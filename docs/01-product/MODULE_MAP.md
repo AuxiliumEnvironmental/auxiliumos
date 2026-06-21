@@ -1,0 +1,24 @@
+# Module Map
+
+- Core
+- IAM / Permissions
+- Accounts
+- Programs / MSAs
+- Assets / Facilities
+- Readiness / Site Passport
+- Service Ontology
+- Rules Engine
+- Intake
+- Scope Control
+- Sampling
+- ROM
+- Agreements / Authorizations
+- Operations / Projects
+- Documents
+- Communications
+- Vendors
+- Finance
+- Reporting
+- Integrations
+- AI Control
+- Audit

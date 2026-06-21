@@ -1,0 +1,5 @@
+# Testing Rules
+- Every feature needs acceptance criteria.
+- Permission-sensitive features need denial tests.
+- Document features need release/access tests.
+- Workflow features need state-transition tests.

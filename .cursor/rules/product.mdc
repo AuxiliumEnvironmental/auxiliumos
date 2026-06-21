@@ -1,0 +1,5 @@
+# Product Rules
+- Follow the canonical AuxiliumOS data spine.
+- Do not invent new core objects without a decision record.
+- Build vertical slices, not broad horizontal layers.
+- Client-facing simplicity must map to internal technical truth.

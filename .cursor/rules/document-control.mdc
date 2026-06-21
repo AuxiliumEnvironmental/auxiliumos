@@ -1,0 +1,5 @@
+# Document Control Rules
+- No client-visible document without release approval.
+- Drafts are internal by default.
+- All document views/downloads should be auditable.
+- Superseded documents remain traceable.

@@ -1,0 +1,5 @@
+# Supabase Rules
+- Use migrations for schema changes.
+- Client-owned records must have account ownership.
+- RLS is required on client-data tables.
+- Do not expose service-role keys in frontend code.

@@ -1,0 +1,5 @@
+# Security Rules
+- UI hiding is not security.
+- Add positive and negative permission tests.
+- Documents need metadata, class, version, release state, and access policy.
+- Production data is off limits during prep.
