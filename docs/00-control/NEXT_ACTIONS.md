@@ -232,6 +232,18 @@ Do not start these yet:
 
 # Current Next Work Item
 
-After this issue is released:
+After Supabase dev setup documentation is released:
 
-Install Node.js LTS, then install/open Cursor and verify Cursor can read the repo rules without editing files.
+Continue specification work before app/schema build.
+
+Next specification issues:
+
+1. Fill ROLE_PERMISSION_MATRIX.md v1.
+2. Fill DOCUMENT_ACCESS_MATRIX.md v1.
+3. Create first vertical slice spec.
+4. Create RLS test matrix v1.
+5. Create document release workflow spec.
+6. Create project request state machine v1.
+7. Create no-PHI policy v1.
+
+Do not begin full Lovable app build, Supabase schema, storage buckets, auth providers, Claude Code edits, Codex edits, Playwright installation, GitHub Actions real CI, production setup, real client data, or PHI.
