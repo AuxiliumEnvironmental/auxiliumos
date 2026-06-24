@@ -43,3 +43,48 @@ Next Supabase work requires:
 - No-PHI policy
 - Schema plan
 - Approved GitHub issue
+---
+
+# Spec Gate Review Status
+
+Date:
+2026-06-22
+
+Status:
+Passed for visual-only first build preparation.
+
+Completed:
+- Role permission matrix draft
+- Document access matrix draft
+- First vertical slice spec
+- UAT scenarios
+- RLS policy matrix
+- RLS test plan
+- Document release workflow
+- Project request state machine
+- Emergency exception workflow
+- Change authorization workflow
+- Playwright UAT plan
+- No-PHI policy
+- Spec gate review
+
+Next approved issue:
+Create Lovable visual UI shell v1
+
+Current limitations:
+- Visual shell only
+- Fake/demo data only
+- No Supabase schema
+- No Supabase storage
+- No auth providers
+- No RLS policies
+- No production
+- No real client data
+- No PHI
+- No full backend workflows
+- No Claude Code implementation edits
+- No Codex implementation edits
+- No Playwright install yet
+
+Important note:
+This gate does not finalize founder-decision items. Role authority, document release authority, scope approval, cap/change authorization, no-PHI exceptions, production readiness, and real client data onboarding remain draft/founder-review-required until separately approved.
