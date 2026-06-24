@@ -1,182 +1,108 @@
-# # Next Actions
+# Next Actions
 
 Last updated: 2026-06-22
 
 ## Current Phase
 
-Prep / AI Software Factory Setup
+Spec Gate Passed / Visual First Build Preparation
 
 ## Current Goal
 
-Complete the repo control layer before installing or activating additional development tools.
-
-The repository must be stable enough that ChatGPT, Cursor, Lovable, Claude Code, Codex, and future AI agents can read project rules and work from issues without relying on chat memory.
+Begin the first controlled visual-only AuxiliumOS build step while preserving the repository-first workflow and all security, document-control, scope-control, and no-PHI guardrails.
 
 ---
 
-# Repo Foundation Review
+# Current Source-of-Truth Rule
 
-## Review Status
+The GitHub repository is the source of truth.
 
-Status: Complete
+AI tools are workers.
 
-Reviewer: CJD
-
-Founder: CJD
-
-Branch: docs/repo-foundation-review
+Anything not captured in the repository does not count.
 
 ---
 
-# Expected Top-Level Files and Folders
+# Current Approved Next Issue
 
-Confirmed these exist at the root of the repository:
+Next issue to create/work:
 
-- [x] [AGENTS.md](http://AGENTS.md)
+Create Lovable visual UI shell v1
 
-- [x] [CLAUDE.md](http://CLAUDE.md)
+Purpose:
+Create a visual-only UI shell for AuxiliumOS using Lovable.
 
-- [x] [README.md](http://README.md)
+Allowed:
+- UI shell only
+- Professional enterprise layout
+- Navigation placeholders
+- Client portal concept
+- Admin command center concept
+- Enterprise facility portal concept
+- Status cards
+- Empty states
+- Fake/demo data only
 
-- [x] [CHANGELOG.md](http://CHANGELOG.md)
-
-- [x] .gitignore
-
-- [x] .github/
-
-- [x] .cursor/
-
-- [x] app/
-
-- [x] docs/
-
-- [x] supabase/
-
-- [x] tests/
-
----
-
-# Expected GitHub Files
-
-Confirmed these exist:
-
-- [x] .github/PULL_REQUEST_[TEMPLATE.md](http://TEMPLATE.md)
-
-- [x] .github/ISSUE_TEMPLATE/feature_[ticket.md](http://ticket.md)
-
-- [x] .github/ISSUE_TEMPLATE/decision_[required.md](http://required.md)
-
-- [x] .github/workflows/ci.yml
+Not allowed:
+- Supabase schema
+- Supabase storage
+- Auth providers
+- RLS policies
+- Production backend
+- Real document release logic
+- Real scope logic
+- Real agreement logic
+- Real finance logic
+- Real client data
+- PHI
+- Service-role keys
+- API keys
+- Production deployment
 
 ---
 
-# Expected Cursor Rule Files
+# Completed Gate Items
 
-Confirmed these exist:
+The following are complete and merged:
 
-- [x] .cursor/rules/product.mdc
-
-- [x] .cursor/rules/supabase.mdc
-
-- [x] .cursor/rules/security.mdc
-
-- [x] .cursor/rules/testing.mdc
-
-- [x] .cursor/rules/document-control.mdc
-
----
-
-# Expected Documentation Folders
-
-Confirmed these exist:
-
-- [x] docs/00-control/
-
-- [x] docs/01-product/
-
-- [x] docs/02-ontology/
-
-- [x] docs/03-data/
-
-- [x] docs/04-security/
-
-- [x] docs/05-workflows/
-
-- [x] docs/06-ui/
-
-- [x] docs/07-testing/
-
-- [x] docs/08-ai/
-
-- [x] docs/09-release/
+- [x] PROJECT_STATE.md v1
+- [x] DECISION_LOG.md v1
+- [x] OPEN_QUESTIONS.md v1
+- [x] DATA_SPINE.md v1
+- [x] MODULE_MAP.md v1
+- [x] AI_TOOL_RULES.md and PROMPT_LIBRARY.md
+- [x] Repo foundation review
+- [x] ROLE_PERMISSION_MATRIX.md v1
+- [x] DOCUMENT_ACCESS_MATRIX.md v1
+- [x] V1_SCOPE.md and UAT_SCENARIOS.md
+- [x] RLS_POLICY_MATRIX.md and RLS_TEST_PLAN.md
+- [x] DOCUMENT_RELEASE_WORKFLOW.md
+- [x] REQUEST_STATE_MACHINE.md
+- [x] EMERGENCY_EXCEPTION_WORKFLOW.md
+- [x] CHANGE_AUTHORIZATION_WORKFLOW.md
+- [x] PLAYWRIGHT_TEST_PLAN.md
+- [x] No-PHI policy in SECURITY_GUARDRAILS.md and OUT_OF_SCOPE.md
+- [x] SPEC_GATE_REVIEW.md
 
 ---
 
-# Expected Supabase Folders
+# Still Draft / Founder Review Required
 
-Confirmed these exist:
+The following are not final implementation decisions:
 
-- [x] supabase/migrations/
+- Role authority
+- Document release authority
+- Scope approval authority
+- Cap/change authorization authority
+- No-PHI exceptions
+- Emergency authorization thresholds
+- RLS helper design
+- Auth provider strategy
+- Storage bucket design
+- Supabase schema design
+- Production readiness
+- Real client data onboarding
 
-- [x] supabase/functions/
-
-- [x] supabase/seed/
-
-- [x] supabase/tests/rls/
-
-- [x] supabase/tests/database/
-
----
-
-# Expected Test Folders
-
-Confirmed these exist:
-
-- [x] tests/e2e/
-
-- [x] tests/integration/
-
-- [x] tests/unit/
-
----
-
-# Control Documents Completed
-
-These source-of-truth control documents have been completed and merged:
-
-- [x] PROJECT_[STATE.md](http://STATE.md) v1
-
-- [x] DECISION_[LOG.md](http://LOG.md) v1
-
-- [x] OPEN_[QUESTIONS.md](http://QUESTIONS.md) v1
-
-- [x] DATA_[SPINE.md](http://SPINE.md) v1
-
-- [x] MODULE_[MAP.md](http://MAP.md) v1
-
-- [x] Session closeout habit v1
-
----
-
-# Immediate Next Actions After Foundation Review
-
-After this repo foundation review is complete, the next setup sequence is:
-
-1. Install Node.js LTS.
-
-2. Install Cursor.
-
-3. Open the repo in Cursor.
-
-4. Ask Cursor to summarize project rules without editing files.
-
-5. Set up Lovable Project Knowledge.
-
-6. Create Supabase dev project.
-
-7. Document Supabase dev project existence without committing secrets.
-
-8. Continue specification work before allowing AI tools to edit app/schema files.
+These must remain draft until founder/legal/security review is complete.
 
 ---
 
@@ -185,65 +111,40 @@ After this repo foundation review is complete, the next setup sequence is:
 Do not start these yet:
 
 - Full Lovable app build
-
+- Supabase schema
 - Supabase production project
-
-- Supabase schema migrations
-
 - Supabase storage buckets
-
-- RLS policies
-
-- Claude Code file edits
-
-- Codex file edits
-
+- Auth providers
+- RLS policy creation
+- Claude Code implementation edits
+- Codex implementation edits
 - Playwright installation
-
-- GitHub Actions real CI setup
-
+- GitHub Actions real CI
 - Real client data
-
 - Real PHI or healthcare patient data
-
 - Production deployment
 
 ---
 
-# Missing Items
+# Immediate Next Step
 
-## Missing files/folders
+After this issue is merged:
 
-- None identified.
-
-## Setup issues
-
-- None identified.
-
-## Risks
-
-- Founder is still learning GitHub/project workflow.
-
-- AI tools must not be allowed to work outside the repo/ticket/guardrail system.
-
-- No real client data or secrets should enter the repo or AI tools.
+1. Create GitHub issue: Create Lovable visual UI shell v1.
+2. Move that issue to Ready for Build.
+3. Use Lovable only for visual shell work.
+4. Do not connect Supabase.
+5. Do not create backend/schema/auth/storage/RLS.
+6. Do not use real client data or PHI.
 
 ---
 
-# Current Next Work Item
+# Next Phase After Visual Shell
 
-After Supabase dev setup documentation is released:
+After the visual shell is reviewed, create a separate issue for:
 
-Continue specification work before app/schema build.
+First build implementation plan
 
-Next specification issues:
+That future issue should define exactly when and how Supabase schema work begins.
 
-1. Fill ROLE_PERMISSION_MATRIX.md v1.
-2. Fill DOCUMENT_ACCESS_MATRIX.md v1.
-3. Create first vertical slice spec.
-4. Create RLS test matrix v1.
-5. Create document release workflow spec.
-6. Create project request state machine v1.
-7. Create no-PHI policy v1.
-
-Do not begin full Lovable app build, Supabase schema, storage buckets, auth providers, Claude Code edits, Codex edits, Playwright installation, GitHub Actions real CI, production setup, real client data, or PHI.
+Do not begin schema work until that issue exists and is approved.
