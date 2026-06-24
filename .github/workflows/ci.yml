@@ -1,14 +1,14 @@
-name: CI
+name: CI Placeholder
 
 on:
-  pull_request:
-  push:
-    branches: [main, dev]
+  workflow_dispatch:
 
 jobs:
   placeholder:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: CI placeholder
-        run: echo "Add lint, typecheck, tests, build, RLS tests, and Playwright tests as the app is built."
+      - name: Placeholder only
+        run: |
+          echo "CI is intentionally manual-only for now."
+          echo "Do not treat this as real CI."
+          echo "Real lint, typecheck, unit tests, RLS tests, Playwright tests, and build checks will be added after the app exists."
