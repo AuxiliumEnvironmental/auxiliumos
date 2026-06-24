@@ -1,6 +1,6 @@
 # Current Handoff
 
-Last updated: 2026-06-22
+Last updated: 2026-06-24
 
 ## Purpose
 
@@ -48,7 +48,7 @@ Every future feature must connect to this spine or be treated as global configur
 
 # Current Project Phase
 
-Spec Gate Passed / Visual First Build Preparation
+Spec Gate Passed / Visual First Build Preparation.
 
 The repo control layer and required specification documents are complete enough to begin visual-only first build preparation.
 
@@ -152,7 +152,7 @@ Dev only. No production. No staging yet. No tables. No storage buckets. No auth 
 
 # Current Next Issue
 
-Next issue to work after this handoff update:
+Next issue to work:
 
 Create Lovable visual UI shell v1
 
@@ -269,7 +269,7 @@ until the relevant future GitHub issues are created, approved, and worked throug
 16. Confirm no secrets/client data/unrelated files.
 17. Merge.
 18. Delete remote branch if offered.
-19. Move board card to Released.
+19. Move board card to Released/Done.
 20. Close issue.
 21. Switch GitHub Desktop back to main.
 22. Fetch/pull.
@@ -332,3 +332,26 @@ First, summarize:
 5. Any founder decisions still open.
 
 Then wait for me to confirm before giving step-by-step instructions.
+```
+
+---
+
+# Current Known Risk
+
+The founder is learning GitHub, Cursor, Lovable, Supabase, and AI-agent workflow.
+
+Because of that, every response must remain beginner-safe, explicit, and step-by-step.
+
+Avoid mixing explanation text with file-content blocks. When file content is required, label the exact file path and provide one complete copy/paste block.
+
+---
+
+# Final Handoff Rule
+
+If an AI response becomes confusing, inconsistent, too broad, or appears to hallucinate:
+
+1. Stop.
+2. Do not copy the content.
+3. Do not commit.
+4. Ask for a corrected response.
+5. If needed, start a new chat using this handoff file.

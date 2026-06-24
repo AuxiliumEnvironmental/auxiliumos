@@ -1,9 +1,101 @@
----
+# Project State
 
-# Supabase Dev Project Status
+Last updated: 2026-06-24
+
+## Current Phase
+
+Spec Gate Passed / Visual First Build Preparation
+
+## Source of Truth
+
+The GitHub repository is the source of truth.
+
+ChatGPT, Cursor, Lovable, Claude Code, Codex, GitHub Copilot, and all future AI agents are workers. If a decision, workflow, assumption, schema change, permission rule, document rule, or project status is not captured in the repository, it does not count.
+
+## Canonical Data Spine
+
+Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.
+
+## Current Status
+
+The repo control layer and required specification documents are complete enough to begin visual-only first build preparation.
+
+The project is not approved for production, real client data, PHI, Supabase schema, storage buckets, auth providers, RLS policies, or full backend workflows.
+
+## Completed Setup Items
+
+- Local AuxiliumOS folder system created.
+- Private GitHub repository named auxiliumos created.
+- Starter repo skeleton committed and pushed.
+- GitHub Desktop connected.
+- GitHub labels created.
+- GitHub Project board created.
+- First set of issues created and worked through the issue/branch/PR workflow.
+- Node.js installed.
+- Cursor installed.
+- Lovable paid account available.
+- Lovable Workspace Knowledge and Project Knowledge configured.
+- Supabase dev project documented as auxiliumos-dev.
+- No real client data has been used.
+- No PHI has been used.
+- No secrets have been committed.
+
+## Completed Control Documents
+
+- PROJECT_STATE.md v1
+- DECISION_LOG.md v1
+- OPEN_QUESTIONS.md v1
+- DATA_SPINE.md v1
+- MODULE_MAP.md v1
+- AI_TOOL_RULES.md
+- PROMPT_LIBRARY.md
+- CURRENT_HANDOFF.md
+- Repo foundation review
+- SPEC_GATE_REVIEW.md
+
+## Completed Specification Documents
+
+- ROLE_PERMISSION_MATRIX.md v1
+- DOCUMENT_ACCESS_MATRIX.md v1
+- V1_SCOPE.md
+- UAT_SCENARIOS.md
+- RLS_POLICY_MATRIX.md
+- RLS_TEST_PLAN.md
+- DOCUMENT_RELEASE_WORKFLOW.md
+- REQUEST_STATE_MACHINE.md
+- EMERGENCY_EXCEPTION_WORKFLOW.md
+- CHANGE_AUTHORIZATION_WORKFLOW.md
+- PLAYWRIGHT_TEST_PLAN.md
+- SECURITY_GUARDRAILS.md no-PHI policy
+- OUT_OF_SCOPE.md no-PHI/out-of-scope policy
+
+## Spec Gate Review Status
 
 Status:
-Created
+Passed for visual-only first build preparation.
+
+Next approved issue:
+Create Lovable visual UI shell v1
+
+Allowed next work:
+- Visual-only UI shell
+- Navigation placeholders
+- Status cards
+- Empty states
+- Simple fake/demo data
+- No backend
+- No schema
+- No Supabase connection
+- No auth
+- No RLS
+- No storage
+- No real client data
+- No PHI
+
+## Supabase Dev Project Status
+
+Status:
+Created / documented as development only.
 
 Project name:
 auxiliumos-dev
@@ -34,57 +126,45 @@ Current Supabase limitations:
 RLS posture:
 RLS should be enabled by default for any future exposed client-data table, but no application tables or policies have been created yet.
 
-Next Supabase work requires:
-- Role permission matrix
-- Document access matrix
-- First vertical slice spec
-- RLS test matrix
-- Document release workflow
-- No-PHI policy
-- Schema plan
-- Approved GitHub issue
----
+## Still Draft / Founder Review Required
 
-# Spec Gate Review Status
+The following are not final implementation decisions:
 
-Date:
-2026-06-22
+- Role authority
+- Document release authority
+- Scope approval authority
+- Cap/change authorization authority
+- Emergency conditional authorization authority
+- No-PHI operational exceptions
+- Professional/legal boundaries
+- RLS helper design
+- Auth provider strategy
+- Storage bucket design
+- Supabase schema design
+- Production readiness
+- Real client data onboarding
 
-Status:
-Passed for visual-only first build preparation.
+## Do Not Start Yet
 
-Completed:
-- Role permission matrix draft
-- Document access matrix draft
-- First vertical slice spec
-- UAT scenarios
-- RLS policy matrix
-- RLS test plan
-- Document release workflow
-- Project request state machine
-- Emergency exception workflow
-- Change authorization workflow
-- Playwright UAT plan
-- No-PHI policy
-- Spec gate review
+Do not start:
 
-Next approved issue:
+- Full Lovable backend app build
+- Supabase schema
+- Supabase storage buckets
+- Auth providers
+- RLS policy creation
+- Claude Code implementation edits
+- Codex implementation edits
+- Playwright install
+- GitHub Actions real CI
+- Production setup
+- Real client data onboarding
+- PHI-capable workflows
+
+until the relevant future GitHub issues are created, approved, and worked through the normal branch/PR process.
+
+## Current Next Action
+
+Create GitHub issue:
+
 Create Lovable visual UI shell v1
-
-Current limitations:
-- Visual shell only
-- Fake/demo data only
-- No Supabase schema
-- No Supabase storage
-- No auth providers
-- No RLS policies
-- No production
-- No real client data
-- No PHI
-- No full backend workflows
-- No Claude Code implementation edits
-- No Codex implementation edits
-- No Playwright install yet
-
-Important note:
-This gate does not finalize founder-decision items. Role authority, document release authority, scope approval, cap/change authorization, no-PHI exceptions, production readiness, and real client data onboarding remain draft/founder-review-required until separately approved.
