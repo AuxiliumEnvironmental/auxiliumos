@@ -9,12 +9,14 @@ Do not rely on chat memory.
 Before making changes, read in this order:
 
 1. docs/00-control/CURRENT_HANDOFF.md
-2. docs/00-control/PROJECT_STATE.md
-3. docs/00-control/NEXT_ACTIONS.md
-4. docs/01-product/DATA_SPINE.md
-5. docs/04-security/ROLE_PERMISSION_MATRIX.md
-6. docs/04-security/DOCUMENT_ACCESS_MATRIX.md
-7. The specific GitHub issue/ticket/spec linked to the task.
+2. docs/00-control/TRANSITION_PROTOCOL.md
+3. docs/01-product/END_STATE_BLUEPRINT.md
+4. docs/00-control/PROJECT_STATE.md
+5. docs/00-control/NEXT_ACTIONS.md
+6. docs/01-product/DATA_SPINE.md
+7. docs/04-security/ROLE_PERMISSION_MATRIX.md
+8. docs/04-security/DOCUMENT_ACCESS_MATRIX.md
+9. The specific GitHub issue/ticket/spec linked to the task.
 
 ## Canonical Data Spine
 

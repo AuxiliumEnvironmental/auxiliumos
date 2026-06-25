@@ -23,9 +23,11 @@ Read these files in order:
 1. `AGENTS.md`
 2. `docs/00-control/CURRENT_HANDOFF.md`
 3. `docs/00-control/PROJECT_STATE.md`
-4. `docs/00-control/NEXT_ACTIONS.md`
-5. `docs/01-product/DATA_SPINE.md`
-6. The active GitHub issue being worked.
+4. `docs/00-control/TRANSITION_PROTOCOL.md`
+5. `docs/01-product/END_STATE_BLUEPRINT.md`
+6. `docs/00-control/NEXT_ACTIONS.md`
+7. `docs/01-product/DATA_SPINE.md`
+8. The active GitHub issue being worked.
 
 ## Canonical Data Spine
 
