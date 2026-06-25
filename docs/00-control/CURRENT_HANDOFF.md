@@ -284,6 +284,8 @@ When starting a new ChatGPT chat, paste the New Chat Starter Prompt from this fi
 - AGENTS.md
 - docs/00-control/CURRENT_HANDOFF.md
 - docs/00-control/PROJECT_STATE.md
+- docs/00-control/TRANSITION_PROTOCOL.md
+- docs/01-product/END_STATE_BLUEPRINT.md
 - docs/00-control/NEXT_ACTIONS.md
 - docs/00-control/OPEN_QUESTIONS.md
 - docs/00-control/DECISION_LOG.md
