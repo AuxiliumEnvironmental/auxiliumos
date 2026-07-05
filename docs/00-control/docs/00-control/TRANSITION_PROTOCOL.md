@@ -33,10 +33,20 @@ At minimum, a new ChatGPT chat should receive or read:
 - docs/01-product/END_STATE_BLUEPRINT.md
 - docs/01-product/DATA_SPINE.md
 - docs/01-product/MODULE_MAP.md
+- docs/04-security/ROLE_PERMISSION_MATRIX.md
+- docs/04-security/DOCUMENT_ACCESS_MATRIX.md
 - docs/08-ai/AI_TOOL_RULES.md
 - docs/08-ai/PROMPT_LIBRARY.md
 
-For issue-specific work, also provide the active GitHub issue body and relevant module/spec files.
+For issue-specific work, also provide:
+
+- The active GitHub issue body
+- The expected branch name if already known
+- The allowed file list
+- Any relevant module/spec files
+- Any current board status or issue notes
+
+A new chat may summarize from the minimum handoff packet, but it must not give issue-specific implementation instructions unless it has the active issue and allowed file list.
 
 ---
 
@@ -66,6 +76,8 @@ Before giving any build instructions, read and summarize the current framework f
 - END_STATE_BLUEPRINT.md
 - DATA_SPINE.md
 - MODULE_MAP.md
+- ROLE_PERMISSION_MATRIX.md
+- DOCUMENT_ACCESS_MATRIX.md
 - AI_TOOL_RULES.md
 - PROMPT_LIBRARY.md
 
