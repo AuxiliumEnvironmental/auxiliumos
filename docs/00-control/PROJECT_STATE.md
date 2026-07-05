@@ -1,10 +1,18 @@
+
+---
+
+## File 4 — `docs/00-control/PROJECT_STATE.md`
+
+Replace the entire file with:
+
+```markdown
 # Project State
 
-Last updated: 2026-06-24
+Last updated: 2026-07-05
 
 ## Current Phase
 
-Spec Gate Passed / Visual First Build Preparation
+First Build Implementation Planning
 
 ## Source of Truth
 
@@ -18,9 +26,13 @@ Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Inc
 
 ## Current Status
 
-The repo control layer and required specification documents are complete enough to begin visual-only first build preparation.
+Issue #52 — Create Lovable visual UI shell v1 — is complete and manually verified.
 
-The project is not approved for production, real client data, PHI, Supabase schema, storage buckets, auth providers, RLS policies, or full backend workflows.
+Issue #54 — First build implementation plan — has created the controlled plan for moving from visual shell review into first build planning.
+
+The repo now contains a first build implementation plan that defines future issue sequencing and authorization gates.
+
+The project is not approved for production, real client data, PHI, Supabase schema, storage buckets, auth providers, RLS policies, edge functions, full backend workflows, Playwright installation, Claude Code implementation edits, or Codex implementation edits unless a future GitHub issue explicitly authorizes that scope.
 
 ## Completed Setup Items
 
@@ -52,6 +64,9 @@ The project is not approved for production, real client data, PHI, Supabase sche
 - CURRENT_HANDOFF.md
 - Repo foundation review
 - SPEC_GATE_REVIEW.md
+- TRANSITION_PROTOCOL.md
+- END_STATE_BLUEPRINT.md
+- FIRST_BUILD_IMPLEMENTATION_PLAN.md
 
 ## Completed Specification Documents
 
@@ -69,50 +84,99 @@ The project is not approved for production, real client data, PHI, Supabase sche
 - SECURITY_GUARDRAILS.md no-PHI policy
 - OUT_OF_SCOPE.md no-PHI/out-of-scope policy
 
+## Completed Visual Preparation
+
+- Issue #52 — Create Lovable visual UI shell v1
+- Visual UI shell review completed manually.
+- Visual shell did not authorize backend implementation.
+
 ## Spec Gate Review Status
 
 Status:
-Passed for visual-only first build preparation.
 
-Next approved issue:
-Create Lovable visual UI shell v1
+Passed for visual-only first build preparation and first build planning.
 
-Allowed next work:
-- Visual-only UI shell
-- Navigation placeholders
-- Status cards
-- Empty states
-- Simple fake/demo data
-- No backend
-- No schema
-- No Supabase connection
-- No auth
-- No RLS
-- No storage
-- No real client data
-- No PHI
+Important limitation:
+
+This gate allowed the Lovable visual shell and first build planning.
+
+This gate does not authorize Supabase schema creation, storage buckets, auth providers, RLS policies, production deployment, real client data, PHI, unrestricted AI coding, Claude Code implementation edits, Codex implementation edits, or Playwright installation.
+
+## First Build Implementation Plan Status
+
+Status:
+
+Created.
+
+Plan file:
+
+`docs/00-control/FIRST_BUILD_IMPLEMENTATION_PLAN.md`
+
+The plan defines:
+
+- Next build issues in exact order
+- Docs-only issues
+- First issue that may touch app code
+- First issue that may authorize Supabase schema
+- First issue that may authorize auth setup
+- First issue that may authorize storage buckets
+- First issue that may authorize RLS policies
+- First issue that may authorize Playwright installation
+- First issue that may authorize Claude Code or Codex implementation edits
+- Founder decision blockers
+- Security/legal/professional review blockers
+- Test expectations
+
+## First Build Slice Confirmed
+
+The first controlled build target remains:
+
+Account -> User Role -> Facility -> Incident Request -> Admin Queue -> Document Upload -> Document Release -> Client View -> Audit Event.
+
+This slice proves:
+
+- Account ownership
+- User membership
+- Role assignment
+- Facility ownership
+- Incident/request submission
+- Admin review
+- Document upload
+- Document hidden by default
+- Document release workflow
+- Client-visible released document access
+- Audit events
+- Positive permission tests
+- Negative permission tests
 
 ## Supabase Dev Project Status
 
 Status:
+
 Created / documented as development only.
 
 Project name:
+
 auxiliumos-dev
 
 Environment:
+
 Development only
 
 Production status:
+
 Not created
 
 Staging status:
+
 Not created
 
 Important security note:
+
 No Supabase URL, publishable key, anon key, secret key, service-role key, database password, JWT secret, connection string, or API credential is stored in this repository.
 
 Current Supabase limitations:
+
 - No production client data
 - No real client data
 - No PHI
@@ -124,7 +188,38 @@ Current Supabase limitations:
 - No GitHub/Supabase integration yet
 
 RLS posture:
+
 RLS should be enabled by default for any future exposed client-data table, but no application tables or policies have been created yet.
+
+## First Authorization Gates
+
+First issue that may touch app code:
+
+FB-03 — Static app shell scaffold and route placeholders
+
+First issue that may authorize Playwright installation:
+
+FB-04 — App test harness and Playwright baseline
+
+First issue that may authorize Supabase schema creation:
+
+FB-06 — Initial Supabase schema migrations for foundation slice
+
+First issue that may authorize auth setup:
+
+FB-07 — Development auth setup and test identities
+
+First issue that may authorize RLS policies:
+
+FB-08 — RLS policies and permission-denial tests for foundation slice
+
+First issue that may authorize storage buckets:
+
+FB-09 — Development storage buckets and document metadata staging
+
+First issue that may authorize Claude Code or Codex implementation edits:
+
+FB-03 — Static app shell scaffold and route placeholders, if and only if the issue body explicitly authorizes those tools, exact files, tests, and out-of-scope rules.
 
 ## Still Draft / Founder Review Required
 
@@ -143,16 +238,19 @@ The following are not final implementation decisions:
 - Supabase schema design
 - Production readiness
 - Real client data onboarding
+- PHI-capable workflow policy
 
 ## Do Not Start Yet
 
 Do not start:
 
 - Full Lovable backend app build
+- App implementation beyond future issue authorization
 - Supabase schema
 - Supabase storage buckets
 - Auth providers
 - RLS policy creation
+- Edge functions
 - Claude Code implementation edits
 - Codex implementation edits
 - Playwright install
@@ -160,11 +258,25 @@ Do not start:
 - Production setup
 - Real client data onboarding
 - PHI-capable workflows
+- Real document release logic
+- Real scope logic
+- Real agreement/signature logic
+- Real finance/cap logic
 
-until the relevant future GitHub issues are created, approved, and worked through the normal branch/PR process.
+until the relevant future GitHub issue is created, approved, and worked through the normal branch/PR process.
 
 ## Current Next Action
 
 Create GitHub issue:
 
-Create Lovable visual UI shell v1
+Founder decision checkpoint for first build blockers
+
+Recommended board status:
+
+Ready for Spec
+
+Purpose:
+
+Identify and record which founder/security/legal/professional decisions must be answered before first build implementation begins.
+
+This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
