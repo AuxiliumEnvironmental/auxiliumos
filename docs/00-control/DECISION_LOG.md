@@ -22,7 +22,7 @@ Date: 2026-06-22
 Decision:
 AuxiliumOS follows this data spine:
 
-Client Account → Program/MSA → Portfolio → Asset/Facility → Zone/Area → Incident → Project Request → Scope Record → Authorization → Project → Tasks → Deliverables → Documents → Communications → Financial Records → Reports → Audit Events.
+Client Account → Program/MSA → Portfolio → Asset/Facility → Zone/Area → Incident → Project Request → Scope Record → Authorization → Project → Tasks/Work Orders -> Deliverables → Documents → Communications → Financial Records -> Reports/Dashboards -> Audit Events.
 
 Reason:
 Every module must connect to the same operating truth so the system can support both simple clients and Nutex-style enterprise clients.
