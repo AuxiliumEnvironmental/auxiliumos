@@ -326,17 +326,23 @@ Product build sequence
 Question:
 Should the first build slice remain Account → User Role → Facility → Incident Request → Admin Queue → Document Upload → Document Release → Client View → Audit Event?
 
+Decision:
+Yes. The first build slice is confirmed as Account → User Role → Facility → Incident Request → Admin Queue → Document Upload → Document Release → Client View → Audit Event.
+
+Important limitation:
+This decision confirms the build-slice direction only. It does not authorize Supabase schema, storage buckets, auth providers, RLS policies, production, real client data, PHI, or unrestricted backend/app build.
+
 Why it matters:
 This slice proves account ownership, roles, facility/project context, document release, client visibility, and audit events before building the full monster.
 
 Current recommendation:
-Yes. Keep this as the first build slice.
+Proceed next with visual-only Lovable UI shell preparation. Full implementation requires later GitHub issues and approvals.
 
 Decision owner:
 Founder
 
 Status:
-Open
+Decided
 
 Repo file to update after decision:
 docs/01-product/V1_SCOPE.md

@@ -17,7 +17,7 @@ Draft / Founder/legal/security review required / Not implementation-approved
 
 ## Current phase
 
-Prep / AI Software Factory Setup transitioning into Specification Gate.
+Spec Gate Passed / Visual First Build Preparation
 
 ## Current data posture
 
