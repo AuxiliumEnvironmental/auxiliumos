@@ -512,3 +512,53 @@ Open
 Repo file to update after decision:
 docs/00-control/PROJECT_STATE.md
 docs/00-control/NEXT_ACTIONS.md
+
+## First Build Blocker Checkpoint — Added 2026-07-05
+
+Source issue: #55 — Founder decision checkpoint for first build blockers
+
+The following decisions remain founder-review-required / not implementation-approved unless a later repo update marks them approved:
+
+- Final role authority
+- Final client-side roles and internal roles
+- Document release authority
+- Document grant model
+- Scope approval authority
+- Cap/change authorization authority
+- Emergency conditional authorization authority
+- Emergency authorization thresholds
+- No-PHI exceptions
+- Professional/legal boundaries
+- Client Executive visibility boundaries
+- Site Champion visibility boundaries
+- Billing Contact access boundaries
+- Vendor User inclusion in v1
+- Account membership model
+- Billing visibility model
+- Audit event visibility
+- Auth provider strategy
+- RLS helper design
+- Supabase schema design
+- Storage bucket design
+- Production readiness
+- Real client data onboarding
+- Whether any PHI-capable workflow will ever be supported
+
+Safe default until approved:
+
+- No real client data.
+- No PHI.
+- No secrets.
+- No production setup.
+- No Supabase schema.
+- No auth setup.
+- No storage buckets.
+- No RLS policies.
+- No client-visible document without release workflow.
+- No chat/message changes approved scope.
+- No client-data table without RLS plan and tests.
+- No final business authority decisions by AI.
+
+Detailed checkpoint file:
+
+`docs/00-control/FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md`

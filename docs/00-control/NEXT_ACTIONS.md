@@ -38,6 +38,8 @@ Completed by this planning update:
 - Updated `CURRENT_HANDOFF.md`
 - Updated `NEXT_ACTIONS.md`
 
+- Issue #55 — Founder decision checkpoint for first build blockers
+
 ## Current Approved Planning Output
 
 Current planning document:
@@ -52,7 +54,7 @@ Define the first build issue sequence and identify which future issue may first 
 
 Create GitHub issue:
 
-Founder decision checkpoint for first build blockers
+Foundation vertical slice build-control packet
 
 Recommended board status after creation:
 
@@ -60,11 +62,41 @@ Ready for Spec
 
 Task type:
 
-Issue creation / decision documentation.
+Documentation / control packet.
 
 Purpose:
 
-Identify and record founder/security/legal/professional decisions needed before first build implementation begins.
+Create the exact build-control packet for the first vertical slice before any app implementation begins.
+
+This next issue must define:
+
+- Controlled first-slice scope
+- Allowed future app surfaces
+- Future issue breakdown
+- Permission expectations
+- Document-release expectations
+- Audit-event expectations
+- Test expectations
+- Out-of-scope rules
+
+This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
+
+## Recommended Labels For Next Issue
+
+- `type:docs`
+- `type:feature`
+- `module:ai`
+- `module:security`
+- `module:accounts`
+- `module:assets`
+- `module:intake`
+- `module:docs`
+- `risk:permission`
+- `risk:document-release`
+- `risk:client-data`
+- `needs:founder-decision`
+- `needs:security-review`
+- `ready-for-agent`
 
 ## Recommended Labels For Next Issue
 

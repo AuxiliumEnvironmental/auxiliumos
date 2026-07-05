@@ -88,6 +88,8 @@ The following have been completed and merged or manually verified:
 - Issue #52 — Create Lovable visual UI shell v1
 - Issue #54 — First build implementation plan
 - FIRST_BUILD_IMPLEMENTATION_PLAN.md
+- Issue #55 — Founder decision checkpoint for first build blockers
+- FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md
 
 ## Current Tool Status
 
@@ -179,6 +181,30 @@ This plan defines:
 - Security/legal/professional review blockers
 - Test requirements
 
+## Current Founder Decision Checkpoint
+
+Current checkpoint file:
+
+`docs/00-control/FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md`
+
+Status:
+
+Founder/security/legal/professional decisions remain review-required / not implementation-approved unless explicitly recorded as approved in the repo.
+
+Safe default:
+
+- No real client data.
+- No PHI.
+- No secrets.
+- No production setup.
+- No Supabase schema.
+- No auth setup.
+- No storage buckets.
+- No RLS policies.
+- No client-visible document without release workflow.
+- No chat/message changes approved scope.
+- No final business authority decisions by AI.
+
 ## First Build Slice Target
 
 The first controlled build target remains:
@@ -213,7 +239,7 @@ This slice proves:
 
 Next issue to create:
 
-Founder decision checkpoint for first build blockers
+Foundation vertical slice build-control packet
 
 Recommended board status after creation:
 
@@ -221,9 +247,11 @@ Ready for Spec
 
 Purpose:
 
-Identify and record which founder/security/legal/professional decisions must be answered before app code, Supabase schema, auth, storage, RLS, Playwright, real client data, or production work can begin.
+Create the exact build-control packet for the first vertical slice before any app implementation begins.
 
-This next issue is not an implementation issue.
+This next issue is documentation/control only.
+
+This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
 
 ## Future Build Issue Sequence
 
