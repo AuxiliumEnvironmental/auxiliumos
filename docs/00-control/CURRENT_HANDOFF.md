@@ -90,6 +90,8 @@ The following have been completed and merged or manually verified:
 - FIRST_BUILD_IMPLEMENTATION_PLAN.md
 - Issue #55 — Founder decision checkpoint for first build blockers
 - FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md
+- Issue #58 — Foundation vertical slice build-control packet
+- FOUNDATION_VERTICAL_SLICE_CONTROL_PACKET.md
 
 ## Current Tool Status
 
@@ -181,6 +183,28 @@ This plan defines:
 - Security/legal/professional review blockers
 - Test requirements
 
+## Current Foundation Vertical Slice Control Packet
+
+Current packet file:
+
+`docs/00-control/FOUNDATION_VERTICAL_SLICE_CONTROL_PACKET.md`
+
+Status:
+
+Created.
+
+The packet defines the controlled first build slice:
+
+Account -> User Role -> Facility -> Incident Request -> Admin Queue -> Document Upload -> Document Release -> Client View -> Audit Event.
+
+The packet does not authorize implementation.
+
+The next possible implementation issue is:
+
+Static app shell scaffold and route placeholders
+
+That future issue must be static-only and must include exact branch, allowed files, tests, and out-of-scope rules.
+
 ## Current Founder Decision Checkpoint
 
 Current checkpoint file:
@@ -239,7 +263,7 @@ This slice proves:
 
 Next issue to create:
 
-Foundation vertical slice build-control packet
+Static app shell scaffold and route placeholders
 
 Recommended board status after creation:
 
@@ -247,11 +271,11 @@ Ready for Spec
 
 Purpose:
 
-Create the exact build-control packet for the first vertical slice before any app implementation begins.
+Create the first static app shell and route placeholders.
 
-This next issue is documentation/control only.
+This future issue may touch app code only if the issue explicitly provides exact app files, branch, tests, and out-of-scope rules.
 
-This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
+This future issue must not authorize Supabase schema, auth, storage, RLS, real backend workflows, production deployment, real client data, PHI, or secrets.
 
 ## Future Build Issue Sequence
 

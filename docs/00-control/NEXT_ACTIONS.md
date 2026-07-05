@@ -40,6 +40,8 @@ Completed by this planning update:
 
 - Issue #55 — Founder decision checkpoint for first build blockers
 
+- Issue #56 — Foundation vertical slice build-control packet
+
 ## Current Approved Planning Output
 
 Current planning document:
@@ -54,7 +56,7 @@ Define the first build issue sequence and identify which future issue may first 
 
 Create GitHub issue:
 
-Foundation vertical slice build-control packet
+Static app shell scaffold and route placeholders
 
 Recommended board status after creation:
 
@@ -62,54 +64,26 @@ Ready for Spec
 
 Task type:
 
-Documentation / control packet.
+App/code implementation, static-only.
 
 Purpose:
 
-Create the exact build-control packet for the first vertical slice before any app implementation begins.
+Create the first static app shell and route placeholders only after the issue explicitly authorizes exact app files, branch, tests, and out-of-scope rules.
 
-This next issue must define:
+This future issue may be the first issue to touch app code.
 
-- Controlled first-slice scope
-- Allowed future app surfaces
-- Future issue breakdown
-- Permission expectations
-- Document-release expectations
-- Audit-event expectations
-- Test expectations
-- Out-of-scope rules
-
-This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
+It must not authorize Supabase schema, auth, storage, RLS, real backend workflows, Playwright installation unless separately included, production deployment, real client data, PHI, or secrets.
 
 ## Recommended Labels For Next Issue
 
-- `type:docs`
 - `type:feature`
+- `type:ui`
 - `module:ai`
 - `module:security`
-- `module:accounts`
-- `module:assets`
-- `module:intake`
-- `module:docs`
 - `risk:permission`
 - `risk:document-release`
 - `risk:client-data`
-- `needs:founder-decision`
-- `needs:security-review`
 - `ready-for-agent`
-
-## Recommended Labels For Next Issue
-
-- `type:docs`
-- `module:security`
-- `module:ai`
-- `risk:permission`
-- `risk:document-release`
-- `risk:client-data`
-- `risk:professional-boundary`
-- `needs:founder-decision`
-- `needs:legal-review`
-- `needs:security-review`
 
 Do not add implementation labels that imply app code, schema, auth, storage, or RLS is authorized.
 
