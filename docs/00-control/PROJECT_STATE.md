@@ -67,6 +67,7 @@ The project is not approved for production, real client data, PHI, Supabase sche
 - TRANSITION_PROTOCOL.md
 - END_STATE_BLUEPRINT.md
 - FIRST_BUILD_IMPLEMENTATION_PLAN.md
+- FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md
 
 ## Completed Specification Documents
 
@@ -126,6 +127,34 @@ The plan defines:
 - Founder decision blockers
 - Security/legal/professional review blockers
 - Test expectations
+
+## Founder Decision Checkpoint Status
+
+Status:
+
+Created.
+
+Checkpoint file:
+
+`docs/00-control/FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md`
+
+The checkpoint identifies founder/security/legal/professional decisions that remain review-required or not implementation-approved before future implementation work.
+
+No implementation was authorized by the checkpoint.
+
+Safe default remains:
+
+- No real client data.
+- No PHI.
+- No secrets.
+- No production setup.
+- No Supabase schema.
+- No auth setup.
+- No storage buckets.
+- No RLS policies.
+- No client-visible document without release workflow.
+- No chat/message changes approved scope.
+- No final business authority decisions by AI.
 
 ## First Build Slice Confirmed
 
@@ -269,7 +298,7 @@ until the relevant future GitHub issue is created, approved, and worked through 
 
 Create GitHub issue:
 
-Founder decision checkpoint for first build blockers
+Foundation vertical slice build-control packet
 
 Recommended board status:
 
@@ -277,6 +306,6 @@ Ready for Spec
 
 Purpose:
 
-Identify and record which founder/security/legal/professional decisions must be answered before first build implementation begins.
+Create the exact build-control packet for the first vertical slice before any app implementation begins.
 
 This next issue must not authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, Codex implementation edits, production deployment, real client data, PHI, or secrets.
