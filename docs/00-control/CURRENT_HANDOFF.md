@@ -284,11 +284,18 @@ When starting a new ChatGPT chat, paste the New Chat Starter Prompt from this fi
 - AGENTS.md
 - docs/00-control/CURRENT_HANDOFF.md
 - docs/00-control/PROJECT_STATE.md
-- docs/00-control/TRANSITION_PROTOCOL.md
-- docs/01-product/END_STATE_BLUEPRINT.md
 - docs/00-control/NEXT_ACTIONS.md
 - docs/00-control/OPEN_QUESTIONS.md
 - docs/00-control/DECISION_LOG.md
+- docs/00-control/SPEC_GATE_REVIEW.md
+- docs/00-control/TRANSITION_PROTOCOL.md
+- docs/01-product/END_STATE_BLUEPRINT.md
+- docs/01-product/DATA_SPINE.md
+- docs/01-product/MODULE_MAP.md
+- docs/04-security/ROLE_PERMISSION_MATRIX.md
+- docs/04-security/DOCUMENT_ACCESS_MATRIX.md
+- docs/08-ai/AI_TOOL_RULES.md
+- docs/08-ai/PROMPT_LIBRARY.md
 
 If the new chat does not have those files or current text, it must not give build instructions.
 
@@ -312,6 +319,13 @@ Before giving instructions, read and summarize the current framework from these 
 - NEXT_ACTIONS.md
 - OPEN_QUESTIONS.md
 - DECISION_LOG.md
+- END_STATE_BLUEPRINT.md
+- DATA_SPINE.md
+- MODULE_MAP.md
+- ROLE_PERMISSION_MATRIX.md
+- DOCUMENT_ACCESS_MATRIX.md
+- AI_TOOL_RULES.md
+- PROMPT_LIBRARY.md
 
 You must preserve this canonical data spine:
 Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.

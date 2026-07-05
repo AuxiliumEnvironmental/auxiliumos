@@ -341,6 +341,8 @@ Open
 Repo file to update after decision:
 docs/01-product/V1_SCOPE.md
 docs/07-testing/UAT_SCENARIOS.md
+docs/00-control/SPEC_GATE_REVIEW.md
+
 
 ---
 
