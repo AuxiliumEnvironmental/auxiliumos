@@ -38,9 +38,13 @@ Completed by this planning update:
 - Updated `CURRENT_HANDOFF.md`
 - Updated `NEXT_ACTIONS.md`
 
-- Issue #55 — Founder decision checkpoint for first build blockers
+- Issue #56 — Founder decision checkpoint for first build blockers
 
-- Issue #56 — Foundation vertical slice build-control packet
+- Issue #58 — Foundation vertical slice build-control packet
+
+- #60 — Static app shell scaffold and route placeholders
+- #62 — App test harness and Playwright baseline
+- #64 — Correct issue-number references and bulk control doc update after static shell baseline
 
 ## Current Approved Planning Output
 
@@ -56,7 +60,7 @@ Define the first build issue sequence and identify which future issue may first 
 
 Create GitHub issue:
 
-Static app shell scaffold and route placeholders
+Supabase schema design packet for foundation slice
 
 Recommended board status after creation:
 
@@ -64,15 +68,23 @@ Ready for Spec
 
 Task type:
 
-App/code implementation, static-only.
+Documentation / data planning only.
 
 Purpose:
 
-Create the first static app shell and route placeholders only after the issue explicitly authorizes exact app files, branch, tests, and out-of-scope rules.
+Document the first-slice schema design before creating migrations.
 
-This future issue may be the first issue to touch app code.
+This next issue may discuss proposed data domains and table concepts, but it must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
 
-It must not authorize Supabase schema, auth, storage, RLS, real backend workflows, Playwright installation unless separately included, production deployment, real client data, PHI, or secrets.
+Required emphasis:
+
+- Map proposed records to the canonical data spine.
+- Identify founder/security/legal/professional blockers.
+- Identify table ownership by module.
+- Identify RLS/test requirements.
+- Identify seed data requirements.
+- Identify audit-event expectations.
+- Preserve all unresolved decisions as Draft / Founder review required / Not implementation-approved.
 
 ## Recommended Labels For Next Issue
 
@@ -146,31 +158,33 @@ Each future issue must have its own issue body, branch name, allowed file list, 
 
 First issue that may touch app code:
 
-FB-03 — Static app shell scaffold and route placeholders
+First issue that touched app code:
 
-First issue that may authorize Playwright installation:
+#60 — Static app shell scaffold and route placeholders
 
-FB-04 — App test harness and Playwright baseline
+First issue that authorized Playwright installation:
 
-First issue that may authorize Supabase schema:
+#62 — App test harness and Playwright baseline
 
-FB-06 — Initial Supabase schema migrations for foundation slice
+First future issue that may authorize Supabase schema creation:
 
-First issue that may authorize auth setup:
+Not yet authorized. Schema design must happen first.
 
-FB-07 — Development auth setup and test identities
+First future issue that may authorize auth setup:
 
-First issue that may authorize RLS policies:
+Not yet authorized.
 
-FB-08 — RLS policies and permission-denial tests for foundation slice
+First future issue that may authorize RLS policies:
 
-First issue that may authorize storage buckets:
+Not yet authorized.
 
-FB-09 — Development storage buckets and document metadata staging
+First future issue that may authorize storage buckets:
 
-First issue that may authorize Claude Code or Codex implementation edits:
+Not yet authorized.
 
-FB-03 — Static app shell scaffold and route placeholders, only if the issue body explicitly authorizes those tools.
+First future issue that may authorize Claude Code or Codex implementation edits:
+
+Not yet authorized.
 
 ## Still Draft / Founder Review Required
 

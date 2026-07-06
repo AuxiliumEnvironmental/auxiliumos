@@ -201,6 +201,51 @@ This slice proves:
 - Positive permission tests
 - Negative permission tests
 
+## Static App Shell Status
+
+Status:
+
+Created.
+
+Issue:
+
+#60 — Static app shell scaffold and route placeholders
+
+Files:
+
+- `app/index.html`
+- `app/styles.css`
+- `app/app.js`
+
+Scope:
+
+Static frontend only.
+
+No backend, Supabase, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
+
+## Playwright Baseline Status
+
+Status:
+
+Created.
+
+Issue:
+
+#62 — App test harness and Playwright baseline
+
+Files:
+
+- `package.json`
+- `package-lock.json`
+- `playwright.config.ts`
+- `tests/e2e/static-app-shell.spec.ts`
+
+Scope:
+
+Development-only Playwright baseline for the static app shell.
+
+No Supabase, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
+
 ## Supabase Dev Project Status
 
 Status:
@@ -321,7 +366,7 @@ until the relevant future GitHub issue is created, approved, and worked through 
 
 Create GitHub issue:
 
-Static app shell scaffold and route placeholders
+Supabase schema design packet for foundation slice
 
 Recommended board status:
 
@@ -329,8 +374,8 @@ Ready for Spec
 
 Purpose:
 
-Create the first static app shell and route placeholders.
+Document the first-slice schema design before creating migrations.
 
-This future issue may touch app code only if the issue explicitly provides exact app files, branch, tests, and out-of-scope rules.
+This next issue is documentation/data planning only.
 
-This future issue must not authorize Supabase schema, auth, storage, RLS, real backend workflows, production deployment, real client data, PHI, or secrets.
+This next issue must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.

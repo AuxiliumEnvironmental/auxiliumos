@@ -2,7 +2,7 @@
 
 Last updated: 2026-07-05
 
-Issue: #55 — Founder decision checkpoint for first build blockers
+Issue: #56 — Founder decision checkpoint for first build blockers
 
 ## Status
 
