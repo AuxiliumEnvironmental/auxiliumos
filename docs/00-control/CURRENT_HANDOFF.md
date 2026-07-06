@@ -88,10 +88,58 @@ The following have been completed and merged or manually verified:
 - Issue #52 — Create Lovable visual UI shell v1
 - Issue #54 — First build implementation plan
 - FIRST_BUILD_IMPLEMENTATION_PLAN.md
-- Issue #55 — Founder decision checkpoint for first build blockers
+- Issue #56 — Founder decision checkpoint for first build blockers
 - FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md
 - Issue #58 — Foundation vertical slice build-control packet
 - FOUNDATION_VERTICAL_SLICE_CONTROL_PACKET.md
+- #60 — Static app shell scaffold and route placeholders
+- #62 — App test harness and Playwright baseline
+- #64 — Correct issue-number references and bulk control doc update after static shell baseline
+
+## Current Static App Shell Status
+
+Status:
+
+Created.
+
+Issue:
+
+#60 — Static app shell scaffold and route placeholders
+
+Files:
+
+- `app/index.html`
+- `app/styles.css`
+- `app/app.js`
+
+Scope:
+
+Static frontend only.
+
+No backend, Supabase, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
+
+## Current Playwright Baseline Status
+
+Status:
+
+Created.
+
+Issue:
+
+#62 — App test harness and Playwright baseline
+
+Files:
+
+- `package.json`
+- `package-lock.json`
+- `playwright.config.ts`
+- `tests/e2e/static-app-shell.spec.ts`
+
+Scope:
+
+Development-only Playwright baseline for the static app shell.
+
+No Supabase, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
 
 ## Current Tool Status
 
@@ -263,7 +311,9 @@ This slice proves:
 
 Next issue to create:
 
-Static app shell scaffold and route placeholders
+Next issue to create:
+
+Supabase schema design packet for foundation slice
 
 Recommended board status after creation:
 
@@ -271,11 +321,11 @@ Ready for Spec
 
 Purpose:
 
-Create the first static app shell and route placeholders.
+Document the first-slice schema design before creating migrations.
 
-This future issue may touch app code only if the issue explicitly provides exact app files, branch, tests, and out-of-scope rules.
+This next issue is documentation/data planning only.
 
-This future issue must not authorize Supabase schema, auth, storage, RLS, real backend workflows, production deployment, real client data, PHI, or secrets.
+This next issue must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
 
 ## Future Build Issue Sequence
 

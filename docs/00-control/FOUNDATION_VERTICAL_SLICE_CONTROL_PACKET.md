@@ -2,7 +2,7 @@
 
 Last updated: 2026-07-05
 
-Issue: #56 — Foundation vertical slice build-control packet
+Issue: #58 — Foundation vertical slice build-control packet
 
 ## Status
 
