@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AuxiliumOS Static App Shell</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="prototype-banner" role="status">
+      Prototype only — demo data, no backend, no PHI, no real client data.
+    </div>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand-block">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div>
+            <p class="eyebrow">AuxiliumOS</p>
+            <h1>Command Shell</h1>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="App sections">
+          <button class="nav-item is-active" type="button" data-section="dashboard">Dashboard</button>
+          <button class="nav-item" type="button" data-section="facilities">Facilities</button>
+          <button class="nav-item" type="button" data-section="requests">Requests</button>
+          <button class="nav-item" type="button" data-section="adminQueue">Admin Queue</button>
+          <button class="nav-item" type="button" data-section="documents">Documents</button>
+          <button class="nav-item" type="button" data-section="documentRelease">Document Release</button>
+          <button class="nav-item" type="button" data-section="clientView">Client View</button>
+          <button class="nav-item" type="button" data-section="auditEvents">Audit Events</button>
+          <button class="nav-item" type="button" data-section="account">Account</button>
+        </nav>
+
+        <div class="sidebar-note">
+          <strong>Static shell only.</strong>
+          <span>No login, database, RLS, storage, production, or real workflow exists.</span>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Foundation slice placeholder</p>
+            <h2 data-testid="view-title">Simple Project Portal</h2>
+            <p class="subtle">
+              Account -> User Role -> Facility -> Incident Request -> Admin Queue -> Document Upload -> Document Release -> Client View -> Audit Event
+            </p>
+          </div>
+
+          <div class="view-switcher" aria-label="Prototype view switcher">
+            <button class="view-button is-active" type="button" data-view="simple" aria-pressed="true">Simple Project Portal</button>
+            <button class="view-button" type="button" data-view="enterprise" aria-pressed="false">Enterprise Facility Portal</button>
+            <button class="view-button" type="button" data-view="admin" aria-pressed="false">Internal Admin Command Center</button>
+          </div>
+        </header>
+
+        <section class="guardrail-card" aria-label="Prototype guardrails">
+          <div>
+            <p class="eyebrow">Non-negotiable guardrails</p>
+            <h3>No backend authority exists in this shell.</h3>
+          </div>
+          <ul>
+            <li>No client-visible document without release workflow.</li>
+            <li>No chat/message changes approved scope.</li>
+            <li>No client-data table without RLS plan and tests.</li>
+            <li>No real client data, PHI, secrets, or production behavior.</li>
+          </ul>
+        </section>
+
+        <section id="content-root" class="content-grid" aria-live="polite"></section>
+      </main>
+    </div>
+  </body>
+</html>
