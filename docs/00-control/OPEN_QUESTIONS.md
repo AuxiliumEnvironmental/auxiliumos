@@ -562,3 +562,24 @@ Safe default until approved:
 Detailed checkpoint file:
 
 `docs/00-control/FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md`
+
+## Minimum Schema Blockers — Added 2026-07-08
+
+Source issue: #68 — Schema implementation readiness gate for foundation slice
+
+The following questions block initial schema migrations unless resolved, deferred, or explicitly scoped around:
+
+1. What is the minimum approved account membership model for development schema?
+2. Which minimum roles may exist for schema/testing only?
+3. Should document access follow account access, facility/request access, explicit grants, or a hybrid model?
+4. Who may release a document in future workflows?
+5. Are audit events internal-only for now?
+6. How should future user records link to auth identities?
+7. Is storage fully deferred until a storage design packet?
+8. Is RLS helper design deferred until the RLS issue?
+9. Confirm that no PHI fields are allowed.
+10. Confirm that only fake/demo seed data may be used.
+
+Current safe status:
+
+Blocked for migrations.

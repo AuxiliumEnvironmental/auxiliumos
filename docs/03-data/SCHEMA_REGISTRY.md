@@ -127,8 +127,8 @@ Before creating client-data tables, the following must be drafted or approved:
 
 # Foundation Schema Design Packet
 
-Added: 2026-07-06  
-Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+Added: 2026-07-08  
+Source issue: #66 — Supabase schema design packet for foundation slice
 
 ## Status
 
@@ -178,3 +178,33 @@ Create and complete:
 Schema implementation readiness gate for foundation slice
 
 That gate must determine whether unresolved founder/security decisions block migrations.
+
+---
+
+# Schema Implementation Readiness Gate
+
+Added: 2026-07-08  
+Source issue: #68 — Schema implementation readiness gate for foundation slice
+
+## Readiness Result
+
+Blocked for migrations.
+
+## Reason
+
+The foundation schema design packet exists, but minimum founder/security decisions remain unresolved.
+
+## Required Before Migration Issue
+
+- Account membership model
+- Minimum role authority
+- Document grant model
+- Document release authority
+- Audit visibility
+- Auth provider strategy or safe dev-only assumption
+- Storage deferral or storage design packet
+- RLS helper strategy
+- No-PHI confirmation
+- Fake/demo seed data confirmation
+
+No migration issue should be worked until these blockers are resolved, deferred, or explicitly scoped around in the repo.
