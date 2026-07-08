@@ -1,3 +1,42 @@
 # Seed Data Registry
 
 Document seed records and test data here.
+
+---
+
+# Foundation Slice Future Seed Data Plan
+
+Added: 2026-07-06  
+Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+
+Status:
+
+Planned only. No seed files created.
+
+Seed data must remain fake/demo only.
+
+Future fake seed records may include:
+
+| Seed concept | Example value | Purpose |
+|---|---|---|
+| Demo account | Demo Property Group | Fake account for development/testing. |
+| Demo facility | North Wing Facility | Fake facility for facility-linked workflows. |
+| Demo request | Water Intrusion Demo | Fake incident/request for app/testing. |
+| Demo document | Document Placeholder 001 | Fake document metadata. |
+| Demo internal user | Auxilium Admin Demo | Fake internal actor. |
+| Demo client user | Client Viewer Demo | Fake client viewer. |
+| Demo audit event | Request Submitted | Future audit test placeholder. |
+| Demo audit event | Document Released | Future audit test placeholder. |
+
+Disallowed seed data:
+
+- Real client names
+- Real addresses
+- Real project names
+- Real documents
+- Real contacts
+- PHI
+- Passwords
+- API keys
+- Service-role keys
+- Any secret
