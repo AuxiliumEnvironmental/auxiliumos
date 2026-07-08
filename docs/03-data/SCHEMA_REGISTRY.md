@@ -122,3 +122,59 @@ Before creating client-data tables, the following must be drafted or approved:
 - No auth provider setup before role/onboarding flow is defined.
 - No Lovable/Supabase connection before schema and RLS planning is approved.
 - No GitHub/Supabase integration before migration workflow is approved.
+
+---
+
+# Foundation Schema Design Packet
+
+Added: 2026-07-06  
+Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+
+## Status
+
+Foundation schema design packet created.
+
+Implementation status:
+
+Not implementation-approved.
+
+No Supabase migrations have been created.
+
+No application tables have been created.
+
+No auth providers have been configured.
+
+No storage buckets have been created.
+
+No RLS policies have been created.
+
+## Candidate Concepts Documented
+
+See:
+
+`docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md`
+
+Candidate concepts documented:
+
+- `client_accounts`
+- `user_profiles`
+- `account_memberships`
+- `facilities`
+- `incident_requests`
+- `documents`
+- `audit_events`
+
+Derived surfaces documented:
+
+- Admin Queue
+- Document Release Queue
+- Client View
+- Reports/Dashboards
+
+## Next Required Step Before Migrations
+
+Create and complete:
+
+Schema implementation readiness gate for foundation slice
+
+That gate must determine whether unresolved founder/security decisions block migrations.
