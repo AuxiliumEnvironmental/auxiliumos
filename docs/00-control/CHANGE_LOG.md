@@ -29,3 +29,26 @@ Next planned issue:
 Important:
 
 The next planned issue is documentation/data planning only. It must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
+## 2026-07-06 — Schema design sprint
+
+Completed:
+
+- #66 — Supabase schema design packet for foundation slice
+- #68 — Schema implementation readiness gate for foundation slice
+- #70 — Bulk control doc update after schema design sprint
+
+Summary:
+
+- Created the foundation schema design packet.
+- Documented candidate table concepts, ownership, relationships, field meanings, and seed data expectations.
+- Created the schema implementation readiness gate.
+- Recorded schema migrations as blocked until minimum founder/security decisions are resolved, deferred, or explicitly scoped around.
+- Preserved no-Supabase-migration, no-auth, no-storage, no-RLS, no-production, no-real-client-data, no-PHI, and no-secrets restrictions.
+
+Next planned issue:
+
+- Minimum schema blocker decisions for foundation slice
+
+Important:
+
+The next planned issue is a founder/security decision issue. It must not create migrations, tables, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.

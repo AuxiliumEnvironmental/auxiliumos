@@ -45,6 +45,9 @@ Completed by this planning update:
 - #60 — Static app shell scaffold and route placeholders
 - #62 — App test harness and Playwright baseline
 - #64 — Correct issue-number references and bulk control doc update after static shell baseline
+- #66 — Supabase schema design packet for foundation slice
+- #68 — Schema implementation readiness gate for foundation slice
+- #70 — Bulk control doc update after schema design sprint
 
 ## Current Approved Planning Output
 
@@ -60,7 +63,7 @@ Define the first build issue sequence and identify which future issue may first 
 
 Create GitHub issue:
 
-Supabase schema design packet for foundation slice
+Minimum schema blocker decisions for foundation slice
 
 Recommended board status after creation:
 
@@ -68,23 +71,26 @@ Ready for Spec
 
 Task type:
 
-Documentation / data planning only.
+Founder/security decision documentation.
 
 Purpose:
 
-Document the first-slice schema design before creating migrations.
+Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
 
-This next issue may discuss proposed data domains and table concepts, but it must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
+This next issue must decide or preserve as blocked:
 
-Required emphasis:
+- Account membership model
+- Minimum development role authority
+- Document grant model
+- Document release authority
+- Audit event visibility
+- Auth identity linkage assumption
+- Storage deferral or storage design dependency
+- RLS helper design dependency
+- No-PHI confirmation
+- Fake/demo seed data confirmation
 
-- Map proposed records to the canonical data spine.
-- Identify founder/security/legal/professional blockers.
-- Identify table ownership by module.
-- Identify RLS/test requirements.
-- Identify seed data requirements.
-- Identify audit-event expectations.
-- Preserve all unresolved decisions as Draft / Founder review required / Not implementation-approved.
+This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
 
 ## Recommended Labels For Next Issue
 

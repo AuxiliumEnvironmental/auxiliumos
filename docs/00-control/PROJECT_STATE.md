@@ -366,7 +366,7 @@ until the relevant future GitHub issue is created, approved, and worked through 
 
 Create GitHub issue:
 
-Supabase schema design packet for foundation slice
+Minimum schema blocker decisions for foundation slice
 
 Recommended board status:
 
@@ -374,8 +374,48 @@ Ready for Spec
 
 Purpose:
 
-Document the first-slice schema design before creating migrations.
+Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
 
-This next issue is documentation/data planning only.
+This next issue is founder/security decision documentation.
 
-This next issue must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
+This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
+
+## Schema Design Status
+
+Status:
+
+Created.
+
+Issue:
+
+#66 — Supabase schema design packet for foundation slice
+
+File:
+
+- `docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md`
+
+Scope:
+
+Documentation/data planning only.
+
+No Supabase migrations, tables, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
+
+## Schema Implementation Readiness Status
+
+Status:
+
+Blocked for migrations.
+
+Issue:
+
+#68 — Schema implementation readiness gate for foundation slice
+
+File:
+
+- `docs/03-data/SCHEMA_IMPLEMENTATION_READINESS_GATE.md`
+
+Reason:
+
+Minimum founder/security decisions remain unresolved or not implementation-approved.
+
+No schema implementation is authorized.
