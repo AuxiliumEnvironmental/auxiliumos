@@ -211,6 +211,48 @@ Current restriction:
 
 Dev only. No production. No staging yet. No tables. No storage buckets. No auth providers. No Lovable connection. No GitHub integration. No keys in repo or AI chats.
 
+## Current Schema Design Status
+
+Status:
+
+Design packet created.
+
+Issue:
+
+#[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+
+File:
+
+- `docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md`
+
+Scope:
+
+Documentation/data planning only.
+
+No Supabase migrations, tables, auth, storage, RLS, production deployment, real client data, PHI, or secrets were added.
+
+## Current Schema Implementation Readiness Status
+
+Status:
+
+Blocked for migrations.
+
+Issue:
+
+#[READINESS_ISSUE_NUMBER] — Schema implementation readiness gate for foundation slice
+
+File:
+
+- `docs/03-data/SCHEMA_IMPLEMENTATION_READINESS_GATE.md`
+
+Reason:
+
+Minimum founder/security decisions remain unresolved or not implementation-approved.
+
+Next required issue:
+
+Minimum schema blocker decisions for foundation slice
+
 ## Current Planning Document
 
 Current first build plan:
@@ -311,9 +353,7 @@ This slice proves:
 
 Next issue to create:
 
-Next issue to create:
-
-Supabase schema design packet for foundation slice
+Minimum schema blocker decisions for foundation slice
 
 Recommended board status after creation:
 
@@ -321,11 +361,11 @@ Ready for Spec
 
 Purpose:
 
-Document the first-slice schema design before creating migrations.
+Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
 
-This next issue is documentation/data planning only.
+This next issue is founder/security decision documentation.
 
-This next issue must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
+This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
 
 ## Future Build Issue Sequence
 
