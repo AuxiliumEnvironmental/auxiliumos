@@ -583,3 +583,37 @@ The following questions block initial schema migrations unless resolved, deferre
 Current safe status:
 
 Blocked for migrations.
+
+
+## Post-Minimum Schema Decision Open Questions — Added 2026-07-10
+
+Source issue: #72 — Minimum schema blocker decisions for foundation slice
+
+The following remain open beyond dev-schema planning:
+
+- Final production account membership model
+- Final role authority
+- Full document grant model
+- Final document release authority
+- Client-visible audit event policy
+- Final auth provider strategy
+- Storage bucket design
+- RLS helper design
+- Production readiness
+- Real client data onboarding
+- PHI-capable workflow policy
+
+Current safe next step:
+
+Create a foundation migration control packet.
+
+Current blocked work:
+
+- Supabase migrations
+- Supabase tables
+- Auth setup
+- Storage buckets
+- RLS policies
+- Production setup
+- Real client data
+- PHI
