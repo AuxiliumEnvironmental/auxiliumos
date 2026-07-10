@@ -110,3 +110,44 @@ Do not start:
 Schema implementation is not ready.
 
 A minimum founder/security decision issue is required before migrations.
+
+
+---
+
+# Minimum Schema Blocker Decisions Recorded
+
+Added: 2026-07-10  
+Source issue: #72 — Minimum schema blocker decisions for foundation slice
+
+## Updated Readiness Result
+
+Ready to create a migration control packet.
+
+Still blocked for actual migrations.
+
+## Decisions Recorded
+
+See:
+
+`docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md`
+
+Minimum decisions recorded:
+
+- Account membership model for dev schema
+- Minimum static roles for fake/dev testing
+- Document grant model for the first slice
+- Document release authority stance for schema purposes only
+- Audit event visibility for now
+- Auth identity linkage assumption for dev
+- Storage deferred
+- RLS helper design deferred
+- No-PHI confirmation
+- Fake/demo seed data confirmation
+
+## Migration Status
+
+No migrations are authorized by this update.
+
+The next safe issue is:
+
+Foundation migration control packet

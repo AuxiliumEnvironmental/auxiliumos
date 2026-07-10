@@ -187,3 +187,47 @@ Healthcare clients may be part of the future system, but the safest v1 posture i
 
 Status:
 Approved
+
+
+---
+
+# Minimum Schema Blocker Decisions — 2026-07-10
+
+Source issue: #72 — Minimum schema blocker decisions for foundation slice
+
+Decision scope:
+
+Dev-schema planning only.
+
+Decisions recorded:
+
+1. Account membership model for dev schema: account-scoped membership concept may be planned for fake/dev schema only.
+2. Minimum static roles for fake/dev testing: System Admin, Intake Admin, Document Controller, Site Champion, Project Requester, Document Viewer, Removed/Suspended User.
+3. Document grant model for first slice: document access must not rely on account membership alone; explicit document grants deferred.
+4. Document release authority stance: release state may be represented for schema planning only; final release authority deferred.
+5. Audit event visibility: internal-only for now; client-visible audit deferred.
+6. Auth identity linkage: future auth identity linkage may be planned; auth setup deferred.
+7. Storage: deferred.
+8. RLS helper design: deferred.
+9. No-PHI: confirmed.
+10. Fake/demo seed data only: confirmed.
+
+Decision status:
+
+Approved for dev-schema planning only / Not production-approved / Not final business authority.
+
+Next safe issue:
+
+Foundation migration control packet
+
+Not authorized:
+
+- Migrations
+- Supabase tables
+- Auth
+- Storage
+- RLS
+- Production
+- Real client data
+- PHI
+- Secrets

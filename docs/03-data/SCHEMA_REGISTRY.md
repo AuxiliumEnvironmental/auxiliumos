@@ -208,3 +208,40 @@ The foundation schema design packet exists, but minimum founder/security decisio
 - Fake/demo seed data confirmation
 
 No migration issue should be worked until these blockers are resolved, deferred, or explicitly scoped around in the repo.
+
+
+---
+
+# Minimum Schema Blocker Decisions
+
+Added: 2026-07-10  
+Source issue: #72 — Minimum schema blocker decisions for foundation slice
+
+## Status
+
+Minimum founder/security decision checkpoint completed for dev-schema planning only.
+
+## Result
+
+Ready to create a migration control packet.
+
+Still blocked for actual migrations.
+
+## Decision File
+
+`docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md`
+
+## Important Limitation
+
+This update does not authorize:
+
+- Supabase migrations
+- Supabase tables
+- Auth setup
+- Storage buckets
+- RLS policies
+- Edge functions
+- Production setup
+- Real client data
+- PHI
+- Secrets
