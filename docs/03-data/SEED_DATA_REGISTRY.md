@@ -40,3 +40,43 @@ Disallowed seed data:
 - API keys
 - Service-role keys
 - Any secret
+
+
+---
+
+# Foundation Migration Control Packet Seed Rules
+
+Added: 2026-07-12  
+Source issue: #74 — Foundation migration control packet
+
+Seed data status:
+
+Future-only.
+
+No seed file is created by this packet.
+
+Future seed data must be fake/demo only.
+
+Allowed future examples:
+
+- Demo Property Group
+- North Wing Facility
+- Water Intrusion Demo
+- Document Placeholder 001
+- Auxilium Admin Demo
+- Client Viewer Demo
+- Request Submitted placeholder event
+- Document Released placeholder event
+
+Disallowed:
+
+- Real client names
+- Real addresses
+- Real contacts
+- Real documents
+- Real project names
+- PHI
+- Passwords
+- API keys
+- Service-role keys
+- Any secret
