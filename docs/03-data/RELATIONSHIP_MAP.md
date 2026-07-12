@@ -7,7 +7,7 @@ Document parent/child relationships and foreign keys here.
 # Foundation Slice Candidate Relationships
 
 Added: 2026-07-06  
-Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+Source issue: #66 — Supabase schema design packet for foundation slice
 
 All relationships below are draft / not implementation-approved.
 

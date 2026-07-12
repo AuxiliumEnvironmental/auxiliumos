@@ -515,7 +515,7 @@ docs/00-control/NEXT_ACTIONS.md
 
 ## First Build Blocker Checkpoint — Added 2026-07-05
 
-Source issue: #55 — Founder decision checkpoint for first build blockers
+Source issue: #56 — Founder decision checkpoint for first build blockers
 
 The following decisions remain founder-review-required / not implementation-approved unless a later repo update marks them approved:
 
@@ -603,17 +603,24 @@ The following remain open beyond dev-schema planning:
 - Real client data onboarding
 - PHI-capable workflow policy
 
+Current status:
+
+- #74 — Foundation migration control packet — complete.
+- #76 — Bulk control doc update after schema blocker sprint — complete.
+- Founder selected the controlled dev-only migration path.
+
 Current safe next step:
 
-Create a foundation migration control packet.
+Create the issue `Initial dev-only foundation schema migrations` with exact migration, seed, documentation, and test files.
 
-Current blocked work:
+Still blocked outside that future issue:
 
-- Supabase migrations
-- Supabase tables
+- Migration application
+- Cloud Supabase connection
 - Auth setup
 - Storage buckets
 - RLS policies
 - Production setup
 - Real client data
 - PHI
+- Secrets

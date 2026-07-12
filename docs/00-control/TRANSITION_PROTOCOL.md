@@ -109,3 +109,4 @@ First, summarize only:
 8. Any contradictions or missing files you notice in the uploaded handoff packet.
 
 After the summary, stop and wait for me to confirm. Do not provide step-by-step build instructions yet.
+```
