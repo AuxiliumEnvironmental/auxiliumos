@@ -6,9 +6,10 @@
 Replace the entire file with:
 
 ```markdown
+
 # Project State
 
-Last updated: 2026-07-05
+Last updated: 2026-07-12
 
 ## Current Phase
 
@@ -364,9 +365,9 @@ until the relevant future GitHub issue is created, approved, and worked through 
 
 ## Current Next Action
 
-Create GitHub issue:
+Create GitHub issue only if founder chooses to proceed:
 
-Minimum schema blocker decisions for foundation slice
+Initial dev-only foundation schema migrations
 
 Recommended board status:
 
@@ -374,11 +375,11 @@ Ready for Spec
 
 Purpose:
 
-Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
+Create the first dev-only foundation schema migration and fake/demo seed file under the foundation migration control packet.
 
-This next issue is founder/security decision documentation.
+This future issue must explicitly authorize exact migration and seed files before any migration is created.
 
-This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
+This future issue must not authorize auth setup, storage buckets, RLS policies, edge functions, production deployment, real client data, PHI, secrets, Claude Code implementation edits, or Codex implementation edits unless explicitly and separately authorized.
 
 ## Schema Design Status
 
@@ -419,3 +420,49 @@ Reason:
 Minimum founder/security decisions remain unresolved or not implementation-approved.
 
 No schema implementation is authorized.
+
+## Minimum Schema Decision Status
+
+Status:
+
+Recorded for dev-schema planning only.
+
+Issue:
+
+#72 — Minimum schema blocker decisions for foundation slice
+
+File:
+
+- `docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md`
+
+Result:
+
+Ready to create a migration control packet.
+
+Still not production-approved.
+
+Still does not authorize migrations by itself.
+
+## Foundation Migration Control Packet Status
+
+Status:
+
+Created.
+
+Issue:
+
+#74 — Foundation migration control packet
+
+File:
+
+- `docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md`
+
+Result:
+
+A future dev-only migration issue may be considered if founder chooses to proceed.
+
+No migrations have been created yet.
+
+No Supabase tables exist yet.
+
+No auth, storage, RLS, production, real client data, PHI, or secrets are authorized.

@@ -1,6 +1,6 @@
 # Current Handoff
 
-Last updated: 2026-07-05
+Last updated: 2026-07-12
 
 ## Purpose
 
@@ -219,7 +219,7 @@ Design packet created.
 
 Issue:
 
-#[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+#66 — Supabase schema design packet for foundation slice
 
 File:
 
@@ -239,7 +239,7 @@ Blocked for migrations.
 
 Issue:
 
-#[READINESS_ISSUE_NUMBER] — Schema implementation readiness gate for foundation slice
+#68 — Schema implementation readiness gate for foundation slice
 
 File:
 
@@ -252,6 +252,53 @@ Minimum founder/security decisions remain unresolved or not implementation-appro
 Next required issue:
 
 Minimum schema blocker decisions for foundation slice
+
+## Current Minimum Schema Decision Status
+
+Status:
+
+Recorded for dev-schema planning only.
+
+Issue:
+
+#72 — Minimum schema blocker decisions for foundation slice
+
+File:
+
+- `docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md`
+
+Scope:
+
+Minimum founder/security decisions needed before planning dev-only migrations.
+
+Limitations:
+
+- Not production-approved.
+- Does not authorize migrations.
+- Does not authorize auth, storage, RLS, real client data, PHI, or secrets.
+
+## Current Migration Control Packet Status
+
+Status:
+
+Created.
+
+Issue:
+
+#74 — Foundation migration control packet
+
+File:
+
+- `docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md`
+
+Scope:
+
+Defines what a future dev-only migration issue must contain.
+
+Limitations:
+
+- Does not itself authorize migrations.
+- Does not authorize auth, storage, RLS, production, real client data, PHI, or secrets.
 
 ## Current Planning Document
 
@@ -351,9 +398,9 @@ This slice proves:
 
 ## Immediate Next Issue
 
-Next issue to create:
+Next issue to create only if founder chooses to proceed:
 
-Minimum schema blocker decisions for foundation slice
+Initial dev-only foundation schema migrations
 
 Recommended board status after creation:
 
@@ -361,11 +408,11 @@ Ready for Spec
 
 Purpose:
 
-Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
+Create the first dev-only foundation schema migration and fake/demo seed file under the foundation migration control packet.
 
-This next issue is founder/security decision documentation.
+This future issue must explicitly authorize exact migration and seed files.
 
-This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production deployment, real client data, PHI, or secrets.
+This future issue must not authorize auth setup, storage buckets, RLS policies, edge functions, production deployment, real client data, PHI, secrets, Claude Code implementation edits, or Codex implementation edits unless explicitly and separately authorized.
 
 ## Future Build Issue Sequence
 
@@ -514,6 +561,7 @@ If it cannot determine those items, it must stop and ask.
 Every AI/tool session must end with this closeout:
 
 ```markdown
+
 # Session Closeout
 
 Date:

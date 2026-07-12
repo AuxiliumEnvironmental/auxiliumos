@@ -1,6 +1,6 @@
 # Next Actions
 
-Last updated: 2026-07-05
+Last updated: 2026-07-12
 
 ## Current Phase
 
@@ -48,6 +48,9 @@ Completed by this planning update:
 - #66 — Supabase schema design packet for foundation slice
 - #68 — Schema implementation readiness gate for foundation slice
 - #70 — Bulk control doc update after schema design sprint
+- #72 — Minimum schema blocker decisions for foundation slice
+- #74 — Foundation migration control packet
+- #76 — Bulk control doc update after schema blocker sprint
 
 ## Current Approved Planning Output
 
@@ -61,9 +64,9 @@ Define the first build issue sequence and identify which future issue may first 
 
 ## Immediate Next Issue To Create
 
-Create GitHub issue:
+Create GitHub issue only if founder chooses to proceed:
 
-Minimum schema blocker decisions for foundation slice
+Initial dev-only foundation schema migrations
 
 Recommended board status after creation:
 
@@ -71,26 +74,25 @@ Ready for Spec
 
 Task type:
 
-Founder/security decision documentation.
+Supabase migration implementation, dev-only.
 
 Purpose:
 
-Resolve, defer, or explicitly scope around the minimum blockers that prevent initial schema migrations.
+Create the first dev-only foundation schema migration and fake/demo seed file under the strict migration control packet.
 
-This next issue must decide or preserve as blocked:
+This issue must explicitly authorize exact migration and seed files before any migration is created.
 
-- Account membership model
-- Minimum development role authority
-- Document grant model
-- Document release authority
-- Audit event visibility
-- Auth identity linkage assumption
-- Storage deferral or storage design dependency
-- RLS helper design dependency
-- No-PHI confirmation
-- Fake/demo seed data confirmation
+Required warning:
 
-This next issue must not create migrations, tables, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
+Do not create this issue unless the founder confirms that dev-only migrations should begin.
+
+This future issue must not authorize auth setup, storage buckets, RLS policies, edge functions, production deployment, real client data, PHI, secrets, Claude Code implementation edits, or Codex implementation edits unless explicitly and separately authorized in that issue.
+
+Required future allowed files should be limited to:
+
+- `supabase/migrations/[TIMESTAMP]_foundation_slice_schema.sql`
+- `supabase/seed/foundation_demo_seed.sql`
+- `docs/03-data/SCHEMA_REGISTRY.md`
 
 ## Recommended Labels For Next Issue
 
@@ -160,37 +162,47 @@ Summary:
 
 Each future issue must have its own issue body, branch name, allowed file list, tool authorization, acceptance criteria, tests, and out-of-scope rules.
 
-## First Authorization Gates
+## Current Authorization Gates
 
-First issue that may touch app code:
+App code:
 
-First issue that touched app code:
+Authorized only by completed static-shell issue.
 
-#60 — Static app shell scaffold and route placeholders
+Playwright:
 
-First issue that authorized Playwright installation:
+Authorized only by completed Playwright baseline issue.
 
-#62 — App test harness and Playwright baseline
+Supabase schema migrations:
 
-First future issue that may authorize Supabase schema creation:
+Not yet started. May be considered next only if founder chooses to proceed with a dev-only migration issue under the foundation migration control packet.
 
-Not yet authorized. Schema design must happen first.
+Auth setup:
 
-First future issue that may authorize auth setup:
+Not authorized.
 
-Not yet authorized.
+Storage buckets:
 
-First future issue that may authorize RLS policies:
+Not authorized.
 
-Not yet authorized.
+RLS policies:
 
-First future issue that may authorize storage buckets:
+Not authorized.
 
-Not yet authorized.
+Production:
 
-First future issue that may authorize Claude Code or Codex implementation edits:
+Not authorized.
 
-Not yet authorized.
+Real client data:
+
+Not authorized.
+
+PHI:
+
+Not authorized.
+
+Claude Code / Codex implementation edits:
+
+Not authorized.
 
 ## Still Draft / Founder Review Required
 

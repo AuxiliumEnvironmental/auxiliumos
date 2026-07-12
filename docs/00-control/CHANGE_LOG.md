@@ -29,6 +29,7 @@ Next planned issue:
 Important:
 
 The next planned issue is documentation/data planning only. It must not create migrations, tables, Supabase schema, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
+
 ## 2026-07-06 — Schema design sprint
 
 Completed:
@@ -52,3 +53,35 @@ Next planned issue:
 Important:
 
 The next planned issue is a founder/security decision issue. It must not create migrations, tables, auth, storage, RLS policies, edge functions, production setup, real client data, PHI, or secrets.
+
+
+## 2026-07-12 — Schema blocker and migration-control sprint
+
+Completed:
+
+- #72 — Minimum schema blocker decisions for foundation slice
+- #74 — Foundation migration control packet
+- #76 — Bulk control doc update after schema blocker sprint
+
+Summary:
+
+- Recorded minimum founder/security decisions required for dev-schema planning.
+- Confirmed account-scoped membership concept for dev-schema planning only.
+- Confirmed minimum static roles for fake/dev testing only.
+- Confirmed document access must not rely on account membership alone.
+- Confirmed document release metadata may be planned, but final release authority remains deferred.
+- Confirmed audit events are internal-only for now.
+- Confirmed auth setup, storage, and RLS helper design remain deferred.
+- Confirmed no-PHI and fake/demo seed data only.
+- Created the foundation migration control packet.
+- Preserved no-migration, no-Supabase-table, no-auth, no-storage, no-RLS, no-production, no-real-client-data, no-PHI, and no-secrets restrictions.
+
+Next planned issue:
+
+- Initial dev-only foundation schema migrations
+
+Important:
+
+This next issue may be considered only if the founder chooses to proceed with dev-only migrations under the migration control packet.
+
+The next issue must explicitly authorize exact migration files and seed files before any migration is created.
