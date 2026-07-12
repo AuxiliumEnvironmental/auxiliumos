@@ -4,13 +4,10 @@ Every table must have an owner and purpose.
 
 ---
 
-
----
-
 # Foundation Slice Candidate Ownership
 
-Added: 2026-07-06  
-Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+Added: 2026-07-08  
+Source issue: #66 — Supabase schema design packet for foundation slice
 
 All concepts below are draft / not implementation-approved.
 

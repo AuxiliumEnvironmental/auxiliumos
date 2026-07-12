@@ -7,7 +7,7 @@ Document seed records and test data here.
 # Foundation Slice Future Seed Data Plan
 
 Added: 2026-07-06  
-Source issue: #[SCHEMA_DESIGN_ISSUE_NUMBER] — Supabase schema design packet for foundation slice
+Source issue: #66 — Supabase schema design packet for foundation slice
 
 Status:
 

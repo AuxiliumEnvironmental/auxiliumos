@@ -1,14 +1,16 @@
 # Next Actions
 
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 
 ## Current Phase
 
-First Build Implementation Planning
+Dev-Only Foundation Schema Migration Preparation
 
 ## Current Goal
 
-Move from the completed Lovable visual UI shell into controlled first build planning without starting app code, Supabase schema, auth, storage, RLS, Playwright, Claude Code implementation edits, Codex implementation edits, production setup, real client data, or PHI-capable workflows.
+Create the first controlled dev-only foundation migration artifact after repairing the current source-of-truth entrypoints.
+
+The migration must remain disconnected from cloud Supabase and must not configure auth, storage, RLS policies, production, real client data, PHI, or secrets.
 
 ## Source-of-Truth Rule
 
@@ -16,32 +18,18 @@ The GitHub repository is the source of truth.
 
 AI tools are workers.
 
-Anything not captured in the repository does not count.
-
 One issue controls one branch and one controlled change.
 
 ## Canonical Data Spine
 
 Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.
 
-## Completed Immediate Work
+## Completed Issue Chain
 
-Completed and manually verified:
-
-- Issue #52 — Create Lovable visual UI shell v1
-
-Completed by this planning update:
-
-- Issue #54 — First build implementation plan
-- `docs/00-control/FIRST_BUILD_IMPLEMENTATION_PLAN.md`
-- Updated `PROJECT_STATE.md`
-- Updated `CURRENT_HANDOFF.md`
-- Updated `NEXT_ACTIONS.md`
-
-- Issue #56 — Founder decision checkpoint for first build blockers
-
-- Issue #58 — Foundation vertical slice build-control packet
-
+- #52 — Create Lovable visual UI shell v1
+- #54 — First build implementation plan
+- #56 — Founder decision checkpoint for first build blockers
+- #58 — Foundation vertical slice build-control packet
 - #60 — Static app shell scaffold and route placeholders
 - #62 — App test harness and Playwright baseline
 - #64 — Correct issue-number references and bulk control doc update after static shell baseline
@@ -52,206 +40,163 @@ Completed by this planning update:
 - #74 — Foundation migration control packet
 - #76 — Bulk control doc update after schema blocker sprint
 
-## Current Approved Planning Output
+## Current Approved Planning Files
 
-Current planning document:
-
-`docs/00-control/FIRST_BUILD_IMPLEMENTATION_PLAN.md`
-
-Purpose:
-
-Define the first build issue sequence and identify which future issue may first authorize app code, Supabase schema, auth, storage, RLS, Playwright installation, Claude Code implementation edits, and Codex implementation edits.
+- `docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md`
+- `docs/03-data/SCHEMA_IMPLEMENTATION_READINESS_GATE.md`
+- `docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md`
+- `docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md`
+- `docs/03-data/SCHEMA_REGISTRY.md`
+- `docs/03-data/TABLE_OWNERSHIP.md`
+- `docs/03-data/RELATIONSHIP_MAP.md`
+- `docs/03-data/FIELD_DICTIONARY.md`
+- `docs/03-data/SEED_DATA_REGISTRY.md`
 
 ## Immediate Next Issue To Create
 
-Create GitHub issue only if founder chooses to proceed:
+Create:
 
-Initial dev-only foundation schema migrations
+`Initial dev-only foundation schema migrations`
 
-Recommended board status after creation:
+Recommended board status:
 
-Ready for Spec
-
-Task type:
-
-Supabase migration implementation, dev-only.
+`Ready for Build`
 
 Purpose:
 
-Create the first dev-only foundation schema migration and fake/demo seed file under the strict migration control packet.
+Create one dev-only migration SQL file, one fake/demo seed SQL file, one schema-registry entry, one static migration contract test, and one package script update.
 
-This issue must explicitly authorize exact migration and seed files before any migration is created.
+The issue must explicitly identify every allowed file.
 
-Required warning:
+## Migration Candidate Tables
 
-Do not create this issue unless the founder confirms that dev-only migrations should begin.
+Only these candidate tables are permitted in the initial migration issue:
 
-This future issue must not authorize auth setup, storage buckets, RLS policies, edge functions, production deployment, real client data, PHI, secrets, Claude Code implementation edits, or Codex implementation edits unless explicitly and separately authorized in that issue.
+- `client_accounts`
+- `user_profiles`
+- `account_memberships`
+- `facilities`
+- `incident_requests`
+- `documents`
+- `audit_events`
 
-Required future allowed files should be limited to:
+## Migration Safety Stance
 
-- `supabase/migrations/[TIMESTAMP]_foundation_slice_schema.sql`
-- `supabase/seed/foundation_demo_seed.sql`
-- `docs/03-data/SCHEMA_REGISTRY.md`
+The migration issue may:
 
-## Recommended Labels For Next Issue
+- Create only the seven approved tables.
+- Enable RLS on all seven tables.
+- Add fake/demo seed data.
+- Add static migration contract tests.
 
-- `type:feature`
-- `type:ui`
-- `module:ai`
-- `module:security`
-- `risk:permission`
-- `risk:document-release`
-- `risk:client-data`
-- `ready-for-agent`
+The migration issue may not:
 
-Do not add implementation labels that imply app code, schema, auth, storage, or RLS is authorized.
+- Create RLS policies.
+- Create RLS helper functions.
+- Configure auth.
+- Create storage buckets.
+- Create edge functions.
+- Connect the app.
+- Connect a cloud Supabase project.
+- Apply the migration.
+- Use production.
+- Use real client data.
+- Use PHI.
+- Add secrets.
 
-## Next Issue Must Decide Or Preserve As Open
+## Following Sprint Sequence
 
-The next issue should review the following blockers:
+After the migration artifact is merged:
 
-- Final role authority
-- Final client-side roles and internal roles
-- Document release authority
-- Document grant model
-- Scope approval authority
-- Cap/change authorization authority
-- Emergency conditional authorization authority
-- Emergency authorization thresholds
-- No-PHI exceptions
-- Professional/legal boundaries
-- Client Executive visibility boundaries
-- Site Champion visibility boundaries
-- Billing Contact access boundaries
-- Vendor User inclusion in v1
-- Account membership model
-- Billing visibility model
-- Audit event visibility
-- Auth provider strategy
-- Storage bucket design
-- Supabase schema design
-- Production readiness
-- Real client data onboarding
-- Whether any PHI-capable workflow will ever be supported
-
-If unresolved, mark the item as:
-
-Decision Status: Draft / Founder review required / Not implementation-approved.
-
-## First Build Issue Sequence
-
-After the founder decision checkpoint, follow the sequence in:
-
-`docs/00-control/FIRST_BUILD_IMPLEMENTATION_PLAN.md`
-
-Summary:
-
-1. Founder decision checkpoint for first build blockers
-2. Foundation vertical slice build-control packet
-3. Static app shell scaffold and route placeholders
-4. App test harness and Playwright baseline
-5. Supabase schema design packet for foundation slice
-6. Initial Supabase schema migrations for foundation slice
-7. Development auth setup and test identities
-8. RLS policies and permission-denial tests for foundation slice
-9. Development storage buckets and document metadata staging
-10. Foundation incident request and admin queue implementation
-11. Foundation document release and client view implementation
-12. Foundation audit, backup, and handoff proof
-
-Each future issue must have its own issue body, branch name, allowed file list, tool authorization, acceptance criteria, tests, and out-of-scope rules.
+1. Foundation RLS design packet
+2. Foundation RLS denial-test specification
+3. Dev auth identity-linkage design packet
+4. Document storage readiness and deferral packet
+5. Local Supabase tooling readiness check
+6. Foundation data sprint bulk closeout
 
 ## Current Authorization Gates
 
-App code:
+### App code
 
-Authorized only by completed static-shell issue.
+Static app shell only is complete.
 
-Playwright:
+No backend app connection is authorized.
 
-Authorized only by completed Playwright baseline issue.
+### Playwright
 
-Supabase schema migrations:
+The static-shell Playwright baseline exists.
 
-Not yet started. May be considered next only if founder chooses to proceed with a dev-only migration issue under the foundation migration control packet.
+### Migration artifacts
 
-Auth setup:
+The next exact issue may authorize one dev-only migration and one fake/demo seed file.
 
-Not authorized.
+### Migration application
 
-Storage buckets:
+Not authorized until local tooling readiness is confirmed and a separate issue authorizes local-only commands.
 
-Not authorized.
-
-RLS policies:
+### Auth
 
 Not authorized.
 
-Production:
+### Storage
 
 Not authorized.
 
-Real client data:
+### RLS policies
 
 Not authorized.
 
-PHI:
+RLS enablement in the migration may be authorized as a secure deny-by-default posture.
+
+### Cloud Supabase
 
 Not authorized.
 
-Claude Code / Codex implementation edits:
+### Production
 
 Not authorized.
 
-## Still Draft / Founder Review Required
+### Real client data
 
-The following are not final implementation decisions:
+Not authorized.
 
-- Role authority
-- Document release authority
-- Scope approval authority
-- Cap/change authorization authority
-- No-PHI exceptions
-- Emergency authorization thresholds
-- RLS helper design
-- Auth provider strategy
+### PHI
+
+Not authorized.
+
+### Claude Code and Codex implementation edits
+
+Not authorized.
+
+## Still Draft Or Deferred
+
+- Final production account membership model
+- Final role authority
+- Full document grant model
+- Final document release authority
+- Client-visible audit policy
+- Final auth provider
 - Storage bucket design
-- Supabase schema design
+- RLS helper design
 - Production readiness
-- Real client data onboarding
+- Real client-data onboarding
 - PHI-capable workflow policy
-
-These must remain draft until founder/legal/security/professional review is complete.
 
 ## Do Not Start Yet
 
-Do not start these yet:
-
-- Full Lovable backend app build
-- App implementation beyond future issue authorization
-- Supabase schema
-- Supabase production project
-- Supabase storage buckets
-- Auth providers
-- RLS policy creation
+- Cloud Supabase connection
+- Migration application
+- Auth provider setup
+- Storage buckets
+- RLS policies
+- RLS helper functions
 - Edge functions
-- Claude Code implementation edits
-- Codex implementation edits
-- Playwright installation
-- GitHub Actions real CI
+- App/database connection
+- Production setup
 - Real client data
-- Real PHI or healthcare patient data
-- Production deployment
-- Real document release logic
+- PHI
+- Real document release
 - Real scope logic
-- Real agreement/signature logic
-- Real finance/cap logic
-
-## Immediate Operating Instruction
-
-Next session should create the issue:
-
-Founder decision checkpoint for first build blockers
-
-Do not provide implementation steps for app code, Supabase schema, auth, storage, RLS, Playwright, Claude Code, Codex, production, real client data, or PHI until the relevant future issue explicitly authorizes that work.
+- Agreement/signature logic
+- Finance/cap logic
