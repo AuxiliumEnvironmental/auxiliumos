@@ -285,3 +285,63 @@ No migrations have been created.
 No Supabase tables have been created.
 
 No auth, storage, RLS, production, real client data, PHI, or secrets are authorized by this packet.
+
+---
+
+# Initial Dev-Only Foundation Migration
+
+Added: 2026-07-13  
+Source issue: #80 — Initial dev-only foundation schema migrations
+
+## Status
+
+Migration artifact created.
+
+Database application status:
+
+Not applied by this issue.
+
+## Migration File
+
+`supabase/migrations/20260713000100_foundation_slice_schema.sql`
+
+## Seed File
+
+`supabase/seed/foundation_demo_seed.sql`
+
+## Tables Defined
+
+- `client_accounts`
+- `user_profiles`
+- `account_memberships`
+- `facilities`
+- `incident_requests`
+- `documents`
+- `audit_events`
+
+## Security Posture
+
+- RLS enabled on all seven tables.
+- No RLS policies created.
+- No RLS helper functions created.
+- No app connection authorized.
+- No auth provider configured.
+- No storage bucket created.
+- No cloud project connected.
+
+## Data Posture
+
+- Fake/demo seed data only.
+- No PHI.
+- No real client data.
+- No credentials or secrets.
+
+## Next Requirements
+
+Before any database application or app connection:
+
+- Complete foundation RLS design packet.
+- Complete foundation RLS denial-test specification.
+- Complete dev auth identity-linkage design packet.
+- Complete document storage readiness and deferral packet.
+- Complete local Supabase tooling readiness check.
