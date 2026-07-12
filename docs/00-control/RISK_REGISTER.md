@@ -26,3 +26,15 @@ Source issue: #72 — Minimum schema blocker decisions for foundation slice
 | R-SCHEMA-008 | Deferring explicit document grants may require document access redesign later. | Document release | Medium | Treat document access as stricter than account membership and defer final grant model. | Open |
 | R-SCHEMA-009 | RLS helper design deferral may affect future migration structure. | Security | Medium | Do not create helper functions until RLS issue. | Open |
 | R-SCHEMA-010 | Storage deferral may require document metadata changes later. | Document storage | Medium | Keep storage out of first migration planning and document the deferral. | Open |
+
+
+## Foundation Migration Control Risks — Added 2026-07-12
+
+Source issue: #74 — Foundation migration control packet
+
+| Risk ID | Risk | Category | Severity | Mitigation | Status |
+|---|---|---|---|---|---|
+| R-SCHEMA-011 | Future migration issue may over-expand beyond the foundation slice. | Scope control | High | Limit future migration issue to candidate tables listed in the control packet. | Open |
+| R-SCHEMA-012 | Future migrations may create tables without RLS readiness. | Security | High | Keep app connection blocked until RLS policies and tests are authorized. | Open |
+| R-SCHEMA-013 | Future seed files may accidentally include real data. | Client data | High | Require fake/demo-only seed review before merge. | Open |
+| R-SCHEMA-014 | Future migration may include auth/storage/RLS without explicit issue authorization. | Governance | High | Require exact allowed files and out-of-scope review. | Open |

@@ -245,3 +245,43 @@ This update does not authorize:
 - Real client data
 - PHI
 - Secrets
+
+
+---
+
+# Foundation Migration Control Packet
+
+Added: 2026-07-12 
+Source issue: #74 — Foundation migration control packet
+
+## Status
+
+Migration control packet created.
+
+Migrations status:
+
+Not yet authorized.
+
+## Packet File
+
+`docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md`
+
+## Future Migration Candidate Scope
+
+Candidate tables for a future dev-only migration issue:
+
+- `client_accounts`
+- `user_profiles`
+- `account_memberships`
+- `facilities`
+- `incident_requests`
+- `documents`
+- `audit_events`
+
+## Current Limitation
+
+No migrations have been created.
+
+No Supabase tables have been created.
+
+No auth, storage, RLS, production, real client data, PHI, or secrets are authorized by this packet.
