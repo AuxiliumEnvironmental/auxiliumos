@@ -1,14 +1,20 @@
 {
-    "name": "auxiliumos",
-    "version": "0.0.0",
-    "private": true,
-    "description": "AuxiliumOS operating suite control repo and static app shell.",
-"scripts": {
-  "test": "npm run test:e2e",
-  "test:e2e": "playwright test",
-  "test:migration-contract": "node --test tests/unit/foundation-migration-contract.test.mjs"
-},
-    "devDependencies": {
-        "@playwright/test": "^1.61.1"
-    }
+  "name": "auxiliumos",
+  "version": "0.0.0",
+  "private": true,
+  "description": "AuxiliumOS full-system specifications, static foundation and verified continuation controls.",
+  "scripts": {
+    "test": "npm run test:e2e",
+    "test:e2e": "playwright test",
+    "test:migration-contract": "node --test tests/unit/foundation-migration-contract.test.mjs",
+    "os:check": "node scripts/os-control.mjs validate",
+    "os:status": "node scripts/os-control.mjs status",
+    "os:verify": "node scripts/os-control.mjs verify",
+    "os:checkpoint": "node scripts/os-control.mjs checkpoint",
+    "os:release-check": "node scripts/os-control.mjs release-check",
+    "test:control": "node --test tests/unit/control-system.test.mjs tests/unit/document-integrity.test.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
 }

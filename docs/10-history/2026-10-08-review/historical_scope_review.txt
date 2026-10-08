@@ -1,0 +1,107 @@
+AuxiliumOS historical scope review
+Review date: 2026-10-08
+
+READ COVERAGE AND LIMITS
+
+Read all text in these materialized historical Markdown sources:
+- AuxiliumOS_Master_Map_Guardrails_Roadmap.md
+- AuxiliumOS_Founder_Homework_Workbook.md
+- AuxiliumOS_AI_Context_Packet.md
+- AuxiliumOS_AI_Handoff_Packet.md
+- AuxiliumOS_Project_Status_Ledger.md
+- AuxiliumOS_AI_Tool_Workflow_and_Timeline.md
+- AuxiliumOS_Prep_To_Fly_Checklist.md
+- AuxiliumOS_Beginner_Tool_Setup_Manual.md
+- AuxiliumOS_Audit_Report_2026-06-24.md
+
+Also extracted and reviewed the distinct AuxiliumOS_Master_Map_and_Guardrails.docx, compared the long-form Master_Map_Guardrails_Roadmap.docx to its Markdown, compared Founder_Homework_Workbook.docx to its Markdown, and structurally inspected all question/answer rows of Founder_Homework_Workbook(1).docx. The latter has 1,196 question rows in 112 tables; every answer and owner is blank and every status is still “Open / Draft / Final.” All 194 distinct question patterns were read after normalizing repeated subject names. No completed hidden owner decisions were found in that workbook. No claims are made about inaccessible conversations, current cloud setup, current GitHub issues/board, or actual Cursor contents. TSV board exports were not analyzed in this subtask.
+
+Source text comparison, not document visual-layout QA, was the purpose of DOCX extraction. No comments or tracked changes were present in the four compared DOCX files. Their 2013 core-property timestamps are template artifacts and were not treated as content dates.
+
+SOURCE PROVENANCE AND DUPLICATES
+
+1. AuxiliumOS_Master_Map_and_Guardrails.docx explicitly says “Working Blueprint | June 14, 2026.” It is the shorter, table-oriented master map. Founder_Homework_Workbook(1).docx uses that same visible date and belongs to the Roadmap_and_Guardrails_Package; its bytes match the workbook member of that ZIP exactly.
+2. AuxiliumOS_Planning_Packet.zip entries are dated June 14, 2026. The long Master_Map_Guardrails_Roadmap.md, Founder_Homework_Workbook.md, AI_Handoff_Packet.md and Project_Status_Ledger.md exactly match the package members. Their standalone Markdown does not independently state an author approval date. Cite June 14 as package provenance, not decision approval.
+3. The long-form master DOCX matches its Markdown after removing Markdown/list formatting, except for two additional cover lines. The corresponding smaller Founder_Homework_Workbook.docx does likewise. No requirements are hidden in those presentation duplicates.
+4. AuxiliumOS_Roadmap_and_Guardrails_Package.zip includes the shorter master, larger blank table workbook, AI_Context_Packet and AI_Tool_Workflow_and_Timeline. The context and workflow Markdown match the materialized files exactly. Its README emphasizes context packet plus current ticket/handoff at every restart.
+5. AuxiliumOS_Prep_To_Fly_Package.zip entries are dated June 21, 2026; the checklist files match the materialized copies. The nine development-agent roles originate in section 11.5 of that checklist. The document is a setup plan, not evidence agents were configured.
+6. AuxiliumOS_Beginner_Tool_Setup_Manual.md explicitly says official docs were checked on June 21, 2026. Its ZIP members match the materialized copies. Tool UI/commands and model suggestions are historical, not current verification.
+7. AuxiliumOS_Audit_Report_2026-06-24.md describes a June 24 repo/board audit and corrections to broken continuity files. It is evidence of historical findings, not current build completion.
+
+Historical repo ZIP comparison:
+- auxiliumos-main.zip and auxiliumos-repo-review-snapshot-2026-06-24.zip are byte-identical (SHA-256 prefix 13e17319cf6c; comment 86ca5cac2c853a66f7e8b4f9f23094ed851a9ada), 85 files.
+- June 24 snapshot (1) has comment f32089cd2a19df2e51b7ea85e4b5bc02d8c7f389, 85 files.
+- June 24 snapshot (2) has comment 6acd3b62e5c3da17da5e15efd1304b11a97b7a7c, 87 files.
+- auxiliumos-main(1).zip and Auxilium Website Master Build/auxiliumos-main.zip are byte-identical (SHA-256 prefix 4c4a09513260), comment 3bcd6701ca6d83e2300f5d95cd311e39aed633af, 87 files, archive entries dated July 5.
+- The two AuxiliumOS Product Command/07:13:26-auxiliumos-main ZIPs are byte-identical (SHA-256 prefix a6b8a9abd422), comment f9ef46007d31bc9d9c18bfdfb34e0c116679abd4, 102 files. Their entries are dated July 11 despite the upload filename prefix July 13. Do not infer content recency from the filename alone.
+- None of those historical repository ZIPs contains an application migration beyond a placeholder. The later user-supplied (2) snapshot has the foundation migration, so old archives do not contradict that implementation advance.
+- All older repository paths remain in the later review snapshot except historical malformed/duplicate paths. The older extensionless docs/00-control/first-build-implementation-plan exactly matches the current uppercase .md file. The nested malformed END_STATE_BLUEPRINT exactly matches its corrected current path. The nested old TRANSITION_PROTOCOL was expanded with current role/access references and an active-issue requirement; it did not contain a lost product capability.
+
+Full file comparison metadata is in /workspace/scratch/c6081b60a6a7/history_sources/historical_archive_comparison.json. This is an intermediate review aid, not a claim to contain all Git history.
+
+ACTIONABLE REQUIREMENTS RECOVERED
+
+A. Actual ontology candidate inventories exist in the original workbook even though current repo ontology files are placeholders. Recovered faithfully:
+- 11 service families (section 4.1).
+- 19 issue types (4.2).
+- 16 service intents (4.3).
+- 27 technical work modules (4.4).
+- 16 sampling categories and structured module fields (5.1-5.2).
+- 21 deliverable candidates (6.1).
+- 14 initial smart-prompt trigger contexts (7.1).
+- 16 limitation topics and 19 agreement block topics (8.1-8.2).
+- 12 client types (2.2).
+These are candidate structures and questions, not approved service availability, lab methods, rates, legal wording or business authority. Preserve full source inventories while building proposed versioned configurations under the current user mandate.
+
+B. Issue/intent service catalogue must be nuanced, not a generic menu. It distinguishes issue, desired intent, technical module, method, sample group, deliverable, scope depth, safety modifier, price modifier, and turnaround modifier. The Master Map's relationship taxonomy defines included/recommended/conditional/prerequisite/separate/referral/incompatible relationships. The table-form workbook further asks about valid versus incompatible issue-intent combinations and when a mold/IAQ/PCA request needs reclassification. Do not turn every issue-intent cross-product into a valid offering.
+
+C. Source request routes include saved template, repeat prior request, search more services, help classify, and asset prefill. Repeating work must not copy old authorization or bypass review. Client type orders or deprioritizes requests; it must not impose blanket service limits. Newer CLIENT_TYPES was missing these operational details.
+
+D. Rules/Ontology/Template Admin was a named domain in both June 14 master maps. It includes question banks, trigger cards, sample/deliverable modules, ROM variables, agreement/limitation blocks, review/routing gates, dashboard configuration and state-machine versions. Ordinary users cannot publish changes; new rules never retroactively rewrite an old approved scope without an explicit migration. The later 20-module list needs explicit allocation of this governed configuration across Core/domain owners so it does not disappear or become an unplanned 21st app.
+
+E. Core originally included permission-filtered global search, identity, object IDs, notification/event infrastructure and integration registry. The later split into Audit/Integrations/Communications can preserve these functions with one owner for each. Do not implement several independent notification or audit systems because historical module boundaries differ.
+
+F. Internal queue items have a precise source field list: account, linked asset/project/request, status, priority, owner, next action, due date, blocker, required reviewer, client-facing status and last activity. Every user-facing page should show status, next action and context. The workbook asks for top five tasks users can do without training, role-specific onboarding, and quick-reference cards for Site Champions/frequent requesters. These are useful product acceptance requirements beyond visual theme.
+
+G. Enterprise P0 behavior must direct people to emergency services/facility emergency procedures first. P1 routes to Auxilium command center under configured rules. QR/hotline intake was a possible entry route, not permission to expose protected site records publicly. Triage identifies program/site activation, sensitive areas, contacts, response maps and vendor matrix before applying covered/billable/specialist/out-of-scope/emergency routing. Exact severities/SLAs remain undefined owner/professional configuration.
+
+H. Emergency exception workflow has explicit minimum facts: account, requester, signer, payer, address, access contact, immediate hazard, affected area, occupancy, safety flags, requested action and cap. It requires senior review plus signed emergency authority or verified applicable MSA provision. Follow-up sampling, formal report, protocol, PRV, extended consulting and other services require further authorization unless already included. The architecture should build the workflow without inventing emergency authority.
+
+I. “Ask about this document” must retain account/project/document/deliverable/author/PM/scope and exact document-version context. Classifications include admin, technical, scope, billing, scheduling, urgent incident, complaint, legal/dispute and vendor coordination. Technical responses are review-gated; requested extra work creates a change draft rather than direct mutation.
+
+J. Canonical document records have multiple controlled references. Packages are views of canonical versions rather than independent copies. Superseded originals remain historically traceable and not the current default. The source permits explicitly released drafts in older prose, while later access matrix says Draft Report cannot be released as a draft; the safer current selected policy must be explicit, not an unnoticed mix of both.
+
+K. Sample module requirements are much richer than an add-on checkbox: type/analyte, verified method/media, equipment, COC, lab, standard/rush turnaround, verified rate/markup/shipping, interpretation/reporting effort, QA/QC, safety/PPE, count/scaling basis, field flexibility, authorization and limitation on decline. Table-form source proposes scaling by area/unit/floor/building/material/pathway/control/employee/task/shift and labels unknown typical values “historical data needed.” No numerical averages or thresholds were supplied.
+
+L. Reports/executive intelligence requires action paths, aging issues, value ledger, readiness/risk trends and vendor evidence. It explicitly forbids vanity metrics without actions. Missing/unverified source data must not be translated into a confident zero or compliance claim.
+
+M. Programs include export/transition terms and professional boundary statements. Finance includes vendor management fees and a rule against floating major vendor costs without applicable prepayment/client-direct arrangements. These are proposed contractual/operating policy topics, not approved amounts or terms. User's desired potential Moldo separation reinforces the need to capture ownership, exports and revocable access now.
+
+N. Full application state machines historically include Request, Project, Document, Agreement, Change Request and Message, not only the request state. Historical status names differ between packets. A canonical state/alias migration must reconcile them once rather than letting builders copy mixed labels into code. Examples include Revisions Needed, On Hold, Retracted/Withdrawn, Scope Proposed/Revision Proposed, and message Converted to Task/Change Request.
+
+O. Development continuity was a founding requirement. Compact current context plus a single bounded task, source file map, decisions, assumptions, tests, risks, next work and repository save points were explicit from June 14 onward. The blank status-ledger template is not completed history. The June 24 audit already found unclosed code fences, incomplete state files and malformed links; add deterministic integrity/consistency checks to prevent those exact failures.
+
+CONFLICTS TO RECONCILE IN THE MODERNIZATION
+
+1. Original “separate apps/databases are incorrect” wording vs current independent Moldo mandate. Explicitly supersede the universal shared-operational-database assumption for Moldo with mapped identities, permitted projections and source ownership. Preserve the OS's coherent internal domain model and avoid uncontrolled duplication.
+2. Original “unknown, do not build yet” and “stop for each owner question” rules vs current user authorization to build recommended defaults and review later. Use draft/development-only configuration plus activation controls and a complete owner decision register. Continue unrelated development. Never relabel an unanswered historical workbook entry as approved.
+3. Original all work strictly serial through user-driven Desktop steps vs current explicit parallel agent intent. Preserve bounded tasks, isolated change ownership, review, tests and commits; automate routine bookkeeping and parallelize independent work. No need to build LangGraph/n8n/custom orchestration first; the original prep document itself says add them later only when needed.
+4. Original exact tool/model/UI setup and timeline estimates are historical proposals. The packets disagree even with each other: mature suite 18-30+ months in long roadmap versus 12-24+ months elsewhere. Do not reuse those as current prediction or commitment; base estimates on current evidence/dependencies.
+5. Module counts 11/12 in early maps vs 20 in current repo reflect decomposition, not permission to drop a domain. Rules/template administration, global search, exact-version document questions and notification infrastructure must be assigned explicitly.
+6. Source-of-truth hierarchy amendment ambiguity, optional enterprise layers and Incident/Project Request split remain as identified in product_scope_review.txt.
+7. A source recommendation for separate storage buckets by workflow state is not a requirement to duplicate canonical files or grant access by path. Current implementation should meet metadata, release and permission contracts with a reviewed storage design.
+8. “20 real past projects as test data” is an unfilled workbook prompt. Recreate synthetic/anonymized scenarios only under the current no-real-client-data development boundary; do not upload real historic jobs from that sentence.
+9. Development audit/closeout continuity and runtime product audit are separate. Chat artifacts and Cursor are interfaces/copies of versioned repo state; an unpushed local commit or a Library package must not be described as saved to GitHub.
+
+PACKAGE FILES IMPLEMENTED UNDER PARENT'S FOLLOW-UP TASK
+
+Only these seven formerly placeholder files were changed in AuxiliumOS_Continuation_2026-10-08/repo:
+- docs/02-ontology/SERVICE_FAMILIES.md
+- docs/02-ontology/ISSUES_INTENTS_MODULES.md
+- docs/02-ontology/DELIVERABLES.md
+- docs/02-ontology/SAMPLING_ENGINE.md
+- docs/02-ontology/SMART_PROMPTS.md
+- docs/02-ontology/SCOPE_LIMITATIONS.md
+- docs/01-product/CLIENT_TYPES.md
+
+They retain source inventories and provenance, introduce catalogue IDs, describe versioning/ownership/dependencies and concrete behavior acceptance, reference root REQUIREMENTS.json, and map proposed defaults to the parent's OD-001 through OD-017 decision IDs as applicable. No thresholds, numerical sampling formulae, licenses, rates, approved contracts, authority grants, production changes, code/schema/RLS changes or tests were fabricated. No substantial product blueprint, spine, module map or relationship taxonomy was edited. Final source links depend on the parent's planned copy into docs/10-history/original-plans.

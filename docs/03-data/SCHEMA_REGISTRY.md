@@ -1,3 +1,5 @@
+> Current observation 2026-10-08: the existing auxiliumos-dev project (txofqxictwecgcnvezlb) is accessible. Read-only calls returned no public tables and no migration-history entries. Auth/storage and runtime behavior remain unreviewed; no database writes occurred. Repository migration/seed artifacts below exist, but are not proof of application to this backend. Older environment/security entries below are historical records. Full development is authorized by AGENTS.md; live activation follows explicit gates. Exact observations: docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json.
+
 # Schema Registry
 
 ## Purpose
@@ -16,7 +18,7 @@ No production schema changes should exist without:
 
 ---
 
-# Current Supabase Environment Status
+# Historical Supabase Environment Status
 
 ## Development Project
 
@@ -62,13 +64,13 @@ Not created
 # Schema Status
 
 Current schema status:
-No application schema has been created yet.
+The seven-table foundation schema exists as a repository SQL artifact. Application to any database is unverified in this review.
 
 Current migration status:
-No AuxiliumOS application migrations have been created yet.
+supabase/migrations/20260713000100_foundation_slice_schema.sql exists, recorded under Issue #80. Do not recreate it.
 
 Current RLS status:
-No AuxiliumOS RLS policies have been created yet.
+The migration enables RLS on seven tables but defines no RLS policies. Runtime denial behavior is unverified.
 
 Current storage status:
 No AuxiliumOS storage buckets have been created yet.

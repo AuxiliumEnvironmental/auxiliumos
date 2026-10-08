@@ -1,157 +1,25 @@
-# AuxiliumOS Agent Instructions
+# AuxiliumOS operating instructions
+Effective owner mandate: 2026-10-08. This replaces the preparation-only execution restrictions preserved in docs/10-history. Keep the complete 20-module destination in REQUIREMENTS.json. A foundation milestone is sequencing, never the final product ceiling. Moldo operates independently through a controlled integration; Moldo-only staff/managers receive no OS access. Companion redesign is deferred.
 
-## Absolute Source of Truth
+## Cold start
+1. Inspect actual repository root, origin, branch, HEAD, working tree and accessible remote. Never reset or overwrite newer work from an archive.
+2. Read BUILD_STATE.json and docs/00-control/RESUME.md if present. Run `npm run os:status`. Read the next task's BUILD_QUEUE.json entry and its linked requirements, decisions and source files. Do not reload every historical chat or document.
+3. Reuse only current matching verification evidence. Name the first incomplete action. Continue authorized work without asking the owner to reconfirm the whole plan.
 
-This repository is the source of truth.
+## Authority and facts
+Latest explicit owner instructions govern product direction. Verified current code, approved decisions and effective approved domain revisions govern implementation facts. Historical phase instructions cannot prohibit newly authorized development. Record contradictions; do not silently discard original requirements or invent completed work.
+Distinguish proposed, configured for development, implemented, verified and deployed. A file, screenshot, static test or worker summary cannot prove runtime behavior. State inaccessible sources and unexecuted checks precisely. No claim of perfect knowledge, zero bugs, automatic background work, GitHub push or Cursor synchronization without evidence.
 
-Do not rely on chat memory.
+## Nonblocking owner decisions
+Use OWNER_DECISIONS.json and config/policy-defaults.json. The owner authorized logically consistent recommended defaults and placeholders. Build configurable synthetic behavior and tests; do not stop unrelated work. Mark every actual provisional choice and batch it for owner review. Only the affected live binding action waits for its recorded activation gate. Engineering details such as helper functions, table design and private bucket structure are delegated. No invented live rates, contractual guarantees, credentials, retention periods or scientific thresholds.
 
-Before making changes, read in this order:
+## Build and integration
+One lead integrates code and owns shared contracts, migration ordering, lockfiles, queue and evidence. Use only the needed specialist roles from docs/08-ai/AI_AGENT_ROLES.md. Default at most three concurrent specialists where tooling supports it, with fresh bounded context. Parallel writers need isolated worktrees or exclusive nonoverlapping file allocations. Never assume shared agents have isolated files. Review actual diff and allowed paths before integration.
+Use bounded tasks with requirement IDs, input versions, allowed paths, dependencies, acceptance, risk and stopping conditions. Workers return files, commands/results, decisions and remaining gaps. Do not start broad dependent work before auth, tenancy, version and authority contracts are settled. Prefer modular application architecture; add infrastructure only for demonstrated requirements.
 
-1. `AGENTS.md`
-2. `docs/00-control/CURRENT_HANDOFF.md`
-3. `docs/00-control/TRANSITION_PROTOCOL.md`
-4. `docs/00-control/PROJECT_STATE.md`
-5. `docs/00-control/NEXT_ACTIONS.md`
-6. `docs/01-product/END_STATE_BLUEPRINT.md`
-7. `docs/01-product/DATA_SPINE.md`
-8. `docs/04-security/ROLE_PERMISSION_MATRIX.md`
-9. `docs/04-security/DOCUMENT_ACCESS_MATRIX.md`
-10. The active GitHub issue and its allowed file list
+## Permanent application controls
+No PHI v1; no real secrets or private client data in prompts/source. Backend permissions must deny cross-account access and inactive membership independently of UI or other roles. No message or AI output changes approved scope, sampling, cap, signed terms or release authority. Exact immutable revisions bind reviews/signatures; new drafts do not supersede released versions. Preservation holds and visibility restrictions are separate. Qualified humans retain professional review and actual commercial authority.
 
-## Canonical Data Spine
-
-Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.
-
-Every feature must connect to this spine or be identified as global configuration, reference data, integration data, or out of scope.
-
-## Current Phase
-
-Dev-Only Foundation Schema Migration Preparation.
-
-Completed control work includes:
-
-- First build implementation plan
-- Founder decision checkpoint
-- Foundation vertical-slice control packet
-- Static app shell
-- Playwright baseline
-- Foundation schema design packet
-- Schema readiness gate
-- Minimum schema blocker decisions
-- Foundation migration control packet
-- Bulk control updates through Issue #76
-
-## Current Gate
-
-The next implementation candidate is:
-
-`Initial dev-only foundation schema migrations`
-
-That work may begin only through an active GitHub issue that explicitly provides:
-
-- Exact branch
-- Exact migration filename
-- Exact seed filename
-- Exact allowed files
-- Exact table list
-- Exact constraints
-- Exact tests
-- Explicit fake/demo-data-only rule
-- Explicit no-PHI rule
-- Explicit no-secrets rule
-- Explicit no-auth/no-storage/no-RLS-policy boundaries
-
-A migration artifact does not authorize:
-
-- Cloud Supabase connection
-- Migration application
-- App/database connection
-- Auth provider setup
-- Storage buckets
-- RLS policies
-- Edge functions
-- Production
-- Real client data
-- PHI
-
-## Non-Negotiable Rules
-
-- Do not invent new core objects.
-- Do not rename canonical objects without an approved architecture decision.
-- Do not create or change schema outside an issue that explicitly authorizes it.
-- Do not expose client data without RLS policies and tests.
-- UI hiding is not security.
-- Do not add service-role keys to browser or client code.
-- Do not add API keys, passwords, connection strings, real client data, or PHI.
-- Do not make documents client-visible without release workflow.
-- Do not allow messages or chat to change approved scope.
-- Do not create scope, sampling, cap, agreement, finance, or authorization logic without approved specs and tests.
-- Do not remove or weaken audit requirements.
-- Do not change professional-boundary language without a ticket.
-- Do not work outside the active issue.
-- Do not change files outside the allowed file list.
-- Do not treat founder-decision items as final unless the repository explicitly says they are final.
-
-## Required Workflow
-
-1. Select one GitHub issue.
-2. Confirm issue body, branch, allowed files, tests, and prohibitions.
-3. Move the board card to `In Agent Work`.
-4. Switch GitHub Desktop to `main`.
-5. Fetch and pull.
-6. Create the exact issue branch.
-7. Edit only allowed files.
-8. Run required tests.
-9. Review GitHub Desktop changed files.
-10. Commit with the required summary.
-11. Push/publish.
-12. Open the PR.
-13. Use the required PR title and body.
-14. Review the GitHub Files changed tab.
-15. Merge only after the diff and tests pass.
-16. Move the board card to `Done`.
-17. Confirm the issue closes.
-18. Switch GitHub Desktop back to `main`.
-19. Fetch and pull.
-20. Delete the local branch.
-21. Confirm a clean working tree.
-
-## Required Output For Every Task
-
-Every agent/tool task must provide:
-
-- Summary
-- Files changed
-- Database changes
-- RLS changes
-- Tests added or updated
-- Tests run
-- Test results
-- Assumptions
-- Risks
-- Founder decisions needed
-- Documentation updated
-- Next recommended ticket
-
-## Stop Conditions
-
-Stop unless the active issue explicitly authorizes the work when a task requires:
-
-- New migration or schema files
-- SQL execution
-- Supabase project connection
-- RLS policy changes
-- Auth provider setup
-- Storage bucket creation
-- Document release logic
-- Scope-change logic
-- Sampling authorization logic
-- Agreement/signature logic
-- Finance/cap logic
-- Professional/legal boundary decisions
-- Production deployment
-- Real client data
-- PHI-capable workflows
-- Claude Code implementation edits
-- Codex implementation edits
+## Verification and persistence
+Follow docs/00-control/EXECUTION_PROTOCOL.md, docs/08-ai/FULL_STACK_BUILD_PROTOCOL.md and docs/07-testing/ACCEPTANCE_TEST_MATRIX.md. ChatGPT coordinates the existing Lovable project and existing auxiliumos-dev backend; Cursor is optional. Prefer changed-risk tests and hash-tied evidence reuse; add real database/API denial tests for security, then representative browser journeys. No repeated full suites without a changed input, failed case or required release gate. CI is necessary evidence, not proof of the entire OS.
+Before handing off, update canonical state/queue/decisions, run affected profiles, generate checkpoint, review diff, commit and push to the authorized feature branch when access allows, then verify remote HEAD. Use issues and PRs for traceability; record unavailable links rather than invent them. Preserve every meaningful decision/change/test result; hidden reasoning and unseen chats are not automatically saved. Never claim final acceptance while production requirements or meaningful runtime checks remain missing. At a context limit, checkpoint and resume in a fresh chat in the same project.

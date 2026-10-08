@@ -1,0 +1,45 @@
+["node","scripts/os-control.mjs","validate"]
+{
+  "valid": true,
+  "note": "Structure and references only; application behavior is not certified."
+}
+
+
+["node","scripts/check-docs.mjs"]
+{
+  "files_checked": 91,
+  "errors": []
+}
+
+
+["node","--test","tests/unit/control-system.test.mjs","tests/unit/document-integrity.test.mjs"]
+✔ baseline model preserves all 20 modules and validates its actual references (9.545934ms)
+✔ missing module and duplicate IDs are rejected (1.611955ms)
+✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.468135ms)
+✔ unapproved activation and unsupported completed status cannot forge completion (2.351088ms)
+✔ active writer leases must be identified and must not overlap (0.908396ms)
+✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.392496ms)
+✔ missing source, config and policy decision references are rejected on disk (5.319055ms)
+✔ source inventory rejects missing inputs, traversal and symbolic links (2.310054ms)
+✔ real fixture command produces evidence and a current cache prevents redundant execution (184.343523ms)
+✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (787.437113ms)
+✔ declared environment input change invalidates a cached pass without storing the raw value (179.970534ms)
+✔ runtime identity participates in evidence freshness (170.492172ms)
+✔ failed verification replaces prior success and cannot be reused as passing (281.789791ms)
+✔ tampered verification log is rejected and fresh execution repairs evidence (180.849742ms)
+✔ tracked input changed during execution invalidates a zero-exit command (80.516093ms)
+✔ implemented declaration needs current evidence and required runtime evidence levels (96.46461ms)
+✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (7.151863ms)
+✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.523094ms)
+✔ partial approvals activate only actions whose complete decision set is approved (0.234297ms)
+✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.242944ms)
+✔ handoff checker distinguishes closed examples from an unclosed fence (2.11365ms)
+✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.469473ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2130.256747

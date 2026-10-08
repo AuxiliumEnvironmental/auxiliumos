@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "profile": "package-importer",
+  "level": "control_unit",
+  "recorded_at": "2026-10-08T11:58:56.913Z",
+  "result": "passed",
+  "digest": "3d307958bae9e989f83954040a7f36f32c156c822ccca8650343e9edfaace40e",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-node-isolated-git-fixtures",
+    "environment_hashes": {
+      "CI": null,
+      "GIT_CONFIG_GLOBAL": null,
+      "GIT_CONFIG_NOSYSTEM": null,
+      "GIT_CONFIG_SYSTEM": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "bfd9d138486f54943204f9aee46cb9e3d8eee38eff234cda5793f5b6c349d091",
+      "TZ": "e8def32656206d2574e163cff4330221cbca79a584c6debd922546da0bb0ff74"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "16ddc9338eec5381ba64441b702e7fce8d9b4dfc9df4fe2950f3b5d02b12e48a",
+    "package.json": "5f9d90588f0bb1d8cf935778f7a4addec0c8a066ecdb8a699138c2150c13bf78",
+    "scripts/os-control.mjs": "06da576a46fbc66a72b08f8b3899749a3829c202e4f72fe7a7b71ebb08306a19",
+    "tools/package-importer/apply-package.mjs": "c3d5e742be77d51daeef8e2cd9709c3e57179f93dcb9b6fc2d22ecd091abdfbb",
+    "tools/package-importer/README.md": "db0f05b713dba04284b574335670f4847059a17e5bcc02cc3acc7dab0e320019",
+    "tools/package-importer/tests/apply-package.test.mjs": "021e7b1b64bd1c9dc837e35b016bf22838a3c74cb4a65fafa4c2c18c0b137c72",
+    "VERIFICATION_PROFILES.json": "40c254af3b2d547cd18eca1a571f46904b5fdb25219a8216fb3269ee2bd139be"
+  },
+  "observed_git_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tools/package-importer/tests/apply-package.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/package-importer.log",
+  "log_sha256": "bb06d509eaf06d3d971fc71c3fc10756186ea4c71746c08398bacf3845797c91"
+}

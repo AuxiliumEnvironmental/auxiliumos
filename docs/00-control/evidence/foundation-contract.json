@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "profile": "foundation-contract",
+  "level": "static_sql_contract",
+  "recorded_at": "2026-10-08T11:58:57.426Z",
+  "result": "passed",
+  "digest": "7374178063b0c0ef4cd0193de9415042f0f8c215249b3e62391688971f6394dd",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-node-sql-text-only",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "bfd9d138486f54943204f9aee46cb9e3d8eee38eff234cda5793f5b6c349d091",
+      "TZ": "e8def32656206d2574e163cff4330221cbca79a584c6debd922546da0bb0ff74"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "16ddc9338eec5381ba64441b702e7fce8d9b4dfc9df4fe2950f3b5d02b12e48a",
+    "package.json": "5f9d90588f0bb1d8cf935778f7a4addec0c8a066ecdb8a699138c2150c13bf78",
+    "scripts/os-control.mjs": "06da576a46fbc66a72b08f8b3899749a3829c202e4f72fe7a7b71ebb08306a19",
+    "supabase/migrations/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "tests/unit/foundation-migration-contract.test.mjs": "ca23affab7875b63c2735d114d8e73aa472ce42a6b21fc1848c81ac442d5e4a3",
+    "VERIFICATION_PROFILES.json": "40c254af3b2d547cd18eca1a571f46904b5fdb25219a8216fb3269ee2bd139be"
+  },
+  "observed_git_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/unit/foundation-migration-contract.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/foundation-contract.log",
+  "log_sha256": "f8db77ac579123cc529a053335ec0deb65b56b271efc9108a1551043952fd930"
+}

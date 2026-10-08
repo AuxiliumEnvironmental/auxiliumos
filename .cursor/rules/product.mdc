@@ -1,5 +1,5 @@
-# Product Rules
-- Follow the canonical AuxiliumOS data spine.
-- Do not invent new core objects without a decision record.
-- Build vertical slices, not broad horizontal layers.
-- Client-facing simplicity must map to internal technical truth.
+---
+description: AuxiliumOS full requirements, effective versions and independent moldo boundaries
+alwaysApply: true
+---
+Follow @AGENTS.md and @docs/00-control/EXECUTION_PROTOCOL.md. This file is a pointer, not a parallel policy copy. Use @BUILD_STATE.json, @BUILD_QUEUE.json and the selected @REQUIREMENTS.json entries. For full requirements, effective versions and independent moldo boundaries, inspect the relevant task sources and @OWNER_DECISIONS.json before implementation. Historical preparation-only instructions are superseded; runtime authority and security controls remain. Verify actual source/evidence and save meaningful changes to the canonical Git feature branch.

@@ -1,5 +1,5 @@
-# Supabase Rules
-- Use migrations for schema changes.
-- Client-owned records must have account ownership.
-- RLS is required on client-data tables.
-- Do not expose service-role keys in frontend code.
+---
+description: AuxiliumOS versioned migrations, real rls/api tests and private storage
+alwaysApply: true
+---
+Follow @AGENTS.md and @docs/00-control/EXECUTION_PROTOCOL.md. This file is a pointer, not a parallel policy copy. Use @BUILD_STATE.json, @BUILD_QUEUE.json and the selected @REQUIREMENTS.json entries. For versioned migrations, real rls/api tests and private storage, inspect the relevant task sources and @OWNER_DECISIONS.json before implementation. Historical preparation-only instructions are superseded; runtime authority and security controls remain. Verify actual source/evidence and save meaningful changes to the canonical Git feature branch.

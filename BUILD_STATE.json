@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "as_of": "2026-10-08",
+  "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
+  "source": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
+    "review_basis": "Uploaded snapshot plus accessible original files and retrieved conversation excerpts; not the current live GitHub branch."
+  },
+  "live_repository_reconciled": false,
+  "production_authorization": {
+    "evidence": null
+  },
+  "observed_facts": [
+    "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
+    "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
+    "RLS is enabled in SQL, but no policies, real auth integration, private storage or exact-version release implementation are established.",
+    "Playwright dependency/config and three static shell tests exist. This package does not claim browser execution this session.",
+    "Modernization adds working repository controls and proposed detailed specifications; it does not implement the OS runtime.",
+    "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
+  ],
+  "external_access": {
+    "github": "Installed connector reports no accessible installation; repository read returned 404. No push or PR performed.",
+    "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
+    "supabase": "Read-only access confirmed to existing auxiliumos-dev (txofqxictwecgcnvezlb). Public-table and migration-history lists returned empty on 2026-10-08. Auth/storage configuration and runtime behavior not yet reviewed; no database writes.",
+    "lovable": "OS project 0b7bbfc6-627f-4ca0-9217-98f5b164b419 remains at observed head d271bc5668bc9ad235dd17ee5d9bf92c26a6e146. Corrected project knowledge and OS-only workspace addendum applied and read back. No runtime build dispatched; unpublished prototype."
+  },
+  "source_precedence": [
+    "Latest explicit owner instructions within platform permissions",
+    "Current verified Git source and recorded approved product decisions",
+    "Effective approved domain versions including valid amendments",
+    "Canonical acceptance contracts and clearly provisional configuration",
+    "Historical plans and retrieved chat as attributed evidence"
+  ],
+  "first_runtime_action": "Reconcile the live repository and deployments, then ARCH-001. Do not overwrite newer work from this archive."
+}

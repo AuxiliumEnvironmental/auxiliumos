@@ -1,3 +1,5 @@
+> Current interpretation, 2026-10-08: the foundation SQL now implements UUID IDs and timestamp defaults. `updated_at` has a default but no update trigger, so do not assume automatic updates. `auth_user_id` is nullable and not linked to auth.users; document version_label is not an immutable version model; request/release states accept nonblank text. The candidate dictionary below remains historical design context. Future refinements follow ADR-001 and meaningful runtime tests, not a blanket owner-only build stop.
+
 # Field Dictionary
 
 Define important fields and meanings here.

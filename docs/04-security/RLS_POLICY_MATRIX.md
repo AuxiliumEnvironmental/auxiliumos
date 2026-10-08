@@ -1,3 +1,5 @@
+> Current interpretation, 2026-10-08: this is a proposed domain contract, not runtime proof. Development may implement the recommended configurable defaults under AGENTS.md. OWNER_DECISIONS.json controls pending live business activation. ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md refines membership lifecycle, Incident/Request, effective amendments and Moldo ownership.
+
 # RLS Policy Matrix
 
 ## Purpose

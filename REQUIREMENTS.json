@@ -1,0 +1,706 @@
+{
+  "version": 1,
+  "authority": "Acceptance contracts derived from original plans and current owner direction. They are not runtime implementation evidence.",
+  "requirements": [
+    {
+      "id": "M01",
+      "kind": "product_module",
+      "name": "Core",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "reusable platform services are consistently used across modules.",
+        "account/program module visibility can differ without creating client-specific tables.",
+        "shared configurations that affect scope, pricing, authority, or release carry controlled versions.",
+        "identifiers and cross-object links remain stable.",
+        "feature flags never serve as authorization. Domain business logic resides in its owning module.",
+        "Permission-filtered global search finds only authorized objects and content.",
+        "Governed rules/template administration versions question banks, routing, scope limitations, agreement blocks, ROM variables and dashboard defaults without retroactively changing approved work."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M02",
+      "kind": "product_module",
+      "name": "Accounts",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/CLIENT_TYPES.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "one account can have multiple client types, users, and scoped relationships.",
+        "simple and enterprise clients receive appropriate navigation without service hard limits.",
+        "billing contact, requester, payer, signer, property owner, and approver can be different parties.",
+        "account changes do not rewrite historical project/authorization facts.",
+        "unassigned accounts remain inaccessible.",
+        "Client-type defaults prioritize the right requests and terminology without forbidding valid services; role-specific onboarding and quick-reference guidance support common tasks."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M03",
+      "kind": "product_module",
+      "name": "Programs / Msa",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md"
+      ],
+      "acceptance": [
+        "an account can operate with zero, one, or several programs.",
+        "coverage and activation are explicit per facility and effective period.",
+        "the correct versioned terms/rate basis are attached to an engagement.",
+        "an MSA never bypasses project scope and authorization.",
+        "program-specific commitments are configurable and auditable.",
+        "out-of-coverage work enters a controlled approval route."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M04",
+      "kind": "product_module",
+      "name": "Portfolios",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/DATA_SPINE.md"
+      ],
+      "acceptance": [
+        "assets can be grouped into multiple permitted portfolios.",
+        "changes preserve site-level truth and historical group membership where relevant.",
+        "executive/portfolio views derive from authorized underlying records.",
+        "grouping never grants unintended cross-account access.",
+        "an ordinary one-property engagement does not need an invented portfolio."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M05",
+      "kind": "product_module",
+      "name": "Assets / Facilities",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/DATA_SPINE.md"
+      ],
+      "acceptance": [
+        "repeat work can attach to the same stable site and physical areas.",
+        "observations and scope identify actual included/excluded areas.",
+        "facility history preserves linked incidents/projects/docs instead of copying them into one notes field.",
+        "facility assignments restrict site users.",
+        "physical site identity, paying account, and business relationship are not accidentally conflated."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M06",
+      "kind": "product_module",
+      "name": "Readiness / Site Passport",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/END_STATE_BLUEPRINT.md"
+      ],
+      "acceptance": [
+        "a facility has a versioned passport with owners, source evidence and review dates.",
+        "readiness gaps have responsible owners, actions and follow-up.",
+        "activation reflects completed requirements and explicit exceptions.",
+        "response information is available to assigned people.",
+        "recurring work surfaces due/overdue items.",
+        "reporting distinguishes verified readiness facts from unknown or expired information."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M07",
+      "kind": "product_module",
+      "name": "Intake",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/05-workflows/REQUEST_STATE_MACHINE.md",
+        "docs/02-ontology/SMART_PROMPTS.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "original submitted wording and attachments remain preserved.",
+        "structured review can reclassify without erasing that original.",
+        "requirements adapt to issue and intent using versioned rules.",
+        "missing information has ownership and response tracking.",
+        "a request can be accepted, limited, referred, declined or returned.",
+        "submission alone never mobilizes or authorizes work.",
+        "Users can start from a saved template, repeat prior request, asset prefill or help-classify route; prior approval and authorization are never copied as new authority."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M08",
+      "kind": "product_module",
+      "name": "Scope",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/05-workflows/SCOPE_STATE_MACHINE.md"
+      ],
+      "acceptance": [
+        "approved scope is a specific preserved revision.",
+        "inclusions and exclusions, areas, assumptions and required deliverables are unambiguous.",
+        "accepted/declined recommendations are evidenced.",
+        "changes produce a reviewed amendment linked to its authorization and effective time.",
+        "unauthorized edits cannot alter active scope.",
+        "chat can suggest a change but cannot approve one."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M09",
+      "kind": "product_module",
+      "name": "Sampling",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/02-ontology/SAMPLING_ENGINE.md"
+      ],
+      "acceptance": [
+        "requested, recommended, authorized, collected, lab-reported and professionally interpreted information are distinct.",
+        "plans and collected samples trace to scope and location.",
+        "collection identifiers reconcile with COC/lab records.",
+        "revised lab data preserves previous records.",
+        "decisions and declinations affect scope/cost/deliverables visibly.",
+        "unqualified users and AI cannot approve strategy or issue conclusions."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M10",
+      "kind": "product_module",
+      "name": "Rom",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md"
+      ],
+      "acceptance": [
+        "estimates show assumptions, ranges, exclusions and rate version.",
+        "scope/sampling/travel inputs have traceable effects.",
+        "revisions preserve their bases.",
+        "recommended cap differs from granted cap.",
+        "actual work costs can be compared to the applicable estimate without retroactively changing it.",
+        "confidence is justified by data quality, not a fabricated precision score."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M11",
+      "kind": "product_module",
+      "name": "Agreements / Authorization",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/05-workflows/AGREEMENT_AUTHORIZATION_WORKFLOW.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "authorized scope version, signer authority, payer, rate basis, cap, sampling and terms are captured as an immutable approved record.",
+        "signature evidence attaches to the exact version.",
+        "valid authority controls mobilization and changes.",
+        "expiry/revocation/supersession has deterministic effects.",
+        "emergency exceptions are explicit, limited and reviewed.",
+        "retries cannot create duplicate commitments.",
+        "Emergency intake records requester, signer, payer, site/address, access contact, hazard, affected area, occupancy, safety flags, action and cap; follow-up services require further authorization unless explicitly covered."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M12",
+      "kind": "product_module",
+      "name": "Operations / Projects",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/05-workflows/PROJECT_STATE_MACHINE.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "one incident can produce several related requests/projects.",
+        "project creation links accepted request, applicable scope and authorization.",
+        "role-specific queues state next actions and owner.",
+        "scheduling and visits have clear status.",
+        "field conditions can trigger a change request.",
+        "closeout checks deliverables/open items before final state.",
+        "history remains inspectable.",
+        "Queues expose account/object context, status, priority, owner, next action, due date, blocker, required reviewer, client-facing status and last activity."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M13",
+      "kind": "product_module",
+      "name": "Documents",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/05-workflows/DOCUMENT_RELEASE_WORKFLOW.md",
+        "docs/04-security/DOCUMENT_ACCESS_MATRIX.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "uploads begin hidden.",
+        "classification, exact version, owning context, required approval and recipient permissions are checked together before release.",
+        "authorized viewers/downloaders receive only the approved version.",
+        "direct object URL/API attempts respect access restrictions.",
+        "new drafts cannot inherit old release approval.",
+        "superseded/withdrawn records have explicit access behavior.",
+        "holds prevent destructive retention cleanup.",
+        "packages cannot disclose a restricted child document.",
+        "Document packages reference canonical versions rather than duplicating independent copies; technical drafts are not treated as released final reports."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M14",
+      "kind": "product_module",
+      "name": "Communications",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "every thread is linked to an account/object.",
+        "participants and notification content honor the same access model.",
+        "messages have ownership and response status.",
+        "technical questions route to qualified reviewers.",
+        "calls and external messages can be logged without changing approved records.",
+        "requests for changed scope/cap/sampling/releases create drafts or tasks.",
+        "failed notifications are visible and retryable without duplicate commitments.",
+        "Ask-about-document questions retain exact version, scope, author/reviewer and project context; administrative, technical, scope, billing, scheduling, urgent, complaint/dispute and vendor routes keep separate authority."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M15",
+      "kind": "product_module",
+      "name": "Vendors",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/06-ui/VENDOR_PORTAL_MAP.md"
+      ],
+      "acceptance": [
+        "assignment checks category, site/program authorization, active credential status and applicable restrictions.",
+        "vendors see assigned instructions/work only.",
+        "required closeout documents and evidence are tracked.",
+        "scorecards derive from recorded facts.",
+        "financial and professional responsibility remain explicit.",
+        "a vendor upload is not automatically client-released."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M16",
+      "kind": "product_module",
+      "name": "Finance",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md",
+        "docs/10-history/original-plans/AuxiliumOS_Master_Map_Guardrails_Roadmap.md"
+      ],
+      "acceptance": [
+        "money records trace to scope/project/authorization and correct client/program.",
+        "authorized cap, committed amount, incurred amount and invoiced amount are not conflated.",
+        "approval requirements are enforced on mutations.",
+        "rate/tax/markup/terms changes do not alter issued history.",
+        "invoice/export retries reconcile.",
+        "reserve balances derive from immutable transactions and explicit permitted uses.",
+        "reporting can show the inputs behind a total.",
+        "Vendor management fees and prepayment/client-direct handling are configurable proposed commercial policies; the system does not silently commit Auxilium to floating major vendor costs."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M17",
+      "kind": "product_module",
+      "name": "Reporting / Qbr",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/06-ui/EXECUTIVE_PORTAL_MAP.md"
+      ],
+      "acceptance": [
+        "totals and risk/readiness metrics resolve to authorized source records and defined denominators.",
+        "period snapshots are reproducible.",
+        "executive action items have owners and status.",
+        "released QBRs are versioned packages.",
+        "exports follow visibility rules.",
+        "missing data is shown as unknown rather than zero or compliant.",
+        "claimed value is supported and labeled accurately."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M18",
+      "kind": "product_module",
+      "name": "Ai",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/01-product/MODULE_MAP.md"
+      ],
+      "acceptance": [
+        "each output records source context, prompt/model version and resulting review status.",
+        "AI respects the user's access.",
+        "source content is treated as data rather than system instructions.",
+        "uncertain or incomplete extraction is visible.",
+        "adoption/rejection is recorded.",
+        "AI proposes and drafts but cannot grant professional scope, sampling, signatures, caps, final release or technical conclusions.",
+        "jobs have failure/cost/timeout visibility."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M19",
+      "kind": "product_module",
+      "name": "Audit",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/04-security/SECURITY_GUARDRAILS.md"
+      ],
+      "acceptance": [
+        "consequential state changes and denials produce usable, protected history.",
+        "audit events correlate to exact records and versions.",
+        "events cannot be casually changed/deleted.",
+        "access to the log itself is restricted.",
+        "sensitive payloads/secrets are not copied into logs.",
+        "exports and incident investigations can reconstruct what happened.",
+        "background/system actors are represented explicitly."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "M20",
+      "kind": "product_module",
+      "name": "Integrations",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md"
+      ],
+      "acceptance": [
+        "each connector declares record ownership, allowed operations, external identity mapping and version.",
+        "least-privilege credentials are server-controlled.",
+        "events/retries are idempotent.",
+        "ordering/conflicts/partial failures and reconciliation are visible.",
+        "changes still use domain authorization/release/audit rules.",
+        "sync cannot expose drafts or overwrite approved scope.",
+        "connector revocation and export/offboarding are supported.",
+        "staff and Moldo-only managers operate in Moldo without OS access; authorized Auxilium managers see permitted operational projections in OS; enterprise clients see only released/allowed Moldo information scoped to their account/portfolio; scoped enterprise assignments can enter Moldo without requiring Moldo staff to use OS; Moldo ordinary operations survive OS unavailability; integration can be removed without destroying Moldo's essential records."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "implementation_note": "No complete runtime module is established by the uploaded snapshot. Planned acceptance, not a completion claim."
+    },
+    {
+      "id": "C01",
+      "kind": "cross_module",
+      "name": "Identity and isolation",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "An inactive user or membership is denied even with another role row and a previously issued session.",
+        "Cross-account and unassigned-facility reads, writes, joins, exports, object paths and dashboard aggregates are denied server-side.",
+        "Technical administrators do not gain implicit scientific, signature or release authority."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "C02",
+      "kind": "cross_module",
+      "name": "Document integrity",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "Review approval binds to the exact immutable revision and checksum; a changed draft loses that approval.",
+        "Creating a replacement draft leaves the released version current until controlled replacement release.",
+        "A package cannot expose restricted child files; direct storage access is denied without current audience authorization.",
+        "Preservation holds block destruction separately from visibility restrictions."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "C03",
+      "kind": "cross_module",
+      "name": "Controlled authority",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "Messages and AI outputs can create proposals but cannot change approved scope, caps, samples, signed terms or released files.",
+        "Effective approved amendments govern the amended domain while original records and approval chains remain available.",
+        "Retries and concurrency do not cause duplicate signatures, commitments or conflicting active revisions."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "C04",
+      "kind": "cross_module",
+      "name": "Resilience and data lifecycle",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md",
+        "docs/10-history/original-plans/AuxiliumOS_AI_Tool_Workflow_and_Timeline_full_docx_text.txt"
+      ],
+      "acceptance": [
+        "Restore a representative backup into an isolated environment and reconcile database records with private objects and audit history.",
+        "A failed migration or partial integration has an exercised recovery path; no untested destructive down-migration is assumed safe.",
+        "Record measured recovery and performance results against explicitly approved targets.",
+        "Candidate release includes dependency and secret scanning, privileged-admin MFA evidence and independent outside security/code review with material findings resolved or explicitly dispositioned.",
+        "Operational errors, uptime checks, audit failures and admin alerts are observed with a named support owner before real client use."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "C05",
+      "kind": "cross_module",
+      "name": "Usability and accessibility",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "Simple, enterprise, internal and vendor roles complete representative real workflows on keyboard and supported phone/desktop sizes.",
+        "Loading, empty, permission-denied, stale-edit, validation, upload-retry and partial-failure states are actionable and preserve entered work.",
+        "Unknown, unmeasured and unapproved information is visibly distinguished from zero, compliant and complete."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "C06",
+      "kind": "cross_module",
+      "name": "Moldo independent operation",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "Moldo-only staff and managers have no OS membership by integration alone.",
+        "OS outage, connector revocation, duplicate or out-of-order messages do not corrupt or stop ordinary Moldo operations.",
+        "Enterprise clients and group managers see only their authorized and appropriately released projection.",
+        "Per-engagement commercial owner, data owner and identity mapping can be exported and reconciled without merging databases."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "C07",
+      "kind": "cross_module",
+      "name": "No-PHI and runtime AI",
+      "status": "planned",
+      "sources": [
+        "docs/01-product/END_STATE_BLUEPRINT.md",
+        "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+        "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md"
+      ],
+      "acceptance": [
+        "Suspected PHI is quarantined and excluded from AI processing under the already-decided no-PHI posture.",
+        "Untrusted documents and messages cannot supply agent instructions or elevate permissions.",
+        "Runtime AI outputs carry sources and review state; technical sign-off remains an authorized human action."
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ]
+    },
+    {
+      "id": "GOV-001",
+      "kind": "build_control",
+      "name": "Durable and verifiable continuation",
+      "status": "implemented",
+      "sources": [
+        "AGENTS.md",
+        "docs/00-control/EXECUTION_PROTOCOL.md",
+        "docs/08-ai/FULL_STACK_BUILD_PROTOCOL.md"
+      ],
+      "acceptance": [
+        "The complete product scope, dependencies, decisions and source references are machine-checked.",
+        "Evidence is invalidated by changed input files, test commands, environment identity or logs; a chat summary is never test evidence.",
+        "Checkpoint and importer preserve observed state and refuse unsupported remote-save claims."
+      ],
+      "verification_profiles": [
+        "controls",
+        "package-importer"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ]
+    }
+  ]
+}

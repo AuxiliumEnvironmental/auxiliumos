@@ -1,0 +1,31 @@
+["node","--test","tools/package-importer/tests/apply-package.test.mjs"]
+✔ default preflight does not create targets, journals, commits or branches (79.275091ms)
+✔ successful import preserves unrelated files and repeats exactly without rewriting (181.164201ms)
+✔ a newer unrelated committed change is preserved when all baseline targets still match (121.692588ms)
+✔ target conflict refuses the entire import before any writes (91.956563ms)
+✔ new-file collision refuses updates to other target files (54.947274ms)
+✔ a corrupt or missing payload refuses all target changes (91.747317ms)
+✔ unsafe paths, duplicate paths and case collisions are rejected (43.260164ms)
+✔ symlink destination parents and payload symlinks are rejected (89.991904ms)
+✔ wrong origin is rejected and SSH origin is accepted (73.849692ms)
+✔ apply rejects main and detached HEAD while dry run permits inspection (149.579031ms)
+✔ dirty first import and unrelated dirt during repeat are rejected (139.312401ms)
+✔ staged content different from the package is not mistaken for an exact repeat (132.446634ms)
+✔ source commit must exist and be an ancestor of HEAD (75.090696ms)
+✔ target must be the repository root (39.49976ms)
+✔ write failure rolls back earlier writes and removes only new empty directories (173.529283ms)
+✔ failure after adding a new file restores both updated and added targets (136.73999ms)
+✔ journal directory symlinks are rejected before target changes (100.591566ms)
+✔ abrupt interruption is detected, then explicit recovery restores original files (379.875291ms)
+✔ recovery refuses newer edits and preserves the journal for later resolution (253.980571ms)
+✔ recovery rejects a changed HEAD even when package target bytes still match (337.459232ms)
+✔ CLI requires a target and rejects conflicting or unknown flags (431.35741ms)
+✔ CLI accepts an explicit package root separate from the script location (170.752357ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3481.468564

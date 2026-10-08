@@ -1,5 +1,5 @@
-# Security Rules
-- UI hiding is not security.
-- Add positive and negative permission tests.
-- Documents need metadata, class, version, release state, and access policy.
-- Production data is off limits during prep.
+---
+description: AuxiliumOS backend isolation, independent membership lifecycle and no-phi
+alwaysApply: true
+---
+Follow @AGENTS.md and @docs/00-control/EXECUTION_PROTOCOL.md. This file is a pointer, not a parallel policy copy. Use @BUILD_STATE.json, @BUILD_QUEUE.json and the selected @REQUIREMENTS.json entries. For backend isolation, independent membership lifecycle and no-phi, inspect the relevant task sources and @OWNER_DECISIONS.json before implementation. Historical preparation-only instructions are superseded; runtime authority and security controls remain. Verify actual source/evidence and save meaningful changes to the canonical Git feature branch.

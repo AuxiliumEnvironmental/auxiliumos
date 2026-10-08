@@ -6,7 +6,7 @@ This file defines the final long-term vision for AuxiliumOS.
 
 It exists so future ChatGPT, Cursor, Lovable, Claude Code, Codex, GitHub Copilot, and other AI tools understand what the full product is ultimately becoming, even when working on one small issue.
 
-This file is not the current build scope.
+This file defines the full product destination authorized for the build. REQUIREMENTS.json preserves its acceptance scope; BUILD_QUEUE.json sequences bounded implementation tasks toward that destination.
 
 It is the permanent north star.
 

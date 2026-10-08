@@ -1,3 +1,5 @@
+> Current observation 2026-10-08: supabase/seed/foundation_demo_seed.sql exists with synthetic deterministic data. Any older future-only/no-file statements below are historical. Database execution and live environment contents are unverified.
+
 # Seed Data Registry
 
 Document seed records and test data here.

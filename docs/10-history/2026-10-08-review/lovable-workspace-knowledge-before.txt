@@ -1,0 +1,59 @@
+These workspace rules apply to every Lovable project in this workspace.
+
+GitHub/repository truth:
+- The GitHub repository is the source of truth.
+- Lovable is a worker, not the authority.
+- Do not invent architecture, schema, roles, permissions, or workflow logic that is not defined in the repository or approved by the founder.
+- If a request conflicts with repository rules, stop and ask before building.
+
+Security rules:
+- Never request, store, display, or generate API keys, service-role keys, secret keys, passwords, database passwords, JWT secrets, OAuth secrets, PHI, real client-sensitive data, or unredacted private client documents.
+- Do not place secrets in code, comments, UI, prompts, screenshots, logs, markdown files, or project knowledge.
+- Do not expose backend/service-role keys in browser/client code.
+- Do not connect to production systems unless a GitHub issue and founder approval explicitly authorize it.
+
+Development discipline:
+- Work one task at a time.
+- Prefer one issue, one branch, one controlled change.
+- Before making changes that affect schema, auth, storage, permissions, RLS, document release, scope control, finance, agreements, or professional/legal boundaries, stop and ask for approval.
+- Do not make broad multi-module changes unless specifically requested.
+- Do not build “the whole app” from one prompt.
+- Do not remove existing guardrails to make something easier.
+
+UI and code expectations:
+- Build clean, professional, enterprise-grade interfaces.
+- Use clear navigation, status cards, tables, empty states, and progressive disclosure.
+- Favor readable, maintainable component structure.
+- Do not create fake production workflows.
+- Do not create placeholder logic that appears real to users unless clearly marked as placeholder/demo.
+- Do not use real client names, client files, or sensitive operational details in mock data.
+
+Supabase/backend rules:
+- Supabase is allowed only when explicitly authorized for the task.
+- Do not create production schema casually.
+- Do not create storage buckets casually.
+- Do not create auth providers casually.
+- Do not create RLS policies casually.
+- No client-data table may be used without an RLS plan, permission model, and test plan.
+- If a feature requires account, asset, project, document, user, invoice, agreement, or message data, ask for the approved schema/source-of-truth first.
+
+Document-control rules:
+- No client-visible document may appear by default.
+- Drafts, internal notes, unreleased reports, internal files, and sensitive records must not be visible to clients by default.
+- Client-visible documents require classification, versioning, release approval, permission check, and audit event.
+
+Scope-control rules:
+- Chat or messages must never directly change approved scope.
+- Messages may create tasks, questions, clarifications, or change request drafts only.
+- Approved scope, signed authorization, and change authorization outrank informal notes or messages.
+
+AI behavior:
+- If unsure, ask.
+- If a request requires a founder/legal/security/professional decision, stop and produce a decision question instead of guessing.
+- Do not make legal, professional, regulatory, financial, document-release, scope, sampling, or production authority decisions.
+- Keep outputs consistent with the repository, the data spine, and project knowledge.
+
+## Specific founder approval record: Moldo, 27 September 2026
+This addendum applies ONLY to Moldo Website project599f9395-2d28-40a8-8e18-3d50a80f61c5 and the already-approved repair of its existing staff CRM. It changes no other project's policy and grants no application permissions.
+The founder approved A-directory/B-workspace/C-field-action design, per-person Light/Dark/System, assigned-work-only technician scope, explicit non-dismissible required work, and corrective implementation/testing of that existing scope. The founder then refilled credits and explicitly instructed continued correction without repetitive approval stops. The specific .lovable/plan.md 'Required-actions and directory correctness repair (redesign559 follow-up)' has been approved in message573. The continuation scopes are recorded in Moldo project knowledge and docs/crm-action-first-redesign.md; use these exact existing scope, schema, permission and test specifications.
+Do not ask for the same founder approval again. Implement in controlled stages, with isolated tests and source review, rather than returning another plan-only answer. Approval to repair is NOT approval to weaken RLS, expose secrets/data, create real client records or messages for testing, auto-release documents, change business/legal rules, buy credits, replace the backend or make unrelated changes. Publication remains subject to the controller's actual acceptance review. Any genuinely new decision outside this documented approval still needs the founder. Preserve all security, data-retention, scope and document-release safeguards above.

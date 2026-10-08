@@ -1,3 +1,5 @@
+> Historical phase document, retained for traceability. The 2026-10-08 owner mandate in AGENTS.md and EXECUTION_PROTOCOL.md supersedes preparation-only stop rules and first-slice scope ceilings. Permanent domain/security rules remain. Full delivery is REQUIREMENTS.json; pending owner policies permit synthetic development defaults with scoped live activation gates.
+
 # Lovable Visual UI Shell v1
 
 Issue: #52 — Create Lovable visual UI shell v1  

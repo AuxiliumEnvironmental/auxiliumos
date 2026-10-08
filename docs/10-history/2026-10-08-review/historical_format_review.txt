@@ -1,0 +1,69 @@
+AuxiliumOS historical original-format review
+Date: 2026-10-08
+Read-only review. No project code or control files changed.
+
+SCOPE AND METHOD
+Reviewed the requested existing files in /workspace/scratch/c6081b60a6a7/history_sources only:
+1. AuxiliumOS_AI_Tool_Workflow_and_Timeline.docx against its Markdown.
+2. AuxiliumOS_Beginner_Tool_Setup_Manual.docx and .pdf against its Markdown.
+3. AuxiliumOS_Prep_To_Fly_Checklist.docx against its Markdown.
+4. AuxiliumOS_Correction_File_Pack_2026-06-24.zip inventory/content differences.
+5. AuxiliumOS_Starter_Repo_Skeleton.zip inventory/content differences.
+
+Loaded PDF skill and used pypdf read-only text extraction. The Beginner PDF has 21 pages. pypdf logged three wrong-pointer warnings for objects 22, 80, 81 but extracted all pages. Compared all extracted text with DOCX; no DOCX words/numbers were absent from PDF after list numbering normalization. This was content comparison, not visual-layout certification.
+DOCX extraction read document, header/footer, note XML, preserving paragraph text and explicit breaks/tabs. Compared normalized tokens after Unicode compatibility normalization, Markdown fence and automatic numbered-list removal. Extraction text files, format_comparison.json and format_archive_comparison.json remain as intermediate audit evidence in history_sources.
+ZIP inventories were read without executing anything. SHA256 compared every entry with current uploaded repository snapshot and accessible historical artifacts/archive entries. Only unique contents required additional reading; all 23 unique contents were read fully (one correction file and 22 starter files).
+
+FINDING A: WORKFLOW/TIMELINE DOCX IS SUBSTANTIALLY MORE COMPLETE THAN MARKDOWN
+The DOCX contains approximately 9.3k extracted text characters versus approximately 1.9k in Markdown. It is not a semantic duplicate. Full DOCX reviewed.
+Prepared June 14, 2026; historical estimates must not become current schedule commitments.
+Additional detail preserved from DOCX:
+- Monitoring/operations category: Sentry, uptime checks, audit logs, admin alerts, backup/export scripts after alpha and before production client use.
+- Security baseline includes OWASP ASVS/NIST SSDF guidance, dependency scanning, secret scanning, RLS policy tests and backup testing.
+- Explicit production prerequisites: permission tests; backup/restore test; document release audit; dependency/secret scan; admin MFA; outside security/code review. These are original release requirements and should be reflected in the modern release plan, with honest completed/pending status.
+- Each feature's proof includes documented business rule, domain ownership, allowed and denied role tests, important action audits, file version/class/release/download controls, impossible state prevention, qualified human professional gates, failure/denial path coverage, and handoff updates.
+- Minimal useful PA/client portal: isolated login, project list/status/summary, released versioned downloads, project-linked messages with classification/routing, request capturing issue+intent+property+areas+urgency+payer/signer+attachments, intake queue with assignment/missing information/decision actions, scope summary and limitations even before full smart prompts, audit, backup/export and access removal.
+- Do not initially build custom accounting, full enterprise passport suite, vendor-scorecard marketplace, AI technical conclusions to clients, automatic scope acceptance, PHI workflows, non-actionable dashboards, or multiple apps with disconnected client/user/document tables.
+- New sessions should use durable context + bounded issue; agent plan, branch, tests, diff review, closeout and next three tickets were part of original process.
+- Historical timing includes assumptions of full-time disciplined focus/tight v1, no custom accounting, and no sensitive healthcare-adjacent production prototype; notes part-time work/unresolved homework/permission rework can double estimates. These estimates do not account for today's tooling or present implementation and should remain historical.
+
+Implication: These details mostly reinforce existing reviewed project controls, but outside review/admin MFA/operational monitoring and precise minimal-portal acceptance should not be lost because only the abbreviated Markdown was read. Disconnected-app prohibition needs explicit modern Moldo integration ADR, not silent erasure: Moldo independent operational authority with shared ID mapping and governed integration, rather than uncontrolled competing record copies.
+
+FINDING B: BEGINNER DOCX IS ALMOST THE SAME AS MARKDOWN, WITH FOUR EXPLANATORY ADDITIONS
+After normalization, token alignment is approximately 99.36%; all differences were inspected. The DOCX expands the initial non-negotiable-guardrail list into a two-column explanation table:
+1. Do not paste credentials, client data or live sensitive files into AI/repository files.
+2. Use fake data while learning; real client data awaits security/RLS/access/release testing.
+3. AI cannot silently introduce new objects, roles, permissions, scope or release rules.
+4. Work in dev/staging; production requires tests and human approval.
+These explanations reinforce requirements already stated in other reviewed sources; no new product module or workflow appears in DOCX.
+The DOCX's explicit line breaks remove misleading concatenations in naive extraction (e.g. node/npm commands, prompt headings). The current comparison preserved these breaks.
+
+FINDING C: BEGINNER PDF IS CONTENT-EQUIVALENT TO DOCX
+Normalized full token multisets, including numbers other than automatic list enumerators, show no DOCX-only tokens. The PDF adds exactly the 13 tokens of a repeated table heading: 'Tool / What it is / Your plain-English understanding / What it must never become.'
+Observed differences in sequential extraction are page/table reading order, ligatures, numbering, line wrapping and that repeated heading. No distinct requirements found. PDF content was not treated as a newer independent instruction set or visual proof.
+
+FINDING D: PREP-TO-FLY DOCX IS SUBSTANTIVELY THE SAME AS MARKDOWN
+After normalization token alignment is approximately 99.69%; all differences inspected. DOCX adds a front-matter paragraph describing itself as the beginner-friendly operating checklist for safe, organized repository/tools/Supabase/Lovable/testing/security/backups before speed, plus a repeated document-title footer. No distinct implementation or permission requirement found.
+Nine agent roles and operational instructions are already in the reviewed Markdown. No new hidden agent configurations were discovered in DOCX.
+
+FINDING E: CORRECTION PACK
+8 files. Three byte-identical to current snapshot; seven have exact content copies in other accessible historical/current sources. One unique file content: corrected AGENTS.md (2,035 bytes).
+Read that unique AGENTS fully. It supplies the same canonical spine, repository authority, startup references, RLS/secrets/client-document/chat-scope protections, tests for scope/sampling/cap/authorization, no production-data modifications, no removed audits, ticketed professional-boundary edits, and closeout. Its phase rule requires a specific approved issue before backend work. These controls are now present or superseded in current documents, with no distinct missing feature.
+AUDIT_REPORT.md is absent by that path from current snapshot but byte-identical to the separately reviewed AuxiliumOS_Audit_Report_2026-06-24.md. Other differing entrypoints have exact copies in June review snapshots. No unique source content was omitted beyond the AGENTS file now reviewed.
+
+FINDING F: STARTER SKELETON
+83 files including empty keep files. 52 byte-identical to current snapshot. 61 have exact copies in other accessible historical/current sources. 22 unique byte contents were read fully; no starter file path is absent from current uploaded repository.
+Unique material comprises early templates/short initial specs later expanded:
+- PROJECT_STATE establishes the same final modular company platform plus initial development-factory foundation. Its 'not started' status is historical.
+- Initial NEXT_ACTIONS lists repository/skeleton/agent rules/labels/templates/dev-staging-prod plan/Lovable knowledge/first 20 tickets.
+- Decision template explicitly asks owner, area, problem, options, decision, reason, risks and follow-up.
+- Initial module list separates IAM/Permissions, Service Ontology and Rules Engine alongside Core and the operating modules. Those responsibilities should remain visible within modern Core/ontology/rules coverage even if consolidated under the 20-module map. It does not imply a second contradictory product architecture.
+- Initial role list includes Read-Only User and Removed/Suspended User and combines Portfolio/Regional Manager. Current detailed role permissions supersede the short seed list; read-only access and revocation remain acceptance behaviors.
+- Initial RLS text explicitly allows account_id OR a clear ownership path through a required parent, prohibits publicly readable operational client tables, and requires allowed/denied tests.
+- Initial document classes and nine-step release/audit flow are consistent with current expanded specs.
+- Original V1 scope excludes full ROM/sampling/QBR/vendor-scorecards/accounting integration and real production data from the foundation slice. That is build sequencing, not deletion of full end-state capability.
+- Remaining unique contents are placeholder prompts to define already-expanded request/emergency/change workflows, testing plans, tool rules, schema registry, open questions and out-of-scope material.
+Conclusion: No missing code, populated agent configurations, or unique advanced implementation was hidden in this starter ZIP. Its persistent high-value requirements are already covered by the current specifications and modernization recommendations.
+
+ACCESS LIMIT
+This closes the requested accessible original-format source gap. It does not establish access to every historical conversation, private GitHub revision, Cursor local file, deleted document, or external system. Findings apply only to the named supplied files and exact accessible copies used in comparisons.

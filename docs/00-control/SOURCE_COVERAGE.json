@@ -1,0 +1,904 @@
+{
+  "version": 1,
+  "review_date": "2026-10-08",
+  "scope": "Every file in the supplied repository snapshot; all 36 materialized AuxiliumOS original files with deduplication and format comparisons; accessible retrieved conversation excerpts and prior targeted Moldo/companion review. Not universal access to every chat, cloud or live Git revision.",
+  "repository_snapshot": {
+    "commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "files": [
+      {
+        "path": ".cursor/rules/document-control.mdc",
+        "sha256": "ae75f0a7a72d6138270e2beed0fcd2cbd97ef0b27a4da9e51a4ceb5b128e2ad9",
+        "bytes": 207
+      },
+      {
+        "path": ".cursor/rules/product.mdc",
+        "sha256": "e8adf7354ed9551eae16db4ab90a55386947e997bd6b853e7e73c78e6dd6be83",
+        "bytes": 241
+      },
+      {
+        "path": ".cursor/rules/security.mdc",
+        "sha256": "406ce69cc893f9c212267c7631a7a844e38d42efadb0b578eaae6161e2a88c0d",
+        "bytes": 214
+      },
+      {
+        "path": ".cursor/rules/supabase.mdc",
+        "sha256": "41a0640cabda2ed0c684107c2f2b065df1310a34d2fef54f6e341041cc7555f9",
+        "bytes": 199
+      },
+      {
+        "path": ".cursor/rules/testing.mdc",
+        "sha256": "d89f1940a8a55aa5d5db5615a013431de307254011850519c17d7cf7d6b1fc6b",
+        "bytes": 206
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE/decision_required.md",
+        "sha256": "dc2a9d2da6652f9dc07b81efa32e46e41f45ca5717055b13c8ba479bbdda2f3f",
+        "bytes": 242
+      },
+      {
+        "path": ".github/ISSUE_TEMPLATE/feature_ticket.md",
+        "sha256": "9d1fbe9d013615ec6ea9035669535ea98883f88ae88b524bcc73a6a38ea6e0da",
+        "bytes": 500
+      },
+      {
+        "path": ".github/PULL_REQUEST_TEMPLATE.md",
+        "sha256": "778f187c2415f568135902c39e283ddf390be8b4aeeb8c9b95faf686375fc281",
+        "bytes": 497
+      },
+      {
+        "path": ".github/workflows/ci.yml",
+        "sha256": "e24420bb47702b1ed8c9b648c4201f4aa01856214b22fdea761853f0ad8102ce",
+        "bytes": 390
+      },
+      {
+        "path": ".gitignore",
+        "sha256": "4781bffca65f39e76fe25dff48764e6d5d2a52f73ee2860d13a7089ffb48c1f1",
+        "bytes": 276
+      },
+      {
+        "path": "AGENTS.md",
+        "sha256": "7c5e1095ff561db4fc578cf60737d2725ddbf43ee5c797f037e5513337cd5b56",
+        "bytes": 4693
+      },
+      {
+        "path": "CHANGELOG.md",
+        "sha256": "f10fe6e17af2849d24aabca0e15b9fda61846f0223b92b594f67150353e44c8b",
+        "bytes": 54
+      },
+      {
+        "path": "CLAUDE.md",
+        "sha256": "be59bb752d45360d2851c28d367eff935408e114a6e4a655d2cdd40a4685e976",
+        "bytes": 739
+      },
+      {
+        "path": "README.md",
+        "sha256": "5d8a374c8dca75d58e872f7a48a2a350db156c904c4e84a105a20b50f53c1b85",
+        "bytes": 2323
+      },
+      {
+        "path": "app/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "app/app.js",
+        "sha256": "ac938e6d809597bc3ea1d7d4feaf7e589572402bd2e49e6da664339d1f0bf230",
+        "bytes": 12931
+      },
+      {
+        "path": "app/index.html",
+        "sha256": "cb7307d2c54556c054f5c0728ee0f2ea0be5716bd78f7fb85ab025157e27e819",
+        "bytes": 3541
+      },
+      {
+        "path": "app/styles.css",
+        "sha256": "2bd253bfdcc4bf6d2094d7d1816c2fc50a3a6f478ce4fd92db69079af2d6d82d",
+        "bytes": 5765
+      },
+      {
+        "path": "docs/00-control/ASSUMPTION_REGISTER.md",
+        "sha256": "955aca07ef411de7dc1e045c010d7f08920d25533134db2d3bd4d6b2c44bcd38",
+        "bytes": 261
+      },
+      {
+        "path": "docs/00-control/CHANGE_LOG.md",
+        "sha256": "270814b31b06552b0aa0e2ab445dcd9582e93a92776ce9a29b7c80e621797796",
+        "bytes": 3637
+      },
+      {
+        "path": "docs/00-control/CURRENT_HANDOFF.md",
+        "sha256": "e39bf23581df9c39a0c17ad8731cbbe6ff9a142e89cb87b25d7e8b7110cf325c",
+        "bytes": 6028
+      },
+      {
+        "path": "docs/00-control/DECISION_LOG.md",
+        "sha256": "41b2247f567d07bcc16d6a21e28a41db577250805e2f9047df26dece6cb4af05",
+        "bytes": 7754
+      },
+      {
+        "path": "docs/00-control/FIRST_BUILD_IMPLEMENTATION_PLAN.md",
+        "sha256": "2876d8c47f130bd8250c390343a8ccc616ed4bdf03ced1496d8fc3c478506ba6",
+        "bytes": 13912
+      },
+      {
+        "path": "docs/00-control/FOUNDATION_VERTICAL_SLICE_CONTROL_PACKET.md",
+        "sha256": "81fba3352fe96a7d5ac9ccbd468e8a1047fe68d2e31c403239002cd2530fc901",
+        "bytes": 9115
+      },
+      {
+        "path": "docs/00-control/FOUNDER_DECISION_CHECKPOINT_FIRST_BUILD.md",
+        "sha256": "95bf270906e2d2e9d9480e3879293ed95e15fe8d68bcafc56228a46ea0a738c7",
+        "bytes": 14289
+      },
+      {
+        "path": "docs/00-control/NEXT_ACTIONS.md",
+        "sha256": "f0f386721c8cc4a57ffa7d3b43a15d095293eea08f73e2a6d61e765300ab8704",
+        "bytes": 5019
+      },
+      {
+        "path": "docs/00-control/OPEN_QUESTIONS.md",
+        "sha256": "34b8cf2cbc0927e76f672f142ace0214618a0eacd567d20ead4914331b76b9c7",
+        "bytes": 15972
+      },
+      {
+        "path": "docs/00-control/PROJECT_STATE.md",
+        "sha256": "b2ccbd376e486d770a18326f095bec5fb401691ed4ee6296a835b405c8b65cd1",
+        "bytes": 4850
+      },
+      {
+        "path": "docs/00-control/RISK_REGISTER.md",
+        "sha256": "3641093f728967c9d66b88c880c9174ecd0af574dfc0aa67ea81697c10f62ff6",
+        "bytes": 3312
+      },
+      {
+        "path": "docs/00-control/SPEC_GATE_REVIEW.md",
+        "sha256": "559a412db8d254eef7b73accc912fbd1ba9546019762986b7c9eab7c82515d2e",
+        "bytes": 6439
+      },
+      {
+        "path": "docs/00-control/TRANSITION_PROTOCOL.md",
+        "sha256": "8900c1dda96ba61832bffe81d6ebdd7a33d7348b7cdf16a233f4b384730437de",
+        "bytes": 3748
+      },
+      {
+        "path": "docs/01-product/CLIENT_TYPES.md",
+        "sha256": "5f26b700eb2c59423077a58b2a86d0609756f02495b27afacd7be7de7770842c",
+        "bytes": 82
+      },
+      {
+        "path": "docs/01-product/DATA_SPINE.md",
+        "sha256": "0272df54415c717212ad78983a3fa9a767589e9d8dc1f4d5c126375256ec00ed",
+        "bytes": 23395
+      },
+      {
+        "path": "docs/01-product/END_STATE_BLUEPRINT.md",
+        "sha256": "b6460242979863144d43db8d4efcdce595aad73f4a4add8e9b946615898a4128",
+        "bytes": 8593
+      },
+      {
+        "path": "docs/01-product/MODULE_MAP.md",
+        "sha256": "d4af136e4bf20691607886adf70e2b68d4fcc62e6b462ed502f40996a80bc83d",
+        "bytes": 22445
+      },
+      {
+        "path": "docs/01-product/OUT_OF_SCOPE.md",
+        "sha256": "a501926f097645c52e7d1166979e72706ea0607ee33c7c35803ba9ed2959e264",
+        "bytes": 3343
+      },
+      {
+        "path": "docs/01-product/PRODUCT_PRINCIPLES.md",
+        "sha256": "a7bb009935a7f9e06ecedeb2b601581c0e608f6566e9564c5fea9e44638a811b",
+        "bytes": 343
+      },
+      {
+        "path": "docs/01-product/V1_SCOPE.md",
+        "sha256": "417900fd3ee9b231c049522ef436ec906aec686cfc22a38211d316b8fba27bde",
+        "bytes": 6871
+      },
+      {
+        "path": "docs/02-ontology/DELIVERABLES.md",
+        "sha256": "c67084e9185c5aff482cc0c1b22890aa857f47b62e6bd0ed0e71da8870eb1033",
+        "bytes": 57
+      },
+      {
+        "path": "docs/02-ontology/ISSUES_INTENTS_MODULES.md",
+        "sha256": "ba52a6d4f62107fc136d0011c861871a03222756a5f7a4d99a5c369ffc3a641b",
+        "bytes": 98
+      },
+      {
+        "path": "docs/02-ontology/RELATIONSHIP_TAXONOMY.md",
+        "sha256": "85f3601e2dfad5c919f98e44dd77718e364d921a3c6e405725cf2b30bf938aba",
+        "bytes": 463
+      },
+      {
+        "path": "docs/02-ontology/SAMPLING_ENGINE.md",
+        "sha256": "35b7dde160a319334db47e5d5c522bf04bcc4826e86ee072da77f7b63c100e03",
+        "bytes": 99
+      },
+      {
+        "path": "docs/02-ontology/SCOPE_LIMITATIONS.md",
+        "sha256": "a3396f9f867c03ee9913a3291ff16861eac5f906be6c81003bb5f97edb2ef181",
+        "bytes": 69
+      },
+      {
+        "path": "docs/02-ontology/SERVICE_FAMILIES.md",
+        "sha256": "53df6402e594f3a7e2c43df6376e05807e37ff19852bb8ede62c25bebfc13bc6",
+        "bytes": 68
+      },
+      {
+        "path": "docs/02-ontology/SMART_PROMPTS.md",
+        "sha256": "afcf59ad7adeea3efc828974883879d37e9359e371862fe9a23cc449d743eca5",
+        "bytes": 63
+      },
+      {
+        "path": "docs/03-data/FIELD_DICTIONARY.md",
+        "sha256": "413671535aa37c7d47930e394f11620e1941fb0b04c960b7ae8d9ef5b89466b3",
+        "bytes": 1762
+      },
+      {
+        "path": "docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md",
+        "sha256": "54c0157a734b1ca2a296e85cfdc60f2a168fe8ba652e23f49734478b70c1df79",
+        "bytes": 5173
+      },
+      {
+        "path": "docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md",
+        "sha256": "0b37f95a8b08691650d43392a4fbb9d22b7c0f008545559b2af09980975abeb4",
+        "bytes": 9164
+      },
+      {
+        "path": "docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md",
+        "sha256": "9b436b28bec81035c539c7c4620bbd5d2b8269b51de3a84deb5e0753d6cd9193",
+        "bytes": 13029
+      },
+      {
+        "path": "docs/03-data/RELATIONSHIP_MAP.md",
+        "sha256": "abe6ee7c989e2afb2394d5fc17af308509a2c0d4119d937ca8d6d9cf917799e6",
+        "bytes": 1456
+      },
+      {
+        "path": "docs/03-data/SCHEMA_IMPLEMENTATION_READINESS_GATE.md",
+        "sha256": "373074566e2e4a7b8e187c1f32dcc85668560b06abb90f1bb6ed79860e80242d",
+        "bytes": 4974
+      },
+      {
+        "path": "docs/03-data/SCHEMA_REGISTRY.md",
+        "sha256": "984333cfd130a34569902f3029365d09ef8049773ee3568b4489a3e9458b0774",
+        "bytes": 7020
+      },
+      {
+        "path": "docs/03-data/SEED_DATA_REGISTRY.md",
+        "sha256": "29983d19e8e801cf9cd3d176f41361af4e1b0af882a03562c54f242ff598b471",
+        "bytes": 1820
+      },
+      {
+        "path": "docs/03-data/TABLE_OWNERSHIP.md",
+        "sha256": "1b8cff684137b0988dd2cc8747179271d79692f4f2699f5e160617243a38fcf9",
+        "bytes": 1103
+      },
+      {
+        "path": "docs/04-security/DOCUMENT_ACCESS_MATRIX.md",
+        "sha256": "49a6fb170c7a93ff24350f6242010f4668246c5a3977a871e85b52e654a0cdcf",
+        "bytes": 11016
+      },
+      {
+        "path": "docs/04-security/RLS_POLICY_MATRIX.md",
+        "sha256": "b8a87bc050d7e32ee2f047229e8bc9423a33af2429d69cf9496915a3452ddd13",
+        "bytes": 5229
+      },
+      {
+        "path": "docs/04-security/ROLE_PERMISSION_MATRIX.md",
+        "sha256": "f1868cacdb603cff9cf1806cddb26a3ee960bac7ffff21c0c004d056e6a2cad7",
+        "bytes": 19039
+      },
+      {
+        "path": "docs/04-security/SECURITY_GUARDRAILS.md",
+        "sha256": "ec1cd51ef0e340fdec7b819496ad4c82cdac58bb96f46b67e888372a9ae883e1",
+        "bytes": 5226
+      },
+      {
+        "path": "docs/04-security/TEST_USERS.md",
+        "sha256": "5b54395fdceae0330a2cf25158cec3eb348737a09aff1db8bec5925a20b4c20f",
+        "bytes": 275
+      },
+      {
+        "path": "docs/05-workflows/AGREEMENT_AUTHORIZATION_WORKFLOW.md",
+        "sha256": "2068d6fc01b583ae02dd2aaa6fb210bef9557091c57c04da59a62aa96ed2be16",
+        "bytes": 74
+      },
+      {
+        "path": "docs/05-workflows/CHANGE_AUTHORIZATION_WORKFLOW.md",
+        "sha256": "acb39671eed5e73dd2c963237f2bebae4575dd830b3b4ad11fc8306280701325",
+        "bytes": 8542
+      },
+      {
+        "path": "docs/05-workflows/DOCUMENT_RELEASE_WORKFLOW.md",
+        "sha256": "2c80d10e64cd7b4315e46fe36f2f729d637cbd288ec3326857a7a026ef613f6c",
+        "bytes": 6890
+      },
+      {
+        "path": "docs/05-workflows/EMERGENCY_EXCEPTION_WORKFLOW.md",
+        "sha256": "50fa0dd2447bc1eb5c84b8975c54cf2ce9043a2213d6772048b874c92a0bfeb9",
+        "bytes": 9690
+      },
+      {
+        "path": "docs/05-workflows/PROJECT_STATE_MACHINE.md",
+        "sha256": "5ee5975f2d65c646409f9a35ab1468c4657cea10ba4840326f6484d0d153450f",
+        "bytes": 61
+      },
+      {
+        "path": "docs/05-workflows/REQUEST_STATE_MACHINE.md",
+        "sha256": "2e6d2da61fdaf23ecd33aee47b76628e511019c1a0cd6c077cf7a9ecccf7a329",
+        "bytes": 7618
+      },
+      {
+        "path": "docs/05-workflows/SCOPE_STATE_MACHINE.md",
+        "sha256": "700e5dc3043d628cd8d738b9a46ad955eddee35ed467ed812a264003254783c2",
+        "bytes": 59
+      },
+      {
+        "path": "docs/06-ui/ADMIN_CONSOLE_MAP.md",
+        "sha256": "45074fad9719140e852b0af9ecf0244a51a458b87607f3475d7e80e45ccd5dcf",
+        "bytes": 57
+      },
+      {
+        "path": "docs/06-ui/CLIENT_PORTAL_MAP.md",
+        "sha256": "0ca3f60bdceb5eb4067144f8597aeca9fdfc6f2d2afaa90e001b2af6c95651b9",
+        "bytes": 69
+      },
+      {
+        "path": "docs/06-ui/COMPONENT_RULES.md",
+        "sha256": "1d893dba12396f71a5160e6588ecf49a176a5d231f7500fa8da7216024f9fc62",
+        "bytes": 71
+      },
+      {
+        "path": "docs/06-ui/DESIGN_SYSTEM.md",
+        "sha256": "df816aeb5f8471c01ae0be082eac5854ae34981f0a2beb658fdd835d5b0b1e81",
+        "bytes": 71
+      },
+      {
+        "path": "docs/06-ui/EXECUTIVE_PORTAL_MAP.md",
+        "sha256": "6cbdd5ce65953c052d7a688844a93a65eb6cb2fe5c180eb5fceecce108f17f70",
+        "bytes": 73
+      },
+      {
+        "path": "docs/06-ui/VENDOR_PORTAL_MAP.md",
+        "sha256": "841a47c8a28b01cb981cc50be1329a7bc247221b111dbe33d6489267f07f14e1",
+        "bytes": 57
+      },
+      {
+        "path": "docs/07-testing/ACCEPTANCE_TEST_MATRIX.md",
+        "sha256": "d45d692143165b54295a25fd220d52696d15d14cf5addfcf1a9c9ff20ba77da7",
+        "bytes": 66
+      },
+      {
+        "path": "docs/07-testing/EDGE_CASES.md",
+        "sha256": "74df660f4b6fe1931d6c2c4a6f4fa536b4aa71227fbb23c170bc0b512c316224",
+        "bytes": 57
+      },
+      {
+        "path": "docs/07-testing/PLAYWRIGHT_TEST_PLAN.md",
+        "sha256": "cbf9e26460b63318927f1d4364ceb523b20592b9ad8741f05f4f92f038d02097",
+        "bytes": 6850
+      },
+      {
+        "path": "docs/07-testing/RLS_TEST_PLAN.md",
+        "sha256": "c2fd1522c764b5c744991b5aa0265f8850b6cd735cc8439d8be274684fbb09aa",
+        "bytes": 4213
+      },
+      {
+        "path": "docs/07-testing/UAT_SCENARIOS.md",
+        "sha256": "4bacb2d9b972702c6cd5cf5c96f4bcadf65939f5d3cda8e4990c77c9616f9f87",
+        "bytes": 5950
+      },
+      {
+        "path": "docs/08-ai/AI_AGENT_ROLES.md",
+        "sha256": "ccd62f23a094918a8899c5444e985f652d426f84c6a268093041949f02e45882",
+        "bytes": 83
+      },
+      {
+        "path": "docs/08-ai/AI_TOOL_RULES.md",
+        "sha256": "b8d2ab936298af64d77e7fadcc56419d43b99feb9645152953d7c29b98c97839",
+        "bytes": 7383
+      },
+      {
+        "path": "docs/08-ai/CLAUDE_RULES.md",
+        "sha256": "96a460b73db5765452c0645b3ad171314560cd3b81bf1fe03a4e48e52128f582",
+        "bytes": 65
+      },
+      {
+        "path": "docs/08-ai/CODEX_RULES.md",
+        "sha256": "528fe415c72ee7418351d8245341402064ce9f92bcede1de1723ca7296e2c9f6",
+        "bytes": 71
+      },
+      {
+        "path": "docs/08-ai/CURSOR_RULES.md",
+        "sha256": "7017fe27d3e6a0c68d68a4ef669ce4c1808849af395f9417f7ef6cc6ac3e5f5f",
+        "bytes": 54
+      },
+      {
+        "path": "docs/08-ai/LOVABLE_KNOWLEDGE.md",
+        "sha256": "89ae2e974ad882f2cd89f2a47d220a97d5907982028b180d536bcae74b8d0e22",
+        "bytes": 441
+      },
+      {
+        "path": "docs/08-ai/LOVABLE_VISUAL_UI_SHELL_V1.md",
+        "sha256": "6e90da8254a500b27c6d35c19960d2c4bc3a3003e2379c6f3cbc68fcc01194ef",
+        "bytes": 6723
+      },
+      {
+        "path": "docs/08-ai/PROMPT_LIBRARY.md",
+        "sha256": "121cb8fdd52ee8091031968cc78b5fa4fcf2addbffad5becf8a7376148fec5f5",
+        "bytes": 5877
+      },
+      {
+        "path": "docs/09-release/BACKUP_RECOVERY_PLAN.md",
+        "sha256": "0be84f0aef49c84ef2665a14521eee488b8e7486d3be86ec65dc6529aeb3ef60",
+        "bytes": 72
+      },
+      {
+        "path": "docs/09-release/DEPLOYMENT_RUNBOOK.md",
+        "sha256": "bbd265c73a65b4c3ae141deff84f8afd78736146620cf27e5bc9cf4e4a89f7a8",
+        "bytes": 54
+      },
+      {
+        "path": "docs/09-release/RELEASE_CHECKLIST.md",
+        "sha256": "2914f20ab1b772034008ada537661425ade2e1a3a5ba5b1cb84ec685ac48308b",
+        "bytes": 58
+      },
+      {
+        "path": "docs/09-release/ROLLBACK_PLAN.md",
+        "sha256": "e6ee9849b17a6fc7f5ebf1cbd89b79a724c90ba81dc1b76e59d1976555ebdfb2",
+        "bytes": 45
+      },
+      {
+        "path": "docs/09-release/SUPPORT_RUNBOOK.md",
+        "sha256": "23f760b1fb50632ec1a1494a7d9b3315b870dd9132a1b422720f91a4be1fd9af",
+        "bytes": 48
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "16ddc9338eec5381ba64441b702e7fce8d9b4dfc9df4fe2950f3b5d02b12e48a",
+        "bytes": 2665
+      },
+      {
+        "path": "package.json",
+        "sha256": "ae9a7f57a4139f46fc24899b6257466f624bb22fe1c49779a8663082075d235c",
+        "bytes": 400
+      },
+      {
+        "path": "playwright.config.ts",
+        "sha256": "bb75095784e89749f69a5afca572c65a7a2983fd94e6a2c8c7366b9bad9d6554",
+        "bytes": 321
+      },
+      {
+        "path": "supabase/functions/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "supabase/migrations/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+        "bytes": 7968
+      },
+      {
+        "path": "supabase/seed/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "supabase/seed/foundation_demo_seed.sql",
+        "sha256": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+        "bytes": 4601
+      },
+      {
+        "path": "supabase/tests/database/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "supabase/tests/rls/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "tests/e2e/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "tests/e2e/static-app-shell.spec.ts",
+        "sha256": "91811518a4ba12aaf97a7f8e8ab2953ac93930627254daaa6d50df4e282aadc0",
+        "bytes": 2419
+      },
+      {
+        "path": "tests/integration/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "tests/unit/.gitkeep",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "tests/unit/foundation-migration-contract.test.mjs",
+        "sha256": "ca23affab7875b63c2735d114d8e73aa472ce42a6b21fc1848c81ac442d5e4a3",
+        "bytes": 2864
+      }
+    ]
+  },
+  "historical_files": [
+    {
+      "path": "Auxilium Website Master Build/auxiliumos-main.zip",
+      "sha256": "4c4a09513260d57200886b445c1122b6f4f524836d68c5fff329d34add6c9a98",
+      "bytes": 104923,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS Product Command/07:13:26-AuxiliumOS Build Command Board - AuxiliumOS Build Command Board.tsv",
+      "sha256": "696a2d14efc363b80ee2d301aa3dfcd6256f780e29a9f235100f17692b39ad07",
+      "bytes": 8231,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS Product Command/07:13:26-AuxiliumOS%20Build%20Command%20Board%20-%20AuxiliumOS%20Build%20Command%20Board.tsv",
+      "sha256": "696a2d14efc363b80ee2d301aa3dfcd6256f780e29a9f235100f17692b39ad07",
+      "bytes": 8231,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS Product Command/07:13:26-auxiliumos-main(1).zip",
+      "sha256": "a6b8a9abd422c7dd56b4fb57eac81fe72cc04ccf314f3c94a4ea9df4994fe9ce",
+      "bytes": 151438,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS Product Command/07:13:26-auxiliumos-main.zip",
+      "sha256": "a6b8a9abd422c7dd56b4fb57eac81fe72cc04ccf314f3c94a4ea9df4994fe9ce",
+      "bytes": 151438,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_AI_Context_Packet.md",
+      "sha256": "3c31015c701d139acc311fcb7794dc8966bd81a3d6f324450dde26bb4d314328",
+      "bytes": 6105,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_AI_Handoff_Packet.md",
+      "sha256": "20db2a0143cb7560d8034b0f22289910e0d18097ab0aba5fba12d8aa76086ec6",
+      "bytes": 5973,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_AI_Tool_Workflow_and_Timeline.docx",
+      "sha256": "c5e99f01a53a51d291b1bd26232ed164cb096a01e6124167db2c415657a0e30d",
+      "bytes": 42402,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_AI_Tool_Workflow_and_Timeline.md",
+      "sha256": "c34f7bd6aa0b16b5641ada179a0c399bafe40890c5389917fb6c871c3a0fa9ee",
+      "bytes": 1936,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Audit_Report_2026-06-24.md",
+      "sha256": "ea5d0703f6022ef5671a47f9d908cece7cd08912078c48e8d99da64b957542cc",
+      "bytes": 3080,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Beginner_Tool_Setup_Manual.docx",
+      "sha256": "7826336ec80c6fda54eb061ca1b4d2c0868e7845073c7a2ad7b4f78087341caf",
+      "bytes": 54112,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Beginner_Tool_Setup_Manual.md",
+      "sha256": "eed699f4434ce843080880438063728861471fb38a5865a978d693685a34837e",
+      "bytes": 42341,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Beginner_Tool_Setup_Manual.pdf",
+      "sha256": "85cd23eea4714edb2b1060183973c60a78266fc5572ede2305929142592555c5",
+      "bytes": 358157,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Beginner_Tool_Setup_Manual_Package.zip",
+      "sha256": "f5b220b95d6493b44e91354724e48385af1906f4695c988daabf584ebb8a95a9",
+      "bytes": 66371,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Correction_File_Pack_2026-06-24.zip",
+      "sha256": "346de24a7c7f4dfa3de873d4f99412be043596731d17b30a7165fb42ad739e6a",
+      "bytes": 18926,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Founder_Homework_Workbook(1).docx",
+      "sha256": "c0f27feb355c2a89e7e4b3bcbc295e9ac9a5e7c294b64c87fe7e76cbfa8ea8c5",
+      "bytes": 57969,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Founder_Homework_Workbook.docx",
+      "sha256": "e4f4563455e1c6c08f69554dbbc793fc49062970090f1d3d739748653625980d",
+      "bytes": 49559,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Founder_Homework_Workbook.md",
+      "sha256": "d827122314e5019dfcb7f46599f76c9843502ed6648db7070245487450f54ff3",
+      "bytes": 43179,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Master_Map_Guardrails_Roadmap.docx",
+      "sha256": "b3c13351dbf2742feca8bf6b6284ff7f2138f24d9e014a36db933685e854352a",
+      "bytes": 53539,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Master_Map_Guardrails_Roadmap.md",
+      "sha256": "9f52bc27f597b297e2b462c241a56729332feee0b7bdfada8cce6838ae8b4ee3",
+      "bytes": 41154,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Master_Map_and_Guardrails.docx",
+      "sha256": "0a69ff1136265b7203fedab10892190829912d05d54670a63a2e95bce5f1f3dd",
+      "bytes": 47678,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Planning_Packet.zip",
+      "sha256": "5673206d4a1cdb9658b3c52a78e96a097ef75ca2c6865205ec6363ddc088603a",
+      "bytes": 127796,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Prep_To_Fly_Checklist.docx",
+      "sha256": "814adf93bc9fe296ba2c86b69bf3e7694413ce4bf1c409b41af93fb105c3e931",
+      "bytes": 63130,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Prep_To_Fly_Checklist.md",
+      "sha256": "6313cd109e23a1d3f55c09df2b57911224521f2ec6f86b71dbe2c5ac9a15f581",
+      "bytes": 63727,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Prep_To_Fly_Package.zip",
+      "sha256": "5d97853527c9b5dc6a5978b5fab0c82c84ad5bbef4804a5d20f177f7ce8f2933",
+      "bytes": 94016,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Project_Status_Ledger.md",
+      "sha256": "a0ccfd121d45d19d05d7b3c0a0aab220a3faafeb1fa30ce59de265cb1d59fef0",
+      "bytes": 5420,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Roadmap_and_Guardrails_Package.zip",
+      "sha256": "d9717bc24477275ea8295b1f0fdb68e42545627ca65d67d342a91590cacec7b9",
+      "bytes": 143119,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "AuxiliumOS_Starter_Repo_Skeleton.zip",
+      "sha256": "1ea37aeab2ca905ec676f05d164e7933e325959d743bc6d0aeb13164589732af",
+      "bytes": 25346,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-main(1).zip",
+      "sha256": "4c4a09513260d57200886b445c1122b6f4f524836d68c5fff329d34add6c9a98",
+      "bytes": 104923,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-main.zip",
+      "sha256": "13e17319cf6cfa1fb778264d9a88ea39b989e967b4554a4fae5a2d373a49a442",
+      "bytes": 96347,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-project-board-export-2026-06-24(1).tsv",
+      "sha256": "40a31ee6f3137870b7d40a7b6d849ad7da142017d64400690edec58cce7848c3",
+      "bytes": 3415,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-project-board-export-2026-06-24(2).tsv",
+      "sha256": "a5d0c1bb7139ff292ca3b7aa7dd9ad7dea348f3b1815305c3451714c22395b78",
+      "bytes": 3776,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-project-board-export-2026-06-24.tsv",
+      "sha256": "ed5d1731afa00148dcfb19a42b2258ea0a37887f51c12655d356aef4c3333461",
+      "bytes": 3242,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-repo-review-snapshot-2026-06-24(1).zip",
+      "sha256": "0658c4c83fed277dc466c600ad9d6976a23dedf8fa0c28e247358ffcf7a7625f",
+      "bytes": 97690,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-repo-review-snapshot-2026-06-24(2).zip",
+      "sha256": "44c3590c333986f68422202e9d88e24283ec457d4f2f88b7cee0e8ea12673ff8",
+      "bytes": 105289,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    },
+    {
+      "path": "auxiliumos-repo-review-snapshot-2026-06-24.zip",
+      "sha256": "13e17319cf6cfa1fb778264d9a88ea39b989e967b4554a4fae5a2d373a49a442",
+      "bytes": 96347,
+      "coverage": "Read directly or verified duplicate; exact methods/differences are in historical_scope_review, historical_format_review and historical_board_review."
+    }
+  ],
+  "review_reports": [
+    "docs/10-history/2026-10-08-review/continuity_design_review.txt",
+    "docs/10-history/2026-10-08-review/product_scope_review.txt",
+    "docs/10-history/2026-10-08-review/business_controls_review.txt",
+    "docs/10-history/2026-10-08-review/historical_scope_review.txt",
+    "docs/10-history/2026-10-08-review/historical_format_review.txt",
+    "docs/10-history/2026-10-08-review/historical_board_review.txt"
+  ],
+  "targeted_other_project_review": [
+    {
+      "artifact": "mapping_checkpoint.txt",
+      "sha256": "27bf4e877c86dfbad02555f1654e5cb9c181c0cd97da31f7c61de49eaffb0bb0",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_domain.txt",
+      "sha256": "e94acbf9a36e6fcd21164c7a97fd859667b834d4f4ee312c4f5847449404504e",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_editor.txt",
+      "sha256": "80390e1ea3de47481d27b3facbd9be2366d57fa122c98d6192f24793847ace8b",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_integration.txt",
+      "sha256": "e9d801417d45d7589549c777c776666a8906ccbc01a312486d8d9871a80643e3",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_onsite.txt",
+      "sha256": "f85bbeeaa724eac1fba1c492f5f6b15e3b199e3336cc23201e6553a51960265f",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_patch.txt",
+      "sha256": "3c80b35353e126c6dba374cae300a55a20128db19bc80d6524c808c1bdc11f6c",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_scope_route.txt",
+      "sha256": "15362614f82395a900c1afa8a14e93681c896dfc2e79d9ccc8128ed509e3a2c8",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_shell.txt",
+      "sha256": "7ade9a6248e366b62a09a099198e5c7f9f1e7f846ac1b182684a72c246b7056d",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_spec.txt",
+      "sha256": "dea915dd72b70b9cdd9e027193d9f01d5526f8f24646f4a6af380fb136d33ef1",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_status.txt",
+      "sha256": "f55cf7eeb4ce1a110511c2faa485cfa5c8d0c604c27c4093f88716e167453782",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "mapping_tools.txt",
+      "sha256": "51c7a7c262b6097c5420d2addd4684912a7c84f31fe5f3fc5231af82b2d83054",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_architecture.txt",
+      "sha256": "25d25041058c18d91607bc7cc8756296b59898980e500cc54d1524b5e9cbb9bf",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_assessment_workspace.txt",
+      "sha256": "88092e1f346c243178c584edb1e1b81d2b060121982832591c372574b0856f75",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_brief.txt",
+      "sha256": "f167c513370825b2d69b84daa36a9ceead3e33a0f728c466e23fa609b7c9a83a",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_field.txt",
+      "sha256": "17feaee9901a2185a6ac730944c50ca73bb658c9d42a229b0701f670f3be96f2",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_portal_component.txt",
+      "sha256": "a064f35d36553f12378777bc64a900178f31875a65ae0c1e90b78258e08a39f6",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_portal_content.txt",
+      "sha256": "857f6d19302abc9697a7b7e5c954384b0378de3330a97d0d65c069409b2b0169",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_project_workspace.txt",
+      "sha256": "922a9eb2c27102af1f60e866be5c08801efb1a921a86a718d3f7eed7da22bafd",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_staff_nav.txt",
+      "sha256": "f5d3c5658be142a33a6cbeec0cf5ead3f85e80c961dbd9895b0ddd08a28c5f68",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    },
+    {
+      "artifact": "moldo_status.txt",
+      "sha256": "ad166fe28d84e16be2addd7118af9b259d2f14b268e45ae404ec78994d5150d6",
+      "scope": "Selected source/spec/status excerpt inspected earlier in this thread, not a fresh exhaustive repository/runtime audit."
+    }
+  ],
+  "conversation_coverage": "Current user directions and retrieved earlier excerpts, including June 14 original intent and July 5 continuation. Full historical transcripts, deleted/unsurfaced conversations and attachments are not available as a complete corpus.",
+  "access_gaps": [
+    "GitHub connector installed but installations list empty; repository API read 404. Current branches/PRs/issues and later code cannot be certified.",
+    "Owner Cursor local filesystem/editor is inaccessible.",
+    "Read-only inspection of auxiliumos-dev returned no public tables or recorded migrations. Auth/storage, RLS runtime, deployment linkage and real-user workflows remain unverified; no database writes.",
+    "Historical board exports report labels only; latest export ends at issue #76 and does not contain later #80.",
+    "Moldo and companion observations are targeted prior source review, not claims of end-to-end current test success. Companion work is deferred."
+  ],
+  "corrections": [
+    "Existing foundation migration/seed and Playwright harness were missing from stale entrypoint status.",
+    "Current no-PHI prohibition is settled despite legacy open question Q008.",
+    "Recovered 171 proposed catalogue entries; blank founder workbooks are not approval evidence.",
+    "Long Timeline DOCX contains release requirements absent from its abbreviated Markdown.",
+    "Full 20-module destination retained; initial slice restrictions are historical milestones.",
+    "Follow-up audit found live Lovable project knowledge still visual-only and workspace blanket stops conflicting with the current OS development mandate. Applied and read back updated OS knowledge plus a narrow addendum preserving the complete prior workspace text.",
+    "Replaced Cursor-first startup with ChatGPT-first instructions and added a complete feature delivery protocol from schema/permissions through connected UI, runtime evidence and GitHub parity.",
+    "Recorded existing auxiliumos-dev read access, empty returned public-schema/migration lists and the precise remaining auth/storage/runtime gaps. No new backend created."
+  ],
+  "current_external_references": [
+    {
+      "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
+      "used_for": "Custom role files and supported concurrency configuration; runtime support is conditional."
+    },
+    {
+      "url": "https://github.com/actions/checkout",
+      "used_for": "Current documented v7 usage; CI has not been run on GitHub here."
+    },
+    {
+      "url": "https://github.com/actions/setup-node",
+      "used_for": "Current documented v7 usage with Node24."
+    },
+    {
+      "url": "https://github.com/actions/upload-artifact",
+      "used_for": "Current documented v7 artifact upload syntax."
+    },
+    {
+      "url": "https://docs.github.com/en/apps/using-github-apps/reviewing-and-modifying-installed-github-apps",
+      "used_for": "Repository access configuration guidance."
+    }
+  ],
+  "follow_up_observations": "docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json"
+}

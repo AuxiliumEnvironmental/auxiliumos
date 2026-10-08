@@ -1,0 +1,572 @@
+{
+  "version": 1,
+  "rule": "Dependency roadmap for the full destination. Expand a ready task into bounded owned-file tasks before parallel writes. Implemented is not verified unless its current evidence passes. Never mark placeholder modules complete.",
+  "tasks": [
+    {
+      "id": "CTRL-001",
+      "title": "Modernized continuation controls",
+      "status": "implemented",
+      "dependencies": [],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "scripts/**",
+        "tests/unit/control-system.test.mjs",
+        "config/**",
+        "docs/**",
+        "AGENTS.md",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "OWNER_DECISIONS.json",
+        "REQUIREMENTS.json",
+        "VERIFICATION_PROFILES.json"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls",
+        "package-importer"
+      ],
+      "next_action": "Use current evidence or run the controls profile when its fingerprint changed.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "SYNC-001",
+      "title": "Reconcile current GitHub, Lovable and existing Supabase backend",
+      "status": "blocked",
+      "dependencies": [
+        "CTRL-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/**",
+        "docs/03-data/SCHEMA_REGISTRY.md"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [],
+      "verification_profiles": [],
+      "next_action": "Verify GitHub repository access, compare current HEAD/branches/PRs with archive and Lovable, confirm actual GitHub sync mapping and existing auxiliumos-dev configuration/migration history. Import safely on a feature branch. Cursor is optional.",
+      "blocker": "GitHub connector has no accessible installation, so current source and remote write access remain unverified. Lovable knowledge and read-only Supabase public-schema/migration observations are recorded; auth/storage and actual source linkage still need reconciliation.",
+      "issue": null
+    },
+    {
+      "id": "ARCH-001",
+      "title": "Finalize domain boundaries and production app basis",
+      "status": "planned",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "requirements": [
+        "M01",
+        "M20",
+        "C06"
+      ],
+      "allowed_paths": [
+        "docs/03-data/**",
+        "docs/08-ai/**",
+        "BUILD_QUEUE.json"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-016"
+      ],
+      "verification_profiles": [],
+      "next_action": "Inspect current GitHub and Lovable source. Choose one maintainable production frontend, preserving useful design. Specify Incident vs Request, identity/tenancy, versioning, owned data contracts and additive migration plan.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "SEC-001",
+      "title": "Identity, account/facility isolation and audit foundation",
+      "status": "planned",
+      "dependencies": [
+        "ARCH-001"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/**",
+        "app/**",
+        "src/**",
+        "tests/**",
+        "docs/03-data/**",
+        "docs/04-security/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement and exercise real local database/API authentication, active membership denial, scoped capabilities, private storage and event provenance. Do not treat SQL text checks as RLS proof.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "INTAKE-001",
+      "title": "Structured intake, incidents and project queue",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C03",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/02-ontology/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement versioned catalogue-backed intake, preserve original submission, separate Incident and Request, assign triage and next action; no submission-only authorization.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "DOC-001",
+      "title": "Immutable documents and release lifecycle",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001"
+      ],
+      "requirements": [
+        "M13",
+        "C02",
+        "C01"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/DOCUMENT_RELEASE_WORKFLOW.md"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-011"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement exact-revision reviews, release grants, storage authorization, packages, withdrawal and replacement semantics with allowed/denied runtime tests.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "SCOPE-001",
+      "title": "Versioned scopes and sampling",
+      "status": "planned",
+      "dependencies": [
+        "INTAKE-001",
+        "DOC-001"
+      ],
+      "requirements": [
+        "M08",
+        "M09",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/02-ontology/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-005",
+        "OD-009"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement approved scope revisions, recommendations/declinations, qualified review, sample/COC/lab provenance and separately reviewed interpretation.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "COMMERCIAL-001",
+      "title": "ROM, agreements and change authority",
+      "status": "planned",
+      "dependencies": [
+        "SCOPE-001"
+      ],
+      "requirements": [
+        "M10",
+        "M11",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-006",
+        "OD-007",
+        "OD-008"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement versioned T&M estimates, effective authorization and cap controls, exact signature revision and bounded emergency/change workflow using synthetic commercial data.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "OPERATIONS-001",
+      "title": "Projects, assignments and closeout",
+      "status": "planned",
+      "dependencies": [
+        "COMMERCIAL-001",
+        "DOC-001"
+      ],
+      "requirements": [
+        "M12",
+        "M14",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-005",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Complete scheduling, visits, field records, change escalation, document-linked questions, tasks and audited closeout. Companion redesign is not a dependency.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "ENTERPRISE-001",
+      "title": "Programs, portfolios and readiness",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001",
+        "COMMERCIAL-001"
+      ],
+      "requirements": [
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-003",
+        "OD-007",
+        "OD-008"
+      ],
+      "verification_profiles": [],
+      "next_action": "Build program coverage/activation, optional portfolio hierarchy, site passports, champions, critical assets, drills, readiness gaps and recurring work.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "VENDOR-001",
+      "title": "Qualified assigned-work vendor operations",
+      "status": "planned",
+      "dependencies": [
+        "OPERATIONS-001",
+        "ENTERPRISE-001"
+      ],
+      "requirements": [
+        "M15",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-010"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement scoped vendor portal, credentials, work orders, closeout evidence and documented contracting relationship.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "FINANCE-001",
+      "title": "Operational finance and reserves",
+      "status": "planned",
+      "dependencies": [
+        "COMMERCIAL-001",
+        "OPERATIONS-001"
+      ],
+      "requirements": [
+        "M16",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-006",
+        "OD-007"
+      ],
+      "verification_profiles": [],
+      "next_action": "Build traceable commitments/costs/invoices, reserve ledger, cap/change approvals and reconciled accounting exports; no unapproved live money defaults.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "REPORT-001",
+      "title": "Executive reporting and QBR",
+      "status": "planned",
+      "dependencies": [
+        "ENTERPRISE-001",
+        "VENDOR-001",
+        "FINANCE-001"
+      ],
+      "requirements": [
+        "M17",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-002",
+        "OD-003"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement permission-filtered metrics, explicit denominators/unknowns, reproducible snapshots, actions, evidence-supported value ledger and released QBR packages.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "AI-001",
+      "title": "Source-grounded runtime assistance",
+      "status": "planned",
+      "dependencies": [
+        "SCOPE-001",
+        "DOC-001",
+        "SEC-001"
+      ],
+      "requirements": [
+        "M18",
+        "C07"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-014"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement access-scoped AI drafts/extraction with source/prompt/model versions, injection-resistant content handling, evaluation, cost/time limits and human adoption.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "CONNECT-001",
+      "title": "Independent Moldo and external adapters",
+      "status": "planned",
+      "dependencies": [
+        "ARCH-001",
+        "DOC-001",
+        "COMMERCIAL-001",
+        "ENTERPRISE-001"
+      ],
+      "requirements": [
+        "M20",
+        "C06"
+      ],
+      "allowed_paths": [
+        "src/integrations/**",
+        "app/**",
+        "supabase/**",
+        "tests/**",
+        "docs/03-data/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-016",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Review the actual current Moldo source contract before edits. Build versioned minimal projection, idempotency, retries/reconciliation and outage/revocation tests with simulated peers. Enable live connectors only at their recorded activation gates.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "HARDEN-001",
+      "title": "Cross-module scale, mobile and recovery evidence",
+      "status": "planned",
+      "dependencies": [
+        "OPERATIONS-001",
+        "ENTERPRISE-001",
+        "VENDOR-001",
+        "FINANCE-001",
+        "REPORT-001",
+        "AI-001",
+        "CONNECT-001"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/07-testing/**",
+        "docs/09-release/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-011",
+        "OD-015"
+      ],
+      "verification_profiles": [],
+      "next_action": "Exercise complete ordinary and enterprise lifecycles; measure realistic workloads and test migrations/restore, revocation, retries and partial failure. Fix measured bottlenecks; do not add services speculatively.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "RELEASE-001",
+      "title": "Full destination acceptance and owner activation",
+      "status": "planned",
+      "dependencies": [
+        "HARDEN-001"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20"
+      ],
+      "allowed_paths": [
+        "docs/09-release/**",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "REQUIREMENTS.json",
+        "OWNER_DECISIONS.json"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-005",
+        "OD-006",
+        "OD-007",
+        "OD-008",
+        "OD-009",
+        "OD-010",
+        "OD-011",
+        "OD-012",
+        "OD-013",
+        "OD-014",
+        "OD-015",
+        "OD-016",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Verify all 20 modules against current runtime evidence, complete bounded owner review, recovery drill and deployment authorization, then release and verify the actual deployed revision.",
+      "blocker": null,
+      "issue": null
+    }
+  ]
+}

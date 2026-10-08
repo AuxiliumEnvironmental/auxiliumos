@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "rule": "Static profiles cannot prove database/API/browser behavior. Add meaningful runtime profiles with explicit environment identity and required evidence levels as modules are implemented. Inputs cover every file/test/config affecting the claim. Review input coverage when architecture changes.",
+  "profiles": [
+    {
+      "id": "controls",
+      "level": "control_unit",
+      "environment": "local-node-control-tests",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "AGENTS.md",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "REQUIREMENTS.json",
+        "OWNER_DECISIONS.json",
+        "config",
+        "scripts",
+        "tests/unit/control-system.test.mjs",
+        "docs",
+        ".cursor",
+        ".codex",
+        ".github",
+        "tests/unit/document-integrity.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "scripts/os-control.mjs",
+          "validate"
+        ],
+        [
+          "node",
+          "scripts/check-docs.mjs"
+        ],
+        [
+          "node",
+          "--test",
+          "tests/unit/control-system.test.mjs",
+          "tests/unit/document-integrity.test.mjs"
+        ]
+      ],
+      "include_root_files": true
+    },
+    {
+      "id": "foundation-contract",
+      "level": "static_sql_contract",
+      "environment": "local-node-sql-text-only",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations",
+        "supabase/seed",
+        "tests/unit/foundation-migration-contract.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/foundation-migration-contract.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "package-importer",
+      "level": "control_unit",
+      "environment": "local-node-isolated-git-fixtures",
+      "environment_variables": [
+        "GIT_CONFIG_GLOBAL",
+        "GIT_CONFIG_SYSTEM",
+        "GIT_CONFIG_NOSYSTEM"
+      ],
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "tools/package-importer"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tools/package-importer/tests/apply-package.test.mjs"
+        ]
+      ]
+    }
+  ]
+}

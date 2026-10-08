@@ -1,3 +1,5 @@
+> 2026-10-08 refinement: approval binds to exact immutable version/checksum. A replacement draft does not supersede the current release. Preservation hold blocks destruction separately from visibility restrictions. OWNER_DECISIONS.json OD-002/003/004/011 tracks proposed live policies.
+
 # Document Release Workflow
 
 ## Purpose
@@ -212,7 +214,7 @@ Founder/legal/security review required.
 
 1. New version created.
 2. New version linked to original document.
-3. Prior version marked superseded.
+3. Prior released version remains current while the replacement is drafted and reviewed. Mark it superseded only when the replacement is validly released through the controlled transition.
 4. Active version clearly identified.
 5. Client visibility of prior version follows policy.
 6. Audit event records supersession.

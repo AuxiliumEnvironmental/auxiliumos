@@ -1,0 +1,105 @@
+AUXILIUMOS HISTORICAL COMMAND BOARD REVIEW
+Reviewed 2026-10-08. Read-only analysis of all five TSV files under history_sources.
+This is historical export evidence, not a live GitHub board or issue/PR inspection.
+The Spreadsheets skill and read-only guidance were read before analysis. Source files were not edited.
+
+COVERAGE AND DEDUPLICATION
+All seven fields of all 143 data-record occurrences were read: Title, URL, Assignees, Status, Linked pull requests, Sub-issues progress, Labels. All records have exactly seven string fields; none was malformed or skipped.
+Five physical files contain four unique byte sequences. Removing the duplicate file leaves 105 record occurrences; deduplicating complete seven-field rows leaves 38 unique rows, one per unique issue URL. Shared issue rows are identical across exports, with no conflicting field values. The 38-row export contains every unique earlier row.
+All 143 occurrences and all 38 unique rows have Status=Done. This reports the exported label only. It does not establish completed acceptance criteria, merged PRs, live deployments, permission approval or that an unfiltered board had no unfinished work.
+Latest export field coverage: Title 38/38, URL 38/38, Status 38/38, Labels 38/38, Linked pull requests 12/38, Assignees 0/38, Sub-issues progress 0/38. Blank assignee fields do not establish who performed the work.
+The latest export has 35 rows labelled type:docs, 6 type:feature, 7 type:schema, 3 type:ui, 2 type:test and 1 type:rls. These labels overlap. Nine Done rows retain needs:founder-decision, two retain needs:legal-review and six retain needs:security-review. Treat these labels as review prompts to reconcile against decision and implementation evidence, not as proof of missing or granted approval.
+
+SOURCE INVENTORY
+All paths below are relative to history_sources. The date in each filename is a source naming convention; the TSV content has no export timestamp, created/updated/completed date or issue body/comments.
+
+- AuxiliumOS Product Command/07:13:26-AuxiliumOS Build Command Board - AuxiliumOS Build Command Board.tsv
+  38 data rows, Done=38, highest issue number #76; 8231 bytes. SHA256 696a2d14efc363b80ee2d301aa3dfcd6256f780e29a9f235100f17692b39ad07.
+- AuxiliumOS Product Command/07:13:26-AuxiliumOS%20Build%20Command%20Board%20-%20AuxiliumOS%20Build%20Command%20Board.tsv
+  38 data rows, Done=38, highest issue number #76; 8231 bytes. SHA256 696a2d14efc363b80ee2d301aa3dfcd6256f780e29a9f235100f17692b39ad07.
+- auxiliumos-project-board-export-2026-06-24(1).tsv
+  22 data rows, Done=22, highest issue number #43; 3415 bytes. SHA256 40a31ee6f3137870b7d40a7b6d849ad7da142017d64400690edec58cce7848c3.
+- auxiliumos-project-board-export-2026-06-24(2).tsv
+  24 data rows, Done=24, highest issue number #47; 3776 bytes. SHA256 a5d0c1bb7139ff292ca3b7aa7dd9ad7dea348f3b1815305c3451714c22395b78.
+- auxiliumos-project-board-export-2026-06-24.tsv
+  21 data rows, Done=21, highest issue number #41; 3242 bytes. SHA256 ed5d1731afa00148dcfb19a42b2258ea0a37887f51c12655d356aef4c3333461.
+The two Product Command exports (plain spaces and percent-encoded filename) are byte-identical. Their names imply July 13, 2026; no independent export timestamp is embedded. The three June 24 filenames are also date labels only. Content progression is consistent with the following strict subset sequence:
+- June24 base: 21 issues, highest #41.
+- June24 (1): adds #43, total 22.
+- June24 (2): adds #45 and #47, total 24.
+- July13-labelled Product Command: adds #50, #52, #54, #56, #58, #60, #62, #64, #66, #68, #70, #72, #74 and #76, total 38.
+No issue disappears or changes complete-row content across that sequence. This is content ordering, not a reconstruction of precise event times.
+
+LATEST RECORDED WORK AND ARCHIVE RECONCILIATION
+The highest numbered issue in any board export is #76, "Bulk control doc update after schema blocker sprint", Status Done, linked PR #77. This does not mean it was the last issue chronologically completed; no completion dates are exported. Neither issue #78 nor #80 appears in any TSV.
+The July13-labelled repository archives in the same Product Command folder are byte-identical:
+- 07:13:26-auxiliumos-main.zip
+- 07:13:26-auxiliumos-main(1).zip
+SHA256 a6b8a9abd422c7dd56b4fb57eac81fe72cc04ccf314f3c94a4ea9df4994fe9ce; archive Git commit comment f9ef46007d31bc9d9c18bfdfb34e0c116679abd4; 102 non-directory files. Every entry carries ZIP timestamp 2026-07-11 22:40:08, without a timezone. Filename July13 and ZIP entry date July11 must both be recorded rather than collapsed into one authoritative date. These archives have no actual migration SQL, as established by the archive inventory.
+Separately, the later source checkout auxiliumos_review_20261008/auxiliumos-main/docs/03-data/SCHEMA_REGISTRY.md identifies source issue #80, "Initial dev-only foundation schema migrations", and migration supabase/migrations/20260713000100_foundation_slice_schema.sql. Therefore the board exports precede or omit that recorded migration work. Absence of #80 from the board is not a basis to undo or repeat the later source change. The migration filename encodes July13 but is not proof of application or deployment time.
+
+IMPORTANT ACTIONS FOR THE MODERNIZED HANDOFF
+1. Treat #7 role matrix, #8 document access, #10 RLS test matrix, #11 release workflow, #13 no-PHI policy, #17 emergency workflow, #18 change authorization and #19 UAT scenarios as documented control work. Confirm current evidence before enabling any runtime authority. Exported Done alone cannot activate it.
+2. Preserve #43 continuity fixes, #45 entrypoint cleanup, #47 permanent transition/end-state work and #50 transfer corrections as the documented lineage of the handoff process. Avoid claiming that the latest modernized roles are identical to the original recommendations.
+3. Reconcile #56 founder checkpoint and #72 minimum schema blocker decisions to current OD-001 through OD-017 entries. Existing approved decisions need evidence; proposed development defaults can continue without implying approval. The exports contain titles and labels, not the decision content.
+4. Keep #52 visual shell/PR53 separate from #60 app scaffold/PR61 and #62 test harness/PR63. A visual shell, static routes or test baseline are not an implemented business flow.
+5. Keep #66 schema design/PR67, #68 readiness gate/PR69, #74 migration control packet/PR75 separate from actual migration issue #80 found in later source. #70/PR71 and #76/PR77 are control-document updates, not schema execution.
+6. On live-repository access, reconcile these exports to current issue/PR state and commit before opening duplicate work. Do not rewrite history from this board or infer current open backlog, applied database state, live Supabase state, Cursor state or all prior chats.
+
+FULL UNIQUE ISSUE COVERAGE
+The following is the complete 38-issue inventory, preserving exact title and linked PR evidence. Row numbers refer to the plain-spaces July13-labelled Product Command TSV, with the header at row 1. Every listed row has exported Status Done; linked PR URLs are references, not verified merge state.
+
+- #3 | row 27 | Fill DECISION_LOG.md v1 | linked PR not supplied.
+- #4 | row 26 | Fill OPEN_QUESTIONS.md v1 | linked PR not supplied.
+- #5 | row 25 | Fill DATA_SPINE.md v1 | linked PR not supplied.
+- #6 | row 24 | Fill MODULE_MAP.md v1 | linked PR not supplied.
+- #7 | row 17 | Fill ROLE_PERMISSION_MATRIX.md v1 | linked PR not supplied.
+- #8 | row 16 | Fill DOCUMENT_ACCESS_MATRIX.md v1 | linked PR not supplied.
+- #9 | row 15 | Create first vertical slice spec | linked PR not supplied.
+- #10 | row 14 | Create RLS test matrix v1 | linked PR not supplied.
+- #11 | row 13 | Create document release workflow spec | linked PR not supplied.
+- #12 | row 12 | Create project request state machine v1 | linked PR not supplied.
+- #13 | row 11 | Create no-PHI policy v1 | linked PR not supplied.
+- #14 | row 20 | Create first Lovable UI shell prompt | linked PR not supplied.
+- #15 | row 21 | Prepare Cursor rules verification | linked PR not supplied.
+- #16 | row 18 | Prepare Supabase dev project documentation | linked PR not supplied.
+- #17 | row 10 | Create emergency exception workflow v1 | linked PR not supplied.
+- #18 | row 9 | Create change authorization workflow v1 | linked PR not supplied.
+- #19 | row 8 | Create Playwright UAT scenarios v1 | linked PR not supplied.
+- #20 | row 23 | Create session closeout habit v1 | linked PR not supplied.
+- #21 | row 22 | Repo foundation review | linked PR not supplied.
+- #28 | row 19 | Set up Lovable Project Knowledge | linked PR not supplied.
+- #41 | row 7 | Spec gate review before first build | linked PR not supplied.
+- #43 | row 6 | Fix continuity docs before Lovable visual shell | linked PR not supplied.
+- #45 | row 28 | Final entrypoint cleanup before Lovable visual shell | linked PR not supplied.
+- #47 | row 29 | Add permanent transition protocol and end-state blueprint | linked PR not supplied.
+- #50 | row 5 | Fix full-transfer findings before Lovable visual shell | linked PR not supplied.
+- #52 | row 4 | Create Lovable visual UI shell v1 | linked PR #53.
+- #54 | row 3 | First build implementation plan | linked PR #55.
+- #56 | row 2 | Founder decision checkpoint for first build blockers | linked PR not supplied.
+- #58 | row 30 | Foundation vertical slice build-control packet | linked PR #59.
+- #60 | row 31 | Static app shell scaffold and route placeholders | linked PR #61.
+- #62 | row 32 | App test harness and Playwright baseline | linked PR #63.
+- #64 | row 33 | Correct issue-number references and bulk control doc update after static shell baseline | linked PR #65.
+- #66 | row 34 | Supabase schema design packet for foundation slice | linked PR #67.
+- #68 | row 35 | Schema implementation readiness gate for foundation slice | linked PR #69.
+- #70 | row 36 | Bulk control doc update after schema design sprint | linked PR #71.
+- #72 | row 37 | Minimum schema blocker decisions for foundation slice | linked PR #73.
+- #74 | row 38 | Foundation migration control packet | linked PR #75.
+- #76 | row 39 | Bulk control doc update after schema blocker sprint | linked PR #77.
+
+ORIGINAL AGENT ROLE PLAN
+Source: history_sources/AuxiliumOS_Prep_To_Fly_Checklist.md, section 11.5 "Create agent roles". The checklist is part of the historical June21-labelled prep package; the section itself has no separate date. It explicitly says "Recommended roles" and has an unchecked instruction to add definitions to docs/08-ai/AI_AGENT_ROLES.md:
+1. Product Architect Agent
+2. Domain/Ontology Agent
+3. Database/Supabase Architect Agent
+4. UI/UX Build Agent
+5. Feature Implementation Agent
+6. Security/RLS Agent
+7. QA/UAT Agent
+8. Documentation/Handoff Agent
+9. Release Manager Agent
+These are the original nine role names. They are not evidence nine agents had been configured or deployed. The modern package can adapt responsibilities, but must show an explicit original-to-modern mapping and account for product, domain, schema, UI, implementation, independent security/QA, continuity and release responsibilities.
+Adjacent section 11.6 prescribes a closeout with date, agent/tool, tickets, completed work, changed files/database/RLS, tests added/run/results, assumptions, founder decisions, introduced risks, next ticket and docs updated. Preserve those facts in the modern session checkpoint rather than relying on conversational memory.
+
+Intermediate machine-readable extraction: historical_board_rows.json in the review scratch folder. The originals remain unchanged. No spreadsheet was created or source repo modified by this board review.

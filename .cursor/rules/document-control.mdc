@@ -1,5 +1,5 @@
-# Document Control Rules
-- No client-visible document without release approval.
-- Drafts are internal by default.
-- All document views/downloads should be auditable.
-- Superseded documents remain traceable.
+---
+description: AuxiliumOS exact-version review/release, grants, holds and supersession
+alwaysApply: true
+---
+Follow @AGENTS.md and @docs/00-control/EXECUTION_PROTOCOL.md. This file is a pointer, not a parallel policy copy. Use @BUILD_STATE.json, @BUILD_QUEUE.json and the selected @REQUIREMENTS.json entries. For exact-version review/release, grants, holds and supersession, inspect the relevant task sources and @OWNER_DECISIONS.json before implementation. Historical preparation-only instructions are superseded; runtime authority and security controls remain. Verify actual source/evidence and save meaningful changes to the canonical Git feature branch.
