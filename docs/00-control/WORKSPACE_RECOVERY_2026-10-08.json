@@ -1,0 +1,278 @@
+{
+  "record_type": "workspace_recovery_handoff",
+  "date": "2026-10-08",
+  "status": "LOCAL_RESERVATION_PATCH_REVIEWED_AND_TESTED_BUT_NOT_SAVED_REMOTELY",
+  "purpose": "Preserve the exact recovery boundary after local workspace tools stopped responding. This document does not publish or substitute for the unavailable local patch.",
+  "source": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "feature_branch": "wip/recovery-2026-10-08",
+    "base_main_sha": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "last_published_implementation_sha": "0773cce60f030084a8a321ec42429d6a91fce838",
+    "last_published_implementation_tree": "94dfa1765320d820d46e19c1e6c75647aca124b3",
+    "draft_pr": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+    "issue_authentication": 83,
+    "issue_audit_and_fixture_safety": 85,
+    "issue_private_objects": 86,
+    "sync_001": "Previously reconciled and saved; do not restart or overwrite from the ZIP.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
+    "foundation_migration_sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "foundation_seed_sha256": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "foundation_and_seed": "Unchanged at last successful local hash check; never recreate the foundation migration."
+  },
+  "verified_access": {
+    "github": "Connector read and Git Data API writes verified. Feature branch and draft PR are writable.",
+    "cli_push": "No CLI write credential; Git Data API publication is the already-tested alternative. Do not extract credentials.",
+    "local_workspace": "Two consecutive calls stopped returning output, including a read-only git status diagnostic. Calls were terminated. Root cause is unknown; this is not evidence of a GitHub permission failure.",
+    "blocked_tools": [
+      "apply_patch",
+      "exec_command"
+    ],
+    "working_tools_at_handoff": [
+      "GitHub connector",
+      "web search",
+      "functions orchestration"
+    ],
+    "destructive_recovery_actions": "None performed.",
+    "supabase": "Existing development project txofqxictwecgcnvezlb was reachable read-only. No cloud writes performed. Genuine Auth/API harness still needs securely configured server-side test credentials and reviewed migration application.",
+    "lovable": "Existing prototype inspected read-only; no GitHub/Supabase binding verified, no edit or deployment performed."
+  },
+  "remotely_saved_implementation": [
+    {
+      "area": "Protected access audit and safe API-fixture cleanup",
+      "remote_sha": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+      "original_local_sha": "f793a9c2e93f776e9f78107b092a06b614606982",
+      "tree_sha": "98b449123f881f6913508ef06ac976de14bda7c4",
+      "verification": "Independent review and bounded local checks completed; remote tree equality and actual fetch/diff verified."
+    },
+    {
+      "area": "Authentication storage generation isolation and stale-credential retirement",
+      "remote_sha": "0773cce60f030084a8a321ec42429d6a91fce838",
+      "original_local_sha": "6699b4dd08106ba50c1d94faccd09a07d66e4723",
+      "tree_sha": "94dfa1765320d820d46e19c1e6c75647aca124b3",
+      "verification": "Independent review, 28 runtime tests, seven intercepted-HTTP browser journeys, and green CI. Remote tree equality and actual fetch/diff verified. This is not genuine Supabase Auth/API acceptance."
+    }
+  ],
+  "ci": {
+    "status": "success",
+    "run_id": 37811327001,
+    "run_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/37811327001",
+    "feature_sha": "0773cce60f030084a8a321ec42429d6a91fce838",
+    "tested_merge_sha": "7f9e83fe48f27574347d8471077705bf6786b1a7",
+    "base_main_sha": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "jobs": {
+      "controls": {
+        "id": 113428617009,
+        "status": "success"
+      },
+      "application_foundation": {
+        "id": 113428617561,
+        "status": "success"
+      }
+    },
+    "inspected_environment": {
+      "node": "24.21.0",
+      "chromium": "149.0.7827.55",
+      "playwright_chromium_build": "1228"
+    },
+    "limitation": "This run predates the unsaved reservation increment and this handoff. It proves neither real Auth/API behavior nor deployment."
+  },
+  "local_recovery_locations": {
+    "root": "/workspace/scratch/831a296a4676/auxiliumos",
+    "last_known_branch": "build/private-object-integration-2026-10-08",
+    "last_known_head": "0773cce60f030084a8a321ec42429d6a91fce838",
+    "last_known_tracking_branch": "origin/wip/recovery-2026-10-08",
+    "root_dirty": true,
+    "reservation_worker": "/workspace/scratch/831a296a4676/object-reservations",
+    "reservation_worker_branch": "work/sec-001c-object-reservations",
+    "architecture_worker": "/workspace/scratch/831a296a4676/storage-contract",
+    "independent_probe": "/workspace/scratch/831a296a4676/private-object-security-probes.mjs",
+    "preservation_warning": "Scratch persistence is not guaranteed. Recover actual bytes before resetting, replacing, or cleaning any worktree. Do not reconstruct unavailable files from this prose and claim the same reviewed patch."
+  },
+  "unsaved_reviewed_files": [
+    {
+      "path": "supabase/migrations/20261008164758_private_object_reservations.sql",
+      "sha256": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1"
+    },
+    {
+      "path": "tests/database/private-object-reservations.test.mjs",
+      "sha256": "3e37490093d86dd10940610f59711cb386ed9d825b5c4e1911faa8daa7c31021"
+    },
+    {
+      "path": "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md",
+      "sha256": "7f67d78ea69c0a3e3c2e6e127dbd22bf67e3b13ad3a13171eb7d13731e81fe47"
+    },
+    {
+      "path": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+      "sha256": "d2c778f6a4289fad3544cd62c2989314eb32b7cfd386ed19b811bbe6afea3fa6"
+    },
+    {
+      "path": "tests/database/identity-directory.test.mjs",
+      "sha256": "40fed0644fe3993a07b3108a26c4a0bf84539022915e87c3b9dd14ada1fce0c0",
+      "caveat": "A later stalled call attempted only a test-title correction from all three to all four. Check actual bytes and rerun the affected profile if changed."
+    },
+    {
+      "path": "tests/database/access-audit.test.mjs",
+      "sha256": "6bf59fe06534b7aa7c706c078593e0b6341557aa0fb30161382c6025584a5239"
+    }
+  ],
+  "unsaved_reservation_scope": {
+    "status": "Implemented, locally tested, independently reviewed; not committed, not saved remotely, not deployed.",
+    "includes": [
+      "Exact-facility ingest_private_object capability; current protected identity, membership, profile, account, facility and capability checks before reservation replay/status.",
+      "Private immutable reservations with server-generated identifiers, immutable creator/history, same-account facility reference, idempotent canonical request identity, original expiry on exact retry, and conflict on changed request.",
+      "Disabled-by-default trusted-server configuration: synthetic text/plain, maximum 65536 bytes, default 900-second reservation TTL; bytes configurable 1..65536 and TTL 1..3600.",
+      "Minimal public invoker RPC wrappers; private security-definer implementations with empty search_path; no client/service-role direct table authority.",
+      "Consistent FOR SHARE lock order: configuration, profile, account, membership, facility, sorted relevant grants. Real multi-session race proof remains required.",
+      "Safe allowlisted reservation/configuration audit events; audit failure rolls back; no sensitive storage key or raw claims in return values/audit.",
+      "Immutable history guards, exact function/table/column ACL verification, fail-closed forged-context and direct-SQL checks."
+    ],
+    "expressly_not_implemented": [
+      "File bytes, Storage bucket/policy, gateway, actual content length/hash readback",
+      "Upload attempts or transport receipts and verified finalization",
+      "Malware scan, qualified human clearance, object inspection/read grants",
+      "Legal holds implementation, durable denial collector",
+      "Document versions, exact-version release/adoption, live activation"
+    ],
+    "architecture_status": "ADR-003 defines a broader future contract, not completed behavior."
+  },
+  "independent_reservation_review": {
+    "reviewer": "/root/private_object_security_review",
+    "status": "Complete; no blocking findings in the frozen narrow reservation increment or lead regression edits.",
+    "targeted_probes_passed": 7,
+    "probe_sha256": "7ebe62b22f19bc344dbb7c1a3f26ccf72937c41417a04dd31ffe45562de09793",
+    "coverage": [
+      "Replay after grant reassignment/profile unlink denied",
+      "Foreign creator status indistinguishable from unavailable",
+      "Disabled configuration and forged enable GUC denied",
+      "Forged direct SQL subject and service-role execution drift denied",
+      "All ten function plus table/column ACLs closed despite broad defaults",
+      "Service-role configuration privilege drift blocked by execution guard",
+      "Audit failure rollback and safe metadata allowlist"
+    ],
+    "limits": "PGlite single-connection simulated gateway context, not genuine PostgREST/Auth/Storage or simultaneous-session proof.",
+    "formal_review_json": "Not yet written because the local workspace stalled."
+  },
+  "last_successful_local_verification": {
+    "environment": {
+      "node": "24.19.0",
+      "pglite": "0.5.8",
+      "postgres": "18.3",
+      "auth": "simulated protected gateway context",
+      "concurrency": "single connection"
+    },
+    "profiles": [
+      {
+        "profile": "private-object-reservations-database",
+        "passed": 15
+      },
+      {
+        "profile": "directory-database",
+        "passed": 19
+      },
+      {
+        "profile": "access-audit-database",
+        "passed": 30
+      },
+      {
+        "profile": "runtime-build",
+        "passed": 28,
+        "extra": "TypeScript and Vite build also passed."
+      },
+      {
+        "profile": "directory-browser-fixture",
+        "passed": 7
+      },
+      {
+        "profile": "api-fixture-safety",
+        "passed": 22
+      },
+      {
+        "profile": "foundation-contract",
+        "passed": 7
+      },
+      {
+        "profile": "package-importer",
+        "passed": 22
+      }
+    ],
+    "documentation_check": "95 files checked without errors; validation valid before final metadata changes.",
+    "pending": [
+      "Full controls profile after final register/checkpoint edits",
+      "Fresh source-reconciliation evidence; prior validity window expired",
+      "Any profile invalidated by actual post-test file changes",
+      "Real Auth/API/Storage and multi-session concurrency acceptance"
+    ],
+    "local_advisors": "Could not connect to localhost:54322; no cloud fallback or write."
+  },
+  "unsaved_shared_changes_and_incomplete_metadata": {
+    "known_changed": [
+      ".github/workflows/ci.yml",
+      "VERIFICATION_PROFILES.json",
+      "BUILD_QUEUE.json",
+      "BUILD_STATE.json",
+      "OWNER_DECISIONS.json",
+      "SOURCE_RECONCILIATION.json",
+      "docs/00-control/CI_OBSERVATIONS.json",
+      "docs/00-control/reviews/SEC-001C-STORAGE-CONTRACT-2026-10-08.json",
+      "docs/00-control/RESUME.md",
+      "docs/00-control/SESSION_CHECKPOINT.json",
+      "Affected profile evidence JSON/log files"
+    ],
+    "check_exact_checkpoint_filename": true,
+    "checkpoint_caveat": "The 16:57:07Z local checkpoint predates the completed independent review and later passing tests. Reconcile rather than treating it as current.",
+    "pending_registry": "SCHEMA_REGISTRY.md needs an accurate additive reservation entry and updated current observations, preserving historical entries.",
+    "stalled_call_119": "First awaited apply_patch attempted the directory test-title correction. Later intended queue/state/owner-decision updates may not have run. No output was received. Inspect actual state before retrying.",
+    "owner_decision": {
+      "id": "OD013",
+      "status": "Provisional configurable development behavior; not owner live approval.",
+      "choices": [
+        "No automatic uploader readback; future exact quarantine inspection and human clearance remain separate from document release.",
+        "Synthetic disabled-by-default text/plain reservation settings as recorded above; expiry is not permission for destruction."
+      ],
+      "activation_gates": [
+        "OD001",
+        "OD003",
+        "OD013",
+        "Actual Auth/API and storage verification",
+        "Required qualified human and owner approvals"
+      ]
+    }
+  },
+  "recovery_sequence": [
+    "Restore a responsive workspace and first read the root branch, HEAD, dirty state and actual remote main/feature heads. Determine whether stalled edits partially applied.",
+    "Preserve actual local patch bytes and compare all frozen hashes. Inspect the worker worktree if root files are missing. Do not reset or clean.",
+    "Fetch and deliberately reconcile the remote documentation-only handoff commit containing this file without overwriting the dirty local reservation increment or newer remote work.",
+    "Read current repository AGENTS.md, EXECUTION_PROTOCOL.md, BUILD_STATE.json, BUILD_QUEUE.json, RESUME.md and this handoff. Do not repeat the completed package import or auth/audit work.",
+    "Finalize independent reservation review evidence, schema register, owner-decision status, queue/state and exact next-task handoff. Inspect the minor test-title change.",
+    "Run only invalidated affected profiles plus controls and fresh source reconciliation. Review actual diff and evidence, then commit the recovered reservation increment.",
+    "Publish to the existing feature branch with expected-SHA lease, verify exact tree and actual remote commit, update draft PR, and inspect the new CI run.",
+    "Only after preserving this increment, begin SEC-001C-OBJECT-TRANSPORT: bounded upload-attempt/manifest/receipt and verified-finalization contract work, CLI-generated additive migration, targeted tests and independent review. Never call mocked transport real Storage verification."
+  ],
+  "first_unfinished_action": "Recover and inspect the dirty local workspace; preserve the actual reviewed reservation patch and reconcile the remote recovery handoff before any new implementation.",
+  "remaining_external_gates": {
+    "secure_api_test_environment": [
+      "AUXILIUMOS_TEST_URL",
+      "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+      "AUXILIUMOS_TEST_SERVICE_ROLE_KEY"
+    ],
+    "secret_handling": "Use a secure configured server-side runtime. Never paste keys into chat, source, logs or command arguments.",
+    "development_target": "txofqxictwecgcnvezlb",
+    "before_api_execution": "Fresh target/migration/role/ACL/advisor reconciliation and a version-preserving reviewed migration application path.",
+    "production": "No merge, deployment, owner activation or real customer-data processing authorized by this handoff."
+  },
+  "destination_preserved": {
+    "complete_modules": 20,
+    "fully_verified_modules": 0,
+    "scope": "Every requirement and acceptance criterion remains in scope; foundation sequencing is not an MVP reduction.",
+    "moldo": "Independent operation, controlled authorized enterprise/portfolio integration only; no Moldo-only staff or manager OS access; inspect actual current contracts before adapter implementation.",
+    "companion_redesign": "Deferred",
+    "invariants": [
+      "Backend isolation",
+      "Immediate membership revocation",
+      "Exact-version approvals/releases",
+      "Controlled scope changes",
+      "No PHI",
+      "Qualified human scientific authority"
+    ]
+  }
+}
