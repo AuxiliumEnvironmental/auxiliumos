@@ -5,7 +5,7 @@
   "canonical_repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
   "canonical_branch": "main",
   "canonical_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
-  "local_branch": "build/integration-reviewed-2026-10-08",
+  "local_branch": "build/private-object-integration-2026-10-08",
   "starting_working_tree": "clean",
   "remote_branches": [
     "main",
@@ -90,7 +90,7 @@
     "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
     "mutations": []
   },
-  "remote_save_status": "Recovery and reviewed audit/fixture work are saved through remote 6b93ee3 with exact local/remote tree matches. The subsequent R5 patch requires its own publication/readback.",
+  "remote_save_status": "Recovery and reviewed audit/fixture/authentication work saved through 0773cce with exact local/remote tree matches and green GitHub CI. Subsequent storage contract/reservation work requires separate publication/readback.",
   "published_increments": [
     {
       "task": "SEC-001C-AUDIT and SEC-001B-API-FIXTURES",
@@ -100,6 +100,15 @@
       "tree": "98b449123f881f6913508ef06ac976de14bda7c4",
       "verification": "API-created tree matched local commit; nonforce expected-SHA ref update; fetched remote branch; git diff --exit-code against local commit returned 0.",
       "acceptance": "Reviewed local database/test-harness increment; no authentic API, merge or deployment. Later R5 authentication changes are not covered by this commit."
+    },
+    {
+      "task": "SEC-001B-R5",
+      "branch": "wip/recovery-2026-10-08",
+      "local_commit": "6699b4dd08106ba50c1d94faccd09a07d66e4723",
+      "head": "0773cce60f030084a8a321ec42429d6a91fce838",
+      "tree": "94dfa1765320d820d46e19c1e6c75647aca124b3",
+      "verification": "API-created tree matched local commit; nonforce expected-SHA update; fetched feature ref; git diff --exit-code against local commit returned 0. GitHub CI run 37811327001 passed.",
+      "acceptance": "Reviewed authentication code and build/browser-fixture layers, not authentic Supabase/API, cross-browser, merge or deployment."
     }
   ],
   "remaining_publish_task": null

@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "task": "SEC-001C-STORAGE-CONTRACT",
+  "reviewer_role": "independent-security-reviewer",
+  "source_commit": "0773cce60f030084a8a321ec42429d6a91fce838",
+  "reviewed_on": "2026-10-08",
+  "outcome": "no_blocking_contract_finding_for_reservation_only_subset",
+  "source_sha256": {
+    "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md": "d2c778f6a4289fad3544cd62c2989314eb32b7cfd386ed19b811bbe6afea3fa6",
+    "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md": "71c9145b87a0780441c6e33701cb4afe8e759e64904736afaa917b788ea10ab4",
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76"
+  },
+  "constraints": [
+    "Current authorization before reserve, replay or status; revoked authority cannot use idempotency as a bypass",
+    "Lock/re-read all mutable authority facts in consistent order; real multi-session evidence remains required",
+    "Trusted authenticator/authenticated context plus coherent protected claims; no actor/key/time/config override",
+    "Immutable reservation identity and expiry; exact replay neither renews nor duplicates audit",
+    "Private disabled-by-default bounded synthetic config; no caller-controlled configuration authority",
+    "RLS and explicit table/column/function ACLs; no direct service-role manifest/config writes",
+    "Minimal fixed reservation and configuration audit events only, same-transaction rollback on failure",
+    "Truthful reserved/expired status, no claim of bytes, scanning, clearance, release or durable denials"
+  ],
+  "lead_scope": "Only the reservation/configuration/authorization/audit database subset is currently allocated. ADR-003's remaining transport, provider storage, scan/clearance and future exact-version mechanisms require later bounded implementation and independent review.",
+  "owner_decisions": "Provisional development refinements recorded under OD-013, cross-referencing OD-001/003 and future DOC-001 authority. No live owner approval inferred.",
+  "evidence_limits": "Read-only contract review, no code security certification, runtime execution, cloud operation or deployment. Actual frozen migration patch review remains mandatory."
+}

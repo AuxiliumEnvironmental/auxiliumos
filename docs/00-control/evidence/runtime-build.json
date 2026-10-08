@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "runtime-build",
   "level": "build",
-  "recorded_at": "2026-10-08T16:33:17.381Z",
+  "recorded_at": "2026-10-08T17:04:11.311Z",
   "result": "passed",
-  "digest": "e402c7f9e80c52309d8d8a87e369f7d280587c8c6eabe0d52090c53330875332",
+  "digest": "a6e9e9b98cd01ae06ec0810c62fa81e64365e46214766847721666a6c2fa31a4",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -29,7 +29,7 @@
     "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
     "tests/unit/auth-persistence.test.mjs": "062ea0693db1dcd6020c5fb5227d6a393c53ac769a68e27c611a7b871d86e771",
     "tests/unit/runtime-configuration.test.mjs": "b13fd015fd8815684d4dad9f44c1b15954120b04cf6882a98a79b704726ce860",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d",
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
@@ -53,7 +53,7 @@
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -78,5 +78,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/runtime-build.log",
-  "log_sha256": "3f85920273e2562792574d8d1a07a7eb38b680a1d84ced8202554eab68ba0a83"
+  "log_sha256": "f7cab63ccb89148ae18c81021da70aec7555ed94dd060ad4554544a539a03d19"
 }

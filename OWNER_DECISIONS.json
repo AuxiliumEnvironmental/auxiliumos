@@ -332,7 +332,27 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "ADR-003 proposes a quarantined ingest boundary. Reservation-only database work is in progress; no real upload, scanner, human clearance or byte-serving enforcement is yet implemented.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "No automatic uploader content readback. Future normal internal inspection requires current scan evidence plus exact designated human clearance; a separately granted quarantine-inspection route may bypass only ordinary visibility restriction after malware pass. The reservation-only increment exposes none of those byte routes.",
+          "rationale": "Separates receipt, security review and document release, avoids turning uploader ownership or technical roles into content authority, and keeps all real-file handling gated under the existing no-PHI decision.",
+          "affected_capabilities": ["upload_readback", "quarantine_inspection", "content_clearance", "private_storage"],
+          "activation_gate": "Before real grants/uploads, approve designated actors, safe inspection environment, incident contact and false-positive handling. OD-001/003 audiences and DOC-001 professional/release authority remain independent and unapproved.",
+          "source": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+          "implementation": "proposed_for_future_synthetic_slices"
+        },
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "The synthetic reservation configuration is private and disabled by default, with text/plain and at most 65536 requested bytes. A default 900-second reservation TTL is configurable within a 1..3600-second test bound; expiry never deletes a record or grants content access.",
+          "rationale": "Small reproducible engineering limits exercise safe state and authorization without inventing a product-format promise, retention schedule or scientific threshold. Trusted configuration does not replace current identity/membership/capability checks.",
+          "affected_capabilities": ["synthetic_upload_reservation", "reservation_expiry"],
+          "activation_gate": "Synthetic development only. Real uploads still require OD-013 handling approval and actual gateway/Storage/scanner/security/restore acceptance; limits must be reviewed for the selected live workload.",
+          "source": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+          "implementation": "in_progress"
+        }
+      ]
     },
     {
       "id": "OD-014",

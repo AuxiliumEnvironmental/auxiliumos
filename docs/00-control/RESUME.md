@@ -1,22 +1,22 @@
 # Resume AuxiliumOS
 
-Generated 2026-10-08T16:43:25.521Z. Recheck actual Git state before trusting this snapshot.
+Generated 2026-10-08T16:57:07.162Z. Recheck actual Git state before trusting this snapshot.
 
 Read AGENTS.md, BUILD_STATE.json and BUILD_QUEUE.json, then run npm run os:status. Load only the sources for the next task. Do not restart completed work merely because the conversation changed.
 
-Next ready task: SEC-001C
+Next ready task: CTRL-001
 Verified product modules: 0/20.
 Pending owner review: OD-001, OD-002, OD-003, OD-004, OD-005, OD-006, OD-007, OD-008, OD-009, OD-010, OD-011, OD-012, OD-013, OD-014, OD-015, OD-016, OD-017.
-Git HEAD: 6b93ee34cee1ddc946cd3cae17db95f91f09f4e9. Remote observation: unavailable_or_branch_absent.
+Git HEAD: 0773cce60f030084a8a321ec42429d6a91fce838. Remote observation: not_checked.
 
 The checkpoint is observation, not a claim of push, deployment or runtime completion. See SESSION_CHECKPOINT.json for evidence freshness and blockers.
 
-## Exact unfinished action at this checkpoint
+## Exact first unfinished action
 
-Commit and publish the integrated SEC-001B-R5 authentication correction, then fetch and compare its actual remote tree. Independent review closed both cleanup findings; the integrated build, 25 persistence plus three configuration tests and seven browser-fixture journeys pass. These are synthetic/fixture layers, not authentic Supabase acceptance or an atomic crash-erasure guarantee.
+Finish the frozen-patch handoff for SEC-001C-OBJECT-RESERVATIONS from `../object-reservations` (branch `work/sec-001c-object-reservations`, base `0773cce60f030084a8a321ec42429d6a91fce838`). Backend worker owns only migration `20261008164758_private_object_reservations.sql`, its dedicated database test and implementation note. The independent security reviewer has accepted only the narrow architecture contract and must review the actual completed patch before integration. Do not assume moving worker files have passed or are saved remotely.
 
-After publication, review the bounded SEC-001C-STORAGE-CONTRACT handoff and implement its first additive private-object/quarantine slice. The architecture worker is isolated in `../storage-contract` with only `docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md` allocated. The parent SEC-001C is sequencing, not a duplicate broad writer lease. All 20 destination modules remain required.
+Lead root changes register the reservation task/profile/CI and update the existing directory/audit suites to run after the new fourth migration. Those files are not worker allocations. New profile registration invalidates the control system's shared profile fingerprints; rerun affected registered profiles after final integration, not rebuild completed controls because the generic next-ready field currently says CTRL-001. All 20 modules remain required and incomplete.
 
-Reviewed access audit and preservation-safe test fixtures are saved remotely through `6b93ee34cee1ddc946cd3cae17db95f91f09f4e9` on `wip/recovery-2026-10-08`, tree `98b449123f881f6913508ef06ac976de14bda7c4`, with exact fetch/readback equality to local `f793a9c2e93f776e9f78107b092a06b614606982`. Main remains `1729a525a7a60b86d1498c1300b579eb6775b02c`; draft PR #84 is not merged or deployed. The generator checked the local integration branch name, which is not a remote branch; this does not contradict the separately verified feature-branch receipt in SOURCE_RECONCILIATION.json.
+Reviewed source through authentication commit `0773cce60f030084a8a321ec42429d6a91fce838` is saved on `wip/recovery-2026-10-08`, exact tree `94dfa1765320d820d46e19c1e6c75647aca124b3` equals local commit `6699b4dd08106ba50c1d94faccd09a07d66e4723`. GitHub CI run 37811327001 passed both jobs on its PR merge candidate. Draft PR #84 and issue #86 track this continuation; main remains `1729a525a7a60b86d1498c1300b579eb6775b02c`. New storage contract/register/worker work at this checkpoint is not yet published.
 
-Existing Supabase target/migration reconciliation and secure Auth-admin test configuration still gate genuine Auth/API and real-service browser verification only. No cloud migration, real data operation or deployment was performed. Do not recreate the foundation migration, reimport the package, repeat matching tests, or treat the separate Lovable prototype as canonical source.
+ADR-003 is an architecture proposal, SHA-256 `d2c778f6a4289fad3544cd62c2989314eb32b7cfd386ed19b811bbe6afea3fa6`; the first task is reservation-only, not its whole byte/scanner/clearance/gateway contract. OD-013 records provisional synthetic choices and live gates without owner approval. Existing Supabase target/migration reconciliation and secure Auth-admin configuration still gate genuine API tests only. No cloud migration, upload, real data, Moldo adapter or deployment occurred. Do not recreate the foundation migration or reimport the continuation package.

@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "package-importer",
   "level": "control_unit",
-  "recorded_at": "2026-10-08T16:27:29.690Z",
+  "recorded_at": "2026-10-08T17:04:11.229Z",
   "result": "passed",
-  "digest": "53e8b5311b7da7f06d2afdce5a220c76bcb6fb3060ac849a8034f81cfd0779b2",
+  "digest": "d0a556736c7878a773c8ef88e330d99456943f9ba5d3b6c9019d7d7c763cddb6",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -30,9 +30,9 @@
     "tools/package-importer/apply-package.mjs": "c3d5e742be77d51daeef8e2cd9709c3e57179f93dcb9b6fc2d22ecd091abdfbb",
     "tools/package-importer/README.md": "db0f05b713dba04284b574335670f4847059a17e5bcc02cc3acc7dab0e320019",
     "tools/package-importer/tests/apply-package.test.mjs": "021e7b1b64bd1c9dc837e35b016bf22838a3c74cb4a65fafa4c2c18c0b137c72",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -46,5 +46,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/package-importer.log",
-  "log_sha256": "1649d5c6e57dcd1236fd19c607549a8ced08f2a7f6124e166a1323e1178cf6f4"
+  "log_sha256": "1d8dd76ca2e77a15dd2327239cd4d3bdbf1679e47299d85efaff94f0822cf762"
 }

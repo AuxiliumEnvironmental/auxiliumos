@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "foundation-contract",
   "level": "static_sql_contract",
-  "recorded_at": "2026-10-08T16:27:27.060Z",
+  "recorded_at": "2026-10-08T17:04:08.651Z",
   "result": "passed",
-  "digest": "a1f4e8e83172fb31f5053fd544c98fa4db71399394bed4ca6728a513c02b4c4a",
+  "digest": "f082b72c804ffa4417e16a417e48769fc1e10bfaaf5be7afbb17a58d71255bf0",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -28,12 +28,13 @@
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
     "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
     "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
     "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
     "tests/unit/foundation-migration-contract.test.mjs": "ca23affab7875b63c2735d114d8e73aa472ce42a6b21fc1848c81ac442d5e4a3",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -47,5 +48,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/foundation-contract.log",
-  "log_sha256": "fdd5d8788c65fc876f00a4b1dea7d0dcf9e0132228009e6fd9c830beb4d203d4"
+  "log_sha256": "070b4e4f5549afb33a25427e8540e867e096af4ba16270a27e1a189f9ae1bf42"
 }

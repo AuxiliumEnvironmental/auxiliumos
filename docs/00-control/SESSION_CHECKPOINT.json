@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-08T16:43:25.521Z",
+  "created_at": "2026-10-08T16:57:07.162Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,19 +10,18 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
-    "branch": "build/integration-reviewed-2026-10-08",
+    "head": "0773cce60f030084a8a321ec42429d6a91fce838",
+    "branch": "build/private-object-integration-2026-10-08",
     "upstream": "origin/wip/recovery-2026-10-08",
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/directory-browser-fixture.json\n M docs/00-control/evidence/directory-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/evidence/source-reconciliation.json\n M docs/00-control/evidence/source-reconciliation.log\n M docs/00-control/reviews/SEC-001B-2026-10-08.json\n M docs/00-control/reviews/SEC-001B-R5-2026-10-08.json\n M scripts/verify-source-reconciliation.mjs\n M tests/e2e/directory.spec.ts\n M tests/unit/auth-persistence.test.mjs\n M web/README.md\n M web/src/lib/auth-storage.ts\n M web/src/lib/runtime.tsx",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M tests/database/access-audit.test.mjs\n M tests/database/identity-directory.test.mjs\n?? docs/00-control/CI_OBSERVATIONS.json\n?? docs/00-control/reviews/SEC-001C-STORAGE-CONTRACT-2026-10-08.json\n?? docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
     "remote": {
-      "status": "unavailable_or_branch_absent",
-      "branch": "build/integration-reviewed-2026-10-08",
-      "head": null,
-      "checked_at": "2026-10-08T16:43:25.520Z"
+      "status": "not_checked",
+      "branch": "build/private-object-integration-2026-10-08",
+      "head": null
     }
   },
-  "controls_digest": "ae9185a12a16efc8c049bb075d801094d281c501b651a21f3d5c69b8fd3567eb",
-  "next_ready_task": "SEC-001C",
+  "controls_digest": "8a14aabbe7a40f6d4dbb5b65d4029f5881b1483c6b362823cd34b0b546dffb8a",
+  "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
       "id": "SEC-001B",
@@ -35,67 +34,45 @@
   ],
   "evidence": {
     "controls": {
-      "status": "passed",
-      "profile": "controls",
-      "evidence": "docs/00-control/evidence/controls.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-08T16:38:22.262Z"
+      "status": "stale",
+      "profile": "controls"
     },
     "foundation-contract": {
-      "status": "passed",
-      "profile": "foundation-contract",
-      "evidence": "docs/00-control/evidence/foundation-contract.json",
-      "level": "static_sql_contract",
-      "recorded_at": "2026-10-08T16:27:27.060Z"
+      "status": "stale",
+      "profile": "foundation-contract"
     },
     "package-importer": {
-      "status": "passed",
-      "profile": "package-importer",
-      "evidence": "docs/00-control/evidence/package-importer.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-08T16:27:29.690Z"
+      "status": "stale",
+      "profile": "package-importer"
     },
     "source-reconciliation": {
-      "status": "passed",
+      "status": "stale",
       "profile": "source-reconciliation",
-      "evidence": "docs/00-control/evidence/source-reconciliation.json",
-      "level": "source_inspection",
-      "recorded_at": "2026-10-08T16:38:46.484Z"
+      "reason": "Evidence timestamp is future-dated or expired."
     },
     "directory-database": {
-      "status": "passed",
-      "profile": "directory-database",
-      "evidence": "docs/00-control/evidence/directory-database.json",
-      "level": "database",
-      "recorded_at": "2026-10-08T16:20:37.020Z"
+      "status": "stale",
+      "profile": "directory-database"
     },
     "access-audit-database": {
-      "status": "passed",
-      "profile": "access-audit-database",
-      "evidence": "docs/00-control/evidence/access-audit-database.json",
-      "level": "database",
-      "recorded_at": "2026-10-08T16:20:40.740Z"
+      "status": "stale",
+      "profile": "access-audit-database"
+    },
+    "private-object-reservations-database": {
+      "status": "not_run",
+      "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "passed",
-      "profile": "runtime-build",
-      "evidence": "docs/00-control/evidence/runtime-build.json",
-      "level": "build",
-      "recorded_at": "2026-10-08T16:33:17.381Z"
+      "status": "stale",
+      "profile": "runtime-build"
     },
     "directory-browser-fixture": {
-      "status": "passed",
-      "profile": "directory-browser-fixture",
-      "evidence": "docs/00-control/evidence/directory-browser-fixture.json",
-      "level": "browser_fixture",
-      "recorded_at": "2026-10-08T16:33:22.460Z"
+      "status": "stale",
+      "profile": "directory-browser-fixture"
     },
     "api-fixture-safety": {
-      "status": "passed",
-      "profile": "api-fixture-safety",
-      "evidence": "docs/00-control/evidence/api-fixture-safety.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-08T16:24:50.745Z"
+      "status": "stale",
+      "profile": "api-fixture-safety"
     },
     "directory-api": {
       "status": "not_run",

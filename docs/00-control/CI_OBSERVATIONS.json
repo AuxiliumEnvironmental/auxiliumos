@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "observed_on": "2026-10-08",
+  "repository": "AuxiliumEnvironmental/auxiliumos",
+  "run_id": 37811327001,
+  "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/37811327001",
+  "head": "0773cce60f030084a8a321ec42429d6a91fce838",
+  "base": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "tested_pull_request_merge_candidate": "7f9e83fe48f27574347d8471077705bf6786b1a7",
+  "conclusion": "success",
+  "jobs": {
+    "controls": {"id": 113428617009, "conclusion": "success"},
+    "application-foundation": {"id": 113428617561, "conclusion": "success"}
+  },
+  "observed_application_log": {
+    "node": "24.21.0",
+    "chromium": "149.0.7827.55",
+    "playwright_chromium_build": "1228",
+    "passed_profiles": ["directory-database", "access-audit-database", "api-fixture-safety", "runtime-build", "directory-browser-fixture"],
+    "static_shell_tests_passed": 3
+  },
+  "scope": "Repository CI at this exact PR candidate. Database contexts are simulated Auth; browser service responses are fixtures. Neither genuine hosted API acceptance nor full-module completion, merge or deployment. Later source changes require their own CI observation."
+}

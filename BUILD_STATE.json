@@ -14,7 +14,7 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Read and connected-API write verified after installation 169293718. Recovery plus reviewed audit/fixture work saved through 6b93ee3 on wip/recovery-2026-10-08, fetched back with exact tree matches. Draft PR #84 and issues #83/#85 exist. CLI push still lacks credentials; API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
+    "github": "Read and connected-API write verified after installation 169293718. Reviewed audit/fixtures/authentication saved through 0773cce on wip/recovery-2026-10-08 with exact fetched tree matches. Its GitHub CI passed. Draft PR #84 and issues #83/#85/#86 exist. CLI push lacks credentials but API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb reachable. No public application tables/migrations/users/buckets/objects as of source inspection. No writes; authentication configuration and runtime not yet verified.",
     "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Review SEC-001C-STORAGE-CONTRACT and begin its first bounded additive private-object/quarantine implementation. R5 authentication corrections, protected audit and preservation-safe API fixtures are independently reviewed and pass their local profiles. Authentic Auth/API remains gated only on its reviewed target/migrations and secure configuration.",
+  "first_runtime_action": "Finish SEC-001C-OBJECT-RESERVATIONS in its isolated worktree, independently review the frozen migration/RPC/ACL/audit patch, then integrate affected database evidence. The private-object ADR is architecture, not byte access. Authentic Auth/API remains gated on reviewed target/migrations and secure configuration only.",
   "active_remote_work": ["https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -44,6 +44,7 @@
     "Seven intercepted-HTTP browser journeys exercise the actual app and SDK. Authentic Auth/API harness is prepared but unexecuted without secure service credentials and applied migrations.",
     "SEC-001C-AUDIT is implemented with an additive migration and independent security/migration review. Thirty audit checks plus nineteen directory checks after migration three pass in PostgreSQL 18.3/PGlite with simulated Auth; no hosted migration is claimed.",
     "The API fixture harness now preflights required columns and retains audit-linked application rows while disabling exact synthetic access and deleting only verified test-created Auth identities. Twenty-two mock/unit checks and independent review pass; authentic API execution remains unexecuted.",
+    "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
     "No cloud migration, Auth identity, storage object, deployment or Lovable code mutation was performed. Full SEC-001 and all 20 product modules remain incomplete."
   ],
   "runtime_implementation": {
@@ -86,10 +87,10 @@
     "verification": "Fetched remote source equals recovered local 8aa8482. Later worker patches and current register edits are not covered until separately published.",
     "cloud_mutations": false,
     "latest_verified_increment": {
-      "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
-      "tree": "98b449123f881f6913508ef06ac976de14bda7c4",
-      "local_commit": "f793a9c2e93f776e9f78107b092a06b614606982",
-      "scope": "Reviewed access audit and preservation-safe test fixtures; later authentication changes are not covered until separately published"
+      "head": "0773cce60f030084a8a321ec42429d6a91fce838",
+      "tree": "94dfa1765320d820d46e19c1e6c75647aca124b3",
+      "local_commit": "6699b4dd08106ba50c1d94faccd09a07d66e4723",
+      "scope": "Reviewed authentication increment after audit/fixtures, fetched source equality and successful GitHub CI. Later storage contract/reservation work requires separate review/publication."
     }
   }
 }

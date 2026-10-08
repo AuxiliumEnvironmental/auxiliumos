@@ -9,10 +9,13 @@ import {
   setSimulatedSubject,
 } from "../helpers/pglite-database.mjs";
 
-// Deliberately explicit: existing directory tests still test their two-migration
-// boundary. No helper silently upgrades unrelated tests to this audit contract.
+// Exercise the existing access-audit behavior after the new reservation layer
+// extends its checked event scope. Keep this boundary explicit in the test.
 const auditMigrationUrl = new URL(
   "../../supabase/migrations/20261008154950_access_audit_provenance.sql", import.meta.url,
+);
+const reservationMigrationUrl = new URL(
+  "../../supabase/migrations/20261008164758_private_object_reservations.sql", import.meta.url,
 );
 const id = (suffix, prefix = "00000000") =>
   `${prefix}-0000-4000-8000-${String(suffix).padStart(12, "0")}`;
@@ -138,6 +141,7 @@ test("access audit provenance in PostgreSQL with simulated Auth/gateway sessions
   const database = await createTestDatabase();
   t.after(() => database.close());
   const originalEvents = await rows(database, `select ${legacyColumns} from public.audit_events order by id`);
+  const originalEventIds = originalEvents.map((event) => event.id);
   const originalProfiles = await rows(database, "select * from public.user_profiles order by id");
   const originalMemberships = await rows(database, "select * from public.account_memberships order by id");
   const originalAccess = await rows(database, "select * from public.account_access order by account_id, user_profile_id");
@@ -146,6 +150,7 @@ test("access audit provenance in PostgreSQL with simulated Auth/gateway sessions
     grant select (event_metadata), insert (event_metadata), update (event_metadata)
       on public.audit_events to public, anon, authenticated, service_role;`);
   await runSqlFile(database, auditMigrationUrl);
+  await runSqlFile(database, reservationMigrationUrl);
   const isolated = async (name, callback) => t.test(name, async () => {
     await database.exec("begin");
     try { await callback(); } finally {
@@ -154,11 +159,17 @@ test("access audit provenance in PostgreSQL with simulated Auth/gateway sessions
   });
 
   await isolated("additive migration preserves every old field, identity, role and lifecycle row", async () => {
-    assert.deepEqual(await rows(database, `select ${legacyColumns} from public.audit_events order by id`), originalEvents);
+    assert.deepEqual(await rows(database, `select ${legacyColumns} from public.audit_events
+      where id = any($1::uuid[]) order by id`, [originalEventIds]), originalEvents);
+    const added = await rows(database, `select event_type, object_type, actor_kind, account_id
+      from public.audit_events where not (id = any($1::uuid[]))`, [originalEventIds]);
+    assert.deepEqual(added, [{ event_type: "private_object_reservation_config_created",
+      object_type: "private_object_reservation_config", actor_kind: "system", account_id: null }]);
     assert.deepEqual(await rows(database, "select * from public.user_profiles order by id"), originalProfiles);
     assert.deepEqual(await rows(database, "select * from public.account_memberships order by id"), originalMemberships);
     assert.deepEqual(await rows(database, "select * from public.account_access order by account_id, user_profile_id"), originalAccess);
-    const legacy = await rows(database, "select actor_kind, actor_auth_user_id, actor_system_key, correlation_id from public.audit_events");
+    const legacy = await rows(database, `select actor_kind, actor_auth_user_id, actor_system_key, correlation_id
+      from public.audit_events where id = any($1::uuid[])`, [originalEventIds]);
     assert.equal(new Set(legacy.map((event) => event.correlation_id)).size, originalEvents.length);
     for (const event of legacy) {
       assert.equal(event.actor_kind, "legacy_fixture");
@@ -559,16 +570,17 @@ test("access audit provenance in PostgreSQL with simulated Auth/gateway sessions
   });
 });
 
-test("new database can apply all three migrations then replay original seed without activating access", async (t) => {
+test("new database can apply all four migrations then replay original seed without activating access", async (t) => {
   const database = await createTestDatabase({ seedBeforeMigration: false });
   t.after(() => database.close());
   await runSqlFile(database, auditMigrationUrl);
+  await runSqlFile(database, reservationMigrationUrl);
   await runSqlFile(database, foundationSeedUrl);
   const before = await rows(database, "select * from public.audit_events order by id");
   await runSqlFile(database, foundationSeedUrl);
   assert.deepEqual(await rows(database, "select * from public.audit_events order by id"), before);
   assert.deepEqual(await rows(database, "select actor_kind, count(*)::int as total from public.audit_events group by actor_kind order by actor_kind"),
-    [{ actor_kind: "legacy_fixture", total: 2 }, { actor_kind: "system", total: 14 }]);
+    [{ actor_kind: "legacy_fixture", total: 2 }, { actor_kind: "system", total: 15 }]);
   assert.deepEqual(await rows(database, "select distinct identity_status from public.user_profiles"), [{ identity_status: "suspended" }]);
   await setSimulatedSubject(database, null);
   assert.deepEqual(await asClientRole(database, "authenticated", () => rows(database, "select id from public.client_accounts")), []);

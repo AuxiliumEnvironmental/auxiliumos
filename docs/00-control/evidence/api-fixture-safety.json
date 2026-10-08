@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "api-fixture-safety",
   "level": "control_unit",
-  "recorded_at": "2026-10-08T16:24:50.745Z",
+  "recorded_at": "2026-10-08T17:04:18.272Z",
   "result": "passed",
-  "digest": "cd1afb87bbe918311f1f6af92b27af626afee72334b6913949cdc81984bbbebb",
+  "digest": "987dabbb3281717ffefd2ce98cae8909ad17a791bb953a4afcc856136fcbba84",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -28,9 +28,9 @@
     "tests/api/identity-directory.test.mjs": "d83207dd618c54841d9c76e7a5375021068ab90d1e0556f3d2d6f58bcd7e7fe2",
     "tests/api/README.md": "08ce459ae4f713616acf5d41718ee60cac7f8fc952146940824bda84a685f1a6",
     "tests/unit/api-fixture-cleanup.test.mjs": "4f471a45fb9d5f130809c0e516a9aaf23175b60719ed951bec2a663971b8e6d1",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -54,5 +54,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/api-fixture-safety.log",
-  "log_sha256": "63efa519a58e629be424392254ee6f1f572c7e24bf2b7bee857ace30751979b7"
+  "log_sha256": "bf0b0284bc661a1f6dfa2ff6a0ced4ad1b851aedda037fa16069bd3ab6188f61"
 }

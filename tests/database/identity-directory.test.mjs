@@ -11,10 +11,13 @@ import {
 } from "../helpers/pglite-database.mjs";
 
 // The directory denial/regression suite also protects its behavior after the
-// current additive audit migration. The isolated orphan/backfill failure case
+// current additive audit and private-reservation migrations. The orphan case
 // below deliberately retains the pre-directory boundary.
 const auditMigrationUrl = new URL(
   "../../supabase/migrations/20261008154950_access_audit_provenance.sql", import.meta.url,
+);
+const reservationMigrationUrl = new URL(
+  "../../supabase/migrations/20261008164758_private_object_reservations.sql", import.meta.url,
 );
 
 const id = (suffix, prefix = "00000000") =>
@@ -112,6 +115,7 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
   const originalRoleRows = await rows(database, "select * from public.account_memberships order by id");
   await runSqlFile(database, directoryMigrationUrl);
   await runSqlFile(database, auditMigrationUrl);
+  await runSqlFile(database, reservationMigrationUrl);
 
   const isolated = async (name, callback) => t.test(name, async () => {
     await database.exec("begin");
@@ -322,7 +326,8 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
     await expectSqlError(database, "23503", "delete from public.account_access where user_profile_id = $1", [profile(3)]);
   });
 
-  await isolated("private helpers have pinned paths, trusted ownership and minimal execution ACLs", async () => {
+  // New reservation helpers have a separate complete ACL matrix in their suite.
+  await isolated("directory/access-audit helpers retain pinned paths, ownership and execution ACLs", async () => {
     const functions = await rows(database, `select p.proname, p.prosecdef, p.provolatile, p.proconfig,
       p.proowner = c.relowner as same_owner,
       has_function_privilege('anon', p.oid, 'EXECUTE') as anon_execute,
@@ -331,6 +336,9 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
       from pg_proc p join pg_namespace n on n.oid = p.pronamespace
       cross join pg_class c join pg_namespace cn on cn.oid = c.relnamespace
       where n.nspname = 'private' and cn.nspname = 'public' and c.relname = 'user_profiles'
+        and p.proname in ('current_subject_id', 'has_directory_capability',
+          'initialize_legacy_account_access', 'guard_profile_auth_link',
+          'touch_account_access', 'audit_access_change', 'guard_audit_history')
       order by p.proname`);
     assert.equal(functions.length, 7);
     for (const fn of functions) {
@@ -441,6 +449,7 @@ test("unchanged foundation seed works after all three migrations without activat
   const database = await createTestDatabase({ seedBeforeMigration: false });
   t.after(() => database.close());
   await runSqlFile(database, auditMigrationUrl);
+  await runSqlFile(database, reservationMigrationUrl);
   await runSqlFile(database, foundationSeedUrl);
   await runSqlFile(database, foundationSeedUrl);
   assert.deepEqual(await rows(database, "select membership_status, count(*)::int as total from public.account_access group by membership_status order by membership_status"),

@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "directory-browser-fixture",
   "level": "browser_fixture",
-  "recorded_at": "2026-10-08T16:33:22.460Z",
+  "recorded_at": "2026-10-08T17:04:17.961Z",
   "result": "passed",
-  "digest": "ee895080c0b1983acd7f3cdb3790265ace4f9c4b97c1e6c262d89bd03023703b",
+  "digest": "06e23d36e560577c2d7e9d5b03e2eb39c7647f6fe2f34297dd09a4ae00b147fb",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -27,7 +27,7 @@
     "playwright.runtime.config.ts": "516b596a72003029ae9867766de5d8f9392fb51d6ed60bfd540fd46aceb83dcb",
     "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
     "tests/e2e/directory.spec.ts": "1f41b243bc5d7cf995032486b43e6eabfeb746c6cae5507fd06925437ff5b38d",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d",
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
@@ -51,7 +51,7 @@
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -65,5 +65,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/directory-browser-fixture.log",
-  "log_sha256": "2d6eff2a3c20679ea42372a33b49a4a0cbbfed6169971e5417708f5957e2b0c8"
+  "log_sha256": "de4efa1a37c84cf27a20245850de8a4aec657068c7b911298612fcc5ff0d469f"
 }

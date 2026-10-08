@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "profile": "directory-database",
+  "profile": "private-object-reservations-database",
   "level": "database",
-  "recorded_at": "2026-10-08T17:03:30.318Z",
+  "recorded_at": "2026-10-08T17:03:25.156Z",
   "result": "passed",
-  "digest": "1d13eaf5ca9125aee968cb7519371f09aad5cc563541f862ef755887354f5dcd",
+  "digest": "3c25fb7f1cc725321e029d4fa397a102bb19f38f4ef0e28e81a3107a2180d96a",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
     "arch": "x64",
-    "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-claims",
+    "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-gateway-sessions",
     "environment_hashes": {
       "CI": null,
       "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
@@ -31,8 +31,6 @@
     "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
     "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
-    "tests/database/access-audit.test.mjs": "6bf59fe06534b7aa7c706c078593e0b6341557aa0fb30161382c6025584a5239",
-    "tests/database/identity-directory.test.mjs": "40fed0644fe3993a07b3108a26c4a0bf84539022915e87c3b9dd14ada1fce0c0",
     "tests/database/private-object-reservations.test.mjs": "3e37490093d86dd10940610f59711cb386ed9d825b5c4e1911faa8daa7c31021",
     "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba",
     "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
@@ -43,13 +41,13 @@
       "argv": [
         "node",
         "--test",
-        "tests/database/identity-directory.test.mjs"
+        "tests/database/private-object-reservations.test.mjs"
       ],
       "exit_code": 0,
       "signal": null,
       "error": null
     }
   ],
-  "log_path": "docs/00-control/evidence/directory-database.log",
-  "log_sha256": "7b820c0c3faa18f9af757a66ff6f61c89d612ad50874ed35f84a205accd00b62"
+  "log_path": "docs/00-control/evidence/private-object-reservations-database.log",
+  "log_sha256": "41aece3c161d749c6ad5c583fcfc832065ff3268b3efe444d0332293078ded26"
 }

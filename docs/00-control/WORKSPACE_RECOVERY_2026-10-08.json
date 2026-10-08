@@ -1,5 +1,11 @@
 {
   "record_type": "workspace_recovery_handoff",
+  "recovery_observation": {
+    "date": "2026-10-08",
+    "status": "actual_patch_recovered_for_publication",
+    "verification": "All six recorded reviewed file SHA-256 values match the recovered worktree. Remote 2bbb732 was fetched and fast-forwarded without changing the dirty patch. No stalled edit altered these reviewed files.",
+    "scope": "The original entries below remain historical. This recovery commit preserves actual code and prior evidence; control corrections and subsequent intake/file integration are separate work. No live backend or full-module acceptance is claimed."
+  },
   "date": "2026-10-08",
   "status": "LOCAL_RESERVATION_PATCH_REVIEWED_AND_TESTED_BUT_NOT_SAVED_REMOTELY",
   "purpose": "Preserve the exact recovery boundary after local workspace tools stopped responding. This document does not publish or substitute for the unavailable local patch.",

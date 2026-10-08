@@ -142,6 +142,20 @@
       "commands": [["node", "--test", "tests/database/access-audit.test.mjs"]]
     },
     {
+      "id": "private-object-reservations-database",
+      "level": "database",
+      "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-gateway-sessions",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations",
+        "supabase/seed",
+        "tests/database/private-object-reservations.test.mjs",
+        "tests/helpers"
+      ],
+      "commands": [["node", "--test", "tests/database/private-object-reservations.test.mjs"]]
+    },
+    {
       "id": "runtime-build",
       "level": "build",
       "environment": "local-Node-24-TypeScript-Vite-production-bundle",

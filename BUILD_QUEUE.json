@@ -309,7 +309,7 @@
     {
       "id": "SEC-001C-STORAGE-CONTRACT",
       "title": "Private object and quarantine implementation contract",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": ["SEC-001C-AUDIT"],
       "requirements": ["M12", "M19", "C01", "C02", "C07"],
       "allowed_paths": ["docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md"],
@@ -317,9 +317,31 @@
       "branch": "work/sec-001c-storage-contract",
       "owner_decisions": ["OD-011", "OD-013"],
       "verification_profiles": ["controls"],
-      "next_action": "Produce the bounded storage/quarantine contract and exact-version interfaces, avoiding a SEC-001/DOC-001 dependency cycle. Review before implementing the first additive storage slice; a document alone proves no application behavior.",
+      "next_action": "ADR-003 defines the private ingest/quarantine and future exact-version boundary. Independent contract review found no blocker for the lead's reservation-only first subset. Actual code review and runtime evidence remain required; the ADR proves no application behavior.",
       "blocker": null,
       "issue": null
+    },
+    {
+      "id": "SEC-001C-OBJECT-RESERVATIONS",
+      "title": "Synthetic private-object reservation authorization",
+      "status": "in_progress",
+      "dependencies": ["SEC-001A", "SEC-001C-AUDIT", "SEC-001C-STORAGE-CONTRACT"],
+      "requirements": ["M19", "C01", "C02", "C07"],
+      "allowed_paths": [
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "tests/database/private-object-reservations.test.mjs",
+        "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md",
+        "tests/database/identity-directory.test.mjs",
+        "tests/database/access-audit.test.mjs"
+      ],
+      "assigned_to": "backend-engineer",
+      "branch": "work/sec-001c-object-reservations",
+      "owner_decisions": ["OD-001", "OD-003", "OD-011", "OD-013"],
+      "verification_profiles": ["private-object-reservations-database"],
+      "required_evidence_levels": ["database"],
+      "next_action": "Implement and independently review the bounded immutable reservation/configuration/RPC/audit slice. No byte upload, Storage policies, scan/clearance, version/release or durable denial collector is implemented by this task; preserve them as subsequent work.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/86"
     },
     {
       "id": "SEC-001",

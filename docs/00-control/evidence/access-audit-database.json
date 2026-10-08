@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "access-audit-database",
   "level": "database",
-  "recorded_at": "2026-10-08T16:20:40.740Z",
+  "recorded_at": "2026-10-08T17:03:33.957Z",
   "result": "passed",
-  "digest": "3b35c9475fad13e580e4939d98d6cdbdb251c73658ed8cd8e5e9969b5999fc77",
+  "digest": "3aa1b3d7ba005f92fc320cc01a44aa578235abb5a0165e2cc8f0a94672fed931",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -28,13 +28,14 @@
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
     "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
     "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
     "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
-    "tests/database/access-audit.test.mjs": "c8ea4a76c54ccc504fe5487d4406aa11a23d403275aa1a1a696d761e39fc2c27",
+    "tests/database/access-audit.test.mjs": "6bf59fe06534b7aa7c706c078593e0b6341557aa0fb30161382c6025584a5239",
     "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba",
-    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
   "results": [
     {
       "argv": [
@@ -48,5 +49,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/access-audit-database.log",
-  "log_sha256": "910abddccbdae3565f72424976f0c5875cf89416933ddb70820426bbbd2cd8ef"
+  "log_sha256": "2a38decbc932488bc2bbdd68133ed1d1e7b8462d69bf71608e2df9a04e4a5c35"
 }
