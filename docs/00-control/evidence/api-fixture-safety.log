@@ -1,0 +1,34 @@
+["node","--check","tests/api/identity-directory.test.mjs"]
+
+
+["node","--test","tests/unit/api-fixture-cleanup.test.mjs"]
+✔ configuration accepts only the exact target and keeps rejected keys out of errors (2.504945ms)
+✔ read-only preflight requires identity history and the audit schema before creation (2.120135ms)
+✔ ownership registration requires a returned UUID and exact run-specific email (1.03526ms)
+✔ cleanup preserves every application/audit row, disables exact demo scopes, then deletes owned Auth only (4.614515ms)
+✔ silent zero-row profile update fails; unrelated and unlinked Auth cleanup still proceeds (2.159095ms)
+✔ an update response claiming removal cannot replace the persisted-state readback (2.387148ms)
+✔ failed grant revocation is reported without retaining an otherwise safely disabled Auth identity (1.285137ms)
+✔ failed active membership retirement blocks only its associated Auth deletion (1.227881ms)
+✔ current Auth email mismatch cannot acquire deletion authority (0.954679ms)
+✔ Auth ownership is rechecked after profile/access verification and before deletion (1.215632ms)
+✔ unexpected non-demo profile linked to a created Auth identity is not touched or unlinked (1.474132ms)
+✔ partially provisioned run removes returned Auth identities even when no model rows were created (0.429186ms)
+✔ an unexpectedly accepted audit probe is preserved and reported, never mutated (0.981199ms)
+✔ unreadable audit probe does not short-circuit independent Auth cleanup (0.733416ms)
+✔ Auth deletion failure is read back and reported while later identities are removed (0.907908ms)
+✔ successful no-op Auth deletion is not reported as verified absence (1.912002ms)
+✔ ambiguous Auth deletion may have committed but its failed response still fails the run (0.774297ms)
+✔ successful Auth response cannot hide broken retained-profile link history (0.724802ms)
+✔ already absent Auth and already disabled rows are verified rather than claimed as new deletes/updates (0.816019ms)
+✔ a generated grant found under an unexpected membership is a failure, not falsely absent (1.06837ms)
+✔ non-demo generated profile is never modified or deleted through Auth (0.640966ms)
+✔ invalid generated-ID or Auth-ownership manifests fail before any request (0.814738ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.427201

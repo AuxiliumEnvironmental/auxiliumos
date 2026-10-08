@@ -18,21 +18,23 @@
   "findings": [
     {
       "id": "SEC-001B-R1",
-      "state": "corrected_pending_final_review",
+      "state": "code_correction_independently_reviewed",
       "finding": "Auth fixture ID was queued for deletion before exact generated-email ownership assertion.",
-      "resolution": "Validate UUID and generated email before registering the ID for cleanup. Never delete an unexpected returned identity."
+      "resolution": "Validate UUID and generated email before registering the ID for cleanup. Never delete an unexpected returned identity. Independent source review on 2026-10-08 confirms ordering at published 283882c; authentic provisioning/cleanup remains unexecuted."
     },
     {
       "id": "SEC-001B-R2",
-      "state": "open",
+      "state": "code_correction_independently_reviewed",
       "finding": "Runtime-only key validation occurs after Vite embeds VITE values. A wrongly configured secret would be emitted before rejection. No current secret exposure was found.",
-      "required_fix": "Reuse safe URL/key validation at Vite startup/build before output; retain browser validation."
+      "required_fix": "Reuse safe URL/key validation at Vite startup/build before output; retain browser validation.",
+      "resolution": "Independent source review confirms Vite invokes shared validation before configuration return; key validation precedes the missing-URL return. Remote run 37803280803 passed the three configuration regressions; integrated candidate rerun remains required."
     },
     {
       "id": "SEC-001B-R3",
-      "state": "open",
+      "state": "code_correction_independently_reviewed",
       "finding": "Default fetch redirects can forward credential-bearing password/refresh JSON on 307/308 redirects.",
-      "required_fix": "Reject redirects in the credential-bearing runtime transport."
+      "required_fix": "Reject redirects in the credential-bearing runtime transport.",
+      "resolution": "Independent source review confirms redirect:error on runtime fetch. The affected browser fixture must pass on the final integrated candidate."
     },
     {
       "id": "SEC-001B-R4",
@@ -47,7 +49,8 @@
       "state": "open",
       "finding": "A stale tab may overwrite or delete a fresh session before its storage event arrives, because new login removes the shared logout marker.",
       "reproduction": "tests/unit/auth-persistence.test.mjs exercises actual production adapter and interleaved shared Storage.",
-      "required_fix": "Durable generation pointer plus physically separate credential slots and intent per generation; captured logout client/generation; independent review required."
+      "required_fix": "Durable generation pointer plus physically separate credential slots and intent per generation; captured logout client/generation; independent review required.",
+      "followup_review": "docs/00-control/reviews/SEC-001B-R5-2026-10-08.json: first revised patch still leaves overlapping-login orphan credentials. R4/R5 remain open pending correction and re-review."
     }
   ],
   "limits": [

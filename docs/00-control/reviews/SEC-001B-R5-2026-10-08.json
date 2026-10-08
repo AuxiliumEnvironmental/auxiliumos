@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "task": "SEC-001B-R5",
+  "reviewer_role": "independent-security-reviewer",
+  "published_base": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "base_tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
+  "outcome": "changes_required",
+  "first_review": {
+    "reviewed_on": "2026-10-08",
+    "auth_storage_sha256": "e2b43ff43280303d2dadf99b3a33b5b9ff150c5664e5a22e072129f0fffb77e1",
+    "runtime_sha256": "3ff86cc45c3c4cc990f57e09f6d463634b4f3c51f240d5e0a36eabe25f90bfc4",
+    "finding": {
+      "id": "SEC-001B-R5-P2-1",
+      "severity": "P2",
+      "state": "corrected_in_second_review",
+      "requirements": ["C01", "C05"],
+      "description": "Overlapping beginLogin publications can orphan a committed generation's physical credentials after the winning tab logs out.",
+      "reproduction": "B captures G, pauses before publishing B; A publishes and commits A; B resumes and purges only captured G. A's authority check merely revokes its lease. B logout removes B but leaves A credential material, its committed marker and no A tombstone.",
+      "impact": "Ordinary reload remains locked on B, but the old bearer/refresh credential remains in localStorage and pointer restoration adopts it locally. Live token acceptance was not tested.",
+      "required_fix": "Clean superseded credential generations without relying on old-tab responsiveness and without removing a genuinely newer generation. Add the interleaving as a production-adapter regression.",
+      "reproducer_sha256": "eaf504605cf4ba0e30ffa3515b20c9bc65cc4cee42df0f1731120e952b7c2523"
+    },
+    "other_independent_evidence": [
+      "32 same-generation refresh/logout boundaries passed",
+      "64 stale write/remove versus fresh-login boundaries passed",
+      "122 stale logout versus fresh-login boundaries passed",
+      "80 one-shot storage-failure commitment boundaries passed",
+      "Installed SDK 2.117.3 with synthetic Storage/fetch/BroadcastChannel preserved the fresh session through delayed old sign-out and stale SIGNED_OUT"
+    ],
+    "probe_sha256": "7f393d37a25a09b67ec12d229aed3dd73e2923ba8da86f8407df45c1cb7f6b85",
+    "sdk_probe_sha256": "123e6b9ee67bea1993767ffc343987f2e00c44e15df6762b03cab3e7686edd73"
+  },
+  "second_review": {
+    "reviewed_on": "2026-10-08",
+    "auth_storage_sha256": "745f60424321228701cd234ea3b0ebb339365957bb6086055ce912182f86c33a",
+    "original_overlap_reproduction": "passed corrected expectations without an old-tab event or callback",
+    "other_evidence": "306 boundary probes and installed SDK delayed-signout/broadcast probe passed",
+    "finding": {
+      "id": "SEC-001B-R5-P2-2",
+      "severity": "P2",
+      "state": "open",
+      "description": "A length snapshot plus live key(index) enumeration can miss a retired credential when another tab removes an earlier key and shifts the key list.",
+      "reproduction": "Logout enumerates retired X; another tab removes X; retired Y shifts below the next index. Logout completes but leaves Y credential/committed marker without its tombstone. No crash or refused storage operation is required.",
+      "required_fix": "Replace mutable indexed enumeration with a defensible key-name snapshot while preserving strict namespace and current-generation checks; add the exact concurrent-removal regression.",
+      "reproducer_sha256": "cbbd6201810aa8026e656c217cbe311352656178a1ec9678a771a707cd32d3b8"
+    },
+    "limits": "Node mocks only; no browser, live token-use, genuine Auth/API or crash-erasure claim"
+  },
+  "limits": [
+    "Node Storage/SDK probes are not actual browser or cross-browser evidence",
+    "No genuine Auth/API, server revocation, RLS or deployment is certified",
+    "Final review and integrated build/browser profiles remain required"
+  ]
+}

@@ -252,13 +252,21 @@
       "development_choices": [
         {
           "recorded_at": "2026-10-08",
-          "choice": "Client access to audit remains closed; profile preservation uses Auth link nulling. Audit provenance and durable denial collection remain SEC-001C.",
+          "choice": "Client access to audit remains closed; profile preservation uses Auth link nulling. Server access-change provenance is the bounded SEC-001C-AUDIT increment; durable denial collection remains separate.",
           "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
           "affected_capabilities": [
             "audit",
             "identity_deletion"
           ],
           "activation_gate": "Approve retention schedule, hold/restriction authorities and audit-export recipients before destructive automation or client audit exports.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        },
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Retain synthetic audit-linked application records in API acceptance fixtures; cleanup revokes their access and removes only verified test-created Auth identities. Never delete audit history to satisfy fixture foreign keys.",
+          "rationale": "Exercises the append-only preservation boundary without inventing a live retention duration or destruction approval. Exact fixture ownership and fail-closed schema preflight prevent a test cleanup from becoming a broad data sweep.",
+          "affected_capabilities": ["audit", "identity_deletion", "synthetic_api_verification"],
+          "activation_gate": "Synthetic development only. Authentic execution still requires a securely configured authorized target and reviewed migrations. Real-data retention, destruction and exports remain subject to OD-011 approval.",
           "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
         }
       ]

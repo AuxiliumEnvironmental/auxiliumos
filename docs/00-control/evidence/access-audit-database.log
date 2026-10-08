@@ -1,0 +1,40 @@
+["node","--test","tests/database/access-audit.test.mjs"]
+▶ access audit provenance in PostgreSQL with simulated Auth/gateway sessions (not authentic API evidence)
+  ✔ additive migration preserves every old field, identity, role and lifecycle row (11.177027ms)
+  ✔ unchanged privileged foundation seed replay is idempotent and asserts no runtime actor (16.497427ms)
+  ✔ database actor, UUIDs, time and correlation ignore arbitrary caller claims and fields (5.744398ms)
+  ✔ service-role provisioning remains system even with another valid user's claims (10.1307ms)
+  ✔ profile create/link/history/status/unlink/delete records safe control states (11.618923ms)
+  ✔ inserting a linked suspended profile records database-assigned initial history (2.77981ms)
+  ✔ no-op and text/timestamp-only updates produce no control-change event (12.36612ms)
+  ✔ membership creation, lifecycle changes and deletion append in the same tenant (8.314372ms)
+  ✔ grant create/change/revoke/restore/delete retains only allowed safe values (10.952479ms)
+  ✔ authorization-affecting demo flags are audited without changing directory denial (22.034172ms)
+  ✔ cross-account or missing-membership grant failures produce neither mutation nor durable audit (4.853917ms)
+  ✔ valid privileged account moves retain both tenant histories with shared server correlation (11.242877ms)
+  ✔ simulated trusted gateway derives the user actor from subject, not changed row or metadata (6.006693ms)
+  ✔ self-suspension preserves a valid prior user actor without reopening linkage (7.421486ms)
+  ✔ self-unlink preserves a valid prior user actor without reopening linkage (4.1861ms)
+  ✔ malformed, mismatched, anonymous, missing, inactive and unlinked gateway actors fail closed (48.521732ms)
+  ✔ a role string and plausible claims on an untrusted session do not assert a human actor (9.292972ms)
+  ✔ Auth deletion audits its cascade unlink as system and retains historical user Auth UUID (8.181462ms)
+  ✔ existing actor-profile FK preserves an actor profile and does not cascade-delete history (8.86987ms)
+  ✔ audited tenant FK blocks hard-delete cleanup but system subject IDs add no new profile FK (11.098089ms)
+  ✔ transaction rollback removes successful mutation and its audit; logging failure aborts mutation (7.948651ms)
+  ✔ ordinary roles cannot read/insert/forge/alter/delete/truncate audit or mutate access tables (46.75236ms)
+  ✔ service can inspect internal evidence but cannot directly append or rewrite it (11.556008ms)
+  ✔ append-only triggers stop even owner casual UPDATE, DELETE and TRUNCATE (8.835898ms)
+  ✔ bulk TRUNCATE cannot bypass access-control row auditing (11.053922ms)
+  ✔ checked actor and event scope reject null/mixed provenance and unbounded global events (22.150737ms)
+  ✔ trigger ownership/search path/ACL and policy inventory keep the read-only directory boundary (10.749683ms)
+  ✔ RLS-filtered reads create no audit and denied exceptions leave no durable denial collector (6.076219ms)
+✔ access audit provenance in PostgreSQL with simulated Auth/gateway sessions (not authentic API evidence) (2139.719294ms)
+✔ new database can apply all three migrations then replay original seed without activating access (1296.222291ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3565.501776

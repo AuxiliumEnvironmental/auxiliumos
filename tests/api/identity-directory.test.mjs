@@ -2,42 +2,11 @@ import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
 import test from 'node:test';
 import { createClient } from '@supabase/supabase-js';
+import { cleanupFixtures, configuration, preflightSchema, recordCreatedAuth } from './fixture-cleanup.mjs';
 
-const DEVELOPMENT_URL = 'https://txofqxictwecgcnvezlb.supabase.co';
-const LOCAL_URLS = new Set(['http://127.0.0.1:54321', 'http://localhost:54321']);
 const ACCOUNT_COLUMNS = 'id,display_name,is_demo';
 const FACILITY_COLUMNS = 'id,account_id,display_name,is_demo';
 const PROFILE_COLUMNS = 'id,display_name,identity_status,is_demo';
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-
-function configuration() {
-  const names = [
-    'AUXILIUMOS_TEST_URL',
-    'AUXILIUMOS_TEST_PUBLISHABLE_KEY',
-    'AUXILIUMOS_TEST_SERVICE_ROLE_KEY',
-  ];
-  const missing = names.filter((name) => !process.env[name]?.trim());
-  assert.ok(missing.length === 0,
-    `API acceptance requires secure runtime configuration: missing ${missing.join(', ')}. No API checks ran; this is not a passing or skipped acceptance result.`);
-  const url = process.env.AUXILIUMOS_TEST_URL;
-  assert.ok(url === DEVELOPMENT_URL || LOCAL_URLS.has(url),
-    'AUXILIUMOS_TEST_URL must exactly match the approved development project or a documented local Supabase URL. No API checks ran.');
-  const publishableKey = process.env.AUXILIUMOS_TEST_PUBLISHABLE_KEY;
-  const serviceRoleKey = process.env.AUXILIUMOS_TEST_SERVICE_ROLE_KEY;
-  assert.ok(publishableKey !== serviceRoleKey && !publishableKey.startsWith('sb_secret_'),
-    'API acceptance requires distinct browser and server keys; a server key must not be used as the publishable key.');
-  // Reject a legacy service-role JWT in the browser-key slot without printing it.
-  if (publishableKey.split('.').length === 3) {
-    let role;
-    try {
-      role = JSON.parse(Buffer.from(publishableKey.split('.')[1], 'base64url').toString()).role;
-    } catch {
-      assert.fail('The legacy publishable key is not a valid key configuration.');
-    }
-    assert.ok(role === 'anon', 'A legacy browser key must have the anon role.');
-  }
-  return { url, publishableKey, serviceRoleKey };
-}
 
 function client(config, key, token) {
   return createClient(config.url, key, {
@@ -133,60 +102,6 @@ async function snapshot(admin, f) {
   return result;
 }
 
-async function cleanup(admin, f) {
-  const failures = [];
-  async function remove(table) {
-    try {
-      await ok(`Clean ${table}`, fixtureScope(admin.from(table).delete().eq('is_demo', true), table, f));
-      const columns = table === 'account_access' ? 'account_id,user_profile_id' : 'id';
-      const remaining = await ok(`Verify ${table} cleanup`, fixtureScope(admin.from(table).select(columns), table, f));
-      assert.ok(remaining.length === 0, 'Generated fixture rows remain.');
-    } catch {
-      const ids = table === 'account_access' ? f.accessPairs.map((pair) => pair.join('/')) : f.idsByTable[table];
-      failures.push(`${table} [${ids.join(', ')}]`);
-    }
-  }
-  // An audit insert is attempted only as a forbidden operation. If the request
-  // was unexpectedly accepted/ambiguous, clean only its exact generated ID.
-  if (f.auditMayExist) {
-    try {
-      await ok('Clean unexpectedly accepted synthetic audit insert', admin.from('audit_events')
-        .delete().eq('id', f.auditProbe).eq('is_demo', true));
-      const rows = await ok('Verify synthetic audit insert cleanup', admin.from('audit_events')
-        .select('id').eq('id', f.auditProbe));
-      assert.ok(rows.length === 0, 'Generated audit probe remains.');
-    } catch {
-      failures.push(`audit_events [${f.auditProbe}]`);
-    }
-  }
-  // Directory migration has no audit triggers. Never delete by account, demo
-  // flag alone, email domain, fixture prefix, or a pre-existing seed UUID.
-  for (const table of ['account_capability_grants', 'account_memberships', 'account_access',
-    'facilities', 'user_profiles', 'client_accounts']) {
-    await remove(table);
-  }
-  for (const authId of f.createdAuthIds) {
-    const profileId = f.profileIdByAuthId.get(authId);
-    if (profileId) {
-      try {
-        const rows = await ok('Confirm fixture profile was deleted before its Auth user', admin.from('user_profiles')
-          .select('id').eq('id', profileId));
-        assert.ok(rows.length === 0, 'Linked fixture profile remains.');
-      } catch {
-        failures.push(`auth user [${authId}] retained: deletion of exact profile [${profileId}] was not verified`);
-        continue;
-      }
-    }
-    try {
-      await ok('Delete this run\'s Auth user', admin.auth.admin.deleteUser(authId));
-    } catch {
-      failures.push(`auth user [${authId}]`);
-    }
-  }
-  assert.ok(failures.length === 0,
-    `Synthetic fixture cleanup failed; secure operator review required for exact IDs: ${failures.join('; ')}. Provider details omitted.`);
-}
-
 function fixtures() {
   const ids = Object.fromEntries([
     'accountA', 'accountB', 'accountProbe', 'profileA', 'profileB', 'profileRoleOnly', 'profileProbe',
@@ -196,12 +111,18 @@ function fixtures() {
   ].map((name) => [name, randomUUID()]));
   return {
     ...ids,
-    runId: randomUUID(), createdAuthIds: [], profileIdByAuthId: new Map(), auditMayExist: false,
+    runId: randomUUID(), createdAuth: [], profileIdByAuthId: new Map(), auditProbeAttempted: false,
     accountIds: [ids.accountA, ids.accountB],
     facilityIds: [ids.facilityA1, ids.facilityA2, ids.facilityB1],
     accessPairs: [
       [ids.accountA, ids.profileA], [ids.accountB, ids.profileB],
       [ids.accountA, ids.profileRoleOnly], [ids.accountB, ids.profileA],
+    ],
+    grantTargets: [
+      [ids.grantAccountA, ids.accountA, ids.profileA], [ids.grantA1, ids.accountA, ids.profileA],
+      [ids.grantAccountB, ids.accountB, ids.profileB], [ids.grantB1, ids.accountB, ids.profileB],
+      [ids.grantAllA, ids.accountA, ids.profileA], [ids.grantAtoB, ids.accountB, ids.profileA],
+      [ids.grantAtoB1, ids.accountB, ids.profileA], [ids.grantProbe, ids.accountA, ids.profileA],
     ],
     idsByTable: {
       client_accounts: [ids.accountA, ids.accountB, ids.accountProbe],
@@ -223,9 +144,11 @@ test('SEC-001B authentic Supabase identity and directory API acceptance', async 
   // Fail before constructing clients or making requests if secure config is absent.
   const config = configuration();
   const admin = client(config, config.serviceRoleKey);
+  // This performs SELECTs only, before any fixture/Auth creation request.
+  await preflightSchema(admin);
   const anonymous = client(config, config.publishableKey);
   const f = fixtures();
-  t.after(async () => cleanup(admin, f));
+  t.after(async () => cleanupFixtures(admin, f, (message) => t.diagnostic(message)));
   t.diagnostic(`Synthetic fixture run ${f.runId}; target ${config.url}.`);
 
   async function createSubject(label) {
@@ -234,11 +157,9 @@ test('SEC-001B authentic Supabase identity and directory API acceptance', async 
     const created = await ok('Create synthetic Auth user', admin.auth.admin.createUser({
       email, password, email_confirm: true,
     }));
-    assert.ok(UUID.test(created.user?.id ?? ''), 'Auth did not return a valid created-user ID.');
-    assert.ok(created.user.email === email, 'Auth returned an unexpected synthetic user.');
     // Register a destructive cleanup target only after both identity fields
     // match the object created by this run. A mismatched response is never owned.
-    f.createdAuthIds.push(created.user.id);
+    recordCreatedAuth(f, created.user, label);
     const login = client(config, config.publishableKey);
     const signedIn = await ok('Sign in synthetic Auth user', login.auth.signInWithPassword({ email, password }));
     assert.ok(signedIn.user?.id === created.user.id && typeof signedIn.session?.access_token === 'string',
@@ -411,21 +332,16 @@ test('SEC-001B authentic Supabase identity and directory API acceptance', async 
       .update({ auth_user_id: b.authId, identity_status: 'active' }).eq('id', f.profileA));
     await denied('Client capability upsert', a.data.from('account_capability_grants')
       .upsert(grant(f.grantProbe, f.accountA, f.profileA, 'view_asset', 'facility', f.facilityA2)));
-    f.auditMayExist = true;
+    f.auditProbeAttempted = true;
     const auditResult = await response('Client forged audit actor insert', a.data.from('audit_events').insert({
       id: f.auditProbe, account_id: f.accountA, actor_user_profile_id: f.profileB,
       object_type: 'client_account', object_id: f.accountB, event_type: 'api_acceptance_forged_actor',
       event_metadata: { actor_kind: 'user', actor_auth_user_id: b.authId },
       occurred_at: '2000-01-01T00:00:00.000Z', is_internal_only: true, is_demo: true,
     }));
-    if (permissionDenied(auditResult)) f.auditMayExist = false;
     assert.ok(permissionDenied(auditResult), 'Client audit insertion must fail with a database permission denial.');
-    const auditRead = await response('Check exact audit probe ID', admin.from('audit_events').select('id').eq('id', f.auditProbe));
-    if (permissionDenied(auditRead)) {
-      t.diagnostic('Audit insert was rejected by database permission. Service role lacks audit SELECT; independent audit row inspection remains in the database suite.');
-    } else {
-      sameIds(success(auditRead, 'Check exact audit probe ID'), [], 'Denied audit insert');
-    }
+    const auditRows = await ok('Check exact audit probe ID', admin.from('audit_events').select('id').eq('id', f.auditProbe));
+    sameIds(auditRows, [], 'Denied audit insert');
     const after = await snapshot(admin, f);
     assert.ok(JSON.stringify(before) === JSON.stringify(after), 'A denied client write changed generated directory/authorization rows.');
     await directoryRows(a, f, [f.accountA], [f.facilityA1], 'After denied writes');

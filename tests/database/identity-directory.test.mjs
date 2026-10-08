@@ -10,6 +10,13 @@ import {
   setSimulatedSubject,
 } from "../helpers/pglite-database.mjs";
 
+// The directory denial/regression suite also protects its behavior after the
+// current additive audit migration. The isolated orphan/backfill failure case
+// below deliberately retains the pre-directory boundary.
+const auditMigrationUrl = new URL(
+  "../../supabase/migrations/20261008154950_access_audit_provenance.sql", import.meta.url,
+);
+
 const id = (suffix, prefix = "00000000") =>
   `${prefix}-0000-4000-8000-${String(suffix).padStart(12, "0")}`;
 const accountA = id(1);
@@ -104,6 +111,7 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
     values ($1, $2, 'system_admin'), ($1, $3, 'removed_suspended')`, [accountA, profile(7), profile(3)]);
   const originalRoleRows = await rows(database, "select * from public.account_memberships order by id");
   await runSqlFile(database, directoryMigrationUrl);
+  await runSqlFile(database, auditMigrationUrl);
 
   const isolated = async (name, callback) => t.test(name, async () => {
     await database.exec("begin");
@@ -324,10 +332,10 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
       cross join pg_class c join pg_namespace cn on cn.oid = c.relnamespace
       where n.nspname = 'private' and cn.nspname = 'public' and c.relname = 'user_profiles'
       order by p.proname`);
-    assert.equal(functions.length, 5);
+    assert.equal(functions.length, 7);
     for (const fn of functions) {
       const helper = ["current_subject_id", "has_directory_capability"].includes(fn.proname);
-      assert.equal(fn.prosecdef, helper, fn.proname);
+      assert.equal(fn.prosecdef, helper || fn.proname === "audit_access_change", fn.proname);
       if (helper) assert.equal(fn.provolatile, "s");
       assert.deepEqual(fn.proconfig, ['search_path=""']);
       assert.equal(fn.same_owner, true);
@@ -429,9 +437,10 @@ test("PostgreSQL directory authorization with simulated Auth request context (no
   });
 });
 
-test("unchanged foundation seed works after both migrations without activating access", async (t) => {
+test("unchanged foundation seed works after all three migrations without activating access", async (t) => {
   const database = await createTestDatabase({ seedBeforeMigration: false });
   t.after(() => database.close());
+  await runSqlFile(database, auditMigrationUrl);
   await runSqlFile(database, foundationSeedUrl);
   await runSqlFile(database, foundationSeedUrl);
   assert.deepEqual(await rows(database, "select membership_status, count(*)::int as total from public.account_access group by membership_status order by membership_status"),

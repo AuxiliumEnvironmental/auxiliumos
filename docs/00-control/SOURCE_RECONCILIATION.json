@@ -1,15 +1,19 @@
 {
   "version": 1,
-  "observed_at": "2026-10-08T12:05:37.075311+00:00",
+  "observed_at": "2026-10-08T15:55:04Z",
+  "initial_reconciliation_at": "2026-10-08T12:05:37.075311+00:00",
   "canonical_repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
   "canonical_branch": "main",
   "canonical_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
-  "local_branch": "build/continuation-2026-10-08",
+  "local_branch": "build/integration-2026-10-08",
   "starting_working_tree": "clean",
   "remote_branches": [
-    "main"
+    "main",
+    "wip/recovery-2026-10-08"
   ],
-  "open_pull_requests": [],
+  "open_pull_requests": [
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+  ],
   "package_baseline_matches": true,
   "package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
   "import": {
@@ -23,15 +27,42 @@
   "foundation_sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
   "github_access": {
     "read": "verified by clone, ls-remote, repository API and PR list",
-    "write": "blocked",
-    "issue_creation": "403 Resource not accessible by integration",
-    "branch_creation": "403 Resource not accessible by integration",
+    "write": "verified through connected GitHub Git Data API; command-line push remains unavailable",
+    "issue_creation": "verified: issue 83",
+    "branch_creation": "verified: wip/recovery-2026-10-08",
     "git_push_dry_run": "No command-line credentials; prompts disabled",
-    "installations": [],
+    "installations": [169293718],
     "metadata_permissions_warning": "Repository permissions.push=true did not establish integration write permission.",
-    "required_action": "Configure the ChatGPT GitHub installation to include AuxiliumEnvironmental/auxiliumos and reconnect if needed. Never paste credentials."
+    "required_action": null,
+    "previous_failure": "Before installation 169293718, the connector exposed no installations and issue/branch writes returned 403. The owner's Installed confirmation was followed by successful real writes, not inferred permission.",
+    "publication": {
+      "branch": "wip/recovery-2026-10-08",
+      "head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+      "tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
+      "recovered_local_commit": "8aa8482e239e1afe870961b0ada1ab8e71a88ae0",
+      "verification": "Each API-created tree matched its local tree. Fetched the final remote branch and git diff --exit-code against recovered local 8aa8482 returned 0.",
+      "update_mode": "nonforce with expected prior SHA; main untouched",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
+      "draft_pr": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "acceptance": "WIP recovery checkpoint; not accepted, merged or deployed",
+      "commit_map": [
+        {"local": "167c04ef2e39e0a30f04e5d8fd26e25eb1803a43", "remote": "92b9ba367b54bfa40955b0fdfe1a743006807c75"},
+        {"local": "bb46093f88c88ef1ced1b96d203d804e41f8af0d", "remote": "4d92332718b12f00ac139a107943e8f7052e2540"},
+        {"local": "8aa8482e239e1afe870961b0ada1ab8e71a88ae0", "remote": "283882ced0f8e7be119f4b3c4c75a3f913572bde"}
+      ],
+      "ci": {
+        "run": 37803280803,
+        "head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+        "controls": "passed",
+        "directory_database": "passed",
+        "runtime_build": "TypeScript/bundle passed; actual CI artifact confirms 3 failed auth-persistence regressions and 4 passing tests (one persistence plus three configuration guards)",
+        "artifact_id": 11560599544,
+        "browser": "not run because runtime-build failed"
+      }
+    }
   },
   "lovable": {
+    "observed_at": "2026-10-08T12:05:37.075311+00:00",
     "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
     "observed_head": "0d48e1adfa63fa05ee0436bb5d83dd56ca94f523",
     "published": false,
@@ -46,6 +77,7 @@
     "resolution": "Canonical repository stays authoritative. ARCH-001 transfers/adapts reviewed useful UI with provenance into a single maintainable app; hosted Lovable remains an unbound prototype until explicit parity verification."
   },
   "supabase": {
+    "observed_at": "2026-10-08T12:05:37.075311+00:00",
     "project_id": "txofqxictwecgcnvezlb",
     "name": "auxiliumos-dev",
     "status": "ACTIVE_HEALTHY",
@@ -58,6 +90,6 @@
     "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
     "mutations": []
   },
-  "remote_save_status": "No new commit pushed. Reviewed continuation and runtime work exist only on the local feature branch until SYNC-PUBLISH-001 is resolved.",
-  "remaining_publish_task": "SYNC-PUBLISH-001"
+  "remote_save_status": "Recovered source through local 8aa8482 is saved at remote 283882c, with an exact source-tree match. Subsequent uncommitted authentication/audit work is not covered by that remote checkpoint.",
+  "remaining_publish_task": null
 }

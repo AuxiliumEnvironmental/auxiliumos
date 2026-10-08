@@ -1,24 +1,24 @@
 ["node","--test","tests/database/identity-directory.test.mjs"]
 ▶ PostgreSQL directory authorization with simulated Auth request context (not Supabase Auth/API)
-  ✔ migration preserves legacy rows and backfills only invited/suspended access (38.311407ms)
-  ✔ A1-only subject reads its own profile, account and exact facility (11.71449ms)
-  ✔ guessed tenants/facilities, joins, counts and exported rows stay scoped (14.404898ms)
-  ✔ account-read alone reveals no facilities; all_facilities is explicit and same-account (24.43027ms)
-  ✔ unknown keys, invalid helper arguments, absent membership and grants deny (27.781852ms)
-  ✔ legacy technical or alternate roles never overcome inactive lifecycle status (44.592987ms)
-  ✔ null/unlinked subjects and anonymous/unknown protected claims deny (54.373661ms)
-  ✔ every demo restriction participates in the effective predicate (44.877431ms)
-  ✔ constraints reject cross-tenant grants, invalid statuses/scopes and active duplicates (25.349265ms)
-  ✔ profile links require real Auth IDs, start suspended and cannot be reassigned (25.184196ms)
-  ✔ service_role cannot reset linkage history or inherit access after manual unlink (55.281861ms)
-  ✔ Auth deletion preserves history and service_role cannot attach a replacement identity (48.273563ms)
-  ✔ private helpers have pinned paths, trusted ownership and minimal execution ACLs (7.321406ms)
-  ✔ RLS and exact column grants replace broad table/column defaults (37.037205ms)
-  ✔ all client writes, self grants, forged actor/profile payloads and hidden columns deny (138.139624ms)
-  ✔ committed lifecycle and grant revocation deny the next query with unchanged simulated claims (49.710662ms)
-✔ PostgreSQL directory authorization with simulated Auth request context (not Supabase Auth/API) (3451.533958ms)
-✔ unchanged foundation seed works after both migrations without activating access (4149.397652ms)
-✔ orphaned pre-existing Auth link aborts the additive migration without altering history (3271.824966ms)
+  ✔ migration preserves legacy rows and backfills only invited/suspended access (26.173106ms)
+  ✔ A1-only subject reads its own profile, account and exact facility (8.938528ms)
+  ✔ guessed tenants/facilities, joins, counts and exported rows stay scoped (13.64829ms)
+  ✔ account-read alone reveals no facilities; all_facilities is explicit and same-account (11.536996ms)
+  ✔ unknown keys, invalid helper arguments, absent membership and grants deny (12.977969ms)
+  ✔ legacy technical or alternate roles never overcome inactive lifecycle status (25.489705ms)
+  ✔ null/unlinked subjects and anonymous/unknown protected claims deny (36.227637ms)
+  ✔ every demo restriction participates in the effective predicate (33.301124ms)
+  ✔ constraints reject cross-tenant grants, invalid statuses/scopes and active duplicates (17.581ms)
+  ✔ profile links require real Auth IDs, start suspended and cannot be reassigned (16.068119ms)
+  ✔ service_role cannot reset linkage history or inherit access after manual unlink (29.895699ms)
+  ✔ Auth deletion preserves history and service_role cannot attach a replacement identity (19.201554ms)
+  ✔ private helpers have pinned paths, trusted ownership and minimal execution ACLs (5.013349ms)
+  ✔ RLS and exact column grants replace broad table/column defaults (22.644986ms)
+  ✔ all client writes, self grants, forged actor/profile payloads and hidden columns deny (84.167414ms)
+  ✔ committed lifecycle and grant revocation deny the next query with unchanged simulated claims (29.979595ms)
+✔ PostgreSQL directory authorization with simulated Auth request context (not Supabase Auth/API) (2213.682929ms)
+✔ unchanged foundation seed works after all three migrations without activating access (1397.870536ms)
+✔ orphaned pre-existing Auth link aborts the additive migration without altering history (1380.153559ms)
 ℹ tests 19
 ℹ suites 0
 ℹ pass 19
@@ -26,4 +26,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 11081.834549
+ℹ duration_ms 5122.843886

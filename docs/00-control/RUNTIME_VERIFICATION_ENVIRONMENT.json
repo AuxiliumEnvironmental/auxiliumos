@@ -19,5 +19,5 @@
     "standard_installer": "Chromium download returned a truncated archive; did not continue that retry loop. Extracted the pinned npm-distributed brotli executable and verified it launched.",
     "configuration": "AUXILIUMOS_BROWSER_EXECUTABLE points to scratch executable for this run. A different browser installation/environment invalidates fixture evidence."
   },
-  "external_writes": "None to GitHub, Supabase or Lovable. Auth/API harness missing configuration guard was checked, not counted as acceptance."
+  "external_writes": "The original runtime checks made no cloud mutations. GitHub recovery publication was separately verified on 2026-10-08 at 283882c / draft PR #84. Supabase and Lovable remain unchanged. Auth/API missing-configuration guards are preparation, not acceptance."
 }

@@ -84,7 +84,7 @@
       "verification_profiles": [
         "source-reconciliation"
       ],
-      "next_action": "Source reconciliation is recorded. Remote publication is blocked separately under SYNC-PUBLISH-001; no GitHub/Lovable parity or remote save is claimed.",
+      "next_action": "Initial source reconciliation and recovery publication are recorded. Recheck current main/feature refs before publication; no GitHub/Lovable parity is claimed.",
       "blocker": null,
       "issue": null
     },
@@ -240,7 +240,86 @@
         "docs/03-data/**",
         "docs/04-security/**"
       ],
-      "next_action": "After the SEC-001B-R5 recovery fix, read ADR-002 and split protected audit provenance and private-object authorization into bounded tasks. Authentic API gating remains separate."
+      "next_action": "Protected access-change audit is independently reviewed and locally verified. Continue private-object authorization and durable denied-attempt collection as bounded tasks; authentic API gating remains separate."
+    },
+    {
+      "id": "SEC-001B-R5",
+      "title": "Generation-isolated browser authentication persistence",
+      "status": "in_progress",
+      "dependencies": ["SEC-001A"],
+      "requirements": ["M01", "C01", "C05"],
+      "allowed_paths": [
+        "web/src/lib/auth-storage.ts",
+        "web/src/lib/runtime.tsx",
+        "web/README.md",
+        "tests/unit/auth-persistence.test.mjs",
+        "tests/e2e/directory.spec.ts"
+      ],
+      "assigned_to": "frontend-engineer",
+      "branch": "work/sec-001b-r5",
+      "owner_decisions": [],
+      "verification_profiles": ["runtime-build", "directory-browser-fixture"],
+      "required_evidence_levels": ["build", "browser_fixture"],
+      "next_action": "Independently review the frozen generation-pointer/tombstone patch; integrate accepted files and run affected profiles. These layers do not satisfy authentic API/browser requirements of parent SEC-001B.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
+    },
+    {
+      "id": "SEC-001C-AUDIT",
+      "title": "Append-only server provenance for access lifecycle changes",
+      "status": "implemented",
+      "dependencies": ["SEC-001A"],
+      "requirements": ["M19", "C01", "C07"],
+      "allowed_paths": [
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "tests/database/access-audit.test.mjs",
+        "tests/database/identity-directory.test.mjs",
+        "docs/03-data/ACCESS_AUDIT_IMPLEMENTATION.md"
+      ],
+      "assigned_to": "backend-engineer",
+      "branch": "work/sec-001c-audit",
+      "owner_decisions": ["OD-011", "OD-013"],
+      "verification_profiles": ["access-audit-database", "directory-database"],
+      "required_evidence_levels": ["database"],
+      "next_action": "Reuse matching 30 audit and 19 directory PostgreSQL checks; independent migration review found no blocker. Verify actual target/roles/advisors and authentic API before cloud acceptance. Private storage and durable denial collection remain incomplete.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
+    },
+    {
+      "id": "SEC-001B-API-FIXTURES",
+      "title": "Audit-preserving synthetic API fixture preflight and cleanup",
+      "status": "implemented",
+      "dependencies": ["SEC-001A"],
+      "requirements": ["M19", "C01", "C07"],
+      "allowed_paths": [
+        "tests/api/identity-directory.test.mjs",
+        "tests/api/fixture-cleanup.mjs",
+        "tests/api/README.md",
+        "tests/unit/api-fixture-cleanup.test.mjs"
+      ],
+      "assigned_to": "verification-engineer",
+      "branch": "work/sec-001b-api-fixtures",
+      "owner_decisions": ["OD-011"],
+      "verification_profiles": ["api-fixture-safety"],
+      "required_evidence_levels": ["control_unit"],
+      "next_action": "Reuse matching 22 synthetic cleanup tests and independent review. Execute authentic acceptance only after reviewed migrations and secure target configuration; retain audited fixture rows and verify exact Auth cleanup. No live API evidence is claimed.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
+    },
+    {
+      "id": "SEC-001C-STORAGE-CONTRACT",
+      "title": "Private object and quarantine implementation contract",
+      "status": "in_progress",
+      "dependencies": ["SEC-001C-AUDIT"],
+      "requirements": ["M12", "M19", "C01", "C02", "C07"],
+      "allowed_paths": ["docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md"],
+      "assigned_to": "product-architect",
+      "branch": "work/sec-001c-storage-contract",
+      "owner_decisions": ["OD-011", "OD-013"],
+      "verification_profiles": ["controls"],
+      "next_action": "Produce the bounded storage/quarantine contract and exact-version interfaces, avoiding a SEC-001/DOC-001 dependency cycle. Review before implementing the first additive storage slice; a document alone proves no application behavior.",
+      "blocker": null,
+      "issue": null
     },
     {
       "id": "SEC-001",
@@ -800,7 +879,7 @@
     {
       "id": "SYNC-PUBLISH-001",
       "title": "Publish locally reviewed continuation and runtime work to GitHub",
-      "status": "blocked",
+      "status": "implemented",
       "dependencies": [
         "SYNC-001"
       ],
@@ -813,12 +892,12 @@
         "docs/00-control/**"
       ],
       "assigned_to": "integration-lead",
-      "branch": "build/continuation-2026-10-08",
+      "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
-      "verification_profiles": [],
-      "next_action": "After installation permissions are restored, fetch/reconcile newer remote work, create/update issue, push reviewed commits to feature branch, open draft PR and read back remote HEAD.",
-      "blocker": "GitHub app exposes no installation; issue and branch creation return 403. Command-line push has no credentials.",
-      "issue": null
+      "verification_profiles": ["source-reconciliation"],
+      "next_action": "Recovered source saved via connected Git Data API at 283882c with exact fetched tree match; draft PR #84. Continue lease-protected publication and remote verification of reviewed increments. CLI credentials are not required for this working path.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
     }
   ]
 }

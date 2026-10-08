@@ -14,7 +14,7 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Live read verified at main 1729a525. Issue and branch writes return integration 403; CLI lacks push credentials. No new remote commit/PR. See SOURCE_RECONCILIATION.json.",
+    "github": "Read and connected-API write verified after installation 169293718. Recovered source saved at 283882c on wip/recovery-2026-10-08 and fetched back with exact tree match. Draft PR #84 and issue #83 exist. CLI push still lacks credentials; API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb reachable. No public application tables/migrations/users/buckets/objects as of source inspection. No writes; authentication configuration and runtime not yet verified.",
     "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
@@ -26,8 +26,8 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "SEC-001B-R5: fix cross-tab stale session writes/removals with generation-specific credential slots, obtain independent review, and run the four auth-persistence regressions plus affected build/browser checks. Then continue SEC-001C and secure real Auth/API verification.",
-  "active_remote_work": [],
+  "first_runtime_action": "SEC-001B-R5: correct live-index cleanup enumeration, then obtain targeted re-review and integrated build/browser evidence. The protected access audit and preservation-safe API fixture harness are independently reviewed and locally verified. Continue the separate private-storage contract while authentic Auth/API awaits secure configuration.",
+  "active_remote_work": ["https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
     "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
@@ -37,11 +37,13 @@
     "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
   ],
   "observed_facts": [
-    "Canonical source safely reconciled and reviewed continuation imported on local feature branch; GitHub integration write probes failed. No new remote commit or PR.",
+    "Canonical source safely reconciled and reviewed continuation imported without conflicts. Initial GitHub write failures were resolved after installation; the recovered source is saved in draft PR #84 with exact remote source-tree verification.",
     "SEC-001A additive directory migration implemented and independently reviewed, including fixed immutable Auth-link history. Original foundation migration and demo seed remain byte-identical.",
     "PostgreSQL-engine acceptance uses PGlite with explicitly simulated Auth context. It does not certify authentic Supabase login or HTTP API authorization.",
     "Canonical web/ React/TypeScript app implements sign-in and permitted account/facility directory with safe unavailable states, paging and cache clearing. All other module destinations remain visibly unfinished.",
     "Seven intercepted-HTTP browser journeys exercise the actual app and SDK. Authentic Auth/API harness is prepared but unexecuted without secure service credentials and applied migrations.",
+    "SEC-001C-AUDIT is implemented with an additive migration and independent security/migration review. Thirty audit checks plus nineteen directory checks after migration three pass in PostgreSQL 18.3/PGlite with simulated Auth; no hosted migration is claimed.",
+    "The API fixture harness now preflights required columns and retains audit-linked application rows while disabling exact synthetic access and deleting only verified test-created Auth identities. Twenty-two mock/unit checks and independent review pass; authentic API execution remains unexecuted.",
     "No cloud migration, Auth identity, storage object, deployment or Lovable code mutation was performed. Full SEC-001 and all 20 product modules remain incomplete."
   ],
   "runtime_implementation": {
@@ -55,7 +57,10 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "unverified; cross-tab storage regression remains open and current evidence is stale"
+    "verification_status": "Database audit/directory and synthetic API-cleanup profiles pass; browser authentication remains WIP pending the R5 enumeration correction, independent re-review and integrated build/browser checks",
+    "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
+    "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
+    "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json"
   },
   "execution_recovery": {
     "observed_at": "2026-10-08T13:55:39.917035+00:00",
@@ -69,5 +74,16 @@
     "app_permissions": "GitHub, Supabase and Lovable inherit Allow low-risk actions. No settings changed.",
     "first_unfinished_action": "SEC-001B-R5",
     "remote_save": "not performed"
+  },
+  "publication_recovery": {
+    "observed_at": "2026-10-08T15:55:04Z",
+    "status": "saved_remotely_as_wip",
+    "branch": "wip/recovery-2026-10-08",
+    "remote_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+    "source_tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
+    "draft_pr": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+    "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
+    "verification": "Fetched remote source equals recovered local 8aa8482. Later worker patches and current register edits are not covered until separately published.",
+    "cloud_mutations": false
   }
 }

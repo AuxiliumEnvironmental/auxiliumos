@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "directory-database",
   "level": "database",
-  "recorded_at": "2026-10-08T12:44:37.610Z",
+  "recorded_at": "2026-10-08T16:20:37.020Z",
   "result": "passed",
-  "digest": "10e9a474b0e65021a079ece7998e19fae1fa14998899acbc93802a1ff2eb4442",
+  "digest": "7910ea64c32652a1ef7571495a7076a5f20b98168f6af7936423d53bfe113a2f",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -16,8 +16,8 @@
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
-      "PATH": "bfd9d138486f54943204f9aee46cb9e3d8eee38eff234cda5793f5b6c349d091",
-      "TZ": "e8def32656206d2574e163cff4330221cbca79a584c6debd922546da0bb0ff74"
+      "PATH": "52394806bac22aed7619acf5a7d36ecb4c9b0929652a9a2e408e9ec63ec2b4c2",
+      "TZ": "796751c31e4ef1b1d8e344c13d017179f3ef862a00f2127eab63a5161945a77f"
     }
   },
   "inputs": {
@@ -27,13 +27,15 @@
     "supabase/migrations/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
     "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
     "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
-    "tests/database/identity-directory.test.mjs": "ba2ef43276c46537ceaa0d0bcad00b3169d107bef6561103bc7cf347412d2ba0",
+    "tests/database/access-audit.test.mjs": "c8ea4a76c54ccc504fe5487d4406aa11a23d403275aa1a1a696d761e39fc2c27",
+    "tests/database/identity-directory.test.mjs": "c199c36956e789109ec2da337086355d8b8704a435ce9476c126dde2baaa1278",
     "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba",
-    "VERIFICATION_PROFILES.json": "2877ec826823d8a7f8f7436cda36727e9dbf1ef9227a9667a7e642b292564fbe"
+    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
   },
-  "observed_git_head": "bb46093f88c88ef1ced1b96d203d804e41f8af0d",
+  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
   "results": [
     {
       "argv": [
@@ -47,5 +49,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/directory-database.log",
-  "log_sha256": "097c68c9c65638a984021fe3cc0d1a5c8014dc9765ee77f5959b9a73438ba921"
+  "log_sha256": "f44c02354a5f9269a42cfe45fa9c7a9c336ff51aeddf91353543046a5154ea09"
 }

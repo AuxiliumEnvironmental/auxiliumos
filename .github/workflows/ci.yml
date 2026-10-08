@@ -36,6 +36,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run os:verify -- directory-database
+      - run: npm run os:verify -- access-audit-database
+      - run: npm run os:verify -- api-fixture-safety
       - run: npm run os:verify -- runtime-build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e

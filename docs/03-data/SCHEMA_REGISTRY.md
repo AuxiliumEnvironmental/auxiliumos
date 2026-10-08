@@ -351,7 +351,7 @@ Before any database application or app connection:
 
 # Identity and directory development increment
 
-Added: 2026-10-08. Task: SEC-001A; architecture: ADR-002. GitHub issue and PR remain unavailable because the installed integration returned 403 for writes. Local feature branch: `build/continuation-2026-10-08`.
+Added: 2026-10-08. Task: SEC-001A; architecture: ADR-002. Initial GitHub write failures were resolved after app installation. The recovered increment is saved in [draft PR #84](https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84), with remote source-tree verification in SOURCE_RECONCILIATION.json.
 
 The original `20260713000100_foundation_slice_schema.sql` and `supabase/seed/foundation_demo_seed.sql` are unchanged. New CLI-generated artifact: `20261008120645_identity_access_directory.sql`. Application to the existing cloud backend is **not performed**.
 
@@ -360,3 +360,11 @@ The additive migration creates `account_access` and `account_capability_grants`;
 The independent review resolved an unlink/relink inheritance gap and recorded exact source hashes in [SEC-001A review](../00-control/reviews/SEC-001A-2026-10-08.json). The `directory-database` profile runs the actual migrations in PGlite with mocked Auth functions and simulated subjects. It covers positive and negative reads, independent status/grant revocation, column ACLs, trusted link guards, seed ordering and rollback. Genuine Auth/Data API and real-service browser acceptance remain unexecuted.
 
 Before cloud application, re-inspect the target, preserve migration identity/history, apply the existing foundation exactly once followed by the additive artifact, and record the resulting migration versions/checksums. The available migration connector has no explicit version argument; do not rename/recreate the foundation or blindly run a duplicate CLI migration to repair a mismatch. Select a reviewed application path when secure tooling is configured. Never reset a populated backend to make tests pass.
+
+## Protected access-change audit increment
+
+Added: 2026-10-08. Task: SEC-001C-AUDIT, [issue #85](https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85). CLI-generated migration `20261008154950_access_audit_provenance.sql` extends the existing audit table after the directory migration; the original foundation and seed remain unchanged.
+
+The migration records allowlisted profile/access/capability changes with server actor/time/correlation provenance, preserves legacy history and existing foreign keys, and denies client audit mutation and source truncation. It adds no client mutation endpoint, file access, denied-attempt collector or human approval authority. See [implementation and boundaries](ACCESS_AUDIT_IMPLEMENTATION.md) and [independent review](../00-control/reviews/SEC-001C-AUDIT-2026-10-08.json).
+
+Integrated PostgreSQL 18.3/PGlite checks passed: 30 audit checks and all 19 directory regressions, now exercised after migration three except the intentional pre-directory failure case. These use simulated Auth context, not genuine Auth/API or the observed PostgreSQL 17 cloud target. No cloud migration was applied. Audited synthetic account/profile records are preserved; API fixture cleanup must disable access without deleting their history. Actual target migration/owner/role/advisor checks and authentic API acceptance remain gates.

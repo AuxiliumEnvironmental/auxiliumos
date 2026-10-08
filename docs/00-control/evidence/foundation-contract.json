@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "foundation-contract",
   "level": "static_sql_contract",
-  "recorded_at": "2026-10-08T12:44:26.665Z",
+  "recorded_at": "2026-10-08T16:27:27.060Z",
   "result": "passed",
-  "digest": "b13ac52b51c8f7db50cf586d4ac8e5f0c5ca3313108e105b844b8cb7bd76b60d",
+  "digest": "a1f4e8e83172fb31f5053fd544c98fa4db71399394bed4ca6728a513c02b4c4a",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -16,8 +16,8 @@
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
-      "PATH": "bfd9d138486f54943204f9aee46cb9e3d8eee38eff234cda5793f5b6c349d091",
-      "TZ": "e8def32656206d2574e163cff4330221cbca79a584c6debd922546da0bb0ff74"
+      "PATH": "52394806bac22aed7619acf5a7d36ecb4c9b0929652a9a2e408e9ec63ec2b4c2",
+      "TZ": "796751c31e4ef1b1d8e344c13d017179f3ef862a00f2127eab63a5161945a77f"
     }
   },
   "inputs": {
@@ -27,12 +27,13 @@
     "supabase/migrations/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
     "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
     "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
     "tests/unit/foundation-migration-contract.test.mjs": "ca23affab7875b63c2735d114d8e73aa472ce42a6b21fc1848c81ac442d5e4a3",
-    "VERIFICATION_PROFILES.json": "2877ec826823d8a7f8f7436cda36727e9dbf1ef9227a9667a7e642b292564fbe"
+    "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
   },
-  "observed_git_head": "bb46093f88c88ef1ced1b96d203d804e41f8af0d",
+  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
   "results": [
     {
       "argv": [
@@ -46,5 +47,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/foundation-contract.log",
-  "log_sha256": "7f7e162b001aaf5b5307d5c6c306fe64619170a72c5258843f498fea35f5040b"
+  "log_sha256": "fdd5d8788c65fc876f00a4b1dea7d0dcf9e0132228009e6fd9c830beb4d203d4"
 }

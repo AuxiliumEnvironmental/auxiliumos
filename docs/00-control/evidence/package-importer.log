@@ -1,26 +1,26 @@
 ["node","--test","tools/package-importer/tests/apply-package.test.mjs"]
-✔ default preflight does not create targets, journals, commits or branches (115.269149ms)
-✔ successful import preserves unrelated files and repeats exactly without rewriting (281.249531ms)
-✔ a newer unrelated committed change is preserved when all baseline targets still match (178.053095ms)
-✔ target conflict refuses the entire import before any writes (114.757ms)
-✔ new-file collision refuses updates to other target files (105.752822ms)
-✔ a corrupt or missing payload refuses all target changes (149.563577ms)
-✔ unsafe paths, duplicate paths and case collisions are rejected (64.529732ms)
-✔ symlink destination parents and payload symlinks are rejected (133.039271ms)
-✔ wrong origin is rejected and SSH origin is accepted (124.920542ms)
-✔ apply rejects main and detached HEAD while dry run permits inspection (240.600848ms)
-✔ dirty first import and unrelated dirt during repeat are rejected (256.528582ms)
-✔ staged content different from the package is not mistaken for an exact repeat (177.194596ms)
-✔ source commit must exist and be an ancestor of HEAD (119.578255ms)
-✔ target must be the repository root (52.900238ms)
-✔ write failure rolls back earlier writes and removes only new empty directories (296.124011ms)
-✔ failure after adding a new file restores both updated and added targets (177.775524ms)
-✔ journal directory symlinks are rejected before target changes (125.489466ms)
-✔ abrupt interruption is detected, then explicit recovery restores original files (428.808668ms)
-✔ recovery refuses newer edits and preserves the journal for later resolution (270.089623ms)
-✔ recovery rejects a changed HEAD even when package target bytes still match (317.392021ms)
-✔ CLI requires a target and rejects conflicting or unknown flags (495.172098ms)
-✔ CLI accepts an explicit package root separate from the script location (875.200608ms)
+✔ default preflight does not create targets, journals, commits or branches (76.486029ms)
+✔ successful import preserves unrelated files and repeats exactly without rewriting (183.158541ms)
+✔ a newer unrelated committed change is preserved when all baseline targets still match (96.726932ms)
+✔ target conflict refuses the entire import before any writes (61.749421ms)
+✔ new-file collision refuses updates to other target files (63.641648ms)
+✔ a corrupt or missing payload refuses all target changes (81.467737ms)
+✔ unsafe paths, duplicate paths and case collisions are rejected (40.160655ms)
+✔ symlink destination parents and payload symlinks are rejected (63.889682ms)
+✔ wrong origin is rejected and SSH origin is accepted (72.561162ms)
+✔ apply rejects main and detached HEAD while dry run permits inspection (121.763865ms)
+✔ dirty first import and unrelated dirt during repeat are rejected (108.300177ms)
+✔ staged content different from the package is not mistaken for an exact repeat (103.453541ms)
+✔ source commit must exist and be an ancestor of HEAD (80.73291ms)
+✔ target must be the repository root (39.500199ms)
+✔ write failure rolls back earlier writes and removes only new empty directories (179.945619ms)
+✔ failure after adding a new file restores both updated and added targets (107.642881ms)
+✔ journal directory symlinks are rejected before target changes (66.765482ms)
+✔ abrupt interruption is detected, then explicit recovery restores original files (234.788934ms)
+✔ recovery refuses newer edits and preserves the journal for later resolution (175.369977ms)
+✔ recovery rejects a changed HEAD even when package target bytes still match (191.410315ms)
+✔ CLI requires a target and rejects conflicting or unknown flags (350.825218ms)
+✔ CLI accepts an explicit package root separate from the script location (128.646094ms)
 ℹ tests 22
 ℹ suites 0
 ℹ pass 22
@@ -28,4 +28,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 5278.519525
+ℹ duration_ms 2753.333185

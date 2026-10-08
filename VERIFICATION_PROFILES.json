@@ -128,6 +128,20 @@
       ]
     },
     {
+      "id": "access-audit-database",
+      "level": "database",
+      "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-gateway-sessions",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations",
+        "supabase/seed",
+        "tests/database/access-audit.test.mjs",
+        "tests/helpers"
+      ],
+      "commands": [["node", "--test", "tests/database/access-audit.test.mjs"]]
+    },
+    {
       "id": "runtime-build",
       "level": "build",
       "environment": "local-Node-24-TypeScript-Vite-production-bundle",
@@ -177,6 +191,18 @@
           "run",
           "test:runtime-ui"
         ]
+      ]
+    },
+    {
+      "id": "api-fixture-safety",
+      "level": "control_unit",
+      "environment": "local-Node-synthetic-cleanup-transport-no-service",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": ["tests/api", "tests/unit/api-fixture-cleanup.test.mjs"],
+      "commands": [
+        ["node", "--check", "tests/api/identity-directory.test.mjs"],
+        ["node", "--test", "tests/unit/api-fixture-cleanup.test.mjs"]
       ]
     },
     {

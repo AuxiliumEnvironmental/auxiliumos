@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "profile": "source-reconciliation",
-  "level": "source_inspection",
-  "recorded_at": "2026-10-08T16:27:49.270Z",
+  "profile": "access-audit-database",
+  "level": "database",
+  "recorded_at": "2026-10-08T16:20:40.740Z",
   "result": "passed",
-  "digest": "ff065fec60719de6081a402a4973af3090060220ec5e28db549cdb5846a61f15",
+  "digest": "3b35c9475fad13e580e4939d98d6cdbdb251c73658ed8cd8e5e9969b5999fc77",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
     "arch": "x64",
-    "environment": "live-github-read-and-recorded-connector-observations",
+    "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-gateway-sessions",
     "environment_hashes": {
       "CI": null,
       "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
@@ -21,12 +21,17 @@
     }
   },
   "inputs": {
-    "docs/00-control/SOURCE_RECONCILIATION.json": "7af6b67816c095c3819659a3e95609d503048bbd105efd0bbc6dad7f7b2f62f7",
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
     "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
-    "scripts/verify-source-reconciliation.mjs": "200a7fbad1a468ffb761b3c5f1cf0ea604c174c831bc7a6af6d7f2460b05f05a",
+    "supabase/migrations/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/seed/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "tests/database/access-audit.test.mjs": "c8ea4a76c54ccc504fe5487d4406aa11a23d403275aa1a1a696d761e39fc2c27",
+    "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba",
     "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
   },
   "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
@@ -34,13 +39,14 @@
     {
       "argv": [
         "node",
-        "scripts/verify-source-reconciliation.mjs"
+        "--test",
+        "tests/database/access-audit.test.mjs"
       ],
       "exit_code": 0,
       "signal": null,
       "error": null
     }
   ],
-  "log_path": "docs/00-control/evidence/source-reconciliation.log",
-  "log_sha256": "e4211cfe5c5311add04f731c5aa49c4bb69ff77dfccfa2f29364b0505ee91849"
+  "log_path": "docs/00-control/evidence/access-audit-database.log",
+  "log_sha256": "910abddccbdae3565f72424976f0c5875cf89416933ddb70820426bbbd2cd8ef"
 }
