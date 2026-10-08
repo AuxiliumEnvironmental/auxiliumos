@@ -5,7 +5,7 @@
   "canonical_repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
   "canonical_branch": "main",
   "canonical_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
-  "local_branch": "build/integration-2026-10-08",
+  "local_branch": "build/integration-reviewed-2026-10-08",
   "starting_working_tree": "clean",
   "remote_branches": [
     "main",
@@ -90,6 +90,17 @@
     "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
     "mutations": []
   },
-  "remote_save_status": "Recovered source through local 8aa8482 is saved at remote 283882c, with an exact source-tree match. Subsequent uncommitted authentication/audit work is not covered by that remote checkpoint.",
+  "remote_save_status": "Recovery and reviewed audit/fixture work are saved through remote 6b93ee3 with exact local/remote tree matches. The subsequent R5 patch requires its own publication/readback.",
+  "published_increments": [
+    {
+      "task": "SEC-001C-AUDIT and SEC-001B-API-FIXTURES",
+      "branch": "wip/recovery-2026-10-08",
+      "local_commit": "f793a9c2e93f776e9f78107b092a06b614606982",
+      "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+      "tree": "98b449123f881f6913508ef06ac976de14bda7c4",
+      "verification": "API-created tree matched local commit; nonforce expected-SHA ref update; fetched remote branch; git diff --exit-code against local commit returned 0.",
+      "acceptance": "Reviewed local database/test-harness increment; no authentic API, merge or deployment. Later R5 authentication changes are not covered by this commit."
+    }
+  ],
   "remaining_publish_task": null
 }

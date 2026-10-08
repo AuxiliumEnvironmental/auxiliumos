@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "source-reconciliation",
   "level": "source_inspection",
-  "recorded_at": "2026-10-08T16:27:49.270Z",
+  "recorded_at": "2026-10-08T16:38:46.484Z",
   "result": "passed",
-  "digest": "ff065fec60719de6081a402a4973af3090060220ec5e28db549cdb5846a61f15",
+  "digest": "53b3ad75c87b299b45b8943122425e49359293494b26cbb64b47aebf54a4fec3",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -21,15 +21,15 @@
     }
   },
   "inputs": {
-    "docs/00-control/SOURCE_RECONCILIATION.json": "7af6b67816c095c3819659a3e95609d503048bbd105efd0bbc6dad7f7b2f62f7",
+    "docs/00-control/SOURCE_RECONCILIATION.json": "02262cd36c525ac43b24f86a2099ecb724d6e3059b32c6cf1e6ef171f5fc1aa7",
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
     "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
-    "scripts/verify-source-reconciliation.mjs": "200a7fbad1a468ffb761b3c5f1cf0ea604c174c831bc7a6af6d7f2460b05f05a",
+    "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
     "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
   "results": [
     {
       "argv": [
@@ -42,5 +42,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/source-reconciliation.log",
-  "log_sha256": "e4211cfe5c5311add04f731c5aa49c4bb69ff77dfccfa2f29364b0505ee91849"
+  "log_sha256": "aa1ab7e01361d6960d575f62c286baa5f8a9e0c5080a9d46036f01561eb29b78"
 }

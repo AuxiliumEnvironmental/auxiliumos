@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 
 const report = JSON.parse(readFileSync('docs/00-control/SOURCE_RECONCILIATION.json', 'utf8'));
+assert.equal(report.canonical_repository, 'https://github.com/AuxiliumEnvironmental/auxiliumos.git');
 const remote = execFileSync('git', ['ls-remote', '--exit-code', report.canonical_repository, 'refs/heads/main'], { encoding: 'utf8', timeout: 25000, env: { ...process.env, GIT_TERMINAL_PROMPT: '0' } }).trim().split(/\s+/)[0];
 assert.equal(remote, report.canonical_head, 'Canonical main changed; reconcile new source before reusing this checkpoint.');
 execFileSync('git', ['merge-base', '--is-ancestor', report.canonical_head, 'HEAD']);
@@ -26,6 +27,14 @@ if (publication) {
   assert.equal(execFileSync('git', ['rev-parse', 'FETCH_HEAD'], { encoding: 'utf8' }).trim(), publishedRemote, 'Feature branch moved during inspection; reconcile it.');
   execFileSync('git', ['merge-base', '--is-ancestor', publication.head, publishedRemote]);
   assert.equal(execFileSync('git', ['rev-parse', `${publication.head}^{tree}`], { encoding: 'utf8' }).trim(), publication.tree);
-  publishedSource = { recorded_commit: publication.head, recorded_tree: publication.tree, current_branch_head: publishedRemote, preserved_in_remote_history: true };
+  const increments = report.published_increments || [];
+  for (const increment of increments) {
+    assert.equal(increment.branch, publication.branch);
+    assert.match(increment.head, /^[0-9a-f]{40}$/);
+    assert.match(increment.tree, /^[0-9a-f]{40}$/);
+    execFileSync('git', ['merge-base', '--is-ancestor', increment.head, publishedRemote]);
+    assert.equal(execFileSync('git', ['rev-parse', `${increment.head}^{tree}`], { encoding: 'utf8' }).trim(), increment.tree);
+  }
+  publishedSource = { recorded_commit: publication.head, recorded_tree: publication.tree, recorded_increments: increments.map(({ head, tree }) => ({ head, tree })), current_branch_head: publishedRemote, preserved_in_remote_history: true };
 }
 console.log(JSON.stringify({ canonical_main: remote, foundation_preserved: true, source_relationship: 'Separate Lovable prototype explicitly recorded', github_write: report.github_access.write, published_source: publishedSource, scope: 'Current Git reads and historical published-tree verification plus dated connector observations. Not a push, runtime acceptance or deployment.' }, null, 2));

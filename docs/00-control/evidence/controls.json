@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-08T16:27:29.464Z",
+  "recorded_at": "2026-10-08T16:38:22.262Z",
   "result": "passed",
-  "digest": "3205dbdc934aed824afcee643e1a4721c6ab652ec1427e4b4dff01b74f482def",
+  "digest": "82003f2a1d53622d406d62976a661f4aabd9c88af7686f91e481aa72a339566c",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -45,8 +45,8 @@
     ".github/workflows/ci.yml": "616dcb3eaa672648aaea02e3e10508add233df905c1c0cd6b722294846631c1f",
     ".gitignore": "6635fca58934cc8e6833a1cc01d129039cde7e0ab19ce20ad5a3bab2c9f9f648",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "34ba8097b66e0052d6c7ad9bb0e7a0d57750b5657da9f9dfd7b893a885bd3a13",
-    "BUILD_STATE.json": "5ad5b20625c730c7162a94adf40ae261e265c4631bded6dead9d7486cf53fd80",
+    "BUILD_QUEUE.json": "654b62174b68e32c5c6b0c4b65d315b13ea6dfc75705837818f6179117a52556",
+    "BUILD_STATE.json": "d92d9d808302c6d0b2d495bd1ed2726d009eda83288fb13a5b4565683ff86773",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -65,14 +65,14 @@
     "docs/00-control/OWNER_REVIEW.md": "aaf1978b62595837097b223d7aaa0a860b151b159a003f326521e5dab6572fb2",
     "docs/00-control/PROJECT_STATE.md": "bf9f2b723461bb0e795ad07d3cb23fc8ea0ff86f11da808cd788055f17094d65",
     "docs/00-control/reviews/SEC-001A-2026-10-08.json": "e5596c049716bbbbbecbf8c70e019dc05dfc647cf73760b7eea053d89b6dccb2",
-    "docs/00-control/reviews/SEC-001B-2026-10-08.json": "be2564951d51e8e586652b207618939a37f784a2458e16f73ab46b6092d72bc7",
+    "docs/00-control/reviews/SEC-001B-2026-10-08.json": "0350b83a31079ae023a73af84c55c5568e6ea399756123b974a8dba09948134a",
     "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json": "4cb9ddd5f72899bd0f857b0d02d4d670e439c1bb9efd77aea7cc70692ebeba31",
-    "docs/00-control/reviews/SEC-001B-R5-2026-10-08.json": "7b043ea7738dfd214e8fe7aaa72206ddba754cbf540c7b16bd6ad8fd7732c889",
+    "docs/00-control/reviews/SEC-001B-R5-2026-10-08.json": "059547c22dc34d1bf5eda9b8c5ed2ad923df78e3c78d45edaeb5541def55e892",
     "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json": "8878c65dae52e221c8be29a7a6f255c4959a1953ef2c891a260301debb86db73",
     "docs/00-control/RISK_REGISTER.md": "3641093f728967c9d66b88c880c9174ecd0af574dfc0aa67ea81697c10f62ff6",
     "docs/00-control/RUNTIME_VERIFICATION_ENVIRONMENT.json": "c184d27d47f3d4aba99d779910a2a7697f3ce4153aa80d2d990753f2741f5a80",
     "docs/00-control/SOURCE_COVERAGE.json": "74889975cfcf5e424d2bca6da751085cef780a6cb086e1836dce9b3dc4c7a344",
-    "docs/00-control/SOURCE_RECONCILIATION.json": "7af6b67816c095c3819659a3e95609d503048bbd105efd0bbc6dad7f7b2f62f7",
+    "docs/00-control/SOURCE_RECONCILIATION.json": "02262cd36c525ac43b24f86a2099ecb724d6e3059b32c6cf1e6ef171f5fc1aa7",
     "docs/00-control/SPEC_GATE_REVIEW.md": "dead10ec887d4d12c64f7869422d24c6a1911375b4777db3b92e2c8d158ed65b",
     "docs/00-control/TRANSITION_PROTOCOL.md": "e0391424a30a2a46b61452f81353e80a13d0795780c9ba6269f737448e825e17",
     "docs/01-product/CLIENT_TYPES.md": "3d683cdcc63db16ce1d13a66687228274968d401276efd9691e1b7461c4c8860",
@@ -180,12 +180,12 @@
     "scripts/check-docs.mjs": "c874e58a9cc8e1037ba207886836fea36fd6afe97413aaa2437c519ed945b108",
     "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
     "scripts/owner-policy.mjs": "3d8c448ec3b81d242863ba2420b9303c2fa1201a2d7dabb8852c2285c2d0b991",
-    "scripts/verify-source-reconciliation.mjs": "200a7fbad1a468ffb761b3c5f1cf0ea604c174c831bc7a6af6d7f2460b05f05a",
+    "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "tests/unit/control-system.test.mjs": "e4b74f13da5ac4e1e93b4d619b525375a04f29bf2663c80e6d08b874bdf434e1",
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
     "VERIFICATION_PROFILES.json": "6c4a9ef6d5fe44cc415c378e839279d418e3603c41498b92df43c57e27ed6d0d"
   },
-  "observed_git_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "observed_git_head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
   "results": [
     {
       "argv": [
@@ -219,5 +219,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "f64dfd4071e5710f0b5a861870cd3a455ac0a737fde1bfdc8e177ad33c0badcf"
+  "log_sha256": "cb07f2ca6d0cd1b28663bb904127df22e86eb0344065b6fd770b4b6333dd591f"
 }

@@ -9,9 +9,9 @@ rendering chunks...
 computing gzip size...
 web/dist/index.html                   0.54 kB │ gzip:   0.32 kB
 web/dist/assets/index-BsaS5VYi.css   20.06 kB │ gzip:   4.29 kB
-web/dist/assets/index-CtiBEj6c.js   533.16 kB │ gzip: 153.80 kB
+web/dist/assets/index-CY70fXCP.js   537.27 kB │ gzip: 154.61 kB
 
-✓ built in 430ms
+✓ built in 318ms
 npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
@@ -20,15 +20,40 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
 
 
-["node","--test","tests/unit/runtime-configuration.test.mjs"]
-✔ Vite rejects a synthetic server secret before emitting a bundle (284.1876ms)
-✔ Vite rejects a synthetic legacy service-role JWT before emitting a bundle (340.954304ms)
-✔ development startup rejects a different backend before opening a server (296.32565ms)
-ℹ tests 3
+["node","--test","tests/unit/runtime-configuration.test.mjs","tests/unit/auth-persistence.test.mjs"]
+✔ a delayed storage event cannot make an old tab overwrite or remove a fresh session (3.035204ms)
+✔ a login interleaved between an old lease check and write cannot overwrite the current generation (0.694216ms)
+✔ a login interleaved with removal of an old slot cannot delete the current session (0.565042ms)
+✔ logout purges this project credentials, preserves unrelated storage and stays locked after failed login (0.744212ms)
+✔ a read interleaved with a fresh login cannot return the superseded credential (0.62391ms)
+✔ an old async logout finishing after fresh login only cleans its captured lease (0.641356ms)
+✔ logout from an already superseded tab cannot revoke or snapshot the fresh session (0.449457ms)
+✔ a superseded staged login cannot commit or erase the fresh generation (0.94916ms)
+✔ logout interleaved with a staged credential write cannot be cleared by that commit (0.699104ms)
+✔ logout interleaved with a staged commit marker write cannot be cleared by that commit (0.455236ms)
+✔ a fresh login interleaved with a stale commit marker keeps its own credentials (0.371139ms)
+✔ a new tab observing an in-progress commit cannot purge that generation (0.351219ms)
+✔ storage read failure permanently locks this owner and persists intent when possible (0.561406ms)
+✔ partial credential persistence failure cannot unlock reload or a later attempt in the failed tab (0.49823ms)
+✔ refused logout deletion reports failure while its saved intent prevents restoration (0.59103ms)
+✔ refused intent and deletion never claim logout or allow recovery in the failed tab (0.372431ms)
+✔ leases touch only their exact project SDK keys, including user and verifier slots (0.640846ms)
+✔ the old shared-slot format is purged without adopting its credentials or deleting unrelated keys (0.420754ms)
+✔ overlapping beginLogin cleans an intermediate committed generation without a responsive old tab (0.47762ms)
+✔ a newer login during retired-slot enumeration keeps its own credentials (0.546203ms)
+✔ a newer login during retired-slot removal keeps its own credentials (0.51105ms)
+✔ a retired-generation cleanup failure cannot delete a newer concurrent session (0.625182ms)
+✔ reload cleanup retires exact orphan credential slots but preserves metadata-only and unrelated entries (0.381265ms)
+✔ the Storage mock exposes stored names, not its instrumentation fields (0.418961ms)
+✔ concurrent deletion during a key snapshot cannot skip another retired credential (0.47053ms)
+✔ Vite rejects a synthetic server secret before emitting a bundle (172.715447ms)
+✔ Vite rejects a synthetic legacy service-role JWT before emitting a bundle (236.172227ms)
+✔ development startup rejects a different backend before opening a server (193.622315ms)
+ℹ tests 28
 ℹ suites 0
-ℹ pass 3
+ℹ pass 28
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 1053.178551
+ℹ duration_ms 696.903134

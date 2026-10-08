@@ -148,7 +148,10 @@ test('fixture browser: expired-session sign-out cannot restore access after refr
   await page.clock.install();
   backend.failRefresh = true;
   await page.evaluate(() => {
-    const key = 'auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co';
+    const namespace = 'auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co';
+    const generation = localStorage.getItem(`${namespace}.generation`);
+    if (!generation) throw new Error('Expected the fixture login to commit a generation.');
+    const key = `${namespace}.generation.${generation}`;
     const session = JSON.parse(localStorage.getItem(key)!);
     session.expires_at = Math.floor(Date.now() / 1000) - 60;
     localStorage.setItem(key, JSON.stringify(session));

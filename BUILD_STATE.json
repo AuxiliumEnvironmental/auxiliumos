@@ -14,7 +14,7 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Read and connected-API write verified after installation 169293718. Recovered source saved at 283882c on wip/recovery-2026-10-08 and fetched back with exact tree match. Draft PR #84 and issue #83 exist. CLI push still lacks credentials; API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
+    "github": "Read and connected-API write verified after installation 169293718. Recovery plus reviewed audit/fixture work saved through 6b93ee3 on wip/recovery-2026-10-08, fetched back with exact tree matches. Draft PR #84 and issues #83/#85 exist. CLI push still lacks credentials; API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb reachable. No public application tables/migrations/users/buckets/objects as of source inspection. No writes; authentication configuration and runtime not yet verified.",
     "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "SEC-001B-R5: correct live-index cleanup enumeration, then obtain targeted re-review and integrated build/browser evidence. The protected access audit and preservation-safe API fixture harness are independently reviewed and locally verified. Continue the separate private-storage contract while authentic Auth/API awaits secure configuration.",
+  "first_runtime_action": "Review SEC-001C-STORAGE-CONTRACT and begin its first bounded additive private-object/quarantine implementation. R5 authentication corrections, protected audit and preservation-safe API fixtures are independently reviewed and pass their local profiles. Authentic Auth/API remains gated only on its reviewed target/migrations and secure configuration.",
   "active_remote_work": ["https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -57,7 +57,7 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "Database audit/directory and synthetic API-cleanup profiles pass; browser authentication remains WIP pending the R5 enumeration correction, independent re-review and integrated build/browser checks",
+    "verification_status": "Local database, build, synthetic cleanup and 7 browser-fixture checks pass; genuine Auth/API, cross-browser target checks and deployment remain unexecuted",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json"
@@ -84,6 +84,12 @@
     "draft_pr": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
     "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
     "verification": "Fetched remote source equals recovered local 8aa8482. Later worker patches and current register edits are not covered until separately published.",
-    "cloud_mutations": false
+    "cloud_mutations": false,
+    "latest_verified_increment": {
+      "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+      "tree": "98b449123f881f6913508ef06ac976de14bda7c4",
+      "local_commit": "f793a9c2e93f776e9f78107b092a06b614606982",
+      "scope": "Reviewed access audit and preservation-safe test fixtures; later authentication changes are not covered until separately published"
+    }
   }
 }

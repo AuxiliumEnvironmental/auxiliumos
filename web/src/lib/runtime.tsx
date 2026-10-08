@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { RuntimeConfig } from "./config";
-import type { AuthPersistence } from "./auth-storage";
+import type { AuthPersistence, AuthStorageLease } from "./auth-storage";
 import { createRuntimeClient, DirectoryApi, type RuntimeContext } from "./directory-api";
 import { asRuntimeError, isAbort, RuntimeError, serviceError } from "./errors";
 
@@ -30,6 +30,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
   const [client, setClient] = useState(api.client);
   const currentRequest = useRef<AbortController | null>(null);
   const generation = useRef(0);
+  const authOperation = useRef(0);
   const scheduledCheck = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const mounted = useRef(false);
   const hadSession = useRef(false);
@@ -52,8 +53,18 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
     // Unmount the authenticated subtree immediately. Every row is memory-only.
     setState({ status: "checking" });
     try {
+      if (!persistence.isCurrent()) {
+        signoutLocked.current = true;
+        setState({ status: "unauthenticated", expired: hadSession.current });
+        return;
+      }
       const result = await api.loadRuntimeContext({ signal: controller.signal });
       if (!mounted.current || request !== generation.current) return;
+      if (!persistence.isCurrent()) {
+        signoutLocked.current = true;
+        setState({ status: "unauthenticated", expired: hadSession.current });
+        return;
+      }
       if (result.status === "ready") {
         hadSession.current = true;
         setState({ status: "ready", context: result.context, revision: request });
@@ -73,7 +84,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
         setState({ status: "error", error: failure });
       }
     }
-  }, [api, invalidate]);
+  }, [api, invalidate, persistence]);
 
   useEffect(() => {
     mounted.current = true;
@@ -81,13 +92,10 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       // This callback is deliberately synchronous. Calling a Supabase method here
       // can deadlock versions that dispatch events while holding the Auth lock.
       if (!mounted.current || client !== api.client) return;
-      if (event === "SIGNED_OUT") {
-        invalidate();
-        setState({ status: "unauthenticated", expired: !signingOut.current && hadSession.current });
-        return;
-      }
       if (signingOut.current || signoutLocked.current) return;
-      if (["INITIAL_SESSION", "SIGNED_IN", "TOKEN_REFRESHED", "USER_UPDATED"].includes(event)) {
+      // Broadcast events can belong to a superseded SDK client. Recheck our
+      // own lease/session instead of trusting the event's identity or payload.
+      if (["INITIAL_SESSION", "SIGNED_IN", "SIGNED_OUT", "TOKEN_REFRESHED", "USER_UPDATED"].includes(event)) {
         invalidate();
         setState({ status: "checking" });
         scheduledCheck.current = setTimeout(() => { void recheck(); }, 0);
@@ -107,12 +115,16 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
     };
     document.addEventListener("visibilitychange", onVisible);
     const onStorage = (event: StorageEvent) => {
-      if (event.key !== persistence.logoutKey || event.newValue === null) return;
+      if (client !== api.client || !persistence.observesStorageKey(event.key)) return;
+      let failure: RuntimeError | null = null;
+      try { if (persistence.isCurrent()) return; } catch (error) { failure = asRuntimeError(error); }
+      authOperation.current += 1;
+      signingOut.current = false;
       signoutLocked.current = true;
       persistence.revoke();
       invalidate();
       void client.auth.stopAutoRefresh().catch(() => {});
-      setState({ status: "unauthenticated", expired: false });
+      setState(failure ? { status: "error", error: failure } : { status: "unauthenticated", expired: false });
     };
     window.addEventListener("storage", onStorage);
     return () => {
@@ -125,6 +137,8 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
   }, [api, client, invalidate, persistence, recheck]);
 
   const signIn = useCallback(async (email: string, password: string) => {
+    const operation = ++authOperation.current;
+    signingOut.current = false;
     signoutLocked.current = true;
     invalidate();
     const lease = persistence.beginLogin();
@@ -151,35 +165,41 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       if (!verified.data.user || verified.data.user.is_anonymous || verified.data.user.id !== data.user.id) {
         throw new RuntimeError("credentials", "Sign-in could not be verified. Try your assigned login again.");
       }
+      if (operation !== authOperation.current || nextClient !== api.client) {
+        throw new RuntimeError("session_expired", "Sign-in was interrupted. Sign in again to continue.");
+      }
       persistence.commitLogin(lease);
       signoutLocked.current = false;
       await nextClient.auth.startAutoRefresh();
-      await recheck();
+      if (operation === authOperation.current && nextClient === api.client) await recheck();
     } catch (error) {
       lease.revoke();
-      // Failed credentials or verification never remove persistent logout intent.
+      // Failed credentials or verification never commit a new generation.
       throw error;
     }
   }, [api, config, invalidate, persistence, recheck]);
 
   const signOut = useCallback(async () => {
+    const operation = ++authOperation.current;
+    const logoutClient = api.client;
+    let logoutLease: AuthStorageLease | null = null;
     signingOut.current = true;
     signoutLocked.current = true;
     invalidate();
     setState({ status: "checking" });
     let failure: RuntimeError | null = null;
     try {
-      persistence.beginLogout();
-      await api.client.auth.stopAutoRefresh();
-      const { error } = await api.client.auth.signOut({ scope: "local" });
+      logoutLease = persistence.beginLogout();
+      await logoutClient.auth.stopAutoRefresh();
+      const { error } = await logoutClient.auth.signOut({ scope: "local" });
       if (error) failure = serviceError(error);
     } catch (error) {
       failure = asRuntimeError(error);
     } finally {
-      try { persistence.finishLogout(); } catch (error) { failure = asRuntimeError(error); }
-      signingOut.current = false;
+      try { persistence.finishLogout(logoutLease); } catch (error) { failure = asRuntimeError(error); }
+      if (operation === authOperation.current) signingOut.current = false;
     }
-    if (!mounted.current) return;
+    if (!mounted.current || operation !== authOperation.current || logoutClient !== api.client) return;
     if (failure) setState({ status: "signout_error", error: failure });
     else {
       hadSession.current = false;
@@ -188,7 +208,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
   }, [api, invalidate, persistence]);
 
   const showSignIn = useCallback(() => {
-    // Showing a form is not an unlock. Only commitLogin can clear the marker.
+    // Showing a form is not an unlock. Only a fresh generation can be committed.
     invalidate();
     setState({ status: "unauthenticated", expired: false });
   }, [invalidate]);

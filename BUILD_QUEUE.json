@@ -202,8 +202,8 @@
         "tests/unit/runtime-configuration.test.mjs",
         "tests/unit/auth-persistence.test.mjs"
       ],
-      "next_action": "First resolve SEC-001B-R5 cross-tab storage race and obtain independent review. Then reconcile dev migrations and securely configure the authentic Auth/API environment described in tests/api/README.md.",
-      "implementation_status": "WIP frontend and API harness implemented locally; cross-tab storage race open; authentic acceptance unexecuted."
+      "next_action": "R5 code findings are corrected, independently reviewed and fixture-verified. Reconcile dev migrations and securely configure authentic Auth/API as described in tests/api/README.md; run real-service browser acceptance afterward.",
+      "implementation_status": "Frontend and preservation-safe API harness implemented and independently reviewed; build and synthetic browser/unit profiles pass. Authentic API and real-service browser acceptance remain unexecuted."
     },
     {
       "assigned_to": null,
@@ -245,7 +245,7 @@
     {
       "id": "SEC-001B-R5",
       "title": "Generation-isolated browser authentication persistence",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": ["SEC-001A"],
       "requirements": ["M01", "C01", "C05"],
       "allowed_paths": [
@@ -260,7 +260,7 @@
       "owner_decisions": [],
       "verification_profiles": ["runtime-build", "directory-browser-fixture"],
       "required_evidence_levels": ["build", "browser_fixture"],
-      "next_action": "Independently review the frozen generation-pointer/tombstone patch; integrate accepted files and run affected profiles. These layers do not satisfy authentic API/browser requirements of parent SEC-001B.",
+      "next_action": "Reuse matching build, 25 persistence tests and 7 browser-fixture journeys. Independent review closed both cleanup findings. These bounded layers do not satisfy authentic API/browser requirements of parent SEC-001B or atomic crash-erasure guarantees.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
     },

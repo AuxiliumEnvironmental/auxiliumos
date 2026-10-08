@@ -4,7 +4,7 @@
   "reviewer_role": "independent-security-reviewer",
   "published_base": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
   "base_tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
-  "outcome": "changes_required",
+  "outcome": "no_blocking_findings_after_corrections_and_integrated_fixture_checks",
   "first_review": {
     "reviewed_on": "2026-10-08",
     "auth_storage_sha256": "e2b43ff43280303d2dadf99b3a33b5b9ff150c5664e5a22e072129f0fffb77e1",
@@ -38,7 +38,7 @@
     "finding": {
       "id": "SEC-001B-R5-P2-2",
       "severity": "P2",
-      "state": "open",
+      "state": "corrected_in_third_review",
       "description": "A length snapshot plus live key(index) enumeration can miss a retired credential when another tab removes an earlier key and shifts the key list.",
       "reproduction": "Logout enumerates retired X; another tab removes X; retired Y shifts below the next index. Logout completes but leaves Y credential/committed marker without its tombstone. No crash or refused storage operation is required.",
       "required_fix": "Replace mutable indexed enumeration with a defensible key-name snapshot while preserving strict namespace and current-generation checks; add the exact concurrent-removal regression.",
@@ -46,9 +46,38 @@
     },
     "limits": "Node mocks only; no browser, live token-use, genuine Auth/API or crash-erasure claim"
   },
+  "third_review": {
+    "reviewed_on": "2026-10-08",
+    "outcome": "both_P2_code_findings_closed",
+    "sha256": {
+      "web/src/lib/auth-storage.ts": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
+      "web/src/lib/runtime.tsx": "3ff86cc45c3c4cc990f57e09f6d463634b4f3c51f240d5e0a36eabe25f90bfc4",
+      "web/README.md": "979684798830da44d55c2e7a75f681119086675e5b2aafc779a7c5d4ce4db561",
+      "tests/unit/auth-persistence.test.mjs": "062ea0693db1dcd6020c5fb5227d6a393c53ac769a68e27c611a7b871d86e771",
+      "tests/e2e/directory.spec.ts": "1f41b243bc5d7cf995032486b43e6eabfeb746c6cae5507fd06925437ff5b38d"
+    },
+    "independent_evidence": [
+      "Original overlapping-publication reproduction now removes/tombstones retired credentials without old-tab participation",
+      "Concurrent deletion really occurs during the key-name snapshot; the next retired generation is still removed/tombstoned",
+      "300 operation boundaries passed: 32 refresh/logout, 64 stale write/remove, 124 stale logout and 80 commit-storage failures",
+      "Six snapshot/failure cases preserve newer sessions, unrelated values and metadata-only entries",
+      "Installed SDK 2.117.3 delayed sign-out/stale broadcast probe preserves fresh session and reload state"
+    ],
+    "probe_sha256": {
+      "overlap": "cc1d93f3276e6071cc1bf0758602d4693f1f84b3644cd86da5438f1bf0855aa3",
+      "snapshot_deletion": "a69e9b60c394f6c3ca6ab9c622a49bcca58734b6cf16cdac61f62f18c6eee62d",
+      "boundaries": "46e3b82f81be98d30389475dc9bd1d576d8963fcba840865e837d9181c3d757e",
+      "sdk": "0db0293941b0acef5776dea46a81556ef7a1411e2e8935a78a0b3f0c2cd23210"
+    }
+  },
+  "integration_evidence": {
+    "runtime-build": "TypeScript and bundle passed; 25 persistence plus 3 configuration tests passed",
+    "directory-browser-fixture": "7 passed against real Chromium Storage and intercepted synthetic HTTP; not authentic Supabase Auth/API"
+  },
   "limits": [
     "Node Storage/SDK probes are not actual browser or cross-browser evidence",
     "No genuine Auth/API, server revocation, RLS or deployment is certified",
-    "Final review and integrated build/browser profiles remain required"
+    "Cross-browser scheduling, genuine Auth/API, server revocation and release acceptance remain required",
+    "Storage refusal and multi-operation crash-time erasure cannot be guaranteed; no atomic cross-agent transaction is claimed"
   ]
 }

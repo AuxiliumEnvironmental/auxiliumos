@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-08T16:28:18.472Z",
+  "created_at": "2026-10-08T16:43:25.521Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,17 +10,18 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
-    "branch": "build/integration-2026-10-08",
+    "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+    "branch": "build/integration-reviewed-2026-10-08",
     "upstream": "origin/wip/recovery-2026-10-08",
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/RUNTIME_VERIFICATION_ENVIRONMENT.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/directory-database.json\n M docs/00-control/evidence/directory-database.log\n M docs/00-control/evidence/foundation-contract.json\n M docs/00-control/evidence/foundation-contract.log\n M docs/00-control/evidence/package-importer.json\n M docs/00-control/evidence/package-importer.log\n M docs/00-control/evidence/source-reconciliation.json\n M docs/00-control/evidence/source-reconciliation.log\n M docs/00-control/reviews/SEC-001B-2026-10-08.json\n M docs/03-data/SCHEMA_REGISTRY.md\n M scripts/verify-source-reconciliation.mjs\n M tests/api/README.md\n M tests/api/identity-directory.test.mjs\n M tests/database/identity-directory.test.mjs\n?? docs/00-control/evidence/access-audit-database.json\n?? docs/00-control/evidence/access-audit-database.log\n?? docs/00-control/evidence/api-fixture-safety.json\n?? docs/00-control/evidence/api-fixture-safety.log\n?? docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json\n?? docs/00-control/reviews/SEC-001B-R5-2026-10-08.json\n?? docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json\n?? docs/03-data/ACCESS_AUDIT_IMPLEMENTATION.md\n?? supabase/migrations/20261008154950_access_audit_provenance.sql\n?? tests/api/fixture-cleanup.mjs\n?? tests/database/access-audit.test.mjs\n?? tests/unit/api-fixture-cleanup.test.mjs",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/directory-browser-fixture.json\n M docs/00-control/evidence/directory-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/evidence/source-reconciliation.json\n M docs/00-control/evidence/source-reconciliation.log\n M docs/00-control/reviews/SEC-001B-2026-10-08.json\n M docs/00-control/reviews/SEC-001B-R5-2026-10-08.json\n M scripts/verify-source-reconciliation.mjs\n M tests/e2e/directory.spec.ts\n M tests/unit/auth-persistence.test.mjs\n M web/README.md\n M web/src/lib/auth-storage.ts\n M web/src/lib/runtime.tsx",
     "remote": {
-      "status": "not_checked",
-      "branch": "build/integration-2026-10-08",
-      "head": null
+      "status": "unavailable_or_branch_absent",
+      "branch": "build/integration-reviewed-2026-10-08",
+      "head": null,
+      "checked_at": "2026-10-08T16:43:25.520Z"
     }
   },
-  "controls_digest": "2526b81e368a6be96b103a9a42f8b98fcd5e281e71bf55bc743da0beb88fe442",
+  "controls_digest": "ae9185a12a16efc8c049bb075d801094d281c501b651a21f3d5c69b8fd3567eb",
   "next_ready_task": "SEC-001C",
   "blocked_tasks": [
     {
@@ -28,7 +29,7 @@
       "title": "Supabase login and account/facility interface",
       "declared_status": "blocked",
       "verified": false,
-      "next_action": "First resolve SEC-001B-R5 cross-tab storage race and obtain independent review. Then reconcile dev migrations and securely configure the authentic Auth/API environment described in tests/api/README.md.",
+      "next_action": "R5 code findings are corrected, independently reviewed and fixture-verified. Reconcile dev migrations and securely configure authentic Auth/API as described in tests/api/README.md; run real-service browser acceptance afterward.",
       "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed."
     }
   ],
@@ -38,7 +39,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-08T16:27:29.464Z"
+      "recorded_at": "2026-10-08T16:38:22.262Z"
     },
     "foundation-contract": {
       "status": "passed",
@@ -59,7 +60,7 @@
       "profile": "source-reconciliation",
       "evidence": "docs/00-control/evidence/source-reconciliation.json",
       "level": "source_inspection",
-      "recorded_at": "2026-10-08T16:27:49.270Z"
+      "recorded_at": "2026-10-08T16:38:46.484Z"
     },
     "directory-database": {
       "status": "passed",
@@ -76,12 +77,18 @@
       "recorded_at": "2026-10-08T16:20:40.740Z"
     },
     "runtime-build": {
-      "status": "stale",
-      "profile": "runtime-build"
+      "status": "passed",
+      "profile": "runtime-build",
+      "evidence": "docs/00-control/evidence/runtime-build.json",
+      "level": "build",
+      "recorded_at": "2026-10-08T16:33:17.381Z"
     },
     "directory-browser-fixture": {
-      "status": "stale",
-      "profile": "directory-browser-fixture"
+      "status": "passed",
+      "profile": "directory-browser-fixture",
+      "evidence": "docs/00-control/evidence/directory-browser-fixture.json",
+      "level": "browser_fixture",
+      "recorded_at": "2026-10-08T16:33:22.460Z"
     },
     "api-fixture-safety": {
       "status": "passed",
