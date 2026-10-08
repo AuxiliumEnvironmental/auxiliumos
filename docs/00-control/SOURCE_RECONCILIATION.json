@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-08T12:05:37.075311+00:00",
+  "canonical_repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+  "canonical_branch": "main",
+  "canonical_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "local_branch": "build/continuation-2026-10-08",
+  "starting_working_tree": "clean",
+  "remote_branches": [
+    "main"
+  ],
+  "open_pull_requests": [],
+  "package_baseline_matches": true,
+  "package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
+  "import": {
+    "mode": "safe_importer",
+    "adds": 71,
+    "updates": 76,
+    "conflicts": 0,
+    "local_import_commit": "167c04ef2e39e0a30f04e5d8fd26e25eb1803a43",
+    "post_import_change": "Remove trailing Markdown whitespace in seven catalogue headings."
+  },
+  "foundation_sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+  "github_access": {
+    "read": "verified by clone, ls-remote, repository API and PR list",
+    "write": "blocked",
+    "issue_creation": "403 Resource not accessible by integration",
+    "branch_creation": "403 Resource not accessible by integration",
+    "git_push_dry_run": "No command-line credentials; prompts disabled",
+    "installations": [],
+    "metadata_permissions_warning": "Repository permissions.push=true did not establish integration write permission.",
+    "required_action": "Configure the ChatGPT GitHub installation to include AuxiliumEnvironmental/auxiliumos and reconnect if needed. Never paste credentials."
+  },
+  "lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "observed_head": "0d48e1adfa63fa05ee0436bb5d83dd56ca94f523",
+    "published": false,
+    "agent_finished_before_dispatch": true,
+    "inspection_message_id": "umsg_01m4dp5xgkexmakp6g6b27ck1b",
+    "inspection_thread_id": "main",
+    "inspection_status": "completed",
+    "inspection_mode": "read-only plan",
+    "stack": "React 19 / TanStack Start / Vite 8 / TypeScript (pinned package.json)",
+    "source_relationship": "Separate source trees. Local origin is Lovable internal storage. No GitHub remote/config reference visible; platform sync settings not exposed. No sync is claimed.",
+    "supabase_binding": "No source/config/environment Supabase binding visible.",
+    "resolution": "Canonical repository stays authoritative. ARCH-001 transfers/adapts reviewed useful UI with provenance into a single maintainable app; hosted Lovable remains an unbound prototype until explicit parity verification."
+  },
+  "supabase": {
+    "project_id": "txofqxictwecgcnvezlb",
+    "name": "auxiliumos-dev",
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.6.1.127",
+    "public_tables": [],
+    "migrations": [],
+    "auth_user_count": 0,
+    "storage_bucket_count": 0,
+    "storage_object_count": 0,
+    "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
+    "mutations": []
+  },
+  "remote_save_status": "No new commit pushed. Local import commit only.",
+  "remaining_publish_task": "SYNC-PUBLISH-001"
+}

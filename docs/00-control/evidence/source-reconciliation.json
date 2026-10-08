@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "profile": "source-reconciliation",
+  "level": "source_inspection",
+  "recorded_at": "2026-10-08T12:06:53.883Z",
+  "result": "passed",
+  "digest": "e06cc4cebdb7e19aef22c69198ab534e114381584e031a5db49367a07813f49d",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "live-github-read-and-recorded-connector-observations",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "bfd9d138486f54943204f9aee46cb9e3d8eee38eff234cda5793f5b6c349d091",
+      "TZ": "e8def32656206d2574e163cff4330221cbca79a584c6debd922546da0bb0ff74"
+    }
+  },
+  "inputs": {
+    "docs/00-control/SOURCE_RECONCILIATION.json": "261dc4a6c1b58c6c49796e3769b125f47b0c552fd43cb87d3fd7b34e91c420a0",
+    "package-lock.json": "563418dfb9f053bb14cf4a7771f103ff7563114578926bea240d8bf60a1a29de",
+    "package.json": "5f334ce86d50cd1b18e93a0b5cacd8e27837c7d288f1ca89396ec094451ebede",
+    "scripts/os-control.mjs": "06da576a46fbc66a72b08f8b3899749a3829c202e4f72fe7a7b71ebb08306a19",
+    "scripts/verify-source-reconciliation.mjs": "7b3c93a142aba323267d5e58c4fe8e5e690db29245eb1e9640c1da4bd7b69d04",
+    "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "VERIFICATION_PROFILES.json": "ece98c57e496c74b9e5aebebffb1bf63f5a50ddb6ed3b56ec1f0f00f413e958f"
+  },
+  "observed_git_head": "167c04ef2e39e0a30f04e5d8fd26e25eb1803a43",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "scripts/verify-source-reconciliation.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/source-reconciliation.log",
+  "log_sha256": "284b019eb4cc777e42da575e6f38fdbfd15f6659b856b4a86ab965c3571fa96c"
+}

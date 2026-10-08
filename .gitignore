@@ -15,6 +15,7 @@ build/
 
 # Supabase local
 .supabase/
+supabase/.temp/
 
 # OS/editor
 .DS_Store

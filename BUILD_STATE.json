@@ -6,9 +6,9 @@
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
-    "review_basis": "Uploaded snapshot plus accessible original files and retrieved conversation excerpts; not the current live GitHub branch."
+    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only."
   },
-  "live_repository_reconciled": false,
+  "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": null
   },
@@ -21,10 +21,10 @@
     "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
   ],
   "external_access": {
-    "github": "Installed connector reports no accessible installation; repository read returned 404. No push or PR performed.",
+    "github": "Live read verified at main 1729a525. Issue and branch writes return integration 403; CLI lacks push credentials. No new remote commit/PR. See SOURCE_RECONCILIATION.json.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Read-only access confirmed to existing auxiliumos-dev (txofqxictwecgcnvezlb). Public-table and migration-history lists returned empty on 2026-10-08. Auth/storage configuration and runtime behavior not yet reviewed; no database writes.",
-    "lovable": "OS project 0b7bbfc6-627f-4ca0-9217-98f5b164b419 remains at observed head d271bc5668bc9ad235dd17ee5d9bf92c26a6e146. Corrected project knowledge and OS-only workspace addendum applied and read back. No runtime build dispatched; unpublished prototype."
+    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb reachable. No public application tables/migrations/users/buckets/objects as of source inspection. No writes; authentication configuration and runtime not yet verified.",
+    "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -33,5 +33,6 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Reconcile the live repository and deployments, then ARCH-001. Do not overwrite newer work from this archive."
+  "first_runtime_action": "ARCH-001 development contract, then SEC-001A authenticated account/facility directory. GitHub publication independently blocked in SYNC-PUBLISH-001.",
+  "active_remote_work": []
 }

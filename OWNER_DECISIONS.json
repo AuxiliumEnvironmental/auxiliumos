@@ -25,7 +25,21 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Use existing view_account/view_asset capabilities with separate account_access lifecycle and explicit facility/all_facilities scope; legacy role rows grant nothing automatically.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "directory",
+            "identity",
+            "membership_revocation"
+          ],
+          "activation_gate": "Confirm actual people, roles, client representatives and delegation limits before live grants.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
     },
     {
       "id": "OD-002",
@@ -66,7 +80,20 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Directory exposes only permitted names and stable IDs. Account-level view does not imply all-facilities access.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "account_directory",
+            "facility_directory"
+          ],
+          "activation_gate": "Confirm per-account audiences and portal defaults before client onboarding.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
     },
     {
       "id": "OD-004",
@@ -221,7 +248,20 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Client access to audit remains closed; profile preservation uses Auth link nulling. Audit provenance and durable denial collection remain SEC-001C.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "audit",
+            "identity_deletion"
+          ],
+          "activation_gate": "Approve retention schedule, hold/restriction authorities and audit-export recipients before destructive automation or client audit exports.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
     },
     {
       "id": "OD-012",
@@ -240,7 +280,20 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Development login uses invited synthetic password identities; no registration or automatic membership. Production login/MFA/recovery not activated.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "authentication",
+            "session_recovery"
+          ],
+          "activation_gate": "Confirm administrators, recovery contacts, client login approach and any SSO commitments.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
     },
     {
       "id": "OD-013",

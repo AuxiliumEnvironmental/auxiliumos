@@ -1,0 +1,8 @@
+["node","scripts/verify-source-reconciliation.mjs"]
+{
+  "canonical_main": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "foundation_preserved": true,
+  "source_relationship": "Separate Lovable prototype explicitly recorded",
+  "github_write": "blocked",
+  "scope": "Current Git read plus dated connector observations only. No runtime, push or deployment claim."
+}

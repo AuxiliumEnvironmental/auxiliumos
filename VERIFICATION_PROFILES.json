@@ -82,6 +82,25 @@
           "tools/package-importer/tests/apply-package.test.mjs"
         ]
       ]
+    },
+    {
+      "id": "source-reconciliation",
+      "level": "source_inspection",
+      "environment": "live-github-read-and-recorded-connector-observations",
+      "cacheable": false,
+      "timeout_ms": 30000,
+      "inputs": [
+        "scripts/verify-source-reconciliation.mjs",
+        "docs/00-control/SOURCE_RECONCILIATION.json",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql"
+      ],
+      "commands": [
+        [
+          "node",
+          "scripts/verify-source-reconciliation.mjs"
+        ]
+      ],
+      "max_age_ms": 900000
     }
   ]
 }

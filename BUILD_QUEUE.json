@@ -36,7 +36,7 @@
     {
       "id": "SYNC-001",
       "title": "Reconcile current GitHub, Lovable and existing Supabase backend",
-      "status": "blocked",
+      "status": "implemented",
       "dependencies": [
         "CTRL-001"
       ],
@@ -47,20 +47,24 @@
         "BUILD_STATE.json",
         "BUILD_QUEUE.json",
         "docs/00-control/**",
-        "docs/03-data/SCHEMA_REGISTRY.md"
+        "docs/03-data/SCHEMA_REGISTRY.md",
+        "scripts/verify-source-reconciliation.mjs",
+        "VERIFICATION_PROFILES.json"
       ],
-      "assigned_to": null,
-      "branch": null,
+      "assigned_to": "integration-lead",
+      "branch": "build/continuation-2026-10-08",
       "owner_decisions": [],
-      "verification_profiles": [],
-      "next_action": "Verify GitHub repository access, compare current HEAD/branches/PRs with archive and Lovable, confirm actual GitHub sync mapping and existing auxiliumos-dev configuration/migration history. Import safely on a feature branch. Cursor is optional.",
-      "blocker": "GitHub connector has no accessible installation, so current source and remote write access remain unverified. Lovable knowledge and read-only Supabase public-schema/migration observations are recorded; auth/storage and actual source linkage still need reconciliation.",
+      "verification_profiles": [
+        "source-reconciliation"
+      ],
+      "next_action": "Source reconciliation is recorded. Remote publication is blocked separately under SYNC-PUBLISH-001; no GitHub/Lovable parity or remote save is claimed.",
+      "blocker": null,
       "issue": null
     },
     {
       "id": "ARCH-001",
       "title": "Finalize domain boundaries and production app basis",
-      "status": "planned",
+      "status": "implemented",
       "dependencies": [
         "SYNC-001"
       ],
@@ -74,23 +78,138 @@
         "docs/08-ai/**",
         "BUILD_QUEUE.json"
       ],
-      "assigned_to": null,
-      "branch": null,
+      "assigned_to": "integration-lead",
+      "branch": "build/continuation-2026-10-08",
       "owner_decisions": [
         "OD-001",
         "OD-016"
       ],
-      "verification_profiles": [],
-      "next_action": "Inspect current GitHub and Lovable source. Choose one maintainable production frontend, preserving useful design. Specify Incident vs Request, identity/tenancy, versioning, owned data contracts and additive migration plan.",
+      "verification_profiles": [
+        "controls"
+      ],
+      "next_action": "ADR-002 reviewed as development engineering contract. Implement bounded SEC-001 slices; business activation gates stay closed.",
       "blocker": null,
       "issue": null
     },
     {
-      "id": "SEC-001",
-      "title": "Identity, account/facility isolation and audit foundation",
-      "status": "planned",
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "blocker": null,
+      "issue": null,
+      "id": "SEC-001A",
+      "title": "Database account/facility directory and immediate membership revocation",
+      "status": "in_progress",
       "dependencies": [
         "ARCH-001"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "C01"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "tests/database/**",
+        "tests/helpers/**",
+        "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+      ],
+      "next_action": "Implement ADR-002 read-only directory policies; use a real PostgreSQL engine to prove allowed reads plus tenant/facility/status/grant denials. Simulated subject tests do not certify Auth/API."
+    },
+    {
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "blocker": null,
+      "issue": null,
+      "id": "SEC-001B",
+      "title": "Supabase login and account/facility interface",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "C01",
+        "C05"
+      ],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ],
+      "allowed_paths": [
+        "web/**",
+        "tests/e2e/directory.spec.ts",
+        "tests/api/**",
+        "playwright.runtime.config.ts"
+      ],
+      "next_action": "Implement typed adapter and responsive UI; verify authentic Supabase identity and direct API denials, then browser journey. Fixture browser checks alone do not complete this task."
+    },
+    {
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "blocker": null,
+      "issue": null,
+      "id": "SEC-001C",
+      "title": "Private storage and protected audit provenance",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "allowed_paths": [
+        "supabase/**",
+        "tests/**",
+        "web/**",
+        "docs/03-data/**",
+        "docs/04-security/**"
+      ],
+      "next_action": "Implement private object authorization and access-change audit; prove forged actors/rewrites denied and record durable denied attempts. Complete before parent SEC-001 acceptance."
+    },
+    {
+      "id": "SEC-001",
+      "title": "Identity, account/facility isolation and audit foundation",
+      "status": "in_progress",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001B",
+        "SEC-001C"
       ],
       "requirements": [
         "M01",
@@ -118,9 +237,14 @@
         "OD-013"
       ],
       "verification_profiles": [],
-      "next_action": "Implement and exercise real local database/API authentication, active membership denial, scoped capabilities, private storage and event provenance. Do not treat SQL text checks as RLS proof.",
+      "next_action": "Finish directory policies, authentic identity/UI verification, then private storage/provenance/denial audit before this parent can verify.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "INTAKE-001",
@@ -153,7 +277,12 @@
       "verification_profiles": [],
       "next_action": "Implement versioned catalogue-backed intake, preserve original submission, separate Incident and Request, assign triage and next action; no submission-only authorization.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "DOC-001",
@@ -185,7 +314,12 @@
       "verification_profiles": [],
       "next_action": "Implement exact-revision reviews, release grants, storage authorization, packages, withdrawal and replacement semantics with allowed/denied runtime tests.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "SCOPE-001",
@@ -217,7 +351,12 @@
       "verification_profiles": [],
       "next_action": "Implement approved scope revisions, recommendations/declinations, qualified review, sample/COC/lab provenance and separately reviewed interpretation.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "COMMERCIAL-001",
@@ -248,7 +387,12 @@
       "verification_profiles": [],
       "next_action": "Implement versioned T&M estimates, effective authorization and cap controls, exact signature revision and bounded emergency/change workflow using synthetic commercial data.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "OPERATIONS-001",
@@ -280,7 +424,12 @@
       "verification_profiles": [],
       "next_action": "Complete scheduling, visits, field records, change escalation, document-linked questions, tasks and audited closeout. Companion redesign is not a dependency.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "ENTERPRISE-001",
@@ -313,7 +462,12 @@
       "verification_profiles": [],
       "next_action": "Build program coverage/activation, optional portfolio hierarchy, site passports, champions, critical assets, drills, readiness gaps and recurring work.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "VENDOR-001",
@@ -342,7 +496,12 @@
       "verification_profiles": [],
       "next_action": "Implement scoped vendor portal, credentials, work orders, closeout evidence and documented contracting relationship.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "FINANCE-001",
@@ -371,7 +530,12 @@
       "verification_profiles": [],
       "next_action": "Build traceable commitments/costs/invoices, reserve ledger, cap/change approvals and reconciled accounting exports; no unapproved live money defaults.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "REPORT-001",
@@ -402,7 +566,12 @@
       "verification_profiles": [],
       "next_action": "Implement permission-filtered metrics, explicit denominators/unknowns, reproducible snapshots, actions, evidence-supported value ledger and released QBR packages.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "AI-001",
@@ -431,7 +600,12 @@
       "verification_profiles": [],
       "next_action": "Implement access-scoped AI drafts/extraction with source/prompt/model versions, injection-resistant content handling, evaluation, cost/time limits and human adoption.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "CONNECT-001",
@@ -463,7 +637,12 @@
       "verification_profiles": [],
       "next_action": "Review the actual current Moldo source contract before edits. Build versioned minimal projection, idempotency, retries/reconciliation and outage/revocation tests with simulated peers. Enable live connectors only at their recorded activation gates.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "HARDEN-001",
@@ -504,7 +683,12 @@
       "verification_profiles": [],
       "next_action": "Exercise complete ordinary and enterprise lifecycles; measure realistic workloads and test migrations/restore, revocation, retries and partial failure. Fix measured bottlenecks; do not add services speculatively.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
     },
     {
       "id": "RELEASE-001",
@@ -566,6 +750,34 @@
       "verification_profiles": [],
       "next_action": "Verify all 20 modules against current runtime evidence, complete bounded owner review, recovery drill and deployment authorization, then release and verify the actual deployed revision.",
       "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "SYNC-PUBLISH-001",
+      "title": "Publish locally reviewed continuation and runtime work to GitHub",
+      "status": "blocked",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/**"
+      ],
+      "assigned_to": "integration-lead",
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [],
+      "next_action": "After installation permissions are restored, fetch/reconcile newer remote work, create/update issue, push reviewed commits to feature branch, open draft PR and read back remote HEAD.",
+      "blocker": "GitHub app exposes no installation; issue and branch creation return 403. Command-line push has no credentials.",
       "issue": null
     }
   ]
