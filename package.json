@@ -2,7 +2,7 @@
   "name": "auxiliumos",
   "version": "0.0.0",
   "private": true,
-  "description": "AuxiliumOS full-system specifications, static foundation and verified continuation controls.",
+  "description": "AuxiliumOS full-system requirements, verified continuation controls and authenticated directory development foundation.",
   "scripts": {
     "test": "npm run test:e2e",
     "test:e2e": "playwright test",
@@ -12,9 +12,30 @@
     "os:verify": "node scripts/os-control.mjs verify",
     "os:checkpoint": "node scripts/os-control.mjs checkpoint",
     "os:release-check": "node scripts/os-control.mjs release-check",
-    "test:control": "node --test tests/unit/control-system.test.mjs tests/unit/document-integrity.test.mjs"
+    "test:control": "node --test tests/unit/control-system.test.mjs tests/unit/document-integrity.test.mjs",
+    "dev": "vite --config web/vite.config.ts",
+    "build": "tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts",
+    "test:database": "node --test tests/database/*.test.mjs",
+    "test:runtime-ui": "playwright test --config playwright.runtime.config.ts"
   },
   "devDependencies": {
-    "@playwright/test": "^1.61.1"
+    "@electric-sql/pglite": "0.5.8",
+    "@playwright/test": "^1.61.1",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "24.19.1",
+    "@types/react": "19.2.0",
+    "@types/react-dom": "19.2.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "supabase": "2.120.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.8.3",
+    "vite": "8.0.16"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.117.3",
+    "@tanstack/react-router": "1.168.25",
+    "lucide-react": "0.575.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   }
 }

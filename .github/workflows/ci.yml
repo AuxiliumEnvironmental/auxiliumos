@@ -24,7 +24,7 @@ jobs:
         with:
           name: repository-check-evidence
           path: docs/00-control/evidence/
-  static-browser:
+  application-foundation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -35,6 +35,17 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
+      - run: npm run os:verify -- directory-database
+      - run: npm run os:verify -- runtime-build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
-# These jobs verify current controls/static artifacts, not the unimplemented OS runtime.
+      - run: npm run os:verify -- directory-browser-fixture
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: browser-failure-evidence
+          path: |
+            test-results/
+            docs/00-control/evidence/
+# Local database tests use simulated Auth claims; UI tests use HTTP fixtures.
+# These jobs do not establish genuine hosted Auth/API or full-system acceptance.

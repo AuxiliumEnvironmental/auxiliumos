@@ -40,7 +40,12 @@
           "tests/unit/document-integrity.test.mjs"
         ]
       ],
-      "include_root_files": true
+      "include_root_files": true,
+      "environment_variables": [
+        "GIT_CONFIG_GLOBAL",
+        "GIT_CONFIG_SYSTEM",
+        "GIT_CONFIG_NOSYSTEM"
+      ]
     },
     {
       "id": "foundation-contract",
@@ -101,6 +106,103 @@
         ]
       ],
       "max_age_ms": 900000
+    },
+    {
+      "id": "directory-database",
+      "level": "database",
+      "environment": "local-PostgreSQL-18.3-PGlite-0.5.8-with-simulated-Auth-claims",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations",
+        "supabase/seed",
+        "tests/database",
+        "tests/helpers"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/identity-directory.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "runtime-build",
+      "level": "build",
+      "environment": "local-Node-24-TypeScript-Vite-production-bundle",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web",
+        "tests/unit/runtime-configuration.test.mjs",
+        "tests/unit/auth-persistence.test.mjs"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "build"
+        ],
+        [
+          "node",
+          "--test",
+          "tests/unit/runtime-configuration.test.mjs",
+          "tests/unit/auth-persistence.test.mjs"
+        ]
+      ],
+      "environment_variables": [
+        "VITE_SUPABASE_URL",
+        "VITE_SUPABASE_PUBLISHABLE_KEY",
+        "VITE_ALLOW_LOCAL_TEST_BACKEND"
+      ]
+    },
+    {
+      "id": "directory-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE"
+      ],
+      "inputs": [
+        "web",
+        "tests/e2e/directory.spec.ts",
+        "playwright.runtime.config.ts"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "test:runtime-ui"
+        ]
+      ]
+    },
+    {
+      "id": "directory-api",
+      "level": "api",
+      "environment": "authentic-Supabase-development-Auth-and-Data-API-securely-configured-target",
+      "cacheable": false,
+      "max_age_ms": 900000,
+      "timeout_ms": 300000,
+      "environment_variables": [
+        "AUXILIUMOS_TEST_URL",
+        "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+        "AUXILIUMOS_TEST_SERVICE_ROLE_KEY"
+      ],
+      "inputs": [
+        "tests/api",
+        "supabase/migrations",
+        "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/api/identity-directory.test.mjs"
+        ]
+      ]
     }
   ]
 }

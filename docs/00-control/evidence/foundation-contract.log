@@ -1,11 +1,11 @@
 ["node","--test","tests/unit/foundation-migration-contract.test.mjs"]
-✔ migration creates exactly the approved foundation tables (2.053102ms)
-✔ migration enables RLS on every approved table (1.503428ms)
-✔ migration creates no RLS policies, auth objects, or storage objects (0.321495ms)
-✔ migration preserves internal-only defaults without hard-coding release forever (0.27979ms)
-✔ migration keeps auth linkage nullable and storage deferred (0.26278ms)
-✔ seed data is deterministic, demo-only, and contains no credentials (0.415109ms)
-✔ seed creates no auth users and no storage objects (0.141563ms)
+✔ migration creates exactly the approved foundation tables (2.19088ms)
+✔ migration enables RLS on every approved table (1.557616ms)
+✔ migration creates no RLS policies, auth objects, or storage objects (0.338163ms)
+✔ migration preserves internal-only defaults without hard-coding release forever (0.664172ms)
+✔ migration keeps auth linkage nullable and storage deferred (0.569937ms)
+✔ seed data is deterministic, demo-only, and contains no credentials (0.667141ms)
+✔ seed creates no auth users and no storage objects (0.302194ms)
 ℹ tests 7
 ℹ suites 0
 ℹ pass 7
@@ -13,4 +13,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 105.568627
+ℹ duration_ms 153.571248

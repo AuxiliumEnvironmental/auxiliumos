@@ -1,12 +1,12 @@
 # ADR-002: runtime foundation and first authenticated directory slice
 
-Date: 2026-10-08. Status: proposed engineering contract for development; integration/security review required before accepting implementation. Task: ARCH-001, first part of SEC-001. Input: repository `167c04ef2e39e0a30f04e5d8fd26e25eb1803a43`, ADR-001, requirements M01/M02/M05/M19/M20/C01/C06/C07, foundation migration `20260713000100`, security matrices, and OD-001/003/011/012/013/016. This decision creates no schema, permissions, identities, storage, deployment or live authority.
+Date: 2026-10-08. Status: accepted engineering contract for development. Integration review completed; SEC-001A migration received independent security review and a relinking fix. This is not owner approval of live activation or full-system acceptance. Task: ARCH-001, first part of SEC-001. Input: repository `167c04ef2e39e0a30f04e5d8fd26e25eb1803a43`, ADR-001, requirements M01/M02/M05/M19/M20/C01/C06/C07, foundation migration `20260713000100`, security matrices, and OD-001/003/011/012/013/016. This decision creates no schema, permissions, identities, storage, deployment or live authority.
 
 ## Boundary and application basis
 
 The first runtime outcome is a real Supabase login followed by a permitted account/facility directory using synthetic records. It is a bounded increment, not completion of SEC-001, M01/M02/M05/M19 or the 20-module destination. Requests, document contents, releases, role administration, uploads and external integrations remain unavailable in this increment. No PHI or real client data enters fixtures. All owner activation gates remain closed; `production_enabled: false` is unchanged.
 
-The canonical repository has `app/index.html`, `app/styles.css` and static `app/app.js`; its seven-table migration enables RLS but defines no policies. In the separate Lovable source inspected for this preparation, the shell uses React 19, TypeScript and TanStack Start, with no backend contract. The lead reports Lovable head `0d48e1ad` and is resolving repository/branch parity; this ADR does not certify synchronization or remote persistence.
+The canonical repository has `app/index.html`, `app/styles.css` and static `app/app.js`; its seven-table migration enables RLS but defines no policies. In the separate Lovable source inspected for this preparation, the shell uses React 19, TypeScript and TanStack Start, with no backend contract. The inspected Lovable head is `0d48e1adfa63fa05ee0436bb5d83dd56ca94f523`; it has a separate internal remote. Useful interface structure is adapted into canonical `web/`. No GitHub/Lovable synchronization or remote persistence is claimed.
 
 Recommend one React/TypeScript SPA under `web/`, preserving useful Lovable shell components, design tokens, navigation and responsive layouts, with route adapters for the chosen client router. Keep the canonical static shell as a reference until its useful behavior is covered. A private authenticated directory has no demonstrated SSR requirement; carrying the whole starter and its unused dependencies is unnecessary. The lead may retain TanStack routing where that reduces transfer work. Stack/package versions, lockfile and source-transfer review are engineering decisions, not new owner business decisions. Do not maintain two production frontends. Keep auth, typed directory access and domain components separate; no speculative services or microservices.
 
@@ -44,6 +44,8 @@ Only these grants exist in the first increment; action identifiers are capabilit
 A facility read additionally requires `view_account` for its account. No wildcard capabilities, implied document access, organization-wide admin shortcut or program/portfolio inheritance enters this slice. Later project/vendor/financial/release grants need their own contracts and tests. `facilities.account_id` is the present access partition, not proof that the client owns or pays for the physical site. Future shared physical sites use an explicit relationship model; address matching never merges accounts or grants access.
 
 Backfill one `account_access` row per existing account/profile pair. If any legacy role is `removed_suspended`, initialize it as `suspended`; initialize other pairs as `invited`. Existing profiles initialize suspended. Existing nonnull Auth links must resolve to actual `auth.users` before validating the FK; report discrepancies instead of inventing users. No legacy role automatically activates a membership or generates grants. A reviewed synthetic fixture step links actual Auth UUIDs and explicitly activates the intended profiles/memberships/grants. Preserve all legacy rows and record the mapping.
+
+The additive migration preserves immutable `auth_linked_once` history. Existing links initialize true; only the database trigger advances false to true during initial attachment to a suspended profile. Manual unlinking and Auth deletion preserve true. A previously linked profile cannot be attached again, including to its original Auth UUID, and even trusted provisioning cannot reset the history field. Recovery/relinking requires a separately reviewed contract. The field is not exposed to browser roles.
 
 ### Minimal authorization functions and policy surface
 
@@ -84,7 +86,7 @@ On sign-out, identity/account change, or lost access, clear relevant cached rows
 
 ## Server provenance and audit contract
 
-The lead may implement this section as a separate bounded SEC-001B increment after the directory policies. Until then, audit provenance is specified, not implemented, and neither the directory increment nor its tests complete M19 or all of SEC-001.
+The lead may implement this section as a separate bounded SEC-001C increment after the directory policies. Until then, audit provenance is specified, not implemented, and neither the directory increment nor its tests complete M19 or all of SEC-001.
 
 Do not let the client insert an `audit_events` row, choose an actor, provide authoritative timestamps, or rewrite history. Existing seed events are synthetic historical fixtures, not authenticated runtime evidence.
 

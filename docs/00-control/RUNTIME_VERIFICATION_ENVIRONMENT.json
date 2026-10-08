@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-08T12:43:07.276858+00:00",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "database": {
+    "engine": "PostgreSQL 18.3",
+    "runtime": "PGlite 0.5.8 wasm32",
+    "auth": "Mock auth.users(id), auth.uid() and auth.jwt(); simulated request context",
+    "cloud_target_observed_version": "PostgreSQL 17.6.1.127",
+    "limitation": "Local engine is a different major version from the observed cloud backend. Real target migration/Auth/API acceptance remains required; no PostgreSQL 17 execution claimed."
+  },
+  "browser": {
+    "version": "Chromium 149.0.7827.0",
+    "playwright": "1.61.1",
+    "source": "@sparticuz/chromium 149.0.0 npm package, scratch-only tool dependency",
+    "executable_sha256": "434d2607c55941dcaa7fdd19b0800ee90488922fd9744a6642ef527ba8fabf63",
+    "scope": "HTTP interception; no cloud authentication or policy execution",
+    "standard_installer": "Chromium download returned a truncated archive; did not continue that retry loop. Extracted the pinned npm-distributed brotli executable and verified it launched.",
+    "configuration": "AUXILIUMOS_BROWSER_EXECUTABLE points to scratch executable for this run. A different browser installation/environment invalidates fixture evidence."
+  },
+  "external_writes": "None to GitHub, Supabase or Lovable. Auth/API harness missing configuration guard was checked, not counted as acceptance."
+}

@@ -15,3 +15,10 @@ The canonical outcomes are REQUIREMENTS.json. Each module remains planned until 
 The supplied foundation-contract profile tests SQL text only. The existing Playwright harness covers a static shell only. Neither establishes RLS, auth, private storage, release or full workflows. Current profiles are listed in VERIFICATION_PROFILES.json; future runtime profiles must include all source/test/config/dependency inputs plus target revision, database/migration state and fixture identity.
 
 Development: test the changed behavior and its dependent invariants. Integration: run required gates for shared contracts. Release: run required full acceptance, security and recovery gates against the actual candidate. Do not rerun unchanged suites just because the chat changed. Capture first failure and diagnose it; no retry-until-green or skip-to-pass. Evidence reuse is valid only within the declared fingerprint and trustworthy environment assumptions.
+
+
+## Current directory increment evidence
+
+`directory-database` executes the original and additive migrations in PostgreSQL 18.3 through PGlite 0.5.8, with deliberately mocked Auth functions and simulated subjects. The observed cloud backend is PostgreSQL 17.6.1.127, so target-version execution remains a separate gate. `runtime-build` checks TypeScript and bundles the application. `directory-browser-fixture` exercises the actual React app/Supabase SDK against intercepted synthetic HTTP responses and is labeled `browser_fixture`, never `browser` or `api` evidence.
+
+`directory-api` is prepared for authentic synthetic Supabase users and Data API denial checks but has not run against a configured service. It fails before any request when required secure configuration is missing. SEC-001B remains blocked for authentic API and real-service browser acceptance; SEC-001C remains independent work. No full product requirement is marked implemented by these bounded checks. Exact environment and browser provenance are recorded in [runtime environment](../00-control/RUNTIME_VERIFICATION_ENVIRONMENT.json).

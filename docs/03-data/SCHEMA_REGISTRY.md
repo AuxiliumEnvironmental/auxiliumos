@@ -1,4 +1,4 @@
-> Current observation 2026-10-08: the existing auxiliumos-dev project (txofqxictwecgcnvezlb) is accessible. Read-only calls returned no public tables and no migration-history entries. Auth/storage and runtime behavior remain unreviewed; no database writes occurred. Repository migration/seed artifacts below exist, but are not proof of application to this backend. Older environment/security entries below are historical records. Full development is authorized by AGENTS.md; live activation follows explicit gates. Exact observations: docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json.
+> Current observation 2026-10-08: existing auxiliumos-dev (`txofqxictwecgcnvezlb`) was inspected read-only with zero public tables, migrations, Auth users, storage buckets or objects. No cloud writes occurred. Canonical repository now contains the original foundation plus reviewed additive directory migration. Those artifacts and local PostgreSQL tests do not establish cloud application or authentic Auth/API acceptance. See SOURCE_RECONCILIATION.json and the current entry below. Older preparation restrictions are historical; full synthetic development is authorized by AGENTS.md.
 
 # Schema Registry
 
@@ -347,3 +347,16 @@ Before any database application or app connection:
 - Complete dev auth identity-linkage design packet.
 - Complete document storage readiness and deferral packet.
 - Complete local Supabase tooling readiness check.
+
+
+# Identity and directory development increment
+
+Added: 2026-10-08. Task: SEC-001A; architecture: ADR-002. GitHub issue and PR remain unavailable because the installed integration returned 403 for writes. Local feature branch: `build/continuation-2026-10-08`.
+
+The original `20260713000100_foundation_slice_schema.sql` and `supabase/seed/foundation_demo_seed.sql` are unchanged. New CLI-generated artifact: `20261008120645_identity_access_directory.sql`. Application to the existing cloud backend is **not performed**.
+
+The additive migration creates `account_access` and `account_capability_grants`; adds suspended-by-default identity status, immutable link history and the Auth FK; conservatively backfills lifecycle rows; and installs private authorization helpers, exact column privileges and three directory SELECT policies. Legacy roles alone grant no access. Only active demo identities, active account membership and explicit capability/scope grants can read. All client mutations, Auth-link history, authorization tables and other business tables stay unavailable. No bucket, document-release or audit-provenance implementation is implied.
+
+The independent review resolved an unlink/relink inheritance gap and recorded exact source hashes in [SEC-001A review](../00-control/reviews/SEC-001A-2026-10-08.json). The `directory-database` profile runs the actual migrations in PGlite with mocked Auth functions and simulated subjects. It covers positive and negative reads, independent status/grant revocation, column ACLs, trusted link guards, seed ordering and rollback. Genuine Auth/Data API and real-service browser acceptance remain unexecuted.
+
+Before cloud application, re-inspect the target, preserve migration identity/history, apply the existing foundation exactly once followed by the additive artifact, and record the resulting migration versions/checksums. The available migration connector has no explicit version argument; do not rename/recreate the foundation or blindly run a duplicate CLI migration to repair a mismatch. Select a reviewed application path when secure tooling is configured. Never reset a populated backend to make tests pass.

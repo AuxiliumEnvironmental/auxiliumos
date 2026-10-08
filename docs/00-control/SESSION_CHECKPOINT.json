@@ -1,57 +1,78 @@
 {
   "version": 1,
-  "created_at": "2026-10-08T07:33:29.516Z",
+  "created_at": "2026-10-08T13:55:40.833Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
-    "review_basis": "Uploaded snapshot plus accessible original files and retrieved conversation excerpts; not the current live GitHub branch."
+    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
   "git": {
-    "is_repository_root": false,
-    "head": null,
-    "branch": null,
+    "is_repository_root": true,
+    "head": "bb46093f88c88ef1ced1b96d203d804e41f8af0d",
+    "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": null,
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/EXECUTION_PROTOCOL.md\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/foundation-contract.json\n M docs/00-control/evidence/foundation-contract.log\n M docs/00-control/evidence/package-importer.json\n M docs/00-control/evidence/package-importer.log\n M docs/03-data/ADR-002-RUNTIME-FOUNDATION.md\n M docs/03-data/SCHEMA_REGISTRY.md\n M docs/07-testing/ACCEPTANCE_TEST_MATRIX.md\n M package-lock.json\n M package.json\n M playwright.config.ts\n M scripts/os-control.mjs\n M tests/unit/control-system.test.mjs\n?? docs/00-control/RUNTIME_VERIFICATION_ENVIRONMENT.json\n?? docs/00-control/evidence/auth-persistence-recovery.log\n?? docs/00-control/evidence/directory-browser-fixture.json\n?? docs/00-control/evidence/directory-browser-fixture.log\n?? docs/00-control/evidence/directory-database.json\n?? docs/00-control/evidence/directory-database.log\n?? docs/00-control/evidence/runtime-build.json\n?? docs/00-control/evidence/runtime-build.log\n?? docs/00-control/evidence/signout-before-fix.log\n?? docs/00-control/reviews/\n?? playwright.runtime.config.ts\n?? supabase/migrations/20261008120645_identity_access_directory.sql\n?? tests/api/\n?? tests/database/\n?? tests/e2e/directory.spec.ts\n?? tests/helpers/\n?? tests/unit/auth-persistence.test.mjs\n?? tests/unit/runtime-configuration.test.mjs\n?? web/",
     "remote": {
       "status": "not_checked",
-      "branch": null,
+      "branch": "wip/recovery-2026-10-08",
       "head": null
     }
   },
-  "controls_digest": "3aac965c3c0b9b39e27f4ff13ec97097fef7ebe553705eeb31eadbd00a777625",
-  "next_ready_task": null,
+  "controls_digest": "93640181218d437ba9aa7b127c6e92701926db9114ed5ccf5c180a1b64de720a",
+  "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
-      "id": "SYNC-001",
-      "title": "Reconcile current GitHub, Lovable and existing Supabase backend",
+      "id": "SEC-001B",
+      "title": "Supabase login and account/facility interface",
       "declared_status": "blocked",
       "verified": false,
-      "next_action": "Verify GitHub repository access, compare current HEAD/branches/PRs with archive and Lovable, confirm actual GitHub sync mapping and existing auxiliumos-dev configuration/migration history. Import safely on a feature branch. Cursor is optional.",
-      "blocker": "GitHub connector has no accessible installation, so current source and remote write access remain unverified. Lovable knowledge and read-only Supabase public-schema/migration observations are recorded; auth/storage and actual source linkage still need reconciliation."
+      "next_action": "First resolve SEC-001B-R5 cross-tab storage race and obtain independent review. Then reconcile dev migrations and securely configure the authentic Auth/API environment described in tests/api/README.md.",
+      "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed."
+    },
+    {
+      "id": "SYNC-PUBLISH-001",
+      "title": "Publish locally reviewed continuation and runtime work to GitHub",
+      "declared_status": "blocked",
+      "verified": false,
+      "next_action": "After installation permissions are restored, fetch/reconcile newer remote work, create/update issue, push reviewed commits to feature branch, open draft PR and read back remote HEAD.",
+      "blocker": "GitHub app exposes no installation; issue and branch creation return 403. Command-line push has no credentials."
     }
   ],
   "evidence": {
     "controls": {
-      "status": "passed",
-      "profile": "controls",
-      "evidence": "docs/00-control/evidence/controls.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-08T07:33:02.325Z"
+      "status": "stale",
+      "profile": "controls"
     },
     "foundation-contract": {
-      "status": "passed",
-      "profile": "foundation-contract",
-      "evidence": "docs/00-control/evidence/foundation-contract.json",
-      "level": "static_sql_contract",
-      "recorded_at": "2026-10-08T06:57:03.291Z"
+      "status": "stale",
+      "profile": "foundation-contract"
     },
     "package-importer": {
-      "status": "passed",
-      "profile": "package-importer",
-      "evidence": "docs/00-control/evidence/package-importer.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-08T06:57:05.521Z"
+      "status": "stale",
+      "profile": "package-importer"
+    },
+    "source-reconciliation": {
+      "status": "stale",
+      "profile": "source-reconciliation",
+      "reason": "Evidence timestamp is future-dated or expired."
+    },
+    "directory-database": {
+      "status": "stale",
+      "profile": "directory-database"
+    },
+    "runtime-build": {
+      "status": "stale",
+      "profile": "runtime-build"
+    },
+    "directory-browser-fixture": {
+      "status": "stale",
+      "profile": "directory-browser-fixture"
+    },
+    "directory-api": {
+      "status": "not_run",
+      "profile": "directory-api"
     }
   },
   "pending_owner_decisions": [

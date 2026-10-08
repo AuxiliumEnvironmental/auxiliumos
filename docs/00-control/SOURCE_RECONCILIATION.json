@@ -58,6 +58,6 @@
     "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
     "mutations": []
   },
-  "remote_save_status": "No new commit pushed. Local import commit only.",
+  "remote_save_status": "No new commit pushed. Reviewed continuation and runtime work exist only on the local feature branch until SYNC-PUBLISH-001 is resolved.",
   "remaining_publish_task": "SYNC-PUBLISH-001"
 }

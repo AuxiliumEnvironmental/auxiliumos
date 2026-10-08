@@ -61,7 +61,8 @@ export function inventory(root, inputs) {
 }
 
 export function fingerprint(root, profile) {
-  const rootFiles = profile.include_root_files ? fs.readdirSync(root).filter(name => fs.lstatSync(path.join(root, name)).isFile()) : [];
+  // Linked worktrees store .git as a file; it is repository metadata, never an input.
+  const rootFiles = profile.include_root_files ? fs.readdirSync(root).filter(name => !EXCLUDED.has(name) && fs.lstatSync(path.join(root, name)).isFile()) : [];
   const files = inventory(root, [...new Set(['scripts/os-control.mjs', 'VERIFICATION_PROFILES.json', 'package.json', 'package-lock.json', ...rootFiles, ...profile.inputs])]);
   const environmentHashes = Object.fromEntries([...new Set([...COMMON_ENVIRONMENT, ...(profile.environment_variables || [])])].sort().map(name => [name, Object.hasOwn(process.env, name) ? sha256(process.env[name]) : null]));
   const identity = { node: process.version, platform: process.platform, arch: process.arch, environment: profile.environment, environment_hashes: environmentHashes };
@@ -124,6 +125,14 @@ export function validateModel(model) {
     for (const d of t.owner_decisions || []) if (!decisionIds.has(d)) errors.push(`Unknown decision ${d} in ${t.id}`);
     for (const p of t.verification_profiles || []) if (!profileIds.has(p)) errors.push(`Unknown profile ${p} in ${t.id}`);
     if (t.status === 'implemented' && !t.verification_profiles?.length) errors.push(`Implemented task needs verification profile: ${t.id}`);
+    if (Object.hasOwn(t, 'required_evidence_levels')) {
+      const levels = t.required_evidence_levels;
+      if (!Array.isArray(levels) || !levels.length || levels.some(level => typeof level !== 'string' || !level.trim()) || new Set(levels).size !== levels.length) {
+        errors.push(`Task needs nonempty, distinct evidence levels: ${t.id}`);
+      } else if (t.status === 'implemented') {
+        for (const level of levels) if (!(t.verification_profiles || []).some(id => profiles.profiles.some(p => p.id === id && p.level === level))) errors.push(`Implemented task lacks ${level} verification profile: ${t.id}`);
+      }
+    }
     if (t.status === 'in_progress' && (!t.assigned_to || !t.branch)) errors.push(`Active task needs agent and branch: ${t.id}`);
   }
   const seen = new Set(), active = new Set();
@@ -152,6 +161,8 @@ export function validateModel(model) {
   }
   for (const p of profiles.profiles || []) {
     if (!/^[a-z][a-z0-9-]+$/.test(p.id) || !p.inputs?.length || !p.commands?.length || !p.environment || !p.level) errors.push(`Invalid verification profile: ${p.id}`);
+    if (typeof p.cacheable !== 'boolean') errors.push(`Verification profile must declare cacheable: ${p.id}`);
+    if (p.cacheable === false && (!Number.isFinite(p.max_age_ms) || p.max_age_ms <= 0)) errors.push(`Noncacheable profile needs positive finite max_age_ms: ${p.id}`);
     for (const c of p.commands || []) if (!Array.isArray(c) || c.length < 1 || c.some(a => typeof a !== 'string')) errors.push(`Invalid command arguments: ${p.id}`);
   }
   return [...new Set(errors)];
@@ -184,6 +195,15 @@ export function evidenceStatus(root, profile) {
   if (!fs.existsSync(safePath(root, relative))) return { status: 'not_run', profile: profile.id };
   try {
     const evidence = readJson(root, relative);
+    if (profile.cacheable !== true) {
+      // This bounds evidence age only. It does not attest to mutable remote state;
+      // runtime profiles still need target revision, migration/config and fixture inputs.
+      if (!Number.isFinite(profile.max_age_ms) || profile.max_age_ms <= 0) return { status: 'invalid', profile: profile.id, reason: 'Noncacheable profile needs positive finite max_age_ms.' };
+      const recordedAt = typeof evidence.recorded_at === 'string' ? Date.parse(evidence.recorded_at) : NaN;
+      const now = Date.now();
+      if (!Number.isFinite(recordedAt)) return { status: 'invalid', profile: profile.id, reason: 'Evidence timestamp is missing or invalid.' };
+      if (recordedAt > now || now - recordedAt > profile.max_age_ms) return { status: 'stale', profile: profile.id, reason: 'Evidence timestamp is future-dated or expired.' };
+    }
     const current = fingerprint(root, profile);
     if (evidence.version !== 1 || evidence.profile !== profile.id || evidence.level !== profile.level || evidence.digest !== current.digest) return { status: 'stale', profile: profile.id };
     const log = safePath(root, evidence.log_path);

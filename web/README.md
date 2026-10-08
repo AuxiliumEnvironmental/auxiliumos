@@ -1,0 +1,40 @@
+# Authenticated development directory
+
+SEC-001B implements one React/TypeScript SPA using TanStack's client router and the supported Supabase client. Its only application data operations are the three read selectors in ADR-002. It does not complete any full product module or enable production. Login credentials and all backend configuration are supplied at runtime/build time, never committed.
+
+From the repository root:
+
+```sh
+cp web/.env.example web/.env.local
+# Set the existing auxiliumos-dev browser publishable key in web/.env.local.
+npm run dev
+npm run build
+```
+
+The corresponding binaries can also be run directly:
+
+```sh
+node_modules/.bin/tsc -p web/tsconfig.json --noEmit
+node_modules/.bin/vite --config web/vite.config.ts
+node_modules/.bin/vite build --config web/vite.config.ts
+```
+
+The Vite configuration uses `web/` for its root and environment directory, and emits `web/dist/`. A host serving the built SPA must return `index.html` for client routes. No deployment is configured by this slice. Local environment files and build output are ignored. Vite embeds `VITE_` values in browser output: only a publishable key belongs there. The URL must be exactly the HTTPS origin for `txofqxictwecgcnvezlb.supabase.co`. Opaque publishable keys cannot be matched to a project offline; the Auth/API server validates the actual pairing. Supplied URL/key values are validated by the same validator at Vite startup/build time before emission and again at browser startup. Each supplied value is checked even when the other is missing, so a missing URL cannot permit a secret key into the bundle. Missing configuration can still render the safe setup screen. Rejected values are never printed. A rejected connection produces an error, never a demo success. Auth/API fetches use `redirect: "error"` so redirects cannot forward password or refresh bodies.
+
+For isolated browser HTTP fixtures, the Vite **development server only** accepts a loopback backend (`localhost`, `127.0.0.1`, or `[::1]`) with `VITE_ALLOW_LOCAL_TEST_BACKEND=true` and a publishable-format test key. All normal sign-in and directory code paths still run, and the UI identifies this as a local test workspace. Production builds reject loopback configuration even when the flag is present. Fixture execution does not establish real Supabase Auth, token validation, or deployed RLS evidence. A real local Supabase instance requires its own explicitly provisioned synthetic identities and matching policies. There is no fixture mode that supplies application rows or bypasses login inside the app.
+
+## Boundaries and source transfer
+
+Adapted from Lovable source `0d48e1ad`: `src/components/app-shell.tsx` (brand/navigation/shell arrangement, semantic state components), `src/styles.css` (semantic white/slate/navy palette, spacing and border hierarchy), and the account/facility route layout. The canonical base was `bb46093f88c88ef1ced1b96d203d804e41f8af0d`. The SPA removes TanStack Start/SSR, the presentation role switch, static counters and fabricated account/facility records. It retains the original useful navigation destinations. All 20 module destinations are visible in the module directory, with their unfinished status stated explicitly. The static `app/` remains a reference, not a second connected application.
+
+The adapter validates UUID arguments and page sizes before requests, fetches one extra row, and returns the last emitted ID as its cursor. It requests only the ADR's explicit columns and accepts only synthetic rows. Facilities are always filtered by the selected account. Empty RLS results are empty states; they do not identify whether a guessed record exists. There are no signup, membership, capability, role, document, intake, audit, or storage writes.
+
+`auth.getUser()` verifies identity before the permitted profile query. Auth event callbacks are synchronous and defer client calls to a later task. Renewed sessions, screen entry, visibility restoration, and Refresh recheck access. Directory data is held only in the current React subtree, with request keys containing profile/revision/account/cursor. It is not persisted in browser storage, TanStack router data, or a query cache. Auth sessions use the supported client's project-specific storage option and key. Auth/sign-out changes clear the subtree; abort signals plus request generations prevent stale responses from repopulating it. Before awaiting sign-out, a project-specific `auxiliumos.auth.<backend-host>.logout-intent` marker is saved and checked, and the owned persisted SDK session/user/verifier entries are removed. The old storage lease becomes read-only memory for the supported SDK sign-out attempt; auto-refresh is stopped, and its remaining memory is discarded in `finally`. Old client leases remain permanently unable to write, including refreshes completing after disposal. The marker is checked before Auth initialization on reload, so even the SDK's early session-error return cannot restore the old session. A fresh password attempt uses a new client and staged memory storage. Only a successful password response, a matching nonanonymous `getUser()` result, and an unchanged logout marker permit persistence and clearing the marker. Failed credentials/verification leave the marker and cannot unlock access. Other tabs observe the marker and clear their directory. The failure screen offers `Sign in again`; reload also shows the login form. A remote logout failure is reported honestly: local deletion does not certify server revocation, and already-issued access tokens may remain valid. Storage failures fail closed with a browser-data recovery message; no successful logout is claimed when the browser refuses storage operations. If both intent persistence and deletion are refused, the user must clear site data before continuing. The application cannot guarantee cross-reload deletion from storage the browser refuses to modify. Changing an account or directory page clears the previous rows immediately. Authorization remains the database's responsibility on every request. Already delivered bytes cannot be revoked by the UI.
+
+Pagination replaces the current page rather than retaining old pages of account data. The facility selector lists the current account page; if a link targets an account outside that page, navigate to its page and select it. It never infers access from a URL parameter. A manual Refresh returns pagination to the first page and rereads the profile and directory. Backend errors clear current results; only recoverable network/service failures offer request retry. A new authenticated session rechecks the full access boundary.
+
+## Verification boundary
+
+The integration lead owns repository dependencies, browser tests, authentic Auth/API evidence, queue/evidence registers, and deployment review. Type checking and bundling establish only source/build validity. Browser HTTP fixtures can establish UI behavior but cannot establish real authentication or access denial. Development acceptance still requires authentic synthetic identities and the ADR-002 positive/negative API cases against the reconciled backend.
+
+Provider references checked 2026-10-08: [Supabase getUser](https://supabase.com/docs/reference/javascript/auth-getuser) and [onAuthStateChange](https://supabase.com/docs/reference/javascript/auth-onauthstatechange). The pinned installed client/router types are the build contract.

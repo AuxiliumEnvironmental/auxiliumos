@@ -6,20 +6,13 @@
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
-    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only."
+    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": null
   },
-  "observed_facts": [
-    "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
-    "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
-    "RLS is enabled in SQL, but no policies, real auth integration, private storage or exact-version release implementation are established.",
-    "Playwright dependency/config and three static shell tests exist. This package does not claim browser execution this session.",
-    "Modernization adds working repository controls and proposed detailed specifications; it does not implement the OS runtime.",
-    "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
-  ],
   "external_access": {
     "github": "Live read verified at main 1729a525. Issue and branch writes return integration 403; CLI lacks push credentials. No new remote commit/PR. See SOURCE_RECONCILIATION.json.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
@@ -33,6 +26,48 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "ARCH-001 development contract, then SEC-001A authenticated account/facility directory. GitHub publication independently blocked in SYNC-PUBLISH-001.",
-  "active_remote_work": []
+  "first_runtime_action": "SEC-001B-R5: fix cross-tab stale session writes/removals with generation-specific credential slots, obtain independent review, and run the four auth-persistence regressions plus affected build/browser checks. Then continue SEC-001C and secure real Auth/API verification.",
+  "active_remote_work": [],
+  "baseline_observed_facts": [
+    "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
+    "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
+    "RLS is enabled in SQL, but no policies, real auth integration, private storage or exact-version release implementation are established.",
+    "Playwright dependency/config and three static shell tests exist. This package does not claim browser execution this session.",
+    "Modernization adds working repository controls and proposed detailed specifications; it does not implement the OS runtime.",
+    "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
+  ],
+  "observed_facts": [
+    "Canonical source safely reconciled and reviewed continuation imported on local feature branch; GitHub integration write probes failed. No new remote commit or PR.",
+    "SEC-001A additive directory migration implemented and independently reviewed, including fixed immutable Auth-link history. Original foundation migration and demo seed remain byte-identical.",
+    "PostgreSQL-engine acceptance uses PGlite with explicitly simulated Auth context. It does not certify authentic Supabase login or HTTP API authorization.",
+    "Canonical web/ React/TypeScript app implements sign-in and permitted account/facility directory with safe unavailable states, paging and cache clearing. All other module destinations remain visibly unfinished.",
+    "Seven intercepted-HTTP browser journeys exercise the actual app and SDK. Authentic Auth/API harness is prepared but unexecuted without secure service credentials and applied migrations.",
+    "No cloud migration, Auth identity, storage object, deployment or Lovable code mutation was performed. Full SEC-001 and all 20 product modules remain incomplete."
+  ],
+  "runtime_implementation": {
+    "app": "web/",
+    "migration": "supabase/migrations/20261008120645_identity_access_directory.sql",
+    "review": "docs/00-control/reviews/SEC-001A-2026-10-08.json",
+    "verification_profiles": [
+      "directory-database",
+      "runtime-build",
+      "directory-browser-fixture"
+    ],
+    "authentic_api_status": "prepared_unexecuted",
+    "deployed": false,
+    "verification_status": "unverified; cross-tab storage regression remains open and current evidence is stale"
+  },
+  "execution_recovery": {
+    "observed_at": "2026-10-08T13:55:39.917035+00:00",
+    "status": "workspace_recovered",
+    "branch": "wip/recovery-2026-10-08",
+    "purpose": "WIP recovery checkpoint, not accepted or deployed",
+    "remote_main": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "github_installations": [],
+    "supabase_read": "auxiliumos-dev ACTIVE_HEALTHY",
+    "lovable_read": "same 0d48e1ad source, unpublished",
+    "app_permissions": "GitHub, Supabase and Lovable inherit Allow low-risk actions. No settings changed.",
+    "first_unfinished_action": "SEC-001B-R5",
+    "remote_save": "not performed"
+  }
 }

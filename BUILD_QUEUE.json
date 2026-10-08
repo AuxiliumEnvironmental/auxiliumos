@@ -34,6 +34,33 @@
       "issue": null
     },
     {
+      "id": "CTRL-002",
+      "title": "Worktree-safe evidence fingerprints, runtime evidence floors and bounded source freshness",
+      "status": "implemented",
+      "dependencies": [
+        "CTRL-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "scripts/os-control.mjs",
+        "tests/unit/control-system.test.mjs",
+        "VERIFICATION_PROFILES.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/EXECUTION_PROTOCOL.md"
+      ],
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls"
+      ],
+      "next_action": "Use reviewed current controls; linked-worktree metadata is excluded, runtime task evidence floors enforced, and noncacheable evidence must have a bounded nonfuture timestamp.",
+      "blocker": null,
+      "issue": null
+    },
+    {
       "id": "SYNC-001",
       "title": "Reconcile current GitHub, Lovable and existing Supabase backend",
       "status": "implemented",
@@ -101,12 +128,14 @@
         "OD-012",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "directory-database"
+      ],
       "blocker": null,
       "issue": null,
       "id": "SEC-001A",
       "title": "Database account/facility directory and immediate membership revocation",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "ARCH-001"
       ],
@@ -125,7 +154,7 @@
         "tests/helpers/**",
         "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
       ],
-      "next_action": "Implement ADR-002 read-only directory policies; use a real PostgreSQL engine to prove allowed reads plus tenant/facility/status/grant denials. Simulated subject tests do not certify Auth/API."
+      "next_action": "Reviewed additive migration and 19 PostgreSQL checks implemented. Reuse matching database evidence. This proves database behavior with simulated Auth only. Continue SEC-001C; authentic hosted Auth/API remains SEC-001B."
     },
     {
       "assigned_to": null,
@@ -137,12 +166,16 @@
         "OD-012",
         "OD-013"
       ],
-      "verification_profiles": [],
-      "blocker": null,
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture",
+        "directory-api"
+      ],
+      "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
-      "status": "planned",
+      "status": "blocked",
       "dependencies": [
         "SEC-001A"
       ],
@@ -161,9 +194,16 @@
         "web/**",
         "tests/e2e/directory.spec.ts",
         "tests/api/**",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/ci.yml",
+        "playwright.config.ts",
+        "tests/unit/runtime-configuration.test.mjs",
+        "tests/unit/auth-persistence.test.mjs"
       ],
-      "next_action": "Implement typed adapter and responsive UI; verify authentic Supabase identity and direct API denials, then browser journey. Fixture browser checks alone do not complete this task."
+      "next_action": "First resolve SEC-001B-R5 cross-tab storage race and obtain independent review. Then reconcile dev migrations and securely configure the authentic Auth/API environment described in tests/api/README.md.",
+      "implementation_status": "WIP frontend and API harness implemented locally; cross-tab storage race open; authentic acceptance unexecuted."
     },
     {
       "assigned_to": null,
@@ -200,12 +240,12 @@
         "docs/03-data/**",
         "docs/04-security/**"
       ],
-      "next_action": "Implement private object authorization and access-change audit; prove forged actors/rewrites denied and record durable denied attempts. Complete before parent SEC-001 acceptance."
+      "next_action": "After the SEC-001B-R5 recovery fix, read ADR-002 and split protected audit provenance and private-object authorization into bounded tasks. Authentic API gating remains separate."
     },
     {
       "id": "SEC-001",
       "title": "Identity, account/facility isolation and audit foundation",
-      "status": "in_progress",
+      "status": "planned",
       "dependencies": [
         "SEC-001A",
         "SEC-001B",

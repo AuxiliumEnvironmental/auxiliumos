@@ -182,6 +182,30 @@ test('source inventory rejects missing inputs, traversal and symbolic links', t 
   assert.throws(() => inventory(root, ['src']), /Symlink/);
 });
 
+test('root inventory and verification work in a real linked Git worktree', t => {
+  const root = fixture(t, model => { model.profiles.profiles[0].include_root_files = true; });
+  write(root, 'tests/fixture-check.mjs', "console.log('synthetic linked-worktree check');\n");
+  write(root, 'root-note.txt', 'covered root input\n');
+  const worktree = `${root}-linked`;
+  t.after(() => fs.rmSync(worktree, { recursive: true, force: true }));
+  const git = (...args) => {
+    const result = spawnSync('git', ['-C', root, '-c', 'user.name=Control Fixture', '-c', 'user.email=control@example.invalid', '-c', `core.hooksPath=${path.join(root, 'disabled-hooks')}`, ...args], { encoding: 'utf8', timeout: 10000 });
+    assert.equal(result.status, 0, result.stderr);
+  };
+  git('init', '--initial-branch=main');
+  git('add', '.');
+  git('commit', '-m', 'Synthetic control fixture');
+  git('worktree', 'add', '--detach', worktree, 'HEAD');
+  assert.equal(fs.lstatSync(path.join(worktree, '.git')).isFile(), true);
+  const profile = profileAt(worktree);
+  const inputs = fingerprint(worktree, profile).files;
+  assert.equal(Object.hasOwn(inputs, '.git'), false);
+  assert.equal(Object.hasOwn(inputs, 'root-note.txt'), true);
+  assert.equal(verify(worktree, profile.id).status, 'passed');
+  write(worktree, 'root-note.txt', 'changed covered root input\n');
+  assert.equal(evidenceStatus(worktree, profile).status, 'stale');
+});
+
 test('real fixture command produces evidence and a current cache prevents redundant execution', t => {
   const root = fixture(t);
   withMode('pass', () => {
@@ -192,6 +216,45 @@ test('real fixture command produces evidence and a current cache prevents redund
     assert.equal(reused.status, 'passed'); assert.equal(reused.reused, true); assert.equal(runCount(root), 1);
     assert.equal(verify(root, 'fixture-check', { force: true }).reused, false);
     assert.equal(runCount(root), 2);
+  });
+});
+
+test('noncacheable profiles require a declared positive finite freshness bound', () => {
+  for (const max_age_ms of [undefined, null, 0, -1, NaN, Infinity, '60000']) {
+    const model = modelFixture();
+    Object.assign(model.profiles.profiles[0], { cacheable: false, max_age_ms });
+    assert.match(errors(model), /positive finite max_age_ms/);
+  }
+  const model = modelFixture();
+  Object.assign(model.profiles.profiles[0], { cacheable: false, max_age_ms: 60000 });
+  assert.deepEqual(validateModel(model), []);
+  delete model.profiles.profiles[0].cacheable;
+  assert.match(errors(model), /must declare cacheable/);
+});
+
+test('noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed', t => {
+  const maxAge = 60000;
+  const root = fixture(t, model => { Object.assign(model.profiles.profiles[0], { cacheable: false, max_age_ms: maxAge }); });
+  withMode('pass', () => {
+    assert.equal(verify(root, 'fixture-check').status, 'passed');
+    assert.equal(evidenceStatus(root, profileAt(root)).status, 'passed');
+    assert.equal(verify(root, 'fixture-check').reused, false);
+    assert.equal(runCount(root), 2);
+    const recordPath = 'docs/00-control/evidence/fixture-check.json';
+    const recordedAt = Date.parse(JSON.parse(fs.readFileSync(path.join(root, recordPath), 'utf8')).recorded_at);
+    t.mock.method(Date, 'now', () => recordedAt + maxAge);
+    assert.equal(evidenceStatus(root, profileAt(root)).status, 'passed', 'The exact maximum age remains within the bound.');
+    for (const [timestamp, expected] of [
+      [new Date(recordedAt - 1).toISOString(), 'stale'],
+      [new Date(recordedAt + maxAge + 1).toISOString(), 'stale'],
+      [undefined, 'invalid'], [null, 'invalid'], ['not-a-timestamp', 'invalid'],
+    ]) {
+      updateJson(root, recordPath, evidence => { evidence.recorded_at = timestamp; });
+      assert.equal(evidenceStatus(root, profileAt(root)).status, expected);
+    }
+    updateJson(root, recordPath, evidence => { evidence.recorded_at = new Date(recordedAt).toISOString(); });
+    const unbounded = { ...profileAt(root) }; delete unbounded.max_age_ms;
+    assert.equal(evidenceStatus(root, unbounded).status, 'invalid');
   });
 });
 
@@ -295,6 +358,37 @@ test('implemented declaration needs current evidence and required runtime eviden
     assert.deepEqual(currentStatus(root).verified_product_modules, [], 'A static/unit pass must not certify a runtime module.');
     assert.equal(releaseReadiness(root).ready, false);
     assert.match(releaseReadiness(root).gaps.join('\n'), /M01.*(database|api|browser)/);
+  });
+});
+
+test('declared task evidence levels must be nonempty distinct strings', () => {
+  for (const levels of [null, [], 'database', [''], [' '], ['database', 1], ['database', 'database']]) {
+    const model = modelFixture(); model.queue.tasks[0].required_evidence_levels = levels;
+    assert.match(errors(model), /nonempty, distinct evidence levels/);
+  }
+});
+
+test('SEC runtime task cannot unblock its dependent with static evidence alone', t => {
+  const root = fixture(t, model => {
+    const task = model.queue.tasks[0];
+    Object.assign(task, { id: 'SEC-001', verification_profiles: ['fixture-check'], required_evidence_levels: ['database', 'api'] });
+    model.queue.tasks[1].dependencies = ['SEC-001'];
+  });
+  withMode('pass', () => {
+    assert.equal(verify(root, 'fixture-check').status, 'passed');
+    updateJson(root, 'BUILD_QUEUE.json', model => { model.tasks[0].status = 'implemented'; });
+    assert.throws(() => currentStatus(root), /Implemented task lacks database verification profile: SEC-001/);
+    updateJson(root, 'VERIFICATION_PROFILES.json', model => {
+      model.profiles[0].level = 'database';
+      model.profiles.push({ ...model.profiles[0], id: 'fixture-api', level: 'api' });
+    });
+    updateJson(root, 'BUILD_QUEUE.json', model => { model.tasks[0].verification_profiles.push('fixture-api'); });
+    assert.equal(verify(root, 'fixture-check').status, 'passed');
+    assert.equal(currentStatus(root).tasks[0].verified, false, 'A database pass alone still lacks API evidence.');
+    assert.notEqual(currentStatus(root).next_ready_task, 'TASK-2');
+    assert.equal(verify(root, 'fixture-api').status, 'passed');
+    assert.equal(currentStatus(root).tasks[0].verified, true);
+    assert.equal(currentStatus(root).next_ready_task, 'TASK-2');
   });
 });
 
