@@ -12,6 +12,8 @@ build/
 .env
 .env.*
 !.env.example
+# Reviewed public browser settings for the existing development target only.
+!web/.env.development
 
 # Supabase local
 .supabase/

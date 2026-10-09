@@ -1,15 +1,17 @@
-# Authenticated development directory
+# Canonical development application
 
-SEC-001B implements one React/TypeScript SPA using TanStack's client router and the supported Supabase client. Its only application data operations are the three read selectors in ADR-002. It does not complete any full product module or enable production. Login credentials and all backend configuration are supplied at runtime/build time, never committed.
+The canonical `web/` application uses React/TypeScript, TanStack's client router and the supported Supabase client under ADR-002. The directory foundation now includes the reviewed intake, private-file and immutable-document capabilities recorded in BUILD_QUEUE.json. These increments do not complete every module or authorize production. User credentials and server secrets are never committed.
 
 From the repository root:
 
 ```sh
-cp web/.env.example web/.env.local
-# Set the existing auxiliumos-dev browser publishable key in web/.env.local.
 npm run dev
+npm run build:dev
+# Normal production-mode build remains separate and uses explicitly supplied configuration.
 npm run build
 ```
+
+`web/.env.development` deliberately contains only the existing auxiliumos-dev URL and its nonsecret `sb_publishable_` browser key. The explicit development mode used by `dev` and `build:dev` survives editor sandbox resets without an ignored environment file. Normal `build` does not load these development defaults. Process environment overrides still pass the unchanged backend/key validation; service-role/secret keys and other backends remain rejected before browser output. This config enables no login bypass, synthetic-data gate, fixture identity, professional approval, release or production deployment. Use ignored `web/.env.development.local` or process variables for approved local overrides; never place a server secret in any `VITE_` value. Key rotation must update the public setting and receive current-target verification. See [Vite environment modes](https://vite.dev/guide/env-and-mode).
 
 The corresponding binaries can also be run directly:
 
@@ -27,7 +29,7 @@ For isolated browser HTTP fixtures, the Vite **development server only** accepts
 
 Adapted from Lovable source `0d48e1ad`: `src/components/app-shell.tsx` (brand/navigation/shell arrangement, semantic state components), `src/styles.css` (semantic white/slate/navy palette, spacing and border hierarchy), and the account/facility route layout. The canonical base was `bb46093f88c88ef1ced1b96d203d804e41f8af0d`. The SPA removes TanStack Start/SSR, the presentation role switch, static counters and fabricated account/facility records. It retains the original useful navigation destinations. All 20 module destinations are visible in the module directory, with their unfinished status stated explicitly. The static `app/` remains a reference, not a second connected application.
 
-The adapter validates UUID arguments and page sizes before requests, fetches one extra row, and returns the last emitted ID as its cursor. It requests only the ADR's explicit columns and accepts only synthetic rows. Facilities are always filtered by the selected account. Empty RLS results are empty states; they do not identify whether a guessed record exists. There are no signup, membership, capability, role, document, intake, audit, or storage writes.
+The adapter validates UUID arguments and page sizes before requests, fetches one extra row, and returns the last emitted ID as its cursor. It requests only the ADR's explicit columns and accepts only synthetic rows. Facilities are always filtered by the selected account. Empty RLS results are empty states; they do not identify whether a guessed record exists. The directory selectors themselves do not create accounts, memberships, roles or grants. Intake and document/file operations use their separate reviewed RPC/Edge contracts and do not infer authority from directory access.
 
 `auth.getUser()` verifies identity before the permitted profile query. Auth event callbacks are synchronous and defer client calls to a later task. Renewed sessions, screen entry, visibility restoration, and Refresh recheck access. Directory data is held only in the current React subtree, with request keys containing profile/revision/account/cursor. It is not persisted in browser storage, TanStack router data, or a query cache. Auth sessions use the supported client's project-specific storage option and key. Auth/sign-out changes clear the subtree; abort signals plus request generations prevent stale responses from repopulating it.
 
