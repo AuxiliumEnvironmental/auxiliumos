@@ -259,10 +259,14 @@ test('fixture browser: phone navigation, keyboard close, honest module state and
   await open.click();
   await page.getByRole('dialog').getByRole('link', { name: 'Projects', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Operations / Projects', level: 1, exact: true })).toBeVisible();
-  await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Connection required', exact: true })).toBeVisible();
-  await expect(page.getByText('No records have been requested. This is not an empty-result confirmation.', { exact: true })).toBeVisible();
-  await expect(page.getByRole('tabpanel').getByRole('button').filter({ hasText: 'Schedule project' })).toBeDisabled();
+  await expect(page.getByRole('heading', { name: 'Records are not available yet', exact: true })).toBeVisible();
+  await expect(page.getByText('You can prepare an unsaved draft while this workspace is being connected.', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByText('Unsaved draft', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Save project plan', exact: true })).toBeDisabled();
+  await page.getByRole('tab', { name: 'Assigned tasks', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Schedule work orders', exact: true })).toBeDisabled();
   await expect(page.getByRole('dialog')).not.toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await open.click();

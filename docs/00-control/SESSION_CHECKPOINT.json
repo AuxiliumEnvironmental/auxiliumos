@@ -399,7 +399,15 @@
       ],
       "first_incomplete_action": "Complete owner onboarding and real hosted integration; connect the module UI to each approved backend contract without replacing preserved frontend source.",
       "merge_disposition": "Preserved the complete current onboarding Auth/runtime and workflow configuration. Replaced only the product footer in auth.tsx and app-shell.tsx; merged independent directory test additions. Control conflicts resolved by preserving current owner/backend records and adding only UI fields. Subsequent d177692 checkpoint changes were preserved without rerunning unchanged application checks.",
-      "lovable_sync_status": "Awaiting exact changed-source transfer of the combined canonical revision."
+      "lovable_sync_status": "Combined canonical UI and owner-onboarding source from 5f560c384825b9dcfe8fa2bc6f33b294e049a1ec imported into existing Lovable project; tool-reported saved revision f717551cb26164fc0bbeb1ab3a779a7b5ac17891. Eleven differing file hashes confirmed by the transfer agent. No native two-way sync or hosted owner login claimed.",
+      "integrated_ci_correction": {
+        "observed_source": "5f560c384825b9dcfe8fa2bc6f33b294e049a1ec",
+        "run_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/37936756606",
+        "finding": "CI61: all preceding database, unit and build profiles passed. Directory browser fixture: 8 passed, 1 failed because the phone navigation test still expected labels/actions from the replaced module outline. Both new module draft tests passed.",
+        "artifact_id": 11617948673,
+        "correction": "Retain phone navigation, focus return, overflow and unexpected-request checks; assert current unavailable-record and unsaved-draft copy plus disabled project-plan save and work-order scheduling. No product behavior or authorization change.",
+        "next_verification": "Required branch CI on this test correction. Record result in existing PR; do not repeatedly rewrite checkpoints solely to contain their own final commit hash."
+      }
     }
   }
 }
