@@ -10,7 +10,7 @@
     "capacitor/ios/App/AuxiliumCapturePlugin.swift": "977c926d6fc8174f95482e967507cfc3fa897b7c504dfe8a162f5b47f69b01e6",
     "capacitor/ios/App/AuxiliumFilesPlugin.swift": "dffb083ec5bfc86202bfe97a2b90b5ed7b514c847dedb30a7a717acb14ef405e",
     "capacitor/ios/App/BridgePolicy.swift": "cc1073dc80f771c0634758e877c10a811a176b10ebd80a7a7dc06a2fc81e6882",
-    "capacitor/ios/App/ExportBridgePolicy.swift": "f15315def0e114ca4a0321264c24ce0507c6a63e3efe1af9fde04e0e7e1e955c",
+    "capacitor/ios/App/ExportBridgePolicy.swift": "7da5c324383d512b312f5e822ad71ef724557ced7c4cc5a6b5c4e61e2d9c322b",
     "capacitor/ios/App/Info.plist": "4431f180a10abbf62d9247b7da69fc57d9c4d8f38cf3534aeebaa89c0d4b1f5d",
     "capacitor/ios/App/NativeCaptureWorkspace.swift": "b993933f49ba807881df0c50f86a31e4680ac9375300a60ae49dea4e6b9dca66",
     "capacitor/ios/App/SpatialBridgeViewController.swift": "a6e638ad74d286251fcb5349cc495e962748f5cdf90c23592eece41c3ce7578d",
@@ -44,9 +44,9 @@
     "ios/SpatialApp/CapturePipeline.swift": "09253c70afa1f403210029a7e5c1ef28c48bc7383ab2e3a65ba56f7053ca51ae",
     "ios/SpatialApp/DeviceAccessGate.swift": "4af2023cdf182e199553d1dccbd1ecf5be3b6493546a78ef13cd5c458bae948c",
     "ios/SpatialApp/EditorModel.swift": "510c55f931518655f964f3ec6773b38aa9814fa91b23c8eefaba2c2d02fc8001",
-    "ios/SpatialApp/EditorView.swift": "b1a4e44955d84eb696a04b369fbd02f8f922b9f1fe5055e152dd287d216a48d8",
+    "ios/SpatialApp/EditorView.swift": "12bfbdd037fba158f71dcf47589ee0ae67966a58ff6906e871f1c5eac087b295",
     "ios/SpatialApp/FloorManagementView.swift": "345a52f820515c42684e397c6f48ee2f9dec9ee7259d559f944a79352ccdecad",
-    "ios/SpatialApp/FloorplanCanvas.swift": "0a9fca4f8b52e1c706be9eb3e0288b021ee44fb3eae5041343d3c9305aabeed0",
+    "ios/SpatialApp/FloorplanCanvas.swift": "935247a849df3432ced05d6c895261ba865dbdc71fb1ce9c1994fd3f03240f50",
     "ios/SpatialApp/Info.plist": "f27d7544be5547b3b4308aa78eb59acd4a3b02939b04e4aafc029426d7268fac",
     "ios/SpatialApp/ObjectInspector.swift": "9a2b412e78391e1576be091f31db5e7910313ff0f3f3c48d1d4906a99c13aa48",
     "ios/SpatialApp/PrivacyInfo.xcprivacy": "7d8c0e6c93d0991179b77c73e3eda43b0b8b7ba4ba8e89267fde6bd64392d65b",
@@ -117,7 +117,7 @@
     "packages/SpatialInterop/Tests/SpatialInteropTests/ImportTests.swift": "87383c96230384df315bdccbaff19950608627010891d8b40f3630e3490cf991",
     "packages/SpatialInterop/Tests/SpatialInteropTests/LocalDocumentExportTests.swift": "c8995fc167a53c6bebbcbbbfab45af1257d76cd21ee85ce1750d4dc0912a033b",
     "packages/SpatialInterop/Tests/SpatialInteropTests/SchemaEvolutionTests.swift": "b3916f5eab16e5b838bda6f5376cdb5aa482ea3dd15aa24682e4235972efad97",
-    "packages/SpatialPersistence/Package.swift": "51ef947b36afc214e5391d6f30cf4e1bd543c63b327ed98cadd9084e3c742feb",
+    "packages/SpatialPersistence/Package.swift": "be4717947ac762e54cd9c9d2d79d23801baba5b367cab909fa9ee98f2a0600d3",
     "packages/SpatialPersistence/README.md": "2742c2654b7a7abf6543868fa2d30c136aeafd28f08e369d2a5c269a31f842c5",
     "packages/SpatialPersistence/Sources/CSQLite/module.modulemap": "bbfe59a972a3e8e09e347c04bc22c0eacd2544881af8a4b6068bfc30b38466e8",
     "packages/SpatialPersistence/Sources/CSQLite/shim.h": "b052d8e561e942f97b503033ecd2eaa2b35213bdbf374983efe9e68eabdfc024",
@@ -138,7 +138,7 @@
     "packages/SpatialPersistence/Tests/SpatialPersistenceTests/PublicationTests.swift": "f07de5f98a744d49a98fb418a2a547b148971d51847dc4c63f282b1a8f200e43",
     "packages/SpatialPersistence/Tests/SpatialPersistenceTests/SpatialPersistenceTests.swift": "8914fba0411199e815c4eca21eb40d05ad754df0747bca3c7097fc3df60c6649",
     "packages/SpatialPersistence/Tests/SpatialPersistenceTests/SyntheticPublicationReceiver.swift": "7f96bde88d144823e40ea1936c8240043ccdb60fe40cfd470cd7c7bf1af8479a",
-    "tests/capacitor/BridgePolicyTests.swift": "7b991aba60be68170d8675b34ae9498970adf0ec7ee5de9a0dc39989352f137a",
+    "tests/capacitor/BridgePolicyTests.swift": "5d817720a6f01c17d3692a2794485eb246ad6114b2b29cc0ff5005b60cbacc80",
     "tests/capacitor/VERIFICATION.json": "705641ff612d13de7f64ddf46f07ca136ab28d56d81210aab23637c207c6bfdf",
     "tests/capacitor/test_packaging.py": "77df5669b4162fdfab7625f3870395becf6f35b68f13fd1290c0878d1efed12a",
     "tests/native/ConnectedCaptureTests.swift": "09dbbbc76f9c6c40c88b9e63a4b7118a11e26beec7089ad1a34ae73edb7fff1d",
@@ -181,6 +181,10 @@
     "web/src/ui/workspace.css": "bb0c244837665fb494d713b3cfb279351895e119e2f61631063477938034e1ca",
     "web/tsconfig.json": "59eda97779c785ffa9b8386887777981dd09dde5d4c2c8113ce74a592bf1f3cf",
     "web/vite.config.ts": "9d2e6677376800b0d06854904949a351ff9c6a2597359e009acb913885eed231",
-    "web/vite.library.config.ts": "0c0f7feee1c63b0fbb65b04fcde33a78863ca9e27a756b9e1b74f79705ad5b42"
-  }
+    "web/vite.library.config.ts": "0c0f7feee1c63b0fbb65b04fcde33a78863ca9e27a756b9e1b74f79705ad5b42",
+    "integration/apple-interop-evidence.json": "7111ec29bdc9bf080d4408710224874cd129a747bdd44579cee4f1c6fa535c3d",
+    "integration/reuse_apple_interop.py": "9909a3816a2f355807bab78c529bc93c3daaf59c0dafe78e390a3bec0e6d0171"
+  },
+  "nativeFixBaseCommit": "5ae9c705e6f80faa127b35b38489fbc62c62fd4e",
+  "retainedWebInput": "Unchanged, previously built web snapshot from5ae9c705; active browser/provenance edits remain in canonical source until stable integration."
 }

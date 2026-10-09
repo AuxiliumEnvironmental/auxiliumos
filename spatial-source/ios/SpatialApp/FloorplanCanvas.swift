@@ -225,10 +225,18 @@ final class PlanCanvasView: UIView, UIGestureRecognizerDelegate {
     /// multiple candidates still require a choice, never implicit nearest snapping.
     func drawingCandidates(at point: CGPoint) -> [Node] {
         framing()
-        return (floor?.nodes ?? []).map { node in
+        let nodes: [Node] = floor?.nodes ?? []
+        var candidates: [(node: Node, distance: CGFloat)] = []
+        for node in nodes {
             let at = screen(node.point)
-            return (node, hypot(at.x - point.x, at.y - point.y))
-        }.filter { $0.1 <= 22 }.sorted { $0.1 == $1.1 ? $0.0.id < $1.0.id : $0.1 < $1.1 }.map(\.0)
+            let distance: CGFloat = hypot(at.x - point.x, at.y - point.y)
+            if distance <= 22 { candidates.append((node: node, distance: distance)) }
+        }
+        candidates.sort { first, second in
+            if first.distance == second.distance { return first.node.id < second.node.id }
+            return first.distance < second.distance
+        }
+        return candidates.map { $0.node }
     }
     private func commitDrawEndpoint(node: Node?, intended: Point2, floor: Floor) {
         let end = node?.point ?? intended

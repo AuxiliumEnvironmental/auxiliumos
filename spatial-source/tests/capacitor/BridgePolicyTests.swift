@@ -53,4 +53,20 @@ final class BridgePolicyTests: XCTestCase {
         let oversized = String(repeating: "A", count: ((ExportBridgePolicy.maximumBytes + 2) / 3) * 4 + 4)
         XCTAssertThrowsError(try ExportBridgePolicy.decode(filename: "layout.json", mimeType: "application/json", base64: oversized))
     }
+    func testExportRejectsStyleAndEscapedCSSResourceReferences() {
+        let payloads = [
+            #"<svg><path style="fill:u\72l(https://example.invalid/remote)"/></svg>"#,
+            #"<svg><path STYLE="fill:red"/></svg>"#,
+            #"<svg><path style="stroke:#123456"/></svg>"#,
+            #"<svg><path fill="u\000072l(https://example.invalid/remote)"/></svg>"#,
+            #"<?xml-stylesheet href="https://example.invalid/style.css"?><svg/>"#
+        ]
+        for value in payloads {
+            XCTAssertThrowsError(try ExportBridgePolicy.decode(filename: "layout.svg", mimeType: "image/svg+xml",
+                base64: Data(value.utf8).base64EncodedString()), value)
+        }
+        let lineArt = #"<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L1 1" fill="none" stroke="#123456"/></svg>"#
+        XCTAssertNoThrow(try ExportBridgePolicy.decode(filename: "layout.svg", mimeType: "image/svg+xml",
+            base64: Data(lineArt.utf8).base64EncodedString()))
+    }
 }

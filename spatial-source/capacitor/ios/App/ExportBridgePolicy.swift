@@ -45,11 +45,18 @@ private final class SVGExportValidator: NSObject, XMLParserDelegate {
         guard elements.contains(elementName) else { valid = false; parser.abortParsing(); return }
         for (name, value) in attributes {
             let key = name.lowercased(), lower = value.lowercased()
-            if key.hasPrefix("on") || key.contains("href") || key == "src" || lower.contains("javascript:") ||
+            // CSS is not an export requirement. Reject style outright rather
+            // than trying to interpret CSS escapes. Presentation attributes can
+            // also contain CSS URL values, so their escape syntax is forbidden.
+            if key == "style" || value.contains("\\") || key.hasPrefix("on") || key.contains("href") || key == "src" || lower.contains("javascript:") ||
                 lower.range(of: "url\\s*\\(", options: .regularExpression) != nil ||
                 (key.hasPrefix("xmlns") && value != "http://www.w3.org/2000/svg") {
                 valid = false; parser.abortParsing(); return
             }
         }
+    }
+    func parser(_ parser: XMLParser, foundProcessingInstructionWithTarget target: String, data: String?) {
+        // A linked xml-stylesheet could otherwise load CSS outside any element.
+        valid = false; parser.abortParsing()
     }
 }

@@ -49,7 +49,12 @@ jobs:
         if: always()
         run: |
           set -o pipefail
-          swift test --package-path packages/SpatialInterop 2>&1 | tee build-evidence/apple-interop.log
+          if python3 integration/reuse_apple_interop.py > build-evidence/apple-interop-reuse.log 2>&1; then
+            cat build-evidence/apple-interop-reuse.log
+          else
+            cat build-evidence/apple-interop-reuse.log
+            swift test --package-path packages/SpatialInterop 2>&1 | tee build-evidence/apple-interop.log
+          fi
       - name: Native synthetic composition tests on available simulator
         if: always()
         run: |

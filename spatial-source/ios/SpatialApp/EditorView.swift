@@ -28,121 +28,210 @@ struct EditorView: View {
     @State private var exportBusy = false
     init(document: SpatialDocument, store: SpatialStore) { _model = StateObject(wrappedValue: EditorModel(document: document, store: store)) }
     var body: some View {
+        exportableContent
+            .navigationTitle(model.document.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .toolbar { editorToolbar }
+            .task { await model.loadState() }
+    }
+
+    // Each opaque subview bounds SwiftUI's type-checking work while retaining
+    // the same state, callbacks, presentation order and accessibility behavior.
+    private var layoutContent: some View {
         VStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Label(areaDraft.points.isEmpty ? model.status : "Area sketch not saved", systemImage: model.pendingSave || !areaDraft.points.isEmpty ? "exclamationmark.circle" : "checkmark.circle").font(.caption)
-                    Spacer()
-                    Text("Revision \(model.document.revision)").font(.caption).foregroundStyle(.secondary)
-                }
-                Button { review = true } label: {
-                    Label("Needs review · \(model.issues.count) geometry issues", systemImage: "exclamationmark.triangle").font(.caption).frame(minHeight: 44)
-                }.disabled(!areaDraft.points.isEmpty)
-                HStack {
-                    Picker("Floor", selection: $model.floorID) {
-                        ForEach(model.document.floors, id: \.id) { Text($0.label).tag($0.id) }
-                    }.pickerStyle(.menu).disabled(!areaDraft.points.isEmpty)
-                    Button { floors = true } label: { Image(systemName: "square.3.layers.3d").frame(minWidth: 44, minHeight: 44) }.accessibilityLabel("Manage floors").disabled(!areaDraft.points.isEmpty)
-                    Spacer()
-                    Picker("Layout view", selection: $mode) { Text("2D").tag("2D"); Text("3D").tag("3D") }.pickerStyle(.segmented).frame(maxWidth: 180)
-                }
-            }.padding(.horizontal).padding(.bottom, 8)
-            if let floor = model.floor {
-                ZStack(alignment: .topTrailing) {
-                    FloorplanCanvas(floor: floor, selection: $model.selection, tool: model.tool, resetID: resetID, mutationEnabled: !model.busy && !model.pendingSave, areaDraft: areaDraft,
-                                        edit: { command in Task { await model.apply(command) } },
-                                        choose: { overlapping = $0 }, chooseEndpoint: { nodes, accept in
-                                            guard nodes.count <= 20 else { model.error = "Too many corners share this touch target. Zoom in and tap the intended corner again."; return }
-                                            endpointOptions = nodes; endpointCommit = accept
-                                        }, showDetails: { details = true })
-                            .opacity(mode == "2D" ? 1 : 0).allowsHitTesting(mode == "2D").accessibilityHidden(mode != "2D")
-                    if mode == "3D" {
-                        SpatialModelView(document: model.document, floorID: model.floorID, selection: model.selection,
-                                         edgesOnly: false, resetID: resetID, state: orbit,
-                                         selected: { model.selection = $0 }, failed: { model.error = $0 }, choose: { overlapping = $0 })
-                    }
-                    VStack(alignment: .trailing, spacing: 8) {
-                        if mode == "2D" { Button { resetID += 1 } label: { Label("Reset view", systemImage: "arrow.counterclockwise") }.buttonStyle(.bordered).frame(minHeight: 44) }
-                    }.padding(12)
-                }
-                .overlay(alignment: .bottomLeading) {
-                    if mode == "2D" { Text(hint)
-                        .font(.caption).padding(10).background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12)).padding(8).allowsHitTesting(false)
-                    }
-                }
+            statusHeader
+            if let floor = model.floor { floorCanvas(floor) }
+            areaSketchControls
+            pendingSaveControls
+            selectionControls
+            editingToolbar
+        }
+    }
+    private var statusHeader: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Label(saveStatus, systemImage: saveStatusIcon).font(.caption)
+                Spacer()
+                Text("Revision \(model.document.revision)").font(.caption).foregroundStyle(.secondary)
             }
-            if model.tool == .area && mode == "2D" {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        Text("Unsaved area · \(areaDraft.points.count) points").font(.caption)
-                        Button("Undo point") { _ = areaDraft.points.popLast() }.disabled(areaDraft.points.isEmpty)
-                        Button("Finish area") { finishArea() }.disabled(areaDraft.points.count < 3 || model.busy || model.pendingSave)
-                        Button("Cancel area") { areaDraft.points = []; model.tool = .select }
-                    }.buttonStyle(.bordered).frame(minHeight: 44).padding(.horizontal)
+            Button { review = true } label: {
+                Label("Needs review · \(model.issues.count) geometry issues", systemImage: "exclamationmark.triangle")
+                    .font(.caption).frame(minHeight: 44)
+            }.disabled(hasAreaSketch)
+            HStack {
+                Picker("Floor", selection: $model.floorID) {
+                    ForEach(model.document.floors, id: \.id) { floor in Text(floor.label).tag(floor.id) }
+                }.pickerStyle(.menu).disabled(hasAreaSketch)
+                Button { floors = true } label: {
+                    Image(systemName: "square.3.layers.3d").frame(minWidth: 44, minHeight: 44)
+                }.accessibilityLabel("Manage floors").disabled(hasAreaSketch)
+                Spacer()
+                Picker("Layout view", selection: $mode) {
+                    Text("2D").tag("2D")
+                    Text("3D").tag("3D")
+                }.pickerStyle(.segmented).frame(maxWidth: 180)
+            }
+        }.padding(.horizontal).padding(.bottom, 8)
+    }
+    private var hasAreaSketch: Bool { !areaDraft.points.isEmpty }
+    private var saveStatus: String { hasAreaSketch ? "Area sketch not saved" : model.status }
+    private var saveStatusIcon: String { model.pendingSave || hasAreaSketch ? "exclamationmark.circle" : "checkmark.circle" }
+    private func floorCanvas(_ floor: Floor) -> some View {
+        ZStack(alignment: .topTrailing) {
+            FloorplanCanvas(floor: floor, selection: $model.selection, tool: model.tool, resetID: resetID,
+                mutationEnabled: !model.busy && !model.pendingSave, areaDraft: areaDraft,
+                edit: applyCommand, choose: { overlapping = $0 }, chooseEndpoint: requestEndpointChoice,
+                showDetails: { details = true })
+                .opacity(mode == "2D" ? 1 : 0).allowsHitTesting(mode == "2D").accessibilityHidden(mode != "2D")
+            if mode == "3D" {
+                SpatialModelView(document: model.document, floorID: model.floorID, selection: model.selection,
+                    edgesOnly: false, resetID: resetID, state: orbit,
+                    selected: { model.selection = $0 }, failed: { model.error = $0 }, choose: { overlapping = $0 })
+            }
+            VStack(alignment: .trailing, spacing: 8) {
+                if mode == "2D" {
+                    Button { resetID += 1 } label: { Label("Reset view", systemImage: "arrow.counterclockwise") }
+                        .buttonStyle(.bordered).frame(minHeight: 44)
                 }
+            }.padding(12)
+        }.overlay(alignment: .bottomLeading) {
+            if mode == "2D" {
+                Text(hint).font(.caption).padding(10)
+                    .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
+                    .padding(8).allowsHitTesting(false)
             }
-            if model.pendingSave {
-                HStack { Text("Unsaved changes").font(.callout); Spacer(); Button("Retry save") { Task { await model.save() } }.frame(minHeight: 44) }.padding(.horizontal).background(Color.orange.opacity(0.15))
-            }
-            if let selection = model.selection {
-                Button { details = true } label: { Label("Edit " + selection.kind.rawValue, systemImage: "slider.horizontal.3").frame(maxWidth: .infinity, minHeight: 44) }.buttonStyle(.bordered)
-            }
+        }
+    }
+    private func applyCommand(_ command: EditCommand) { Task { await model.apply(command) } }
+    private func requestEndpointChoice(_ nodes: [Node], _ accept: @escaping (Node?) -> Void) {
+        guard nodes.count <= 20 else {
+            model.error = "Too many corners share this touch target. Zoom in and tap the intended corner again."; return
+        }
+        endpointOptions = nodes; endpointCommit = accept
+    }
+    @ViewBuilder private var areaSketchControls: some View {
+        if model.tool == .area && mode == "2D" {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    if mode == "2D" {
-                        ForEach(CanvasTool.allCases, id: \.self) { tool in
-                            Button { model.tool = tool } label: { Text(tool.rawValue).fontWeight(model.tool == tool ? .bold : .regular).frame(minWidth: 48, minHeight: 44) }
-                                .buttonStyle(.bordered).tint(model.tool == tool ? .blue : .secondary).disabled(tool != .select && (model.pendingSave || model.busy))
-                                .disabled(!areaDraft.points.isEmpty && tool != .area)
-                        }
-                    }
-                    Button { objects = true } label: { Label("Objects", systemImage: "list.bullet").frame(minHeight: 44) }.buttonStyle(.bordered)
-                    Button { Task { await model.undo() } } label: { Label("Undo", systemImage: "arrow.uturn.backward").frame(minHeight: 44) }.buttonStyle(.bordered).disabled(!model.canUndo || model.pendingSave || model.busy || !areaDraft.points.isEmpty)
-                    Button { Task { await model.redo() } } label: { Label("Redo", systemImage: "arrow.uturn.forward").frame(minHeight: 44) }.buttonStyle(.bordered).disabled(!model.canRedo || model.pendingSave || model.busy || !areaDraft.points.isEmpty)
-                }.padding(.horizontal)
-            }.padding(.vertical, 8).background(.regularMaterial)
-        }
-        .navigationTitle(model.document.title).navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden()
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) { Button("Workspace") { if model.pendingSave || !areaDraft.points.isEmpty { leaving = true } else { dismiss() } }.disabled(model.busy) }
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Button { review = true } label: { Image(systemName: "checklist").frame(minWidth: 44, minHeight: 44) }.accessibilityLabel("Review layout issues").disabled(!areaDraft.points.isEmpty)
-                Button { exportReview = true } label: { Image(systemName: "square.and.arrow.up").frame(minWidth: 44, minHeight: 44) }.accessibilityLabel("Export selected revision").disabled(model.pendingSave || model.busy || !areaDraft.points.isEmpty)
+                HStack {
+                    Text("Unsaved area · \(areaDraft.points.count) points").font(.caption)
+                    Button("Undo point") { _ = areaDraft.points.popLast() }.disabled(areaDraft.points.isEmpty)
+                    Button("Finish area", action: finishArea).disabled(areaDraft.points.count < 3 || model.busy || model.pendingSave)
+                    Button("Cancel area") { areaDraft.points = []; model.tool = .select }
+                }.buttonStyle(.bordered).frame(minHeight: 44).padding(.horizontal)
             }
         }
-        .task { await model.loadState() }
-        .sheet(isPresented: $objects) { ObjectList(model: model) { objects = false; details = true } }
-        .sheet(isPresented: $details) { ObjectInspector(model: model) }
-        .sheet(isPresented: $floors) { FloorManagementView(model: model) }
-        .onChange(of: model.floorID) { _, _ in model.selection = nil; areaDraft.points = [] }
-        .sheet(isPresented: $review) { reviewSheet }
-        .sheet(isPresented: $exportReview) { exportSheet }
-        .confirmationDialog("Select the object at this location", isPresented: Binding(get: { !overlapping.isEmpty }, set: { if !$0 { overlapping = [] } }), titleVisibility: .visible) {
-            ForEach(overlapping, id: \.self) { object in
-                Button(object.kind.rawValue.capitalized + " " + String(object.id.prefix(8))) { model.selection = object; overlapping = []; if model.tool != .select { details = true } }
-            }
+    }
+    @ViewBuilder private var pendingSaveControls: some View {
+        if model.pendingSave {
+            HStack {
+                Text("Unsaved changes").font(.callout)
+                Spacer()
+                Button("Retry save") { Task { await model.save() } }.frame(minHeight: 44)
+            }.padding(.horizontal).background(Color.orange.opacity(0.15))
         }
-        .confirmationDialog("Choose the wall endpoint", isPresented: Binding(get: { endpointCommit != nil }, set: { if !$0 { endpointCommit = nil; endpointOptions = [] } }), titleVisibility: .visible) {
-            if let commit = endpointCommit {
-                ForEach(endpointOptions, id: \.id) { node in
-                    Button("Corner \((model.floor?.nodes.firstIndex(where: { $0.id == node.id }) ?? 0) + 1)") {
-                        endpointCommit = nil; endpointOptions = []; commit(node)
+    }
+    @ViewBuilder private var selectionControls: some View {
+        if let selection = model.selection {
+            Button { details = true } label: {
+                Label("Edit " + selection.kind.rawValue, systemImage: "slider.horizontal.3")
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            }.buttonStyle(.bordered)
+        }
+    }
+    private var editingToolbar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                if mode == "2D" {
+                    ForEach(CanvasTool.allCases, id: \.self) { tool in toolButton(tool) }
+                }
+                Button { objects = true } label: { Label("Objects", systemImage: "list.bullet").frame(minHeight: 44) }.buttonStyle(.bordered)
+                Button { Task { await model.undo() } } label: { Label("Undo", systemImage: "arrow.uturn.backward").frame(minHeight: 44) }
+                    .buttonStyle(.bordered).disabled(!model.canUndo || model.pendingSave || model.busy || hasAreaSketch)
+                Button { Task { await model.redo() } } label: { Label("Redo", systemImage: "arrow.uturn.forward").frame(minHeight: 44) }
+                    .buttonStyle(.bordered).disabled(!model.canRedo || model.pendingSave || model.busy || hasAreaSketch)
+            }.padding(.horizontal)
+        }.padding(.vertical, 8).background(.regularMaterial)
+    }
+    private func toolButton(_ tool: CanvasTool) -> some View {
+        Button { model.tool = tool } label: {
+            Text(tool.rawValue).fontWeight(model.tool == tool ? .bold : .regular).frame(minWidth: 48, minHeight: 44)
+        }.buttonStyle(.bordered).tint(model.tool == tool ? Color.blue : Color.secondary)
+            .disabled(tool != .select && (model.pendingSave || model.busy))
+            .disabled(hasAreaSketch && tool != .area)
+    }
+    @ToolbarContentBuilder private var editorToolbar: some ToolbarContent {
+        ToolbarItem(placement: .topBarLeading) {
+            Button("Workspace") {
+                if model.pendingSave || hasAreaSketch { leaving = true } else { dismiss() }
+            }.disabled(model.busy)
+        }
+        ToolbarItemGroup(placement: .topBarTrailing) {
+            Button { review = true } label: { Image(systemName: "checklist").frame(minWidth: 44, minHeight: 44) }
+                .accessibilityLabel("Review layout issues").disabled(hasAreaSketch)
+            Button { exportReview = true } label: { Image(systemName: "square.and.arrow.up").frame(minWidth: 44, minHeight: 44) }
+                .accessibilityLabel("Export selected revision").disabled(model.pendingSave || model.busy || hasAreaSketch)
+        }
+    }
+    private var sheetContent: some View {
+        layoutContent
+            .sheet(isPresented: $objects) { ObjectList(model: model) { objects = false; details = true } }
+            .sheet(isPresented: $details) { ObjectInspector(model: model) }
+            .sheet(isPresented: $floors) { FloorManagementView(model: model) }
+            .onChange(of: model.floorID) { _, _ in model.selection = nil; areaDraft.points = [] }
+            .sheet(isPresented: $review) { reviewSheet }
+            .sheet(isPresented: $exportReview) { exportSheet }
+    }
+    private var objectDialogContent: some View {
+        sheetContent
+            .confirmationDialog("Select the object at this location", isPresented: overlapPresented, titleVisibility: .visible) {
+                ForEach(overlapping, id: \.self) { object in
+                    Button(object.kind.rawValue.capitalized + " " + String(object.id.prefix(8))) {
+                        model.selection = object; overlapping = []
+                        if model.tool != .select { details = true }
                     }
                 }
-                Button("Create an independent corner here") { endpointCommit = nil; endpointOptions = []; commit(nil) }
             }
-            Button("Cancel", role: .cancel) { endpointCommit = nil; endpointOptions = [] }
-        } message: { Text("Several explicit corners are near your touch. The nearest is listed first. Choose the intended connection or keep this endpoint independent.") }
-        .alert("Action needs attention", isPresented: Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })) {
-            Button("OK", role: .cancel) { model.error = nil }
-        } message: { Text(model.error ?? "") }
-        .confirmationDialog("Leave unsaved changes?", isPresented: $leaving, titleVisibility: .visible) {
-            Button("Discard unsaved changes", role: .destructive) { dismiss() }
-            Button("Keep editing", role: .cancel) {}
-        } message: { Text("The previously saved revision remains on this device. The edits shown on this screen have not been saved.") }
-        .fileExporter(isPresented: $exporting, document: exportFile, contentType: exportContentType, defaultFilename: exportName) { result in
-            if case .failure(let error) = result { model.error = "Export was not completed. " + error.localizedDescription }
+            .confirmationDialog("Choose the wall endpoint", isPresented: endpointsPresented, titleVisibility: .visible) {
+                endpointButtons
+            } message: {
+                Text("Several explicit corners are near your touch. The nearest is listed first. Choose the intended connection or keep this endpoint independent.")
+            }
+    }
+    private var overlapPresented: Binding<Bool> {
+        Binding(get: { !overlapping.isEmpty }, set: { if !$0 { overlapping = [] } })
+    }
+    private var endpointsPresented: Binding<Bool> {
+        Binding(get: { endpointCommit != nil }, set: { if !$0 { endpointCommit = nil; endpointOptions = [] } })
+    }
+    @ViewBuilder private var endpointButtons: some View {
+        if let commit = endpointCommit {
+            ForEach(endpointOptions, id: \.id) { node in
+                Button(endpointLabel(node)) { endpointCommit = nil; endpointOptions = []; commit(node) }
+            }
+            Button("Create an independent corner here") { endpointCommit = nil; endpointOptions = []; commit(nil) }
         }
+        Button("Cancel", role: .cancel) { endpointCommit = nil; endpointOptions = [] }
+    }
+    private func endpointLabel(_ node: Node) -> String {
+        let index: Int = model.floor?.nodes.firstIndex(where: { $0.id == node.id }) ?? 0
+        return "Corner \(index + 1)"
+    }
+    private var errorPresented: Binding<Bool> {
+        Binding(get: { model.error != nil }, set: { if !$0 { model.error = nil } })
+    }
+    private var exportableContent: some View {
+        objectDialogContent
+            .alert("Action needs attention", isPresented: errorPresented) {
+                Button("OK", role: .cancel) { model.error = nil }
+            } message: { Text(model.error ?? "") }
+            .confirmationDialog("Leave unsaved changes?", isPresented: $leaving, titleVisibility: .visible) {
+                Button("Discard unsaved changes", role: .destructive) { dismiss() }
+                Button("Keep editing", role: .cancel) {}
+            } message: { Text("The previously saved revision remains on this device. The edits shown on this screen have not been saved.") }
+            .fileExporter(isPresented: $exporting, document: exportFile, contentType: exportContentType, defaultFilename: exportName) { result in
+                if case .failure(let error) = result { model.error = "Export was not completed. " + error.localizedDescription }
+            }
     }
     private var hint: String {
         switch model.tool {
