@@ -51,7 +51,7 @@
     },
     {
       "id": "UI-2026-10-09",
-      "title": "Responsive shell and full-destination module presentation",
+      "title": "Responsive application and full-destination module interfaces",
       "status": "implemented",
       "dependencies": [],
       "requirements": [
@@ -84,7 +84,12 @@
         "web/src/components/**",
         "web/src/pages/**",
         "web/src/styles.css",
-        "web/src/router.tsx"
+        "web/src/router.tsx",
+        "web/src/lib/modules.ts",
+        "tests/e2e/directory.spec.ts",
+        "docs/00-control/**",
+        "BUILD_QUEUE.json",
+        "BUILD_STATE.json"
       ],
       "assigned_to": "Lovable frontend; root integration",
       "branch": "wip/recovery-2026-10-08",
@@ -94,7 +99,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Implemented UI and owner auth are saved in GitHub b577b5a (CI59pass) and existing Lovable cc8828319.20integratedauth/directory browserfixtures pass; Lovable390pxsign-in/recovery display passes. Next verify personal hosted access through existing authorized Lovable workspace; no module-completion claim.",
+      "next_action": "UI source from Lovable 4ce078da is preserved in this canonical increment. Keep existing connected adapters and integrate owner onboarding. Connect the 45 module panels to genuine scoped records/actions and server-supplied audience capabilities as those contracts are implemented. Draft preparation is in-memory only; no full module or hosted acceptance is claimed.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },

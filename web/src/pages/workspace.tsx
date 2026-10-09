@@ -13,7 +13,7 @@ export function ProfilePage() {
 }
 
 export function ModulesPage() {
-  return <><PageHeader eyebrow="AuxiliumOS · Operating suite" title="All modules" description="Account context, governed work and evidence across one operating suite." /><div className="module-boundary"><Layers3 size={20} /><p>Directory, intake and private-document adapters are connected for development. Other module records and actions are not connected.</p></div><ModuleFinder /></>;
+  return <><PageHeader eyebrow="AuxiliumOS · Operating suite" title="All modules" description="Account context, governed work and evidence across one operating suite." /><div className="module-boundary"><Layers3 size={20} /><p>Open accounts, intake and private documents, or prepare drafts in the other workspaces.</p></div><ModuleFinder /></>;
 }
 
 export function NotFoundPage() {

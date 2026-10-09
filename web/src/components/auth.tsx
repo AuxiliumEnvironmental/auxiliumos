@@ -6,7 +6,7 @@ import type { PasswordLinkKind } from "../lib/auth-links";
 import { Brand, DevelopmentBanner, LoadingState } from "./shared";
 
 export function PublicLayout({ children, local = false }: { children: ReactNode; local?: boolean }) {
-  return <div className="public-layout"><DevelopmentBanner local={local} /><header className="public-header"><Brand /><span className="public-label">Development access</span></header><main id="main-content" className="public-main">{children}</main><footer className="public-footer">Auxilium Environmental<span>AuxiliumOS</span></footer></div>;
+  return <div className="public-layout"><DevelopmentBanner local={local} /><header className="public-header"><Brand /><span className="public-label">Development access</span></header><main id="main-content" className="public-main">{children}</main><footer className="public-footer">Auxilium Environmental<span>Secure workspace access</span></footer></div>;
 }
 
 export function ConfigurationScreen({ error }: { error: RuntimeError }) {

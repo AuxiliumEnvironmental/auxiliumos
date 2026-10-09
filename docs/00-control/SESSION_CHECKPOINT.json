@@ -222,5 +222,184 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file."
+  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
+  "lovable_frontend_assignment": {
+    "observed_at": "2026-10-09T12:45:11.835096+00:00",
+    "baseline": "b0f2ee4bf4f25f67dbb141d681b95ed0753dcc90",
+    "source_pin": "0113b60d0e1fb16657b0c921e22022d6dea5417b",
+    "scope": "Presentation only; controller owns GitHub integration. Other execution_outage records remain historical and unchanged.",
+    "changed_paths": [
+      "AGENTS.md",
+      "BUILD_QUEUE.json",
+      "docs/00-control/SESSION_CHECKPOINT.json",
+      "roadmap.md",
+      "web/src/components/app-shell.tsx",
+      "web/src/components/auth.tsx",
+      "web/src/components/button.tsx",
+      "web/src/pages/directory.tsx",
+      "web/src/pages/intake.css",
+      "web/src/pages/module-surfaces.ts",
+      "web/src/pages/module-workspace.tsx",
+      "web/src/pages/workspace.tsx",
+      "web/src/router.tsx",
+      "web/src/styles.css"
+    ],
+    "completed_surfaces": [
+      "Responsive searchable grouped shell and breadcrumbs",
+      "Sign-in and unavailable states",
+      "Authorized directory search and facility details",
+      "Existing intake and private-document hierarchy",
+      "20-module directory and distinct tabbed record/review outlines; no record requests for unavailable modules"
+    ],
+    "connected_behavior": "Existing directory, intake, upload/security status, immutable versions and exact-version download adapters retained. Hosted actions remain contingent on existing permissions and gates.",
+    "unconnected_behavior": "Other module structures are non-operational and explicitly unavailable; no fabricated rows, metrics, saves, approvals or releases. Moldo remains unavailable. No audience role switcher.",
+    "verification": {
+      "browser_command": "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome bunx playwright test --config playwright.runtime.config.ts --grep 'keyboard login, account selection|recoverable service error, empty access|phone layout, keyboard submission|current-facility assignee|mobile keyboard confirmation|phone keyboard control|disabled transport and malformed authority|confirmed narrowing report'",
+      "browser_result": "8 passed / 8 selected synthetic intercepted fixtures; not hosted Auth/RLS/API acceptance",
+      "visual_check": "1280, 768, 390 widths; 16 module URLs; tab arrow keys and Escape navigation; 9 screenshots inspected; no page errors or unexpected fixture requests",
+      "automatic_build": "Platform automatic build OK at 2026-10-09T12:45:12Z; no manual build/typecheck triggered",
+      "facility_alias": "Synthetic browser verified /assets?account redirects to canonical /facilities?account with selection preserved"
+    },
+    "backend_handoff": [
+      "Effective audience/module capabilities and assigned-action projection; never infer authority from structural module outlines",
+      "Programs/portfolios/readiness account/facility-scoped reads and mutation contracts",
+      "Scope/sampling/ROM/authorization immutable revision, transaction and permission contracts",
+      "Operations/vendor assigned-work records and state transitions",
+      "Finance/reporting capability-filtered records and derived metrics",
+      "Communications draft-only actions; AI source/provenance/human-adoption contracts",
+      "Audit query authorization; integration provenance/sync/failure projection; Moldo adapter unavailable",
+      "Approved account lookup/deep-link contract beyond current paginated directory; no new query introduced"
+    ],
+    "remaining_gaps": [
+      "Owner onboarding and genuine hosted acceptance",
+      "Internal document-review patch unpublished and not recreated",
+      "Controller independent diff review and GitHub persistence"
+    ],
+    "database_changes": [],
+    "rls_changes": [],
+    "dependency_changes": [],
+    "production_published": false,
+    "saved_presentation_commit": "5c0dbeed2b0c244fadda7bdf32e4d934d5472218",
+    "persistence_note": "Observed Lovable saved revision contains presentation and controls; this evidence update is saved by platform subsequently. No native GitHub sync claimed.",
+    "review_disposition": {
+      "module_metadata": "Authenticated outlines contain no records, permissions or private review data; backend audience/capability support is an explicit dependency before operational screens.",
+      "pagination": "Existing current-page account lookup retained; linked-account pagination limit now explicit.",
+      "alias": "Corrected to canonical URL with account preserved.",
+      "signout_storage": "Storage failure uses existing error message and does not claim clearance; runtime untouched.",
+      "navigation_ids": "Desktop/mobile search IDs distinct.",
+      "auth_rechecks": "Existing security rechecks deliberately retained."
+    },
+    "substantive_pass": {
+      "observed_at": "2026-10-09T12:55:36.473368+00:00",
+      "baseline": "2e47b70df86d78dbaf3e38ee2247e15102cc9583",
+      "changed_paths": [
+        "BUILD_QUEUE.json",
+        "tests/e2e/directory.spec.ts",
+        "web/src/components/app-shell.tsx",
+        "web/src/components/audience-layouts.tsx",
+        "web/src/components/auth.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/module-record-list.tsx",
+        "web/src/pages/module-screen-definitions.ts",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/workspace.tsx",
+        "web/src/styles.css"
+      ],
+      "interfaces": [
+        "Scope inclusion/exclusion/limitations and repeatable deliverables; exact-revision comparison notes/checklist; change request editor",
+        "Projects planning; repeatable work orders and month-filtered draft schedule; closeout evidence checklist",
+        "Programs facility coverage/effective periods/commercial review; portfolios relationships/executive brief; readiness passport/gaps/recurring work",
+        "ROM money/quantity planning inputs, assumptions, cap preparation; authorization request, exact-revision review and amendments",
+        "Sampling plan/custody/laboratory review; vendor assignment/credentials/closeout; financial entry/invoice/export preparation",
+        "Conversation routing/message preview/follow-up; report definitions/QBR sections; AI question/source references/human review/history",
+        "Audit filter preparation and unavailable history; separate Moldo connection, provenance and sync status panels",
+        "Permission-filtered list/detail component with loading/denied/error/ready prop states; no fabricated records",
+        "Four audience layout components with verified audience props; no runtime audience activation"
+      ],
+      "draft_behavior": "Values remain only in component memory and survive tab changes; module exit discards values. Beforeunload warns on edited drafts. Preview/discard/add/remove/filter work locally. No persistence, send, approve, sign, closeout, release or scheduling authority. Browser autocomplete/spellcheck disabled on draft fields.",
+      "verification": {
+        "focused_command": "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome bunx playwright test --config playwright.runtime.config.ts --grep 'fixture module drafts:'",
+        "focused_result": "2 passed, 2 selected; tests retained in tests/e2e/directory.spec.ts",
+        "interaction_browser": "python3 /tmp/browser/auxilium-ui/draft-interactions.py; 14 interaction types, 45 tabs across 15 modules, 1280/390 viewports; no page errors or unexpected provider calls; screenshots inspected",
+        "unchanged_checks": "Previous 8 connected-workflow fixture checks retained, not rerun; adapters/runtime/config unchanged",
+        "hosted_acceptance": false
+      },
+      "remaining_incomplete": [
+        "No actual revision diff or server history until immutable source revisions are provided",
+        "Audience operational surfaces not activated: runtime has no server-provided audience/capability projection",
+        "Record lists have no live records in newly unconnected modules; integration/AI/report results unavailable",
+        "No full calendar resource booking, actual conversations, laboratory evidence rendering or populated financial ledger without approved records/contracts",
+        "Owner onboarding/Auth URLs and genuine hosted acceptance remain lead-owned"
+      ],
+      "review_disposition": [
+        "Authenticated blank draft preparation grants no privilege and exposes no operational records. Audience components deny null/mismatched audience and are intentionally not wired to runtime.",
+        "First-tab records/draft toggle stays on first tab; each other tab has isolated mounted draft state.",
+        "Local draft exit limitation explicit; no cross-module persistence introduced.",
+        "List ready/denied/error states exist as props; caller currently passes unavailable rather than invented data."
+      ],
+      "backend_handoff": [
+        "Effective audience/module capabilities and assigned-action projection; never infer authority from structural module outlines",
+        "Programs/portfolios/readiness account/facility-scoped reads and mutation contracts",
+        "Scope/sampling/ROM/authorization immutable revision, transaction and permission contracts",
+        "Operations/vendor assigned-work records and state transitions",
+        "Finance/reporting capability-filtered records and derived metrics",
+        "Communications draft-only actions; AI source/provenance/human-adoption contracts",
+        "Audit query authorization; integration provenance/sync/failure projection; Moldo adapter unavailable",
+        "Approved account lookup/deep-link contract beyond current paginated directory; no new query introduced"
+      ],
+      "no_backend_or_auth_changes": true,
+      "no_new_dependencies": true,
+      "no_AGENTS_or_roadmap_changes": true,
+      "focused_review_correction": {
+        "observed_at": "2026-10-09T13:02:00Z",
+        "baseline": "8da43b186da18c9c1cd2207a7b1b06ef5550189d",
+        "changed_paths": [
+          "BUILD_QUEUE.json",
+          "docs/00-control/SESSION_CHECKPOINT.json",
+          "docs/00-control/evidence/ui-2026-10-09/scope-desktop.png",
+          "docs/00-control/evidence/ui-2026-10-09/scope-phone.png",
+          "docs/00-control/evidence/ui-capture-transfer.json",
+          "tests/e2e/directory.spec.ts",
+          "web/src/components/button.tsx",
+          "web/src/components/module-draft-screen.tsx",
+          "web/src/components/module-record-list.tsx",
+          "web/src/pages/module-workspace.tsx"
+        ],
+        "behavior": "Records Prepare draft and the Draft preparation toggle open usable first-tab fields in one action. Values persist across records/draft views and module tabs. Confirmed discard clears draft fields and repeatable rows.",
+        "copy_and_controls": "Report periods use 'to'; absent table values use 'Not provided'; shared buttons default to type=button while the draft preview remains an explicit submit control.",
+        "verification": {
+          "command": "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome bunx playwright test --config playwright.runtime.config.ts --grep 'fixture module drafts:'",
+          "result": "2 passed, 2 selected; single-click entry, records/draft persistence, tab persistence and explicit discard covered",
+          "broader_suites": "Not run by instruction"
+        },
+        "captures": {
+          "scope-desktop.png": "1280x1800 RGB PNG; SHA-256 9db6a90512ff8a20aaf1535863a6aedba60c88facf85e4731e7457148b567991",
+          "scope-phone.png": "390x1800 RGB PNG; SHA-256 d985f7e552e12a71d34d92497b326eb522bbd920c1d8d27470ff9d8393af6218",
+          "inspection": "Existing synthetic-fixture captures inspected; only synthetic fixture labels/data were visible, with no password, token or secret material and no embedded PNG metadata.",
+          "transport": "ui-capture-transfer.json contains two base64 image records for text-based transfer only and is excluded from canonical GitHub by the controller.",
+          "evidence_kind": "synthetic browser fixture, not hosted Auth acceptance",
+          "controller_visual_inspection": "Both PNGs were inspected by the controller: real application UI with synthetic fixture data. They were captured during the second UI pass before later field/copy refinements; exact capture commit is unverified. Use them as design evidence, not exact-final-source or hosted acceptance evidence.",
+          "exact_capture_revision": null
+        },
+        "no_backend_auth_permission_or_publication_changes": true
+      }
+    },
+    "controller_review": {
+      "status": "reviewed_for_canonical_integration",
+      "canonical_parent": "d177692db1a3056d271000434631abdda3dfaa4d",
+      "lovable_source_revision": "4ce078da0e412e5f50e3d70836faaf7d1f095956",
+      "preserved_existing_work": "Merged only the current UI queue entry and UI checkpoint/state fields; existing owner-onboarding task and all backend source remain preserved.",
+      "actual_source_review": "Reviewed renderer/draft state, prop-based audience denial, disabled consequential actions, unchanged live adapters/Auth runtime, scoped directory changes and focused browser-test diff.",
+      "local_build": "npm run build:dev passed on the merged owner-onboarding plus final UI source; TypeScript and Vite succeeded. Main chunk 686.63 kB minified / 192.13 kB gzip produces a nonblocking size warning. No performance acceptance is claimed.",
+      "browser_evidence": "Lovable reports 2 affected final draft cases passed. Earlier connected checks are fixture evidence, not real Auth/Storage acceptance. Local browser capture was not available because the Chromium archive download failed; no local browser pass is claimed.",
+      "excluded_from_canonical": [
+        "AGENTS.md Lovable memory addition",
+        "roadmap.md",
+        "docs/00-control/evidence/ui-capture-transfer.json"
+      ],
+      "first_incomplete_action": "Complete owner onboarding and real hosted integration; connect the module UI to each approved backend contract without replacing preserved frontend source.",
+      "merge_disposition": "Preserved the complete current onboarding Auth/runtime and workflow configuration. Replaced only the product footer in auth.tsx and app-shell.tsx; merged independent directory test additions. Control conflicts resolved by preserving current owner/backend records and adding only UI fields. Subsequent d177692 checkpoint changes were preserved without rerunning unchanged application checks.",
+      "lovable_sync_status": "Awaiting exact changed-source transfer of the combined canonical revision."
+    }
+  }
 }

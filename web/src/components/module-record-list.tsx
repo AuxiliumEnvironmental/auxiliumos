@@ -1,0 +1,15 @@
+import { useId, useState } from 'react';
+import { ArrowLeft, FileSearch, Search } from 'lucide-react';
+import { Button } from './button';
+export type PresentedRecord = { id: string; title: string; cells: string[]; details: { label: string; value: string }[] };
+export type RecordAccess = { status: 'unavailable' | 'loading' | 'denied' | 'error'; message?: string } | { status: 'ready'; records: PresentedRecord[] };
+/** Only permission-filtered records may be passed here. This component does not query data. */
+export function ModuleRecordList({ title, columns, access, onPrepare, onRetry }: { title: string; columns: readonly string[]; access: RecordAccess; onPrepare?: () => void; onRetry?: () => void }) {
+ const [query,setQuery] = useState('');
+ const [selected,setSelected] = useState<string | null>(null);
+ const id = useId();
+ const records = access.status === 'ready' ? access.records.filter(row=>`${row.title} ${row.cells.join(' ')}`.toLowerCase().includes(query.toLowerCase())) : [];
+ const detail = access.status === 'ready' ? access.records.find(row=>row.id === selected) : undefined;
+ if (detail) return <section className="record-detail"><Button variant="text-button" onClick={()=>setSelected(null)}><ArrowLeft size={16} />Back to list</Button><h2>{detail.title}</h2><dl>{detail.details.map(item=><div key={item.label}><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl></section>;
+ return <section className="module-record-list"><div className="section-intro"><h2>{title}</h2>{onPrepare && <Button variant="primary" onClick={onPrepare}>Prepare draft</Button>}</div><div className="field"><label htmlFor={id}>Find a record</label><div className="search-input"><Search size={17}/><input id={id} value={query} type="search" onChange={event=>setQuery(event.target.value)} placeholder="Search available records" /></div></div><div className="record-table" role="region" aria-label={title} tabIndex={0}><table><thead><tr>{columns.map(column=><th key={column} scope="col">{column}</th>)}<th scope="col">Details</th></tr></thead><tbody>{access.status === 'ready' && records.length > 0 ? records.map(row=><tr key={row.id}>{columns.map((column,index)=><td key={column}>{row.cells[index] || 'Not provided'}</td>)}<td><Button onClick={()=>setSelected(row.id)}>View details</Button></td></tr>) : <tr><td colSpan={columns.length+1}><div className="unconnected-state"><FileSearch size={28}/><div role={access.status === 'error' ? 'alert' : 'status'}><h3>{access.status === 'loading' ? 'Loading records' : access.status === 'denied' ? 'Access not available' : access.status === 'error' ? 'Records could not be opened' : access.status === 'ready' ? 'No matching records' : 'Records are not available yet'}</h3><p>{(access.status !== 'ready' ? access.message : undefined) || (access.status === 'unavailable' ? 'You can prepare an unsaved draft while this workspace is being connected.' : access.status === 'ready' ? 'Try another search.' : 'Check your assigned access before continuing.')}</p>{access.status === 'error' && onRetry && <Button onClick={onRetry}>Try again</Button>}</div></div></td></tr>}</tbody></table></div></section>;
+}

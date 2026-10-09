@@ -17,7 +17,7 @@
     "github": "Implementation source b577b5a94eec09bf6ff175b26f3c19f09061dd35 published, fetched and exact tree430d3969de0fbda12a09437faaf6a3c60ad6f21b verified. CI59/run37935336603 passed on that implementation. Registered ci.yml appears as CI Placeholder from main, workflow_dispatch supported. Current connector cannot inspect Actions secrets or create a dispatch; browser is signed out.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb: ten migrations including owner_onboarding_activation20261009130331 applied and ACLs read back. Existing private-objects v2 and document-version-content v3 remain JWT protected. Auth0 and buckets0; ingest/content gates false revision1. Separate synthetic connected document provisioned at revision0. No Moldo changes.",
-    "lovable": "Exact37-file transfer from GitHub b577b5a to existing project saved at cc8828319079e0c4fac3e5bba4e1f288258418d8. Worker verified all37blob hashes, development build and390px login/recovery display passed without sending mail. Root independently fetched and matched4auth/runtime/app-shellfiles plusworkflow. Preview is ready, unpublished, workspace_edit; signed-out root browser redirects to Lovable login before AuxiliumOS. Existing authorized Lovable workspace access is required; hosted owner callback behavior remains unverified.",
+    "lovable": "Existing Lovable project has owner-onboarding source at cc8828319079e0c4fac3e5bba4e1f288258418d8 and the dedicated UI build originally saved at 4ce078da0e412e5f50e3d70836faaf7d1f095956. The combined canonical integration preserves both; verify only changed files when synchronizing. No native two-way synchronization, hosted owner login or production publication is claimed.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -155,6 +155,15 @@
       "owner_password_set": false,
       "owner_first_login_verified": false,
       "independent_of_document_release": true
+    },
+    "frontend_ui": {
+      "source_lovable_revision": "4ce078da0e412e5f50e3d70836faaf7d1f095956",
+      "canonical_parent": "d177692db1a3056d271000434631abdda3dfaa4d",
+      "status": "implemented",
+      "scope": "Responsive shell and existing connected pages; 45 distinct preparation/review/status panels across the remaining 15 modules. Four audience layout components remain inactive pending server capabilities.",
+      "data_behavior": "New module drafts stay only in component memory. Missing backend reads/mutations, audience activation and professional/commercial actions remain unavailable.",
+      "verification": "Controller reviewed actual source and passed the development build. Lovable's two final affected browser-fixture cases pass. Hosted backend acceptance and complete-module acceptance remain open.",
+      "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json"
     }
   },
   "execution_recovery": {
