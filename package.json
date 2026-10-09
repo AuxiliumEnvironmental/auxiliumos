@@ -15,7 +15,7 @@
     "test:control": "node --test tests/unit/control-system.test.mjs tests/unit/document-integrity.test.mjs",
     "dev": "vite --config web/vite.config.ts",
     "build": "tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts",
-    "build:dev": "tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts --mode development",
+    "build:dev": "tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts --mode development --outDir ../dist",
     "test:database": "node --test tests/database/*.test.mjs",
     "test:runtime-ui": "playwright test --config playwright.runtime.config.ts"
   },

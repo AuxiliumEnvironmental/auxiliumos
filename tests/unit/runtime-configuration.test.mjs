@@ -71,11 +71,11 @@ test('tracked development settings contain only the approved public browser pair
   assert.deepEqual(loaded.production, {}, 'Normal production mode must not silently inherit the development target.');
 });
 
-test('explicit development build works from tracked public settings without an ignored environment file', (t) => {
+test('explicit development build emits the tracked public settings in a clean checkout', (t) => {
   const output = fs.mkdtempSync(path.join(os.tmpdir(), 'auxiliumos-development-bundle-'));
   t.after(() => fs.rmSync(output, { recursive: true, force: true }));
   const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
-  assert.equal(packageJson.scripts['build:dev'], 'tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts --mode development');
+  assert.equal(packageJson.scripts['build:dev'], 'tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts --mode development --outDir ../dist');
   const result = spawnSync(process.execPath, [
     path.join(root, 'node_modules/vite/bin/vite.js'), 'build',
     '--config', 'web/vite.config.ts', '--mode', 'development', '--outDir', output, '--logLevel', 'error',
