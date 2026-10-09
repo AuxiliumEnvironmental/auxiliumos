@@ -9,6 +9,7 @@ import { PrivateFilesPage } from "./pages/private-files";
 import { ModulesPage, NotFoundPage, ProfilePage } from "./pages/workspace";
 
 import { ModuleWorkspace } from "./pages/module-workspace";
+import { SpatialPage } from "./pages/spatial";
 
 function ScreenAccessCheck() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
@@ -73,7 +74,8 @@ function PrivateFilesRoute() {
 }
 const moduleRoute = createRoute({ getParentRoute: () => rootRoute, path: "/$module", validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }), head: ({ params }) => pageHead(params.module === "core" ? "My work" : params.module.charAt(0).toUpperCase() + params.module.slice(1), `AuxiliumOS ${params.module} workspace and connection status.`)(), component: () => <ModuleWorkspace path={moduleRoute.useParams().module} accountId={moduleRoute.useSearch().account} /> });
 
-const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, moduleRoute]);
+const spatialRoute = createRoute({ getParentRoute: () => rootRoute, path: "/spatial", head: pageHead("Spatial", "Private local layout editing and geometric navigation."), component: SpatialPage });
+const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, spatialRoute, moduleRoute]);
 export const router = createRouter({ routeTree, defaultPreload: false, scrollRestoration: true });
 
 declare module "@tanstack/react-router" {
