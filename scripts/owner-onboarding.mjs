@@ -8,7 +8,7 @@ import { preflightSchema } from '../tests/api/fixture-cleanup.mjs';
 const OWNER_EMAIL_SHA256 = '25b94cb2f529c847c80f4581f9101ff74676472d0df211419fed1a522652c5d9';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 export const OWNER_TARGET = 'https://txofqxictwecgcnvezlb.supabase.co';
-export const OWNER_ORIGIN = 'https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app';
+export const OWNER_ORIGIN = 'https://auxiliumos.io';
 export const OWNER_IDS = Object.freeze({
   account: '80f693ae-4109-442c-b719-000000000001',
   profile: '80f693ae-4109-442c-b719-000000000101',

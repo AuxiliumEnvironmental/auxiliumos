@@ -14,6 +14,8 @@ build/
 !.env.example
 # Reviewed public browser settings for the existing development target only.
 !web/.env.development
+# Published frontend still uses the reviewed synthetic development backend.
+!web/.env.production
 
 # Supabase local
 .supabase/

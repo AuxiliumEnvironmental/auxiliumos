@@ -12,6 +12,7 @@ const runnable = ts.transpileModule(source.replace(/^import .*;\n/gm, ''), {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None },
 }).outputText;
 const canonical = 'https://txofqxictwecgcnvezlb.supabase.co';
+const applicationOrigin = 'https://auxiliumos.io';
 const editorOrigin = 'https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app';
 function evaluate(overrides = {}) {
   const env = { SUPABASE_URL: canonical, SUPABASE_ANON_KEY: 'test-public', SUPABASE_SERVICE_ROLE_KEY: 'test-server', ...overrides };
@@ -30,7 +31,7 @@ function evaluate(overrides = {}) {
 test('exact development target has bounded synthetic defaults', () => {
   const { config } = evaluate();
   assert.equal(config.enabled, true);
-  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179', editorOrigin]);
+  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179', editorOrigin, applicationOrigin]);
 });
 test('mode overrides disable rather than silently enable', () => {
   for (const mode of ['', 'disabled', 'production', 'SYNTHETIC-ONLY']) {
@@ -69,6 +70,21 @@ test('only the exact existing editor origin is permitted, exclusively on the int
   const response = await handler(new Request(`${canonical}/functions/v1/private-objects`, { method: 'OPTIONS', headers: { Origin: editorOrigin } }));
   assert.equal(response.status, 204); assert.equal(response.headers.get('Access-Control-Allow-Origin'), editorOrigin);
   assert.equal(response.headers.get('Access-Control-Allow-Credentials'), null);
+});
+test('exact owner domain is allowed without accepting subdomains or alternate origins', async () => {
+  assert.equal(evaluate({ PRIVATE_OBJECT_ALLOWED_ORIGINS: applicationOrigin }).config.enabled, true);
+  for (const origin of ['http://auxiliumos.io', 'https://www.auxiliumos.io', 'https://auxiliumos.io.evil.test',
+    'https://auxiliumos.io:444', 'https://auxiliumos.io/', 'https://user@auxiliumos.io', 'https://auxiliumos.io?next=x']) {
+    assert.equal(evaluate({ PRIVATE_OBJECT_ALLOWED_ORIGINS: origin }).config.enabled, false, origin);
+  }
+  assert.equal(evaluate({ SUPABASE_URL: 'http://localhost:54321', PRIVATE_OBJECT_ALLOW_LOCAL_TEST: 'true',
+    PRIVATE_OBJECT_TRANSPORT_MODE: 'synthetic-only', PRIVATE_OBJECT_ALLOWED_ORIGINS: applicationOrigin }).config.enabled, false);
+  const noBackend = () => { throw Error('CORS cannot authenticate or read storage'); };
+  const handler = createPrivateObjectGateway({ ...evaluate().config, createUserClient: noBackend, createServiceClient: noBackend });
+  const response = await handler(new Request(`${canonical}/functions/v1/private-objects`, { method: 'OPTIONS', headers: { Origin: applicationOrigin } }));
+  assert.equal(response.status, 204); assert.equal(response.headers.get('Access-Control-Allow-Origin'), applicationOrigin);
+  const unauthenticated = await handler(new Request(`${canonical}/functions/v1/private-objects`, { method: 'POST', headers: { Origin: applicationOrigin } }));
+  assert.equal(unauthenticated.status, 401);
 });
 test('local stack is opt-in with explicit synthetic mode and no inherited CORS defaults', () => {
   for (const target of ['http://localhost:54321', 'http://127.0.0.1:54321', 'http://kong:8000']) {

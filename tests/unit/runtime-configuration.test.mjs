@@ -48,7 +48,7 @@ function cleanBrowserEnvironment() {
   return env;
 }
 
-test('tracked development settings contain only the approved public browser pair and do not load in production mode', (t) => {
+test('tracked development settings contain only the approved public browser pair and remain mode-scoped', (t) => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'auxiliumos-public-settings-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const content = fs.readFileSync(path.join(root, 'web/.env.development'), 'utf8');
@@ -69,6 +69,41 @@ test('tracked development settings contain only the approved public browser pair
     VITE_SUPABASE_PUBLISHABLE_KEY: assignments[1].slice('VITE_SUPABASE_PUBLISHABLE_KEY='.length),
   });
   assert.deepEqual(loaded.production, {}, 'Normal production mode must not silently inherit the development target.');
+});
+
+test('tracked publication settings explicitly configure only the same approved public development pair', (t) => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'auxiliumos-publication-settings-'));
+  t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const assignments = fs.readFileSync(path.join(root, 'web/.env.production'), 'utf8')
+    .split(/\r?\n/).filter((line) => line.trim() && !line.trim().startsWith('#'));
+  const developmentAssignments = fs.readFileSync(path.join(root, 'web/.env.development'), 'utf8')
+    .split(/\r?\n/).filter((line) => line.trim() && !line.trim().startsWith('#'));
+  assert.equal(assignments.length, 2, 'Publication defaults may contain only the public URL and publishable key.');
+  assert.equal(assignments[0], 'VITE_SUPABASE_URL=' + approvedUrl);
+  assert.match(assignments[1], /^VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_[A-Za-z0-9_-]+$/);
+  assert.deepEqual(assignments, developmentAssignments, 'Publishing must not switch the backend or add activation settings.');
+  fs.copyFileSync(path.join(root, 'web/.env.production'), path.join(directory, '.env.production'));
+  const script = `import { loadEnv } from 'vite'; process.stdout.write(JSON.stringify(loadEnv('production', process.argv[1], 'VITE_')));`;
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script, directory], {
+    cwd: root, encoding: 'utf8', timeout: 10_000, env: cleanBrowserEnvironment(),
+  });
+  assert.equal(result.error, undefined);
+  assert.equal(result.status, 0, result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout), {
+    VITE_SUPABASE_URL: approvedUrl,
+    VITE_SUPABASE_PUBLISHABLE_KEY: assignments[1].slice('VITE_SUPABASE_PUBLISHABLE_KEY='.length),
+  });
+});
+
+test('normal production build resolves the repository-root artifact expected by hosting', () => {
+  const script = `import { resolveConfig } from 'vite'; const config = await resolveConfig({ configFile: 'web/vite.config.ts', mode: 'production' }, 'build'); process.stdout.write(JSON.stringify({ root: config.root, outDir: config.build.outDir }));`;
+  const result = spawnSync(process.execPath, ['--input-type=module', '-e', script], {
+    cwd: root, encoding: 'utf8', timeout: 10_000, env: cleanBrowserEnvironment(),
+  });
+  assert.equal(result.error, undefined);
+  assert.equal(result.status, 0, result.stderr);
+  const resolved = JSON.parse(result.stdout);
+  assert.equal(path.resolve(resolved.root, resolved.outDir), path.join(root, 'dist'));
 });
 
 test('explicit development build emits the tracked public settings in a clean checkout', (t) => {
@@ -98,19 +133,27 @@ test('development mode still rejects an explicitly supplied different backend be
   rejectedBeforeEmission(t, { mode: 'development', url: 'https://other-project.example.invalid', key: 'sb_publishable_synthetic_development_mode_regression' });
 });
 
+test('production publication settings still reject an explicitly supplied different backend before emission', (t) => {
+  rejectedBeforeEmission(t, { url: 'https://other-project.example.invalid', key: 'sb_publishable_synthetic_publication_regression' });
+});
+
 test('development-mode builds never enable the development-server-only loopback fixture escape', (t) => {
   rejectedBeforeEmission(t, { mode: 'development', url: 'http://127.0.0.1:54321', key: 'sb_publishable_synthetic_development_mode_regression', allowLocal: 'true' });
 });
 
-test('public development ignore exceptions apply to exactly the reviewed file', () => {
+test('public build-mode ignore exceptions apply to exactly the two reviewed files', () => {
   const cases = [
     ['web/.env.development', 1],
     ['web/.env', 0],
     ['web/.env.local', 0],
     ['web/.env.development.local', 0],
-    ['web/.env.production', 0],
+    ['web/.env.production', 1],
+    ['web/.env.production.local', 0],
+    ['.env.production', 0],
     ['web/src/.env.development', 0],
+    ['web/src/.env.production', 0],
     ['tools/.env.development', 0],
+    ['tools/.env.production', 0],
   ];
   for (const [file, expected] of cases) {
     const result = spawnSync('git', ['check-ignore', '--no-index', '--quiet', '--', file], {

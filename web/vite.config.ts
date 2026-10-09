@@ -15,6 +15,8 @@ export default defineConfig(({ command, mode, isPreview }) => {
   plugins: [react()],
   server: { host: "127.0.0.1", port: 5173, strictPort: true },
   preview: { host: "127.0.0.1", port: 4173, strictPort: true },
-  build: { outDir: "dist", emptyOutDir: true },
+  // Lovable serves the repository-root artifact for both preview and publish.
+  // Keep the canonical application/environment rooted in web/.
+  build: { outDir: "../dist", emptyOutDir: true },
   };
 });

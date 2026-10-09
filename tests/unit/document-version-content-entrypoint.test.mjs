@@ -13,6 +13,7 @@ const runnable = ts.transpileModule(source.replace(/^import .*;\n/gm, ''), {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None },
 }).outputText;
 const canonical = 'https://txofqxictwecgcnvezlb.supabase.co';
+const applicationOrigin = 'https://auxiliumos.io';
 const editorOrigin = 'https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app';
 function evaluate(overrides = {}, { fetch = async () => { throw Error('Unexpected test network access'); }, sdk = realCreateClient } = {}) {
   const env = { SUPABASE_URL: canonical, SUPABASE_ANON_KEY: 'test-public-key', SUPABASE_SERVICE_ROLE_KEY: 'test-server-secret', ...overrides };
@@ -73,7 +74,7 @@ function wire(overrides = {}) {
 
 test('exact auxiliumos-dev defaults remain bounded synthetic-only and independently DB-gated', () => {
   const { config } = evaluate(); assert.equal(config.enabled, true);
-  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179', editorOrigin]);
+  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179', editorOrigin, applicationOrigin]);
   assert.match(source, /@supabase\/supabase-js@2\.117\.3/);
 });
 test('unknown targets, lookalikes, incomplete credentials and non-synthetic modes are disabled', () => {
@@ -114,6 +115,24 @@ test('exact existing editor origin works only with canonical backend and still r
   const rejection = await denied.handle(new Request(url, { headers: { Authorization: 'Bearer current.user.token', Origin: editorOrigin } }));
   assert.equal(rejection.status, 404); assert.deepEqual(await rejection.json(), { error: 'not_found_or_unavailable' });
   assert.equal(revoked.state.calls.at(-1).body.p_outcome, 'access_changed');
+});
+test('exact owner domain is allowed without accepting subdomains or alternate origins', async () => {
+  assert.equal(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: applicationOrigin }).config.enabled, true);
+  for (const origin of ['http://auxiliumos.io', 'https://www.auxiliumos.io', 'https://auxiliumos.io.evil.test',
+    'https://auxiliumos.io:444', 'https://auxiliumos.io/', 'https://user@auxiliumos.io', 'https://auxiliumos.io?next=x']) {
+    assert.equal(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: origin }).config.enabled, false, origin);
+  }
+  assert.equal(evaluate({ SUPABASE_URL: 'http://localhost:54321', DOCUMENT_CONTENT_ALLOW_LOCAL_TEST: 'true',
+    DOCUMENT_CONTENT_TRANSPORT_MODE: 'synthetic-only', DOCUMENT_CONTENT_ALLOWED_ORIGINS: applicationOrigin }).config.enabled, false);
+  const w = wire(), f = evaluate({}, { fetch: w.fetch });
+  const response = await f.handle(new Request(url, { method: 'OPTIONS', headers: { Origin: applicationOrigin,
+    'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'authorization,apikey' } }));
+  assert.equal(response.status, 204); assert.equal(response.headers.get('Access-Control-Allow-Origin'), applicationOrigin);
+  assert.equal(w.state.calls.length, 0);
+  const unauthenticated = await f.handle(new Request(url, { headers: { Origin: applicationOrigin } }));
+  assert.equal(unauthenticated.status, 401);
+  assert.deepEqual(w.state.calls.map(call => call.path), ['/rest/v1/rpc/record_document_content_denial']);
+  assert.equal(w.state.calls[0].body.p_reason_code, 'unauthenticated');
 });
 test('local test stack requires explicit synthetic mode and opt-in, with no inherited origins', () => {
   for (const target of ['http://localhost:54321', 'http://127.0.0.1:54321', 'http://kong:8000']) {

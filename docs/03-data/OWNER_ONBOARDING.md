@@ -48,10 +48,10 @@ The privileged key is injected only into the explicit owner operation, never ins
 
 ## Invitation, recovery and redirect checks
 
-Both supported callbacks are pinned to the existing Lovable preview origin:
+Both supported callbacks are pinned to the owner's application domain. Verify its HTTPS deployment before sending mail:
 
-- `https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app/?auth=invite`
-- `https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app/?auth=recovery`
+- `https://auxiliumos.io/?auth=invite`
+- `https://auxiliumos.io/?auth=recovery`
 
 Before an actual invitation or recovery email, the command creates one uniquely named synthetic Auth identity through `auth.admin.createUser`, with no application profile, grants or password. For both callbacks it uses supported `auth.admin.generateLink` recovery requests and checks the provider-resolved `properties.redirect_to` exactly. It neither prints, follows nor persists the generated link, token hash or OTP. It revalidates the exact generated Auth ID/email and absence of application linkage before deleting only that disposable identity through Admin API. Any redirect mismatch or unconfirmed cleanup prevents owner email. A transport failure before creation confirmation may require independent Auth inventory reconciliation; the command never guesses a deletion target.
 
@@ -77,6 +77,14 @@ Provider mechanisms checked against the installed SDK `@supabase/supabase-js@2.1
 
 For initial owner setup, select `invite-and-provision`, the authorized owner email, leave `reviewed_owner_auth_id` empty while the verified Auth inventory is empty, and keep both acceptance switches false. Selecting `private_bucket_mode=create-if-absent` also runs independent private storage preparation under the reviewed same-target guard. This prepares the missing bucket without making owner access wait for storage or starting tests against disabled gates. Keep `reviewed_existing_private_bucket=false` for the verified empty initial inventory.
 
-### Existing hosting access
+### Earlier preview hosting evidence
 
-On 2026-10-09 the existing unpublished preview was confirmed `workspace_edit`. A signed-out cloud browser is redirected to Lovable sign-in before reaching AuxiliumOS. The owner must have access to that existing Lovable workspace and open its preview in an authenticated workspace session. Public publication or broader editor access has not been authorized or performed. This hosting prerequisite is distinct from Supabase application identity; cross-device invitation redirect/delivery remains unverified until exercised. Do not report a local callback fixture or provider redirect resolution as proof of that complete hosted path.
+On 2026-10-09 the existing unpublished preview was confirmed `workspace_edit`. A signed-out cloud browser is redirected to Lovable sign-in before reaching AuxiliumOS. Using that private preview requires an existing Lovable workspace session. The owner subsequently supplied auxiliumos.io; the domain deployment and exact Auth URL settings are now the immediate onboarding target. At that earlier observation no public publication had been performed. Domain publication is a frontend deployment, not completion of backend workflow acceptance. This hosting prerequisite is distinct from Supabase application identity; cross-device invitation redirect/delivery remains unverified until exercised. Do not report a local callback fixture or provider redirect resolution as proof of that complete hosted path.
+
+### Supported Dashboard invitation and database-operator provisioning
+
+Owner access can use Supabase's supported **Authentication → Users → Add user → Send invitation** action without waiting for the automated API-test credential. First verify the actual application origin, working HTTPS/hosting access, Auth Site URL and allowed recovery callback. The existing client accepts the provider's root-path implicit `type=invite` callback without requiring the optional `auth=invite` query hint. A configured custom domain becomes an eligible destination only after deployment and HTTPS are verified; DNS configuration alone is insufficient. Confirm the invite template uses `.ConfirmationURL` and that the provider can send to the authorized recipient. See the official [Users guide](https://supabase.com/docs/guides/auth/users) and [SMTP restrictions](https://supabase.com/docs/guides/auth/auth-smtp).
+
+After the supported invitation, independently read back the exact Auth UUID and identity. In `scripts/provision-owner-from-dashboard.sql`, replace only `v_expected_auth_id constant uuid := null;` with that observed UUID, and execute the reviewed transaction against the confirmed `auxiliumos-dev` project as its genuine `postgres` or `supabase_admin` operator. The untouched template refuses to run. The transaction checks the same fixed recipient hash, existing IDs, exact capabilities, lifecycle history and immutable linkage; reads/locks Auth but never writes it; and creates ordinary application rows plus initial activation atomically. Its normal audit triggers record system provenance. It does not alter or invoke the PostgREST-only activation RPC, forge a role/JWT, add a public API, restore access, alter existing grants or turn on file/release gates. Exact completed retries are read-only, while mismatches and historical revocation/removal fail closed. The caller must independently verify the project reference because a database connection alone does not identify the hosted project safely.
+
+Focused coverage is `tests/database/dashboard-owner-onboarding.test.mjs`, using synthetic Auth and recipient data. A successful transaction establishes application provisioning only. The owner must personally receive the invitation, set a password and sign in, and those outcomes still require direct verification. Automated backend/API acceptance retains its separate protected-credential requirement.

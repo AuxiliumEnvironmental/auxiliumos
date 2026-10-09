@@ -896,14 +896,17 @@
         "tests/database/owner-onboarding.test.mjs",
         "tests/helpers/pglite-database.mjs",
         "supabase/migrations",
-        "tests/api/fixture-cleanup.mjs"
+        "tests/api/fixture-cleanup.mjs",
+        "scripts/provision-owner-from-dashboard.sql",
+        "tests/database/dashboard-owner-onboarding.test.mjs"
       ],
       "commands": [
         [
           "node",
           "--test",
           "tests/unit/owner-onboarding.test.mjs",
-          "tests/database/owner-onboarding.test.mjs"
+          "tests/database/owner-onboarding.test.mjs",
+          "tests/database/dashboard-owner-onboarding.test.mjs"
         ]
       ]
     },
