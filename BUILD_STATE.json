@@ -14,11 +14,11 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Connected API publication works. Last branch read3a862d25; CI56/run37908695151 SUCCESS. This checkpoint accompanies independently reviewed durable-config source5c4c524e; verify its containing remote commit/CI after publication. Local root remains last-confirmeded6b29b and must reconcile remote-only changes without reset.",
+    "github": "Verified branchHEADae899b234dd4e084ce357e1588fac3f2770b084a/tree722e75a10f7b8bd290cf3ad8b7de676cc346dc00. CI57/run37911346187 SUCCESS for the exact implementedcode. Followingcheckpoint changesonlyfourcontrolrecords, notapp/test/runtimeconfig; reusecodeCI and validate changedrecords structurally. No nativeCLIcredential claim.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Nine canonical migrations confirmed; private-objects Edgev2 and document-version-content Edgev3 ACTIVE/JWT verified. Exact contentv3source readback and intended-origin public preflights pass; foreign/lookalike origins denied. Fresh09:23:33Z check: content/reservation gatesfalse, synthetic-onlytrue, Auth0, buckets0. No genuine signed-in or Storage acceptance.",
     "lovable": "Existing project saved1eb5a991bce8a48e30418a90ec21654e0936802f independently matches334canonical files at5c4c524e (7changedrawreads+327unchanged); two pre-existing platform files retained. Publicdevsettings now saved in tracked exactpath; fullapp development artifactrootdist passes platformbuild. No nativeGitHubsync, realAuthacceptance or productionpublication.",
-    "workspace_execution": "Shared exec-server transport remains unavailable. Latest bounded read-only pwd attempt had no response in15s; no repeated writes/tests were submitted. Reviewed remote increments are safe; review-workflow backend/UI files remain only in localworktrees. Exact raw patch export was unavailable, so workers did not reconstruct or falsely publish them."
+    "workspace_execution": "Confirmed409 environment_offline: Environment is not connected. Existing UIcell47 failed; backendcell21 failed writing the contract after608.7s, so its later collection commands neverran. No new filesystemwrites, tests ortranscriptions were submitted. Local reviewpatchesremainunpublished; GitHubAPI, Supabase andLovablepathsworked."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Collect the interrupted local worker calls without resubmitting writes: backend cell21/sessions95415,40105 and UIcell47/browser68533. The workspace exec transport still does not respond. Backend first fix: read review head, events and capability flags in one SQL snapshot after current authorization; then inspect actual saved code and run focused affected tests. Correct the pending contract's unconfirmed47-test claim. UI first: collect final54-case result, revert only temporary testMatch/dependency symlink, review and commit the five allocated files. Once execution recovers, fetch and deliberately reconcile remote-only commits after localed6b29b; never reset, reimport or recreate code from prose. Securely configure/run the existing protected development API workflow for authentic acceptance; no secret values in chat.",
+  "first_runtime_action": "Restore the disconnected development workspace, then collect existing backend sessions95415/40105 and UIbrowser session68533 before rerunning tests. Backend cell21 has FAILED during the contract-file write; UIcell47 has FAILED with409 environment_offline. Do not wait on or resubmit those completed failed cells. Inspect actual local files for partial writes. Backend next: fix review head/history/flags to one SQL snapshot after current metadata authorization, correct any unconfirmed47-test claim, run only affected checks, inspect/commit and independently review the actual patch. UI next: recover54-case result, revert only temporary testMatch/dependency symlink, inspect/commit the five allocated files. Fetch/reconcile remote-only source after lastlocaled6b29b without reset/reimport/reconstruction. Genuine Auth/API acceptance separately needs the existing protected workflow and securely configured GitHub Actions service-role secret; never supply its value in chat.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -178,8 +178,8 @@
     "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Collect the interrupted local worker calls without resubmitting writes: backend cell21/sessions95415,40105 and UIcell47/browser68533. The workspace exec transport still does not respond. Backend first fix: read review head, events and capability flags in one SQL snapshot after current authorization; then inspect actual saved code and run focused affected tests. Correct the pending contract's unconfirmed47-test claim. UI first: collect final54-case result, revert only temporary testMatch/dependency symlink, review and commit the five allocated files. Once execution recovers, fetch and deliberately reconcile remote-only commits after localed6b29b; never reset, reimport or recreate code from prose. Securely configure/run the existing protected development API workflow for authentic acceptance; no secret values in chat.",
-    "latest_verified_remote": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b",
+    "first_unfinished_action": "Restore the disconnected development workspace, then collect existing backend sessions95415/40105 and UIbrowser session68533 before rerunning tests. Backend cell21 has FAILED during the contract-file write; UIcell47 has FAILED with409 environment_offline. Do not wait on or resubmit those completed failed cells. Inspect actual local files for partial writes. Backend next: fix review head/history/flags to one SQL snapshot after current metadata authorization, correct any unconfirmed47-test claim, run only affected checks, inspect/commit and independently review the actual patch. UI next: recover54-case result, revert only temporary testMatch/dependency symlink, inspect/commit the five allocated files. Fetch/reconcile remote-only source after lastlocaled6b29b without reset/reimport/reconstruction. Genuine Auth/API acceptance separately needs the existing protected workflow and securely configured GitHub Actions service-role secret; never supply its value in chat.",
+    "latest_verified_remote": "ae899b234dd4e084ce357e1588fac3f2770b084a",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4fze89fe7sbjjxg6xddbqb7",
@@ -208,11 +208,16 @@
           "supabase/migrations/20261009083206_document_version_reviews.sql",
           "tests/database/document-version-reviews.test.mjs"
         ],
-        "contract_doc_apply_pending": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
         "last_confirmed_tests": 45,
         "pending_expected_test_count": 47,
-        "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure.",
-        "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests."
+        "warning": "Contract creation failed before later result collection.45checks remain confirmed;47-resultuncollected. Do not certify the submitted contract's premature47claim or recreate it fromprose. Localmigration-listECONNREFUSED54322 wasnotahostedfailure.",
+        "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests.",
+        "cell_status": "failed",
+        "contract_doc_creation": {
+          "path": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+          "status": "write_failed",
+          "partial_file_state": "inspect actual filesystem after reconnect; no byte snapshot available"
+        }
       },
       "ui": {
         "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
@@ -234,11 +239,35 @@
           "playwright.runtime.config.ts testMatch addition",
           "node_modules symlink"
         ],
-        "port4179_release_unverified": true
+        "port4179_release_unverified": true,
+        "cell_status": "failed"
       },
       "saved_remotely": false,
       "latest_read_only_check": "pwd no response within15seconds; no actual new filesystem state observed",
-      "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative."
+      "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative.",
+      "final_transport_failure": {
+        "observed_at": "2026-10-09T09:28:32.925Z",
+        "ui": {
+          "cell": "47",
+          "status": "failed",
+          "error": "409 Conflict, environment_offline: Environment is not connected.",
+          "browser_session": 68533,
+          "result_uncollected": true
+        },
+        "backend": {
+          "cell": "21",
+          "status": "failed",
+          "exit_code": 1,
+          "wall_time_seconds": 608.7,
+          "error": "Failed to write file /workspace/scratch/831a296a4676/document-review-backend/docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+          "sessions": [
+            95415,
+            40105
+          ],
+          "subsequent_commands_executed": false
+        },
+        "no_new_filesystem_requests": true
+      }
     }
   }
 }

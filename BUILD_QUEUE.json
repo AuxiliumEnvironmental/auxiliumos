@@ -1477,7 +1477,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Execution interrupted; preserve localdocument-review-backend atdf0ed913, cell21/sessions95415,40105. Recover actualfiles/results, fix one-snapshot status coherence, correct unconfirmed47claim, runaffectedchecks, commit and obtain independentconsequentialreview. No tenth migration deployed; seeSESSION_CHECKPOINT.",
+      "next_action": "Workspace409environment_offline. Cell21FAILED writingcontract; latercollection neverran. Recoveractualfiles andsessions95415/40105, thenfixsingle-snapshot statuscoherence andrunaffectedchecks.45checksconfirmed,47uncollected; no tenth migration deployed. Commit/review actualpatch only.",
       "status": "in_progress",
       "requirements": [
         "M13",
@@ -1516,7 +1516,7 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Execution interrupted; preserve localdocument-review-ui atdf0ed913, cell47/session68533 and port4179reservation.12adapter/18newbrowser/build confirmed; final54results uncollected. Recoverresults, restoreonlytemporarytestMatch/symlink, inspectactual5files andcommit; no reconstructedcode. SeeSESSION_CHECKPOINT.",
+      "next_action": "Workspace409environment_offline. Cell47FAILED; browser68533uncollected.12adapter/18newbrowser/buildconfirmed; final54resultunknown. Recoveractualfiles/result, revert onlytemporarytestMatch/symlink, inspect/commit5files. No reconstructedcode; seeSESSION_CHECKPOINT.",
       "status": "in_progress",
       "requirements": [
         "M13",
