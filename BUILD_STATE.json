@@ -16,8 +16,8 @@
   "external_access": {
     "github": "Verified remote42741cdc10544a19aa5ced9d28048c709ef2e416 tree4685dfad125e69dca9bfdcd1c73e5e4b36a79b75 equals lastlocaled6b29b. CI55 run37907152104 SUCCESS. No manual workflow_dispatch run exists for this branch as of08:54Z. Later remote-only diagnostic patch/checkpoint must be fetched before local integration.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Nine canonical migrations applied with exact hashes;29 application tables allRLS. Six new content tables deny direct application/service access; user/service RPC split verified. New document-version-content Edgev1 ACTIVE/verify_jwt true and exact source readback; both operational gates disabled,Auth0/buckets0/versions0 at08:37:20Z. No genuine hosted acceptance.",
-    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks pass. NativeGitHubsync and production publication notclaimed. Existing publicweb/.env preserved; durable runtime settings still notverified. Exact editor CORS compatibility fix pending independentreview/deployment.",
+    "supabase": "Nine canonical migrations applied with exact hashes;29 application tables allRLS. Both Edge functions are version2 ACTIVE with JWT verification and exact source readback. The content gateway allows-origin preflight still returns400; independently reviewed empty-stream correction awaits CI, deployment and real-provider verification. Operational gates remain disabled. No genuine hostedAuth/API acceptance.",
+    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks passed. Later gateway-origin changes are not yet mirrored. Existing publicweb/.env preserved; durable runtime settings and nativeGitHubsync are not verified. Not published to production.",
     "workspace_execution": "Shared exec-server transport disconnected during active backend/UI work. One bounded read-only pwd check did not return in30s. Root read-only cell169 terminated. Source already published is safe; next review increment remains only in two local worktrees until connection recovers."
   },
   "source_precedence": [
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
+  "first_runtime_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -170,7 +170,7 @@
       "/root/document_review_backend",
       "/root/document_content_ui"
     ],
-    "first_unfinished_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
+    "first_unfinished_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
     "latest_verified_remote": "42741cdc10544a19aa5ced9d28048c709ef2e416",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
@@ -204,7 +204,8 @@
         "contract_doc_apply_pending": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
         "last_confirmed_tests": 45,
         "pending_expected_test_count": 47,
-        "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure."
+        "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure.",
+        "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests."
       },
       "ui": {
         "worktree": "/workspace/scratch/831a296a4676/document-review-ui",

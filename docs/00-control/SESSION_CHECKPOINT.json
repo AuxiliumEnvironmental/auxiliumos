@@ -8,7 +8,7 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
+  "first_unfinished_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
   "git": {
     "is_repository_root": true,
     "head": "3828ea26365c9d2d78cf9c305c19cd064a8fa3b7",
@@ -214,7 +214,8 @@
       "contract_doc_apply_pending": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
       "last_confirmed_tests": 45,
       "pending_expected_test_count": 47,
-      "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure."
+      "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure.",
+      "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests."
     },
     "ui": {
       "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
