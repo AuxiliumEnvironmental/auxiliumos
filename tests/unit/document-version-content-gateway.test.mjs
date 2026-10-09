@@ -310,3 +310,19 @@ test('stream cap and timeout cancel incomplete reads without trusting reported c
   const f = fixture({ blob: new FalseSizeBlob([bytes], { type: 'text/plain' }) });
   await safeError(await f.request(), 503); assert.deepEqual(outcome(f), ['integrity_failure']);
 });
+
+test('preflight accepts an explicitly empty HTTP body stream but rejects any payload or invalid request', async () => {
+  const headers = { origin, 'access-control-request-method': 'GET', 'access-control-request-headers': 'authorization,apikey' };
+  const empty = new Request(requestUrl, { method: 'OPTIONS', headers, body: '' });
+  assert.notEqual(empty.body, null, 'Model the provider HTTP adapter, not a bodyless fixture');
+  const f = fixture(), response = await f.handle(empty);
+  assert.equal(response.status, 204); assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin);
+  assert.equal(f.state.authCalls, 0); assert.equal(f.state.serviceClients, 0); assert.equal(f.state.downloads, 0);
+  for (const [url, body, extra] of [[requestUrl, 'x', {}], [requestUrl + '&extra=1', '', {}],
+    [requestUrl, '', { 'access-control-request-method': 'POST' }], [requestUrl, '', { range: 'bytes=0-1' }]]) {
+    const denied = fixture();
+    await safeError(await denied.handle(new Request(url, { method: 'OPTIONS', headers: { ...headers, ...extra }, body })), 400, 'invalid_request');
+    assert.equal(denied.state.authCalls, 0); assert.equal(denied.state.downloads, 0);
+    assert.equal(denial(denied).p_reason_code, 'invalid_request');
+  }
+});

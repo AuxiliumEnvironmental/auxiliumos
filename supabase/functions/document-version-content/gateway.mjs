@@ -88,7 +88,7 @@ function requestedVersion(request) {
   // One exact canonical parameter, not duplicates, path/actor overrides,
   // transformation options, encoded aliases, fragments, or moving latest IDs.
   if (typeof digest !== 'string' || !SHA.test(digest) || url.search !== `?sha256=${digest}` || url.hash
-    || request.body !== null || ['range', 'content-range', 'if-range', 'if-none-match', 'if-modified-since', 'content-encoding'].some(name => request.headers.has(name))) {
+    || (request.method !== 'OPTIONS' && request.body !== null) || ['range', 'content-range', 'if-range', 'if-none-match', 'if-modified-since', 'content-encoding'].some(name => request.headers.has(name))) {
     throw new GatewayError('invalid_request', 400);
   }
   return { versionId, digest };
@@ -128,6 +128,12 @@ export function createDocumentVersionContentGateway({ createUserClient, createSe
       if (origin !== null && !originAllowed) throw new GatewayError('forbidden_origin', 403);
       if (!['GET', 'OPTIONS'].includes(request.method)) throw new GatewayError('method_not_allowed', 405);
       if (request.method === 'OPTIONS') {
+        // HTTP adapters may represent an empty OPTIONS body as a stream.
+        // Prove that it is empty; never accept payload bytes as a preflight.
+        if (request.body !== null) {
+          try { await boundedBytes(request.body, 0); }
+          catch { throw new GatewayError('invalid_request', 400); }
+        }
         requestedVersion(request);
         const requestedHeaders = request.headers.get('access-control-request-headers');
         if (!originAllowed || request.headers.get('access-control-request-method') !== 'GET'

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T08:45:54.075Z",
+  "created_at": "2026-10-09T08:56:23.132Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,7 +8,7 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
+  "first_unfinished_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
   "git": {
     "is_repository_root": true,
     "head": "3828ea26365c9d2d78cf9c305c19cd064a8fa3b7",
@@ -16,9 +16,10 @@
     "upstream": null,
     "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/development-private-function.json\n M docs/00-control/evidence/lovable-source-transfer.json\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n?? node_modules",
     "remote": {
-      "status": "not_checked",
-      "branch": "build/continuation-2026-10-09",
-      "head": null
+      "status": "last_verified_before_remote_only_checkpoint",
+      "branch": "wip/recovery-2026-10-08",
+      "head": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+      "tree": "4685dfad125e69dca9bfdcd1c73e5e4b36a79b75"
     }
   },
   "controls_digest": "593af7e8f6f5dd033cb7d8932667685f2fd7fb6a8c16c98ca8d890bf602933a7",
@@ -191,5 +192,52 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file."
+  "note": "Remote API checkpoint after execution transport failure, not a fresh filesystem observation or a claim the active local review patches are saved remotely. Preserve active jobs/files and collect their results. Local and remote source must be reconciled before integration; no resets.",
+  "execution_outage": {
+    "observed_at": "2026-10-09T08:56:23.132Z",
+    "root_last_local_head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
+    "remote_base": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+    "root_pending_cell_terminated": "169",
+    "read_only_check": "pwd did not return within30s",
+    "backend": {
+      "worktree": "/workspace/scratch/831a296a4676/document-review-backend",
+      "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+      "cell": "21",
+      "sessions": [
+        95415,
+        40105
+      ],
+      "files_saved_uncommitted": [
+        "supabase/migrations/20261009083206_document_version_reviews.sql",
+        "tests/database/document-version-reviews.test.mjs"
+      ],
+      "contract_doc_apply_pending": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+      "last_confirmed_tests": 45,
+      "pending_expected_test_count": 47,
+      "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure."
+    },
+    "ui": {
+      "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
+      "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+      "cell": "47",
+      "browser_session": 68533,
+      "last_confirmed_adapter_tests": 12,
+      "last_confirmed_review_browser_tests": 18,
+      "final_54_case_run_last_observed_pass": 27,
+      "build_passed": true,
+      "files_saved_uncommitted": [
+        "web/src/lib/document-review-api.ts",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-review-api.test.mjs",
+        "tests/e2e/document-reviews.spec.ts"
+      ],
+      "temporary_changes": [
+        "playwright.runtime.config.ts testMatch addition",
+        "node_modules symlink"
+      ],
+      "port4179_release_unverified": true
+    },
+    "saved_remotely": false
+  }
 }

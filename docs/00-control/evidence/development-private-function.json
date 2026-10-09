@@ -38,5 +38,118 @@
       },
       "acceptance": "Provider deployed/retrieved exact source. Both synthetic DB gates disabled. No genuine Auth/Storage/API or real-data release claim."
     }
-  ]
+  ],
+  "cors_update": {
+    "source_commit": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+    "review_commit": "3828ea26365c9d2d78cf9c305c19cd064a8fa3b7",
+    "functions": [
+      {
+        "id": "2727d9ce-5651-4519-abb4-64f3e532f70f",
+        "slug": "private-objects",
+        "version": 2,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "ezbr_sha256": "633038dd41cf2b5c3bb722ce61dabbaaff93deb0548a68d45f8c441facbdb7a8",
+        "observed_at": "2026-10-09T08:48:25.809Z",
+        "two_files_exact": true
+      },
+      {
+        "id": "4bbddcf6-39a8-46b1-9c71-ff2ee7506c41",
+        "slug": "document-version-content",
+        "version": 2,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "ezbr_sha256": "d04df3fd259442ca3b42ee05ec56881a94da0f422971396e3ac61d121dd9ed1b",
+        "observed_at": "2026-10-09T08:48:26.526Z",
+        "two_files_exact": true
+      }
+    ],
+    "before_update_probe": {
+      "kind": "before_cors_update_non_authenticated_preflight",
+      "status": 403,
+      "allowedOrigin": null,
+      "methods": null,
+      "bodyIsEmpty": false
+    },
+    "after_update_probe": {
+      "checked_at": "2026-10-09T08:48:28.834Z",
+      "kind": "real_provider_unauthenticated_OPTIONS_only",
+      "checks": [
+        {
+          "slug": "private-objects",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "status": 204,
+          "allowOrigin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "credentials": null,
+          "bodyIsEmpty": true,
+          "pass": true
+        },
+        {
+          "slug": "private-objects",
+          "origin": "http://127.0.0.1:4179",
+          "status": 204,
+          "allowOrigin": "http://127.0.0.1:4179",
+          "credentials": null,
+          "bodyIsEmpty": true,
+          "pass": true
+        },
+        {
+          "slug": "private-objects",
+          "origin": "https://other.lovable.app",
+          "status": 403,
+          "allowOrigin": null,
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": true
+        },
+        {
+          "slug": "private-objects",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app.evil.test",
+          "status": 403,
+          "allowOrigin": null,
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": true
+        },
+        {
+          "slug": "document-version-content",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "status": 400,
+          "allowOrigin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": false
+        },
+        {
+          "slug": "document-version-content",
+          "origin": "http://127.0.0.1:4179",
+          "status": 400,
+          "allowOrigin": "http://127.0.0.1:4179",
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": false
+        },
+        {
+          "slug": "document-version-content",
+          "origin": "https://other.lovable.app",
+          "status": 403,
+          "allowOrigin": null,
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": true
+        },
+        {
+          "slug": "document-version-content",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app.evil.test",
+          "status": 403,
+          "allowOrigin": null,
+          "credentials": null,
+          "bodyIsEmpty": false,
+          "pass": true
+        }
+      ],
+      "passed": false
+    },
+    "disposition": "Upload real OPTIONS passes; content allowed-origin OPTIONS fails400. Exact deployedv2source verified. Suspected provider representation of empty OPTIONS body as nonnullstream; bounded correction proposed and new regression appended. Not yet verified or deployed; no Auth/Storage acceptance inferred."
+  }
 }

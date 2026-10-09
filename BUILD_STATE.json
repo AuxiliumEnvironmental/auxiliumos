@@ -14,10 +14,11 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Verified remote ad7294501ff4465c48e8b8b1abffc3b0e5853807 equals localdf0ed913 tree7b3a25613f2f323d700b1c27c3cd2a2bc67503a6. CI54 run37905733746 SUCCESS, controls/application jobs pass; protected development-api correctly skipped. Later CORS3828ea2 not yet published at this checkpoint. PR84/main boundary preserved.",
+    "github": "Verified remote42741cdc10544a19aa5ced9d28048c709ef2e416 tree4685dfad125e69dca9bfdcd1c73e5e4b36a79b75 equals lastlocaled6b29b. CI55 run37907152104 SUCCESS. No manual workflow_dispatch run exists for this branch as of08:54Z. Later remote-only diagnostic patch/checkpoint must be fetched before local integration.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Nine canonical migrations applied with exact hashes;29 application tables allRLS. Six new content tables deny direct application/service access; user/service RPC split verified. New document-version-content Edgev1 ACTIVE/verify_jwt true and exact source readback; both operational gates disabled,Auth0/buckets0/versions0 at08:37:20Z. No genuine hosted acceptance.",
-    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks pass. NativeGitHubsync and production publication notclaimed. Existing publicweb/.env preserved; durable runtime settings still notverified. Exact editor CORS compatibility fix pending independentreview/deployment."
+    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks pass. NativeGitHubsync and production publication notclaimed. Existing publicweb/.env preserved; durable runtime settings still notverified. Exact editor CORS compatibility fix pending independentreview/deployment.",
+    "workspace_execution": "Shared exec-server transport disconnected during active backend/UI work. One bounded read-only pwd check did not return in30s. Root read-only cell169 terminated. Source already published is safe; next review increment remains only in two local worktrees until connection recovers."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -26,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
+  "first_runtime_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -167,11 +168,10 @@
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [
       "/root/document_review_backend",
-      "/root/document_content_ui",
-      "/root/integration_security_review"
+      "/root/document_content_ui"
     ],
-    "first_unfinished_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
-    "latest_verified_remote": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+    "first_unfinished_action": "Recover workspace execution before local edits: preserve backend cell21/sessions95415,40105 and UIcell47/browser68533. Collect actual run results, read current files, correct any premature47-test claim in pending backend doc, revert only UItemporarytestMatch/symlink, then commit/review actual patches. Rootlastlocaled6b29b must reconcile subsequent remote-only checkpoint/preflight fix by fetch and actualdiff; no reset or overwrite. Independently review/test suspected empty-OPTIONS-body correction; deployed contentv2 real OPTIONS currently400 for allowedorigins, whileuploadv2 passes. Do not claim hostedAuth/API acceptance.",
+    "latest_verified_remote": "42741cdc10544a19aa5ced9d28048c709ef2e416",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4fx1brzfqmaanepv5gtfezj",
@@ -182,6 +182,53 @@
       "native_github_sync": false,
       "receipt": "docs/00-control/evidence/lovable-source-transfer.json",
       "target_commit": "1a625d6e9a1d3e8d7be7e7f50d348abc004fa886"
+    },
+    "execution_outage": {
+      "observed_at": "2026-10-09T08:56:23.132Z",
+      "root_last_local_head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
+      "remote_base": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+      "root_pending_cell_terminated": "169",
+      "read_only_check": "pwd did not return within30s",
+      "backend": {
+        "worktree": "/workspace/scratch/831a296a4676/document-review-backend",
+        "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+        "cell": "21",
+        "sessions": [
+          95415,
+          40105
+        ],
+        "files_saved_uncommitted": [
+          "supabase/migrations/20261009083206_document_version_reviews.sql",
+          "tests/database/document-version-reviews.test.mjs"
+        ],
+        "contract_doc_apply_pending": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+        "last_confirmed_tests": 45,
+        "pending_expected_test_count": 47,
+        "warning": "Pending contract doc says47passed prematurely; must correct if result cannot be recovered. Local advisor/migration-list ECONNREFUSED54322 is not hosted failure."
+      },
+      "ui": {
+        "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
+        "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+        "cell": "47",
+        "browser_session": 68533,
+        "last_confirmed_adapter_tests": 12,
+        "last_confirmed_review_browser_tests": 18,
+        "final_54_case_run_last_observed_pass": 27,
+        "build_passed": true,
+        "files_saved_uncommitted": [
+          "web/src/lib/document-review-api.ts",
+          "web/src/components/document-version-review.tsx",
+          "web/src/components/document-versions.tsx",
+          "tests/unit/document-review-api.test.mjs",
+          "tests/e2e/document-reviews.spec.ts"
+        ],
+        "temporary_changes": [
+          "playwright.runtime.config.ts testMatch addition",
+          "node_modules symlink"
+        ],
+        "port4179_release_unverified": true
+      },
+      "saved_remotely": false
     }
   }
 }
