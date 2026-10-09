@@ -55,8 +55,13 @@ export interface WalkMove { position: WalkPosition; requested: Point2; reachedTa
 export interface Selection { floorID: string; kind: 'node' | 'wall' | 'opening' | 'room' | 'area'; objectID: string }
 // OS context is supplied only by its authenticated adapter after an authorized lookup.
 export type WorkspaceContext = { mode: 'standalone'; namespace: string } | { mode: 'auxiliumos-personal'; namespace: string; profileID: string; assertAccess: () => Promise<void> } | { mode: 'auxiliumos'; namespace: string; profileID: string; accountID: string; projectID: string; projectLabel: string; assertAccess: () => Promise<void> };
-export interface FrozenRevision { document: SpatialDocument; hash: string; bytes: Uint8Array; createdAt: string }
-export interface StoredWorkspace { document: SpatialDocument; canUndo: boolean; canRedo: boolean; updatedAt: string; receipt?: EditReceipt }
+export interface SourceIdentity { documentID: string; revision: number; sha256: string; reason: string }
+// Optional provenance is local-backup metadata; it never changes graph identity.
+// Both fields must be present together and verified before persistence or export.
+export interface SourceProvenance { sourceIdentity?: SourceIdentity; sourceBytes?: Uint8Array }
+export interface ImportedWorkspace extends SourceProvenance { document: SpatialDocument }
+export interface FrozenRevision extends SourceProvenance { document: SpatialDocument; hash: string; bytes: Uint8Array; createdAt: string }
+export interface StoredWorkspace { document: SpatialDocument; canUndo: boolean; canRedo: boolean; updatedAt: string; receipt?: EditReceipt; sourceIdentity?: SourceIdentity }
 export interface WorkspaceSummary { documentID: string; title: string; revision: number; updatedAt: string }
 export type ExportFormat = 'geometry' | 'scene' | 'svg' | 'pdf' | 'png' | 'glb' | 'bundle' | 'local-document';
 export interface ExportArtifact { filename: string; mimeType: string; bytes: Uint8Array; revision: number; hash: string }

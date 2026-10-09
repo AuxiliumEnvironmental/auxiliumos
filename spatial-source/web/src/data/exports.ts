@@ -47,8 +47,13 @@ export async function exportRevision(frozen: FrozenRevision, format: ExportForma
       // Always complete: a selected-floor UI must not silently narrow a document recovery archive.
       const files: Record<string, Uint8Array> = { 'geometry.json': frozen.bytes.slice() };
       const records: Record<string, unknown>[] = [{ path: 'geometry.json', mimeType: 'application/json', sha256: await sha256(files['geometry.json']), bytes: files['geometry.json'].length }];
+      if (frozen.sourceIdentity && frozen.sourceBytes) {
+        files['source/geometry.json'] = frozen.sourceBytes.slice();
+        files['source/identity.json'] = jsonBytes({ profileVersion: 'auxilium-spatial-source-provenance/1.0.0', documentID: document.documentID, revision: document.revision, sourceIdentity: frozen.sourceIdentity });
+        for (const path of ['source/geometry.json', 'source/identity.json']) records.push({ path, mimeType: 'application/json', sha256: await sha256(files[path]), bytes: files[path].length });
+      }
       const floorPages = document.floors.map(floor => drawings(frozen, floor));
-      if (floorPages.reduce((n, pages) => n + pages.length * 2 + 3, 1) > 4095) fail('local-document-file-limit');
+      if (floorPages.reduce((n, pages) => n + pages.length * 2 + 3, records.length) > 4095) fail('local-document-file-limit');
       const add = async (path: string, data: Uint8Array, type: string, id: string, pageIndex?: number) => { files[path] = data; records.push({ path, mimeType: type, sha256: await sha256(data), bytes: data.length, floorID: id, ...(pageIndex === undefined ? {} : { pageIndex }) }); };
       for (let index = 0; index < document.floors.length; index++) {
         const floor = document.floors[index], base = `floors/${index.toString().padStart(4, '0')}/`;
@@ -61,7 +66,7 @@ export async function exportRevision(frozen: FrozenRevision, format: ExportForma
         await add(`${base}floorplan.pdf`, await pdfDrawing(frozen, [floor]), 'application/pdf', floor.id);
         if (floor.walls.length || floor.rooms.length) await add(`${base}model.glb`, glbDrawing(frozen, floor.id), 'model/gltf-binary', floor.id);
       }
-      files['manifest.json'] = jsonBytes({ profileVersion: 'auxilium-spatial-local-document/1.0.0', documentID: document.documentID, revision: document.revision, measurementStatus: 'unverified', coordinateSystem: document.coordinateSystem, floors: document.floors.map((floor, index) => ({ floorID: floor.id, label: floor.label, elevation: floor.elevation, index, pageCount: floorPages[index].length, representationStatus: floor.walls.length || floor.rooms.length ? 'geometry' : 'empty' })), files: records });
+      files['manifest.json'] = jsonBytes({ profileVersion: frozen.sourceIdentity ? 'auxilium-spatial-local-document/1.1.0' : 'auxilium-spatial-local-document/1.0.0', documentID: document.documentID, revision: document.revision, measurementStatus: 'unverified', coordinateSystem: document.coordinateSystem, floors: document.floors.map((floor, index) => ({ floorID: floor.id, label: floor.label, elevation: floor.elevation, index, pageCount: floorPages[index].length, representationStatus: floor.walls.length || floor.rooms.length ? 'geometry' : 'empty' })), files: records });
       bytes = writeZIP(files); mimeType = 'application/zip'; filename = `${stem}.spatial.zip`; break;
     }
     default: return fail('unsupported-export-format');

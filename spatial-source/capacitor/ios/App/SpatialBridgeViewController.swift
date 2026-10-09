@@ -34,7 +34,7 @@ final class SpatialBridgeViewController: CAPBridgeViewController {
         webView.configuration.userContentController.removeScriptMessageHandler(forName: "bridge")
         webView.configuration.userContentController.add(handler, name: "bridge")
         let navigation = WorkspaceNavigationGuard(target: capacitor.webViewDelegationHandler) { [weak self] in
-            self?.capturePlugin.workspaceReloaded(); self?.filesPlugin.lock()
+            self?.capturePlugin.workspaceReloaded(); self?.filesPlugin.workspaceReloaded()
         }
         navigationGuard = navigation
         webView.navigationDelegate = navigation
@@ -43,6 +43,11 @@ final class SpatialBridgeViewController: CAPBridgeViewController {
 
     override func webViewConfiguration(for instanceConfiguration: InstanceConfiguration) -> WKWebViewConfiguration {
         let configuration = super.webViewConfiguration(for: instanceConfiguration)
+        // Preserve the existing persistent IndexedDB store. Selecting a new UUID
+        // or a nonpersistent store would orphan or discard local drafts. WebKit's
+        // actual file protection still needs installed-device acceptance; the
+        // device-owner shield alone makes no at-rest protection claim.
+        configuration.websiteDataStore = .default()
         configuration.allowsAirPlayForMediaPlayback = false
         configuration.mediaTypesRequiringUserActionForPlayback = .all
         return configuration

@@ -65,8 +65,60 @@ final class BridgePolicyTests: XCTestCase {
             XCTAssertThrowsError(try ExportBridgePolicy.decode(filename: "layout.svg", mimeType: "image/svg+xml",
                 base64: Data(value.utf8).base64EncodedString()), value)
         }
-        let lineArt = #"<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L1 1" fill="none" stroke="#123456"/></svg>"#
+        let lineArt = ##"<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0L1 1" fill="none" stroke="#123456"/></svg>"##
         XCTAssertNoThrow(try ExportBridgePolicy.decode(filename: "layout.svg", mimeType: "image/svg+xml",
             base64: Data(lineArt.utf8).base64EncodedString()))
+    }
+    func testShareBackgroundKeepsFileUntilActualActivityCompletion() {
+        var lifecycle = NativeExportLifecycle(); let id = UUID()
+        XCTAssertTrue(lifecycle.begin(id))
+        lifecycle.enteredBackground()
+        XCTAssertTrue(lifecycle.retainsStagedFile)
+        XCTAssertNil(lifecycle.completion)
+        XCTAssertFalse(lifecycle.mayDeliverCompletion)
+        XCTAssertTrue(lifecycle.completed(id, completed: true, failed: false))
+        XCTAssertFalse(lifecycle.retainsStagedFile)
+        XCTAssertFalse(lifecycle.mayDeliverCompletion)
+        lifecycle.updateAccess(foreground: true, protectedDataAvailable: true, unlocked: true)
+        XCTAssertTrue(lifecycle.mayDeliverCompletion)
+        XCTAssertEqual(lifecycle.completion, .succeeded)
+    }
+    func testProtectedDataLockDoesNotInventCancellationOrDeleteInUseFile() {
+        var lifecycle = NativeExportLifecycle(); let id = UUID()
+        XCTAssertTrue(lifecycle.begin(id))
+        lifecycle.protectedDataUnavailable()
+        XCTAssertTrue(lifecycle.retainsStagedFile)
+        XCTAssertNil(lifecycle.completion)
+        XCTAssertTrue(lifecycle.completed(id, completed: false, failed: false))
+        XCTAssertFalse(lifecycle.mayDeliverCompletion)
+        lifecycle.updateAccess(foreground: true, protectedDataAvailable: true, unlocked: false)
+        XCTAssertFalse(lifecycle.mayDeliverCompletion)
+        lifecycle.updateAccess(foreground: true, protectedDataAvailable: true, unlocked: true)
+        XCTAssertTrue(lifecycle.mayDeliverCompletion)
+        XCTAssertEqual(lifecycle.completion, .cancelled)
+    }
+    func testReloadInvalidatesOnlyCallbackAndCannotResolveIntoNewPage() {
+        var lifecycle = NativeExportLifecycle(); let id = UUID()
+        XCTAssertTrue(lifecycle.begin(id))
+        lifecycle.workspaceReloaded()
+        XCTAssertTrue(lifecycle.retainsStagedFile)
+        XCTAssertFalse(lifecycle.begin(UUID()))
+        XCTAssertTrue(lifecycle.completed(id, completed: true, failed: false))
+        lifecycle.updateAccess(foreground: true, protectedDataAvailable: true, unlocked: true)
+        XCTAssertFalse(lifecycle.mayDeliverCompletion)
+        XCTAssertFalse(lifecycle.retainsStagedFile)
+    }
+    func testStaleActivityCompletionCannotReleaseNextShareFile() {
+        var lifecycle = NativeExportLifecycle(); let old = UUID(), current = UUID()
+        XCTAssertTrue(lifecycle.begin(old))
+        XCTAssertTrue(lifecycle.completed(old, completed: true, failed: false))
+        lifecycle.clear()
+        XCTAssertTrue(lifecycle.begin(current))
+        XCTAssertFalse(lifecycle.completed(old, completed: false, failed: true))
+        XCTAssertTrue(lifecycle.retainsStagedFile)
+        XCTAssertNil(lifecycle.completion)
+        XCTAssertTrue(lifecycle.completed(current, completed: true, failed: true))
+        XCTAssertEqual(lifecycle.completion, .failed)
+        XCTAssertFalse(lifecycle.completed(current, completed: true, failed: false))
     }
 }

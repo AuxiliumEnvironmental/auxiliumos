@@ -1,32 +1,40 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { buildScene, wallPath, WalkNavigation } from '../core';
+import { buildScene, displayCeilings, roomBoundary, wallPath, WalkNavigation } from '../core';
 import { batchSceneFaces } from './sceneBatches';
 import { trackRenderer } from './rendererDiagnostics';
-import type { Floor, Selection, SpatialDocument, WalkPosition } from '../types';
+import type { Floor, Point2, Selection, SpatialDocument, WalkPosition } from '../types';
 
-type Props = { document: SpatialDocument; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void };
-type Runtime = { camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; dispose: () => void };
-export function ModelViewport({ document, floor, selection, onSelect }: Props) {
+export type ModelViewState = { camera: [number,number,number]; target: [number,number,number]; cutaway: boolean; cut: number; fills: boolean; ceilings: boolean };
+type Props = { rememberedView?: ModelViewState; rememberView?: (view: ModelViewState) => void; document: SpatialDocument; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void };
+type Runtime = { camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; showCeilings: (visible: boolean) => void; dispose: () => void };
+export function ModelViewport({ rememberedView, rememberView, document, floor, selection, onSelect }: Props) {
   const host = useRef<HTMLDivElement>(null);
+  const lastFraming=useRef<ModelViewState|undefined>(rememberedView);
   const runtime = useRef<Runtime | null>(null);
   const navigation = useRef<WalkNavigation | null>(null);
   const position = useRef<WalkPosition | null>(null);
   const heading = useRef(0);
   const pitch = useRef(0);
   const walking = useRef(false);
+  const settingsID=useId();
+  const [settingsOpen,setSettingsOpen]=useState(false);
   const [mode, setMode] = useState<'orbit' | 'walk'>('orbit');
-  const [roomID, setRoomID] = useState(floor.rooms[0]?.id ?? '');
-  const [cutaway, setCutaway] = useState(false);
-  const [fills, setFills] = useState(true);
+  const [roomID, setRoomID] = useState(floor.rooms.find(room=>room.id===selection?.objectID)?.id ?? floor.rooms[0]?.id ?? '');
+  const [cutaway, setCutaway] = useState(rememberedView?.cutaway ?? false);
+  const [fills, setFills] = useState(rememberedView?.fills ?? true);
+  const [ceilings, setCeilings] = useState(rememberedView?.ceilings ?? false);
   const fillsRef = useRef(fills); fillsRef.current = fills;
-  const [cut, setCut] = useState(0.5);
+  const [cut, setCut] = useState(rememberedView?.cut ?? 0.5);
+  const viewRef=useRef({cutaway,cut,fills,ceilings});viewRef.current={cutaway,cut,fills,ceilings};
+  const rememberRef=useRef(rememberView);rememberRef.current=rememberView;
   const [message, setMessage] = useState('Drag to orbit. Scroll or pinch to zoom.');
   const [error, setError] = useState('');
   const [portalCount, setPortalCount] = useState(0);
   const selectRef = useRef(onSelect); selectRef.current = onSelect;
   const selectedRef = useRef(selection); selectedRef.current = selection;
+  const moveTargetRef=useRef<(target:Point2)=>void>(()=>{});
   const moveRef = useRef<(forward: number, side: number) => void>(() => {});
   const lookRef = useRef<(turn: number, tilt?: number) => void>(() => {});
   const repeat = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -35,12 +43,12 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
   const cutHeight = floor.elevation + (modelTop - floor.elevation) * cut;
   const updateCamera = () => { const r = runtime.current, p = position.current; if (!r || !p) return; r.camera.position.set(p.point.x, p.eyeY, p.point.z); r.camera.lookAt(p.point.x + Math.sin(heading.current) * Math.cos(pitch.current), p.eyeY + Math.sin(pitch.current), p.point.z - Math.cos(heading.current) * Math.cos(pitch.current)); r.render(); };
   function leaveWalk() { walking.current = false; setMode('orbit'); stopRepeat(); const r = runtime.current; if (r) { r.controls.enabled = true; r.camera.position.copy(r.initial); r.controls.target.copy(r.focus); r.controls.update(); r.render(); } position.current = null; setMessage('Drag to orbit. Scroll or pinch to zoom.'); }
-  function beginWalk(id = roomID) { try { if (!navigation.current) throw new Error('The walking model is unavailable.'); const p = navigation.current.start(id); position.current = p; heading.current = 0; pitch.current = 0; walking.current = true; setMode('walk'); setCutaway(false); if (runtime.current) runtime.current.controls.enabled = false; updateCamera(); setMessage('Use W A S D or the move buttons. Doors and passages connect known rooms.'); setError(''); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); } }
-  moveRef.current = (forward, side) => {
+  function beginWalk(id = roomID) { try { if (!navigation.current) throw new Error('The walking model is unavailable.'); const p = navigation.current.start(id); position.current = p; const portal=navigation.current.portals.filter(portal=>portal.roomIDs.includes(id)).map(portal=>({x:(portal.a.x+portal.b.x)/2,z:(portal.a.z+portal.b.z)/2})).sort((a,b)=>Math.hypot(a.x-p.point.x,a.z-p.point.z)-Math.hypot(b.x-p.point.x,b.z-p.point.z))[0];const boundary=roomBoundary(floor,floor.rooms.find(room=>room.id===id)!);const target=portal??[...boundary].sort((a,b)=>Math.hypot(b.x-p.point.x,b.z-p.point.z)-Math.hypot(a.x-p.point.x,a.z-p.point.z))[0];heading.current=target?Math.atan2(target.x-p.point.x,-(target.z-p.point.z)):0;pitch.current = -0.35; walking.current = true; setMode('walk'); setCutaway(false); if (runtime.current) runtime.current.controls.enabled = false; updateCamera(); setMessage('Tap a visible floor to move. Drag to look, or use the move buttons.'); setError(''); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); } }
+  moveTargetRef.current = target => {
     if (!walking.current || !position.current || !navigation.current) return;
-    const p = position.current, angle = heading.current;
-    try { const result = navigation.current.move(p, { x: p.point.x + Math.sin(angle) * forward + Math.cos(angle) * side, z: p.point.z - Math.cos(angle) * forward + Math.sin(angle) * side }); position.current = result.position; setRoomID(result.position.roomID); updateCamera(); setMessage(result.reachedTarget ? result.crossedPortalIDs.length ? 'Moved through a permitted opening into the next room.' : 'Walking inside the known layout.' : result.stop === 'unknownBoundary' ? 'Unknown boundary. Capture or correct this connection before walking through.' : result.stop === 'ambiguousRooms' ? 'Room connection is ambiguous. Correct the shared boundary first.' : 'Movement stopped at the wall or opening clearance.'); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); }
+    try { const result = navigation.current.move(position.current,target); position.current = result.position; setRoomID(result.position.roomID); updateCamera(); setMessage(result.reachedTarget ? result.crossedPortalIDs.length ? 'Moved through a permitted opening into the next room.' : 'Walking inside the known layout.' : result.stop === 'unknownBoundary' ? 'Unknown boundary. Capture or correct this connection before walking through.' : result.stop === 'ambiguousRooms' ? 'Room connection is ambiguous. Correct the shared boundary first.' : result.stop === 'requestTooLong' ? 'Choose a closer visible floor position.' : 'Movement stopped at the wall or opening clearance.'); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); }
   };
+  moveRef.current = (forward, side) => { const p=position.current;if(!p)return;const angle=heading.current;moveTargetRef.current({x:p.point.x+Math.sin(angle)*forward+Math.cos(angle)*side,z:p.point.z-Math.cos(angle)*forward+Math.sin(angle)*side}); };
   lookRef.current = (turn, tilt = 0) => { heading.current += turn; pitch.current = Math.max(-1, Math.min(1, pitch.current + tilt)); updateCamera(); };
   useEffect(() => {
     const el = host.current; if (!el) return;
@@ -58,6 +66,8 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     const graphic = (() => { try { return buildScene(document, floor.id); } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); return null; } })();
     let section: THREE.LineSegments | null = null, selectedEdges: THREE.LineSegments | null = null, selectedNode: THREE.Mesh | null = null;
     const batches=graphic?batchSceneFaces(graphic,clipping):[];
+    const ceilingBatches=graphic?batchSceneFaces({...graphic,faces:displayCeilings(document,floor.id),edges:[]},clipping):[];
+    for(const batch of ceilingBatches){batch.mesh.visible=ceilings;batch.mesh.userData.role='ceiling';batch.updateColors(selectedRef.current?.objectID,fillsRef.current);scene.add(batch.mesh);meshes.push(batch.mesh);resources.push(batch.mesh.geometry,batch.mesh.material);}
     if (graphic) {
       for(const batch of batches){batch.updateColors(selectedRef.current?.objectID,fillsRef.current);scene.add(batch.mesh);meshes.push(batch.mesh);resources.push(batch.mesh.geometry,batch.mesh.material);}
       const grouped = new Map<string, number[]>();
@@ -73,10 +83,24 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     const bounds = new THREE.Box3(); for (const node of floor.nodes) bounds.expandByPoint(new THREE.Vector3(node.point.x, floor.elevation, node.point.z));
     if (bounds.isEmpty()) { bounds.min.set(-2, floor.elevation, -2); bounds.max.set(2, floor.elevation + 2.6, 2); } else bounds.max.y = modelTop;
     const focus = bounds.getCenter(new THREE.Vector3()), span = Math.max(bounds.max.x - bounds.min.x, bounds.max.z - bounds.min.z, 4), initial = focus.clone().add(new THREE.Vector3(span * 0.8, span * 0.9, span * 1.05));
-    camera.position.copy(initial); controls.target.copy(focus); controls.update();
-    const render = () => { renderer.render(scene, camera); };
+    const savedView=lastFraming.current;camera.position.copy(savedView?new THREE.Vector3(...savedView.camera):initial); controls.target.copy(savedView?new THREE.Vector3(...savedView.target):focus); controls.update();
+    // Coalesce selection, resize and camera invalidations into one frame. This is
+    // deliberately event-driven: hidden and unchanged models schedule no work.
+    let queuedFrame = 0, disposed = false;
+    const cancelFrame = () => { if (queuedFrame) cancelAnimationFrame(queuedFrame); queuedFrame = 0; };
+    const render = () => {
+      if (disposed || window.document.hidden || queuedFrame) return;
+      queuedFrame = requestAnimationFrame(() => {
+        queuedFrame = 0;
+        if (disposed || window.document.hidden) return;
+        renderer.render(scene, camera);
+        renderer.domElement.dataset.rendered = 'true';
+      });
+    };
+    const visibility = () => { if (window.document.hidden) cancelFrame(); else render(); };
+    window.document.addEventListener('visibilitychange', visibility);
     const select = (selection: Selection | null) => {
-      for(const batch of batches)batch.updateColors(selection?.objectID,fillsRef.current);
+      for(const batch of [...batches,...ceilingBatches])batch.updateColors(selection?.objectID,fillsRef.current);
       if (selectedEdges) { scene.remove(selectedEdges); selectedEdges.geometry.dispose(); (selectedEdges.material as THREE.Material).dispose(); selectedEdges = null; }
       if(selectedNode){scene.remove(selectedNode);selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();selectedNode=null;}
       const edges = graphic?.edges.filter(e=>e.objectID===selection?.objectID) ?? [];
@@ -107,7 +131,8 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     const pointerUp = (event: PointerEvent) => {
       if (!pointer || pointer.moved) { pointer = null; return; } pointer = null;
       const rect = renderer.domElement.getBoundingClientRect(); raycaster.setFromCamera(new THREE.Vector2((event.clientX-rect.left)/rect.width*2-1, -(event.clientY-rect.top)/rect.height*2+1),camera);
-      const hit = raycaster.intersectObjects(meshes).find(candidate => candidate.point.y <= clipping.constant + 1e-6);
+      const hit = raycaster.intersectObjects(meshes.filter(mesh=>mesh.visible&&(!walking.current||!mesh.userData.pickOnly))).find(candidate => candidate.point.y <= clipping.constant + 1e-6);
+      if(walking.current){if(hit?.object.userData.role==='floor')moveTargetRef.current({x:hit.point.x,z:hit.point.z});else setMessage('Tap a visible floor surface to move. Walls and windows remain barriers.');return;}
       if (!hit) { selectRef.current(null); return; }
       const id = (hit.object.userData.objectID ?? hit.object.userData.triangleOwners?.[hit.faceIndex ?? -1]) as string;
       if(!id){selectRef.current(null);return;}
@@ -116,19 +141,20 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     const keyDown = (event: KeyboardEvent) => { if (!walking.current) return; const key = event.key.toLowerCase(); if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','escape'].includes(key)) event.preventDefault(); if (key==='w'||key==='arrowup') moveRef.current(0.2,0); if(key==='s'||key==='arrowdown') moveRef.current(-0.2,0);if(key==='a')moveRef.current(0,-0.2);if(key==='d')moveRef.current(0,0.2);if(key==='arrowleft')lookRef.current(-0.12);if(key==='arrowright')lookRef.current(0.12);if(key==='escape')leaveWalk(); };
     const lost = (event: Event) => { event.preventDefault(); setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
     renderer.domElement.addEventListener('pointerdown', pointerDown);renderer.domElement.addEventListener('pointermove',pointerMove);renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('keydown',keyDown);renderer.domElement.addEventListener('webglcontextlost',lost);
-    const dispose = () => { stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
-    runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, dispose };
+    const dispose = () => { disposed = true; cancelFrame(); window.document.removeEventListener('visibilitychange', visibility); stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
+    runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, showCeilings:visible=>{ceilingBatches.forEach(batch=>{batch.mesh.visible=visible;});render();}, dispose };
     try { navigation.current = new WalkNavigation(document, floor.id); setPortalCount(navigation.current.portals.length); if (!navigation.current.roomIDs.includes(roomID)) setRoomID(navigation.current.roomIDs[0] ?? ''); } catch (cause) { navigation.current = null; setMessage(cause instanceof Error ? cause.message : String(cause)); }
     updateSection(cutaway ? cutHeight : null); select(selectedRef.current); render();
-    return () => { runtime.current = null; navigation.current = null; walking.current = false; dispose(); };
+    return () => { const orbit=walking.current?initial:camera.position;const saved={camera:orbit.toArray() as [number,number,number],target:controls.target.toArray() as [number,number,number],...viewRef.current};lastFraming.current=saved;rememberRef.current?.(saved);runtime.current = null; navigation.current = null; walking.current = false; dispose(); };
   }, [document.documentID, document.revision, floor.id]);
   useEffect(() => { runtime.current?.updateSection(cutaway ? cutHeight : null); }, [cutaway, cutHeight]);
-  useEffect(() => { runtime.current?.select(selection); }, [selection, fills]);
+  useEffect(() => { runtime.current?.select(selection);if(!walking.current&&selection?.kind==='room')setRoomID(selection.objectID); }, [selection, fills]);
+  useEffect(()=>{runtime.current?.showCeilings(ceilings);},[ceilings]);
   useEffect(() => { const stop = () => stopRepeat(); window.addEventListener('pointerup',stop);window.addEventListener('blur',stop);window.document.addEventListener('visibilitychange',stop);return()=>{stopRepeat();window.removeEventListener('pointerup',stop);window.removeEventListener('blur',stop);window.document.removeEventListener('visibilitychange',stop);}; },[]);
   function hold(action: () => void) { stopRepeat(); action(); repeat.current = setInterval(action, 110); }
   return <div className="spatial-model"><div ref={host} className="spatial-model-canvas" />
     <div className="spatial-model-bar"><div className="spatial-segmented"><button aria-pressed={mode==='orbit'} onClick={leaveWalk}>Orbit</button><button aria-pressed={mode==='walk'} disabled={!roomID || !!error} onClick={()=>beginWalk()}>Walk through</button></div><button onClick={()=>mode==='walk'?beginWalk():leaveWalk()}>Reset view</button></div>
-    <div className="spatial-model-options">{mode==='orbit' ? <><label className="spatial-check"><input type="checkbox" checked={fills} onChange={event=>setFills(event.target.checked)} />Light blue fills</label><label className="spatial-check"><input type="checkbox" checked={cutaway} onChange={event=>setCutaway(event.target.checked)} />Cutaway</label>{cutaway && <label className="spatial-cut-control">Cut height<input type="range" aria-label="Cutaway height" min="0.1" max="0.95" step="0.01" value={cut} onChange={event=>setCut(Number(event.target.value))} /></label>}</> : <><span className="spatial-walk-badge">● WALKING</span><button onClick={leaveWalk}>Exit walking</button></>}{!!floor.rooms.length && <label className="spatial-room-select"><span>Start in</span><select value={roomID} onChange={event=>{setRoomID(event.target.value);if(mode==='walk')beginWalk(event.target.value);}}>{floor.rooms.map(room=><option key={room.id} value={room.id}>{room.label}</option>)}</select></label>}</div>
+    <div className="spatial-model-options" data-mode={mode}>{mode==='orbit'&&<button className="spatial-model-settings-toggle" aria-expanded={settingsOpen} aria-controls={settingsID} onClick={()=>setSettingsOpen(!settingsOpen)}>{settingsOpen?'Hide controls':'View controls'}</button>}<div id={settingsID} className="spatial-model-settings" data-open={settingsOpen}>{mode==='orbit' ? <><label className="spatial-check"><input type="checkbox" checked={fills} onChange={event=>setFills(event.target.checked)} />Light blue fills</label><label className="spatial-check"><input type="checkbox" checked={ceilings} onChange={event=>setCeilings(event.target.checked)} />Display ceilings</label><label className="spatial-check"><input type="checkbox" checked={cutaway} onChange={event=>setCutaway(event.target.checked)} />Cutaway</label>{cutaway && <label className="spatial-cut-control">Cut height<input type="range" aria-label="Cutaway height" min="0.1" max="0.95" step="0.01" value={cut} onChange={event=>setCut(Number(event.target.value))} /></label>}</> : <><span className="spatial-walk-badge">● WALKING</span><button onClick={leaveWalk}>Exit walking</button></>}{!!floor.rooms.length && <label className="spatial-room-select"><span>Start in</span><select value={roomID} onChange={event=>{setRoomID(event.target.value);if(mode==='walk')beginWalk(event.target.value);}}>{floor.rooms.map(room=><option key={room.id} value={room.id}>{room.label}</option>)}</select></label>}</div></div>
     {mode==='walk' && <div className="spatial-walk-controls" aria-label="Walking controls"><div><button aria-label="Turn left" onPointerDown={()=>hold(()=>lookRef.current(-0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(-0.1);}}>↶</button><button aria-label="Walk forward" onPointerDown={()=>hold(()=>moveRef.current(0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0.2,0);}}>↑</button><button aria-label="Turn right" onPointerDown={()=>hold(()=>lookRef.current(0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(0.1);}}>↷</button></div><div><button aria-label="Step left" onPointerDown={()=>hold(()=>moveRef.current(0,-0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,-0.2);}}>←</button><button aria-label="Walk backward" onPointerDown={()=>hold(()=>moveRef.current(-0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(-0.2,0);}}>↓</button><button aria-label="Step right" onPointerDown={()=>hold(()=>moveRef.current(0,0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,0.2);}}>→</button></div></div>}
     <div className="spatial-model-message" role="status">{error || message}{!error && mode==='walk' && <span> {portalCount === 0 ? 'No traversable room connections. Unknown boundaries stay closed.' : 'Windows and unknown exterior boundaries stay closed.'}</span>}</div>
   </div>;

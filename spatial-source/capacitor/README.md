@@ -49,7 +49,10 @@ revisioned input and preserve any existing corrections when adopting it.
 `AuxiliumFiles.saveExport` v1 accepts `bridgeVersion`, a safe ASCII basename,
 `mimeType` and base64 bytes. Only JSON, ZIP, SVG, GLB, PDF and PNG are admitted,
 up to 32 MiB. It opens an explicit native share sheet, protects staging files and
-cleans them after completion, cancellation or app backgrounding. Cancellation
+cleans them after the actual completion/cancellation callback. Backgrounding and
+device lock retain an in-use protected file; callbacks wait for the same page to
+be active and unlocked. Stale staging cleanup retries on unlock, launch or the
+next export. Cancellation
 returns `completed: false`. The bridge does not upload, grant publication rights,
 or claim a destination completed when the activity did not acknowledge success.
 
@@ -58,5 +61,9 @@ Native bridge messages must originate from the main frame at
 HTTP and hot-update built-ins are blocked. The app loads bundle assets only.
 The existing device-owner lock shields the entire workspace and capture UI.
 Native raw archives stay under `NSFileProtectionComplete` and are excluded from
-cloud backup. Web persistence retention, touch interaction, permission prompts,
+cloud backup. WebKit initializes only after device-owner unlock and retains its
+existing persistent store. Its IndexedDB files and newly created journal/WAL
+files require signed-device protection/lock verification; the native vault's
+protection does not establish the web store's at-rest protection. Web persistence
+retention, touch interaction, permission prompts,
 interruption recovery and performance still require actual installed-device tests.

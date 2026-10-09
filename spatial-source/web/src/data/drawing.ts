@@ -13,8 +13,12 @@ function wrap(text: string, width: number, size: number): string[] {
   const result: string[] = []; let line = '', used = 0;
   for (const character of text) {
     const advance = glyphWidth(character, size);
-    if (character === '\n' || used + advance > width && line) { result.push(line); line = ''; used = 0; }
-    if (character !== '\n') { line += character; used += advance; }
+    if (character === '\n') { result.push(line); line = ''; used = 0; continue; }
+    while (used + advance > width && line) {
+      const wordBreak = line.lastIndexOf(' ') + 1, split = wordBreak > 0 && wordBreak < line.length ? wordBreak : line.length;
+      result.push(line.slice(0, split)); line = line.slice(split); used = [...line].reduce((sum, value) => sum + glyphWidth(value, size), 0);
+    }
+    line += character; used += advance;
   }
   result.push(line); return result;
 }
@@ -123,9 +127,28 @@ function svgPages(pages: Drawing[]): Uint8Array {
   }
   parts.push('</svg>'); return utf8.encode(parts.join(''));
 }
+/** Reject known missing-glyph output rather than exporting boxes as if labels were readable.
+ * This is local canvas coverage checking, not a claim of exhaustive Unicode/font acceptance. */
+function assertDrawingGlyphs(drawing: Drawing): void {
+  const characters = new Set(drawing.labels.flatMap(label => [...label.text].filter(character => /[^\x20-\x7e\u00a0-\u00ff]/.test(character))));
+  if (!characters.size) return;
+  const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
+  try {
+    const context = canvas.getContext('2d', { willReadFrequently: true }); if (!context) fail('png-renderer-unavailable');
+    context.font = '32px system-ui,sans-serif'; context.fillStyle = '#000000';
+    const pixels = (text: string) => { context.clearRect(0, 0, 64, 64); context.fillText(text, 0, 45); return context.getImageData(0, 0, 64, 64).data; };
+    const missing = ['\u0378', '\uffff', '\u{10ffff}'].map(pixels);
+    for (const character of characters) {
+      const sample = pixels(character);
+      if (missing.some(reference => sample.every((value, index) => value === reference[index]))) fail('drawing-font-missing-glyphs: This browser cannot render every label. Use SVG or geometry export, or a browser with fonts for these characters.');
+    }
+  } finally { canvas.width = canvas.height = 0; }
+}
 export async function pngDrawing(frozen: FrozenRevision, floor: Floor, pageIndex = 0, prepared?: Drawing[]): Promise<Uint8Array> {
   if (typeof document === 'undefined' || typeof Image === 'undefined') fail('png-requires-browser-renderer');
-  const svg = svgDrawing(frozen, floor, pageIndex, prepared), url = URL.createObjectURL(new Blob([new Uint8Array(svg).buffer], { type: 'image/svg+xml' }));
+  const pages = prepared ?? drawings(frozen, floor), page = pages[pageIndex]; if (!page) fail('drawing-page-not-found');
+  await document.fonts.ready; assertDrawingGlyphs(page);
+  const svg = svgDrawing(frozen, floor, pageIndex, pages), url = URL.createObjectURL(new Blob([new Uint8Array(svg).buffer], { type: 'image/svg+xml' }));
   const canvas = document.createElement('canvas'); canvas.width = W * 2; canvas.height = H * 2;
   try {
     const image = new Image();
@@ -141,7 +164,7 @@ export async function pngDrawing(frozen: FrozenRevision, floor: Floor, pageIndex
 }
 export async function pdfDrawing(frozen: FrozenRevision, floors: Floor[]): Promise<Uint8Array> {
   const pdf = new jsPDF({ orientation: 'landscape', unit: 'pt', format: [W, H], compress: true, putOnlyUsedFonts: true });
-  pdf.setCreationDate(new Date('2000-01-01T00:00:00Z')); pdf.setFileId(frozen.hash.slice(0, 32));
+  pdf.setCreationDate("D:20000101000000+00'00'"); pdf.setFileId(frozen.hash.slice(0, 32));
   pdf.setProperties({ title: frozen.document.title, subject: `Unverified spatial layout. Source revision ${frozen.document.revision}. ${frozen.hash}`, creator: 'Auxilium Spatial', author: '' });
   let pageCount = 0;
   for (const floor of floors) {
@@ -164,5 +187,13 @@ export async function pdfDrawing(frozen: FrozenRevision, floors: Floor[]): Promi
     for (const label of d.labels) { pdf.setFontSize(label.size); pdf.text(label.text, label.point.x, label.point.z); }
     }
   }
-  return new Uint8Array(pdf.output('arraybuffer'));
+  const bytes = new Uint8Array(pdf.output('arraybuffer'));
+  // jsPDF 4.2.1 always emits a default view /OpenAction, with no public opt-out.
+  // The native drawing profile disallows all OpenAction names. Remove only this
+  // exact generated catalog default using equal-length whitespace, preserving
+  // every xref offset and compressed stream. A library format change fails closed.
+  const source = new TextDecoder('latin1').decode(bytes), catalogs = [...source.matchAll(/\/Type \/Catalog\n\/Pages \d+ 0 R\n(\/OpenAction \[3 0 R \/FitH null\])\n/g)];
+  if (catalogs.length !== 1) fail('unsupported-generated-pdf-catalog');
+  const catalog = catalogs[0], start = catalog.index! + catalog[0].indexOf(catalog[1]); bytes.fill(32, start, start + catalog[1].length);
+  return bytes;
 }

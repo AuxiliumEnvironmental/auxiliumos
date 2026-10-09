@@ -1,9 +1,10 @@
 import { applyCommands, requireValidDocument, restorationMappings } from '../core';
-import type { EditCommand, FrozenRevision, SpatialDocument, StoredWorkspace, WorkspaceSummary } from '../types';
+import type { EditCommand, FrozenRevision, ImportedWorkspace, SourceProvenance, SpatialDocument, StoredWorkspace, WorkspaceSummary } from '../types';
 import { clone, fail, jsonBytes, MAX_MEMBER, sha256, stableJSON } from './bytes';
+import { validSourceReason, validateSourceProvenance } from './provenance';
 
-interface DraftRecord { documentID: string; document: SpatialDocument; hash: string; historyHash: string; undo: SpatialDocument[]; redo: SpatialDocument[]; updatedAt: string; receipt?: StoredWorkspace['receipt'] }
-export interface SavedRevision { key: string; documentID: string; revision: number; frozen: FrozenRevision }
+interface DraftRecord { documentID: string; document: SpatialDocument; hash: string; historyHash: string; undo: SpatialDocument[]; redo: SpatialDocument[]; updatedAt: string; receipt?: StoredWorkspace['receipt']; sourceIdentity?: StoredWorkspace['sourceIdentity']; sourceBytes?: Uint8Array; copyInputHash?: string }
+export interface SavedRevision { key: string; documentID: string; revision: number; frozen: FrozenRevision; provenanceHash?: string }
 const request = <T>(req: IDBRequest<T>): Promise<T> => new Promise((resolve, reject) => { req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error ?? new Error('storage-request-failed')); });
 const completed = (tx: IDBTransaction): Promise<void> => new Promise((resolve, reject) => { tx.oncomplete = () => resolve(); tx.onabort = () => reject(tx.error ?? new Error('storage-transaction-aborted')); tx.onerror = () => { /* onabort owns failure */ }; });
 export class SpatialWebStore {
@@ -39,10 +40,12 @@ export class SpatialWebStore {
     if (!row) fail('document-not-found');
     requireValidDocument(row.document);
     if (await sha256(jsonBytes(row.document)) !== row.hash || row.documentID !== row.document.documentID || !Array.isArray(row.undo) || !Array.isArray(row.redo) || row.undo.length > 100 || row.redo.length > 100) fail('corrupt-local-document');
-    if (!Number.isFinite(Date.parse(row.updatedAt)) || await sha256(jsonBytes({ undo: row.undo, redo: row.redo, receipt: row.receipt })) !== row.historyHash) fail('corrupt-local-history');
+    try { await validateSourceProvenance(row, row.documentID); } catch { fail('corrupt-local-source-identity'); }
+    if (row.copyInputHash !== undefined && (typeof row.copyInputHash !== 'string' || !/^[a-f0-9]{64}$/.test(row.copyInputHash))) fail('corrupt-local-source-identity');
+    if (!Number.isFinite(Date.parse(row.updatedAt)) || await sha256(jsonBytes({ undo: row.undo, redo: row.redo, receipt: row.receipt, sourceIdentity: row.sourceIdentity, copyInputHash: row.copyInputHash })) !== row.historyHash) fail('corrupt-local-history');
     return row;
   }
-  private workspace(row: DraftRecord): StoredWorkspace { return clone({ document: row.document, canUndo: !!row.undo.length, canRedo: !!row.redo.length, updatedAt: row.updatedAt, ...(row.receipt ? { receipt: row.receipt } : {}) }); }
+  private workspace(row: DraftRecord): StoredWorkspace { return clone({ document: row.document, canUndo: !!row.undo.length, canRedo: !!row.redo.length, updatedAt: row.updatedAt, ...(row.receipt ? { receipt: row.receipt } : {}), ...(row.sourceIdentity ? { sourceIdentity: row.sourceIdentity } : {}) }); }
   async list(): Promise<WorkspaceSummary[]> {
     const rows = await this.transaction(['drafts'], 'readonly', tx => request(tx.objectStore('drafts').getAll())) as DraftRecord[];
     return rows.map(row => ({ documentID: row.documentID, title: row.document.title, revision: row.document.revision, updatedAt: row.updatedAt })).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
@@ -56,13 +59,48 @@ export class SpatialWebStore {
     });
     return this.workspace(row);
   }
+  async createImported(imported: ImportedWorkspace): Promise<StoredWorkspace> {
+    imported = clone(imported); const document = requireValidDocument(imported.document);
+    if (Object.keys(imported).some(key => !['document', 'sourceIdentity', 'sourceBytes'].includes(key))) fail('invalid-imported-workspace');
+    await validateSourceProvenance(imported, document.documentID);
+    const bytes = jsonBytes(document); if (bytes.length > MAX_MEMBER) fail('document-size-limit');
+    const provenance = imported.sourceIdentity ? { sourceIdentity: imported.sourceIdentity, sourceBytes: imported.sourceBytes } : {};
+    const row: DraftRecord = { documentID: document.documentID, document, ...provenance, hash: await sha256(bytes), historyHash: await sha256(jsonBytes({ undo: [], redo: [], sourceIdentity: imported.sourceIdentity })), undo: [], redo: [], updatedAt: new Date().toISOString() };
+    await this.transaction(['drafts'], 'readwrite', async tx => {
+      const drafts = tx.objectStore('drafts'); if (await request(drafts.get(row.documentID))) fail('document-already-exists'); await request(drafts.add(row));
+    });
+    return this.workspace(row);
+  }
+  /** Explicit recovery/import branch; never merges or replaces an existing corrected draft. */
+  async createCopy(document: SpatialDocument, reason = 'import-copy', provenance?: SourceProvenance): Promise<StoredWorkspace> {
+    document = clone(requireValidDocument(document)); provenance = provenance ? clone(provenance) : undefined;
+    if (provenance) await validateSourceProvenance(provenance, document.documentID);
+    if (!validSourceReason(reason)) fail('invalid-copy-reason');
+    const inputBytes = jsonBytes(document); if (inputBytes.length > MAX_MEMBER) fail('document-size-limit');
+    const copyInputHash = await sha256(inputBytes), sourceBytes = provenance?.sourceBytes ?? inputBytes;
+    const sourceIdentity = provenance?.sourceIdentity ?? { documentID: document.documentID, revision: document.revision, sha256: copyInputHash, reason };
+    document.documentID = crypto.randomUUID(); document.revision = 1; delete document.parentRevision; document.reviewState = 'needsReview';
+    requireValidDocument(document);
+    const bytes = jsonBytes(document); if (bytes.length > MAX_MEMBER) fail('document-size-limit');
+    const row: DraftRecord = { documentID: document.documentID, document, sourceIdentity, sourceBytes, copyInputHash, hash: await sha256(bytes), historyHash: await sha256(jsonBytes({ undo: [], redo: [], sourceIdentity, copyInputHash })), undo: [], redo: [], updatedAt: new Date().toISOString() };
+    const retainedID = await this.transaction(['drafts'], 'readwrite', async tx => {
+      const drafts = tx.objectStore('drafts'), rows = await request(drafts.getAll()) as DraftRecord[];
+      const existing = rows.find(value => (value.copyInputHash ?? value.sourceIdentity?.sha256) === copyInputHash && value.sourceIdentity?.documentID === sourceIdentity.documentID && value.sourceIdentity.revision === sourceIdentity.revision && value.sourceIdentity.sha256 === sourceIdentity.sha256);
+      if (existing) return existing.documentID;
+      await request(drafts.add(row)); return row.documentID;
+    });
+    // Crypto validation happens after the atomic transaction; an existing corrupt row is not success.
+    const retained = await this.record(retainedID);
+    if ((retained.copyInputHash ?? retained.sourceIdentity?.sha256) !== copyInputHash || retained.sourceIdentity?.documentID !== sourceIdentity.documentID || retained.sourceIdentity.revision !== sourceIdentity.revision || retained.sourceIdentity.sha256 !== sourceIdentity.sha256) fail('corrupt-local-source-identity');
+    return this.workspace(retained);
+  }
   async open(documentID: string): Promise<StoredWorkspace> { return this.workspace(await this.record(documentID)); }
   private async commit(row: DraftRecord, expectedRevision: number): Promise<StoredWorkspace> {
     const expectedHash = row.hash, expectedHistoryHash = row.historyHash;
     const bytes = jsonBytes(row.document); if (bytes.length > MAX_MEMBER) fail('document-size-limit');
     // History is recoverable editing convenience, bounded separately from immutable saved versions.
     for (const key of ['undo', 'redo'] as const) while (row[key].length > 1 && jsonBytes(row[key]).length > 16 * 1024 * 1024) row[key].shift();
-    row.hash = await sha256(bytes); row.historyHash = await sha256(jsonBytes({ undo: row.undo, redo: row.redo, receipt: row.receipt })); row.updatedAt = new Date().toISOString();
+    row.hash = await sha256(bytes); row.historyHash = await sha256(jsonBytes({ undo: row.undo, redo: row.redo, receipt: row.receipt, sourceIdentity: row.sourceIdentity, copyInputHash: row.copyInputHash })); row.updatedAt = new Date().toISOString();
     await this.transaction(['drafts'], 'readwrite', async tx => {
       const drafts = tx.objectStore('drafts'), current = await request(drafts.get(row.documentID)) as DraftRecord | undefined;
       if (!current || current.document.revision !== expectedRevision || current.hash !== expectedHash || current.historyHash !== expectedHistoryHash) fail('revision-conflict'); await request(drafts.put(row));
@@ -92,16 +130,17 @@ export class SpatialWebStore {
   async redo(documentID: string, expectedRevision: number): Promise<StoredWorkspace> { return this.history(documentID, expectedRevision, 'redo'); }
   async freeze(documentID: string, expectedRevision: number): Promise<FrozenRevision> {
     const row = await this.record(documentID); if (row.document.revision !== expectedRevision) fail('revision-conflict');
-    const bytes = jsonBytes(row.document), frozen: FrozenRevision = { document: row.document, hash: await sha256(bytes), bytes, createdAt: new Date().toISOString() };
+    const bytes = jsonBytes(row.document), frozen: FrozenRevision = { document: row.document, hash: await sha256(bytes), bytes, createdAt: new Date().toISOString(), ...(row.sourceIdentity ? { sourceIdentity: row.sourceIdentity, sourceBytes: row.sourceBytes } : {}) };
+    const provenanceHash = row.sourceIdentity ? await sha256(jsonBytes(row.sourceIdentity)) : undefined;
     const retained = await this.transaction(['revisions'], 'readwrite', async tx => {
       const revisions = tx.objectStore('revisions'), key = `${documentID}:${expectedRevision}`, current = await request(revisions.get(key)) as SavedRevision | undefined;
       if (current) return current;
-      const added = { key, documentID, revision: expectedRevision, frozen } satisfies SavedRevision;
+      const added = { key, documentID, revision: expectedRevision, frozen, ...(provenanceHash ? { provenanceHash } : {}) } satisfies SavedRevision;
       await request(revisions.add(added)); return added;
     });
     // Validate the actual retained row after the transaction, without awaiting crypto inside it.
     await validateSavedRevision(retained, documentID, expectedRevision);
-    if (retained.frozen.hash !== frozen.hash || stableJSON(retained.frozen.document) !== stableJSON(frozen.document)) fail('immutable-revision-conflict');
+    if (retained.frozen.hash !== frozen.hash || stableJSON(retained.frozen.document) !== stableJSON(frozen.document) || retained.provenanceHash !== provenanceHash) fail('immutable-revision-conflict');
     return clone(retained.frozen);
   }
   async revisions(documentID: string): Promise<FrozenRevision[]> {
@@ -117,6 +156,7 @@ export class SpatialWebStore {
   }
   async restore(documentID: string, sourceRevision: number, expectedRevision: number): Promise<StoredWorkspace> {
     const frozen = await this.loadFrozen(documentID, sourceRevision), row = await this.record(documentID);
+    if (stableJSON(frozen.sourceIdentity) !== stableJSON(row.sourceIdentity)) fail('frozen-source-provenance-mismatch');
     if (frozen.document.documentID !== documentID || frozen.document.revision !== sourceRevision) fail('frozen-record-identity-mismatch');
     if (row.document.revision !== expectedRevision) fail('revision-conflict');
     if (expectedRevision >= Number.MAX_SAFE_INTEGER) fail('revision-limit');
@@ -130,10 +170,12 @@ export class SpatialWebStore {
 }
 export async function validateFrozen(frozen: FrozenRevision): Promise<void> {
   requireValidDocument(frozen.document);
+  await validateSourceProvenance(frozen, frozen.document.documentID);
   if (!(frozen.bytes instanceof Uint8Array) || frozen.bytes.length > MAX_MEMBER || !Number.isFinite(Date.parse(frozen.createdAt)) || !/^[a-f0-9]{64}$/.test(frozen.hash) || frozen.bytes.length !== jsonBytes(frozen.document).length || stableJSON(frozen.document) !== new TextDecoder('utf-8', { fatal: true }).decode(frozen.bytes) || await sha256(frozen.bytes) !== frozen.hash) fail('frozen-revision-mismatch');
 }
 async function validateSavedRevision(row: SavedRevision, documentID: string, revision?: number): Promise<void> {
   if (!row || row.documentID !== documentID || !Number.isSafeInteger(row.revision) || row.revision < 1 || revision !== undefined && row.revision !== revision || row.key !== `${documentID}:${row.revision}` || !row.frozen || row.frozen.document?.documentID !== documentID || row.frozen.document.revision !== row.revision) fail('frozen-record-identity-mismatch');
   await validateFrozen(row.frozen);
+  if (row.frozen.sourceIdentity ? row.provenanceHash !== await sha256(jsonBytes(row.frozen.sourceIdentity)) : row.provenanceHash !== undefined) fail('frozen-source-provenance-mismatch');
 }
 export { request as idbRequest };

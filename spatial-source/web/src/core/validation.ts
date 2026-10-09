@@ -29,7 +29,9 @@ export function validateDocument(value:unknown):ValidationIssue[]{
     if(issues.length>=200)return;
     switch(shape.kind){
       case 'id':if(!validID(value))add('invalid_id',path,'Use 1 to 96 ASCII letters, digits, hyphens, or underscores');break;
-      case 'text':if(typeof value!=='string'||[...value].length<1||[...value].length>256||/[\u0000-\u0009\u000b-\u001f]/u.test(value))add('invalid_text',path,'Use 1 to 256 visible characters');break;
+      // With Unicode matching, a valid surrogate pair is one code point outside
+      // this range; only malformed, unpaired UTF-16 code units match it.
+      case 'text':if(typeof value!=='string'||[...value].length<1||[...value].length>256||/[\u0000-\u0009\u000b-\u001f\uD800-\uDFFF]/u.test(value))add('invalid_text',path,'Use 1 to 256 valid Unicode characters');break;
       case 'enum':if(!shape.values.includes(value))add('value',path,'Unsupported value');break;
       case 'number':if(value===null&&shape.nullable)break;if(typeof value!=='number'||!Number.isFinite(value)||value<shape.min||value>shape.max||(shape.positive&&value===0)||(shape.integer&&!Number.isSafeInteger(value)))add('number',path,'Invalid finite number or numeric bound');break;
       case 'array':if(!Array.isArray(value)){add('type',path,'Expected an array');break;}if(value.length<shape.min||value.length>shape.max){add('capacity',path,`Expected ${shape.min} to ${shape.max} items`);break;}for(let i=0;i<value.length;i++){if(!Object.hasOwn(value,i))add('type',`${path}[${i}]`,'Sparse arrays are not JSON arrays');else visit(value[i],shape.item,`${path}[${i}]`);}break;

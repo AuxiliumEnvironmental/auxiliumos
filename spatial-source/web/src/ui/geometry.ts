@@ -14,6 +14,12 @@ export function pointAlong(points: Point2[], offset: number): Point2 {
   }
   return { ...points[points.length - 1] };
 }
+/** Preserve every host-wall bend inside an opening, in both ink and hit tests. */
+export function openingPath(points: Point2[], offset: number, width: number): Point2[] {
+  const result = [pointAlong(points, offset)]; let length = 0;
+  for (let i=1;i<points.length;i++) { length += Math.hypot(points[i].x-points[i-1].x,points[i].z-points[i-1].z); if (length>offset && length<offset+width) result.push({...points[i]}); }
+  result.push(pointAlong(points,offset+width)); return result;
+}
 export function pointInPolygon(p: Point2, points: Point2[]) {
   let inside = false;
   for (let i = 0, j = points.length - 1; i < points.length; j = i++) {

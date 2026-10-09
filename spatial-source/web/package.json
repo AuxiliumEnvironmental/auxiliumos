@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "build:library": "vite build --config vite.library.config.ts",
     "test": "node --import tsx --test tests/**/*.test.ts",
-    "test:browser": "playwright test",
+    "test:browser": "playwright test --config tests/ui/playwright.config.ts",
     "cap:sync": "python3 ../capacitor/prepare.py"
   },
   "dependencies": {

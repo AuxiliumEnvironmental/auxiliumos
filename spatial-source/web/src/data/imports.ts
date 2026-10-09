@@ -1,7 +1,8 @@
 import { buildScene, requireValidDocument } from '../core';
-import type { SpatialDocument } from '../types';
+import type { ImportedWorkspace, SourceIdentity, SpatialDocument } from '../types';
 import { crc32, fail, MAX_ARCHIVE, sha256, stableJSON, strictJSON, utf8 } from './bytes';
 import { readZIP } from './zip';
+import { validateSourceProvenance } from './provenance';
 
 type ObjectValue = Record<string, unknown>;
 function object(value: unknown): ObjectValue { if (!value || typeof value !== 'object' || Array.isArray(value)) fail('invalid-manifest'); return value as ObjectValue; }
@@ -112,14 +113,15 @@ function compareScene(value: unknown, document: SpatialDocument, floorID: string
   };
   if (!equal(value, buildScene(document, floorID))) fail('scene-geometry-mismatch');
 }
-export async function importDocument(bytes: Uint8Array, filename: string): Promise<SpatialDocument> {
+export async function importWorkspace(bytes: Uint8Array, filename: string): Promise<ImportedWorkspace> {
   if (!bytes.length || bytes.length > MAX_ARCHIVE) fail('import-size-limit');
-  if (/\.json$/i.test(filename)) return { ...requireValidDocument(strictJSON(bytes)), reviewState: 'needsReview' };
+  bytes = bytes.slice();
+  if (/\.json$/i.test(filename)) return { document: { ...requireValidDocument(strictJSON(bytes)), reviewState: 'needsReview' } };
   if (!/\.zip$/i.test(filename)) fail('unsupported-import-format');
   const files = readZIP(bytes); if (!files['manifest.json'] || !files['geometry.json']) fail('missing-archive-members');
   const manifest = object(strictJSON(files['manifest.json'])), document = requireValidDocument(strictJSON(files['geometry.json']));
   if (manifest.documentID !== document.documentID || manifest.revision !== document.revision || manifest.measurementStatus !== 'unverified') fail('manifest-identity-mismatch');
-  const local = manifest.profileVersion === 'auxilium-spatial-local-document/1.0.0';
+  const copied = manifest.profileVersion === 'auxilium-spatial-local-document/1.1.0', local = copied || manifest.profileVersion === 'auxilium-spatial-local-document/1.0.0';
   if (local) {
     shape(manifest, ['profileVersion', 'documentID', 'revision', 'measurementStatus', 'coordinateSystem', 'floors', 'files']);
     if (manifest.coordinateSystem !== document.coordinateSystem) fail('manifest-coordinate-mismatch');
@@ -133,7 +135,7 @@ export async function importDocument(bytes: Uint8Array, filename: string): Promi
     shape(manifest, ['formatVersion', 'documentID', 'revision', 'measurementStatus', 'contentClass', 'files']);
     if (manifest.formatVersion !== '1.0.0' || manifest.contentClass !== 'spatial-draft' || document.floors.length !== 1 || Object.keys(files).length !== 4) fail('unsupported-exchange-profile');
   }
-  const records = array(manifest.files, local ? 5 : 3, local ? 4095 : 3), seen = new Set<string>();
+  const records = array(manifest.files, copied ? 7 : local ? 5 : 3, local ? 4095 : 3), seen = new Set<string>();
   for (const value of records) {
     const item = object(value);
     shape(item, local ? ['path', 'mimeType', 'sha256', 'bytes'] : ['path', 'sha256', 'bytes'], local ? ['floorID', 'pageIndex'] : []);
@@ -142,7 +144,7 @@ export async function importDocument(bytes: Uint8Array, filename: string): Promi
     seen.add(path);
     if (local) {
       const match = /^floors\/(\d{4})\/(scene\.json|model\.glb|floorplan\.pdf|floorplan-(\d{4})\.(svg|png))$/.exec(path);
-      if (path === 'geometry.json') { if (item.floorID !== undefined || item.pageIndex !== undefined || item.mimeType !== 'application/json') fail('invalid-geometry-record'); }
+      if (path === 'geometry.json' || copied && ['source/geometry.json', 'source/identity.json'].includes(path)) { if (item.floorID !== undefined || item.pageIndex !== undefined || item.mimeType !== 'application/json') fail('invalid-geometry-record'); }
       else {
         if (!match) fail('unsupported-local-member');
         const floor = document.floors[Number(match[1])], floorRecord = object((manifest.floors as unknown[])[Number(match[1])]);
@@ -164,5 +166,16 @@ export async function importDocument(bytes: Uint8Array, filename: string): Promi
     for (let page = 0; page < pages; page++) for (const ext of ['svg', 'png']) if (!seen.has(`${base}floorplan-${page.toString().padStart(4, '0')}.${ext}`)) fail('missing-floor-page');
   }
   else compareScene(strictJSON(files['scene.json']), document, document.floors[0].id);
-  return { ...document, reviewState: 'needsReview' };
+  let provenance: Pick<ImportedWorkspace, 'sourceIdentity' | 'sourceBytes'> = {};
+  if (copied) {
+    if (!seen.has('source/geometry.json') || !seen.has('source/identity.json')) fail('missing-source-provenance-members');
+    const descriptor = object(strictJSON(files['source/identity.json']));
+    shape(descriptor, ['profileVersion', 'documentID', 'revision', 'sourceIdentity']);
+    if (descriptor.profileVersion !== 'auxilium-spatial-source-provenance/1.0.0' || descriptor.documentID !== document.documentID || descriptor.revision !== document.revision) fail('source-provenance-copy-identity-mismatch');
+    provenance = { sourceIdentity: { ...descriptor.sourceIdentity as SourceIdentity }, sourceBytes: files['source/geometry.json'] };
+    await validateSourceProvenance(provenance, document.documentID);
+  }
+  return { document: { ...document, reviewState: 'needsReview' }, ...provenance };
 }
+/** Geometry-only compatibility reader. The authoring UI uses importWorkspace to retain backup provenance. */
+export async function importDocument(bytes: Uint8Array, filename: string): Promise<SpatialDocument> { return (await importWorkspace(bytes, filename)).document; }
