@@ -5,7 +5,7 @@
     {
       "id": "OWNER-ONBOARD-001",
       "title": "Secure owner account, password setup/recovery and first successful access",
-      "status": "in_progress",
+      "status": "blocked",
       "dependencies": [
         "SEC-001A"
       ],
@@ -22,14 +22,14 @@
       ],
       "allowed_paths": [
         "scripts/owner-onboarding.mjs",
-        "supabase/migrations/**",
+        "supabase/migrations/20261009130331_owner_onboarding_activation.sql",
         "tests/database/owner-onboarding.test.mjs",
         "tests/unit/owner-onboarding.test.mjs",
         "web/src/lib/runtime.tsx",
-        "web/src/lib/**",
+        "web/src/lib/auth-links.ts",
         "web/src/components/auth.tsx",
-        "tests/unit/**",
-        "tests/e2e/**",
+        "tests/unit/auth-links.test.mjs",
+        "tests/e2e/auth-onboarding.spec.ts",
         ".github/workflows/ci.yml",
         "tests/api/README.md",
         "docs/03-data/OWNER_ONBOARDING.md"
@@ -39,10 +39,15 @@
       "owner_decisions": [
         "OD-012"
       ],
-      "verification_profiles": [],
-      "next_action": "Complete owner onboarding runtime/provisioning and independently review the activation helper. Securely configure the development-only GitHub Actions key, then run protected owner onboarding and connected hosted workflows. Old unpublished review worktrees were checked once and are unavailable; reimplement review against current contracts after immediate access integration.",
-      "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+      "verification_profiles": [
+        "owner-onboarding",
+        "runtime-build",
+        "auth-onboarding-browser-fixture"
+      ],
+      "next_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
+      "blocker": "Protected development service credential and authorized manual dispatch unavailable here; invitation delivery, personal password and first owner login remain unverified.",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "implementation_status": "UI/script implemented and independently reviewed; activation migration deployed to actual development backend. No owner account created yet."
     },
     {
       "id": "UI-2026-10-09",
@@ -89,7 +94,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Preserve exact imported presentation source in GitHub; integrate owner auth behavior and check affected mobile workflows. Unconnected module outlines are not completed modules.",
+      "next_action": "Publish integrated auth and updated directory fixture with source parity; verify existing Lovable preview. Module outlines remain explicitly unconnected; no complete-module claim.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -262,9 +267,10 @@
         "runtime-build",
         "directory-browser-fixture",
         "directory-api",
-        "development-ui"
+        "development-ui",
+        "document-connected-ui"
       ],
-      "blocker": "Nine migrations and two gateway functions are deployed. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat.",
+      "blocker": "Ten migrations and two gateway functions deployed; actual Auth/API/browser requires protected service credential and manual branch dispatch.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -295,7 +301,7 @@
         "tests/unit/runtime-configuration.test.mjs",
         "tests/unit/auth-persistence.test.mjs"
       ],
-      "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
+      "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
       "implementation_status": "Frontend and preservation-safe API harness implemented and independently reviewed; build and synthetic browser/unit profiles pass. Authentic API and real-service browser acceptance remain unexecuted."
     },
     {
@@ -722,7 +728,7 @@
         "database",
         "unit"
       ],
-      "next_action": "Source saved6163fc9; transport migration applied and private-objects Edge v1 deployed. Provision private bucket via supported API, verify settings, then enable synthetic reservation config through owner-controlled SQL. Genuine Auth/Storage checks await protected test key. New clearance work is separate, not yet deployed."
+      "next_action": "Actual private-objects v2 and restrictive private-bucket RLS verified. Bucket inventory0; supported API provisioning prepared. After creation, lead verifies private settings/policies then enables synthetic ingest/content gates and runs focused actual browser transport/retrieval. Clearance and immutable-content migrations are deployed, not accepted end to end."
     },
     {
       "id": "DOC-001",

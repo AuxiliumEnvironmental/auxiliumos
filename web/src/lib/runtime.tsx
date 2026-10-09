@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import type { RuntimeConfig } from "./config";
 import type { AuthPersistence, AuthStorageLease } from "./auth-storage";
+import { consumePasswordLink, recoveryRedirect, unavailablePasswordLink, validateNewPassword, type PasswordLink, type PasswordLinkKind } from "./auth-links";
 import { createRuntimeClient, DirectoryApi, type RuntimeContext } from "./directory-api";
 import { asRuntimeError, isAbort, RuntimeError, serviceError } from "./errors";
 
@@ -9,6 +10,8 @@ export type RuntimeState =
   | { status: "unauthenticated"; expired: boolean }
   | { status: "ready"; context: RuntimeContext; revision: number }
   | { status: "access_unavailable" }
+  | { status: "password_setup"; kind: PasswordLinkKind; email: string }
+  | { status: "auth_link_error"; error: RuntimeError }
   | { status: "error"; error: RuntimeError }
   | { status: "signout_error"; error: RuntimeError };
 
@@ -19,11 +22,18 @@ type RuntimeValue = {
   recheck: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<void>;
+  setPassword: (password: string, confirmation: string) => Promise<void>;
+  retryPasswordLink: () => Promise<void>;
   showSignIn: () => void;
   handleFailure: (error: RuntimeError) => void;
 };
 
 const Runtime = createContext<RuntimeValue | null>(null);
+
+// Capture once, before the router initializes. React StrictMode may repeat
+// effects, but must neither consume a link twice nor retain it in history.
+let startupPasswordLink = consumePasswordLink(window.location.href, (url) => window.history.replaceState(null, "", url));
 
 export function RuntimeProvider({ api, config, persistence, children }: { api: DirectoryApi; config: RuntimeConfig; persistence: AuthPersistence; children: ReactNode }) {
   const [state, setState] = useState<RuntimeState>({ status: "checking" });
@@ -36,6 +46,10 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
   const hadSession = useRef(false);
   const signingOut = useRef(false);
   const signoutLocked = useRef(persistence.initiallyLocked);
+  const passwordLink = useRef<PasswordLink | null>(startupPasswordLink);
+  const passwordLinkStarted = useRef(false);
+  const passwordLinkActive = useRef(passwordLink.current !== null);
+  const passwordSession = useRef<null | { lease: AuthStorageLease; client: DirectoryApi["client"]; operation: number; userId: string }>(null);
 
   const invalidate = useCallback(() => {
     generation.current += 1;
@@ -86,6 +100,52 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
     }
   }, [api, invalidate, persistence]);
 
+  const retryPasswordLink = useCallback(async () => {
+    const link = passwordLink.current;
+    if (!link) return;
+    const operation = ++authOperation.current;
+    signingOut.current = false;
+    signoutLocked.current = true;
+    passwordLinkActive.current = true;
+    passwordSession.current = null;
+    invalidate();
+    setState({ status: "checking" });
+    let lease: AuthStorageLease | null = null;
+    try {
+      // A callback supersedes any saved session but remains memory-only until
+      // password setup and independent identity verification both succeed.
+      lease = persistence.beginLogin();
+      if (link.kind === "invalid") throw link.error;
+      const previousClient = api.client;
+      const nextClient = createRuntimeClient(config, lease);
+      api.client = nextClient;
+      setClient(nextClient);
+      void previousClient.auth.dispose().catch(() => {});
+      const { data, error } = await nextClient.auth.setSession({ access_token: link.accessToken, refresh_token: link.refreshToken });
+      if (error) {
+        const failure = serviceError(error);
+        throw failure.retryable ? failure : unavailablePasswordLink();
+      }
+      if (!data.session || !data.user || data.user.is_anonymous) throw unavailablePasswordLink();
+      const verified = await nextClient.auth.getUser(data.session.access_token);
+      if (verified.error) {
+        const failure = serviceError(verified.error);
+        throw failure.retryable ? failure : unavailablePasswordLink();
+      }
+      if (!verified.data.user || verified.data.user.is_anonymous || verified.data.user.id !== data.user.id || !verified.data.user.email) throw unavailablePasswordLink();
+      if (operation !== authOperation.current || nextClient !== api.client || !persistence.isCurrent(lease)) throw unavailablePasswordLink();
+      passwordSession.current = { lease, client: nextClient, operation, userId: verified.data.user.id };
+      passwordLink.current = null;
+      if (mounted.current) setState({ status: "password_setup", kind: link.kind, email: verified.data.user.email });
+    } catch (error) {
+      lease?.revoke();
+      if (operation !== authOperation.current) return;
+      const failure = asRuntimeError(error);
+      if (!failure.retryable) passwordLink.current = null;
+      if (mounted.current) setState({ status: "auth_link_error", error: failure });
+    }
+  }, [api, config, invalidate, persistence]);
+
   useEffect(() => {
     mounted.current = true;
     const { data: { subscription } } = client.auth.onAuthStateChange((event) => {
@@ -102,7 +162,13 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       }
     });
     // Also check explicitly: startup does not depend on an event being delivered.
-    if (signoutLocked.current) setState({ status: "unauthenticated", expired: false });
+    if (passwordLinkActive.current) {
+      if (!passwordLinkStarted.current) {
+        passwordLinkStarted.current = true;
+        startupPasswordLink = null;
+        void retryPasswordLink();
+      }
+    } else if (signoutLocked.current) setState({ status: "unauthenticated", expired: false });
     else scheduledCheck.current = setTimeout(() => { void recheck(); }, 0);
     const onVisible = () => {
       if (!hadSession.current || signoutLocked.current) return;
@@ -119,6 +185,9 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       let failure: RuntimeError | null = null;
       try { if (persistence.isCurrent()) return; } catch (error) { failure = asRuntimeError(error); }
       authOperation.current += 1;
+      passwordSession.current = null;
+      passwordLink.current = null;
+      passwordLinkActive.current = false;
       signingOut.current = false;
       signoutLocked.current = true;
       persistence.revoke();
@@ -134,10 +203,13 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("storage", onStorage);
     };
-  }, [api, client, invalidate, persistence, recheck]);
+  }, [api, client, invalidate, persistence, recheck, retryPasswordLink]);
 
   const signIn = useCallback(async (email: string, password: string) => {
     const operation = ++authOperation.current;
+    passwordSession.current = null;
+    passwordLink.current = null;
+    passwordLinkActive.current = false;
     signingOut.current = false;
     signoutLocked.current = true;
     invalidate();
@@ -179,8 +251,64 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
     }
   }, [api, config, invalidate, persistence, recheck]);
 
+  const requestPasswordReset = useCallback(async (email: string) => {
+    const { error } = await api.client.auth.resetPasswordForEmail(email.trim(), { redirectTo: recoveryRedirect(window.location.origin) });
+    if (error) {
+      // A response must not reveal whether an address exists or is eligible.
+      // Connectivity/rate-limit errors are actionable without exposing that.
+      const failure = serviceError(error);
+      if (failure.retryable) throw new RuntimeError("network", "The password link request could not be completed. Check your connection or wait a moment, then try again.", true);
+    }
+  }, [api]);
+
+  const setPassword = useCallback(async (password: string, confirmation: string) => {
+    validateNewPassword(password, confirmation);
+    const pending = passwordSession.current;
+    if (!pending || pending.operation !== authOperation.current || pending.client !== api.client || !persistence.isCurrent(pending.lease)) throw unavailablePasswordLink();
+    let passwordSaved = false;
+    try {
+      const verified = await pending.client.auth.getUser();
+      if (verified.error) throw serviceError(verified.error);
+      if (!verified.data.user || verified.data.user.is_anonymous || verified.data.user.id !== pending.userId) throw unavailablePasswordLink();
+      if (pending.operation !== authOperation.current || !persistence.isCurrent(pending.lease)) throw unavailablePasswordLink();
+      const { data, error } = await pending.client.auth.updateUser({ password });
+      if (error) {
+        if (error.code === "weak_password") throw new RuntimeError("validation", "Choose a stronger password. Your workspace password requirements were not met.");
+        if (error.code === "same_password") throw new RuntimeError("validation", "Choose a password you have not used for this account.");
+        if (error.code === "reauthentication_needed" || error.code === "reauthentication_not_valid") throw unavailablePasswordLink();
+        throw serviceError(error);
+      }
+      if (!data.user || data.user.id !== pending.userId) throw unavailablePasswordLink();
+      passwordSaved = true;
+      const confirmed = await pending.client.auth.getUser();
+      if (confirmed.error) throw serviceError(confirmed.error);
+      if (!confirmed.data.user || confirmed.data.user.is_anonymous || confirmed.data.user.id !== pending.userId) throw unavailablePasswordLink();
+      if (pending.operation !== authOperation.current || pending.client !== api.client) throw unavailablePasswordLink();
+      persistence.commitLogin(pending.lease);
+      passwordSession.current = null;
+      passwordLinkActive.current = false;
+      signoutLocked.current = false;
+      await pending.client.auth.startAutoRefresh();
+      if (pending.operation === authOperation.current && pending.client === api.client) await recheck();
+    } catch (error) {
+      const failure = asRuntimeError(error);
+      if (pending.operation !== authOperation.current) return;
+      if (passwordSaved || ["session_expired", "access_unavailable", "credentials", "storage"].includes(failure.code)) {
+        pending.lease.revoke();
+        passwordSession.current = null;
+        setState({ status: "auth_link_error", error: failure.code === "storage" ? failure : passwordSaved
+          ? new RuntimeError("credentials", "Your password was saved, but access could not be verified. Go back to sign in with your new password, or request a new password link.")
+          : unavailablePasswordLink() });
+      }
+      throw failure;
+    }
+  }, [api, persistence, recheck]);
+
   const signOut = useCallback(async () => {
     const operation = ++authOperation.current;
+    passwordSession.current = null;
+    passwordLink.current = null;
+    passwordLinkActive.current = false;
     const logoutClient = api.client;
     let logoutLease: AuthStorageLease | null = null;
     signingOut.current = true;
@@ -221,7 +349,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       : { status: "access_unavailable" });
   }, [invalidate]);
 
-  return <Runtime.Provider value={{ api, config, state, recheck, signIn, signOut, showSignIn, handleFailure }}>{children}</Runtime.Provider>;
+  return <Runtime.Provider value={{ api, config, state, recheck, signIn, signOut, requestPasswordReset, setPassword, retryPasswordLink, showSignIn, handleFailure }}>{children}</Runtime.Provider>;
 }
 
 export function useRuntime() {

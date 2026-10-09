@@ -1,36 +1,33 @@
 {
   "version": 1,
-  "profile": "runtime-build",
-  "level": "build",
-  "recorded_at": "2026-10-09T13:02:30.368Z",
+  "profile": "auth-onboarding-browser-fixture",
+  "level": "browser_fixture",
+  "recorded_at": "2026-10-09T13:08:36.344Z",
   "result": "passed",
-  "digest": "3d215b8f5ba8f5e9979090ff132ba204a334eac57c8353fafcb272467a7141dd",
+  "digest": "d5a86fcc5578b8416c51a24b8f6364dc5aaa06bf693c501f6eaff7f8eb9a7ea7",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
     "arch": "x64",
-    "environment": "local-Node-24-TypeScript-Vite-production-bundle",
+    "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
     "environment_hashes": {
+      "AUXILIUMOS_BROWSER_EXECUTABLE": "619926da800ed84ebff8e2a3363252bff68ea835a7fdfd7701027bb546c3e3bc",
       "CI": null,
       "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
       "PATH": "e4175b8bf88fa89797668762042018804a73a0582cfcfac71b4ec2bff2baf74a",
-      "TZ": "58c885a79d98507ffb7c33da1c03d9717ee83e00902b882db2598bac4a7da463",
-      "VITE_ALLOW_LOCAL_TEST_BACKEND": null,
-      "VITE_SUPABASE_PUBLISHABLE_KEY": null,
-      "VITE_SUPABASE_URL": null
+      "TZ": "58c885a79d98507ffb7c33da1c03d9717ee83e00902b882db2598bac4a7da463"
     }
   },
   "inputs": {
-    ".gitignore": "3ab4ea703e5d14df8b9f0529def9ede8136f4749be390ae9ecfeb3219449837b",
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35354859711624945d76690ad5e4396f88ab748542c762e1f12ed900db4064e4",
+    "playwright.runtime.config.ts": "e53056e12b9645b7d60d0923393e9c0e7e0e8842bb236937914ca3f0de09b39e",
     "scripts/os-control.mjs": "7975ec94287ad1f782f2e44c89028fd3635f44f4ece18e83f43014f5478f4f22",
-    "tests/unit/auth-links.test.mjs": "eec922b7e9ff8c56a8d8a4ada0baa102c617702c8e2daf84cd66f9141fc77ff0",
-    "tests/unit/auth-persistence.test.mjs": "062ea0693db1dcd6020c5fb5227d6a393c53ac769a68e27c611a7b871d86e771",
-    "tests/unit/runtime-configuration.test.mjs": "0da7648ad2ac7fae2d1155a1ee976f4ac512837a145d62b71d2be7237b7118d6",
+    "tests/e2e/auth-onboarding.spec.ts": "ff8a6a4d5e22c6ddf6cca0cbf1d88a2bd5abb9ee6c17d06a185522dfe7e2e183",
+    "tests/e2e/directory.spec.ts": "72875635cc463ec34b243787fad806b08cbbd1816a1adb801d8129eaa327e71b",
     "web/.env.development": "b77bbd39b8474af6b8ac850ca228bcf4afe2c1dabbd255790d6c382fb1409269",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "708c961b3f256f5dcb2acf1e5eb76b544809500ab66311f97f8492b533762219",
@@ -71,31 +68,22 @@
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "118ef2a184bb3b7bf2c96ea8b1c76859c8b23795",
+  "observed_git_head": "f74123867faae6c43bbba05303a2d5d6c75a4825",
   "results": [
     {
       "argv": [
         "npm",
         "run",
-        "build"
-      ],
-      "exit_code": 0,
-      "signal": null,
-      "error": null
-    },
-    {
-      "argv": [
-        "node",
-        "--test",
-        "tests/unit/runtime-configuration.test.mjs",
-        "tests/unit/auth-persistence.test.mjs",
-        "tests/unit/auth-links.test.mjs"
+        "test:runtime-ui",
+        "--",
+        "auth-onboarding.spec.ts",
+        "directory.spec.ts"
       ],
       "exit_code": 0,
       "signal": null,
       "error": null
     }
   ],
-  "log_path": "docs/00-control/evidence/runtime-build.log",
-  "log_sha256": "82d3f37815b92dc1ee06b15280373f23a0ca8c139ff983152cf919e7e14f7f3a"
+  "log_path": "docs/00-control/evidence/auth-onboarding-browser-fixture.log",
+  "log_sha256": "cc676a6d543c2b2ea9bc9691f626b46e0cb849151567ee219e69cdd7af95d5c2"
 }

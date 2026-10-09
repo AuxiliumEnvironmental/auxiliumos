@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T09:31:20.673Z",
+  "created_at": "2026-10-09T13:11:49.371Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,32 +8,40 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Restore the disconnected development workspace, then collect existing backend sessions95415/40105 and UIbrowser session68533 before rerunning tests. Backend cell21 has FAILED during the contract-file write; UIcell47 has FAILED with409 environment_offline. Do not wait on or resubmit those completed failed cells. Inspect actual local files for partial writes. Backend next: fix review head/history/flags to one SQL snapshot after current metadata authorization, correct any unconfirmed47-test claim, run only affected checks, inspect/commit and independently review the actual patch. UI next: recover54-case result, revert only temporary testMatch/dependency symlink, inspect/commit the five allocated files. Fetch/reconcile remote-only source after lastlocaled6b29b without reset/reimport/reconstruction. Genuine Auth/API acceptance separately needs the existing protected workflow and securely configured GitHub Actions service-role secret; never supply its value in chat.",
+  "first_unfinished_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
   "git": {
     "is_repository_root": true,
-    "head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
-    "branch": "build/continuation-2026-10-09",
+    "head": "f74123867faae6c43bbba05303a2d5d6c75a4825",
+    "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "Last confirmed root had only untracked node_modules symlink; not re-observed after transport failure.",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/RESUME.md\n M docs/00-control/SESSION_CHECKPOINT.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/03-data/OWNER_ONBOARDING.md\n M docs/03-data/SCHEMA_REGISTRY.md\n M playwright.runtime.config.ts\n M tests/api/README.md\n M tests/api/document-versions.test.mjs\n M tests/e2e/directory.spec.ts\n M web/src/components/app-shell.tsx\n?? docs/00-control/evidence/auth-onboarding-browser-fixture.json\n?? docs/00-control/evidence/auth-onboarding-browser-fixture.log\n?? docs/00-control/evidence/development-owner-preparation.json\n?? docs/00-control/evidence/owner-onboarding.json\n?? docs/00-control/evidence/owner-onboarding.log\n?? docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json\n?? tests/api/document-browser.mjs\n?? tests/api/document-connected-ui.test.mjs\n?? tests/api/provision-connected-fixture.sql",
     "remote": {
+      "status": "head_differs_from_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "ae899b234dd4e084ce357e1588fac3f2770b084a",
-      "tree": "722e75a10f7b8bd290cf3ad8b7de676cc346dc00",
-      "status": "verified_remote_application_increment_before_metadata_only_checkpoint"
-    },
-    "source_to_publish": "5c4c524ec64fb985a06ebd31063b580f18baa362"
+      "head": "96e782753d21256178ba7803ddf6afbda30195e5",
+      "checked_at": "2026-10-09T13:11:49.370Z"
+    }
   },
-  "controls_digest": "593af7e8f6f5dd033cb7d8932667685f2fd7fb6a8c16c98ca8d890bf602933a7",
-  "next_ready_task": "DOC-001C-BACKEND",
+  "controls_digest": "1cc3f106c1529a9ccf1d4023d2a246d355df1222cfccb8d4e8aeb8c41021ad11",
+  "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
+    {
+      "id": "OWNER-ONBOARD-001",
+      "title": "Secure owner account, password setup/recovery and first successful access",
+      "declared_status": "blocked",
+      "verified": false,
+      "historical_completion": false,
+      "next_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
+      "blocker": "Protected development service credential and authorized manual dispatch unavailable here; invitation delivery, personal password and first owner login remain unverified."
+    },
     {
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
       "declared_status": "blocked",
       "verified": false,
       "historical_completion": false,
-      "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
-      "blocker": "Nine migrations and two gateway functions are deployed. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat."
+      "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
+      "blocker": "Ten migrations and two gateway functions deployed; actual Auth/API/browser requires protected service credential and manual branch dispatch."
     }
   ],
   "evidence": {
@@ -42,7 +50,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T08:45:53.758Z"
+      "recorded_at": "2026-10-09T13:11:24.851Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -70,8 +78,11 @@
       "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "stale",
-      "profile": "runtime-build"
+      "status": "passed",
+      "profile": "runtime-build",
+      "evidence": "docs/00-control/evidence/runtime-build.json",
+      "level": "build",
+      "recorded_at": "2026-10-09T13:02:30.368Z"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -172,6 +183,24 @@
     "document-content-browser-fixture": {
       "status": "stale",
       "profile": "document-content-browser-fixture"
+    },
+    "document-connected-ui": {
+      "status": "not_run",
+      "profile": "document-connected-ui"
+    },
+    "owner-onboarding": {
+      "status": "passed",
+      "profile": "owner-onboarding",
+      "evidence": "docs/00-control/evidence/owner-onboarding.json",
+      "level": "database",
+      "recorded_at": "2026-10-09T13:11:15.438Z"
+    },
+    "auth-onboarding-browser-fixture": {
+      "status": "passed",
+      "profile": "auth-onboarding-browser-fixture",
+      "evidence": "docs/00-control/evidence/auth-onboarding-browser-fixture.json",
+      "level": "browser_fixture",
+      "recorded_at": "2026-10-09T13:08:36.344Z"
     }
   },
   "pending_owner_decisions": [
@@ -193,112 +222,5 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Actual completed failed cells and uncollected process sessions distinguished. Applicationcode unchanged by this checkpoint; last observed localcode isnot remotelysaved. Read actualfiles afterconnectionreturns; no resetorprose reconstruction.",
-  "execution_outage": {
-    "observed_at": "2026-10-09T08:56:23.132Z",
-    "root_last_local_head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
-    "remote_base": "42741cdc10544a19aa5ced9d28048c709ef2e416",
-    "root_pending_cell_terminated": "169",
-    "read_only_check": "pwd did not return within30s",
-    "backend": {
-      "worktree": "/workspace/scratch/831a296a4676/document-review-backend",
-      "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
-      "cell": "21",
-      "sessions": [
-        95415,
-        40105
-      ],
-      "files_saved_uncommitted": [
-        "supabase/migrations/20261009083206_document_version_reviews.sql",
-        "tests/database/document-version-reviews.test.mjs"
-      ],
-      "last_confirmed_tests": 45,
-      "pending_expected_test_count": 47,
-      "warning": "Contract creation failed before later result collection.45checks remain confirmed;47-resultuncollected. Do not certify the submitted contract's premature47claim or recreate it fromprose. Localmigration-listECONNREFUSED54322 wasnotahostedfailure.",
-      "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests.",
-      "cell_status": "failed",
-      "contract_doc_creation": {
-        "path": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
-        "status": "write_failed",
-        "partial_file_state": "inspect actual filesystem after reconnect; no byte snapshot available"
-      }
-    },
-    "ui": {
-      "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
-      "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
-      "cell": "47",
-      "browser_session": 68533,
-      "last_confirmed_adapter_tests": 12,
-      "last_confirmed_review_browser_tests": 18,
-      "final_54_case_run_last_observed_pass": 27,
-      "build_passed": true,
-      "files_saved_uncommitted": [
-        "web/src/lib/document-review-api.ts",
-        "web/src/components/document-version-review.tsx",
-        "web/src/components/document-versions.tsx",
-        "tests/unit/document-review-api.test.mjs",
-        "tests/e2e/document-reviews.spec.ts"
-      ],
-      "temporary_changes": [
-        "playwright.runtime.config.ts testMatch addition",
-        "node_modules symlink"
-      ],
-      "port4179_release_unverified": true,
-      "cell_status": "failed"
-    },
-    "saved_remotely": false,
-    "latest_read_only_check": "pwd no response within15seconds; no actual new filesystem state observed",
-    "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative.",
-    "final_transport_failure": {
-      "observed_at": "2026-10-09T09:28:32.925Z",
-      "ui": {
-        "cell": "47",
-        "status": "failed",
-        "error": "409 Conflict, environment_offline: Environment is not connected.",
-        "browser_session": 68533,
-        "result_uncollected": true
-      },
-      "backend": {
-        "cell": "21",
-        "status": "failed",
-        "exit_code": 1,
-        "wall_time_seconds": 608.7,
-        "error": "Failed to write file /workspace/scratch/831a296a4676/document-review-backend/docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
-        "sessions": [
-          95415,
-          40105
-        ],
-        "subsequent_commands_executed": false
-      },
-      "no_new_filesystem_requests": true
-    }
-  },
-  "verification_context": {
-    "note": "The existing evidence map below is the last filesystem-generated observation, not a fresh rerun; do not restart completed reconciliation/setup because external receipts expire. GitHubCI56 passed3a862d25; currentconfig Lovabletests passed and nextcontainingcommitCI must be checked.",
-    "source_ci_run": 37908695151,
-    "source_ci_status": "success",
-    "lovable_parity": {
-      "observed_at": "2026-10-09T09:23:33.105Z",
-      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
-      "source_tree": "1303312225d1d37e452ab2496adea2a6acab37f1",
-      "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
-      "canonical_files": 334,
-      "unchanged_from_previous_verified": 327,
-      "changed_raw_files_independently_compared": 7,
-      "mismatches": [],
-      "noncanonical_platform_files_preserved": [
-        "web/.lovable/project.json",
-        "bun.lock"
-      ],
-      "source_parity_not_native_sync": true,
-      "production_published": false
-    },
-    "latest_application_ci": {
-      "id": 37911346187,
-      "head": "ae899b234dd4e084ce357e1588fac3f2770b084a",
-      "status": "completed",
-      "conclusion": "success",
-      "scope": "Application/test/config inputs unchanged by this four-record outage checkpoint; fullsuite notrequestedagain."
-    }
-  }
+  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file."
 }

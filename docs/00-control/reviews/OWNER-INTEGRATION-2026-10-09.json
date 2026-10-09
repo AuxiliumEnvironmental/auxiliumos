@@ -1,0 +1,27 @@
+{
+  "reviewed_at": "2026-10-09T13:06:46.380149+00:00",
+  "reviewer": "integration_security_review",
+  "mode": "independent_read_only",
+  "scope": [
+    "Owner onboarding script and atomic initial activation",
+    "Invitation/recovery callback lifecycle and private session staging",
+    "Protected manual owner and connected-browser workflow jobs",
+    "Dedicated synthetic fixture and real connected-browser harness"
+  ],
+  "blocking_findings": [],
+  "corrected_findings": [
+    "Connected content audit assertions matched unordered array positions; changed to pair every result by exact authorization ID."
+  ],
+  "authority_boundary": "Owner account/facility viewing, request submission/triage and ingest only; no professional clearance, review, release or financial authority.",
+  "remaining_evidence": [
+    "Hosted Auth callback/email behavior",
+    "Personal owner password/first login",
+    "Actual connected backend/browser journey",
+    "Concurrent PostgreSQL sessions"
+  ],
+  "workflow_followup": {
+    "sha256": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
+    "blocking_findings": [],
+    "scope": "Separate hosted/local receipts and independent explicit storage preparation, without database gate activation."
+  }
+}

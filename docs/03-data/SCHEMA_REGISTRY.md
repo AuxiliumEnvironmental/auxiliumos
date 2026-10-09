@@ -1,3 +1,11 @@
+# Current development readback, 2026-10-09
+
+This current section supersedes the dated preparation observations below. Existing `auxiliumos-dev` (`txofqxictwecgcnvezlb`) has ten applied migrations through `20261009130331_owner_onboarding_activation.sql`, plus JWT-protected `private-objects` v2 and `document-version-content` v3. No Moldo backend changed. Original foundation/seed bytes remain preserved.
+
+The tenth migration adds only service-executable initial owner activation, with fixed scoped development access and immutable provenance. No professional authority is granted. See [owner onboarding contract](OWNER_ONBOARDING.md) and [actual preparation receipt](../00-control/evidence/development-owner-preparation.json). Auth users and Storage buckets remain zero at this readback; both synthetic operational gates are disabled. A separate synthetic logical document/facility/account was actually provisioned for the connected browser test at initial document revision0. No hosted sign-in, upload or retrieval is certified.
+
+The older sections below record historical stages; statements that no cloud application occurred are not current deployment facts.
+
 > Current observation 2026-10-09: four unchanged reviewed migrations (foundation, directory, audit, reservations) are applied to existing auxiliumos-dev (`txofqxictwecgcnvezlb`), PostgreSQL17. Exact migration-source/history readback and all11 application tables with RLS are recorded in [deployment evidence](../00-control/evidence/development-migrations.json). Auth users/buckets remain zero; reservation configuration remains disabled. New intake/transport source is independently reviewed but its deployment is tracked separately. Schema deployment does not establish authentic Auth/API or full application acceptance. Older preparation restrictions below are historical; AGENTS.md governs synthetic development.
 
 # Schema Registry

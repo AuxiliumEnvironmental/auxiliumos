@@ -1,0 +1,44 @@
+["node","--test","tests/unit/owner-onboarding.test.mjs","tests/database/owner-onboarding.test.mjs"]
+▶ atomic initial owner activation: PostgreSQL engine with simulated Auth context, no hosted/concurrency claim
+  ✔ service-only preflight is read-only even before activation (9.12642ms)
+  ✔ one exact initial activation appends system provenance and an exact repeat is read-only (15.468019ms)
+  ✔ anonymous and authenticated roles cannot invoke either wrapper or private function (9.787059ms)
+  ✔ a direct service_role session cannot impersonate the protected PostgREST service context (2.677479ms)
+  ✔ different or changed owner Auth email and wrong Auth UUID are denied (5.576682ms)
+  ✔ profile suspension after any previous activation can never be restored (9.453024ms)
+  ✔ a previously removed identity remains denied even if manually returned to initial suspended status (6.760413ms)
+  ✔ nondevelopment account cannot be repaired or activated (3.447763ms)
+  ✔ foreign facility cannot be repaired or activated (6.932843ms)
+  ✔ removed membership cannot be repaired or activated (4.748721ms)
+  ✔ revoked grant cannot be repaired or activated (4.67564ms)
+  ✔ broader grant cannot be repaired or activated (3.480793ms)
+  ✔ missing grant cannot be repaired or activated (5.993187ms)
+  ✔ missing administrative designation cannot be repaired or activated (4.923435ms)
+  ✔ wrong profile label cannot be repaired or activated (3.149432ms)
+  ✔ restored grants and access rows cannot erase revocation history (5.437943ms)
+  ✔ another account lifecycle or an extra legacy role prevents initial activation (3.53199ms)
+  ✔ activation changes no scoped capabilities, professional grants, release configuration or seed identities (10.618476ms)
+✔ atomic initial owner activation: PostgreSQL engine with simulated Auth context, no hosted/concurrency claim (2013.696133ms)
+✔ default preflight is read-only and does not represent a password or owner login as verified (2.576647ms)
+✔ explicit onboarding verifies redirects, sends one supported invitation and activates last with five exact grants (3.224455ms)
+✔ an exact active configuration is read-only idempotent and never sends a second invite (2.120547ms)
+✔ existing unlinked Auth identity must be independently pinned before adoption (1.650886ms)
+✔ ambiguous, banned and anonymous Auth identities fail before changes (1.033673ms)
+✔ Auth inventory is paged before choosing the owner or sending an invite (0.877207ms)
+✔ reserved rows cannot adopt foreign metadata, lifecycle, linkage or expanded capability scope (9.60221ms)
+✔ a formerly active profile cannot be reactivated even with unchanged identity and capabilities (1.1902ms)
+✔ partial setup remains suspended and can safely resume through the atomic activation operation (2.273678ms)
+✔ recovery is explicit, verifies redirects and changes no application permissions (1.187555ms)
+✔ redirect fallback or generation failure retires only its exact synthetic Auth probe and never emails owner (1.010418ms)
+✔ unconfirmed cleanup fails the whole redirect probe and no owner email is sent (0.291681ms)
+✔ all provider error bodies are sanitized, including missing schema and activation RPC (2.053495ms)
+✔ incorrect owner email, action, reviewed UUID or backend is rejected before requests (0.540357ms)
+✔ CLI errors never print supplied credentials or accept command-line values (80.26706ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2181.672096

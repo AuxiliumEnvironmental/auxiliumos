@@ -1,0 +1,51 @@
+{
+  "observed_at": "2026-10-09T13:06:46.380149+00:00",
+  "project_id": "txofqxictwecgcnvezlb",
+  "migration_version": "20261009130331",
+  "migration_name": "owner_onboarding_activation",
+  "source_sha256": "db2c6834a4441cb317f68bbf6d4cf9fbdca545aa26fc57dc9b70b5e4754b0f9d",
+  "applied": true,
+  "readback": {
+    "private_definer": true,
+    "public_invoker": true,
+    "execute_roles": [
+      "postgres",
+      "service_role"
+    ],
+    "auth_users": 0,
+    "buckets": 0,
+    "ingest_enabled": false,
+    "ingest_revision": 1,
+    "content_enabled": false,
+    "content_revision": 1,
+    "content_synthetic_only": true
+  },
+  "synthetic_connected_fixture": {
+    "document_id": "8f161092-30f1-4e67-83c6-000000000501",
+    "document_revision": 0,
+    "account_id": "8f161092-30f1-4e67-83c6-000000000001",
+    "facility_id": "8f161092-30f1-4e67-83c6-000000000301",
+    "is_demo": true,
+    "is_internal_only": true,
+    "release_state": "uploaded_unclassified",
+    "applied": true,
+    "local_idempotent_executions": 2
+  },
+  "limitations": [
+    "No supported Storage API operation performed without protected service credential.",
+    "Owner invitation, password setup, email delivery and first login unexecuted.",
+    "Actual connected Auth/API/Storage/browser profile prepared and unexecuted.",
+    "Auth redirect configuration unavailable through existing connector and Lovable project; exact callback probe prepared."
+  ],
+  "security_advisors": {
+    "observed_at": "2026-10-09T13:06:55.208Z",
+    "new_owner_helper_findings": 0,
+    "rls_no_policy_count": 26,
+    "rls_assessment": "Restricted private/RPC tables deliberately deny direct browser access; do not add permissive policies to clear notices.",
+    "provider_event_trigger": "public.rls_auto_enable returns event_trigger, owned by postgres and attached to enabled ensure_rls. Existing broad execute ACLs produced anon/authenticated warnings; event-trigger behavior independently read back, no permission expansion or provider-trigger change made.",
+    "remediation_urls": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+    ]
+  }
+}

@@ -5,6 +5,7 @@ import { createClient } from '@supabase/supabase-js';
 import { configuration, preflightSchema, recordCreatedAuth } from './fixture-cleanup.mjs';
 import { assertPrivateBucket, PRIVATE_BUCKET } from '../../scripts/private-object-provision.mjs';
 import { SYNTHETIC_PREFIX, sha256 } from '../../supabase/functions/private-objects/gateway.mjs';
+import { startDocumentBrowser } from './document-browser.mjs';
 import { boundedBytes, MAX_BYTES } from '../../supabase/functions/document-version-content/gateway.mjs';
 
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -57,7 +58,11 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   }
   await denied(admin.rpc('authorize_document_version_content',{p_version_id:randomUUID(),p_expected_sha256:'0'.repeat(64),p_request_id:randomUUID()}),'42501');
 
-  const runId=randomUUID(),profiles=[randomUUID(),randomUUID()],directoryGrants=Array.from({length:6},()=>randomUUID());
+  const withBrowser=process.env.AUXILIUMOS_TEST_DOCUMENT_BROWSER==='true';
+  const runId=randomUUID(),profiles=[randomUUID(),randomUUID()];
+  const grantDefinitions=[...['view_account','view_asset','ingest_private_object',...(withBrowser?['submit_request','triage_request']:[])].map(capability=>({profile:profiles[0],capability})),...['view_account','view_asset','ingest_private_object'].map(capability=>({profile:profiles[1],capability}))];
+  const directoryGrants=grantDefinitions.map(()=>randomUUID());
+  let documentBrowser, browserRequestId;
   const owned={runId,createdAuth:[]},actors=[],objectRevisions=new Map(),documentGrants=[],objectGrants=[],versionIds=[],contentGrants=[],contentRevisions=new Map();
   let documentRevision=initialRevision;
   t.after(async()=>{
@@ -67,6 +72,8 @@ test('immutable version adoption and exact internal content authentic Auth/API â
     // targets. All bytes, versions, grants, audit and Auth identities are retained.
     t.diagnostic(`Retained synthetic run ${runId}; borrowed document ${documentId}; last observed document revision ${documentRevision}; objects ${JSON.stringify([...objectRevisions.keys()])}; versions ${JSON.stringify(versionIds)}; document grants ${JSON.stringify(documentGrants.map(g=>g.id))}; object grants ${JSON.stringify(objectGrants.map(g=>g.id))}; content grants ${JSON.stringify(contentGrants.map(g=>({id:g.id,versionId:g.versionId,revoked:g.revoked})))}; content revisions ${JSON.stringify([...contentRevisions])}; Auth IDs ${JSON.stringify(owned.createdAuth.map(a=>a.id))}; created profile IDs ${JSON.stringify(profiles)}; directory grant IDs ${JSON.stringify(directoryGrants)}.`);
     async function attempt(label,operation){try{await operation();}catch{failures.push(label);t.diagnostic(label);}}
+    await attempt('Connected browser shutdown failed',()=>documentBrowser?.close());
+    if(browserRequestId)t.diagnostic(`Connected browser request retained: ${browserRequestId}.`);
     for(const g of contentGrants) if(!g.revoked) await attempt(`Retirement failed for owned content grant ${g.id}`,async()=>{
       const revision=contentRevisions.get(g.versionId);
       const r=await ok(admin.rpc('revoke_document_content_grant',{p_version_id:g.versionId,p_grant_id:g.id,p_expected_revision:revision}));
@@ -109,7 +116,7 @@ test('immutable version adoption and exact internal content authentic Auth/API â
       });
     }
     for(const [i,id] of directoryGrants.entries()) await attempt(`Directory grant retirement failed for ${id}`,async()=>{
-      const columns='id,account_id,user_profile_id,revoked_at,is_demo',profile=profiles[Math.floor(i/3)];
+      const columns='id,account_id,user_profile_id,revoked_at,is_demo',profile=grantDefinitions[i].profile;
       const read=()=>ok(admin.from('account_capability_grants').select(columns).eq('id',id).maybeSingle());
       const row=await read();if(!row)return;
       const ownedGrant=r=>r?.id===id&&r.account_id===doc.account_id&&r.user_profile_id===profile&&r.is_demo===true;
@@ -129,16 +136,25 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   for(const [i,label] of ['a','b'].entries()) {
     const email=`api-${runId}-${label}@identity-directory.invalid`,password=`${randomBytes(36).toString('base64url')}aA1!`;
     const created=await ok(admin.auth.admin.createUser({email,password,email_confirm:true}));recordCreatedAuth(owned,created.user,label);
-    const login=client(config,config.publishableKey),session=await ok(login.auth.signInWithPassword({email,password}));
+    const login=client(config,config.publishableKey);let session;
+    session=await ok(login.auth.signInWithPassword({email,password}));
     assert.equal(session.user.id,created.user.id);assert.ok(session.session?.access_token);
-    actors.push({id:created.user.id,token:session.session.access_token,data:client(config,config.publishableKey,session.session.access_token),login});
+    actors.push({id:created.user.id,token:session.session.access_token,data:client(config,config.publishableKey,session.session.access_token),login,...(withBrowser&&i===0?{email,password}:{})});
   }
   const [upload,review]=actors;
   await ok(admin.from('user_profiles').insert(actors.map((a,i)=>({id:profiles[i],auth_user_id:a.id,display_name:`Synthetic version fixture ${i}`,identity_status:'suspended',is_demo:true}))));
   await ok(admin.from('account_access').insert(profiles.map(id=>({account_id:doc.account_id,user_profile_id:id,membership_status:'active',is_demo:true}))));
-  await ok(admin.from('account_capability_grants').insert(directoryGrants.map((id,i)=>({id,account_id:doc.account_id,user_profile_id:profiles[Math.floor(i/3)],
-    capability_key:['view_account','view_asset','ingest_private_object'][i%3],scope_kind:i%3===0?'account':'facility',facility_id:i%3===0?null:doc.facility_id,is_demo:true}))));
+  await ok(admin.from('account_capability_grants').insert(directoryGrants.map((id,i)=>({id,account_id:doc.account_id,user_profile_id:grantDefinitions[i].profile,
+    capability_key:grantDefinitions[i].capability,scope_kind:grantDefinitions[i].capability==='view_account'?'account':'facility',facility_id:grantDefinitions[i].capability==='view_account'?null:doc.facility_id,is_demo:true}))));
   await ok(admin.from('user_profiles').update({identity_status:'active'}).in('id',profiles));
+  if(withBrowser) {
+    documentBrowser=await startDocumentBrowser(config);const signed=await documentBrowser.signIn(upload.email,upload.password);delete upload.password;delete upload.email;
+    assert.equal((await ok(upload.login.auth.getUser(signed.access_token))).user.id,upload.id,'Auth must verify the actual browser login.');
+    upload.token=signed.access_token;upload.data=client(config,config.publishableKey,signed.access_token);
+    browserRequestId=await documentBrowser.intake(doc,profiles[0],runId);
+    const request=await ok(admin.from('project_requests').select('id,account_id,facility_id,submitted_by_auth_user_id,assigned_to_profile_id,status,revision,is_demo').eq('id',browserRequestId).single());
+    assert.ok(request.is_demo&&request.account_id===doc.account_id&&request.facility_id===doc.facility_id&&request.submitted_by_auth_user_id===upload.id&&request.assigned_to_profile_id===profiles[0]&&request.status==='intake_completeness_review'&&request.revision===2,'Connected request provenance mismatch.');
+  }
   const unavailable={document_id:null,state:'not_found_or_unavailable',items:[],next_cursor:null};
   assert.deepEqual(await ok(upload.data.rpc('list_document_versions',{p_document_id:documentId})),unavailable);
   for(const capability of ['view_versions','create_version']) {
@@ -152,9 +168,9 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   }
   async function prepareClearedObject(label='') {
     const bytes=new TextEncoder().encode(`${SYNTHETIC_PREFIX}Immutable version API ${runId}${label}\nNo real data.\n`),digest=await sha256(bytes);
-    const reserved=await edge('POST','',{accountId:doc.account_id,facilityId:doc.facility_id,idempotencyKey:randomUUID(),byteSize:bytes.length,mediaType:'text/plain'}),id=reserved.objectId;
-    objectRevisions.set(id,0);const received=await edge('PUT',`/${id}/bytes`,bytes,{'X-State-Revision':'1'});
-    await edge('POST',`/${id}/finalize`,{expectedStateRevision:received.stateRevision});
+    let id;
+    if(documentBrowser&&label==='') { const finalized=await documentBrowser.upload(doc,bytes);assert.equal(finalized.state,'finalized');id=finalized.objectId;objectRevisions.set(id,0); }
+    else { const reserved=await edge('POST','',{accountId:doc.account_id,facilityId:doc.facility_id,idempotencyKey:randomUUID(),byteSize:bytes.length,mediaType:'text/plain'});id=reserved.objectId;objectRevisions.set(id,0);const received=await edge('PUT',`/${id}/bytes`,bytes,{'X-State-Revision':'1'});await edge('POST',`/${id}/finalize`,{expectedStateRevision:received.stateRevision}); }
     const g=await ok(admin.rpc('provision_private_object_grant',{p_object_id:id,p_profile_id:profiles[1],p_capability:'clear_object',p_request_id:randomUUID(),p_expected_revision:0}));
     objectGrants.push({id:g.grant_id,objectId:id});objectRevisions.set(id,g.security_revision);
     const a=await ok(admin.rpc('claim_private_object_scan',{p_object_id:id,p_expected_revision:g.security_revision,p_request_id:randomUUID(),p_adapter_kind:'synthetic_fixture',p_adapter_version:'api-fixture-v1',p_ruleset_version:'fixture-rules-v1'}));objectRevisions.set(id,a.security_revision);
@@ -164,10 +180,13 @@ test('immutable version adoption and exact internal content authentic Auth/API â
     return {bytes,digest,id,decision,held};
   }
   const {bytes,digest,id,decision,held}=await prepareClearedObject();
-  const args={p_object_id:id,p_expected_sha256:digest,p_document_id:documentId,p_expected_security_revision:held.security_revision,p_expected_document_revision:documentRevision,p_request_id:randomUUID()};
+  let args={p_object_id:id,p_expected_sha256:digest,p_document_id:documentId,p_expected_security_revision:held.security_revision,p_expected_document_revision:documentRevision,p_request_id:randomUUID()};
   await denied(admin.rpc('adopt_private_object',args),'42501');await denied(review.data.rpc('adopt_private_object',args),'42501');
   await denied(upload.data.rpc('adopt_private_object',{...args,p_expected_document_revision:documentRevision-1}),'40001');
-  const v=await ok(upload.data.rpc('adopt_private_object',args));versionIds.push(v.version_id);documentRevision=v.document_revision;objectRevisions.set(id,v.security_revision);contentRevisions.set(v.version_id,0);
+  let v;
+  if(documentBrowser) { const adopted=await documentBrowser.adopt(doc);args=adopted.request;v=adopted.receipt;assert.ok(args.p_object_id===id&&args.p_expected_sha256===digest&&args.p_document_id===documentId,'Browser adopted a different source.'); }
+  else v=await ok(upload.data.rpc('adopt_private_object',args));
+  versionIds.push(v.version_id);documentRevision=v.document_revision;objectRevisions.set(id,v.security_revision);contentRevisions.set(v.version_id,0);
   assert.equal(v.lifecycle_state,'internal_draft');assert.equal(v.verified_sha256,digest);assert.equal(v.preservation_hold_at_adoption,true);
   assert.deepEqual(await ok(upload.data.rpc('adopt_private_object',args)),v);
   const security=await ok(upload.data.rpc('private_object_security_status',{p_object_id:id}));assert.equal(security.ingest_closed,true);assert.equal(security.preservation_hold,true);
@@ -191,7 +210,8 @@ test('immutable version adoption and exact internal content authentic Auth/API â
     assert.ok(body?.error==='not_found_or_unavailable'&&Object.keys(body).length===1,'Unexpected content denial or audit operational fault; raw body omitted.');
     assert.ok(r.headers.get('cache-control')==='private, no-store'&&r.headers.get('x-content-type-options')==='nosniff','Content denial cache/safety headers absent.');
   }
-  await contentDenied(upload,v.version_id); // adoption, hold and view_versions grant confer no content authority
+  await contentDenied(upload,v.version_id);
+  if(documentBrowser)await documentBrowser.download(v,false); // adoption, hold and view_versions grant confer no content authority
   const contentGrant=await ok(admin.rpc('provision_document_content_grant',{p_version_id:v.version_id,p_expected_sha256:digest,p_profile_id:profiles[0],p_request_id:randomUUID(),p_expected_revision:0}));
   assert.ok(UUID.test(contentGrant?.grant_id??'')&&contentGrant.content_revision===1&&contentGrant.revoked===false,'Exact synthetic content grant receipt required.');
   const ownedContentGrant={id:contentGrant.grant_id,versionId:v.version_id,revoked:false};contentGrants.push(ownedContentGrant);contentRevisions.set(v.version_id,contentGrant.content_revision);
@@ -205,6 +225,7 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   const fetched=await boundedBytes(exact.body,MAX_BYTES);
   assert.ok(fetched.byteLength===bytes.byteLength&&await sha256(fetched)===digest&&Buffer.from(fetched).equals(Buffer.from(bytes)),
     'Returned bytes do not match this exact synthetic immutable version.');
+  if(documentBrowser) {const downloaded=await documentBrowser.download(v,true);assert.ok(Buffer.from(downloaded).equals(Buffer.from(bytes))&&await sha256(downloaded)===digest,'Browser attachment differs from the exact uploaded version.');}
   await contentDenied(review,v.version_id); // separately qualified security reviewer is not a content recipient
   await contentDenied(upload,v.version_id,'0'.repeat(64));
 
@@ -221,14 +242,18 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   assert.ok(revokedContent?.grant_id===ownedContentGrant.id&&revokedContent.revoked===true&&revokedContent.content_revision===2,'Exact content revocation receipt required.');
   ownedContentGrant.revoked=true;contentRevisions.set(v.version_id,revokedContent.content_revision);
   assert.equal((await ok(upload.login.auth.getUser(upload.token))).user.id,upload.id);
-  await contentDenied(upload,v.version_id); // unchanged valid token; logical view grant still present
+  await contentDenied(upload,v.version_id);
+  if(documentBrowser)await documentBrowser.download(v,false); // unchanged valid token; logical view grant still present
 
   const contentAuditColumns='account_id,object_type,object_id,event_type,actor_kind,actor_user_profile_id,actor_auth_user_id,actor_system_key,event_metadata';
   const contentAudit=await ok(admin.from('audit_events').select(contentAuditColumns).eq('event_metadata->>version_id',v.version_id)
     .in('event_type',['document_content_authorized','document_content_result_recorded','document_content_grant_created','document_content_grant_revoked']));
   const authorized=contentAudit.filter(e=>e.event_type==='document_content_authorized'),results=contentAudit.filter(e=>e.event_type==='document_content_result_recorded');
-  assert.equal(authorized.length,1);assert.equal(results.length,1); // two current checks use one exact request/authorization
-  const permitted=authorized[0],result=results[0];
+  assert.equal(authorized.length,documentBrowser?2:1);assert.equal(results.length,documentBrowser?2:1); // two current checks use one exact request/authorization
+  for(const permitted of authorized) {
+  const matches=results.filter(result=>result.event_metadata.authorization_id===permitted.object_id);
+  assert.equal(matches.length,1,'Each authorization requires exactly one matching technical result.');
+  const result=matches[0];
   assert.ok(permitted.object_type==='document_content_authorization'&&permitted.actor_kind==='user'&&permitted.actor_auth_user_id===upload.id
     &&permitted.actor_user_profile_id===profiles[0]&&permitted.actor_system_key===null&&permitted.account_id===doc.account_id
     &&permitted.event_metadata.object_id===id&&permitted.event_metadata.verified_sha256===digest
@@ -237,14 +262,15 @@ test('immutable version adoption and exact internal content authentic Auth/API â
     &&result.actor_system_key==='database_privileged_operation'&&result.account_id===doc.account_id&&result.event_metadata.authorization_id===permitted.object_id
     &&result.event_metadata.object_id===id&&result.event_metadata.verified_sha256===digest&&result.event_metadata.outcome==='response_prepared'
     &&result.event_metadata.meaning==='system_observation_not_delivery','Response preparation must be a technical observation, never delivery/read proof.');
+  }
   for(const event of ['document_content_grant_created','document_content_grant_revoked']) assert.equal(contentAudit.filter(e=>e.event_type===event&&e.object_id===ownedContentGrant.id).length,1);
   const contentDenials=await ok(admin.from('audit_events').select(contentAuditColumns).eq('event_type','document_content_denied')
     .in('event_metadata->>observed_auth_user_id',actors.map(actor=>actor.id)));
-  assert.equal(contentDenials.length,6);
+  assert.equal(contentDenials.length,documentBrowser?8:6);
   assert.ok(contentDenials.every(e=>e.object_type==='document_content_attempt'&&e.actor_kind==='system'&&e.actor_user_profile_id===null&&e.actor_auth_user_id===null
     &&e.actor_system_key==='database_privileged_operation'&&e.event_metadata.reason_code==='not_found_or_unavailable'
     &&e.event_metadata.meaning==='system_observation_not_human_authority'),'Content denials must remain trusted-system observations.');
-  assert.equal(new Set(contentDenials.map(e=>e.event_metadata.request_id)).size,6);
+  assert.equal(new Set(contentDenials.map(e=>e.event_metadata.request_id)).size,documentBrowser?8:6);
   assert.equal(contentDenials.filter(e=>e.event_metadata.observed_auth_user_id===review.id&&e.account_id===null).length,1);
   assert.equal(contentDenials.filter(e=>e.event_metadata.attempted_version_id===guessedVersion&&e.account_id===null).length,1);
   assert.ok([...contentAudit,...contentDenials].every(e=>!Object.hasOwn(e.event_metadata,'object_key')&&!Object.hasOwn(e.event_metadata,'token')
@@ -253,5 +279,6 @@ test('immutable version adoption and exact internal content authentic Auth/API â
   const revoked=await ok(admin.rpc('revoke_document_version_grant',{p_document_id:documentId,p_grant_id:view.id,p_expected_revision:documentRevision}));documentRevision=revoked.document_revision;view.revoked=true;
   assert.equal((await ok(upload.login.auth.getUser(upload.token))).user.id,upload.id);assert.deepEqual(await ok(upload.data.rpc('list_document_versions',{p_document_id:documentId})),unavailable);
   await denied(upload.data.rpc('adopt_private_object',args),'42501');
+  if(documentBrowser){await documentBrowser.verify();t.diagnostic('Actual 390px browser login, account/facility access, request submission, triage, upload/finalization, internal-draft adoption and exact attachment readback passed. Security review used an explicitly designated synthetic actor, not the owner or an actual professional approval.');}
   t.diagnostic('If executed, this proves authentic synthetic adoption, exact internal byte transport, separate content authority and same-token revocation denial. response_prepared is not actual delivery or human reading. It does not prove real scanner effectiveness, professional approval, client release, true PostgreSQL concurrent-session ordering, or revocation during provider I/O; injected tests cover the latter handler path only.');
 });

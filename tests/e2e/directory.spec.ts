@@ -258,9 +258,15 @@ test('fixture browser: phone navigation, keyboard close, honest module state and
   // disclose their unavailable state rather than imply a completed product.
   await open.click();
   await page.getByRole('dialog').getByRole('link', { name: 'Projects', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Not available in this increment', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Operations / Projects', level: 1, exact: true })).toBeVisible();
+  await expect(page.getByText('Not connected', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Connection required', exact: true })).toBeVisible();
+  await expect(page.getByText('No records have been requested. This is not an empty-result confirmation.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('tabpanel').getByRole('button').filter({ hasText: 'Schedule project' })).toBeDisabled();
   await expect(page.getByRole('dialog')).not.toBeVisible();
-  await page.getByRole('link', { name: 'Open account directory', exact: true }).click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await open.click();
+  await page.getByRole('dialog').getByRole('link', { name: 'Accounts', exact: true }).click();
   await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.screenshot({ path: testInfo.outputPath('directory-phone.png'), fullPage: true });
