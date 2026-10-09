@@ -5,7 +5,7 @@ import UIKit
 final class AuxiliumFilesPlugin: CAPPlugin, CAPBridgedPlugin {
     let identifier = "AuxiliumFilesPlugin"
     let jsName = "AuxiliumFiles"
-    let pluginMethods = [CAPPluginMethod(name: "saveExport", returnType: CAPPluginReturnPromise)]
+    let pluginMethods: [CAPPluginMethod] = [CAPPluginMethod(name: "saveExport", returnType: CAPPluginReturnPromise)]
     @MainActor var accessAllowed: () -> Bool = { false }
     @MainActor private var pending: CAPPluginCall?
     @MainActor private var directory: URL?

@@ -74,7 +74,10 @@ for prefix, settings in [('project', project_settings), ('app', app_settings), (
     for mode in ['Debug', 'Release']:
         values = dict(settings)
         if prefix == 'project':
-            values.update({'SWIFT_OPTIMIZATION_LEVEL':'-Onone' if mode == 'Debug' else '-O', 'DEBUG_INFORMATION_FORMAT':'dwarf' if mode == 'Debug' else 'dwarf-with-dsym', 'ENABLE_TESTABILITY':'YES' if mode == 'Debug' else 'NO'})
+            # Match SwiftPM's Debug active-architecture build. Building the app's
+            # unused simulator architecture while packages only build the active
+            # one makes otherwise valid module dependencies appear unavailable.
+            values.update({'SWIFT_OPTIMIZATION_LEVEL':'-Onone' if mode == 'Debug' else '-O', 'DEBUG_INFORMATION_FORMAT':'dwarf' if mode == 'Debug' else 'dwarf-with-dsym', 'ENABLE_TESTABILITY':'YES' if mode == 'Debug' else 'NO', 'ONLY_ACTIVE_ARCH':'YES' if mode == 'Debug' else 'NO'})
             if mode == 'Debug': values['SWIFT_ACTIVE_COMPILATION_CONDITIONS'] = 'DEBUG $(inherited)'
         content = ' '.join(f'{key} = {q(value)};' for key, value in sorted(values.items()))
         obj(prefix + mode, f'isa = XCBuildConfiguration; buildSettings = {{ {content} }}; name = {mode};')

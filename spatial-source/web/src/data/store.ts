@@ -93,26 +93,31 @@ export class SpatialWebStore {
   async freeze(documentID: string, expectedRevision: number): Promise<FrozenRevision> {
     const row = await this.record(documentID); if (row.document.revision !== expectedRevision) fail('revision-conflict');
     const bytes = jsonBytes(row.document), frozen: FrozenRevision = { document: row.document, hash: await sha256(bytes), bytes, createdAt: new Date().toISOString() };
-    await this.transaction(['revisions'], 'readwrite', async tx => {
+    const retained = await this.transaction(['revisions'], 'readwrite', async tx => {
       const revisions = tx.objectStore('revisions'), key = `${documentID}:${expectedRevision}`, current = await request(revisions.get(key)) as SavedRevision | undefined;
-      if (current && (current.frozen.hash !== frozen.hash || stableJSON(current.frozen.document) !== stableJSON(frozen.document))) fail('immutable-revision-conflict');
-      if (!current) await request(revisions.add({ key, documentID, revision: expectedRevision, frozen } satisfies SavedRevision));
+      if (current) return current;
+      const added = { key, documentID, revision: expectedRevision, frozen } satisfies SavedRevision;
+      await request(revisions.add(added)); return added;
     });
-    return clone(frozen);
+    // Validate the actual retained row after the transaction, without awaiting crypto inside it.
+    await validateSavedRevision(retained, documentID, expectedRevision);
+    if (retained.frozen.hash !== frozen.hash || stableJSON(retained.frozen.document) !== stableJSON(frozen.document)) fail('immutable-revision-conflict');
+    return clone(retained.frozen);
   }
   async revisions(documentID: string): Promise<FrozenRevision[]> {
     const rows = await this.transaction(['revisions'], 'readonly', tx => request(tx.objectStore('revisions').getAll())) as SavedRevision[];
-    const result = rows.filter(row => row.documentID === documentID).sort((a, b) => b.revision - a.revision).map(row => row.frozen);
-    for (const frozen of result) await validateFrozen(frozen);
-    return clone(result);
+    const relevant = rows.filter(row => row.documentID === documentID || typeof row.key === 'string' && row.key.startsWith(`${documentID}:`));
+    for (const row of relevant) await validateSavedRevision(row, documentID);
+    return clone(relevant.sort((a, b) => b.revision - a.revision).map(row => row.frozen));
   }
   async listRevisions(documentID: string): Promise<FrozenRevision[]> { return this.revisions(documentID); }
   async loadFrozen(documentID: string, revision: number): Promise<FrozenRevision> {
     const row = await this.transaction(['revisions'], 'readonly', tx => request(tx.objectStore('revisions').get(`${documentID}:${revision}`))) as SavedRevision | undefined;
-    if (!row) fail('frozen-revision-not-found'); await validateFrozen(row.frozen); return clone(row.frozen);
+    if (!row) fail('frozen-revision-not-found'); await validateSavedRevision(row, documentID, revision); return clone(row.frozen);
   }
   async restore(documentID: string, sourceRevision: number, expectedRevision: number): Promise<StoredWorkspace> {
     const frozen = await this.loadFrozen(documentID, sourceRevision), row = await this.record(documentID);
+    if (frozen.document.documentID !== documentID || frozen.document.revision !== sourceRevision) fail('frozen-record-identity-mismatch');
     if (row.document.revision !== expectedRevision) fail('revision-conflict');
     if (expectedRevision >= Number.MAX_SAFE_INTEGER) fail('revision-limit');
     const source = row.document;
@@ -125,6 +130,10 @@ export class SpatialWebStore {
 }
 export async function validateFrozen(frozen: FrozenRevision): Promise<void> {
   requireValidDocument(frozen.document);
-  if (!(frozen.bytes instanceof Uint8Array) || frozen.bytes.length !== jsonBytes(frozen.document).length || stableJSON(frozen.document) !== new TextDecoder().decode(frozen.bytes) || await sha256(frozen.bytes) !== frozen.hash) fail('frozen-revision-mismatch');
+  if (!(frozen.bytes instanceof Uint8Array) || frozen.bytes.length > MAX_MEMBER || !Number.isFinite(Date.parse(frozen.createdAt)) || !/^[a-f0-9]{64}$/.test(frozen.hash) || frozen.bytes.length !== jsonBytes(frozen.document).length || stableJSON(frozen.document) !== new TextDecoder('utf-8', { fatal: true }).decode(frozen.bytes) || await sha256(frozen.bytes) !== frozen.hash) fail('frozen-revision-mismatch');
+}
+async function validateSavedRevision(row: SavedRevision, documentID: string, revision?: number): Promise<void> {
+  if (!row || row.documentID !== documentID || !Number.isSafeInteger(row.revision) || row.revision < 1 || revision !== undefined && row.revision !== revision || row.key !== `${documentID}:${row.revision}` || !row.frozen || row.frozen.document?.documentID !== documentID || row.frozen.document.revision !== row.revision) fail('frozen-record-identity-mismatch');
+  await validateFrozen(row.frozen);
 }
 export { request as idbRequest };

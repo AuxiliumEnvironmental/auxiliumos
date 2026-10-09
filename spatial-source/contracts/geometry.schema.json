@@ -1,0 +1,346 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "documentID": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,96}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "parentRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "coordinateSystem": {
+      "const": "meters_y_up_right_handed"
+    },
+    "measurementStatus": {
+      "const": "unverified"
+    },
+    "reviewState": {
+      "enum": [
+        "needsReview",
+        "reviewed"
+      ]
+    },
+    "floors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Floor"
+      },
+      "minItems": 1,
+      "maxItems": 100
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentID",
+    "revision",
+    "title",
+    "coordinateSystem",
+    "measurementStatus",
+    "reviewState",
+    "floors"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:auxilium:spatial:geometry:1.0.0",
+  "$defs": {
+    "Point2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "z": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "x",
+        "z"
+      ]
+    },
+    "Node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "point": {
+          "$ref": "#/$defs/Point2"
+        }
+      },
+      "required": [
+        "id",
+        "point"
+      ]
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "enum": [
+            "captured",
+            "edited",
+            "inferred",
+            "synthetic"
+          ]
+        },
+        "sourceIDs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "classificationConfidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "origin",
+        "sourceIDs",
+        "classificationConfidence"
+      ]
+    },
+    "Wall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "nodeIDs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "minItems": 2,
+          "maxItems": 1000
+        },
+        "baseY": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "heightBasis": {
+          "enum": [
+            "captured",
+            "assumed",
+            "edited",
+            "synthetic"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "nodeIDs",
+        "baseY",
+        "height",
+        "heightBasis",
+        "provenance"
+      ]
+    },
+    "Opening": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "wallID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "kind": {
+          "enum": [
+            "door",
+            "window",
+            "passage"
+          ]
+        },
+        "offset": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10000
+        },
+        "bottom": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "wallID",
+        "kind",
+        "offset",
+        "width",
+        "bottom",
+        "height",
+        "provenance"
+      ]
+    },
+    "WallReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wallID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "reversed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "wallID",
+        "reversed"
+      ]
+    },
+    "Room": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "boundary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WallReference"
+          },
+          "minItems": 3,
+          "maxItems": 1000
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "boundary"
+      ]
+    },
+    "Floor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "elevation": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Node"
+          },
+          "minItems": 0,
+          "maxItems": 100000
+        },
+        "walls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wall"
+          },
+          "minItems": 0,
+          "maxItems": 50000
+        },
+        "openings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Opening"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "rooms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Room"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "elevation",
+        "nodes",
+        "walls",
+        "openings",
+        "rooms"
+      ]
+    }
+  },
+  "description": "Strict transport structure. Swift semantic validation is additionally required. Local reviewState is not an OS release authorization."
+}

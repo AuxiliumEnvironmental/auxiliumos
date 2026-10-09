@@ -1,6 +1,7 @@
 import type { FrozenRevision } from '../types';
 import { clone, fail, sha256, stableJSON, strictJSON } from './bytes';
 import { exportRevision } from './exports';
+import { importDocument } from './imports';
 import { idbRequest, SpatialWebStore, validateFrozen } from './store';
 import { readZIP } from './zip';
 
@@ -112,7 +113,9 @@ export class SpatialOutbox {
       await validateFrozen(attempt.frozen);
       if (attempt.frozen.hash !== request.localSnapshotSHA256 || attempt.frozen.document.documentID !== request.sourceDocumentID || attempt.frozen.document.revision !== request.sourceRevision || attempt.archive.length !== request.archiveByteCount || await sha256(attempt.archive) !== request.archiveSHA256) fail('corrupt-outbox');
       const members = readZIP(attempt.archive);
-      if (await sha256(members['manifest.json']) !== request.manifestSHA256 || (strictJSON(members['manifest.json']) as Record<string, unknown>).revision !== request.sourceRevision) fail('corrupt-outbox');
+      const manifest = strictJSON(members['manifest.json']) as Record<string, unknown>;
+      if (await sha256(members['manifest.json']) !== request.manifestSHA256 || manifest.documentID !== request.sourceDocumentID || manifest.revision !== request.sourceRevision || !members['geometry.json'] || await sha256(members['geometry.json']) !== attempt.frozen.hash) fail('corrupt-outbox');
+      try { await importDocument(attempt.archive, 'queued.exchange.zip'); } catch { fail('corrupt-outbox'); }
       const auth = clone(await this.transport.authorize(clone(request))); await this.ready(attempt, auth);
       // Every retry reconciles first, covering receiver acceptance followed by tab/process death.
       let remote = clone(await this.transport.status(clone(request), clone(auth))); await this.ready(attempt, auth);

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { buildScene, wallPath, WalkNavigation } from '../core';
+import { batchSceneFaces } from './sceneBatches';
+import { trackRenderer } from './rendererDiagnostics';
 import type { Floor, Selection, SpatialDocument, WalkPosition } from '../types';
 
 type Props = { document: SpatialDocument; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void };
@@ -45,6 +47,7 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     setError(''); walking.current = false; setMode('orbit'); position.current = null; stopRepeat(); setMessage('Drag to orbit. Scroll or pinch to zoom.');
     let renderer: THREE.WebGLRenderer;
     try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'low-power' }); } catch { setError('3D graphics are unavailable in this browser. The 2D editor and saved layout remain available.'); return; }
+    const releaseTracker=trackRenderer(renderer);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setClearColor('#f4f7f8'); renderer.localClippingEnabled = true; renderer.outputColorSpace = THREE.SRGBColorSpace;
     el.appendChild(renderer.domElement); renderer.domElement.setAttribute('aria-label', 'Interactive architectural 3D model'); renderer.domElement.tabIndex = 0;
     const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(46, 1, 0.03, 50000);
@@ -54,15 +57,9 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     const meshes: THREE.Object3D[] = [];
     const graphic = (() => { try { return buildScene(document, floor.id); } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); return null; } })();
     let section: THREE.LineSegments | null = null, selectedEdges: THREE.LineSegments | null = null, selectedNode: THREE.Mesh | null = null;
-    const selectedID = selectedRef.current?.objectID;
-    if (graphic && graphic.faces.length > 50000) setError('This model exceeds the browser drawing safety limit. Use a smaller floor or the 2D editor.');
-    else if (graphic) {
-      for (const face of graphic.faces) {
-        const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(face.vertices.flatMap(v => [v.x, v.y, v.z]), 3)); geometry.setIndex(face.triangles.flat()); geometry.computeVertexNormals();
-        const floorFace = face.role === 'floor' || face.role === 'room';
-        const material = new THREE.MeshBasicMaterial({ color: selectedID === face.objectID ? '#a5cee4' : !fillsRef.current ? '#fff' : floorFace ? '#e0ebf0' : '#edf3f6', side: THREE.DoubleSide, polygonOffset: true, polygonOffsetFactor: 1, polygonOffsetUnits: 1, clippingPlanes: [clipping] });
-        const mesh = new THREE.Mesh(geometry, material); mesh.userData = { objectID: face.objectID, role: face.role }; scene.add(mesh); meshes.push(mesh); resources.push(geometry, material);
-      }
+    const batches=graphic?batchSceneFaces(graphic,clipping):[];
+    if (graphic) {
+      for(const batch of batches){batch.updateColors(selectedRef.current?.objectID,fillsRef.current);scene.add(batch.mesh);meshes.push(batch.mesh);resources.push(batch.mesh.geometry,batch.mesh.material);}
       const grouped = new Map<string, number[]>();
       const inferred = new Set(floor.walls.filter(w=>w.provenance.origin==='inferred').map(w=>w.id));
       for (const edge of graphic.edges) { const key = inferred.has(edge.objectID) ? 'inferred' : edge.role === 'area' ? 'area' : 'normal'; const vertices = grouped.get(key) ?? []; vertices.push(edge.a.x, edge.a.y, edge.a.z, edge.b.x, edge.b.y, edge.b.z); grouped.set(key, vertices); }
@@ -79,7 +76,7 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
     camera.position.copy(initial); controls.target.copy(focus); controls.update();
     const render = () => { renderer.render(scene, camera); };
     const select = (selection: Selection | null) => {
-      for (const item of meshes) { const mesh = item as THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>; const floorFace = mesh.userData.role === 'floor'; mesh.material.color.set(selection?.objectID === mesh.userData.objectID ? '#a5cee4' : !fillsRef.current ? '#fff' : floorFace ? '#e0ebf0' : '#edf3f6'); }
+      for(const batch of batches)batch.updateColors(selection?.objectID,fillsRef.current);
       if (selectedEdges) { scene.remove(selectedEdges); selectedEdges.geometry.dispose(); (selectedEdges.material as THREE.Material).dispose(); selectedEdges = null; }
       if(selectedNode){scene.remove(selectedNode);selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();selectedNode=null;}
       const edges = graphic?.edges.filter(e=>e.objectID===selection?.objectID) ?? [];
@@ -112,13 +109,14 @@ export function ModelViewport({ document, floor, selection, onSelect }: Props) {
       const rect = renderer.domElement.getBoundingClientRect(); raycaster.setFromCamera(new THREE.Vector2((event.clientX-rect.left)/rect.width*2-1, -(event.clientY-rect.top)/rect.height*2+1),camera);
       const hit = raycaster.intersectObjects(meshes).find(candidate => candidate.point.y <= clipping.constant + 1e-6);
       if (!hit) { selectRef.current(null); return; }
-      const id = hit.object.userData.objectID as string;
+      const id = (hit.object.userData.objectID ?? hit.object.userData.triangleOwners?.[hit.faceIndex ?? -1]) as string;
+      if(!id){selectRef.current(null);return;}
       const kind = floor.walls.some(w=>w.id===id) ? 'wall' : floor.openings.some(o=>o.id===id) ? 'opening' : floor.rooms.some(r=>r.id===id) ? 'room' : 'area'; selectRef.current({ floorID:floor.id,kind,objectID:id });
     };
     const keyDown = (event: KeyboardEvent) => { if (!walking.current) return; const key = event.key.toLowerCase(); if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','escape'].includes(key)) event.preventDefault(); if (key==='w'||key==='arrowup') moveRef.current(0.2,0); if(key==='s'||key==='arrowdown') moveRef.current(-0.2,0);if(key==='a')moveRef.current(0,-0.2);if(key==='d')moveRef.current(0,0.2);if(key==='arrowleft')lookRef.current(-0.12);if(key==='arrowright')lookRef.current(0.12);if(key==='escape')leaveWalk(); };
     const lost = (event: Event) => { event.preventDefault(); setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
     renderer.domElement.addEventListener('pointerdown', pointerDown);renderer.domElement.addEventListener('pointermove',pointerMove);renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('keydown',keyDown);renderer.domElement.addEventListener('webglcontextlost',lost);
-    const dispose = () => { stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.dispose(); renderer.domElement.remove(); };
+    const dispose = () => { stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
     runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, dispose };
     try { navigation.current = new WalkNavigation(document, floor.id); setPortalCount(navigation.current.portals.length); if (!navigation.current.roomIDs.includes(roomID)) setRoomID(navigation.current.roomIDs[0] ?? ''); } catch (cause) { navigation.current = null; setMessage(cause instanceof Error ? cause.message : String(cause)); }
     updateSection(cutaway ? cutHeight : null); select(selectedRef.current); render();

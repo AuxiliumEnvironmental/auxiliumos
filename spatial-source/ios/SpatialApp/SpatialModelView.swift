@@ -335,7 +335,8 @@ private struct SpatialModelSurface: UIViewRepresentable {
                 else if identity.role == "ceiling" { entity.isEnabled = state.ceilings && !hiddenCeilings.contains(identity.objectID) }
                 else { entity.isEnabled = true }
                 if let selection = latestSelection, selection.kind != .node, identity.objectID == selection.id {
-                    var highlight = UnlitMaterial(color: .systemBlue); highlight.faceCulling = .none
+                    var highlight = UnlitMaterial(color: .systemBlue)
+                    if #available(iOS 18.0, *) { highlight.faceCulling = .none }
                     entity.model?.materials = [highlight]
                 }
                 else {

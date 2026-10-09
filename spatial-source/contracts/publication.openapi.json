@@ -1,0 +1,203 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Proposed Spatial Publication Contract",
+    "version": "1.0.0",
+    "description": "Design contract only. No endpoint in this package is deployed or authorized to mutate AuxiliumOS/Moldo."
+  },
+  "security": [
+    {
+      "userSession": []
+    }
+  ],
+  "paths": {
+    "/v1/spatial-publications": {
+      "post": {
+        "operationId": "reserveSpatialPublication",
+        "summary": "Authorize destination and reserve an immutable draft publication",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reservation and bounded upload instructions; no client release"
+          },
+          "200": {
+            "description": "Exact idempotent replay of the same request"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Destination or action denied"
+          },
+          "409": {
+            "description": "Reused request ID with different content or stale expected revision"
+          },
+          "413": {
+            "description": "Payload or quota exceeded"
+          }
+        }
+      }
+    },
+    "/v1/spatial-publications/{publicationID}/finalize": {
+      "parameters": [
+        {
+          "name": "publicationID",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "post": {
+        "operationId": "finalizeSpatialPublication",
+        "summary": "Verify stored bytes, current authority, schemas, and expected revision before atomic acceptance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "manifestSHA256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  }
+                },
+                "required": [
+                  "manifestSHA256"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Exact source revision and digest accepted as an internal draft, not released"
+          },
+          "202": {
+            "description": "Quarantine/content checks pending; NOT accepted yet"
+          },
+          "401": {
+            "description": "Authentication required"
+          },
+          "403": {
+            "description": "Authority revoked or source audience mismatch"
+          },
+          "409": {
+            "description": "Revision or content mismatch"
+          },
+          "422": {
+            "description": "Invalid package or stored-byte verification failure"
+          }
+        }
+      }
+    },
+    "/v1/spatial-publications/{publicationID}": {
+      "parameters": [
+        {
+          "name": "publicationID",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          }
+        }
+      ],
+      "get": {
+        "operationId": "getPublicationStatus",
+        "responses": {
+          "200": {
+            "description": "Authorized status, accepted revision, digest and destination"
+          },
+          "403": {
+            "description": "Not authorized"
+          },
+          "404": {
+            "description": "Not found or concealed from this user"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "userSession": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Server verifies token and current project/action authority. This scheme does not grant authorization by itself."
+      }
+    },
+    "schemas": {
+      "ReservationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "clientRequestID": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "sourceDocumentID": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "sourceRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "manifestSHA256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "destination": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "system": {
+                "enum": [
+                  "auxiliumos",
+                  "moldo"
+                ]
+              },
+              "contextID": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{1,96}$"
+              }
+            },
+            "required": [
+              "system",
+              "contextID"
+            ]
+          },
+          "expectedPublishedRevision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        },
+        "required": [
+          "clientRequestID",
+          "sourceDocumentID",
+          "sourceRevision",
+          "manifestSHA256",
+          "destination",
+          "expectedPublishedRevision"
+        ]
+      }
+    }
+  }
+}

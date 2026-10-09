@@ -52,10 +52,22 @@ export function readZIP(bytes: Uint8Array): Record<string, Uint8Array> {
       const inflater = new Inflate((part) => { emitted += part.length; if (emitted > expanded) fail('zip-expansion-limit'); parts.push(part.slice()); });
       // Small input chunks bound intermediate inflation even for a deliberately false size declaration.
       for (let p = 0; p < packed.length; p += 256) inflater.push(packed.subarray(p, p + 256), p + 256 >= packed.length);
+      assertCompleteDeflate(inflater);
       if (emitted !== expanded) fail('zip-size-mismatch'); data = concatenate(parts);
     }
     if (crc32(data) !== crc) fail('zip-crc-mismatch'); files[name] = data;
     nextLocal = local + 30 + nameLength + compressed; cursor += 46 + nameLength;
   }
   if (cursor !== end || nextLocal !== start) fail('zip-overlay'); return files;
+}
+/**
+ * Pinned fflate 0.8.3 adapter: the public streaming callback does not expose input
+ * consumption. Its retained p buffer and s.p bit offset identify the final partial
+ * byte. Fail closed if this pinned internal shape changes in a dependency upgrade.
+ * s.f marks the final DEFLATE block; s.l is null only after that block has ended.
+ */
+function assertCompleteDeflate(inflater: Inflate): void {
+  const state = inflater as unknown as { p?: Uint8Array; s?: { p?: number; f?: number; l?: unknown } };
+  if (!(state.p instanceof Uint8Array) || !state.s || !Number.isInteger(state.s.p) || state.s.p! < 0 || state.s.p! > 7) fail('unsupported-inflater-state');
+  if (state.s.f !== 1 || state.s.l != null || state.p.length !== Math.ceil(state.s.p! / 8)) fail('zip-deflate-trailing-or-incomplete-data');
 }

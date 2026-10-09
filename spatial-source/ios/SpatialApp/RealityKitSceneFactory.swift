@@ -18,7 +18,9 @@ public enum RealityKitSceneFactory {
         case "areaEdge": color = darkMode ? .systemOrange : .init(red: 0.60, green: 0.29, blue: 0.02, alpha: 1)
         default: color = darkMode ? .init(red: 0.81, green: 0.90, blue: 0.98, alpha: 1) : .init(red: 0.09, green: 0.16, blue: 0.24, alpha: 1)
         }
-        var material = UnlitMaterial(color: color); material.faceCulling = .none; return material
+        var material = UnlitMaterial(color: color)
+        if #available(iOS 18.0, *) { material.faceCulling = .none }
+        return material
     }
     public static func make(_ scene: GraphicScene, lineWidth: Float = 0.012, ceilings: [SceneFace] = []) throws -> Entity {
         guard lineWidth.isFinite, (0.001...0.1).contains(lineWidth), scene.faces.count + ceilings.count <= 100_000,
@@ -46,11 +48,19 @@ public enum RealityKitSceneFactory {
             }
             var descriptor = MeshDescriptor(name:face.objectID)
             descriptor.positions = .init(face.vertices.map(vector))
-            descriptor.primitives = .triangles(face.triangles.flatMap { $0.map(UInt32.init) })
+            var triangles = face.triangles.flatMap { $0.map(UInt32.init) }
+            if #available(iOS 18.0, *) {
+                // Material culling below makes these canonical faces two-sided.
+            } else {
+                // iOS 17 has no UnlitMaterial.faceCulling. Reverse each triangle
+                // for the back side without adding planes, filling cutouts or
+                // changing the canonical graph. Default back-face culling keeps
+                // only one winding visible from either viewing direction.
+                triangles += face.triangles.flatMap { [UInt32($0[0]), UInt32($0[2]), UInt32($0[1])] }
+            }
+            descriptor.primitives = .triangles(triangles)
             let mesh = try MeshResource.generate(from:[descriptor])
-            var material = UnlitMaterial(color: face.role == "floor" ? UIColor(red:0.94,green:0.97,blue:1,alpha:1) :
-                                        (face.role == "ceiling" ? UIColor(white: 0.92, alpha: 1) : .white))
-            material.faceCulling = .none
+            let material = Self.material(role: face.role, darkMode: false)
             let entity = ModelEntity(mesh:mesh,materials:[material])
             entity.name = "\(face.role):\(face.objectID)"
             entity.isEnabled = face.role != "ceiling"

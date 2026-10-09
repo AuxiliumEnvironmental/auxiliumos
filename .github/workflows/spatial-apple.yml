@@ -56,7 +56,7 @@ jobs:
           set -o pipefail
           xcrun simctl list devices available --json > build-evidence/simulators.json
           DEVICE_ID=$(python3 -c 'import json; d=json.load(open("build-evidence/simulators.json")); print(next(x["udid"] for k,v in d["devices"].items() if "iOS" in k for x in v if x.get("isAvailable") and "iPhone" in x["name"]))')
-          xcodebuild -project capacitor/ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination "id=$DEVICE_ID" -derivedDataPath build-evidence/CapacitorSimulator CODE_SIGNING_ALLOWED=NO test 2>&1 | tee build-evidence/native-synthetic.log
+          xcodebuild -project capacitor/ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination "platform=iOS Simulator,id=$DEVICE_ID,arch=$(uname -m)" -derivedDataPath build-evidence/CapacitorSimulator CODE_SIGNING_ALLOWED=NO test 2>&1 | tee build-evidence/native-synthetic.log
       - uses: actions/upload-artifact@v7
         if: always()
         with:

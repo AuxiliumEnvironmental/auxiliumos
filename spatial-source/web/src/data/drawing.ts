@@ -103,7 +103,7 @@ export function svgDrawing(frozen: FrozenRevision, floor: Floor, pageIndex = 0, 
 export function svgFloorOverview(frozen: FrozenRevision, floor: Floor): Uint8Array { return svgPages(drawings(frozen, floor)); }
 function svgPages(pages: Drawing[]): Uint8Array {
   const number = (n: number) => Number(n.toFixed(4)).toString();
-  const parts = [`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H * pages.length}" role="img">`, `<rect x="0" y="0" width="1200" height="${H * pages.length}" fill="#ffffff"/>`];
+  const parts = [`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H * pages.length}" role="img">`, `<rect width="1200" height="${H * pages.length}" fill="#ffffff"/>`];
   for (let index = 0; index < pages.length; index++) {
   const d = pages[index], offset = index * H;
   for (const p of d.polygons) {
