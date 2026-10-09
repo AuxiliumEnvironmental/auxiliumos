@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T20:18:51.020Z",
+  "as_of": "2026-10-09T20:29:13.428Z",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -8,17 +8,17 @@
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
-    "current_verified_feature_commit": "80be05020e75c3e6587dece4ff6cc3261030e4fc"
+    "current_verified_feature_commit": "4cf0815879ee31c5374880c28747ef6429a5ef93"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Feature branch 80be05020e75c3e6587dece4ff6cc3261030e4fc read back through GitHub connector. Temporary in-repository diagnostic safely read exact CI64 fixture failure; this candidate restores the original workflow. Protected Actions service secret still requires owner configuration.",
+    "github": "Canonical recovery branch4cf0815879ee31c5374880c28747ef6429a5ef93 read back; CI66 controls and application-foundation succeeded. Original workflow restored exactly. Release-content source536a3e9d and UI WIP06f54fd4 are preserved on isolated GitHub branches; runtime checks pending.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
-    "lovable": "Current project57f637a ready/agentFinished after bounded mobile increment; exactly4source files read back and independently reviewed. Root publication of previous89227e was accepted pending asac37eb2f. Final57f637a publication waits for integrated CI; no latest-live-revision claim.",
+    "lovable": "Mobile source57f637a passed CI66 and publication0cf4e56e acceptedpending. Provider anonymous HTTP observation reports auxiliumos.io200 and public bundle contains new mobile markers. Deployment status record/full bundle equality not verified. Read-only provider check unexpectedly created only .lovable/plan.md asb9bfbfc and paused at plan--show; owner decision required before further provider turn. App source unchanged by exact diff.",
     "workspace_execution": "Current native workspace is unavailable after exec-server transport failure. A later bounded read-only recovery check returned no output and was terminated. GitHub and Lovable connectors remain operational; no local parity or recovered disk content claimed."
   },
   "source_precedence": [
@@ -28,11 +28,11 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
+  "first_runtime_action": "Integrate and execute focused release-content and metadata-release UI checks from their isolated GitHub source branches, then deploy only reviewed passing source. Mobile UI 57f637a passed CI66 and publication was accepted; anonymous public asset observations are provider-reported. Finish the actual private-file workflow after the protected development-only service secret is configured. Lovable report-only plan approval must be resolved by the owner before another provider turn.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-    "wip/release-content-2026-10-09 (source work in progress; worker must return saved SHA)",
-    "wip/release-ui-2026-10-09 (source work in progress; worker must return saved SHA)"
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09"
   ],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -191,9 +191,9 @@
       "data_behavior": "Planning mutations use actual typed creator-scoped Supabase RPCs, immutable revisions/CAS and frozen uncertain retries. Sample cases remain explicitly illustrative. Existing connected workflows preserved; commercial/professional actions remain gated.",
       "verification": "Final dd7961f UI:14focused unit and11browser fixtures passed;20routes at1440/390/360 passed without overflow/errors/unexpected requests. Independent client review clear. New Spatial-only source77a1cf6 matched external64f5b2a,8asset hashes and one build:dev passed, targeted review clear. Reused matching evidence without broad rerun.",
       "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json",
-      "next_increment": "Publish reviewed57f637a after integrated CI. Actual private-file and planning hosted workflows remain open; released-byte backend waits for recovered executor.",
+      "next_increment": "Metadata release UI source underway separately; actual hosted private-file and planning save/reopen acceptance remain open.",
       "candidate_lovable_revision": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
-      "candidate_status": "Full demo, Spatial, internal review and bounded mobile/intake-name source integrated. Source review and exact4file parity passed; production build/CI and publication pending."
+      "candidate_status": "Source reviewed, exact file parity and CI66 passed; publication accepted and provider reports new public mobile markers."
     },
     "workspace_plans": {
       "status": "implemented_deployed_hosted_workflow_pending",
@@ -234,11 +234,12 @@
       "source_worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
       "migration": "20261009184724_document_version_releases.sql",
       "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
-      "status": "reviewed_integrated_pending_deployment",
-      "deployed": false,
+      "status": "reviewed_integrated_deployed_observed",
+      "deployed": true,
       "focused_database_checks": "45/45 passed, no skips; simulated Auth, exact worker evidence reused",
       "review": "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
-      "scope": "Explicit exact-version controller/audience discovery and metadata release, replacement, separate historical recipients, immutable narrowing withdrawal. No released bytes/notifications/signatures or real professional authority."
+      "scope": "Explicit exact-version controller/audience discovery and metadata release, replacement, separate historical recipients, immutable narrowing withdrawal. No released bytes/notifications/signatures or real professional authority.",
+      "deployment_observation": "Already present with exact canonical hash during actual preflight, matching document_releases record; root did not reapply."
     },
     "document_releases": {
       "worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
@@ -253,6 +254,17 @@
       "actual_release_grants": 0,
       "actual_releases": 0,
       "hosted_workflow_verified": false
+    },
+    "document_release_content": {
+      "source_commit": "536a3e9d66eb761d59633352e53388712467be88",
+      "branch": "wip/release-content-2026-10-09",
+      "status": "implemented_source_reviewed_runtime_pending_not_integrated_or_deployed",
+      "migration": "20261009194030_document_release_content.sql",
+      "migration_sha256": "a59db4556034f827e1e92510c09ac656d4776d98d80e5b03fc2d0f6e029860fe",
+      "review": "mobile_review SQL and gateway source clear; executable checks pending",
+      "transport_default": "disabled",
+      "authority": "Separate explicit current/historical recipient authority; no changes to internal content or owner grants.",
+      "remaining": "Register and execute database plus gateway/entrypoint tests; actual hosted bytes/browser and concurrency unverified. No application-level rate limiter."
     }
   },
   "execution_recovery": {
@@ -287,8 +299,8 @@
     "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
-    "latest_verified_remote": "80be05020e75c3e6587dece4ff6cc3261030e4fc",
+    "first_unfinished_action": "Integrate and execute focused release-content and metadata-release UI checks from their isolated GitHub source branches, then deploy only reviewed passing source. Mobile UI 57f637a passed CI66 and publication was accepted; anonymous public asset observations are provider-reported. Finish the actual private-file workflow after the protected development-only service secret is configured. Lovable report-only plan approval must be resolved by the owner before another provider turn.",
+    "latest_verified_remote": "4cf0815879ee31c5374880c28747ef6429a5ef93",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
@@ -414,7 +426,7 @@
       "base_commit": "89227e331463eed0ea0844055cf43714e5969627",
       "message_id": "umsg_01m4h37sx5e1fs19xfksj2bgpv",
       "thread_id": "main",
-      "status": "completed_independently_source_reviewed_ci_publication_pending",
+      "status": "source_verified_ci_passed_publication_accepted_provider_public_asset_observation",
       "writer": "ui_integration",
       "paths": [
         "web/src/components/document-versions.tsx",
@@ -422,11 +434,12 @@
         "web/src/pages/private-files.tsx",
         "web/src/pages/intake.tsx"
       ],
-      "published": false,
+      "published": "accepted_pending_with_provider_public_asset_observation",
       "target_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
       "edit_id": "edt-bcda6535-648b-40fc-9c4a-9ffc75493ed2",
       "source_verification": "All4complete files read by root; every structured hunk applied exactly to canonical GitHub base and matched final provider bytes. Independent mobile_review source review clear.",
-      "provider_hash_warning": "Provider summary hashes disagreed with actual file bytes and were rejected. Source acceptance uses exact file/diff readback; recorded hashes independently calculated by ui_integration."
+      "provider_hash_warning": "Provider summary hashes disagreed with actual file bytes and were rejected. Source acceptance uses exact file/diff readback; recorded hashes independently calculated by ui_integration.",
+      "publication_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242"
     },
     "ci64_failure": {
       "commit": "db0f003d616855bad19dca5fc18d38eefac1d6f1",
@@ -444,7 +457,7 @@
       "diagnostic_result": "Exact pinned archive/member read successfully within GitHub; diagnostic intentionally failed before checkout/tests. 13/14 version fixtures passed. Sole failure: strict locator matched visible warning and disclosure metadata.",
       "correction": "Test now targets the visible warning, opens native details by keyboard and verifies exact ID/hash, restriction and preservation hold; all read-only authority assertions retained.",
       "workflow_restoration": "Original db0f003 .github/workflows/ci.yml restored byte-for-byte in this candidate; no diagnostic code or additional Actions permission retained.",
-      "verification": "Corrected candidate gate pending."
+      "verification": "Corrected candidate4cf08158 passed CI66 run37986270507: controls and application-foundation, including all three document browser profiles. Temporary workflow removed; no testing skipped to obtain pass."
     }
   },
   "immediate_delivery": {
@@ -455,16 +468,27 @@
     "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
-    "independent_work": "Released-byte backend and metadata release UI are continuing through GitHub on isolated branches. Native executor is unavailable; runtime tests remain pending until CI. Moldo independent and companion deferred.",
+    "independent_work": "Release-content source536a3e9d is complete and independently source-reviewed; runtime checks pending. Metadata release UI WIP06f54fd4 is saved, browser tests and review pending. Moldo independent; companion deferred.",
     "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
     "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
-    "publication_blocker": "Confirmed CI64 test locator mismatch corrected; restored-workflow CI gate pending.",
+    "publication_blocker": null,
     "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json",
     "latest_publication_request": {
-      "lovable_commit": "89227e331463eed0ea0844055cf43714e5969627",
-      "deployment_id": "ac37eb2f-5c63-4d77-93f5-f958163cd4a5",
-      "status": "accepted_pending"
+      "lovable_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "deployment_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242",
+      "status": "accepted_pending; provider public asset observation supports mobile delivery"
+    },
+    "lovable_report_pause": {
+      "tool_id": "plan--show",
+      "params": {
+        "path": ".lovable/plan.md"
+      },
+      "message_id": "umsg_01m4h5ez2hfw4vykmv8qg7efcf",
+      "event_id": "main:agent#00000000010736#tcb:APON2MMN",
+      "requires_secure_form": false,
+      "application_change": false,
+      "next_action": "Owner may reject the report-only card. Connector requires a human decision on this specific pending card; do not bypass with another message."
     }
   },
   "remaining_defects": [

@@ -51,18 +51,42 @@
     "required_gate": "Integrated GitHub CI for actual registered regression results and production build; pending at source save.",
     "runtime_boundary": "Not genuine owner/private-storage or actual hosted planning acceptance.",
     "integrated_ci": {
-      "run": 64,
-      "run_id": 37983627412,
-      "commit": "db0f003d616855bad19dca5fc18d38eefac1d6f1",
-      "status": "failed",
-      "failed_profile": "document-versions-browser-fixture",
+      "run": 66,
+      "run_id": 37986270507,
+      "commit": "4cf0815879ee31c5374880c28747ef6429a5ef93",
+      "status": "passed",
+      "failed_profile": null,
       "build": "passed",
-      "content_review_browser": "not_run",
-      "next_action": "Execute restored original CI gate; publish only after success.",
+      "content_review_browser": "passed",
+      "next_action": "Publication accepted; provider public asset observations recorded separately. Continue actual hosted acceptance after protected configuration.",
       "diagnosed_cause": "Strict warning locator matched two copies after intentional disclosure layout. 13/14 version tests passed; content/review browser profiles not run.",
       "diagnostic_run_id": 37985960594,
       "corrected_fixture": "Visible warning plus keyboard-open exact metadata, ID/hash, restriction and hold; no permission assertions removed.",
       "restored_workflow": "Byte-for-byte db0f003 in corrected candidate."
+    },
+    "publication": {
+      "deployment_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242",
+      "status": "accepted_pending",
+      "observed_at": "2026-10-09T20:29:13.428Z",
+      "provider_public_observation": {
+        "source": "Lovable read-only messageumsg_01m4h5ez2hfw4vykmv8qg7efcf",
+        "domain_status": 200,
+        "final_url": "https://auxiliumos.io/",
+        "lovable_url_redirects_to_primary": true,
+        "bundle": "/assets/index-Dg2HQ7Vn.js",
+        "reported_bytes": 750039,
+        "markers_found": [
+          "Exact-version details · Version",
+          "Uploads start in quarantine"
+        ],
+        "boundary": "Provider-reported anonymous HTTP observations; root did not independently inspect public bytes or deployment status. No actual owner/Storage acceptance."
+      },
+      "provider_side_effect": {
+        "commit": "b9bfbfc666a5c8a751f1a8da1150549ce879437d",
+        "only_path": ".lovable/plan.md",
+        "application_source_unchanged": true,
+        "status": "awaiting human plan--show decision"
+      }
     }
   }
 }

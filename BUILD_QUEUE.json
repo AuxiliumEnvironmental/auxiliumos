@@ -117,7 +117,7 @@
         "document-content-browser-fixture",
         "document-reviews-browser-fixture"
       ],
-      "next_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
+      "next_action": "Mobile candidate57f637a passed corrected CI66 and publication accepted0cf4e56e; provider anonymous public asset check supports new mobile delivery. Resolve report-only Lovable pause, then integrate reviewed metadata-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -1747,10 +1747,52 @@
         "database",
         "api"
       ],
-      "next_action": "Read current db0f003 contracts; implement and save isolated released-byte SQL/gateway/tests through GitHub. Do not alter canonical branch or cloud until independently reviewed and executable checks pass. No local migration recovery claim.",
-      "blocker": "Native executor unavailable; source work continues through GitHub. Runtime tests and deployment remain pending.",
+      "next_action": "Source536a3e9d saved and exact7file readback passed; independent SQL/gateway review clear. Register and execute database+gateway+entrypoint tests before canonical integration/deployment acceptance. Preserve disabled transport until deliberately configured. Hosted Auth/Storage remains unverified.",
+      "blocker": "Native executor unavailable; use reviewed GitHub CI for executable checks. No cloud deployment yet.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
+    },
+    {
+      "id": "DOC-001D-UI",
+      "title": "Exact-version release metadata, explicit audience and narrowing withdrawal interface",
+      "status": "in_progress",
+      "dependencies": [
+        "DOC-001D-BACKEND",
+        "DOC-001C-UI"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-release-api.ts",
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/pages/private-files.tsx",
+        "tests/unit/document-release-api.test.mjs",
+        "tests/e2e/document-releases.spec.ts"
+      ],
+      "assigned_to": "ui_integration; root integration lead",
+      "branch": "wip/release-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Six-file WIP06f54fd4 saved/read back. Complete browser fixtures and self-review; independent source review and executable checks required. Metadata only; no recipient bytes, real professional grants or live release claimed.",
+      "blocker": "Native executor unavailable; source work continues through GitHub. Lovable transfer waits for report-only plan card resolution.",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }
   ]
 }
