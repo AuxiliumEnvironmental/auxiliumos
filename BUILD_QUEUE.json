@@ -1180,7 +1180,7 @@
     {
       "id": "SEC-001C-CLEARANCE",
       "title": "Exact-object synthetic scan and human security clearance",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "SEC-001C-FILE-WORKFLOW"
       ],
@@ -1205,11 +1205,130 @@
         "OD-011",
         "OD-013"
       ],
+      "verification_profiles": [
+        "private-clearance-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Independent SQL/API review closed at a32a5d0.39 focused PostgreSQL checks pass with simulated Auth. Publish source, apply once to verified development target, then genuine private-clearance-api remains gated by secure credentials/Storage; no actual scanner or release claim.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001-SECURITY-UI",
+      "title": "Current private-object security status and narrowing concern report",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001-UPLOAD-UI",
+        "SEC-001C-CLEARANCE"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C05",
+        "C07",
+        "M13"
+      ],
+      "allowed_paths": [
+        "web/src/lib/private-object-security-api.ts",
+        "web/src/components/private-object-security-status.tsx",
+        "web/src/components/private-object-upload.tsx",
+        "tests/unit/private-object-security-api.test.mjs",
+        "tests/e2e/private-files.spec.ts"
+      ],
+      "assigned_to": "private_ui_current",
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "private-security-client-unit",
+        "private-file-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewed35611d0 integrated;10 adapter checks and20 integrated upload/security fixture journeys pass. Root fixed test-only initial-read sequencing race and preserved first failure log. Run real-service journeys after secure configuration; no content viewer, human-clearance or release action.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001A",
+      "title": "Immutable document versions and exact-object adoption",
+      "status": "in_progress",
+      "dependencies": [
+        "SEC-001C-CLEARANCE",
+        "SEC-001C-FILE-WORKFLOW",
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009072201_document_versions.sql",
+        "tests/database/document-versions.test.mjs",
+        "tests/api/document-versions.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_CONTRACT.md"
+      ],
+      "assigned_to": "private_clearance_current",
+      "branch": "work/private-clearance-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-011",
+        "OD-013"
+      ],
       "verification_profiles": [],
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Frozen backend f91e60e passed39 simulated-Auth PostgreSQL checks and55 prior regressions; independent review in progress. Two API evidence/cleanup-diagnostic findings being fixed; SQL not deployed. Integrate only after review closes.",
+      "next_action": "Implement frozen list_version_documents/list_document_versions/adopt_private_object contract, exact document grants and atomic immutable version+ingest closure. Basea32a5d0. Lead owns shared migration ordering and review. No legacy release-label authority or content route.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001A-UI",
+      "title": "Connected document version list, history and adoption interface",
+      "status": "in_progress",
+      "dependencies": [
+        "DOC-001-UPLOAD-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C05",
+        "C07",
+        "M13"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-version-api.ts",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-version-api.test.mjs",
+        "tests/e2e/document-versions.spec.ts"
+      ],
+      "assigned_to": "private_ui_current",
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Build against DOC-001A frozen RPC contract with active account/facility and optional current eligible source; preserve exact retry request, stale/uncertain/denied states. Lead wires existing Documents route and security candidate. No paste-a-digest UI or fake save.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

@@ -55,9 +55,11 @@ jobs:
       - run: npm run os:verify -- intake-database
       - run: npm run os:verify -- intake-unit
       - run: npm run os:verify -- private-file-database
+      - run: npm run os:verify -- private-clearance-database
       - run: npm run os:verify -- private-file-unit
       - run: npm run os:verify -- private-file-entrypoint
       - run: npm run os:verify -- private-file-client-unit
+      - run: npm run os:verify -- private-security-client-unit
       - run: npm run os:verify -- api-fixture-safety
       - run: npm run os:verify -- runtime-build
       - run: npx playwright install --with-deps chromium
@@ -110,7 +112,7 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import { rm } from 'node:fs/promises';
-          for (const name of ['directory-api.json', 'directory-api.log', 'intake-api.json', 'intake-api.log', 'private-file-api.json', 'private-file-api.log', 'development-ui.json', 'development-ui.log']) {
+          for (const name of ['directory-api.json', 'directory-api.log', 'intake-api.json', 'intake-api.log', 'private-file-api.json', 'private-file-api.log', 'private-clearance-api.json', 'private-clearance-api.log', 'development-ui.json', 'development-ui.log']) {
             await rm(`docs/00-control/evidence/${name}`, { force: true });
           }
           NODE
@@ -156,6 +158,10 @@ jobs:
         env:
           AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
         run: node scripts/os-control.mjs verify private-file-api
+      - name: Genuine private-object security API acceptance with synthetic scan fixtures
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node scripts/os-control.mjs verify private-clearance-api
       - uses: actions/upload-artifact@v7
         if: always()
         with:
@@ -167,5 +173,7 @@ jobs:
             docs/00-control/evidence/intake-api.log
             docs/00-control/evidence/private-file-api.json
             docs/00-control/evidence/private-file-api.log
+            docs/00-control/evidence/private-clearance-api.json
+            docs/00-control/evidence/private-clearance-api.log
             docs/00-control/evidence/development-ui.log
             docs/00-control/evidence/development-ui.json

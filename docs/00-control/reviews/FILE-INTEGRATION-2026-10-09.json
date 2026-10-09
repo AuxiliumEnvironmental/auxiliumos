@@ -44,7 +44,28 @@
     "Full M13/M19/C01/C02/C07 acceptance"
   ],
   "later_work_excluded": [
-    "Clearance migration f91e60e and subsequent fixes",
-    "Security-status/report UI followup"
-  ]
+    "Document adoption/version implementation 20261009072201 and frontend followup",
+    "Any Lovable source transfer",
+    "Hosted activation and full acceptance"
+  ],
+  "additional_reviews": {
+    "clearance": {
+      "commits": [
+        "f91e60e72f40b267cc35b8258c41adafe56e71f6",
+        "a32a5d008b7a92ce2ccb7f9df8c4ae4547af601b"
+      ],
+      "disposition": "No remaining blocker. SQL immutable binding, current grants, human/service ACL separation, invalidation, hold/restriction and audit reviewed.",
+      "findings_closed": [
+        "P2 M19: empty scan audit .every() false pass; exact scan/claim counts, identities and provenance now required.",
+        "P2 M19: shared cleanup failure concealed retained IDs/prior failure; diagnostics now emitted before shared cleanup without swallowing original error."
+      ],
+      "reproduction": "Independent exact-block offline reproductions; fix-specific valid-case and10 mutation checks reused. SQL unchanged."
+    },
+    "security_ui": {
+      "commit": "35611d0ab677ae2e3fde56598c33de56b0015f65",
+      "disposition": "No blocking finding in all5 scoped files. Exact identity/scope binding, stale suppression, bounded projection and conservative report with no authority elevation.",
+      "integrated_fix": "Root reproduced fixture initial-status race, preserved failure and awaits initial pending response before injecting next Auth failure.20 final browser fixture journeys pass."
+    },
+    "workflow": "Existing protected manual target/branch guard and step-scoped secret retained for new evidence profiles; no hosted execution claimed."
+  }
 }

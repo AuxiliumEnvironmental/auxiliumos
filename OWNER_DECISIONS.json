@@ -375,6 +375,20 @@
           "activation_gate": "Development synthetic payloads only. Real file handling still requires designated people/procedure, scanner/provider and full authorization/recovery acceptance under OD-013.",
           "source": "supabase/functions/private-objects/index.ts",
           "implementation": "deployed_development_only"
+        },
+        {
+          "recorded_at": "2026-10-09",
+          "choice": "Only typed synthetic_fixture scan observations are accepted. Exact-object human security decisions are separate from system scan/grant actions, document authority and professional approval. A current authorized uploader/object grantee may report suspicion without a content/free-text payload, which only restricts visibility and invalidates clearance.",
+          "rationale": "Exercises the complete security transition and UI failure behavior while neither inventing scanner effectiveness nor exposing sensitive content. Current eligibility never grants download, adoption or release.",
+          "affected_capabilities": [
+            "private_object_security_status",
+            "synthetic_scan_evidence",
+            "human_security_disposition",
+            "narrowing_phi_report"
+          ],
+          "activation_gate": "No real scanner/PHI processing or human grant is approved. Live actors, safe inspection, handling procedure and actual runtime/provider/restore evidence remain required; OD001/003 document and professional authority remain independent.",
+          "source": "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md",
+          "implementation": "implemented_synthetic_only"
         }
       ]
     },

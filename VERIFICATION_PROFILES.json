@@ -551,6 +551,85 @@
           "tests/api/development-ui.test.mjs"
         ]
       ]
+    },
+    {
+      "id": "private-clearance-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-scanner-or-hosted-API",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/private-object-clearance.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/private-object-clearance.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-clearance-api",
+      "level": "api",
+      "environment": "authentic-Supabase-development-securely-configured-target-synthetic-scan-fixture",
+      "cacheable": false,
+      "max_age_ms": 900000,
+      "timeout_ms": 300000,
+      "environment_variables": [
+        "AUXILIUMOS_TEST_URL",
+        "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+        "AUXILIUMOS_TEST_SERVICE_ROLE_KEY"
+      ],
+      "inputs": [
+        "tests/api/fixture-cleanup.mjs",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/functions/private-objects",
+        "scripts/private-object-provision.mjs",
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "tests/api/private-object-clearance.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/api/private-object-clearance.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-security-client-unit",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/private-object-security-api.ts",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/private-object-security-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/private-object-security-api.test.mjs"
+        ]
+      ]
     }
   ]
 }

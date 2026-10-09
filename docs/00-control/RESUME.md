@@ -1,20 +1,20 @@
 # Resume AuxiliumOS
 
-Generated 2026-10-09T07:20:10.826Z. Recheck actual Git state before trusting this snapshot.
+First unfinished action: publish reviewed clearance/security UI, then apply only new20261009065625 clearance migration to auxiliumos-dev after fresh history/hash checks. The6 prior migrations and Edgev1 are already deployed. Do not restart auth or import packages because older evidence is stale.
+
+Canonical publication branch: wip/recovery-2026-10-08; last verified59eb21faf5a1d8ef366780c4eac5da5da31f1c5c, CI51success. Active worktree /workspace/scratch/831a296a4676/auxiliumos-current. Preserve old dirty /auxiliumos. Use expected-SHA API publication and fetched tree equality; local build branch is not the remote publication branch.
+
+DOC-001A continues in /private-clearance-current (new20261009072201 immutable versions); DOC-001A-UI continues in /private-ui-current (4 exclusive version UI files). Backend and frontend share the frozen contract; integration lead owns permanent wiring/migration ordering. Owner requests lossless existing-Lovable transfer if viable; no transfer or sync yet claimed. Never sacrifice controls or source for editor compatibility.
+
+Protected hosted Auth/API/browser remains unexecuted: configure AUXILIUMOS_TEST_SERVICE_ROLE_KEY in repository Actions secrets and manually run the canonical feature branch. Synthetic fixture checks do not satisfy hosted acceptance.
+
+Generated 2026-10-09T07:33:38.591Z. Recheck actual Git state before trusting this snapshot.
 
 Read AGENTS.md, BUILD_STATE.json and BUILD_QUEUE.json, then run npm run os:status. Load only the sources for the next task. Do not restart completed work merely because the conversation changed.
 
-First unfinished action: publish the integrated upload interface and protected API/browser workflow, then finish independent clearance review and connect its security-status/report UI. Use BUILD_STATE.json.first_runtime_action; stale profile evidence is not permission to re-import, reapply migrations or restart authentication.
-
-Canonical remote branch: wip/recovery-2026-10-08, last readback6164ffcae620694648bf29a9b120aec943c7d03d. The generated remote check below queried the local-only build branch, not that publication branch. Publish with the existing expected-SHA Git Data API method and verify the actual fetched tree.
-
-Active source: /workspace/scratch/831a296a4676/auxiliumos-current. Preserve the older dirty /auxiliumos worktree. Specialist worktrees: /private-ui-current (status/report interface) and /private-clearance-current (f91e60e review/API-test corrections); integration_security_review reviews frozen source. No repeat package import.
-
-Protected integration: AUXILIUMOS_TEST_SERVICE_ROLE_KEY belongs in repository Actions secrets, never chat. Run the manual workflow on the canonical feature branch after secure configuration. Genuine hosted acceptance remains unexecuted; independent source work continues.
-
-Mechanically selected task: CTRL-001 (changed control inputs require updated evidence, not new setup).
+Next ready task: CTRL-001
 Verified product modules: 0/20.
 Pending owner review: OD-001, OD-002, OD-003, OD-004, OD-005, OD-006, OD-007, OD-008, OD-009, OD-010, OD-011, OD-012, OD-013, OD-014, OD-015, OD-016, OD-017.
-Git HEAD: 41b990666f7e9608a5182840bfa58be73e8064e6. Remote observation: unavailable_or_branch_absent.
+Git HEAD: eb6d5ea26f48be4f574525b69f2f3b4353946228. Remote observation: not_checked.
 
 The checkpoint is observation, not a claim of push, deployment or runtime completion. See SESSION_CHECKPOINT.json for evidence freshness and blockers.

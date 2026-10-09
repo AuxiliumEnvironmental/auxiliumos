@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T07:20:10.826Z",
+  "created_at": "2026-10-09T07:33:38.591Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,18 +10,17 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "41b990666f7e9608a5182840bfa58be73e8064e6",
+    "head": "eb6d5ea26f48be4f574525b69f2f3b4353946228",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/directory-browser-fixture.json\n M docs/00-control/evidence/directory-browser-fixture.log\n M docs/00-control/evidence/private-file-unit.json\n M docs/00-control/evidence/private-file-unit.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M tests/e2e/directory.spec.ts\n M web/src/components/app-shell.tsx\n M web/src/pages/workspace.tsx\n M web/src/router.tsx\n?? docs/00-control/evidence/directory-browser-fixture.route-change-failure.log\n?? docs/00-control/evidence/intake-browser-fixture.json\n?? docs/00-control/evidence/intake-browser-fixture.log\n?? docs/00-control/evidence/private-file-browser-fixture.json\n?? docs/00-control/evidence/private-file-browser-fixture.log\n?? docs/00-control/evidence/private-file-client-unit.json\n?? docs/00-control/evidence/private-file-client-unit.log\n?? docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n?? node_modules",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/private-file-browser-fixture.json\n M docs/00-control/evidence/private-file-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M tests/e2e/private-files.spec.ts\n?? docs/00-control/evidence/private-clearance-database.json\n?? docs/00-control/evidence/private-clearance-database.log\n?? docs/00-control/evidence/private-file-browser-fixture.initial-status-race.log\n?? docs/00-control/evidence/private-security-client-unit.json\n?? docs/00-control/evidence/private-security-client-unit.log\n?? node_modules",
     "remote": {
-      "status": "unavailable_or_branch_absent",
+      "status": "not_checked",
       "branch": "build/continuation-2026-10-09",
-      "head": null,
-      "checked_at": "2026-10-09T07:20:10.825Z"
+      "head": null
     }
   },
-  "controls_digest": "d0855c8ff65b0f0096ae394b59dee959eede51d2b3a6b34fc9deb20b3522e448",
+  "controls_digest": "37af12ad6df471d1a743b2d34104748f5aae5e37575bc1b86c8cd49ce91cde1f",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -36,8 +35,11 @@
   ],
   "evidence": {
     "controls": {
-      "status": "stale",
-      "profile": "controls"
+      "status": "passed",
+      "profile": "controls",
+      "evidence": "docs/00-control/evidence/controls.json",
+      "level": "control_unit",
+      "recorded_at": "2026-10-09T07:33:38.372Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -69,7 +71,7 @@
       "profile": "runtime-build",
       "evidence": "docs/00-control/evidence/runtime-build.json",
       "level": "build",
-      "recorded_at": "2026-10-09T07:07:38.027Z"
+      "recorded_at": "2026-10-09T07:27:28.175Z"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -122,8 +124,11 @@
       "recorded_at": "2026-10-09T07:00:14.011Z"
     },
     "private-file-browser-fixture": {
-      "status": "stale",
-      "profile": "private-file-browser-fixture"
+      "status": "passed",
+      "profile": "private-file-browser-fixture",
+      "evidence": "docs/00-control/evidence/private-file-browser-fixture.json",
+      "level": "browser_fixture",
+      "recorded_at": "2026-10-09T07:29:56.760Z"
     },
     "private-file-client-unit": {
       "status": "passed",
@@ -135,6 +140,24 @@
     "development-ui": {
       "status": "not_run",
       "profile": "development-ui"
+    },
+    "private-clearance-database": {
+      "status": "passed",
+      "profile": "private-clearance-database",
+      "evidence": "docs/00-control/evidence/private-clearance-database.json",
+      "level": "database",
+      "recorded_at": "2026-10-09T07:25:03.952Z"
+    },
+    "private-clearance-api": {
+      "status": "not_run",
+      "profile": "private-clearance-api"
+    },
+    "private-security-client-unit": {
+      "status": "passed",
+      "profile": "private-security-client-unit",
+      "evidence": "docs/00-control/evidence/private-security-client-unit.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T07:27:48.247Z"
     }
   },
   "pending_owner_decisions": [

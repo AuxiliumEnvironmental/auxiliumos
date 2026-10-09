@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "profile": "private-clearance-database",
+  "level": "database",
+  "recorded_at": "2026-10-09T07:25:03.952Z",
+  "result": "passed",
+  "digest": "84a60d444b78714e8da6c356604ecf8be37c5ef19155dfc5710c4597a061e7c5",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-scanner-or-hosted-API",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "837ab464f0d29de01137e1c5a2eb33c004e2fe7e0bd967890368b3a31da680f3",
+      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
+    "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+    "supabase/migrations/20261008234951_intake_triage.sql": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+    "supabase/migrations/20261008234953_private_file_transport.sql": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+    "supabase/migrations/20261009065625_private_object_clearance.sql": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+    "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "tests/database/private-object-clearance.test.mjs": "8a885c3adac419dc93690dede2a3892b40d5798961b99a24c76bd6e81634c894",
+    "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba"
+  },
+  "observed_git_head": "5c4467f75d94ba04240bc4b44ace06bb7b8abd75",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/database/private-object-clearance.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/private-clearance-database.log",
+  "log_sha256": "aafdec1433c23e895702140622f14f986c97fc6a7a47fd0300535d3f086ae14e"
+}

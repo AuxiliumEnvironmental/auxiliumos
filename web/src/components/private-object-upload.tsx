@@ -1,12 +1,13 @@
-import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type FormEvent } from 'react';
 import { PrivateObjectApi, PrivateObjectError, PRIVATE_OBJECT_MAX_BYTES, PRIVATE_OBJECT_SYNTHETIC_PREFIX, type PrivateObjectStatus } from '../lib/private-object-api';
 import { useRuntime } from '../lib/runtime';
 import { RuntimeError } from '../lib/errors';
 import { SyntheticBadge } from './shared';
+import { PrivateObjectSecurityStatus } from './private-object-security-status';
 
 const labels: Record<PrivateObjectStatus['state'], string> = {
   reserved: 'Reserved; bytes not yet received', receiving: 'Upload pending confirmation',
-  stored_unverified: 'Bytes verified; finalization pending', finalized: 'Upload finalized; quarantined', expired: 'Upload window expired; history preserved',
+  stored_unverified: 'Bytes verified; finalization pending', finalized: 'Upload finalized; security status separate', expired: 'Upload window expired; history preserved',
 };
 
 // Composed beneath an already selected account/facility. Being visible
@@ -34,6 +35,11 @@ function UploadForm({ clientApi, accountId, facilityId }: {
   const [confirmed, setConfirmed] = useState(false);
   const [attempted, setAttempted] = useState(false);
   const [inputVersion, setInputVersion] = useState(0);
+  const onSecurityUnavailable = useCallback(() => {
+    controller.current?.abort(); controller.current = null; setBusy(false);
+    key.current = crypto.randomUUID(); setAttempted(false); setStatus(null); setFile(null); setConfirmed(false);
+    setInputVersion(value => value + 1); setError('This upload is unavailable to your current access.');
+  }, []);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; controller.current?.abort(); }; }, []);
 
   async function run(operation: (signal: AbortSignal) => Promise<void>) {
@@ -103,7 +109,7 @@ function UploadForm({ clientApi, accountId, facilityId }: {
       {busy && <p role="status">Verifying the upload with the server. Do not change scope until the response is confirmed.</p>}
       {status && <div className="notice" role="status"><p>Last confirmed server status</p><strong>{labels[status.state]}</strong>
         <p>Upload reference: {status.objectId}</p>
-        <p>Scan: pending. Human clearance: pending. This is not a document version or a release. No download or uploader preview is available.</p></div>}
+        <p>Transport does not establish current scanning or clearance. Its legacy pending fields are not authoritative security status. This is not a document version or a release. No download or uploader preview is available.</p></div>}
       {error && <p className="form-error" role="alert">{error}</p>}
       <div className="button-row"><button className="button primary" type="submit" disabled={busy || !file || !confirmed || status?.state === 'finalized' || status?.state === 'expired'}>
         {busy ? 'Verifying upload…' : attempted ? 'Retry same file' : 'Upload synthetic file'}</button>
@@ -111,5 +117,6 @@ function UploadForm({ clientApi, accountId, facilityId }: {
         {(status || file) && <button className="button secondary" type="button" disabled={busy} onClick={newFile}>Choose a new file</button>}</div>
       <p id={`${inputId}-constraints`} className="field-hint">UTF-8 text only, 1–65,536 bytes. Retries reconcile the same immutable attempt. A failed or interrupted response does not prove that nothing was saved. Choosing a new file does not delete previous bytes or history.</p>
     </form>
+    {status?.state === 'finalized' && <PrivateObjectSecurityStatus objectId={status.objectId} accountId={accountId} facilityId={facilityId} onAccessUnavailable={onSecurityUnavailable} />}
   </section>;
 }

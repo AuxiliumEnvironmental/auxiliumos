@@ -14,10 +14,10 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Read/write Git Data API and exact fetched tree verified at6164ffcae620694648bf29a9b120aec943c7d03d; CI run37896694917 (run50) passed. Draft PR84 remains open; nonforce expected-SHA API publication works.",
+    "github": "Latest verified remote59eb21faf5a1d8ef366780c4eac5da5da31f1c5c exactly matches localbb744a9 tree5f56c35fd9d7b62fdf020352c086efbec48db880. CI run37898799381 (run51) SUCCESS. PR84 draft open; API publication works.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "All6 canonical migration hashes match deployed source. Canonical synthetic seed applied unchanged on2026-10-09 and read back (receipt development-migrations.json). Private-objects Edge v1 ACTIVE verify_jwt=true; zero Auth users/buckets and reservation config disabled at latest check. Genuine Auth/API/Storage/browser requires securely configured test key.",
-    "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
+    "lovable": "2026-10-09 readback: existing project0b7bbfc6-627f-4ca0-9217-98f5b164b419 still0d48e1adfa63fa05ee0436bb5d83dd56ca94f523, agent finished, unpublished older shell. Owner requests lossless transfer if viable; no transfer or GitHub sync claimed. Official Git sync cannot import/link an arbitrary existing repository."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Publish integrated private upload UI and protected actual API/browser workflow, then finish independent clearance review and integrate status/report UI. Do not re-import or reapply6 migrations. Secure live checks wait only for AUXILIUMOS_TEST_SERVICE_ROLE_KEY in repository Actions secrets and a manual run on wip/recovery-2026-10-08.",
+  "first_runtime_action": "Publish reviewed clearance and security-status/report UI; apply only new20261009065625 migration after fresh target checks. Continue active DOC-001A backend/UI work. If transferring to existing Lovable, preserve exact pinned canonical files and verify parity; no rewrite, replacement backend, reduced scope or unsupported sync claim.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -89,6 +89,20 @@
       ],
       "verification": "Build passed; directory7, intake8 and upload12 intercepted-HTTP browser journeys passed. Upload adapter7 unit checks passed; hosted authenticated acceptance unexecuted.",
       "limitation": "No complete module or real-data activation is certified."
+    },
+    "clearance": {
+      "source_worker_commits": [
+        "f91e60e72f40b267cc35b8258c41adafe56e71f6",
+        "a32a5d008b7a92ce2ccb7f9df8c4ae4547af601b"
+      ],
+      "migration_sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "database_checks": 39,
+      "deployed": false,
+      "ui_worker_commit": "35611d0ab677ae2e3fde56598c33de56b0015f65",
+      "security_adapter_checks": 10,
+      "integrated_upload_security_browser_fixture_checks": 20,
+      "hosted_api_acceptance": false
     }
   },
   "execution_recovery": {
@@ -127,7 +141,7 @@
       "/root/private_clearance_current",
       "/root/integration_security_review"
     ],
-    "first_unfinished_action": "Publish integrated private upload UI and protected actual API/browser workflow, then finish independent clearance review and integrate status/report UI. Do not re-import or reapply6 migrations. Secure live checks wait only for AUXILIUMOS_TEST_SERVICE_ROLE_KEY in repository Actions secrets and a manual run on wip/recovery-2026-10-08.",
+    "first_unfinished_action": "Publish reviewed clearance and security-status/report UI; apply only new20261009065625 migration after fresh target checks. Continue active DOC-001A backend/UI work. If transferring to existing Lovable, preserve exact pinned canonical files and verify parity; no rewrite, replacement backend, reduced scope or unsupported sync claim.",
     "latest_verified_remote": "6164ffcae620694648bf29a9b120aec943c7d03d"
   }
 }
