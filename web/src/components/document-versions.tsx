@@ -130,7 +130,7 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
           {resource.value.items.length === 0 ? <p role="status">No internal draft versions on this page.</p>
             : <ol aria-label="Immutable version history" style={{ listStyle: 'none', padding: 0 }}>
               {resource.value.items.map(version => <li key={version.version_id} className="notice" style={{ marginBlock: 'var(--space-3)' }}>
-                <h4>Version {version.version_ordinal} · Internal draft</h4>
+                <h4>Version {version.version_ordinal}{document.document_class !== 'routine_synthetic_document' && ' · Internal draft'}</h4>
                 {version.visibility_restricted && <p className="form-error">Restricted; no content access is provided</p>}
                 <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
                 <DocumentVersionReview key={`review:${resource.key}:${version.version_id}:${version.verified_sha256}`}
