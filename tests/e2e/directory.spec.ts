@@ -251,6 +251,13 @@ test('fixture browser: phone navigation, keyboard close, honest module state and
   await expect(open).toBeFocused();
   await open.click();
   await page.getByRole('dialog').getByRole('link', { name: 'Documents', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Private files', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Upload synthetic file', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  // Documents now has a scoped upload workflow; unfinished modules must still
+  // disclose their unavailable state rather than imply a completed product.
+  await open.click();
+  await page.getByRole('dialog').getByRole('link', { name: 'Projects', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Not available in this increment', exact: true })).toBeVisible();
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await page.getByRole('link', { name: 'Open account directory', exact: true }).click();

@@ -170,7 +170,8 @@
       "verification_profiles": [
         "runtime-build",
         "directory-browser-fixture",
-        "directory-api"
+        "directory-api",
+        "development-ui"
       ],
       "blocker": "All6 reviewed migrations are applied to the existing development backend. Genuine Auth/API and real-service browser checks await securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY; no secret value should be supplied in chat.",
       "issue": null,
@@ -583,13 +584,14 @@
         "build",
         "browser_fixture"
       ],
-      "next_action": "Connected RPC interface and legacy display corrections implemented; 21 adapter checks and 8 browser-fixture journeys passed in worker. Recheck integrated routes; genuine hosted browser/API acceptance remains required."
+      "next_action": "Connected submission/triage is integrated; build and8 intercepted-HTTP journeys passed with current shared navigation. Run prepared genuine development-ui and intake-api after secure key configuration; full intake acceptance remains open."
     },
     {
       "status": "implemented",
       "verification_profiles": [
         "private-file-database",
-        "private-file-unit"
+        "private-file-unit",
+        "private-file-entrypoint"
       ],
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
@@ -1136,7 +1138,7 @@
     {
       "id": "DOC-001-UPLOAD-UI",
       "title": "Connected private-file upload staging interface",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "SEC-001B-R5",
         "SEC-001C-FILE-WORKFLOW"
@@ -1163,13 +1165,15 @@
       ],
       "verification_profiles": [
         "runtime-build",
+        "private-file-client-unit",
         "private-file-browser-fixture"
       ],
       "required_evidence_levels": [
         "build",
+        "unit",
         "browser_fixture"
       ],
-      "next_action": "Implement scoped page against saved real gateway adapter and run explicit fixture browser journeys. Earlier unpublished page source unavailable after workspace snapshot recovery; this is newly verified work, not reconstructed reviewed code.",
+      "next_action": "Connected scoped upload page integrated under /documents. Review c22551c passed; 7 adapter and12 intercepted browser journeys pass. Actual signed-in Edge/Storage/CORS checks remain gated by secure configuration; separate security-status/report panel is next.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -1205,7 +1209,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Implement independent security state and immutable attempt/observation/human-decision history under ADR003, then independent review. No content route, real scanner, professional approval or release is implied.",
+      "next_action": "Frozen backend f91e60e passed39 simulated-Auth PostgreSQL checks and55 prior regressions; independent review in progress. Two API evidence/cleanup-diagnostic findings being fixed; SQL not deployed. Integrate only after review closes.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

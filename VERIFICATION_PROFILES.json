@@ -382,13 +382,15 @@
       "inputs": [
         "supabase/functions/private-objects/gateway.mjs",
         "scripts/private-object-provision.mjs",
-        "tests/unit/private-object-gateway.test.mjs"
+        "tests/unit/private-object-gateway.test.mjs",
+        "tests/unit/private-object-provision.test.mjs"
       ],
       "commands": [
         [
           "node",
           "--test",
-          "tests/unit/private-object-gateway.test.mjs"
+          "tests/unit/private-object-gateway.test.mjs",
+          "tests/unit/private-object-provision.test.mjs"
         ]
       ]
     },
@@ -494,6 +496,59 @@
           "test:runtime-ui",
           "--",
           "private-files.spec.ts"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-client-unit",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/private-object-api.ts",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/private-object-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/private-object-api.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "development-ui",
+      "level": "browser",
+      "environment": "actual-Chromium-React-hosted-Supabase-Auth-Data-API-synthetic-identities",
+      "cacheable": false,
+      "max_age_ms": 900000,
+      "timeout_ms": 300000,
+      "environment_variables": [
+        "AUXILIUMOS_TEST_URL",
+        "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+        "AUXILIUMOS_TEST_SERVICE_ROLE_KEY",
+        "AUXILIUMOS_BROWSER_EXECUTABLE"
+      ],
+      "inputs": [
+        "tests/api/development-ui.test.mjs",
+        "tests/api/fixture-cleanup.mjs",
+        "web",
+        ".github/workflows/ci.yml",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/api/development-ui.test.mjs"
         ]
       ]
     }

@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-09T07:20:04.962Z",
+  "reviewer": "independent integration_security_review",
+  "scope": {
+    "secure_api": [
+      "aae2dc62ecd7c8bc0881858efe00ad79c75c4aed",
+      "205880e38e8a204d0577b5ec1456e40ccbe94639"
+    ],
+    "initial_upload_ui": "c22551c631b64343a877dffc72f9d0ce85bf7202",
+    "recovered_entrypoint": "1c2faee0ef44d9d5cc61c61438342bf4c14e4d4a"
+  },
+  "disposition": "No remaining blocker found in scoped source review.",
+  "findings": [
+    {
+      "id": "API-DENIAL-001",
+      "severity": "P2",
+      "requirements": [
+        "C01",
+        "C02",
+        "M13"
+      ],
+      "impact": "Equality-only forbidden/missing assertion could accept HTTP503,401 or200 as denial evidence.",
+      "reproduction": "Independent offline execution of the exact frozen equality assertion accepted matching503,401,200 responses.",
+      "fix": "205880e requires each response HTTP404 and exact {error:not_found_or_unavailable} before equality; targeted offline regressions reject wrong status/body/extra fields.",
+      "status": "closed"
+    }
+  ],
+  "preserved_boundaries": [
+    "Manual exact repository/feature branch guard before secure steps.",
+    "Service key excluded from app/Chromium child environments and credential artifacts.",
+    "Browser uses real password sign-in and independent verification of its issued JWT.",
+    "Fixture cleanup preserves application/audit history and object bytes.",
+    "Recovered index SHA256 c2eaded3307612123396e755f4014b2f30407ee461bd5de09c9502ab5c8f2aa4 matches deployed bytes.",
+    "Initial UI scope/session invalidation discards late results, ambiguous reserve retains file/key, denial clears UI."
+  ],
+  "evidence_reuse": "Existing unchanged worker unit/syntax/YAML and browser-fixture evidence reused; no broad rerun for review.",
+  "not_verified": [
+    "Hosted Auth/API/browser/cleanup execution",
+    "Private-file UI CORS",
+    "Protected configuration and activation",
+    "Target concurrency and provider route inventory",
+    "Actual scanner effectiveness",
+    "Full M13/M19/C01/C02/C07 acceptance"
+  ],
+  "later_work_excluded": [
+    "Clearance migration f91e60e and subsequent fixes",
+    "Security-status/report UI followup"
+  ]
+}

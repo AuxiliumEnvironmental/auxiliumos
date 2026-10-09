@@ -1,15 +1,15 @@
 {
   "version": 1,
-  "profile": "private-file-unit",
+  "profile": "private-file-client-unit",
   "level": "unit",
-  "recorded_at": "2026-10-09T07:17:57.331Z",
+  "recorded_at": "2026-10-09T07:17:58.002Z",
   "result": "passed",
-  "digest": "7553382270f8e78d7234ea24a116e7277f0d3d4b4c0d54f7abcd641e3f6be41e",
+  "digest": "fe385aa9a526f02778c853093842d614f1ca44eba064aebdf6b653b3aad11193",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
     "arch": "x64",
-    "environment": "Node-injected-adapter-provider-fixtures-no-cloud",
+    "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
     "environment_hashes": {
       "CI": null,
       "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
@@ -24,10 +24,10 @@
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
     "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
-    "scripts/private-object-provision.mjs": "2d7297cfe63335e5724be4055b9d0ccad62209b6212b15b280364e3495d04c15",
-    "supabase/functions/private-objects/gateway.mjs": "777973ba23670c469211db8ab022bc6ada4fefb3f389138530bc0722f5a21a58",
-    "tests/unit/private-object-gateway.test.mjs": "9835aafb1bfb852bb6918995dd76379bdfafdbb01c49fedee428e47658477893",
-    "tests/unit/private-object-provision.test.mjs": "de6e79b7510d5a168f2fa6b8ef8cb5dadc580a26711d6a9c0510134ce24ef589"
+    "tests/unit/private-object-api.test.mjs": "e42dd26d2485e66d9d69295220822f34a2b6825163a7cbdfcc99aef1f0b0bdd6",
+    "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+    "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434",
+    "web/src/lib/private-object-api.ts": "7c011126f476b7d8edfcad91ac58ddd5b3763c36cde23968ee8d42221adfd881"
   },
   "observed_git_head": "41b990666f7e9608a5182840bfa58be73e8064e6",
   "results": [
@@ -35,14 +35,13 @@
       "argv": [
         "node",
         "--test",
-        "tests/unit/private-object-gateway.test.mjs",
-        "tests/unit/private-object-provision.test.mjs"
+        "tests/unit/private-object-api.test.mjs"
       ],
       "exit_code": 0,
       "signal": null,
       "error": null
     }
   ],
-  "log_path": "docs/00-control/evidence/private-file-unit.log",
-  "log_sha256": "16ebdc1cecc41b5388092c36e7bae50af1c70c1ee471975114a57c1f216fa0fd"
+  "log_path": "docs/00-control/evidence/private-file-client-unit.log",
+  "log_sha256": "c4c48ba91f74fd09120c13150fa8baaa09f04e0d7039f53968de9393da4072cf"
 }

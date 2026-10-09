@@ -14,6 +14,18 @@ const safeFetch=(input,init)=>fetch(input,{...init,redirect:'error',signal:Abort
 async function ok(operation) { let result;try{result=await operation;}catch{throw new Error('Provider request failed; details omitted.');}
   assert.ok(result && !result.error,'Provider operation failed; details omitted.');return result.data; }
 const rows=(list)=>assert.ok(Array.isArray(list),'Expected provider rows; details omitted.');
+function storageDenied(result, label) {
+  // An SDK network/5xx/invalid-token failure is not evidence of RLS denial.
+  // Storage can conceal a known existing object/bucket behind 404; the service
+  // readback below proves this exact path exists. Accept documented legacy and
+  // current codes only, without ever printing a raw error or signed URL.
+  const error=result?.error;
+  const known=new Set(['AccessDenied','NoSuchKey','NoSuchBucket','not_found','unauthorized']);
+  const status=Number(error?.statusCode ?? error?.status);
+  const denied=error && [400,403,404].includes(Number(error.status))
+    && (error.code ? known.has(error.code) : [403,404].includes(status));
+  assert.ok(denied,`${label}: expected a recognized Storage denial, not a transport, session, conflict or configuration failure.`);
+}
 
 test('private-file authentic Auth/Edge/Storage acceptance — secure configuration is mandatory',async(t)=>{
   // Absence is a failed prerequisite, never a skipped-to-pass API acceptance.
@@ -32,11 +44,12 @@ test('private-file authentic Auth/Edge/Storage acceptance — secure configurati
     accessPairs:[[accountA,profileA],[accountB,profileB]],
     grantTargets:grants.map((id,n)=>[id,n<3?accountA:accountB,n<3?profileA:profileB])};
   const objects=[];
+  t.diagnostic(`Private-file synthetic run ${runId}; target ${config.url}; all application/audit history and bytes will be retained.`);
   t.after(async()=>{
     // Preserve application/audit rows AND every object byte. Only exact test-
     // created identities/access are retired by the already-reviewed helper.
-    await cleanupFixtures(admin,f,message=>t.diagnostic(message));
     t.diagnostic(`Private object IDs retained, never deleted: ${JSON.stringify(objects)}. Run ${runId}.`);
+    await cleanupFixtures(admin,f,message=>t.diagnostic(message));
   });
   async function subject(label,profileId) {
     const email=`api-${runId}-${label}@identity-directory.invalid`;
@@ -82,7 +95,13 @@ test('private-file authentic Auth/Edge/Storage acceptance — secure configurati
   assert.equal((await edge(a,'POST','',declaration)).value.objectId,objectId);
   assert.equal((await edge(a,'POST','',{...declaration,byteSize:bytes.length-1})).status,409);
   for(const d of [{facilityId:facilityA2},{accountId:accountB,facilityId:facilityB}]) assert.equal((await edge(a,'POST','',{...declaration,...d,idempotencyKey:randomUUID()})).status,404);
-  assert.deepEqual(await edge(b,'GET',`/${objectId}`),await edge(b,'GET',`/${randomUUID()}`));
+  const forbidden=await edge(b,'GET',`/${objectId}`),missing=await edge(b,'GET',`/${randomUUID()}`);
+  // Matching outages, invalid sessions or successful responses prove no denial.
+  for(const response of [forbidden,missing]) {
+    assert.equal(response.status,404,'Cross-account GET must return the expected unavailable denial.');
+    assert.deepEqual(response.value,{error:'not_found_or_unavailable'},'Cross-account GET must return only the safe unavailable error.');
+  }
+  assert.deepEqual(forbidden,missing);
   assert.equal((await edge(b,'PUT',`/${objectId}/bytes`,bytes)).status,404);
   const received=await edge(a,'PUT',`/${objectId}/bytes`,bytes);assert.equal(received.status,200);assert.equal(received.value.state,'stored_unverified');
   assert.equal(received.value.quarantined,true);assert.equal(received.value.scanState,'pending');
@@ -91,15 +110,19 @@ test('private-file authentic Auth/Edge/Storage acceptance — secure configurati
   const objectPath=`${accountA}/${facilityA}/${objectId}/payload`;
   const providerBlob=await ok(admin.storage.from(PRIVATE_BUCKET).download(objectPath));
   assert.equal(await sha256(await providerBlob.arrayBuffer()),await sha256(bytes));assert.equal(providerBlob.size,bytes.length);
+  assert.equal(providerBlob.type.split(';')[0].trim().toLowerCase(),'text/plain');
   // Ordinary direct APIs stay denied, including guessing a manifest-owned key.
   for(const ordinary of [a.data,b.data,client(config,config.publishableKey)]) {
-    assert.ok((await ordinary.storage.from(PRIVATE_BUCKET).download(objectPath)).error,'Direct download must fail.');
+    storageDenied(await ordinary.storage.from(PRIVATE_BUCKET).download(objectPath),'Direct download');
     const listed=await ordinary.storage.from(PRIVATE_BUCKET).list(`${accountA}/${facilityA}/${objectId}`);
-    assert.ok(listed.error || (Array.isArray(listed.data)&&listed.data.length===0),'Direct listing leaked objects.');
-    assert.ok((await ordinary.storage.from(PRIVATE_BUCKET).upload(objectPath,bytes,{contentType:'text/plain',upsert:true})).error,'Overwrite must fail.');
-    assert.ok((await ordinary.storage.from(PRIVATE_BUCKET).createSignedUrl(objectPath,60)).error,'Signing must fail.');
-    assert.ok((await ordinary.storage.from(PRIVATE_BUCKET).createSignedUploadUrl(objectPath)).error,'Upload signing must fail.');
+    if(listed.error)storageDenied(listed,'Direct listing');
+    else assert.ok(Array.isArray(listed.data)&&listed.data.length===0,'Direct listing leaked objects.');
+    storageDenied(await ordinary.storage.from(PRIVATE_BUCKET).upload(objectPath,changed,{contentType:'text/plain',upsert:true}),'Overwrite');
+    storageDenied(await ordinary.storage.from(PRIVATE_BUCKET).createSignedUrl(objectPath,60),'Signing');
+    storageDenied(await ordinary.storage.from(PRIVATE_BUCKET).createSignedUploadUrl(objectPath),'Upload signing');
   }
+  const preserved=await ok(admin.storage.from(PRIVATE_BUCKET).download(objectPath));
+  assert.equal(await sha256(await preserved.arrayBuffer()),await sha256(bytes),'Denied changed-byte overwrites must preserve the original.');
   assert.equal((await edge(a,'GET',`/${objectId}/content`)).status,404);
   assert.equal((await edge(a,'POST',`/${objectId}/clearance`,{})).status,404);
   const final=await edge(a,'POST',`/${objectId}/finalize`,{expectedStateRevision:received.value.stateRevision});
@@ -114,8 +137,14 @@ test('private-file authentic Auth/Edge/Storage acceptance — secure configurati
   assert.equal((await edge(a,'POST',`/${second.value.objectId}/finalize`,{expectedStateRevision:staged.value.stateRevision})).status,404);
   assert.equal((await edge(a,'GET',`/${objectId}`)).status,404);
   const audit=await ok(admin.from('audit_events').select('object_id,event_type,actor_kind,actor_auth_user_id,event_metadata').in('object_id',objects));rows(audit);
-  assert.equal(audit.filter(x=>x.object_id===objectId&&x.event_type==='private_object_finalized').length,1);
+  const finalized=audit.filter(x=>x.object_id===objectId&&x.event_type==='private_object_finalized');
+  assert.equal(finalized.length,1);
+  assert.ok(finalized[0].actor_kind==='user'&&finalized[0].actor_auth_user_id===a.id,'Finalization must retain the genuine user actor.');
   assert.equal(audit.filter(x=>x.object_id===second.value.objectId&&x.event_type==='private_object_finalized').length,0);
-  assert.ok(audit.filter(x=>x.event_type==='private_object_upload_received').every(x=>x.actor_kind==='system'&&x.actor_auth_user_id===null));
+  for(const id of objects){
+    const receivedEvents=audit.filter(x=>x.object_id===id&&x.event_type==='private_object_upload_received');
+    assert.equal(receivedEvents.length,1,'Each provider receipt must have one durable audit event.');
+    assert.ok(receivedEvents[0].actor_kind==='system'&&receivedEvents[0].actor_auth_user_id===null,'A provider receipt is not a human action.');
+  }
   t.diagnostic('Genuine synthetic Auth → Edge → provider bytes → trusted receipt → user finalization checked. Scan/human clearance and production acceptance remain unaccepted; transforms/resumable/S3 route inventory and target concurrency require separate evidence.');
 });

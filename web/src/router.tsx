@@ -5,6 +5,7 @@ import { AuthGate } from "./components/auth";
 import { useRuntime } from "./lib/runtime";
 import { AccountsPage, FacilitiesPage } from "./pages/directory";
 import { IntakePage } from "./pages/intake";
+import { PrivateFilesPage } from "./pages/private-files";
 import { ModulesPage, NotFoundPage, ProfilePage, UnavailablePage } from "./pages/workspace";
 
 function ScreenAccessCheck() {
@@ -52,9 +53,20 @@ function IntakeRoute() {
   return <IntakePage accountId={account} onAccountChange={(id) => { void navigate({ search: id ? { account: id } : {} }); }} />;
 }
 const modulesRoute = createRoute({ getParentRoute: () => rootRoute, path: "/modules", component: ModulesPage });
+const privateFilesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/documents",
+  validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }),
+  component: PrivateFilesRoute,
+});
+function PrivateFilesRoute() {
+  const { account } = privateFilesRoute.useSearch();
+  const navigate = privateFilesRoute.useNavigate();
+  return <PrivateFilesPage accountId={account} onAccountChange={(id) => { void navigate({ search: id ? { account: id } : {} }); }} />;
+}
 const moduleRoute = createRoute({ getParentRoute: () => rootRoute, path: "/$module", component: () => <UnavailablePage path={moduleRoute.useParams().module} /> });
 
-const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, modulesRoute, moduleRoute]);
+const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, moduleRoute]);
 export const router = createRouter({ routeTree, defaultPreload: false, scrollRestoration: true });
 
 declare module "@tanstack/react-router" {

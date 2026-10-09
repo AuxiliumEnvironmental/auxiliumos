@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "directory-browser-fixture",
   "level": "browser_fixture",
-  "recorded_at": "2026-10-08T17:04:17.961Z",
+  "recorded_at": "2026-10-09T07:11:51.588Z",
   "result": "passed",
-  "digest": "06e23d36e560577c2d7e9d5b03e2eb39c7647f6fe2f34297dd09a4ae00b147fb",
+  "digest": "9d375d8c52001cb532ad2c9f3114ad35824ac3959a3409cd97b487f137381f70",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -17,47 +17,54 @@
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
-      "PATH": "52394806bac22aed7619acf5a7d36ecb4c9b0929652a9a2e408e9ec63ec2b4c2",
-      "TZ": "796751c31e4ef1b1d8e344c13d017179f3ef862a00f2127eab63a5161945a77f"
+      "PATH": "837ab464f0d29de01137e1c5a2eb33c004e2fe7e0bd967890368b3a31da680f3",
+      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0"
     }
   },
   "inputs": {
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
-    "playwright.runtime.config.ts": "516b596a72003029ae9867766de5d8f9392fb51d6ed60bfd540fd46aceb83dcb",
-    "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
-    "tests/e2e/directory.spec.ts": "1f41b243bc5d7cf995032486b43e6eabfeb746c6cae5507fd06925437ff5b38d",
-    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48",
+    "playwright.runtime.config.ts": "c14775caf987ee4b3dacf31ca55e3c847c9f06723a05100b49a1708f7a062368",
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
+    "tests/e2e/directory.spec.ts": "6d0d129235a7c50472d242bcac4c53ac754cacc5a6e28a8c24a1a2c9ee7ebb7f",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
     "web/README.md": "979684798830da44d55c2e7a75f681119086675e5b2aafc779a7c5d4ce4db561",
-    "web/src/components/app-shell.tsx": "a7cd0bd74e4a4223ca9e8d347ee95e2980d1d5b3185c65e66a053e55890922c9",
+    "web/src/components/app-shell.tsx": "12e3244ff6536a3770e6754ef971bda5319f227b26f75d33735ad7164d04cc7a",
     "web/src/components/auth.tsx": "302394656ed85b5aa8d587444763ef077e406774678a4c61f6f8dc4254e5d07e",
+    "web/src/components/private-object-upload.tsx": "e46ea2891430f5cf22f08bae1701bbecd70ba6e4549f80321727922ea8c4ad67",
     "web/src/components/shared.tsx": "4848e60dea3dafaf161cc6057997a80622f1fe68d0d83d86e74e357613fbdcc4",
     "web/src/env.d.ts": "60767326176b42460c4b67e6e7e10d071a832882e5410ce7df08e6ebf413af5b",
     "web/src/lib/auth-storage.ts": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
     "web/src/lib/config.ts": "09c2f6e970f6a7435b822e9964ef959aa67a5423712afb9a20321ecd05deed64",
     "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
     "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434",
+    "web/src/lib/intake-api.ts": "e8b36480135b5424477d554455803df31277fbc8e8abdda0f977890f882a2b82",
     "web/src/lib/modules.ts": "dfebe2cb67d8a4a46b3b2a3d1463c03fd2527819095890e83931ed49dae4d74f",
+    "web/src/lib/private-object-api.ts": "7c011126f476b7d8edfcad91ac58ddd5b3763c36cde23968ee8d42221adfd881",
     "web/src/lib/runtime.tsx": "3ff86cc45c3c4cc990f57e09f6d463634b4f3c51f240d5e0a36eabe25f90bfc4",
     "web/src/lib/use-directory.ts": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
     "web/src/main.tsx": "08bb3c4de46d8b6c9ddd967931ed429903593aba902cca3caea5a33878896a71",
     "web/src/pages/directory.tsx": "71f87c4ffdc1ef37ca532d38fd6a143739827a332719df54efbc15b9ef173553",
-    "web/src/pages/workspace.tsx": "396e773483cad5492ebb7c615529dc3a8ec0d1b760db8b609200dac6378ad6b4",
-    "web/src/router.tsx": "c590ff430075ae87497c1302d42b918c75ee1e8bddc4ce2174ad8e5b639ec945",
+    "web/src/pages/intake.css": "5cd741294d8569b3c1128912e034262815cb25ac252487f22aec9031859f3371",
+    "web/src/pages/intake.tsx": "cdca638fbcee0bb9a9174f877236a7d45dafb8c9c99d78df69174d6e1ad7e56b",
+    "web/src/pages/private-files.tsx": "d51281c7d5aa479bf37dc4463503572b7df177cdb609f713f9d36eee8ba09c34",
+    "web/src/pages/workspace.tsx": "49b11e741f9ad8743a1327f3ceaed2dbb9d91dd77a19fb8f0386395c8c4a4375",
+    "web/src/router.tsx": "0e9156c2b42489ef2d5de991de3d70148a28b35e7020c270ccb6ed16d371605f",
     "web/src/styles.css": "3fe7f0d33c0c927cfcf755e62c4291bab7dc95775b3d4dfe8b6721b9087875d0",
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
+  "observed_git_head": "99f9a4a90c02be0a4b65592d708dbf548343c9b9",
   "results": [
     {
       "argv": [
         "npm",
         "run",
-        "test:runtime-ui"
+        "test:runtime-ui",
+        "--",
+        "directory.spec.ts"
       ],
       "exit_code": 0,
       "signal": null,
@@ -65,5 +72,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/directory-browser-fixture.log",
-  "log_sha256": "de4efa1a37c84cf27a20245850de8a4aec657068c7b911298612fcc5ff0d469f"
+  "log_sha256": "64ff64fb76f2708fd87625f4a87eb12b25f6609961b7b42219d4ad0261601b86"
 }

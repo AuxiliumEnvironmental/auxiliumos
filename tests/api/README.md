@@ -1,4 +1,48 @@
-# Authentic directory API acceptance
+# Authentic development API and browser acceptance
+
+The existing `Repository checks` workflow has a manual `development-api` job for genuine synthetic directory, intake, private-file and representative browser checks. **Prepared code is not hosted acceptance.** Until a secure run and its cleanup pass, no genuine API/browser acceptance is claimed. Normal push/PR jobs still run simulated database and HTTP-fixture browser checks without a privileged key.
+
+## Protected manual development run
+
+1. Review the exact candidate on `AuxiliumEnvironmental/auxiliumos`, branch `wip/recovery-2026-10-08`, and independently reconcile the target's six reviewed migrations, Auth password sign-in, provider policies/advisors and deployed `private-objects` revision/configuration. The job checks the exact repository/branch before checkout and checks out the dispatch SHA. It is not a production/deployment/approval job.
+2. An authorized repository operator must configure **GitHub Actions repository secret `AUXILIUMOS_TEST_SERVICE_ROLE_KEY`** for **only** development project `txofqxictwecgcnvezlb`, using the protected GitHub secret form. A suitably privileged server secret or legacy service-role key is required; the browser publishable key cannot provision Auth fixtures or Storage. Never paste the value into chat, source, a workflow input, an issue, command text or an artifact. No harness retrieves secrets. If it is missing, the configuration step fails without printing a value.
+3. An authorized database owner must separately enable only the reviewed synthetic reservation configuration, after target/bucket/policy reconciliation. The Edge deployment must have `PRIVATE_OBJECT_TRANSPORT_MODE=synthetic-only` and retain the reviewed JWT checks. SQL activation is **not** an input or action in this workflow, provisioning script or tests; the server credential cannot be used to bypass that gate. An ACTIVE Edge function alone proves neither transport activation nor reservation authorization. No test silently enables, applies a migration, redeploys, changes Auth, grants a broad privilege or makes Storage public.
+4. In the existing repository Actions workflow at `.github/workflows/ci.yml`, choose the reviewed feature branch for **Run workflow** and choose a bucket mode below. The workflow path must already be registered on the default branch, the updated definition must be published on the selected branch, and the operator needs dispatch permission. If the UI/API does not offer dispatch, report that protected-action blocker; do not merge unreviewed changes to main or invent a successful run. Triggering a new run is not the same as re-running an old job/SHA.
+
+| Manual input | Effect |
+| --- | --- |
+| `private_bucket_mode=verify-only` (default) | Read-only Storage inventory/settings verification. A missing bucket fails. |
+| `private_bucket_mode=create-if-absent` | Explicitly authorizes the supported `storage.createBucket` API for `os-private-ingest` if absent, with `public=false`, 65,536-byte limit and only `text/plain`. Never updates an existing bucket or deletes anything. |
+| `reviewed_existing_private_bucket=false` (default) | Fails if the bucket has any existing entries. |
+| `reviewed_existing_private_bucket=true` | Operator acknowledgment that existing entries/manifests, policies and signing history were reconciled. Strict settings still must match; this is not an automated proof of those reviews. |
+
+All object bytes, manifests and application/audit history are deliberately retained. Consequently a second run normally requires reconciliation and the explicit existing-entry acknowledgment. The workflow never adopts existing objects as fixtures, clears a bucket, repairs settings or reverses an owner decision. If creation succeeds but a later prerequisite fails, the private bucket remains; inspect it and use verify-only after resolving the separate gate. Bucket creation itself does not enable transport.
+
+The URL and browser publishable key are fixed to the existing development target. The server secret is injected only into configuration validation, provisioning and acceptance steps—not checkout, Node setup, dependency/browser installation, artifact upload, job-wide environment or frontend variables. The browser harness also removes it from app-server/Chromium child environments. The allowed branch must be reviewed before dispatch; these guards do not defend against a privileged operator deliberately changing the workflow or server credentials.
+
+The job executes the noncacheable `directory-api`, `intake-api` and `development-ui` profiles, then bucket verification/provisioning and `private-file-api`. The independent browser journey is not blocked by a missing private bucket or disabled private-object configuration. Only safe current-run JSON/log files are uploaded; old receipt copies from checkout are cleared before these steps so an early prerequisite failure cannot upload stale evidence as new. The browser profile records hash-tied source/configuration, environment hashes and sanitized diagnostics with a 15-minute freshness bound. Record the run URL, dispatch SHA, actual target/migration/deployment/configuration readback, exact synthetic fixture IDs and cleanup outcome. A GitHub success is bounded evidence, not full-system, release, scanner, designated-human-clearance or production acceptance.
+
+## Private-file and real browser coverage
+
+`private-file-transport.test.mjs` uses genuinely created Auth identities and original user-issued JWTs against the deployed Edge/Storage surface. Before fixtures it checks the shared API schema, exact private bucket settings and the service-only transport RPC's expected missing-object denial. It then checks scoped reservation, provider byte digest/size/type, immutable retry/finalization, ordinary direct Storage denials, current-authority revocation while Auth still accepts the original token, and nonempty receipt/finalization audits with distinct system/user provenance. A Storage network failure, invalid JWT, conflict or 5xx is not accepted as RLS-denial evidence. Denied changed-byte overwrites are followed by exact original-byte readback. Object IDs are reported before cleanup, including when cleanup itself fails. No object byte is deleted.
+
+`development-ui.test.mjs` launches the repository's actual Vite app on isolated loopback port **4178** and a fresh nonpersistent Chromium context against the real hosted development project. It creates one synthetic Auth identity through Admin API, signs in by filling the actual UI, independently validates that browser-issued token with Auth, checks account/facility isolation, submits and triages one synthetic request through the UI with server readback/provenance, suspends the exact profile, verifies direct API denial with the original still-valid JWT, reloads to the unavailable state and signs out. Only exact generated rows/identities enter the existing preservation-safe cleanup helper. Request rows and their audit history remain preserved.
+
+Browser passwords/tokens are held in memory, not passed in command arguments or saved in `.env`, credential files, storage-state JSON, HAR, video, screenshots or traces. Debug logging is rejected; raw Playwright exceptions (which can include `fill()` values) and provider bodies are replaced by a fixed failing stage. The egress allowlist passes approved app/provider requests through unchanged and blocks other origins; it does not fulfill HTTP responses, fake Auth or inject a session. Browser/App child processes never inherit the server key. A browser or cleanup failure fails acceptance; no retry-to-green or skipped-to-pass fallback is provided. Private-file UI/upload CORS, multi-user/concurrency and full browser acceptance remain separate gates.
+
+After securely configuring the approved runtime, standalone commands are:
+
+```sh
+node scripts/private-object-provision.mjs
+# Explicit authorized creation only; add --reviewed-existing only after reconciliation:
+node scripts/private-object-provision.mjs --create
+node --test tests/api/private-file-transport.test.mjs
+node --test tests/api/development-ui.test.mjs
+```
+
+The real browser requires the hosted project's `sb_publishable_...` browser key, installed Chromium (`npx playwright install --with-deps chromium` with no server secret attached), no other server on port 4178, and no `DEBUG`/`PWDEBUG`. It does not use local-stack legacy `anon` keys because the actual web app deliberately permits browser publishable keys only. The API/provisioning tools retain their documented local Supabase option.
+
+## Directory API contract and preservation-safe cleanup
 
 `identity-directory.test.mjs` implements the Supabase Auth/Data API part of SEC-001B against [ADR-002](../../docs/03-data/ADR-002-RUNTIME-FOUNDATION.md), migration `20261008120645_identity_access_directory.sql`, and the additive SEC-001C server-audit contract. It uses installed `@supabase/supabase-js` version `2.117.3` and Node's test runner. **Live API acceptance remains UNEXECUTED.** A syntax check, the missing-configuration failure, cleanup unit mocks, and simulated SQL subjects do **not** establish API acceptance.
 

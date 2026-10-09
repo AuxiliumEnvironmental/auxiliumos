@@ -78,5 +78,25 @@
     "auth_users": 0,
     "storage_buckets": 0,
     "private_reservations_enabled": false
+  },
+  "canonical_seed": {
+    "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",
+    "file": "supabase/seed/foundation_demo_seed.sql",
+    "sha256": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "source_unchanged": true,
+    "method": "Exact reviewed seed SQL executed once using trusted postgres session after read-only zero-row preflight. No migration recreation, fake Auth identities, linked credentials or privilege grants.",
+    "verification": {
+      "accounts": 1,
+      "profiles": 7,
+      "profiles_linked_to_auth": 0,
+      "auth_users": 0,
+      "facilities": 1,
+      "legacy_requests": 1,
+      "project_requests": 1,
+      "documents": 2,
+      "mapped_documents": 2,
+      "private_enabled": false
+    },
+    "claim_limit": "Real PostgreSQL17 bootstrap/persistence evidence, not genuine Auth/Data API or client document visibility."
   }
 }

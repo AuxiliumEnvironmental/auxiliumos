@@ -15,6 +15,9 @@ export function assertPrivateBucket(bucket) {
 }
 
 export async function provisionPrivateBucket(client, { create = false, reviewedExisting = false } = {}) {
+  if (typeof create !== 'boolean' || typeof reviewedExisting !== 'boolean') {
+    throw new ProvisionError('Provisioning and existing-entry review decisions must be explicit booleans. No requests made.');
+  }
   const listing = await client.storage.listBuckets();
   if (listing.error || !Array.isArray(listing.data)) throw new ProvisionError('Bucket inventory unavailable; no provisioning attempted.');
   let bucket = listing.data.find((item) => item.id === PRIVATE_BUCKET);
@@ -33,8 +36,9 @@ export async function provisionPrivateBucket(client, { create = false, reviewedE
   if (objects.error || !Array.isArray(objects.data)) throw new ProvisionError('Private bucket inventory unavailable. Do not enable transport.');
   const containsEntries = objects.data.length > 0;
   if (containsEntries && !reviewedExisting) throw new ProvisionError('Private bucket contains existing entries. Reconcile exact manifests, signing history and provider policies before explicitly using --reviewed-existing. Nothing was deleted or overwritten.');
-  return { bucket: PRIVATE_BUCKET, created, public: false, maxBytes: 65_536,
-    mediaTypes: ['text/plain'], containsEntries, policiesAndSigningHistoryVerified: false };
+  return { bucket: PRIVATE_BUCKET, mode: create ? 'create-if-absent' : 'verify-only', created, public: false, maxBytes: 65_536,
+    mediaTypes: ['text/plain'], containsEntries, existingEntriesReviewed: containsEntries && reviewedExisting,
+    policiesAndSigningHistoryVerified: false };
 }
 
 async function main() {
@@ -42,7 +46,7 @@ async function main() {
   if (flags.some((flag) => !['--create','--reviewed-existing'].includes(flag))) throw new ProvisionError('Usage: node scripts/private-object-provision.mjs [--create] [--reviewed-existing]');
   const url = process.env.AUXILIUMOS_TEST_URL;
   const key = process.env.AUXILIUMOS_TEST_SERVICE_ROLE_KEY;
-  if (!TARGETS.has(url) || !key) throw new ProvisionError('Secure AUXILIUMOS_TEST_URL and AUXILIUMOS_TEST_SERVICE_ROLE_KEY are required for the approved development/local target. No requests made.');
+  if (!TARGETS.has(url) || !key?.trim()) throw new ProvisionError('Secure AUXILIUMOS_TEST_URL and AUXILIUMOS_TEST_SERVICE_ROLE_KEY are required for the approved development/local target. No requests made.');
   const client = createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},
     global:{fetch:(input,init)=>fetch(input,{...init,redirect:'error',signal:AbortSignal.timeout(15_000)})}});
   const result = await provisionPrivateBucket(client,{create:flags.includes('--create'),reviewedExisting:flags.includes('--reviewed-existing')});

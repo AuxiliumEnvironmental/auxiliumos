@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T07:00:35.909Z",
+  "created_at": "2026-10-09T07:20:10.826Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,17 +10,18 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+    "head": "41b990666f7e9608a5182840bfa58be73e8064e6",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/development-migrations.json\n M supabase/functions/private-objects/README.md\n M supabase/functions/private-objects/index.ts\n?? docs/00-control/evidence/development-private-function.json\n?? docs/00-control/evidence/private-file-entrypoint.json\n?? docs/00-control/evidence/private-file-entrypoint.log\n?? node_modules\n?? tests/unit/private-object-entrypoint.test.mjs",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/directory-browser-fixture.json\n M docs/00-control/evidence/directory-browser-fixture.log\n M docs/00-control/evidence/private-file-unit.json\n M docs/00-control/evidence/private-file-unit.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M tests/e2e/directory.spec.ts\n M web/src/components/app-shell.tsx\n M web/src/pages/workspace.tsx\n M web/src/router.tsx\n?? docs/00-control/evidence/directory-browser-fixture.route-change-failure.log\n?? docs/00-control/evidence/intake-browser-fixture.json\n?? docs/00-control/evidence/intake-browser-fixture.log\n?? docs/00-control/evidence/private-file-browser-fixture.json\n?? docs/00-control/evidence/private-file-browser-fixture.log\n?? docs/00-control/evidence/private-file-client-unit.json\n?? docs/00-control/evidence/private-file-client-unit.log\n?? docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n?? node_modules",
     "remote": {
-      "status": "not_checked",
+      "status": "unavailable_or_branch_absent",
       "branch": "build/continuation-2026-10-09",
-      "head": null
+      "head": null,
+      "checked_at": "2026-10-09T07:20:10.825Z"
     }
   },
-  "controls_digest": "05d05f97bc924182601451a0dbef051002f7e8d466ae7231d19b8bc47b71c290",
+  "controls_digest": "d0855c8ff65b0f0096ae394b59dee959eede51d2b3a6b34fc9deb20b3522e448",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -64,8 +65,11 @@
       "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "stale",
-      "profile": "runtime-build"
+      "status": "passed",
+      "profile": "runtime-build",
+      "evidence": "docs/00-control/evidence/runtime-build.json",
+      "level": "build",
+      "recorded_at": "2026-10-09T07:07:38.027Z"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -88,7 +92,7 @@
       "profile": "intake-unit"
     },
     "intake-browser-fixture": {
-      "status": "not_run",
+      "status": "stale",
       "profile": "intake-browser-fixture"
     },
     "private-file-database": {
@@ -96,8 +100,11 @@
       "profile": "private-file-database"
     },
     "private-file-unit": {
-      "status": "stale",
-      "profile": "private-file-unit"
+      "status": "passed",
+      "profile": "private-file-unit",
+      "evidence": "docs/00-control/evidence/private-file-unit.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T07:17:57.331Z"
     },
     "intake-api": {
       "status": "not_run",
@@ -115,8 +122,19 @@
       "recorded_at": "2026-10-09T07:00:14.011Z"
     },
     "private-file-browser-fixture": {
-      "status": "not_run",
+      "status": "stale",
       "profile": "private-file-browser-fixture"
+    },
+    "private-file-client-unit": {
+      "status": "passed",
+      "profile": "private-file-client-unit",
+      "evidence": "docs/00-control/evidence/private-file-client-unit.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T07:17:58.002Z"
+    },
+    "development-ui": {
+      "status": "not_run",
+      "profile": "development-ui"
     }
   },
   "pending_owner_decisions": [

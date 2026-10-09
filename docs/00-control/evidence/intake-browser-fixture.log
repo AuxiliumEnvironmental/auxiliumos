@@ -1,0 +1,34 @@
+["npm","run","test:runtime-ui","--","intake.spec.ts"]
+
+> auxiliumos@0.0.0 test:runtime-ui
+> playwright test --config playwright.runtime.config.ts intake.spec.ts
+
+
+Running 8 tests using 1 worker
+
+  ✓  1 tests/e2e/intake.spec.ts:340:5 › fixture intake: submission validates, preserves incident and exact payload, retries a lost acknowledgement without duplication (1.2s)
+  ✓  2 tests/e2e/intake.spec.ts:425:5 › fixture intake: current-facility assignee, reclassification and permitted triage keep original submission intact (756ms)
+  ✓  3 tests/e2e/intake.spec.ts:477:5 › fixture intake: needs-information validation and conflict reload preserve draft for deliberate latest-revision save (830ms)
+  ✓  4 tests/e2e/intake.spec.ts:534:5 › fixture intake: submitter response appends once and unconfirmed append requires reload instead of duplicate retry (707ms)
+  ✓  5 tests/e2e/intake.spec.ts:582:5 › fixture intake: queue retry, loading, account-switch race and unavailable detail never show stale scoped rows (694ms)
+  ✓  6 tests/e2e/intake.spec.ts:621:5 › fixture intake: revoked triage hides detail and terminal records expose no reopening or authority controls (819ms)
+  ✓  7 tests/e2e/intake.spec.ts:661:5 › fixture intake: legacy urgency is not recorded in queue and detail (585ms)
+  ✓  8 tests/e2e/intake.spec.ts:671:5 › fixture intake: phone layout, keyboard submission, pending duplicate prevention and sign-out clearing (943ms)
+
+  8 passed (7.6s)
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:65) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:99) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:08:29 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:29.624Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:30 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:30.752Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:31 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:31.451Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:32 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:32.301Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:33 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:33.035Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:33 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:33.752Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:34 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:34.550Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:35 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:35.135Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.

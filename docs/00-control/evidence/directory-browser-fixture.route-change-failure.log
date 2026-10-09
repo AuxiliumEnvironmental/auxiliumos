@@ -1,0 +1,66 @@
+["npm","run","test:runtime-ui","--","directory.spec.ts"]
+
+> auxiliumos@0.0.0 test:runtime-ui
+> playwright test --config playwright.runtime.config.ts directory.spec.ts
+
+
+Running 7 tests using 1 worker
+
+  ✓  1 tests/e2e/directory.spec.ts:113:5 › fixture browser: keyboard login, account selection, directory and sign-out (807ms)
+  ✓  2 tests/e2e/directory.spec.ts:131:5 › fixture browser: credential-bearing redirects fail without forwarding the login (400ms)
+  ✓  3 tests/e2e/directory.spec.ts:144:5 › fixture browser: expired-session sign-out cannot restore access after refresh failure and reload (1.1s)
+  ✓  4 tests/e2e/directory.spec.ts:187:5 › fixture browser: recoverable service error, empty access and profile revocation clear rows (697ms)
+  ✓  5 tests/e2e/directory.spec.ts:207:5 › fixture browser: late response from a previous account cannot replace the selected account (551ms)
+  ✓  6 tests/e2e/directory.spec.ts:224:5 › fixture browser: bounded cursor pages and an expired session (673ms)
+  ✘  7 tests/e2e/directory.spec.ts:242:5 › fixture browser: phone navigation, keyboard close, honest module state and layout (5.6s)
+
+
+  1) tests/e2e/directory.spec.ts:242:5 › fixture browser: phone navigation, keyboard close, honest module state and layout 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Not available in this increment', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Not available in this increment', exact: true })
+
+
+      252 |   await open.click();
+      253 |   await page.getByRole('dialog').getByRole('link', { name: 'Documents', exact: true }).click();
+    > 254 |   await expect(page.getByRole('heading', { name: 'Not available in this increment', exact: true })).toBeVisible();
+          |                                                                                                     ^
+      255 |   await expect(page.getByRole('dialog')).not.toBeVisible();
+      256 |   await page.getByRole('link', { name: 'Open account directory', exact: true }).click();
+      257 |   await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+        at /workspace/scratch/831a296a4676/auxiliumos-current/tests/e2e/directory.spec.ts:254:101
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/directory-fixture-browser--b166e-est-module-state-and-layout/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/directory-fixture-browser--b166e-est-module-state-and-layout/error-context.md
+
+  1 failed
+    tests/e2e/directory.spec.ts:242:5 › fixture browser: phone navigation, keyboard close, honest module state and layout 
+  6 passed (10.9s)
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:360) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:373) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:08:38 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:38.086Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:38 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:38.884Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:39 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:39.271Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:39 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:09:10.632Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:39 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:09:10.956Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:40 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:40.363Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:41 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:41.060Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:41 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:41.627Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:08:42 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:08:42.299Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
