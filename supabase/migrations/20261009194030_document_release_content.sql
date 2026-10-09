@@ -266,4 +266,38 @@ revoke all on function private.lock_document_release_content_access(uuid,text,te
 grant execute on function private.authorize_document_release_content(uuid,text,text,uuid),public.authorize_document_release_content(uuid,text,text,uuid) to authenticated;
 grant execute on function private.record_document_release_content_result(uuid,text),private.record_document_release_content_denial(uuid,uuid,uuid,text),
   public.record_document_release_content_result(uuid,text),public.record_document_release_content_denial(uuid,uuid,uuid,text) to service_role;
+
+-- Narrow withdrawal discovery deliberately mirrors the human withdrawal path:
+-- current logical scope/ingest gate -> existing release head -> exact controller.
+-- Content configuration/grants, scan and clearance are not prerequisites for
+-- narrowing access. This read never creates or advances a head.
+create function private.document_release_withdrawal_status(p_version_id uuid,p_expected_sha256 text)
+returns jsonb language plpgsql security definer set search_path='' as $$
+declare actor uuid:=private.private_object_authenticated_subject(); profile uuid; v private.document_versions%rowtype;
+  h private.document_release_heads%rowtype; r private.document_releases%rowtype; state text;
+begin
+  if p_version_id is null or p_expected_sha256 is null or p_expected_sha256 !~ '^[0-9a-f]{64}$' then
+    raise exception 'Invalid withdrawal status request' using errcode='22023'; end if;
+  select * into v from private.document_versions where id=p_version_id and is_demo;
+  if not found then raise exception 'not_found_or_unavailable' using errcode='42501'; end if;
+  begin
+    profile:=private.lock_document_version_actor(v.document_id,'view_versions');
+  exception when insufficient_privilege then raise exception 'not_found_or_unavailable' using errcode='42501'; end;
+  select * into h from private.document_release_heads where document_id=v.document_id for share;
+  if not found then raise exception 'not_found_or_unavailable' using errcode='42501'; end if;
+  perform private.lock_document_release_controller(v.id,profile,actor);
+  if v.verified_sha256<>p_expected_sha256 then raise exception 'not_found_or_unavailable' using errcode='42501'; end if;
+  select * into r from private.document_releases where version_id=v.id;
+  state:=case when r.id is null then 'unreleased'
+    when exists(select 1 from private.document_release_withdrawals where release_id=r.id) then 'withdrawn'
+    when r.id=h.current_release_id then 'current' else 'superseded' end;
+  return jsonb_build_object('version_id',v.id,'document_id',v.document_id,'verified_sha256',v.verified_sha256,
+    'release_id',r.id,'release_revision',h.release_revision,'release_state',state,'can_withdraw',state in ('current','superseded'));
+end;
+$$;
+create function public.document_release_withdrawal_status(p_version_id uuid,p_expected_sha256 text)
+returns jsonb language sql security invoker set search_path='' as $$ select private.document_release_withdrawal_status(p_version_id,p_expected_sha256) $$;
+revoke all on function private.document_release_withdrawal_status(uuid,text),public.document_release_withdrawal_status(uuid,text)
+  from public,anon,authenticated,service_role;
+grant execute on function private.document_release_withdrawal_status(uuid,text),public.document_release_withdrawal_status(uuid,text) to authenticated;
 commit;

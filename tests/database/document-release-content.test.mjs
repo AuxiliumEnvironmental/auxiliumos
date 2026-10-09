@@ -22,7 +22,7 @@ const user=(db,run,profile=author)=>as(db,'authenticated',run,profile),service=(
 const names=new Set(['provision_document_version_grant','revoke_document_version_grant','adopt_private_object','provision_private_object_grant',
   'claim_private_object_scan','record_private_object_scan','decide_private_object_clearance','set_private_object_controls',
   'provision_document_content_grant','revoke_document_content_grant','provision_document_review_assignment','revoke_document_review_assignment',
-  'request_document_version_review','decide_document_version_review','document_version_review_status','provision_document_release_grant','revoke_document_release_grant','release_document_version','withdraw_document_release','retire_document_release','document_version_release_status','current_document_release','historical_document_release','authorize_document_version_content','document_release_audience_options','authorize_document_release_content','record_document_release_content_result','record_document_release_content_denial']);
+  'request_document_version_review','decide_document_version_review','document_version_review_status','provision_document_release_grant','revoke_document_release_grant','release_document_version','withdraw_document_release','retire_document_release','document_version_release_status','current_document_release','historical_document_release','authorize_document_version_content','document_release_audience_options','authorize_document_release_content','record_document_release_content_result','record_document_release_content_denial','document_release_withdrawal_status']);
 async function rpc(db,name,args) {assert.ok(names.has(name));return (await one(db,`select public.${name}(${args.map((_,i)=>`$${i+1}`).join(',')}) result`,args)).result;}
 const deny=(op,code='42501')=>assert.rejects(op,e=>{assert.equal(e.code,code,e.message);return true;});
 async function ownerDeny(db,sql,args=[],code='55000') {
@@ -317,10 +317,70 @@ test('exact-release content authorization — PostgreSQL/PGlite simulated Auth, 
       await ownerDeny(db,'update private.'+table+' set id=gen_random_uuid()');
       await db.exec('grant select on private.'+table+' to authenticated');assert.deepEqual((await user(db,()=>db.query('select * from private.'+table))).rows,[]);
     }
-    const fns=(await db.query("select n.nspname schema,p.proname name,p.prosecdef definer,p.proconfig,has_function_privilege('anon',p.oid,'execute') anon,has_function_privilege('authenticated',p.oid,'execute') human,has_function_privilege('service_role',p.oid,'execute') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname in ('authorize_document_release_content','record_document_release_content_result','record_document_release_content_denial')")).rows;
-    assert.equal(fns.length,3);
-    for(const f of fns){const human=f.name==='authorize_document_release_content';assert.equal(f.anon,false);assert.equal(f.human,human);assert.equal(f.service,!human);assert.equal(f.definer,false);assert.ok(f.proconfig.includes('search_path=""'));}
+    const fns=(await db.query("select n.nspname schema,p.proname name,p.prosecdef definer,p.proconfig,has_function_privilege('anon',p.oid,'execute') anon,has_function_privilege('authenticated',p.oid,'execute') human,has_function_privilege('service_role',p.oid,'execute') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname in ('authorize_document_release_content','record_document_release_content_result','record_document_release_content_denial','document_release_withdrawal_status')")).rows;
+    assert.equal(fns.length,4);
+    for(const f of fns){const human=['authorize_document_release_content','document_release_withdrawal_status'].includes(f.name);assert.equal(f.anon,false);assert.equal(f.human,human);assert.equal(f.service,!human);assert.equal(f.definer,false);assert.ok(f.proconfig.includes('search_path=""'));}
     const helpers=(await db.query("select p.proname,has_function_privilege('authenticated',p.oid,'execute') human,has_function_privilege('service_role',p.oid,'execute') service from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='private' and p.proname in ('lock_document_release_content_access','guard_document_release_content_history','audit_document_release_content_change','document_release_content_receipt')")).rows;
     assert.equal(helpers.length,4);for(const f of helpers){assert.equal(f.human,false);assert.equal(f.service,false);}
+  });
+
+
+  const withdrawalStatus=(v,profile=author,sha=digest)=>user(db,()=>rpc(db,'document_release_withdrawal_status',[v.version_id,sha]),profile);
+  await isolated('fresh withdrawal discovery survives disabled content gate and unsafe restricted object',async()=>{
+    const p=await prepared(db,v1);await controls(db,v1,{restricted:true});
+    await db.exec('update private.document_content_config set enabled=false');
+    await deny(status(db,v1));
+    const seen=await withdrawalStatus(v1);
+    assert.deepEqual(Object.keys(seen).sort(),['can_withdraw','document_id','release_id','release_revision','release_state','verified_sha256','version_id']);
+    assert.deepEqual(seen,{version_id:v1.version_id,document_id:doc,verified_sha256:digest,release_id:p.result.release_id,
+      release_revision:await releaseRevision(db),release_state:'current',can_withdraw:true});
+    const receipt=await withdraw(db,{release_id:seen.release_id},{rev:seen.release_revision,reason:'security_concern'});
+    assert.equal(receipt.release_id,seen.release_id);assert.equal(receipt.withdrawn,true);
+    const after=await withdrawalStatus(v1);assert.equal(after.release_state,'withdrawn');assert.equal(after.can_withdraw,false);
+    assert.equal(after.release_revision,receipt.release_revision);
+  });
+
+  await isolated('withdrawal discovery excludes internal content grants and reports current head revision for superseded release',async()=>{
+    const p=await prepared(db,v1);await prepared(db,v2);
+    await service(db,()=>rpc(db,'revoke_document_content_grant',[v1.version_id,authorContent.grant_id,2]));
+    const seen=await withdrawalStatus(v1);
+    assert.equal(seen.release_id,p.result.release_id);assert.equal(seen.release_state,'superseded');assert.equal(seen.can_withdraw,true);
+    assert.equal(seen.release_revision,await releaseRevision(db));assert.ok(seen.release_revision>p.result.release_revision);
+    const receipt=await withdraw(db,{release_id:seen.release_id},{rev:seen.release_revision});
+    assert.equal(receipt.withdrawn,true);assert.equal((await current(db)).version_id,v2.version_id);
+  });
+
+  await isolated('unreleased withdrawal discovery requires an explicit controller and never creates release state',async()=>{
+    const before=await one(db,'select count(*)::int n from private.document_release_heads');
+    await deny(withdrawalStatus(v1));
+    assert.equal((await one(db,'select count(*)::int n from private.document_release_heads')).n,before.n);
+    await controller(db,v1);
+    const revision=await releaseRevision(db),seen=await withdrawalStatus(v1);
+    assert.equal(seen.release_id,null);assert.equal(seen.release_state,'unreleased');assert.equal(seen.can_withdraw,false);
+    assert.equal(seen.release_revision,revision);assert.equal(await releaseRevision(db),revision);
+    assert.equal((await one(db,'select count(*)::int n from private.document_releases')).n,0);
+  });
+
+  for(const restriction of ['controller','logical_view','membership','ingest_gate']) await isolated('withdrawal discovery retains existing human '+restriction+' boundary',async()=>{
+    const p=await prepared(db,v1);
+    if(restriction==='controller') await revoke(db,v1,p.assignment,await releaseRevision(db));
+    if(restriction==='logical_view') {
+      const g=await one(db,"select id from private.document_version_grants where document_id=$1 and user_profile_id=$2 and capability_key='view_versions' and revoked_at is null",[doc,author]);
+      const revision=await docRevision(db);
+      await service(db,()=>rpc(db,'revoke_document_version_grant',[doc,g.id,revision]));
+    }
+    if(restriction==='membership') await db.query("update public.account_access set membership_status='suspended' where account_id=$1 and user_profile_id=$2",[account,author]);
+    if(restriction==='ingest_gate') await db.exec('update private.private_object_reservation_config set enabled=false');
+    await deny(withdrawalStatus(v1));
+  });
+
+  await isolated('withdrawal discovery denies other viewers and digest probes without granting new-release authority',async()=>{
+    await prepared(db,v1);
+    for(const profile of [reader,reviewer,outsider]) await deny(withdrawalStatus(v1,profile));
+    await deny(withdrawalStatus(v1,author,'b'.repeat(64)));await deny(withdrawalStatus(v1,author,'bad'),'22023');
+    await deny(withdrawalStatus({version_id:randomUUID()}));
+    await deny(service(db,()=>rpc(db,'document_release_withdrawal_status',[v1.version_id,digest])));
+    await deny(as(db,'anon',()=>rpc(db,'document_release_withdrawal_status',[v1.version_id,digest]),null));
+    const metadata=await current(db);assert.equal(metadata.metadata_only,true);assert.equal(metadata.released_download_available,false);
   });
 });
