@@ -14,11 +14,11 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Verified branchHEADae899b234dd4e084ce357e1588fac3f2770b084a/tree722e75a10f7b8bd290cf3ad8b7de676cc346dc00. CI57/run37911346187 SUCCESS for the exact implementedcode. Followingcheckpoint changesonlyfourcontrolrecords, notapp/test/runtimeconfig; reusecodeCI and validate changedrecords structurally. No nativeCLIcredential claim.",
+    "github": "Current feature branch wip/recovery-2026-10-08 at 0113b60d verified via Git and connector, read/push permissions confirmed. Main remains at older foundation. Manual dispatch runs: zero. Connector exposes no fresh dispatch or Actions secret metadata capability; browser is signed out.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Nine canonical migrations confirmed; private-objects Edgev2 and document-version-content Edgev3 ACTIVE/JWT verified. Exact contentv3source readback and intended-origin public preflights pass; foreign/lookalike origins denied. Fresh09:23:33Z check: content/reservation gatesfalse, synthetic-onlytrue, Auth0, buckets0. No genuine signed-in or Storage acceptance.",
-    "lovable": "Existing project saved1eb5a991bce8a48e30418a90ec21654e0936802f independently matches334canonical files at5c4c524e (7changedrawreads+327unchanged); two pre-existing platform files retained. Publicdevsettings now saved in tracked exactpath; fullapp development artifactrootdist passes platformbuild. No nativeGitHubsync, realAuthacceptance or productionpublication.",
-    "workspace_execution": "Confirmed409 environment_offline: Environment is not connected. Existing UIcell47 failed; backendcell21 failed writing the contract after608.7s, so its later collection commands neverran. No new filesystemwrites, tests ortranscriptions were submitted. Local reviewpatchesremainunpublished; GitHubAPI, Supabase andLovablepathsworked."
+    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb confirmed active with exact nine migration names, private-objects v2 and document-version-content v3 JWT verification enabled. Fresh readback: Auth users 0, buckets 0. No owner login or genuine connected acceptance claimed.",
+    "lovable": "Presentation pass completed at actual saved 2e47b70df86d78dbaf3e38ee2247e15102cc9583; exact 10 web files retrieved and imported for integration. Root build:dev passed. Worker reports 8 focused intercepted browser fixtures and responsive visual checks; hosted Auth/Storage acceptance remains outstanding.",
+    "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Restore the disconnected development workspace, then collect existing backend sessions95415/40105 and UIbrowser session68533 before rerunning tests. Backend cell21 has FAILED during the contract-file write; UIcell47 has FAILED with409 environment_offline. Do not wait on or resubmit those completed failed cells. Inspect actual local files for partial writes. Backend next: fix review head/history/flags to one SQL snapshot after current metadata authorization, correct any unconfirmed47-test claim, run only affected checks, inspect/commit and independently review the actual patch. UI next: recover54-case result, revert only temporary testMatch/dependency symlink, inspect/commit the five allocated files. Fetch/reconcile remote-only source after lastlocaled6b29b without reset/reimport/reconstruction. Genuine Auth/API acceptance separately needs the existing protected workflow and securely configured GitHub Actions service-role secret; never supply its value in chat.",
+  "first_runtime_action": "Complete owner onboarding runtime/provisioning and independently review the activation helper. Securely configure the development-only GitHub Actions key, then run protected owner onboarding and connected hosted workflows. Old unpublished review worktrees were checked once and are unavailable; reimplement review against current contracts after immediate access integration.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -178,7 +178,7 @@
     "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Restore the disconnected development workspace, then collect existing backend sessions95415/40105 and UIbrowser session68533 before rerunning tests. Backend cell21 has FAILED during the contract-file write; UIcell47 has FAILED with409 environment_offline. Do not wait on or resubmit those completed failed cells. Inspect actual local files for partial writes. Backend next: fix review head/history/flags to one SQL snapshot after current metadata authorization, correct any unconfirmed47-test claim, run only affected checks, inspect/commit and independently review the actual patch. UI next: recover54-case result, revert only temporary testMatch/dependency symlink, inspect/commit the five allocated files. Fetch/reconcile remote-only source after lastlocaled6b29b without reset/reimport/reconstruction. Genuine Auth/API acceptance separately needs the existing protected workflow and securely configured GitHub Actions service-role secret; never supply its value in chat.",
+    "first_unfinished_action": "Complete owner onboarding runtime/provisioning and independently review the activation helper. Securely configure the development-only GitHub Actions key, then run protected owner onboarding and connected hosted workflows. Old unpublished review worktrees were checked once and are unavailable; reimplement review against current contracts after immediate access integration.",
     "latest_verified_remote": "ae899b234dd4e084ce357e1588fac3f2770b084a",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
@@ -269,5 +269,15 @@
         "no_new_filesystem_requests": true
       }
     }
+  },
+  "immediate_delivery": {
+    "lead": "root integration lead",
+    "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
+    "owner_onboarding": "in_progress",
+    "owner_first_login": "not_completed",
+    "ui_presentation_source": "2e47b70df86d78dbaf3e38ee2247e15102cc9583",
+    "unpublished_patch_check": "unavailable_checked_once",
+    "protected_configuration": "Development service credential not available in current runner; secret existence cannot be inspected with connector. Never supply its value in chat. Auth redirect settings still being reconciled.",
+    "independent_work": "Owner auth UI and backend provisioning parallel; document review reimplementation follows immediate integration."
   }
 }

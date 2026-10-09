@@ -3,6 +3,97 @@
   "rule": "Dependency roadmap for the full destination. Expand a ready task into bounded owned-file tasks before parallel writes. Implemented is not verified unless its current evidence passes. Never mark placeholder modules complete.",
   "tasks": [
     {
+      "id": "OWNER-ONBOARD-001",
+      "title": "Secure owner account, password setup/recovery and first successful access",
+      "status": "in_progress",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "C01",
+        "C05"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "allowed_paths": [
+        "scripts/owner-onboarding.mjs",
+        "supabase/migrations/**",
+        "tests/database/owner-onboarding.test.mjs",
+        "tests/unit/owner-onboarding.test.mjs",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/**",
+        "web/src/components/auth.tsx",
+        "tests/unit/**",
+        "tests/e2e/**",
+        ".github/workflows/ci.yml",
+        "tests/api/README.md",
+        "docs/03-data/OWNER_ONBOARDING.md"
+      ],
+      "assigned_to": "root integration lead; owner_onboarding_backend and owner_auth_ui",
+      "branch": "wip/recovery-2026-10-08",
+      "owner_decisions": [
+        "OD-012"
+      ],
+      "verification_profiles": [],
+      "next_action": "Complete owner onboarding runtime/provisioning and independently review the activation helper. Securely configure the development-only GitHub Actions key, then run protected owner onboarding and connected hosted workflows. Old unpublished review worktrees were checked once and are unavailable; reimplement review against current contracts after immediate access integration.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "UI-2026-10-09",
+      "title": "Responsive shell and full-destination module presentation",
+      "status": "implemented",
+      "dependencies": [],
+      "requirements": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "allowed_paths": [
+        "web/src/components/**",
+        "web/src/pages/**",
+        "web/src/styles.css",
+        "web/src/router.tsx"
+      ],
+      "assigned_to": "Lovable frontend; root integration",
+      "branch": "wip/recovery-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture",
+        "intake-browser-fixture"
+      ],
+      "next_action": "Preserve exact imported presentation source in GitHub; integrate owner auth behavior and check affected mobile workflows. Unconnected module outlines are not completed modules.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
       "id": "CTRL-001",
       "title": "Modernized continuation controls",
       "status": "implemented",
@@ -1472,13 +1563,13 @@
         "tests/database/document-version-reviews.test.mjs",
         "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md"
       ],
-      "assigned_to": "document_review_backend",
+      "assigned_to": null,
       "branch": "work/document-review-backend-2026-10-09",
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Workspace409environment_offline. Cell21FAILED writingcontract; latercollection neverran. Recoveractualfiles andsessions95415/40105, thenfixsingle-snapshot statuscoherence andrunaffectedchecks.45checksconfirmed,47uncollected; no tenth migration deployed. Commit/review actualpatch only.",
-      "status": "in_progress",
+      "next_action": "Old unpublished worktree unavailable after one check on 2026-10-09. Reimplement from current saved contracts, not prior descriptions. Immediate owner access and connected hosted integration take priority; preserve full review/release requirement.",
+      "status": "planned",
       "requirements": [
         "M13",
         "M19",
@@ -1510,14 +1601,14 @@
         "tests/unit/document-review-api.test.mjs",
         "tests/e2e/document-reviews.spec.ts"
       ],
-      "assigned_to": "document_content_ui",
+      "assigned_to": null,
       "branch": "work/document-review-ui-2026-10-09",
       "required_evidence_levels": [
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Workspace409environment_offline. Cell47FAILED; browser68533uncollected.12adapter/18newbrowser/buildconfirmed; final54resultunknown. Recoveractualfiles/result, revert onlytemporarytestMatch/symlink, inspect/commit5files. No reconstructedcode; seeSESSION_CHECKPOINT.",
-      "status": "in_progress",
+      "next_action": "Old unpublished worktree unavailable after one check on 2026-10-09. Reimplement from current saved contracts, not prior descriptions. Immediate owner access and connected hosted integration take priority; preserve full review/release requirement.",
+      "status": "planned",
       "requirements": [
         "M13",
         "M19",

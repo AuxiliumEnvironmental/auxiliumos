@@ -2,8 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Grid2X2, Layers3, LockKeyhole, UserCircle } from "lucide-react";
 import { PageHeader } from "../components/app-shell";
 import { EmptyState, SyntheticBadge } from "../components/shared";
-import { moduleForPath, modules } from "../lib/modules";
 import { useRuntime } from "../lib/runtime";
+import { ModuleFinder } from "./module-workspace";
 import { RefreshButton } from "./directory";
 
 export function ProfilePage() {
@@ -13,13 +13,7 @@ export function ProfilePage() {
 }
 
 export function ModulesPage() {
-  return <><PageHeader eyebrow="The AuxiliumOS workspace" title="All modules" description="The complete destination, with connected development workflows." /><div className="info-panel module-notice"><Layers3 size={22} aria-hidden="true" /><p>This development increment includes sign-in, the account/facility directory, intake and private synthetic upload staging. Full module workflows and hosted acceptance remain incomplete.</p></div><div className="module-grid">{modules.map((module) => <article className="module-card" key={module.id}><div className="module-card-heading"><span className="module-number">{module.id}</span><span className="availability-label">{["M01", "M02", "M05", "M07", "M13"].includes(module.id) ? "Partial development workflow" : "Not available yet"}</span></div><h2>{module.name}</h2><p>{module.description}</p>{module.id === "M02" ? <Link className="inline-link" to="/">Open directory<ArrowRight size={15} aria-hidden="true" /></Link> : module.id === "M05" ? <Link className="inline-link" to="/facilities" search={{}}>Open directory<ArrowRight size={15} aria-hidden="true" /></Link> : module.id === "M07" ? <Link className="inline-link" to="/intake" search={{}}>Open intake<ArrowRight size={15} aria-hidden="true" /></Link> : module.id === "M13" ? <Link className="inline-link" to="/documents" search={{}}>Open upload staging<ArrowRight size={15} aria-hidden="true" /></Link> : <Link className="inline-link" to="/$module" params={{ module: module.path }}>View module<ArrowRight size={15} aria-hidden="true" /></Link>}</article>)}</div></>;
-}
-
-export function UnavailablePage({ path }: { path: string }) {
-  const module = moduleForPath(path);
-  if (!module) return <NotFoundPage />;
-  return <><PageHeader eyebrow={`${module.id} · Workspace module`} title={module.name} description={module.description} /><EmptyState icon={Layers3} title="Not available in this increment"><p>This module is part of the AuxiliumOS destination. Its workflows are not available in the current development workspace.</p><div className="button-row centered"><Link className="button primary" to="/">Open account directory<ArrowRight size={16} aria-hidden="true" /></Link><Link className="button secondary" to="/modules">View all modules<Grid2X2 size={16} aria-hidden="true" /></Link></div></EmptyState></>;
+  return <><PageHeader eyebrow="AuxiliumOS · Operating suite" title="All modules" description="Account context, governed work and evidence across one operating suite." /><div className="module-boundary"><Layers3 size={20} /><p>Directory, intake and private-document adapters are connected for development. Other module records and actions are not connected.</p></div><ModuleFinder /></>;
 }
 
 export function NotFoundPage() {

@@ -273,3 +273,18 @@
     width: 100%;
   }
 }
+
+/* Shared suite hierarchy; no changes to intake workflow or permission controls. */
+.intake-boundary { background: transparent; border-width: 1px 0; border-radius: 0; padding: 1rem 0; }
+.intake-toolbar .button-row { margin-top: 0; }
+.intake-panel { background: transparent; border-width: 0 0 1px; border-radius: 0; padding: 1.5rem 0; }
+.intake-queue > li { border-radius: var(--radius-sm); }
+.intake-detail-heading, .intake-queue-heading, .intake-toolbar { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+.intake-detail-heading > div, .intake-queue-heading > div, .intake-toolbar > div { min-width: 0; }
+.intake-panel .field label { line-height: 1.5; }
+.intake-panel .intake-next-action { border-left: 3px solid var(--primary); }
+@media (max-width:599px) {
+  .intake-toolbar, .intake-detail-heading, .intake-queue-heading { grid-template-columns: minmax(0,1fr); }
+  .intake-panel { padding: 1rem 0; }
+  .intake-queue > li { padding: 1rem; }
+}
