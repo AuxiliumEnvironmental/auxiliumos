@@ -21,3 +21,11 @@
 @media(max-width:820px){.spatial-workspace .spatial-header{min-height:68px;gap:8px}.spatial-workspace .spatial-brand{font-size:16px;gap:6px}.spatial-workspace .spatial-brand-divider{margin:0 7px}.spatial-workspace[data-large-text=true]{height:auto;min-height:100dvh;overflow:visible}.spatial-workspace[data-large-text=true] .spatial-editor{height:70dvh;min-height:470px;flex:none}.spatial-workspace[data-large-text=true] .spatial-mobile-tabs{position:sticky}.spatial-workspace[data-large-text=true] .spatial-document-actions{margin-left:0}.spatial-workspace[data-large-text=true] .spatial-save-state{max-width:100%;flex-wrap:wrap}.spatial-workspace[data-large-text=true] .spatial-library{overflow:visible}.spatial-workspace[data-large-text=true] .spatial-library-actions{flex-wrap:wrap}.spatial-workspace[data-large-text=true] .spatial-example-card{flex-direction:column;align-items:stretch}.spatial-workspace[data-large-text=true] .spatial-example-card>div:nth-child(2){min-width:0}.spatial-workspace[data-large-text=true] .spatial-project-grid{grid-template-columns:1fr}.spatial-workspace[data-large-text=true] .spatial-mobile-tabs button{font-size:calc(11px * var(--spatial-text-scale));padding:8px 5px}}
 
 .spatial-workspace .spatial-context-caption{display:none}@media(max-width:820px){.spatial-workspace .spatial-context-caption{display:block;flex-shrink:0;font-size:calc(11px * var(--spatial-text-scale,1));background:white;border-bottom:1px solid var(--spatial-line);padding:5px 16px;overflow-wrap:anywhere;color:#526674}}
+
+/* WKWebView fills the display with viewport-fit=cover. Hosts may override these
+   scoped properties for an inset container; env() remains the native default. */
+.spatial-workspace{
+  padding-top:var(--spatial-safe-area-top,env(safe-area-inset-top,0px));
+  padding-left:var(--spatial-safe-area-left,env(safe-area-inset-left,0px));
+  padding-right:var(--spatial-safe-area-right,env(safe-area-inset-right,0px));
+}

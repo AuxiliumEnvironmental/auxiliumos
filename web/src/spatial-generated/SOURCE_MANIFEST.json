@@ -1,5 +1,5 @@
 {
-  "sourceHead": "f04a4e23c4d09e7358ade11864d7f1883cdbc083",
+  "sourceHead": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
   "sourceFiles": {
     "web/src/capture.ts": "0ac1bad3514434fae42a06a659e969ea02116c4ec80d168aa08f08df5bb0978f",
     "web/src/core/editor.ts": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
@@ -32,7 +32,7 @@
     "web/src/ui/review.ts": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
     "web/src/ui/sceneBatches.ts": "3b198a8ad4533fe5d1554f7117a61ea9ea0f862e8af6b990a2e539e9f4098f7a",
     "web/src/ui/useTextScale.ts": "7c288b20d539092c4f822b13931af5aebcad21c550d87f2b4e32b816aa079915",
-    "web/src/ui/workspace.css": "039ea0c79d5aea78991b9f045cf6ea940d8008baf4b88521a7bf18c75ed0f870",
+    "web/src/ui/workspace.css": "0fff9523a1758cac9374fe2eaa7ea881b5f05b1d55af1d233a8d7c568b42a008",
     "web/package.json": "e7f58426639402a1d40f94995f97c6d6d41bdb04f67eb56387db0004778bf890",
     "web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
     "web/vite.library.config.ts": "0c0f7feee1c63b0fbb65b04fcde33a78863ca9e27a756b9e1b74f79705ad5b42",
@@ -43,7 +43,7 @@
     "html2canvas-24W79GqK.js": "6263a762b4a657c23ddd715739b65ef8c771d32a30e9d1279d5e14c0176094ea",
     "index.es-D4ja_wdN.js": "8ffd0e56c639e882c058bf0c95f83bafd451f986403204b75d0bb968dcb681b6",
     "purify.es-Beab6Ujv.js": "b9bc4f9384fb99ef215417798347fb287f1601b4307ede4bf1f4385487b56db0",
-    "spatial-workspace.css": "0adbf55d655e6d6bdf5752c064054301e204ca2b6c2004aa1be8def5510c4419",
+    "spatial-workspace.css": "1899bf8964071b4d3e4f3b8e1434a5040cedd43372942ba0d0cf6e6d6a08526a",
     "spatial-workspace.d.ts": "186117c463fda823d34cd35775d1d0989c7660e6663ec729f74864bfabedcdf6",
     "spatial-workspace.js": "f6c61bda2b479dde8145f4bd83d8a3cdec54b0e7f14e03f7a5300b4eb6487def",
     "typeof-CcP5rTWg.js": "8f034d415e7a371c83fbb5ae9d42ac931664652c6ef75998514cae261bea0f74",

@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "f04a4e23c4d09e7358ade11864d7f1883cdbc083",
+  "sourceCommit": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
   "purpose": "Generated native build snapshot with complete C/Swift/React dependencies and synthetic fixtures. Canonical source remains the Auxilium Spatial repository.",
   "files": {
     "capacitor/.gitignore": "9d6dc8e3ddb1ae8fdaffbf1da89ac885d8649c33b1d94d5d11f1bba85184e4ef",
@@ -185,7 +185,7 @@
     "web/src/ui/review.ts": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
     "web/src/ui/sceneBatches.ts": "3b198a8ad4533fe5d1554f7117a61ea9ea0f862e8af6b990a2e539e9f4098f7a",
     "web/src/ui/useTextScale.ts": "7c288b20d539092c4f822b13931af5aebcad21c550d87f2b4e32b816aa079915",
-    "web/src/ui/workspace.css": "039ea0c79d5aea78991b9f045cf6ea940d8008baf4b88521a7bf18c75ed0f870",
+    "web/src/ui/workspace.css": "0fff9523a1758cac9374fe2eaa7ea881b5f05b1d55af1d233a8d7c568b42a008",
     "web/tsconfig.json": "59eda97779c785ffa9b8386887777981dd09dde5d4c2c8113ce74a592bf1f3cf",
     "web/vite.config.ts": "9d2e6677376800b0d06854904949a351ff9c6a2597359e009acb913885eed231",
     "web/vite.library.config.ts": "0c0f7feee1c63b0fbb65b04fcde33a78863ca9e27a756b9e1b74f79705ad5b42"
