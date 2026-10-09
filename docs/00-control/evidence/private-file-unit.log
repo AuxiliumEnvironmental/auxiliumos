@@ -1,0 +1,21 @@
+["node","--test","tests/unit/private-object-gateway.test.mjs"]
+✔ actual handler: provider round trip is readback verified and finalized only by fresh user RPC (14.537938ms)
+✔ ambiguous provider success and repeated PUT recover without overwrite or new attempt (4.754851ms)
+✔ provider put failure never claims receipt; exact retry recovers (2.733627ms)
+✔ receipt commit failure preserves bytes; finalization readback reconciles without reupload (3.003674ms)
+✔ content/type/readback mismatches remain quarantined, never finalizable (11.363316ms)
+✔ current authorization before and after I/O controls finalization and status (7.093775ms)
+✔ unavailable/invalid identities never reach service; client data cannot choose actor/path/digest (2.946748ms)
+✔ UTF8/size/header and synthetic-only bounds are enforced without accepting active content (1.52685ms)
+✔ read/clearance/scan/adoption/URL routes do not exist, and status is safely projected (0.903891ms)
+✔ disabled/origin boundaries and opaque operational faults do not leak backend details (6.12103ms)
+✔ malformed server targets fail closed before Storage, and streams are bounded without content-length trust (12.113596ms)
+✔ bucket preflight is read-only by default and never repairs or overwrites existing storage (0.666945ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 205.511609

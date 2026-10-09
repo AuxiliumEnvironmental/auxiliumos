@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-08",
+  "as_of": "2026-10-09",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -14,9 +14,9 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Read and connected-API write verified after installation 169293718. Reviewed audit/fixtures/authentication saved through 0773cce on wip/recovery-2026-10-08 with exact fetched tree matches. Its GitHub CI passed. Draft PR #84 and issues #83/#85/#86 exist. CLI push lacks credentials but API publication works. Main remains 1729a525. See SOURCE_RECONCILIATION.json.",
+    "github": "Connected Git Data API publication and exact fetched tree equality verified at a749b7d; GitHub CI run37861401950 passed. Existing draft PR84 and feature branch remain canonical. CLI credentials are not needed for publication.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb reachable. No public application tables/migrations/users/buckets/objects as of source inspection. No writes; authentication configuration and runtime not yet verified.",
+    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb: four reviewed migrations applied and exact source/history verified on2026-10-09; 11 application tables have RLS. Zero Auth users/buckets; private reservation config disabled. See docs/00-control/evidence/development-migrations.json. Genuine Auth/Data API still needs securely configured server-side test key.",
     "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
   },
   "source_precedence": [
@@ -26,8 +26,10 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish SEC-001C-OBJECT-RESERVATIONS in its isolated worktree, independently review the frozen migration/RPC/ACL/audit patch, then integrate affected database evidence. The private-object ADR is architecture, not byte access. Authentic Auth/API remains gated on reviewed target/migrations and secure configuration only.",
-  "active_remote_work": ["https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"],
+  "first_runtime_action": "Finish coherent capability publication, then apply reviewed intake/transport migrations; integrate private-file UI from work/private-files-ui. Genuine Auth/API needs GitHub Actions secret AUXILIUMOS_TEST_SERVICE_ROLE_KEY, never a chat value.",
+  "active_remote_work": [
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+  ],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
     "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
@@ -45,7 +47,8 @@
     "SEC-001C-AUDIT is implemented with an additive migration and independent security/migration review. Thirty audit checks plus nineteen directory checks after migration three pass in PostgreSQL 18.3/PGlite with simulated Auth; no hosted migration is claimed.",
     "The API fixture harness now preflights required columns and retains audit-linked application rows while disabling exact synthetic access and deleting only verified test-created Auth identities. Twenty-two mock/unit checks and independent review pass; authentic API execution remains unexecuted.",
     "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
-    "No cloud migration, Auth identity, storage object, deployment or Lovable code mutation was performed. Full SEC-001 and all 20 product modules remain incomplete."
+    "2026-10-09: foundation, directory, audit and reservation SQL applied unchanged to actual PostgreSQL17 development target. Schema/history readback confirms all11 tables RLS; this is deployment evidence, not Auth/API acceptance.",
+    "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open."
   ],
   "runtime_implementation": {
     "app": "web/",
@@ -58,23 +61,26 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "Local database, build, synthetic cleanup and 7 browser-fixture checks pass; genuine Auth/API, cross-browser target checks and deployment remain unexecuted",
+    "verification_status": "Application deployment and genuine Auth/API acceptance remain unverified. Separate database deployment receipt records four successful exact-source migrations. Worker-local capability checks are bounded simulated/fixture evidence.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
-    "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json"
+    "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
+    "database_deployment": {
+      "source_commit": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+      "receipt": "docs/00-control/evidence/development-migrations.json",
+      "migration_count": 4,
+      "authentic_api_status": "awaiting_secure_key",
+      "private_config_enabled": false,
+      "storage_bucket_count": 0
+    }
   },
   "execution_recovery": {
-    "observed_at": "2026-10-08T13:55:39.917035+00:00",
-    "status": "workspace_recovered",
-    "branch": "wip/recovery-2026-10-08",
-    "purpose": "WIP recovery checkpoint, not accepted or deployed",
-    "remote_main": "1729a525a7a60b86d1498c1300b579eb6775b02c",
-    "github_installations": [],
-    "supabase_read": "auxiliumos-dev ACTIVE_HEALTHY",
-    "lovable_read": "same 0d48e1ad source, unpublished",
-    "app_permissions": "GitHub, Supabase and Lovable inherit Allow low-risk actions. No settings changed.",
-    "first_unfinished_action": "SEC-001B-R5",
-    "remote_save": "not performed"
+    "observed_at": "2026-10-08T23:58:57.452Z",
+    "status": "actual_reviewed_patch_recovered_and_published",
+    "remote_head": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+    "source_tree": "f91e442d44c67e92f9b89217a31aff5677b2903b",
+    "original_local_commit": "33123e5b206d11dca8b75cb702157144258cf600",
+    "verification": "Six frozen reviewed files match; fetched remote tree equals local recovery commit. Prior checkpoint entries remain historical."
   },
   "publication_recovery": {
     "observed_at": "2026-10-08T15:55:04Z",

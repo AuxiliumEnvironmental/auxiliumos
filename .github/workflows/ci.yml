@@ -8,6 +8,7 @@ permissions:
   contents: read
 jobs:
   controls:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -25,6 +26,7 @@ jobs:
           name: repository-check-evidence
           path: docs/00-control/evidence/
   application-foundation:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -38,11 +40,16 @@ jobs:
       - run: npm run os:verify -- directory-database
       - run: npm run os:verify -- access-audit-database
       - run: npm run os:verify -- private-object-reservations-database
+      - run: npm run os:verify -- intake-database
+      - run: npm run os:verify -- intake-unit
+      - run: npm run os:verify -- private-file-database
+      - run: npm run os:verify -- private-file-unit
       - run: npm run os:verify -- api-fixture-safety
       - run: npm run os:verify -- runtime-build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run os:verify -- directory-browser-fixture
+      - run: npm run os:verify -- intake-browser-fixture
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
@@ -52,3 +59,44 @@ jobs:
             docs/00-control/evidence/
 # Local database tests use simulated Auth claims; UI tests use HTTP fixtures.
 # These jobs do not establish genuine hosted Auth/API or full-system acceptance.
+
+  development-api:
+    # A deliberate run against the selected reviewed branch, never a PR/fork
+    # secret injection. Missing secure configuration fails rather than skips.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: auxiliumos-development-api
+      cancel-in-progress: false
+    env:
+      AUXILIUMOS_TEST_URL: https://txofqxictwecgcnvezlb.supabase.co
+      AUXILIUMOS_TEST_PUBLISHABLE_KEY: sb_publishable_F60QaaQSqT86r0WWg8NfVA_ywSonnGz
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Validate protected configuration without printing credentials
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node --input-type=module -e "import { configuration } from './tests/api/fixture-cleanup.mjs'; configuration();"
+      - name: Genuine synthetic Auth and Data API acceptance
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: |
+          npm run os:verify -- directory-api
+          npm run os:verify -- intake-api
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: development-api-evidence
+          path: |
+            docs/00-control/evidence/directory-api.json
+            docs/00-control/evidence/directory-api.log
+            docs/00-control/evidence/intake-api.json
+            docs/00-control/evidence/intake-api.log

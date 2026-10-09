@@ -1,4 +1,4 @@
-> Current observation 2026-10-08: existing auxiliumos-dev (`txofqxictwecgcnvezlb`) was inspected read-only with zero public tables, migrations, Auth users, storage buckets or objects. No cloud writes occurred. Canonical repository now contains the original foundation plus reviewed additive directory migration. Those artifacts and local PostgreSQL tests do not establish cloud application or authentic Auth/API acceptance. See SOURCE_RECONCILIATION.json and the current entry below. Older preparation restrictions are historical; full synthetic development is authorized by AGENTS.md.
+> Current observation 2026-10-09: four unchanged reviewed migrations (foundation, directory, audit, reservations) are applied to existing auxiliumos-dev (`txofqxictwecgcnvezlb`), PostgreSQL17. Exact migration-source/history readback and all11 application tables with RLS are recorded in [deployment evidence](../00-control/evidence/development-migrations.json). Auth users/buckets remain zero; reservation configuration remains disabled. New intake/transport source is independently reviewed but its deployment is tracked separately. Schema deployment does not establish authentic Auth/API or full application acceptance. Older preparation restrictions below are historical; AGENTS.md governs synthetic development.
 
 # Schema Registry
 
@@ -61,7 +61,7 @@ Not created
 
 ---
 
-# Schema Status
+# Historical schema status before runtime integration
 
 Current schema status:
 The seven-table foundation schema exists as a repository SQL artifact. Application to any database is unverified in this review.

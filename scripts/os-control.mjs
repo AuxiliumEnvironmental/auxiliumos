@@ -62,8 +62,10 @@ export function inventory(root, inputs) {
 
 export function fingerprint(root, profile) {
   // Linked worktrees store .git as a file; it is repository metadata, never an input.
-  const rootFiles = profile.include_root_files ? fs.readdirSync(root).filter(name => !EXCLUDED.has(name) && fs.lstatSync(path.join(root, name)).isFile()) : [];
-  const files = inventory(root, [...new Set(['scripts/os-control.mjs', 'VERIFICATION_PROFILES.json', 'package.json', 'package-lock.json', ...rootFiles, ...profile.inputs])]);
+  const rootFiles = profile.include_root_files ? fs.readdirSync(root).filter(name => name !== 'VERIFICATION_PROFILES.json' && !EXCLUDED.has(name) && fs.lstatSync(path.join(root, name)).isFile()) : [];
+  // The selected profile is already hashed below. Other profile definitions are
+  // not execution dependencies unless explicitly declared (e.g. model validation).
+  const files = inventory(root, [...new Set(['scripts/os-control.mjs', 'package.json', 'package-lock.json', ...rootFiles, ...profile.inputs])]);
   const environmentHashes = Object.fromEntries([...new Set([...COMMON_ENVIRONMENT, ...(profile.environment_variables || [])])].sort().map(name => [name, Object.hasOwn(process.env, name) ? sha256(process.env[name]) : null]));
   const identity = { node: process.version, platform: process.platform, arch: process.arch, environment: profile.environment, environment_hashes: environmentHashes };
   return { digest: sha256(JSON.stringify({ profile, files, identity })), files, identity };
@@ -125,6 +127,7 @@ export function validateModel(model) {
     for (const d of t.owner_decisions || []) if (!decisionIds.has(d)) errors.push(`Unknown decision ${d} in ${t.id}`);
     for (const p of t.verification_profiles || []) if (!profileIds.has(p)) errors.push(`Unknown profile ${p} in ${t.id}`);
     if (t.status === 'implemented' && !t.verification_profiles?.length) errors.push(`Implemented task needs verification profile: ${t.id}`);
+    if (t.completion_mode !== undefined && (t.completion_mode !== 'historical_source' || !['SYNC-001', 'SYNC-PUBLISH-001'].includes(t.id) || !t.verification_profiles?.length || t.verification_profiles.some(id => profiles.profiles.find(p => p.id === id)?.level !== 'source_inspection'))) errors.push(`Historical completion is restricted to source reconciliation/publication: ${t.id}`);
     if (Object.hasOwn(t, 'required_evidence_levels')) {
       const levels = t.required_evidence_levels;
       if (!Array.isArray(levels) || !levels.length || levels.some(level => typeof level !== 'string' || !level.trim()) || new Set(levels).size !== levels.length) {
@@ -217,6 +220,9 @@ export function verify(root, id, { force = false } = {}) {
   const model = validate(root);
   const profile = model.profiles.profiles.find(p => p.id === id);
   if (!profile) throw new Error(`Unknown verification profile: ${id}`);
+  // Preserve the dated source operation before a fresh external check can
+  // replace its latest-result files, including when that refresh fails.
+  preserveHistoricalSource(root, profile, model);
   const cached = evidenceStatus(root, profile);
   if (!force && profile.cacheable && cached.status === 'passed') return { ...cached, reused: true };
   const before = fingerprint(root, profile);
@@ -235,15 +241,58 @@ export function verify(root, id, { force = false } = {}) {
   fs.writeFileSync(safePath(root, logPath), logs.join('\n\n'));
   const record = { version: 1, profile: id, level: profile.level, recorded_at: new Date().toISOString(), result: passed ? 'passed' : 'failed', digest: before.digest, identity: before.identity, inputs: before.files, observed_git_head: git(root, ['rev-parse', 'HEAD']), results, log_path: logPath, log_sha256: sha256(fs.readFileSync(safePath(root, logPath))) };
   writeJson(root, `${EVIDENCE}/${id}.json`, record);
+  if (passed) preserveHistoricalSource(root, profile, model);
   return { status: record.result, profile: id, reused: false, evidence: `${EVIDENCE}/${id}.json`, level: record.level };
+}
+
+function validHistoricalSource(root, profile, evidence) {
+  const timestamp = Date.parse(evidence.recorded_at);
+  return profile.level === 'source_inspection' && evidence.version === 1
+    && evidence.profile === profile.id && evidence.level === 'source_inspection'
+    && evidence.result === 'passed' && Number.isFinite(timestamp) && timestamp <= Date.now()
+    && evidence.results?.length === profile.commands.length
+    && evidence.results.every((r, i) => r.exit_code === 0 && JSON.stringify(r.argv) === JSON.stringify(profile.commands[i]))
+    && evidence.log_path.startsWith(`${EVIDENCE}/`)
+    && sha256(fs.readFileSync(safePath(root, evidence.log_path))) === evidence.log_sha256;
+}
+
+function preserveHistoricalSource(root, profile, model) {
+  if (model.state.live_repository_reconciled !== true || !model.queue.tasks.some(task =>
+    task.status === 'implemented' && task.completion_mode === 'historical_source'
+      && task.verification_profiles.includes(profile.id))) return;
+  const completedPath = `${EVIDENCE}/${profile.id}.completed.json`;
+  if (fs.existsSync(safePath(root, completedPath))) return;
+  let evidence;
+  try {
+    evidence = readJson(root, `${EVIDENCE}/${profile.id}.json`);
+    if (!validHistoricalSource(root, profile, evidence)) return;
+  } catch { return; }
+  const logPath = `${EVIDENCE}/${profile.id}.completed.log`;
+  fs.copyFileSync(safePath(root, evidence.log_path), safePath(root, logPath));
+  writeJson(root, completedPath, { ...evidence, log_path: logPath });
+}
+
+function historicalSourceComplete(root, task, model) {
+  if (task.status !== 'implemented' || task.completion_mode !== 'historical_source' || model.state.live_repository_reconciled !== true) return false;
+  // This records an already performed source operation, not fresh remote state.
+  // Retain the original timestamp/log and never use it for runtime/release proof.
+  return task.verification_profiles.every(id => {
+    try {
+      const profile = model.profiles.profiles.find(p => p.id === id);
+      const completedPath = `${EVIDENCE}/${id}.completed.json`;
+      const evidence = readJson(root, fs.existsSync(safePath(root, completedPath)) ? completedPath : `${EVIDENCE}/${id}.json`);
+      return validHistoricalSource(root, profile, evidence);
+    } catch { return false; }
+  });
 }
 
 export function currentStatus(root = ROOT) {
   const model = validate(root);
   const evidence = Object.fromEntries(model.profiles.profiles.map(p => [p.id, evidenceStatus(root, p)]));
   const complete = item => item.status === 'implemented' && item.verification_profiles?.length > 0 && item.verification_profiles.every(id => evidence[id]?.status === 'passed') && (item.required_evidence_levels || []).every(level => item.verification_profiles.some(id => evidence[id]?.status === 'passed' && evidence[id]?.level === level));
-  const tasks = model.queue.tasks.map(t => ({ id: t.id, title: t.title, declared_status: t.status, verified: complete(t), next_action: t.next_action, blocker: t.blocker || null }));
-  const ready = model.queue.tasks.filter(t => !complete(t) && !['blocked', 'deferred'].includes(t.status) && (t.dependencies || []).every(id => complete(model.queue.tasks.find(x => x.id === id))));
+  const dependencySatisfied = task => complete(task) || historicalSourceComplete(root, task, model);
+  const tasks = model.queue.tasks.map(t => ({ id: t.id, title: t.title, declared_status: t.status, verified: complete(t), historical_completion: historicalSourceComplete(root, t, model), next_action: t.next_action, blocker: t.blocker || null }));
+  const ready = model.queue.tasks.filter(t => !dependencySatisfied(t) && !['blocked', 'deferred'].includes(t.status) && (t.dependencies || []).every(id => dependencySatisfied(model.queue.tasks.find(x => x.id === id))));
   const product = model.requirements.requirements.filter(r => r.kind === 'product_module');
   return { version: 1, product_modules: product.length, verified_product_modules: product.filter(complete).map(x => x.id), tasks, evidence, next_ready_task: ready[0]?.id || null, owner_review_pending: model.decisions.decisions.filter(d => d.status !== 'approved' && d.status !== 'superseded' && d.status !== 'rejected').map(d => d.id) };
 }
@@ -257,6 +306,7 @@ export function releaseReadiness(root = ROOT) {
   }
   for (const d of model.decisions.decisions) if (d.required_for_full_release && d.status !== 'approved') gaps.push(`${d.id}: owner activation decision pending`);
   if (model.state.live_repository_reconciled !== true) gaps.push('Live repository has not been reconciled.');
+  if (model.profiles.profiles.some(p => p.id === 'source-reconciliation') && status.evidence['source-reconciliation']?.status !== 'passed') gaps.push('Fresh source reconciliation is required for release; historical completion is insufficient.');
   if (!model.state.production_authorization?.evidence) gaps.push('Production activation authorization is not recorded.');
   return { ready: gaps.length === 0, gaps, note: 'This repository gate is a necessary check, not a runtime, security, legal or operational certification.' };
 }

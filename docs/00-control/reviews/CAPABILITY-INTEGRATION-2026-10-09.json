@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "reviewed_on": "2026-10-09",
+  "tasks": [
+    "INTAKE-001A",
+    "INTAKE-001B",
+    "SEC-001C-FILE-WORKFLOW",
+    "execution-control-corrections"
+  ],
+  "outcome": "bounded_synthetic_source_reviewed_not_full_runtime_acceptance",
+  "source_base": "bbfc1ebbf8f816ad3a4e5a2fbd75e0c41bbde850",
+  "hashes": {
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
+    "tests/unit/control-system.test.mjs": "c7e95b8a28f7db0e4a93861ed5240c6d6e48fd147440a8385cadaf0e48d9b17e",
+    ".github/workflows/ci.yml": "77603ec534b377c7d65404954b105bb2d77ecfb72a13364958984b14713f8628",
+    "supabase/migrations/20261008234951_intake_triage.sql": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+    "tests/database/intake-triage.test.mjs": "a2829e98936a49a254626fba8bed6a3e6995a82f94cbb527ddde6d3c956db8a7",
+    "tests/api/intake-triage.test.mjs": "ac2578c95e6bc089972c7ea0cd4c8cf2b886e44f66c304dec64342c608ed061a",
+    "supabase/migrations/20261008234953_private_file_transport.sql": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+    "supabase/functions/private-objects/gateway.mjs": "777973ba23670c469211db8ab022bc6ada4fefb3f389138530bc0722f5a21a58",
+    "supabase/functions/private-objects/index.ts": "970e6b9f04bd84c5c8f9478870fa8f1959d3b094ad22167a1e825bef1665aba2",
+    "scripts/private-object-provision.mjs": "16c14906711b467300252493289a6bfea5db2e1be70e1cde45c58745bd2c0b5b"
+  },
+  "independent_reviews": [
+    {
+      "reviewer": "/root/capability_security_review",
+      "scope": "Intake authorization, state transitions, immutable legacy/new records, additive migration and audit",
+      "initial_commit": "950cb0827b49d9385e8184ec9069a5c95b7a4283",
+      "finding": {
+        "severity": "P2",
+        "requirements": [
+          "C04",
+          "M07"
+        ],
+        "reproduction": "Fresh database -> five migrations -> unchanged foundation seed failed SQLSTATE42501 in guard_intake_history; seed transaction rolled back.",
+        "fix_commit": "068e82cf395c715690e4b3103468298bbf824c96",
+        "resolution": "Exact canonical synthetic fixture bootstrap limited to trusted owner session; atomic legacy mapping/document links; client/service legacy mutations remain denied; no fabricated actor; later triage audited.",
+        "status": "closed_after_actual_fix_diff_and_regression_review"
+      },
+      "evidence": "20/20 focused database checks reported by implementer; reviewer reproduced original failure and reviewed fixes without redundant full rerun."
+    },
+    {
+      "reviewer": "/root/file_security_review",
+      "commit": "457eb0b5ec4e1a7ea3eff4211e029b6c431ccea3",
+      "scope": "All10 allocated private transport files; user/service separation, current locked finalization, immutable attempt/binding/receipt, nonoverwriting provider readback, quarantine, restrictive private bucket policies and safe fixture/provisioning",
+      "findings": [],
+      "evidence": "Actual code/test inspection; reused22 focused checks and migration composition. Not genuine provider evidence."
+    },
+    {
+      "reviewer": "/root/intake_ui",
+      "scope": "Lead-authored selected-profile invalidation, source-history completion, specific dependency edges and manual API credential handling",
+      "findings": [
+        {
+          "severity": "P2",
+          "issue": "Job-wide service key inherited by dependency/action steps",
+          "resolution": "Key only in explicit configuration/API step env",
+          "status": "closed_after_rereview"
+        },
+        {
+          "severity": "P2",
+          "issue": "Failed latest source check could erase historical completion",
+          "resolution": "Preserve dated separate completed receipt/log before overwrite; failed/stale current evidence still blocks release",
+          "status": "closed_after_rereview"
+        }
+      ],
+      "evidence": "Lead29 focused controls tests pass; reviewer inspected fix + regression without rerunning."
+    }
+  ],
+  "lead_ui_findings": [
+    {
+      "issue": "Read parser rejected preserved legacy titles161–250characters",
+      "fix_commit": "ef36583d6639081611a53921c91457b156a4a094",
+      "status": "fixed_and_unit_verified"
+    },
+    {
+      "issue": "Legacy structural urgency default looked submitted",
+      "fix_commit": "3e4cf61334d7ffdf587a68702e2b827414ceab5f",
+      "status": "fixed_in_queue_and_detail;21adapterchecks+targetedbrowserregression"
+    }
+  ],
+  "remaining_gates": [
+    "Actual development migrations/Edge version/config readback for new increments",
+    "Genuine Auth/Data API/Storage and representative nonintercepted browser journeys",
+    "Multiple-session contention, provider-route inventory, durable denied-attempt collection",
+    "Scanning/designated human clearance, immutable document adoption/review/release and all parent/full-module requirements"
+  ],
+  "production": false
+}

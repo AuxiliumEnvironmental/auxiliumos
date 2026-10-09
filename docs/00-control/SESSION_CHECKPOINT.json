@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-08T16:57:07.162Z",
+  "created_at": "2026-10-09T00:35:26.963Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,17 +10,17 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "0773cce60f030084a8a321ec42429d6a91fce838",
-    "branch": "build/private-object-integration-2026-10-08",
+    "head": "1eb967fe7a692e022d2e9484b1de08daf3a2b3da",
+    "branch": "build/capability-integration-2026-10-08",
     "upstream": "origin/wip/recovery-2026-10-08",
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M tests/database/access-audit.test.mjs\n M tests/database/identity-directory.test.mjs\n?? docs/00-control/CI_OBSERVATIONS.json\n?? docs/00-control/reviews/SEC-001C-STORAGE-CONTRACT-2026-10-08.json\n?? docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/03-data/INTAKE_RUNTIME_CONTRACT.md\n M docs/03-data/SCHEMA_REGISTRY.md\n M playwright.runtime.config.ts\n M scripts/os-control.mjs\n M tests/unit/control-system.test.mjs\n?? docs/00-control/evidence/development-migrations.json\n?? docs/00-control/evidence/intake-database.json\n?? docs/00-control/evidence/intake-database.log\n?? docs/00-control/evidence/intake-unit.json\n?? docs/00-control/evidence/intake-unit.log\n?? docs/00-control/evidence/private-file-database.json\n?? docs/00-control/evidence/private-file-database.log\n?? docs/00-control/evidence/private-file-unit.json\n?? docs/00-control/evidence/private-file-unit.log\n?? docs/00-control/evidence/source-reconciliation.completed.json\n?? docs/00-control/evidence/source-reconciliation.completed.log\n?? docs/00-control/reviews/CAPABILITY-INTEGRATION-2026-10-09.json",
     "remote": {
       "status": "not_checked",
-      "branch": "build/private-object-integration-2026-10-08",
+      "branch": "build/capability-integration-2026-10-08",
       "head": null
     }
   },
-  "controls_digest": "8a14aabbe7a40f6d4dbb5b65d4029f5881b1483c6b362823cd34b0b546dffb8a",
+  "controls_digest": "efc2f7d262cc1fb52f7d80b0435a908611532bf4367a60405b7449f2663662d6",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -28,14 +28,18 @@
       "title": "Supabase login and account/facility interface",
       "declared_status": "blocked",
       "verified": false,
+      "historical_completion": false,
       "next_action": "R5 code findings are corrected, independently reviewed and fixture-verified. Reconcile dev migrations and securely configure authentic Auth/API as described in tests/api/README.md; run real-service browser acceptance afterward.",
       "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed."
     }
   ],
   "evidence": {
     "controls": {
-      "status": "stale",
-      "profile": "controls"
+      "status": "passed",
+      "profile": "controls",
+      "evidence": "docs/00-control/evidence/controls.json",
+      "level": "control_unit",
+      "recorded_at": "2026-10-09T00:33:05.203Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -59,12 +63,15 @@
       "profile": "access-audit-database"
     },
     "private-object-reservations-database": {
-      "status": "not_run",
+      "status": "stale",
       "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "stale",
-      "profile": "runtime-build"
+      "status": "passed",
+      "profile": "runtime-build",
+      "evidence": "docs/00-control/evidence/runtime-build.json",
+      "level": "build",
+      "recorded_at": "2026-10-09T00:33:08.294Z"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -77,6 +84,46 @@
     "directory-api": {
       "status": "not_run",
       "profile": "directory-api"
+    },
+    "intake-database": {
+      "status": "passed",
+      "profile": "intake-database",
+      "evidence": "docs/00-control/evidence/intake-database.json",
+      "level": "database",
+      "recorded_at": "2026-10-09T00:30:46.409Z"
+    },
+    "intake-unit": {
+      "status": "passed",
+      "profile": "intake-unit",
+      "evidence": "docs/00-control/evidence/intake-unit.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T00:30:41.487Z"
+    },
+    "intake-browser-fixture": {
+      "status": "not_run",
+      "profile": "intake-browser-fixture"
+    },
+    "private-file-database": {
+      "status": "passed",
+      "profile": "private-file-database",
+      "evidence": "docs/00-control/evidence/private-file-database.json",
+      "level": "database",
+      "recorded_at": "2026-10-09T00:30:45.789Z"
+    },
+    "private-file-unit": {
+      "status": "passed",
+      "profile": "private-file-unit",
+      "evidence": "docs/00-control/evidence/private-file-unit.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T00:30:41.282Z"
+    },
+    "intake-api": {
+      "status": "not_run",
+      "profile": "intake-api"
+    },
+    "private-file-api": {
+      "status": "not_run",
+      "profile": "private-file-api"
     }
   },
   "pending_owner_decisions": [

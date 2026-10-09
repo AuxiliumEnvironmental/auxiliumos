@@ -1,0 +1,30 @@
+["node","--test","tests/unit/intake-api.test.mjs"]
+✔ submission uses exact RPC arguments, immutable wording, stable supplied idempotency key and no implicit retries (2.735691ms)
+✔ optional new incident or existing incident is preserved without a mandatory program (0.850551ms)
+✔ submission cannot report success with an unexpected approval or revision (0.449477ms)
+✔ submission rejects blank, overlong, invalid urgency, excessive safety and unsupported authority fields before RPC (0.990111ms)
+✔ catalogue preserves all server labels and versions without making scientific combinations (0.333883ms)
+✔ queue maps authorized envelope and explicit UUID cursor without a count (0.526644ms)
+✔ queue rejects wrong-account rows, duplicate or out-of-order rows and invalid cursor (0.632843ms)
+✔ queue validates account, cursor and bounded page size before transport (0.325551ms)
+✔ detail preserves original submission/responses and honestly supports legacy unknown classification (0.503137ms)
+✔ legacy titles through 250 characters load in queue and detail without widening new submissions (0.633814ms)
+✔ legacy structural urgency displays as unknown while recorded urgency labels are unchanged (0.191388ms)
+✔ assignee query is exact-account and exact-facility and parses minimal returned profiles (0.191879ms)
+✔ triage sends only explicit changes with expected revision and rejects original or actor mutations (0.277808ms)
+✔ response is a separate append RPC with exact revision and unchanged narrative (0.188635ms)
+✔ SQLSTATE 22023 becomes a safe validation message (0.188855ms)
+✔ SQLSTATE 42501 becomes a safe unavailable message (0.08022ms)
+✔ SQLSTATE 40001 becomes a safe conflict message (0.095965ms)
+✔ SQLSTATE 23505 becomes a safe idempotency_conflict message (0.082053ms)
+✔ network and expired-session responses use safe existing runtime error semantics (0.200001ms)
+✔ already-aborted work never issues a request and in-flight abort cannot publish results (0.441675ms)
+✔ transition hints never expose approval, mobilization, conversion or terminal reopening (0.124868ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 455.228944

@@ -86,7 +86,8 @@
       ],
       "next_action": "Initial source reconciliation and recovery publication are recorded. Recheck current main/feature refs before publication; no GitHub/Lovable parity is claimed.",
       "blocker": null,
-      "issue": null
+      "issue": null,
+      "completion_mode": "historical_source"
     },
     {
       "id": "ARCH-001",
@@ -246,8 +247,14 @@
       "id": "SEC-001B-R5",
       "title": "Generation-isolated browser authentication persistence",
       "status": "implemented",
-      "dependencies": ["SEC-001A"],
-      "requirements": ["M01", "C01", "C05"],
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "C01",
+        "C05"
+      ],
       "allowed_paths": [
         "web/src/lib/auth-storage.ts",
         "web/src/lib/runtime.tsx",
@@ -258,8 +265,14 @@
       "assigned_to": "frontend-engineer",
       "branch": "work/sec-001b-r5",
       "owner_decisions": [],
-      "verification_profiles": ["runtime-build", "directory-browser-fixture"],
-      "required_evidence_levels": ["build", "browser_fixture"],
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
       "next_action": "Reuse matching build, 25 persistence tests and 7 browser-fixture journeys. Independent review closed both cleanup findings. These bounded layers do not satisfy authentic API/browser requirements of parent SEC-001B or atomic crash-erasure guarantees.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
@@ -268,8 +281,14 @@
       "id": "SEC-001C-AUDIT",
       "title": "Append-only server provenance for access lifecycle changes",
       "status": "implemented",
-      "dependencies": ["SEC-001A"],
-      "requirements": ["M19", "C01", "C07"],
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
       "allowed_paths": [
         "supabase/migrations/20261008154950_access_audit_provenance.sql",
         "tests/database/access-audit.test.mjs",
@@ -278,9 +297,17 @@
       ],
       "assigned_to": "backend-engineer",
       "branch": "work/sec-001c-audit",
-      "owner_decisions": ["OD-011", "OD-013"],
-      "verification_profiles": ["access-audit-database", "directory-database"],
-      "required_evidence_levels": ["database"],
+      "owner_decisions": [
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "access-audit-database",
+        "directory-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
       "next_action": "Reuse matching 30 audit and 19 directory PostgreSQL checks; independent migration review found no blocker. Verify actual target/roles/advisors and authentic API before cloud acceptance. Private storage and durable denial collection remain incomplete.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
@@ -289,8 +316,14 @@
       "id": "SEC-001B-API-FIXTURES",
       "title": "Audit-preserving synthetic API fixture preflight and cleanup",
       "status": "implemented",
-      "dependencies": ["SEC-001A"],
-      "requirements": ["M19", "C01", "C07"],
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
       "allowed_paths": [
         "tests/api/identity-directory.test.mjs",
         "tests/api/fixture-cleanup.mjs",
@@ -299,9 +332,15 @@
       ],
       "assigned_to": "verification-engineer",
       "branch": "work/sec-001b-api-fixtures",
-      "owner_decisions": ["OD-011"],
-      "verification_profiles": ["api-fixture-safety"],
-      "required_evidence_levels": ["control_unit"],
+      "owner_decisions": [
+        "OD-011"
+      ],
+      "verification_profiles": [
+        "api-fixture-safety"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
       "next_action": "Reuse matching 22 synthetic cleanup tests and independent review. Execute authentic acceptance only after reviewed migrations and secure target configuration; retain audited fixture rows and verify exact Auth cleanup. No live API evidence is claimed.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
@@ -310,13 +349,28 @@
       "id": "SEC-001C-STORAGE-CONTRACT",
       "title": "Private object and quarantine implementation contract",
       "status": "implemented",
-      "dependencies": ["SEC-001C-AUDIT"],
-      "requirements": ["M12", "M19", "C01", "C02", "C07"],
-      "allowed_paths": ["docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md"],
+      "dependencies": [
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "M12",
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md"
+      ],
       "assigned_to": "product-architect",
       "branch": "work/sec-001c-storage-contract",
-      "owner_decisions": ["OD-011", "OD-013"],
-      "verification_profiles": ["controls"],
+      "owner_decisions": [
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "controls"
+      ],
       "next_action": "ADR-003 defines the private ingest/quarantine and future exact-version boundary. Independent contract review found no blocker for the lead's reservation-only first subset. Actual code review and runtime evidence remain required; the ADR proves no application behavior.",
       "blocker": null,
       "issue": null
@@ -324,9 +378,18 @@
     {
       "id": "SEC-001C-OBJECT-RESERVATIONS",
       "title": "Synthetic private-object reservation authorization",
-      "status": "in_progress",
-      "dependencies": ["SEC-001A", "SEC-001C-AUDIT", "SEC-001C-STORAGE-CONTRACT"],
-      "requirements": ["M19", "C01", "C02", "C07"],
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-STORAGE-CONTRACT"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
       "allowed_paths": [
         "supabase/migrations/20261008164758_private_object_reservations.sql",
         "tests/database/private-object-reservations.test.mjs",
@@ -336,10 +399,19 @@
       ],
       "assigned_to": "backend-engineer",
       "branch": "work/sec-001c-object-reservations",
-      "owner_decisions": ["OD-001", "OD-003", "OD-011", "OD-013"],
-      "verification_profiles": ["private-object-reservations-database"],
-      "required_evidence_levels": ["database"],
-      "next_action": "Implement and independently review the bounded immutable reservation/configuration/RPC/audit slice. No byte upload, Storage policies, scan/clearance, version/release or durable denial collector is implemented by this task; preserve them as subsequent work.",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "private-object-reservations-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed reservation-only code and original evidence recovered by exact hashes and saved at a749b7d. Continue coherent transport/finalization under SEC-001C-FILE-WORKFLOW; this does not authorize bytes or complete storage.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/86"
     },
@@ -392,7 +464,9 @@
       "title": "Structured intake, incidents and project queue",
       "status": "planned",
       "dependencies": [
-        "SEC-001"
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT"
       ],
       "requirements": [
         "M07",
@@ -416,7 +490,7 @@
         "OD-009"
       ],
       "verification_profiles": [],
-      "next_action": "Implement versioned catalogue-backed intake, preserve original submission, separate Incident and Request, assign triage and next action; no submission-only authorization.",
+      "next_action": "Integrate INTAKE-001A/B against docs/03-data/INTAKE_RUNTIME_CONTRACT.md; genuine Auth/API/browser acceptance remains required before parent completion.",
       "blocker": null,
       "issue": null,
       "required_evidence_levels": [
@@ -426,11 +500,146 @@
       ]
     },
     {
+      "status": "implemented",
+      "verification_profiles": [
+        "intake-database"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "INTAKE-001A",
+      "title": "Authorized request/incident persistence and internal triage",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C01",
+        "C03",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "tests/database/intake-triage.test.mjs",
+        "tests/api/intake-triage.test.mjs",
+        "tests/fixtures/intake/**"
+      ],
+      "assigned_to": "intake_backend",
+      "branch": "work/intake-backend",
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed backend and bootstrap fix integrated (950cb08/068e82c); run hosted intake-api after published migration application and secure Auth fixture configuration. Parent full intake remains incomplete."
+    },
+    {
+      "status": "implemented",
+      "verification_profiles": [
+        "runtime-build",
+        "intake-unit",
+        "intake-browser-fixture"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "INTAKE-001B",
+      "title": "Connected request submission and internal triage interface",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001B-R5"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C01",
+        "C03",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/lib/intake-api.ts",
+        "web/src/pages/intake.tsx",
+        "web/src/pages/intake.css",
+        "web/src/router.tsx",
+        "web/src/components/app-shell.tsx",
+        "web/src/lib/modules.ts",
+        "tests/e2e/intake.spec.ts",
+        "tests/unit/intake-api.test.mjs"
+      ],
+      "assigned_to": "intake_ui",
+      "branch": "work/intake-ui",
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Connected RPC interface and legacy display corrections implemented; 21 adapter checks and 8 browser-fixture journeys passed in worker. Recheck integrated routes; genuine hosted browser/API acceptance remains required."
+    },
+    {
+      "status": "implemented",
+      "verification_profiles": [
+        "private-file-database",
+        "private-file-unit"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "SEC-001C-FILE-WORKFLOW",
+      "title": "Private upload transport and verified immutable finalization",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-OBJECT-RESERVATIONS"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/functions/private-objects/**",
+        "tests/database/private-file-transport.test.mjs",
+        "tests/unit/private-object-gateway.test.mjs",
+        "tests/api/private-file-transport.test.mjs",
+        "scripts/private-object-provision.mjs",
+        "web/src/lib/private-object-api.ts",
+        "web/src/components/private-object-upload.tsx"
+      ],
+      "assigned_to": "private_file_workflow",
+      "branch": "work/private-file-workflow",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "unit"
+      ],
+      "next_action": "Reviewed 457eb0b gateway/transport/finalization integrated. Apply published migration, deploy reviewed Edge function, provision private bucket via supported API and enable synthetic config only after target review. Real API/Storage and scan/human-clearance/version adoption remain unfinished."
+    },
+    {
       "id": "DOC-001",
       "title": "Immutable documents and release lifecycle",
       "status": "planned",
       "dependencies": [
-        "SEC-001"
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-FILE-WORKFLOW"
       ],
       "requirements": [
         "M13",
@@ -916,10 +1125,50 @@
       "assigned_to": "integration-lead",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
-      "verification_profiles": ["source-reconciliation"],
-      "next_action": "Recovered source saved via connected Git Data API at 283882c with exact fetched tree match; draft PR #84. Continue lease-protected publication and remote verification of reviewed increments. CLI credentials are not required for this working path.",
+      "verification_profiles": [
+        "source-reconciliation"
+      ],
+      "next_action": "Recovery published and fetched at a749b7d; continue exact-tree/expected-SHA API publication to existing draft PR84. Historical completion does not replace fresh target checks.",
       "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
+      "completion_mode": "historical_source"
+    },
+    {
+      "id": "DOC-001-UPLOAD-UI",
+      "title": "Connected private-file upload staging interface",
+      "status": "in_progress",
+      "dependencies": [
+        "SEC-001B-R5",
+        "SEC-001C-FILE-WORKFLOW"
+      ],
+      "requirements": [
+        "M13",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/pages/private-files.tsx",
+        "tests/e2e/private-files.spec.ts",
+        "tests/unit/private-object-api.test.mjs",
+        "web/src/components/private-object-upload.tsx"
+      ],
+      "assigned_to": "intake_ui",
+      "branch": "work/private-files-ui",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Finish scoped account/facility upload staging UI and representative browser journeys; lead owns shared route/config integration. Quarantined finalized files are not document versions or releases.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }
   ]
 }

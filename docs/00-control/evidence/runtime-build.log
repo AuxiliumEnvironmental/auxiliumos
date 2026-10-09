@@ -4,14 +4,14 @@
 > tsc --project web/tsconfig.json --noEmit && vite build --config web/vite.config.ts
 
 vite v8.0.16 building client environment for production...
-[2Ktransforming...✓ 1854 modules transformed.
+[2Ktransforming...✓ 1857 modules transformed.
 rendering chunks...
 computing gzip size...
 web/dist/index.html                   0.54 kB │ gzip:   0.32 kB
-web/dist/assets/index-BsaS5VYi.css   20.06 kB │ gzip:   4.29 kB
-web/dist/assets/index-CY70fXCP.js   537.27 kB │ gzip: 154.61 kB
+web/dist/assets/index-BasyYguo.css   24.43 kB │ gzip:   5.11 kB
+web/dist/assets/index-C4F5xDdU.js   575.24 kB │ gzip: 163.43 kB
 
-✓ built in 249ms
+✓ built in 247ms
 npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
@@ -21,34 +21,34 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 
 
 ["node","--test","tests/unit/runtime-configuration.test.mjs","tests/unit/auth-persistence.test.mjs"]
-✔ a delayed storage event cannot make an old tab overwrite or remove a fresh session (3.023408ms)
-✔ a login interleaved between an old lease check and write cannot overwrite the current generation (0.674256ms)
-✔ a login interleaved with removal of an old slot cannot delete the current session (0.553374ms)
-✔ logout purges this project credentials, preserves unrelated storage and stays locked after failed login (0.611592ms)
-✔ a read interleaved with a fresh login cannot return the superseded credential (0.574085ms)
-✔ an old async logout finishing after fresh login only cleans its captured lease (0.677491ms)
-✔ logout from an already superseded tab cannot revoke or snapshot the fresh session (0.386463ms)
-✔ a superseded staged login cannot commit or erase the fresh generation (0.952886ms)
-✔ logout interleaved with a staged credential write cannot be cleared by that commit (0.624652ms)
-✔ logout interleaved with a staged commit marker write cannot be cleared by that commit (0.461576ms)
-✔ a fresh login interleaved with a stale commit marker keeps its own credentials (0.594185ms)
-✔ a new tab observing an in-progress commit cannot purge that generation (0.327914ms)
-✔ storage read failure permanently locks this owner and persists intent when possible (0.621998ms)
-✔ partial credential persistence failure cannot unlock reload or a later attempt in the failed tab (0.450509ms)
-✔ refused logout deletion reports failure while its saved intent prevents restoration (0.485372ms)
-✔ refused intent and deletion never claim logout or allow recovery in the failed tab (0.37164ms)
-✔ leases touch only their exact project SDK keys, including user and verifier slots (0.527805ms)
-✔ the old shared-slot format is purged without adopting its credentials or deleting unrelated keys (0.32497ms)
-✔ overlapping beginLogin cleans an intermediate committed generation without a responsive old tab (0.506133ms)
-✔ a newer login during retired-slot enumeration keeps its own credentials (0.51713ms)
-✔ a newer login during retired-slot removal keeps its own credentials (0.439332ms)
-✔ a retired-generation cleanup failure cannot delete a newer concurrent session (0.538963ms)
-✔ reload cleanup retires exact orphan credential slots but preserves metadata-only and unrelated entries (0.368536ms)
-✔ the Storage mock exposes stored names, not its instrumentation fields (0.43097ms)
-✔ concurrent deletion during a key snapshot cannot skip another retired credential (0.403248ms)
-✔ Vite rejects a synthetic server secret before emitting a bundle (192.228685ms)
-✔ Vite rejects a synthetic legacy service-role JWT before emitting a bundle (255.175967ms)
-✔ development startup rejects a different backend before opening a server (169.399652ms)
+✔ a delayed storage event cannot make an old tab overwrite or remove a fresh session (3.403877ms)
+✔ a login interleaved between an old lease check and write cannot overwrite the current generation (0.764702ms)
+✔ a login interleaved with removal of an old slot cannot delete the current session (0.634476ms)
+✔ logout purges this project credentials, preserves unrelated storage and stays locked after failed login (0.751322ms)
+✔ a read interleaved with a fresh login cannot return the superseded credential (0.690961ms)
+✔ an old async logout finishing after fresh login only cleans its captured lease (0.900577ms)
+✔ logout from an already superseded tab cannot revoke or snapshot the fresh session (0.516638ms)
+✔ a superseded staged login cannot commit or erase the fresh generation (1.117353ms)
+✔ logout interleaved with a staged credential write cannot be cleared by that commit (0.841036ms)
+✔ logout interleaved with a staged commit marker write cannot be cleared by that commit (0.45792ms)
+✔ a fresh login interleaved with a stale commit marker keeps its own credentials (0.502748ms)
+✔ a new tab observing an in-progress commit cannot purge that generation (0.439261ms)
+✔ storage read failure permanently locks this owner and persists intent when possible (0.65057ms)
+✔ partial credential persistence failure cannot unlock reload or a later attempt in the failed tab (0.508186ms)
+✔ refused logout deletion reports failure while its saved intent prevents restoration (0.732293ms)
+✔ refused intent and deletion never claim logout or allow recovery in the failed tab (0.511991ms)
+✔ leases touch only their exact project SDK keys, including user and verifier slots (0.488246ms)
+✔ the old shared-slot format is purged without adopting its credentials or deleting unrelated keys (0.52483ms)
+✔ overlapping beginLogin cleans an intermediate committed generation without a responsive old tab (0.61068ms)
+✔ a newer login during retired-slot enumeration keeps its own credentials (0.77669ms)
+✔ a newer login during retired-slot removal keeps its own credentials (0.662689ms)
+✔ a retired-generation cleanup failure cannot delete a newer concurrent session (0.704851ms)
+✔ reload cleanup retires exact orphan credential slots but preserves metadata-only and unrelated entries (0.468857ms)
+✔ the Storage mock exposes stored names, not its instrumentation fields (0.64386ms)
+✔ concurrent deletion during a key snapshot cannot skip another retired credential (0.406161ms)
+✔ Vite rejects a synthetic server secret before emitting a bundle (158.44263ms)
+✔ Vite rejects a synthetic legacy service-role JWT before emitting a bundle (158.805407ms)
+✔ development startup rejects a different backend before opening a server (140.009945ms)
 ℹ tests 28
 ℹ suites 0
 ℹ pass 28
@@ -56,4 +56,4 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 696.374167
+ℹ duration_ms 537.444346

@@ -294,6 +294,78 @@ test('declared environment input change invalidates a cached pass without storin
   assert.equal(runCount(root), 2);
 });
 
+test('unrelated profile registration does not invalidate another profile, including root-file inventory', t => {
+  const root = fixture(t, model => { model.profiles.profiles[0].include_root_files = true; });
+  write(root, 'tests/fixture-check.mjs', "console.log('synthetic profile-scoping check');\n");
+  withMode('pass', () => {
+    assert.equal(verify(root, 'fixture-check').status, 'passed');
+    const before = fingerprint(root, profileAt(root)).digest;
+    updateJson(root, 'VERIFICATION_PROFILES.json', registry => {
+      registry.profiles.push({ ...clone(registry.profiles[0]), id: 'unrelated-check', environment: 'other-runtime' });
+    });
+    assert.equal(fingerprint(root, profileAt(root)).digest, before);
+    assert.equal(evidenceStatus(root, profileAt(root)).status, 'passed');
+    updateJson(root, 'VERIFICATION_PROFILES.json', registry => { registry.profiles[0].timeout_ms += 1; });
+    assert.equal(evidenceStatus(root, profileAt(root)).status, 'stale');
+  });
+});
+
+test('expired source observations preserve historical setup but never become current release evidence', t => {
+  const root = fixture(t, model => {
+    model.state.live_repository_reconciled = true;
+    Object.assign(model.profiles.profiles[0], { id: 'source-reconciliation', level: 'source_inspection', cacheable: false, max_age_ms: 60000 });
+    Object.assign(model.queue.tasks[0], { id: 'SYNC-001', status: 'implemented', verification_profiles: ['source-reconciliation'], completion_mode: 'historical_source' });
+    model.queue.tasks[1].dependencies = ['SYNC-001'];
+    model.queue.tasks.slice(2).forEach(task => { task.status = 'deferred'; });
+  });
+  withMode('pass', () => {
+    assert.equal(verify(root, 'source-reconciliation').status, 'passed');
+    const recordedAt = Date.parse(readJsonForTest());
+    t.mock.method(Date, 'now', () => recordedAt + 60001);
+    const status = currentStatus(root);
+    assert.equal(status.evidence['source-reconciliation'].status, 'stale');
+    assert.equal(status.tasks[0].verified, false);
+    assert.equal(status.tasks[0].historical_completion, true);
+    assert.equal(status.next_ready_task, 'TASK-2');
+    assert.ok(releaseReadiness(root).gaps.some(gap => /Fresh source reconciliation/.test(gap)));
+    fs.appendFileSync(path.join(root, 'docs/00-control/evidence/source-reconciliation.completed.log'), 'tampered');
+    assert.equal(currentStatus(root).tasks[0].historical_completion, false);
+    assert.equal(currentStatus(root).next_ready_task, 'SYNC-001');
+  });
+  function readJsonForTest() { return JSON.parse(fs.readFileSync(path.join(root, 'docs/00-control/evidence/source-reconciliation.json'))).recorded_at; }
+});
+
+test('failed fresh source checks cannot erase the original successful operation', t => {
+  const root = fixture(t, model => {
+    model.state.live_repository_reconciled = true;
+    Object.assign(model.profiles.profiles[0], { id: 'source-reconciliation', level: 'source_inspection', cacheable: false, max_age_ms: 60000 });
+    Object.assign(model.queue.tasks[0], { id: 'SYNC-001', status: 'implemented', verification_profiles: ['source-reconciliation'], completion_mode: 'historical_source' });
+    model.queue.tasks[1].dependencies = ['SYNC-001'];
+    model.queue.tasks.slice(2).forEach(task => { task.status = 'deferred'; });
+  });
+  const completed = path.join(root, 'docs/00-control/evidence/source-reconciliation.completed.json');
+  withMode('pass', () => assert.equal(verify(root, 'source-reconciliation').status, 'passed'));
+  const original = fs.readFileSync(completed, 'utf8');
+  // Also exercise upgrade from the existing latest-only evidence format.
+  fs.unlinkSync(completed);
+  withMode('fail', () => {
+    assert.equal(verify(root, 'source-reconciliation').status, 'failed');
+    assert.equal(fs.readFileSync(completed, 'utf8'), original);
+    const status = currentStatus(root);
+    assert.equal(status.evidence['source-reconciliation'].status, 'failed');
+    assert.equal(status.tasks[0].historical_completion, true);
+    assert.equal(status.tasks[0].verified, false);
+    assert.equal(status.next_ready_task, 'TASK-2');
+    assert.ok(releaseReadiness(root).gaps.some(gap => /Fresh source reconciliation/.test(gap)));
+  });
+});
+
+test('historical completion cannot be used to bypass runtime task requirements', () => {
+  const model = modelFixture();
+  model.queue.tasks[0].completion_mode = 'historical_source';
+  assert.match(errors(model), /Historical completion is restricted/);
+});
+
 test('runtime identity participates in evidence freshness', t => {
   const root = fixture(t);
   withMode('pass', () => {

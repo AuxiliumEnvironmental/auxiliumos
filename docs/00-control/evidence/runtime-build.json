@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "runtime-build",
   "level": "build",
-  "recorded_at": "2026-10-08T17:04:11.311Z",
+  "recorded_at": "2026-10-09T00:33:08.294Z",
   "result": "passed",
-  "digest": "a6e9e9b98cd01ae06ec0810c62fa81e64365e46214766847721666a6c2fa31a4",
+  "digest": "5e5d3589fb65c953095311084cf403e3103d95d5fec15a2526426df6acf5c1ac",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -16,8 +16,8 @@
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
-      "PATH": "52394806bac22aed7619acf5a7d36ecb4c9b0929652a9a2e408e9ec63ec2b4c2",
-      "TZ": "796751c31e4ef1b1d8e344c13d017179f3ef862a00f2127eab63a5161945a77f",
+      "PATH": "eb8594c0c2ff48353275730e32b35888eb6e54c9e6766bff8c5947f5be834d29",
+      "TZ": "a77b7136d7ecc350d85920c42820c60e5af14172c4213eba09856c2db6e35e7a",
       "VITE_ALLOW_LOCAL_TEST_BACKEND": null,
       "VITE_SUPABASE_PUBLISHABLE_KEY": null,
       "VITE_SUPABASE_URL": null
@@ -26,34 +26,38 @@
   "inputs": {
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
-    "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
     "tests/unit/auth-persistence.test.mjs": "062ea0693db1dcd6020c5fb5227d6a393c53ac769a68e27c611a7b871d86e771",
     "tests/unit/runtime-configuration.test.mjs": "b13fd015fd8815684d4dad9f44c1b15954120b04cf6882a98a79b704726ce860",
-    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
     "web/README.md": "979684798830da44d55c2e7a75f681119086675e5b2aafc779a7c5d4ce4db561",
-    "web/src/components/app-shell.tsx": "a7cd0bd74e4a4223ca9e8d347ee95e2980d1d5b3185c65e66a053e55890922c9",
+    "web/src/components/app-shell.tsx": "3dd32c03b079bc2fd2ac6bf5a9a6040ae58581a21ffa8ee70dfa69329355f800",
     "web/src/components/auth.tsx": "302394656ed85b5aa8d587444763ef077e406774678a4c61f6f8dc4254e5d07e",
+    "web/src/components/private-object-upload.tsx": "670729b9a840f128657c4c3efe6d3852219fe7647982176cbd76148227cd2564",
     "web/src/components/shared.tsx": "4848e60dea3dafaf161cc6057997a80622f1fe68d0d83d86e74e357613fbdcc4",
     "web/src/env.d.ts": "60767326176b42460c4b67e6e7e10d071a832882e5410ce7df08e6ebf413af5b",
     "web/src/lib/auth-storage.ts": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
     "web/src/lib/config.ts": "09c2f6e970f6a7435b822e9964ef959aa67a5423712afb9a20321ecd05deed64",
     "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
     "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434",
+    "web/src/lib/intake-api.ts": "e8b36480135b5424477d554455803df31277fbc8e8abdda0f977890f882a2b82",
     "web/src/lib/modules.ts": "dfebe2cb67d8a4a46b3b2a3d1463c03fd2527819095890e83931ed49dae4d74f",
+    "web/src/lib/private-object-api.ts": "7c011126f476b7d8edfcad91ac58ddd5b3763c36cde23968ee8d42221adfd881",
     "web/src/lib/runtime.tsx": "3ff86cc45c3c4cc990f57e09f6d463634b4f3c51f240d5e0a36eabe25f90bfc4",
     "web/src/lib/use-directory.ts": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
     "web/src/main.tsx": "08bb3c4de46d8b6c9ddd967931ed429903593aba902cca3caea5a33878896a71",
     "web/src/pages/directory.tsx": "71f87c4ffdc1ef37ca532d38fd6a143739827a332719df54efbc15b9ef173553",
+    "web/src/pages/intake.css": "5cd741294d8569b3c1128912e034262815cb25ac252487f22aec9031859f3371",
+    "web/src/pages/intake.tsx": "cdca638fbcee0bb9a9174f877236a7d45dafb8c9c99d78df69174d6e1ad7e56b",
     "web/src/pages/workspace.tsx": "396e773483cad5492ebb7c615529dc3a8ec0d1b760db8b609200dac6378ad6b4",
-    "web/src/router.tsx": "c590ff430075ae87497c1302d42b918c75ee1e8bddc4ce2174ad8e5b639ec945",
+    "web/src/router.tsx": "e8771932445384922b22a8c147b99a03fb6b07fb45be1a96029e6c6b576fdb6b",
     "web/src/styles.css": "3fe7f0d33c0c927cfcf755e62c4291bab7dc95775b3d4dfe8b6721b9087875d0",
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
+  "observed_git_head": "1eb967fe7a692e022d2e9484b1de08daf3a2b3da",
   "results": [
     {
       "argv": [
@@ -78,5 +82,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/runtime-build.log",
-  "log_sha256": "f7cab63ccb89148ae18c81021da70aec7555ed94dd060ad4554544a539a03d19"
+  "log_sha256": "42a725730eaa1b52b9ec954d1576648be2c46ae9a164654cd52f35d02b1ff5ed"
 }

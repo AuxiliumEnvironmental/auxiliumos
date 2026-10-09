@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "project_id": "txofqxictwecgcnvezlb",
+  "environment": "development",
+  "source_commit": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+  "method": "Supabase apply_migration of unchanged reviewed SQL; exact newly-created history row locked and mapped to canonical filename version with complete stored-statement equality and exactly-one-row assertion. No SQL rerun, reset or history deletion.",
+  "independent_method_review": "/root/intake_backend, 2026-10-09; conditional approval of bounded reconciliation, not provider endorsement of direct history DML. CLI push preferred if securely configured.",
+  "preflight": {
+    "observed_at": "2026-10-09T00:05:37.467679Z",
+    "application_tables": 0,
+    "migrations": 0,
+    "auth_users": 0,
+    "storage_buckets": 0
+  },
+  "migrations": [
+    {
+      "canonical_version": "20260713000100",
+      "generated_version": "20261009000637",
+      "name": "foundation_slice_schema",
+      "sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:08:10.767856+00"
+    },
+    {
+      "canonical_version": "20261008120645",
+      "generated_version": "20261009001032",
+      "name": "identity_access_directory",
+      "sha256": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:11:21.801305+00"
+    },
+    {
+      "canonical_version": "20261008154950",
+      "generated_version": "20261009001145",
+      "name": "access_audit_provenance",
+      "sha256": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:12:31.358123+00"
+    },
+    {
+      "canonical_version": "20261008164758",
+      "generated_version": "20261009001236",
+      "name": "private_object_reservations",
+      "sha256": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:15:29.094077+00"
+    }
+  ],
+  "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
+  "production": false
+}

@@ -21,7 +21,8 @@
         ".cursor",
         ".codex",
         ".github",
-        "tests/unit/document-integrity.test.mjs"
+        "tests/unit/document-integrity.test.mjs",
+        "VERIFICATION_PROFILES.json"
       ],
       "commands": [
         [
@@ -54,8 +55,8 @@
       "cacheable": true,
       "timeout_ms": 120000,
       "inputs": [
-        "supabase/migrations",
-        "supabase/seed",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/seed/foundation_demo_seed.sql",
         "tests/unit/foundation-migration-contract.test.mjs"
       ],
       "commands": [
@@ -114,10 +115,13 @@
       "cacheable": true,
       "timeout_ms": 120000,
       "inputs": [
-        "supabase/migrations",
-        "supabase/seed",
-        "tests/database",
-        "tests/helpers"
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/database/identity-directory.test.mjs",
+        "tests/helpers/pglite-database.mjs"
       ],
       "commands": [
         [
@@ -134,12 +138,21 @@
       "cacheable": true,
       "timeout_ms": 120000,
       "inputs": [
-        "supabase/migrations",
-        "supabase/seed",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/seed/foundation_demo_seed.sql",
         "tests/database/access-audit.test.mjs",
-        "tests/helpers"
+        "tests/helpers/pglite-database.mjs"
       ],
-      "commands": [["node", "--test", "tests/database/access-audit.test.mjs"]]
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/access-audit.test.mjs"
+        ]
+      ]
     },
     {
       "id": "private-object-reservations-database",
@@ -148,12 +161,21 @@
       "cacheable": true,
       "timeout_ms": 120000,
       "inputs": [
-        "supabase/migrations",
-        "supabase/seed",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/seed/foundation_demo_seed.sql",
         "tests/database/private-object-reservations.test.mjs",
-        "tests/helpers"
+        "tests/helpers/pglite-database.mjs"
       ],
-      "commands": [["node", "--test", "tests/database/private-object-reservations.test.mjs"]]
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/private-object-reservations.test.mjs"
+        ]
+      ]
     },
     {
       "id": "runtime-build",
@@ -203,7 +225,9 @@
         [
           "npm",
           "run",
-          "test:runtime-ui"
+          "test:runtime-ui",
+          "--",
+          "directory.spec.ts"
         ]
       ]
     },
@@ -213,10 +237,22 @@
       "environment": "local-Node-synthetic-cleanup-transport-no-service",
       "cacheable": true,
       "timeout_ms": 120000,
-      "inputs": ["tests/api", "tests/unit/api-fixture-cleanup.test.mjs"],
+      "inputs": [
+        "tests/api/fixture-cleanup.mjs",
+        "tests/api/identity-directory.test.mjs",
+        "tests/unit/api-fixture-cleanup.test.mjs"
+      ],
       "commands": [
-        ["node", "--check", "tests/api/identity-directory.test.mjs"],
-        ["node", "--test", "tests/unit/api-fixture-cleanup.test.mjs"]
+        [
+          "node",
+          "--check",
+          "tests/api/identity-directory.test.mjs"
+        ],
+        [
+          "node",
+          "--test",
+          "tests/unit/api-fixture-cleanup.test.mjs"
+        ]
       ]
     },
     {
@@ -241,6 +277,179 @@
           "node",
           "--test",
           "tests/api/identity-directory.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "intake-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-and-provider-not-hosted-API",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/intake-triage.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/intake-triage.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "intake-unit",
+      "level": "unit",
+      "environment": "Node-injected-adapter-provider-fixtures-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/intake-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/intake-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/intake-api.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "intake-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE"
+      ],
+      "inputs": [
+        "web",
+        "tests/e2e/intake.spec.ts",
+        "playwright.runtime.config.ts"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "test:runtime-ui",
+          "--",
+          "intake.spec.ts"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-and-provider-not-hosted-API",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/functions/private-objects/gateway.mjs",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/private-file-transport.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/private-file-transport.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-unit",
+      "level": "unit",
+      "environment": "Node-injected-adapter-provider-fixtures-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/functions/private-objects/gateway.mjs",
+        "scripts/private-object-provision.mjs",
+        "tests/unit/private-object-gateway.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/private-object-gateway.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "intake-api",
+      "level": "api",
+      "environment": "authentic-Supabase-development-securely-configured-target",
+      "cacheable": false,
+      "max_age_ms": 900000,
+      "timeout_ms": 300000,
+      "environment_variables": [
+        "AUXILIUMOS_TEST_URL",
+        "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+        "AUXILIUMOS_TEST_SERVICE_ROLE_KEY"
+      ],
+      "inputs": [
+        "tests/api/intake-triage.test.mjs",
+        "tests/api/fixture-cleanup.mjs",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/api/intake-triage.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-api",
+      "level": "api",
+      "environment": "authentic-Supabase-development-securely-configured-target",
+      "cacheable": false,
+      "max_age_ms": 900000,
+      "timeout_ms": 300000,
+      "environment_variables": [
+        "AUXILIUMOS_TEST_URL",
+        "AUXILIUMOS_TEST_PUBLISHABLE_KEY",
+        "AUXILIUMOS_TEST_SERVICE_ROLE_KEY"
+      ],
+      "inputs": [
+        "tests/api/private-file-transport.test.mjs",
+        "tests/api/fixture-cleanup.mjs",
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/functions/private-objects"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/api/private-file-transport.test.mjs"
         ]
       ]
     }
