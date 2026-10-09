@@ -72,59 +72,7 @@ jobs:
   application-foundation:
     if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      actions: read
     steps:
-      - name: Inspect captured CI64 failure within GitHub and hold the release gate
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == 'AuxiliumEnvironmental/auxiliumos' && github.head_ref == 'wip/recovery-2026-10-08'
-        env:
-          AUXILIUMOS_DIAGNOSTIC_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python - <<'PY'
-          import hashlib, io, os, re, sys, urllib.request, urllib.error, urllib.parse, zipfile
-          # Temporary, fixed-artifact diagnosis only. Remove before the next candidate gate.
-          # No code checkout, package installation, provider disclosure or service-role key.
-          class NoRedirect(urllib.request.HTTPRedirectHandler):
-              def redirect_request(self, req, fp, code, msg, headers, newurl):
-                  return None
-          try:
-              req = urllib.request.Request(
-                  'https://api.github.com/repos/AuxiliumEnvironmental/auxiliumos/actions/artifacts/11642431670/zip',
-                  headers={'Authorization': 'Bearer ' + os.environ['AUXILIUMOS_DIAGNOSTIC_TOKEN'],
-                           'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
-              try:
-                  response = urllib.request.build_opener(NoRedirect()).open(req, timeout=20)
-              except urllib.error.HTTPError as redirect:
-                  if redirect.code not in (301, 302, 303, 307, 308):
-                      raise
-                  location = redirect.headers.get('Location', '')
-                  target = urllib.parse.urlparse(location)
-                  if target.scheme != 'https' or not target.hostname or not any(target.hostname.endswith(suffix) for suffix in ('.blob.core.windows.net', '.githubusercontent.com', '.s3.amazonaws.com')):
-                      raise ValueError('Unexpected download host')
-                  # The short-lived repository token is never forwarded to artifact storage.
-                  response = urllib.request.build_opener(NoRedirect()).open(urllib.request.Request(location), timeout=20)
-              with response:
-                  data = response.read(2000001)
-              if len(data) != 723970 or hashlib.sha256(data).hexdigest() != '1dfe386851ea9291081a8fa5d464b9e9001d61e17c01f99e5eb2224a735098fc':
-                  raise ValueError('Unexpected archive')
-              with zipfile.ZipFile(io.BytesIO(data)) as archive:
-                  name = 'docs/00-control/evidence/document-versions-browser-fixture.log'
-                  if archive.getinfo(name).file_size > 131072:
-                      raise ValueError('Unexpected log size')
-                  log = archive.read(name).decode('utf-8', errors='replace')
-              log = re.sub(r'\x1b\[[0-9;]*m', '', log)
-              log = re.sub(r'[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}', '<uuid>', log)
-              log = re.sub(r'[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}', '<email>', log)
-              lines = [line for line in log.splitlines() if not re.search(r'authorization|bearer|sb_secret_|password|eyJ[A-Za-z0-9_-]{12,}', line, re.I)]
-              print('Verified CI64 artifact; bounded synthetic fixture failure excerpt follows.')
-              for line in '\n'.join(lines)[-12000:].splitlines():
-                  print('fixture | ' + line.replace('##[', '## ['))
-              print('Diagnostic-only failure: gate intentionally held. Restore the original workflow before candidate verification.')
-          except Exception:
-              print('Artifact inspection could not complete safely; no provider body, credentials or signed URL emitted.')
-          sys.exit(1)
-          PY
       - uses: actions/checkout@v7
         with:
           persist-credentials: false

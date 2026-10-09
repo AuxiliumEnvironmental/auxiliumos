@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T19:54:55.830Z",
+  "as_of": "2026-10-09T20:18:51.020Z",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -8,18 +8,18 @@
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
-    "current_verified_feature_commit": "1ed3d836e868b8518458997bd4275ef5e0560765"
+    "current_verified_feature_commit": "80be05020e75c3e6587dece4ff6cc3261030e4fc"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Feature branch HEAD1ed3d836 read back through GitHub connector during workspace outage. Protected GitHub Actions settings last showed no repository/environment secrets. Development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY requires protected configuration; no secret read or requested in chat.",
+    "github": "Feature branch 80be05020e75c3e6587dece4ff6cc3261030e4fc read back through GitHub connector. Temporary in-repository diagnostic safely read exact CI64 fixture failure; this candidate restores the original workflow. Protected Actions service secret still requires owner configuration.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
     "lovable": "Current project57f637a ready/agentFinished after bounded mobile increment; exactly4source files read back and independently reviewed. Root publication of previous89227e was accepted pending asac37eb2f. Final57f637a publication waits for integrated CI; no latest-live-revision claim.",
-    "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
+    "workspace_execution": "Current native workspace is unavailable after exec-server transport failure. A later bounded read-only recovery check returned no output and was terminated. GitHub and Lovable connectors remain operational; no local parity or recovered disk content claimed."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -28,9 +28,11 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Inspect only the bounded CI64 document-version failure inside GitHub using the temporary diagnostic step, then restore .github/workflows/ci.yml exactly to db0f003 before the corrected candidate gate. Do not publish57f637a while this failure remains unresolved. No CI archive or signed URL may be sent to Lovable without recognized explicit disclosure authorization.",
+  "first_runtime_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
   "active_remote_work": [
-    "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+    "wip/release-content-2026-10-09 (source work in progress; worker must return saved SHA)",
+    "wip/release-ui-2026-10-09 (source work in progress; worker must return saved SHA)"
   ],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -285,8 +287,8 @@
     "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Inspect only the bounded CI64 document-version failure inside GitHub using the temporary diagnostic step, then restore .github/workflows/ci.yml exactly to db0f003 before the corrected candidate gate. Do not publish57f637a while this failure remains unresolved. No CI archive or signed URL may be sent to Lovable without recognized explicit disclosure authorization.",
-    "latest_verified_remote": "a37834600c14048b0bd2e79f3316cb230aebd3ca",
+    "first_unfinished_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
+    "latest_verified_remote": "80be05020e75c3e6587dece4ff6cc3261030e4fc",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
@@ -404,7 +406,7 @@
         "pending_cell": "10",
         "last_confirmed_file": "Empty CLI-created20261009194030_document_release_content.sql",
         "pending_write": "Migration write waiting cell terminated by worker; disk state unknown. No subsequent gateway/tests/commit/cloud write.",
-        "next_action": "Collect actual result/diff once execution recovers and preserve any real written source before finishing."
+        "next_action": "Source continuation resumed through GitHub on isolated wip/release-content-2026-10-09, based on db0f003. Preserve interrupted local file if environment returns; no disk recovery claim."
       }
     },
     "lovable_mobile_recovery": {
@@ -435,7 +437,14 @@
       "artifact_id": 11642431670,
       "artifact_sha256": "1dfe386851ea9291081a8fa5d464b9e9001d61e17c01f99e5eb2224a735098fc",
       "artifact_provider_disclosure": "Automatic approval review rejected sending signed archive URL to Lovable: possible internal logs/source disclosure without explicit destination authorization. No turn/edit started.",
-      "safe_diagnostic": "Temporary fixed-artifact read within GitHub. Exact archive hash; one capped synthetic log; identifiers/emails/credential-looking lines filtered; read-only repository token never forwarded to storage; intentional nonzero exit keeps gate closed. Original workflow must be restored before candidate verification."
+      "safe_diagnostic": "Temporary fixed-artifact read within GitHub. Exact archive hash; one capped synthetic log; identifiers/emails/credential-looking lines filtered; read-only repository token never forwarded to storage; intentional nonzero exit keeps gate closed. Original workflow must be restored before candidate verification.",
+      "diagnostic_commit": "80be05020e75c3e6587dece4ff6cc3261030e4fc",
+      "diagnostic_run_id": 37985960594,
+      "diagnostic_job_id": 114007890438,
+      "diagnostic_result": "Exact pinned archive/member read successfully within GitHub; diagnostic intentionally failed before checkout/tests. 13/14 version fixtures passed. Sole failure: strict locator matched visible warning and disclosure metadata.",
+      "correction": "Test now targets the visible warning, opens native details by keyboard and verifies exact ID/hash, restriction and preservation hold; all read-only authority assertions retained.",
+      "workflow_restoration": "Original db0f003 .github/workflows/ci.yml restored byte-for-byte in this candidate; no diagnostic code or additional Actions permission retained.",
+      "verification": "Corrected candidate gate pending."
     }
   },
   "immediate_delivery": {
@@ -446,11 +455,11 @@
     "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
-    "independent_work": "Mobile/review source completed in existing Lovable and independently reviewed; root saves exact files and runs GitHub CI before publication. Released-byte backend remains unfinished due workspace outage. Moldo independent and companion deferred.",
+    "independent_work": "Released-byte backend and metadata release UI are continuing through GitHub on isolated branches. Native executor is unavailable; runtime tests remain pending until CI. Moldo independent and companion deferred.",
     "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
     "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
-    "publication_blocker": "CI64 document-versions-browser-fixture failed; later content/review browser profiles not run.",
+    "publication_blocker": "Confirmed CI64 test locator mismatch corrected; restored-workflow CI gate pending.",
     "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json",
     "latest_publication_request": {
       "lovable_commit": "89227e331463eed0ea0844055cf43714e5969627",

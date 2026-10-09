@@ -58,7 +58,11 @@
       "failed_profile": "document-versions-browser-fixture",
       "build": "passed",
       "content_review_browser": "not_run",
-      "next_action": "Read captured exact failure within GitHub; fix only established cause and restore original workflow before next gate."
+      "next_action": "Execute restored original CI gate; publish only after success.",
+      "diagnosed_cause": "Strict warning locator matched two copies after intentional disclosure layout. 13/14 version tests passed; content/review browser profiles not run.",
+      "diagnostic_run_id": 37985960594,
+      "corrected_fixture": "Visible warning plus keyboard-open exact metadata, ID/hash, restriction and hold; no permission assertions removed.",
+      "restored_workflow": "Byte-for-byte db0f003 in corrected candidate."
     }
   }
 }

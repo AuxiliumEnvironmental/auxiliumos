@@ -170,8 +170,16 @@ test('fixture document versions: facility-filtered empty pages preserve account 
   await openHistory(page);
   await expect(page.getByText('Read-only history.', { exact: false })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Version 1 · Internal draft', exact: true })).toBeVisible();
-  await expect(page.getByText('Restricted; no content access is provided', { exact: true })).toBeVisible();
-  await expect(page.getByText('No hold recorded; destruction is not authorized', { exact: true })).toBeVisible();
+  await expect(page.getByRole('paragraph').filter({ hasText: /^Restricted; no content access is provided$/ })).toBeVisible();
+  const versionDetails = page.locator('details').filter({ has: page.getByText('Exact-version details · Version 1', { exact: true }) });
+  await expect(versionDetails.getByText('No hold recorded; destruction is not authorized', { exact: true })).not.toBeVisible();
+  await versionDetails.locator('summary').focus();
+  await versionDetails.locator('summary').press('Enter');
+  await expect(versionDetails).toHaveAttribute('open', '');
+  await expect(versionDetails.getByText(version().version_id, { exact: true })).toBeVisible();
+  await expect(versionDetails.getByText(version().verified_sha256, { exact: true })).toBeVisible();
+  await expect(versionDetails.getByText('Restricted; no content access is provided', { exact: true })).toBeVisible();
+  await expect(versionDetails.getByText('No hold recorded; destruction is not authorized', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: /Create internal draft|Download|Approve|Release/ })).toHaveCount(0);
   expect(backend.calls.filter(call => call.name === 'list_version_documents').at(-1)?.args.p_after_id).toBe(uuid(424));
   expect(adoptionCalls(backend)).toHaveLength(0);

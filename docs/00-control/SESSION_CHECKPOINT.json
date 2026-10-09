@@ -227,8 +227,8 @@
   ],
   "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
   "cloud_recovery": {
-    "recorded_at": "2026-10-09T19:54:55.830Z",
-    "base_remote_commit": "a37834600c14048b0bd2e79f3316cb230aebd3ca",
+    "recorded_at": "2026-10-09T20:18:51.020Z",
+    "base_remote_commit": "80be05020e75c3e6587dece4ff6cc3261030e4fc",
     "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
     "not_claimed": [
       "Local checkpoint regeneration",
@@ -236,8 +236,9 @@
       "Uncollected tests",
       "Completed released-byte backend"
     ],
-    "next_action": "Run the integrated GitHub CI gate on the exact57f637a mobile/review UI source, inspect any concrete failures, then publish the reviewed candidate. Configure missing development-only GitHub Actions service secret for focused actual private-file workflow. Workspace and secure-browser runtime blockers remain distinct; released-byte backend source is unfinished.",
+    "next_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
     "ui_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
-    "exact_source_parity": true
+    "exact_source_parity": true,
+    "ci64_diagnosis": "Exact sanitized artifact excerpt verified within GitHub; duplicate warning locator caused sole version failure. Corrected fixture and original workflow restoration saved together; next CI pending."
   }
 }

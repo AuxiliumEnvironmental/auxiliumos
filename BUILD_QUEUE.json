@@ -117,7 +117,7 @@
         "document-content-browser-fixture",
         "document-reviews-browser-fixture"
       ],
-      "next_action": "Current-source57f637a mobile/intake-name source is independently reviewed and exact4file readback passes. Preserve interruptedlocal569ab1af separately; do not replay it. Run integrated CI then publish reviewed candidate. Full20module operational acceptance and actual hosted private-file/planning workflows remain open.",
+      "next_action": "Run the restored original GitHub CI gate on the corrected document-version disclosure fixture, then publish the unchanged reviewed Lovable UI 57f637a if it passes. Configure the development-only Actions secret for the focused actual private-file workflow. Continue isolated release backend/UI source work without granting professional authority.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -1712,7 +1712,7 @@
     {
       "id": "DOC-001D-CONTENT",
       "title": "Exact released-version private byte authorization and gateway",
-      "status": "blocked",
+      "status": "in_progress",
       "dependencies": [
         "DOC-001D-BACKEND",
         "DOC-001B-GATEWAY"
@@ -1735,7 +1735,7 @@
         "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md"
       ],
       "assigned_to": "release_delivery; root integration lead",
-      "branch": "agent/release-delivery-20261009",
+      "branch": "wip/release-content-2026-10-09",
       "owner_decisions": [
         "OD-002",
         "OD-003",
@@ -1747,8 +1747,8 @@
         "database",
         "api"
       ],
-      "next_action": "Workspace generation call pending; collect actual result before claiming source. Complete separate current/historical released-content authorization and hash-verified bounded gateway with fresh checks before/after Storage. Independently review and run focused checks before integration/deployment; internal content/metadata contracts unchanged.",
-      "blocker": "Workspace transport disconnected; terminated migration-generation wait with disk state unverified.",
+      "next_action": "Read current db0f003 contracts; implement and save isolated released-byte SQL/gateway/tests through GitHub. Do not alter canonical branch or cloud until independently reviewed and executable checks pass. No local migration recovery claim.",
+      "blocker": "Native executor unavailable; source work continues through GitHub. Runtime tests and deployment remain pending.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
     }
