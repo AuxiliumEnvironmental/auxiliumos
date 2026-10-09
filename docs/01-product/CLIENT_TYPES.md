@@ -38,11 +38,11 @@ The historical Master Map proposes these starting experiences. Visibility remain
 | Public adjuster or attorney project client | Projects, new request, project documents/reports and questions | Agreements/invoices, account users and restricted dispute materials by explicit grant |
 | Property manager | Properties, unit/site requests, open approvals and project history | Released documents, messages, agreements/invoices, authorized portfolio rollups |
 | Enterprise, healthcare, industrial or multi-site account | Facilities, active incidents, requests, site passports and readiness | Executive dashboards, vendors, QBRs and financial ledger only for assigned capabilities |
-| Site Champion within an enterprise account | Assigned facility, report incident, site information and next actions | Permitted site tasks and released site/project documents |
+| Facility Coordinator within an enterprise account | Assigned facility, report incident, site information and next actions | Permitted site tasks and released site/project documents |
 | Billing-only user | Invoices, payment/PO records and billing questions | Minimal project references necessary for billing, without automatic technical-report access |
 | Vendor user | Assigned work, instructions, upload/closeout and credentials | Explicitly granted documents; no unrelated client, financial or executive access |
 
-Client type, portal mode and role are separate. A Site Champion is not a separate customer type. A vendor is an external participant rather than automatically a client account. Program/MSA and Portfolio remain optional layers for ordinary work.
+Client type, portal mode and role are separate. A Facility Coordinator is not a separate customer type. A vendor is an external participant rather than automatically a client account. Program/MSA and Portfolio remain optional layers for ordinary work.
 
 ## Account and configuration fields
 
@@ -52,7 +52,7 @@ Each client-type configuration needs a stable ID/version; plain-language termino
 
 ## Onboarding and interaction defaults
 
-Use invite-based access as a proposed development default, with explicit account/site/project assignment and separate signer/approver/billing capabilities. Final identity configuration remains OD-012. Onboarding should identify the user's permitted tasks and explain where status, next actions and support live. Site Champions and frequent requesters should have concise role-specific quick references, as proposed in the alternate June 14 workbook.
+Use invite-based access as a proposed development default, with explicit account/site/project assignment and separate signer/approver/billing capabilities. Final identity configuration remains OD-012. Onboarding should identify the user's permitted tasks and explain where status, next actions and support live. Facility Coordinators and frequent requesters should have concise role-specific quick references, as proposed in the alternate June 14 workbook.
 
 The original command-center design requires account, linked object, status, priority, owner, next action, due date, blocker, reviewer requirement, client-facing status and last activity on actionable queue items. Screens should make those relationships clear without exposing internal technical labels to clients. Use saved templates, asset prefill, repeat prior request and help-classify paths with current-rule revalidation.
 

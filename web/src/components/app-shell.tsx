@@ -8,7 +8,7 @@ import { Button } from "./button";
 
 const groups = [
   { title: "Workspace", items: [
-    { path: "core", label: "My work", icon: LayoutList }, { path: "accounts", label: "Accounts", icon: BriefcaseBusiness },
+    { path: "core", label: "Home", icon: LayoutList }, { path: "accounts", label: "Accounts", icon: BriefcaseBusiness },
     { path: "facilities", label: "Facilities", icon: Building2 }, { path: "intake", label: "Intake", icon: ClipboardList },
     { path: "projects", label: "Projects", icon: FolderKanban }, { path: "documents", label: "Documents", icon: FileText },
     { path: "messages", label: "Communications", icon: MessageSquare },

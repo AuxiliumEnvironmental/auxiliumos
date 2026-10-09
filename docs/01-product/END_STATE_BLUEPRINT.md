@@ -166,7 +166,7 @@ For a Nutex-style enterprise healthcare client or similar national/portfolio acc
 - Facility status
 - Site activation status
 - Site passports
-- Site champions
+- Facility coordinators
 - Emergency contacts
 - Response maps
 - Critical asset registry

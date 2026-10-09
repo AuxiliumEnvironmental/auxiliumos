@@ -123,7 +123,7 @@ For fake/dev schema and test planning only, use a minimal static role set based 
 - System Admin
 - Intake Admin
 - Document Controller
-- Site Champion
+- Facility Coordinator
 - Project Requester
 - Document Viewer
 - Removed/Suspended User

@@ -33,6 +33,7 @@ async function mockBackend(page: Page) {
     redirectedCredentialRequests: 0,
     facilityGate: null as null | { accountId: string; arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> },
     unexpected: [] as string[], requests: [] as URL[],
+    planBackend: false, plans: [] as Record<string, unknown>[], planCalls: [] as { name: string; body: Record<string, unknown> }[],
   };
   const json = (route: Route, value: unknown, status = 200) => route.fulfill({
     status, contentType: 'application/json', body: JSON.stringify(value),
@@ -80,6 +81,19 @@ async function mockBackend(page: Page) {
         await state.facilityGate.release.promise;
       }
       return json(route, rows);
+    }
+    if (state.planBackend && url.pathname.startsWith('/rest/v1/rpc/') && route.request().method() === 'POST') {
+      const name = url.pathname.slice('/rest/v1/rpc/'.length);
+      const body = route.request().postDataJSON() as Record<string, unknown>;
+      state.planCalls.push({ name, body });
+      if (name === 'list_workspace_plans') return json(route, state.plans.filter((plan) => plan.account_id === body.p_account_id && plan.facility_id === body.p_facility_id && plan.panel_key === body.p_panel_key).map(({ values, rows, checks, ...summary }) => summary));
+      if (name === 'get_workspace_plan') { const found = state.plans.find((plan) => plan.id === body.p_plan_id); return found ? json(route, found) : route.fulfill({ status: 403, contentType: 'application/json', body: JSON.stringify({ code: '42501', message: 'denied' }) }); }
+      if (name === 'save_workspace_plan') {
+        const existing = state.plans.find((plan) => plan.id === body.p_plan_id);
+        const plan = { id: body.p_plan_id, account_id: body.p_account_id, facility_id: body.p_facility_id, module_key: body.p_module_key, panel_key: body.p_panel_key, title: body.p_title, revision: (body.p_expected_revision as number) + 1, values: body.p_values, rows: body.p_rows, checks: body.p_checks, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' };
+        state.plans = [plan, ...state.plans.filter((item) => item !== existing)];
+        return json(route, plan);
+      }
     }
     state.unexpected.push(`${route.request().method()} ${url.pathname}`);
     await route.abort('blockedbyclient');
@@ -342,5 +356,38 @@ test('fixture module drafts: phone schedule filter and quantity values stay unsa
   await expect(page.getByLabel('Quantity', { exact: true })).toHaveValue('2');
   await expect(page.getByLabel('Planning unit amount', { exact: true })).toHaveValue('3.25');
   await expect(page.getByRole('button', { name: 'Save estimate revision', exact: true })).toBeDisabled();
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture planning drafts: one scope draft saves, reopens with rows, and clears on facility change', async ({ page }) => {
+  // Fixture evidence only: simulated RPC responses, not the deployed backend.
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  state.facilities.push({ id: uuid(1002), account_id: accountA.id, display_name: 'Synthetic East annex', is_demo: true });
+  await signIn(page);
+  await page.goto(`/scope?account=${accountA.id}`);
+  await page.getByLabel('Facility', { exact: true }).selectOption(facilityA.id);
+  await page.getByRole('button', { name: 'Draft preparation', exact: true }).click();
+  const panel = page.getByRole('tabpanel').first();
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  await panel.getByLabel('Planning draft title').fill('East roof scope notes');
+  await panel.getByLabel('Inclusions').fill('Roof membrane survey');
+  await panel.getByRole('button', { name: 'Add item' }).click();
+  await panel.getByLabel('Deliverable').fill('Survey memo');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  const save = state.planCalls.find((call) => call.name === 'save_workspace_plan')!;
+  expect(save.body.p_expected_revision).toBe(0);
+  expect(save.body.p_panel_key).toBe('scope.1');
+  expect(save.body.p_rows).toEqual([{ Deliverable: 'Survey memo' }]);
+  await expect(panel.getByRole('button', { name: 'Save scope revision', exact: true })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Create another' }).click();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('');
+  await panel.getByRole('button', { name: 'Open East roof scope notes' }).click();
+  await expect(panel.getByLabel('Deliverable')).toHaveValue('Survey memo');
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('Roof membrane survey');
+  await page.getByLabel('Facility', { exact: true }).selectOption(uuid(1002));
+  await expect(panel.getByText('East roof scope notes')).toHaveCount(0);
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
   expect(state.unexpected).toEqual([]);
 });

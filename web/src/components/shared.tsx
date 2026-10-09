@@ -7,7 +7,7 @@ export function Brand() {
 }
 
 export function DevelopmentBanner({ local = false }: { local?: boolean }) {
-  return <div className={`development-banner${local ? " local-test-banner" : ""}`}><ShieldCheck size={16} aria-hidden="true" /><span><strong>{local ? "Local test workspace" : "Development workspace"}</strong><span className="banner-divider" aria-hidden="true">/</span>Synthetic data only. No PHI or real client data.</span></div>;
+  return <div className={`development-banner${local ? " local-test-banner" : ""}`}><ShieldCheck size={16} aria-hidden="true" /><span><strong>{local ? "Local test workspace" : "Development"}</strong><span className="banner-divider" aria-hidden="true">/</span><span className="dataset-pill">Sample dataset</span>Items marked Sample are illustrations; saved items are synthetic development records. No PHI or real client data.</span></div>;
 }
 
 export function SyntheticBadge() {

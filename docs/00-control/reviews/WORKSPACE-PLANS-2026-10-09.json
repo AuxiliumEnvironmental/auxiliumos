@@ -1,0 +1,29 @@
+{
+  "reviewed_at": "2026-10-09T17:29:17.012182+00:00",
+  "reviewer": "integration_security_review",
+  "mode": "independent_read_only",
+  "scope": [
+    "Creator-owned typed planning-draft backend",
+    "Current client retry/open/scope handling"
+  ],
+  "backend_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+  "backend_blocking_findings": [],
+  "corrected_backend_findings": [
+    "Catalogue dollar quoting",
+    "PL/pgSQL ambiguous value identifier",
+    "CASE expression grouping"
+  ],
+  "client_blocking_findings": [
+    "Uncertain save retry can conflict with unlocked edits/cancelled creation",
+    "Same-scope detail requests can replace a newer selection",
+    "Post-save latest read failure must preserve safe retry state"
+  ],
+  "status": "backend_clear_client_corrections_in_progress",
+  "authority_boundary": "Personal synthetic preparation using existing scoped submit_request/view_account/view_asset; creator only; no professional/commercial/release rights.",
+  "remaining_evidence": [
+    "Exact final client source review",
+    "Integrated Facility coordinator catalogue parity",
+    "Hosted Auth/Data API/browser workflow",
+    "Concurrent real PostgreSQL sessions"
+  ]
+}

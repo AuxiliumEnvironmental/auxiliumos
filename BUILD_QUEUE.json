@@ -5,7 +5,7 @@
     {
       "id": "OWNER-ONBOARD-001",
       "title": "Secure owner account, password setup/recovery and first successful access",
-      "status": "blocked",
+      "status": "ready",
       "dependencies": [
         "SEC-001A"
       ],
@@ -48,10 +48,10 @@
         "runtime-build",
         "auth-onboarding-browser-fixture"
       ],
-      "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
-      "blocker": "Owner must personally choose the password and sign in using the delivered invitation. No publication, document or CI-service-key dependency remains for owner access.",
+      "next_action": "Owner invitation, password and provider authentication are observed. Verify usable published application account/facility access and representative workflow in an authenticated browser; do not equate the Auth timestamp with full application acceptance.",
+      "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "implementation_status": "Supported invitation sent; exact Auth identity independently confirmed; reviewed atomic operator transaction completed with active profile and exactly the authorized five capabilities. Password and first login remain unverified."
+      "implementation_status": "Active exact-five scoped access, confirmed email/password configured and Auth sign-in timestamp observed. Application browser evidence remains pending."
     },
     {
       "id": "UI-2026-10-09",
@@ -109,9 +109,19 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Complete one cohesive responsive demo across all 20 modules, preserve connected workflows, integrate bounded creator-owned synthetic planning save/reopen with exact revisions, independently review, run focused representative desktop/mobile checks, save matching source in GitHub, then publish in existing Lovable project under explicit owner approval.",
+      "next_action": "Complete one cohesive responsive demo across all 20 modules, preserve connected workflows, integrate bounded creator-owned synthetic planning save/reopen with exact revisions, independently review, run focused representative desktop/mobile checks, save matching source in GitHub, then publish in existing Lovable project under explicit owner approval. Apply the owner-requested Facility Coordinator terminology at the current integration boundary; do not pause parallel workflows.",
       "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "requested_copy_changes": [
+        {
+          "requested_at": "2026-10-09T12:22:19-05:00",
+          "source": "Explicit owner instruction",
+          "replace": "Site Champion",
+          "with": "Facility Coordinator",
+          "scope": "User-facing titles, field labels, navigation, active product documentation and demo copy. Preserve role/capability semantics and historical source attribution. Coordinate the typed planning catalogue if its stored field key changes.",
+          "status": "queued_for_current_integration_boundary"
+        }
+      ]
     },
     {
       "id": "CTRL-001",
@@ -285,7 +295,7 @@
         "development-ui",
         "document-connected-ui"
       ],
-      "blocker": "Automated authentic acceptance needs the protected development service credential and authorized manual dispatch. Owner invitation and scoped permissions are complete; personal password setup and login remain pending.",
+      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1580,17 +1590,17 @@
         "DOC-001B-BACKEND"
       ],
       "allowed_paths": [
-        "supabase/migrations/20261009083206_document_version_reviews.sql",
         "tests/database/document-version-reviews.test.mjs",
-        "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md"
+        "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+        "supabase/migrations/20261009172736_document_version_reviews.sql"
       ],
-      "assigned_to": null,
-      "branch": "work/document-review-backend-2026-10-09",
+      "assigned_to": "owner_onboarding_backend; root integration",
+      "branch": "agent/workspace-plans-backend",
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Old unpublished worktree unavailable after one check on 2026-10-09. Reimplement from current saved contracts, not prior descriptions. Immediate owner access and connected hosted integration take priority; preserve full review/release requirement.",
-      "status": "planned",
+      "next_action": "Reimplement bounded immutable-version internal human review request/decision against current saved authority/content/audit contracts. New CLI-ordered migration after planning persistence; explicit professional authority stays separate from owner administrative access. Keep backend independent of UI demo publication.",
+      "status": "in_progress",
       "requirements": [
         "M13",
         "M19",

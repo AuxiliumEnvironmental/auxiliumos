@@ -935,6 +935,47 @@
           "directory.spec.ts"
         ]
       ]
+    },
+    {
+      "id": "workspace-plans-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-hosted-or-concurrency-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "supabase/migrations",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/workspace-plans.test.mjs",
+        "web/src/pages/module-screen-definitions.ts"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/workspace-plans.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "workspace-plans-client-unit",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/workspace-plan-api.ts",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/workspace-plan-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/workspace-plan-api.test.mjs"
+        ]
+      ]
     }
   ]
 }

@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T17:13:25.699Z",
+  "recorded_at": "2026-10-09T17:29:40.618Z",
   "result": "passed",
-  "digest": "eb39c32e86d9c159e20b09eb3eddaf572d89083553af5028868699f732a7b191",
+  "digest": "0afd40d6e33802e0a2d09f2e227df9093fe38e0d2145bb04879e66265174d604",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -45,8 +45,8 @@
     ".github/workflows/ci.yml": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
     ".gitignore": "34fc960968677f85e01a6325224b565b97ee27deff865d8d9719ec43f6cca648",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "a3b3d5b2b2069efe1136e74c0e681e2068a14f3820fbd1ea678d303b2beb4918",
-    "BUILD_STATE.json": "827470e393451c6fd01a77fcd07b4798354e0e254c720ff0816cb3159595ff5e",
+    "BUILD_QUEUE.json": "f0d2a1bbe3a7ae68afa60fcce37fc9fbb9680e480a1a9530a285eaf797ab5cf4",
+    "BUILD_STATE.json": "6997ddb3c1edaa79fa5343e99c71048fbaffe04d95e1f74c972cc84066a4e28c",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -74,6 +74,7 @@
     "docs/00-control/reviews/SEC-001B-R5-2026-10-08.json": "059547c22dc34d1bf5eda9b8c5ed2ad923df78e3c78d45edaeb5541def55e892",
     "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json": "8878c65dae52e221c8be29a7a6f255c4959a1953ef2c891a260301debb86db73",
     "docs/00-control/reviews/SEC-001C-STORAGE-CONTRACT-2026-10-08.json": "7f60aa1a4a1dda0ff62b448fc70b4afddc5617951e20b01fc9e869201e0617c0",
+    "docs/00-control/reviews/WORKSPACE-PLANS-2026-10-09.json": "3ecc32fc34b663ead7b93a745b7de1f2760b0ea6f6ec088f17e477a7cbc1bec4",
     "docs/00-control/RISK_REGISTER.md": "3641093f728967c9d66b88c880c9174ecd0af574dfc0aa67ea81697c10f62ff6",
     "docs/00-control/RUNTIME_VERIFICATION_ENVIRONMENT.json": "c184d27d47f3d4aba99d779910a2a7697f3ce4153aa80d2d990753f2741f5a80",
     "docs/00-control/SOURCE_COVERAGE.json": "74889975cfcf5e424d2bca6da751085cef780a6cb086e1836dce9b3dc4c7a344",
@@ -81,14 +82,14 @@
     "docs/00-control/SPEC_GATE_REVIEW.md": "dead10ec887d4d12c64f7869422d24c6a1911375b4777db3b92e2c8d158ed65b",
     "docs/00-control/TRANSITION_PROTOCOL.md": "e0391424a30a2a46b61452f81353e80a13d0795780c9ba6269f737448e825e17",
     "docs/00-control/WORKSPACE_RECOVERY_2026-10-08.json": "2f280697eeaef426b44fb55623ece87ffcc7925d985fa7618727d477a545ae14",
-    "docs/01-product/CLIENT_TYPES.md": "3d683cdcc63db16ce1d13a66687228274968d401276efd9691e1b7461c4c8860",
-    "docs/01-product/DATA_SPINE.md": "32c74d704dc84d17bbcbb6b57faa32c7020046b51352814abb7ed03896051dca",
-    "docs/01-product/END_STATE_BLUEPRINT.md": "320bd67e3ebb91da936ed8997d1fce77501f10dbfa56047bc4f99737e8c468c3",
-    "docs/01-product/MODULE_MAP.md": "f2a6ae672d36aa08aefcb7f7159d5c87dec47697cf028c5db832bb343c4afb6b",
+    "docs/01-product/CLIENT_TYPES.md": "9541a936f08af5f6638c54ed3a63351ecc82af2d8339afcae855db2d6473cc3e",
+    "docs/01-product/DATA_SPINE.md": "c89fd445235fc324879ed3c59e40bdcf74aff0d0156ace7ae7e27832ca5eb022",
+    "docs/01-product/END_STATE_BLUEPRINT.md": "f55bb490069c9121e2a1cb922d195885e2bc220853be4e3fe932dcc101dfbbb4",
+    "docs/01-product/MODULE_MAP.md": "7b8c1f7c388a9f5390276908dbae9ea64c419ba2c3e5b249c64f2af98e2a2464",
     "docs/01-product/OUT_OF_SCOPE.md": "cf0cff165fab26ff6c04db95e6379cfba1d1fbdcc842e48de99ddc9d02a7128c",
     "docs/01-product/PRODUCT_PRINCIPLES.md": "a7bb009935a7f9e06ecedeb2b601581c0e608f6566e9564c5fea9e44638a811b",
     "docs/01-product/STRATEGIC_RATIONALE.md": "75e06fc6842d39778254b8bd7eb6ef9b3c131d999acec1aea7212903a53dc143",
-    "docs/01-product/V1_SCOPE.md": "dfcaca8020e03636c69a51b6f8b99f8c16d6896b8840633b02bba2e9ca2bc33c",
+    "docs/01-product/V1_SCOPE.md": "a3e71436782c3d379db334ed6a718589143646531d33d6c2f822206471ecc208",
     "docs/02-ontology/DELIVERABLES.md": "38330a8d3aa5808ba8c7a57aa2be982e4511dc4897e9ee2780a549312057bc2f",
     "docs/02-ontology/ISSUES_INTENTS_MODULES.md": "1396ea1f006bcaf3a07d2c363a759bc8d57f082ea6509a478db084def54f90e2",
     "docs/02-ontology/RELATIONSHIP_TAXONOMY.md": "85f3601e2dfad5c919f98e44dd77718e364d921a3c6e405725cf2b30bf938aba",
@@ -106,7 +107,7 @@
     "docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md": "39dcd6cfd669605f7aa0211587d70fb9c576ffeb82e9e7b50adee6c1d6853d27",
     "docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md": "b43cc86ed40038fdfbfffd8627fd18b7348d14b1a21bd650432349fadc9bf7ed",
     "docs/03-data/INTAKE_RUNTIME_CONTRACT.md": "bdde02bff6220786490bf60044ea4da7cb4737693b6773265557f2c663567716",
-    "docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md": "1287867e46af5ef0dafa5c5a2e4fc01d5a9f6a815961a947ec3345ded6266d31",
+    "docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md": "732ce98ad3beb877d108fe67b36fd3bb782f926f7d155f07d46da9a45e95be84",
     "docs/03-data/OWNER_ONBOARDING.md": "e87466a47df1b1c74b9de1e5e39742591f57761741ec5fb3c36b7871453ad702",
     "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md": "d045f02ba77e5efb2930598131571fbdd8f4cd234fa81348c96781502be66901",
     "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md": "7f67d78ea69c0a3e3c2e6e127dbd22bf67e3b13ad3a13171eb7d13731e81fe47",
@@ -115,6 +116,7 @@
     "docs/03-data/SCHEMA_REGISTRY.md": "a63bb25d7d9d6b69707bfa35324b0b4b9f8b31b0fe7e3339eec67b6b18aff0a8",
     "docs/03-data/SEED_DATA_REGISTRY.md": "c1b848331bdfcada112f1f3db4c89aa1d1a3ddb7474111a3c62a3102f59726a4",
     "docs/03-data/TABLE_OWNERSHIP.md": "e8104e1b8156cea7d910eaae2b06c10c07c99e0cda2ef5e778dfcfc50e9e4c82",
+    "docs/03-data/WORKSPACE_PLANS.md": "3c44e28253b92f83ee8fc508ef17aa2f19c291a9a45f6ebd10bf29095ad1fea1",
     "docs/04-security/DOCUMENT_ACCESS_MATRIX.md": "71ea64ac588d06688852e22afd7cee0e8cde1f0c38b9045b6883ded285dfb9fc",
     "docs/04-security/RLS_POLICY_MATRIX.md": "c9182fd65f46bbec3b66d35afbd3c875db89dea360454cb5de99df5ce13a04c4",
     "docs/04-security/ROLE_PERMISSION_MATRIX.md": "22dc4a2723c74885293f61f789e04b4f0d16a871086175b42eb5b8bb0165127b",
@@ -199,9 +201,9 @@
     "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "tests/unit/control-system.test.mjs": "a64dc78e1838d689a50dfd4780dac6b41b0d2f07189013043d46047dba90f692",
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
-    "VERIFICATION_PROFILES.json": "dcf2cfca17122156d5665908f8e629049162ebcce656120157669e61f475334c"
+    "VERIFICATION_PROFILES.json": "e391a53f574baa06e6b880afbf3a5c66cbb106770a4e4a12815c953692aef129"
   },
-  "observed_git_head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
+  "observed_git_head": "b8119d0e2073d9c6ac3959b638957e9868fb99a0",
   "results": [
     {
       "argv": [
@@ -235,5 +237,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "2f631fd303d829bfccf80e0061089b0ad6fc51cdaeb34d60ce0651a38d4c6ae1"
+  "log_sha256": "09b25560e24e365e4fd3662cc779a99735063acd14282d5e3d7b177f8f436f17"
 }

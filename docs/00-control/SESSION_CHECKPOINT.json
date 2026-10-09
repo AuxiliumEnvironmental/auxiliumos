@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T17:13:32.616Z",
+  "created_at": "2026-10-09T17:29:47.809Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,32 +8,23 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
+  "first_unfinished_action": "Finish reviewed full-destination demo UI, synchronize the Facility Coordinator field with the typed planning catalogue, run focused affected verification, save exact source and deploy to existing development Supabase/Lovable projects. Owner password and initial Auth session are now confirmed; verify app-level use in the published browser. Protected connected verification awaits the missing development-only GitHub repository secret.",
   "git": {
     "is_repository_root": true,
-    "head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
+    "head": "b8119d0e2073d9c6ac3959b638957e9868fb99a0",
     "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/RESUME.md\n M docs/00-control/SESSION_CHECKPOINT.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/owner-domain-preparation.json",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/01-product/CLIENT_TYPES.md\n M docs/01-product/DATA_SPINE.md\n M docs/01-product/END_STATE_BLUEPRINT.md\n M docs/01-product/MODULE_MAP.md\n M docs/01-product/V1_SCOPE.md\n M docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md\n?? docs/00-control/reviews/WORKSPACE-PLANS-2026-10-09.json",
     "remote": {
-      "status": "head_matches_remote",
+      "status": "head_differs_from_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
-      "checked_at": "2026-10-09T17:13:32.615Z"
+      "head": "d4e76d93b564ec667fcbaf8290d1f15b23cd9289",
+      "checked_at": "2026-10-09T17:29:47.808Z"
     }
   },
-  "controls_digest": "654f8db3bdbfe068244da25f839714ee06e74fba1e422d1731efbff2c5a6cfca",
+  "controls_digest": "2afaeacd065f6fc36c892e82a50782d7437865fc9a504370a80b574666453691",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
-    {
-      "id": "OWNER-ONBOARD-001",
-      "title": "Secure owner account, password setup/recovery and first successful access",
-      "declared_status": "blocked",
-      "verified": false,
-      "historical_completion": false,
-      "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
-      "blocker": "Owner must personally choose the password and sign in using the delivered invitation. No publication, document or CI-service-key dependency remains for owner access."
-    },
     {
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -41,7 +32,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
-      "blocker": "Automated authentic acceptance needs the protected development service credential and authorized manual dispatch. Owner invitation and scoped permissions are complete; personal password setup and login remain pending."
+      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed."
     }
   ],
   "evidence": {
@@ -50,7 +41,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T17:13:25.699Z"
+      "recorded_at": "2026-10-09T17:29:40.618Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -192,6 +183,14 @@
     "auth-onboarding-browser-fixture": {
       "status": "stale",
       "profile": "auth-onboarding-browser-fixture"
+    },
+    "workspace-plans-database": {
+      "status": "not_run",
+      "profile": "workspace-plans-database"
+    },
+    "workspace-plans-client-unit": {
+      "status": "not_run",
+      "profile": "workspace-plans-client-unit"
     }
   },
   "pending_owner_decisions": [

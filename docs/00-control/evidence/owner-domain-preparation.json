@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-09T17:12:35.373540+00:00",
+  "observed_at": "2026-10-09T17:29:17.012182+00:00",
   "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
   "github_ci": {
     "run_id": 37961286796,
@@ -34,7 +34,7 @@
       "https://auxiliumos.io/?auth=recovery"
     ],
     "invite_template": "Observed default .ConfirmationURL",
-    "email_delivery": "Supported invite accepted; invited_at independently observed. Receipt in owner inbox not independently observed.",
+    "email_delivery": "Invite accepted by owner; email confirmed and password configured observed through boolean/timestamp readback only.",
     "bucket": {
       "id": "os-private-ingest",
       "public": false,
@@ -91,14 +91,16 @@
     "independent_security_review": "no_blockers_for_exact_operator_path_and_domain_CORS",
     "hosted_authenticated_workflow": "not_executed",
     "owner_invitation_sent": true,
-    "owner_password_set": false,
+    "owner_password_set": true,
     "owner_first_login_verified": false,
     "owner_application_permissions_active": true,
-    "https_sign_in_and_recovery_browser": "passed"
+    "https_sign_in_and_recovery_browser": "passed",
+    "owner_first_authentication_verified": true,
+    "application_browser_verification": "pending"
   },
   "screenshots": [
     "Private owner-auth-domain-20261009.jpg retained outside the public repository.",
     "Private owner-invitation-sent-20261009.jpg retained outside the public repository."
   ],
-  "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules."
+  "next_action": "Finish reviewed full-destination demo UI, synchronize the Facility Coordinator field with the typed planning catalogue, run focused affected verification, save exact source and deploy to existing development Supabase/Lovable projects. Owner password and initial Auth session are now confirmed; verify app-level use in the published browser. Protected connected verification awaits the missing development-only GitHub repository secret."
 }

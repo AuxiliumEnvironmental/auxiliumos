@@ -1468,7 +1468,7 @@ Client Account
 
 → Audit Events
 
-They may also use site passports, critical asset registries, response maps, readiness reserves, vendor matrices, site champions, QBR packets, and executive dashboards.
+They may also use site passports, critical asset registries, response maps, readiness reserves, vendor matrices, facility coordinators, QBR packets, and executive dashboards.
 
 ---
 

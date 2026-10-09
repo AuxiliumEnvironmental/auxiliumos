@@ -102,7 +102,7 @@ V1 includes:
 - Facility name
 - Facility address placeholder
 - Facility status placeholder
-- Site Champion assignment placeholder
+- Facility Coordinator assignment placeholder
 
 V1 does not include:
 
@@ -245,7 +245,7 @@ V1 should support fake/demo versions of:
 - Auxilium Admin
 - Document Controller
 - Client Executive
-- Site Champion
+- Facility Coordinator
 - Project Requester
 - Document Viewer
 

@@ -380,9 +380,9 @@ It supports:
 
 - Site passports
 
-- Site champion records
+- Facility coordinator records
 
-- Site champion training
+- Facility coordinator training
 
 - Response maps
 
