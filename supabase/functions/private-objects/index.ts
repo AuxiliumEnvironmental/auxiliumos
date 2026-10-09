@@ -7,15 +7,19 @@ const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
 // Nonsecret, DEVELOPMENT-ONLY defaults for the existing auxiliumos-dev backend.
 // They authorize neither bucket provisioning nor SQL reservation enablement.
 const canonicalDevelopment = url === 'https://txofqxictwecgcnvezlb.supabase.co';
+// Exact existing editor project, verified through its project metadata. This is
+// browser transport configuration, never identity, grant or live-data authority.
+const canonicalEditorOrigin = 'https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app';
 const mode = Deno.env.get('PRIVATE_OBJECT_TRANSPORT_MODE') ?? (canonicalDevelopment ? 'synthetic-only' : 'disabled');
 const originSetting = Deno.env.get('PRIVATE_OBJECT_ALLOWED_ORIGINS')
-  ?? (canonicalDevelopment ? 'http://127.0.0.1:4179,http://localhost:4179' : '');
+  ?? (canonicalDevelopment ? `http://127.0.0.1:4179,http://localhost:4179,${canonicalEditorOrigin}` : '');
 const allowedOrigins = originSetting.trim() ? originSetting.split(',').map(origin => origin.trim()) : [];
-// Overrides can select exact local development origins, never production hosts,
-// wildcard/subdomain patterns, opaque origins, paths, credentials or redirects.
+// Overrides select exact local origins or this one editor origin on this one
+// development backend, never arbitrary hosts, wildcard patterns or redirects.
 const validOrigins = allowedOrigins.every(origin => {
   try {
     const parsed = new URL(origin);
+    if (canonicalDevelopment && origin === canonicalEditorOrigin) return true;
     return ['http:', 'https:'].includes(parsed.protocol)
       && ['localhost', '127.0.0.1'].includes(parsed.hostname)
       && Number(parsed.port) > 0 && origin === parsed.origin;

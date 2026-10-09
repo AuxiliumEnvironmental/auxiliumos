@@ -14,10 +14,10 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Verified remotec94e57bfce8b14b7a1d432c6256d098fa520f23f equals local9850848 tree0fc1dcc82d82ffcc111b03a088632a3ad542340d; CI53 run37902541444 SUCCESS. Protected development-api job correctly skipped on ordinary push. PR84 draft open; main untouched.",
+    "github": "Verified remote ad7294501ff4465c48e8b8b1abffc3b0e5853807 equals localdf0ed913 tree7b3a25613f2f323d700b1c27c3cd2a2bc67503a6. CI54 run37905733746 SUCCESS, controls/application jobs pass; protected development-api correctly skipped. Later CORS3828ea2 not yet published at this checkpoint. PR84/main boundary preserved.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Eight canonical migrations applied/read back with exact hashes; canonical seed unchanged. Private config disabled, Auth0/buckets0/document_versions0 at08:05:38Z. Edge private-objects v1 remains; no hosted authenticated acceptance.",
-    "lovable": "Existing project0b7bbfc6-627f-4ca0-9217-98f5b164b419 savedcdd271be8a6ef5402a843f34324885eea20d1706 independently matches all320 canonical files atc94e57b. Build alias passes; public connection/sign-in worker-verified. Runtime env persistence and Lovable browser-test environment remain hosting checks. No native GitHub sync/production publication."
+    "supabase": "Nine canonical migrations applied with exact hashes;29 application tables allRLS. Six new content tables deny direct application/service access; user/service RPC split verified. New document-version-content Edgev1 ACTIVE/verify_jwt true and exact source readback; both operational gates disabled,Auth0/buckets0/versions0 at08:37:20Z. No genuine hosted acceptance.",
+    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks pass. NativeGitHubsync and production publication notclaimed. Existing publicweb/.env preserved; durable runtime settings still notverified. Exact editor CORS compatibility fix pending independentreview/deployment."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "DOC-001B coherent source is integrated and independently reviewed; finish source publication and verify remote tree/CI, then fresh-preflight/apply only new 20261009080505 migration and deploy exact document-version-content gateway on auxiliumos-dev. Transfer new functional source to existing Lovable and verify saved parity. Nine migration source files exist but only eight are applied at this checkpoint. Genuine hosted Auth/API remains separately blocked by protected configuration; continue exact-version review/release next without restarting auth/SYNC.",
+  "first_runtime_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -61,14 +61,14 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "Eight database migrations and Edgev1 deployed; ordinary CI53 passes, including document adoption/UI. Genuine Auth/API/Storage and hosted browser acceptance unexecuted. Source transferred exactly to existing Lovable; no production/complete-module claim.",
+    "verification_status": "Nine database migrations, private-objectsv1 and document-version-contentv1 deployed; exact-source CI54 passes.333files saved identically in existing Lovable. Genuine Auth/API/Storage and hosted browser acceptance remain unexecuted; no production/complete-module claim.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
     "database_deployment": {
-      "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
       "receipt": "docs/00-control/evidence/development-migrations.json",
-      "migration_count": 8,
+      "migration_count": 9,
       "authentic_api_status": "awaiting_secure_key",
       "private_config_enabled": false,
       "storage_bucket_count": 0
@@ -127,8 +127,11 @@
       "worker_client_unit_checks": 13,
       "integrated_browser_fixture_checks": 22,
       "version_browser_regression_checks": 14,
-      "deployed": false,
-      "hosted_api_acceptance": false
+      "deployed": true,
+      "hosted_api_acceptance": false,
+      "operational_gates_enabled": false,
+      "edge_version": 1,
+      "ci_run": 37905733746
     }
   },
   "execution_recovery": {
@@ -162,19 +165,23 @@
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
     "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
-    "active_agents": [],
-    "first_unfinished_action": "DOC-001B coherent source is integrated and independently reviewed; finish source publication and verify remote tree/CI, then fresh-preflight/apply only new 20261009080505 migration and deploy exact document-version-content gateway on auxiliumos-dev. Transfer new functional source to existing Lovable and verify saved parity. Nine migration source files exist but only eight are applied at this checkpoint. Genuine hosted Auth/API remains separately blocked by protected configuration; continue exact-version review/release next without restarting auth/SYNC.",
-    "latest_verified_remote": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+    "active_agents": [
+      "/root/document_review_backend",
+      "/root/document_content_ui",
+      "/root/integration_security_review"
+    ],
+    "first_unfinished_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
+    "latest_verified_remote": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
-      "message_id": "umsg_01m4fv360ce1erhq9zvnj8449n",
+      "message_id": "umsg_01m4fx1brzfqmaanepv5gtfezj",
       "thread_id": "main",
-      "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
-      "archive_sha256": "ca3aa6cb691442477e53bac8b328240a72403e6db2cebbe2cc8b32c7139b1463",
-      "status": "completed_320_of_320_saved_source_parity",
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+      "archive_sha256": "be9b56e683c296f13c7e1962c977a12191aa5c597008acfd0f56775be9c7f8f3",
+      "status": "completed_333_of_333_saved_source_parity",
       "native_github_sync": false,
       "receipt": "docs/00-control/evidence/lovable-source-transfer.json",
-      "target_commit": "cdd271be8a6ef5402a843f34324885eea20d1706"
+      "target_commit": "1a625d6e9a1d3e8d7be7e7f50d348abc004fa886"
     }
   }
 }

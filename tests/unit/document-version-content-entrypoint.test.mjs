@@ -13,6 +13,7 @@ const runnable = ts.transpileModule(source.replace(/^import .*;\n/gm, ''), {
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None },
 }).outputText;
 const canonical = 'https://txofqxictwecgcnvezlb.supabase.co';
+const editorOrigin = 'https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app';
 function evaluate(overrides = {}, { fetch = async () => { throw Error('Unexpected test network access'); }, sdk = realCreateClient } = {}) {
   const env = { SUPABASE_URL: canonical, SUPABASE_ANON_KEY: 'test-public-key', SUPABASE_SERVICE_ROLE_KEY: 'test-server-secret', ...overrides };
   let config, handle;
@@ -72,7 +73,7 @@ function wire(overrides = {}) {
 
 test('exact auxiliumos-dev defaults remain bounded synthetic-only and independently DB-gated', () => {
   const { config } = evaluate(); assert.equal(config.enabled, true);
-  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179']);
+  assert.deepEqual(Array.from(config.allowedOrigins), ['http://127.0.0.1:4179', 'http://localhost:4179', editorOrigin]);
   assert.match(source, /@supabase\/supabase-js@2\.117\.3/);
 });
 test('unknown targets, lookalikes, incomplete credentials and non-synthetic modes are disabled', () => {
@@ -83,7 +84,7 @@ test('unknown targets, lookalikes, incomplete credentials and non-synthetic mode
   for (const key of ['SUPABASE_ANON_KEY', 'SUPABASE_SERVICE_ROLE_KEY']) assert.equal(evaluate({ [key]: '' }).config.enabled, false);
   assert.equal(evaluate({ SUPABASE_ANON_KEY: '', DOCUMENT_CONTENT_PUBLISHABLE_KEY: 'explicit-public' }).config.enabled, true);
 });
-test('origin overrides accept only exact local origins and never Lovable or wildcard patterns', () => {
+test('origin overrides reject unrecognized hosts and wildcard patterns', () => {
   for (const origin of ['*', 'null', 'https://example.test:4179', 'https://preview.lovable.app', 'http://localhost', 'http://localhost:80',
     'http://localhost:4179/', 'http://user@localhost:4179', 'http://localhost:4179/path', 'http://localhost:4179?next=x', 'http://localhost:4179,']) {
     assert.equal(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: origin }).config.enabled, false, origin);
@@ -91,6 +92,28 @@ test('origin overrides accept only exact local origins and never Lovable or wild
   const f = evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: ' http://localhost:4180 , https://127.0.0.1:4181 ' });
   assert.equal(f.config.enabled, true); assert.deepEqual(Array.from(f.config.allowedOrigins), ['http://localhost:4180', 'https://127.0.0.1:4181']);
   assert.deepEqual(Array.from(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: '' }).config.allowedOrigins), []);
+});
+test('exact existing editor origin works only with canonical backend and still requires current authority', async () => {
+  assert.equal(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: editorOrigin }).config.enabled, true);
+  for (const origin of [editorOrigin + '/', editorOrigin + '.evil.test', editorOrigin + ':444', editorOrigin.replace('https:', 'http:'),
+    editorOrigin.replace('0b7bbfc6', '0b7bbfc7'), 'https://lovable.dev', 'https://other.lovable.app', 'https://*.lovable.app',
+    editorOrigin.replace('https://', 'https://user@')]) {
+    assert.equal(evaluate({ DOCUMENT_CONTENT_ALLOWED_ORIGINS: origin }).config.enabled, false, origin);
+  }
+  assert.equal(evaluate({ SUPABASE_URL: 'http://localhost:54321', DOCUMENT_CONTENT_ALLOW_LOCAL_TEST: 'true',
+    DOCUMENT_CONTENT_TRANSPORT_MODE: 'synthetic-only', DOCUMENT_CONTENT_ALLOWED_ORIGINS: editorOrigin }).config.enabled, false);
+  const w = wire(), f = evaluate({}, { fetch: w.fetch });
+  const preflight = await f.handle(new Request(url, { method: 'OPTIONS', headers: { Origin: editorOrigin,
+    'Access-Control-Request-Method': 'GET', 'Access-Control-Request-Headers': 'authorization,apikey' } }));
+  assert.equal(preflight.status, 204); assert.equal(preflight.headers.get('Access-Control-Allow-Origin'), editorOrigin);
+  assert.equal(w.state.calls.length, 0); assert.equal(preflight.headers.get('Access-Control-Allow-Credentials'), null);
+  const response = await f.handle(new Request(url, { headers: { Authorization: 'Bearer current.user.token', Origin: editorOrigin } }));
+  assert.equal(response.status, 200); assert.equal(response.headers.get('Access-Control-Allow-Origin'), editorOrigin);
+  assert.deepEqual(new Uint8Array(await response.arrayBuffer()), bytes); assert.equal(w.state.authorizations, 2);
+  const revoked = wire({ revoked: true }), denied = evaluate({}, { fetch: revoked.fetch });
+  const rejection = await denied.handle(new Request(url, { headers: { Authorization: 'Bearer current.user.token', Origin: editorOrigin } }));
+  assert.equal(rejection.status, 404); assert.deepEqual(await rejection.json(), { error: 'not_found_or_unavailable' });
+  assert.equal(revoked.state.calls.at(-1).body.p_outcome, 'access_changed');
 });
 test('local test stack requires explicit synthetic mode and opt-in, with no inherited origins', () => {
   for (const target of ['http://localhost:54321', 'http://127.0.0.1:54321', 'http://kong:8000']) {

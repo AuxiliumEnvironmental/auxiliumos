@@ -173,7 +173,7 @@
         "directory-api",
         "development-ui"
       ],
-      "blocker": "Eight migrations are applied. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat.",
+      "blocker": "Nine migrations and two gateway functions are deployed. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1374,7 +1374,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Reviewed7c0e658 integrated632c7d0.45 simulated-Auth PGlite checks pass. Narrow hold-only clearance correction independently compared to prior body. Root publishes/preflights/applies only ninth migration; authentic API/concurrency remain open.",
+      "next_action": "Reviewed ninth migration deployed unchanged; exact stored hashes,29allRLS tables, direct role denials and RPC separation verified. CI54 passes45simulatedDB checks. Authentic API/concurrency remain open; continue exact-version internal review.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -1414,7 +1414,7 @@
       "required_evidence_levels": [
         "unit"
       ],
-      "next_action": "Reviewedfd0f06c integrated7f5f52e.30 injected gateway/real-entrypoint-SDK checks pass. Root publishes/deploys exact bounded synthetic gateway; same-request reauthorization and mandatory result audit precede bytes. Existing authentic version harness extended, unexecuted.",
+      "next_action": "Reviewed bounded gatewayv1 deployed with JWT verification and exact two-file source readback; CI54passes30injected checks. Real Auth/Storage remains unexecuted. Root exact existing editor CORS fix3828ea2 awaits review/publication/deployment.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -1458,6 +1458,81 @@
         "browser_fixture"
       ],
       "next_action": "Reviewedc681c31 integrated007fb35.13 adapter,22 content browser and14 prior version regression checks passed. Root permanent wiring/page copy integrated;22 new browser journeys and build pass. Await actual hosted acceptance separately; attachment handoff is not saved/delivered/released.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001C-BACKEND",
+      "title": "Exact immutable-version human internal review",
+      "dependencies": [
+        "DOC-001B-BACKEND"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009083206_document_version_reviews.sql",
+        "tests/database/document-version-reviews.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md"
+      ],
+      "assigned_to": "document_review_backend",
+      "branch": "work/document-review-backend-2026-10-09",
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Pinneddf0ed913; agreed current requester/create-version authority, explicit synthetic reviewer assignment+current exact-content authority, deliberate exact-version attestation, immutable request/terminal decision and dynamic current eligibility. Workerimplements/tests; lead independent review before integration/deployment.",
+      "status": "in_progress",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001C-UI",
+      "title": "Connected exact-version internal review request and decision interface",
+      "dependencies": [
+        "DOC-001B-UI"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-review-api.ts",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-review-api.test.mjs",
+        "tests/e2e/document-reviews.spec.ts"
+      ],
+      "assigned_to": "document_content_ui",
+      "branch": "work/document-review-ui-2026-10-09",
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Pinneddf0ed913; frozen document_version_review_status/request_document_version_review/decide_document_version_review contract. Synthetic-only qualification label; no download→review inference, no real approval/release. Worker owns4179 until finished; root permanent testMatch/profile/pageintegration.",
+      "status": "in_progress",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [],
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

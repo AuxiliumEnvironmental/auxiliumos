@@ -17,5 +17,26 @@
     "gateway.mjs": "777973ba23670c469211db8ab022bc6ada4fefb3f389138530bc0722f5a21a58"
   },
   "recovery": "Exact index.ts bytes fetched from get_edge_function and recovered into repository; gateway.mjs unchanged from6163fc9. No redeployment performed during this recovery.",
-  "acceptance": "Deployment/readback is not genuine signed-in Auth/Storage acceptance. Upload configuration disabled and bucket absent. No production deployment or real files."
+  "acceptance": "Deployment/readback is not genuine signed-in Auth/Storage acceptance. Upload configuration disabled and bucket absent. No production deployment or real files.",
+  "additional_functions": [
+    {
+      "id": "4bbddcf6-39a8-46b1-9c71-ff2ee7506c41",
+      "slug": "document-version-content",
+      "version": 1,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "ezbr_sha256": "c853c628c85309ff1aaace223fc4740c848fc2f2b744a5ef9f12d7eb32201c2c",
+      "created_at": 1791534893059,
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+      "source_readback": {
+        "observed_at": "2026-10-09T08:37:58.637Z",
+        "files": [
+          "index.ts",
+          "gateway.mjs"
+        ],
+        "exact_bytes_match": true
+      },
+      "acceptance": "Provider deployed/retrieved exact source. Both synthetic DB gates disabled. No genuine Auth/Storage/API or real-data release claim."
+    }
+  ]
 }

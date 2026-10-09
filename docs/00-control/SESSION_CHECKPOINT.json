@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T08:31:05.476Z",
+  "created_at": "2026-10-09T08:45:54.075Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,20 +8,20 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "DOC-001B coherent source is integrated and independently reviewed; finish source publication and verify remote tree/CI, then fresh-preflight/apply only new 20261009080505 migration and deploy exact document-version-content gateway on auxiliumos-dev. Transfer new functional source to existing Lovable and verify saved parity. Nine migration source files exist but only eight are applied at this checkpoint. Genuine hosted Auth/API remains separately blocked by protected configuration; continue exact-version review/release next without restarting auth/SYNC.",
+  "first_unfinished_action": "Finish CORS3828ea2 independent review/publication, deploy only the two exact entrypoint updates and verify actual allowed/denied OPTIONS without touching activation gates. DOC-001C backend and UI workers continue in document-review-backend/document-review-ui pinneddf0ed913, migration20261009083206 onlyinworker. Nine migrations already applied; never reapply. Lovable1a625d6 independently matches333files atad72945; no active transferjob. Genuine hosted Auth/API requires protected secure configuration and remains separate.",
   "git": {
     "is_repository_root": true,
-    "head": "007fb3599b27df6879e14c117f67618bc1597815",
+    "head": "3828ea26365c9d2d78cf9c305c19cd064a8fa3b7",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M playwright.runtime.config.ts\n M tests/api/document-versions.test.mjs\n M web/src/pages/private-files.tsx\n?? docs/00-control/evidence/document-content-browser-fixture.json\n?? docs/00-control/evidence/document-content-browser-fixture.log\n?? node_modules",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/development-private-function.json\n M docs/00-control/evidence/lovable-source-transfer.json\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n?? node_modules",
     "remote": {
       "status": "not_checked",
       "branch": "build/continuation-2026-10-09",
       "head": null
     }
   },
-  "controls_digest": "be4f421cdf6f100c7f829e8873b8d20c85f03cafb63a78ab53fe5ccd3e221333",
+  "controls_digest": "593af7e8f6f5dd033cb7d8932667685f2fd7fb6a8c16c98ca8d890bf602933a7",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -31,7 +31,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
-      "blocker": "Eight migrations are applied. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat."
+      "blocker": "Nine migrations and two gateway functions are deployed. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat."
     }
   ],
   "evidence": {
@@ -40,7 +40,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T08:31:05.238Z"
+      "recorded_at": "2026-10-09T08:45:53.758Z"
     },
     "foundation-contract": {
       "status": "stale",

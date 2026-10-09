@@ -58,7 +58,20 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "provisional_choices": [
+        {
+          "id": "OD-002-synthetic-exact-version-review",
+          "choice": "Explicit exact-version synthetic reviewer assignment models qualified-human review only for development fixtures. Decisions bind version/digest and deliberate human attestation; they never assert real professional qualifications or grant release. Requester needs current create_version/view_versions; decider needs current assignment and exact-content authority.",
+          "rationale": "Build the complete human-controlled review workflow without inventing actual credentials, scientific thresholds or owner approval. Preserved decisions and current operational eligibility remain distinct.",
+          "affected_capabilities": [
+            "M13 internal review",
+            "M19 immutable human decision audit"
+          ],
+          "activation_gate": "Existing OD-002 live designated reviewer/releaser/dual-role review and OD-013 safe inspection gates remain closed. Actual qualification evidence and genuine runtime verification required before professional use.",
+          "production_enabled": false
+        }
+      ]
     },
     {
       "id": "OD-003",

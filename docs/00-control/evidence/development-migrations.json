@@ -86,16 +86,27 @@
       "exact_source_match": true,
       "observed_at": "2026-10-09T08:05:38.520655Z",
       "evidence": "Exact reviewed SQL applied once after fresh seven-migration/hash/disabled-config preflight. Generated history version mapped under lock with exact-name/single-statement/SHA/absent-target checks. Three new private tables RLS/direct-CRUD-denied including service_role; five public invoker wrappers and corresponding private empty-search-path definers have exact human/service ACL separation."
+    },
+    {
+      "canonical_version": "20261009080505",
+      "generated_version": "20261009083426",
+      "name": "document_version_content",
+      "sha256": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T08:37:20.503219Z",
+      "evidence": "Exact reviewed SQL applied once after fresh eight-hash/disabled-config/emptyversion preflight. Generated history normalized underlock after exactname/single-statement/hash/absent-canonical checks. Six new private tables RLS with no direct anon/authenticated/service privileges. Public invokers/private checkeddefiners and exact user/service ACLsplit verified; initial-close-only clearance predicate present."
     }
   ],
   "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
   "production": false,
-  "latest_source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+  "latest_source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
   "latest_readback": {
-    "observed_at": "2026-10-09T08:05:38.520655Z",
-    "migration_count": 8,
+    "observed_at": "2026-10-09T08:37:20.503219Z",
+    "migration_count": 9,
     "all_source_hashes_match": true,
-    "application_tables": 23,
+    "application_tables": 29,
     "public_application_tables": 12,
     "tables_without_rls": 0,
     "auth_users": 0,
@@ -109,7 +120,7 @@
       "service_role"
     ],
     "new_public_rpc_security": "Invoker wrappers; empty search_path; human and service EXECUTE grants separated exactly as source. No anonymous EXECUTE.",
-    "advisors": "Intentional deny-by-default RLS without policies retained. Platform public.rls_auto_enable has anon/authenticated EXECUTE warnings but returns event_trigger, not application JSON; recorded for bounded platform review, not changed opportunistically.",
+    "advisors": "26 intentional deny-by-default RLS-without-policy INFOs; unchanged2platform public.rls_auto_enable EXECUTE warnings remain recorded (event_trigger return; not opportunistically changed). Newcontent RPCs have no anonEXECUTE and correct user/service split.",
     "advisor_references": [
       "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
       "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable",
@@ -118,11 +129,17 @@
     "new_document_version_tables": 3,
     "new_document_version_tables_all_rls": true,
     "document_versions": 0,
-    "performance_advisors": "INFO:23 composite foreign-key covering-index notices and41 unused indexes on synthetic nearly-empty target; no measured workload yet. Do not remove integrity indexes because unused. Review actual access paths before load acceptance.",
+    "performance_advisors": "INFO:24 composite FK covering-index notices (one newcontentgrant FK) and48unused indexes on nearly-emptydevelopment target; existing10Authconnections notice. Version-leading indexes and immutable referencedhistory retained. No measured workload acceptance or index-removal justification.",
     "performance_advisor_references": [
       "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
       "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
-    ]
+    ],
+    "new_document_content_tables": 6,
+    "new_document_content_tables_all_rls": true,
+    "document_content_enabled": false,
+    "document_content_revision": 1,
+    "document_content_grants": 0,
+    "advisors_observed_at": "2026-10-09T08:37:23.923Z"
   },
   "canonical_seed": {
     "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",

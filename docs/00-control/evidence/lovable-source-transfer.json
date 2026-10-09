@@ -81,5 +81,24 @@
     },
     "root_checks": "Same source passed GitHub CI53 run37902541444 including14 document-version,20 private-file,7 directory and8 intake browser fixture journeys. No genuine hosted Auth proof.",
     "configuration_durability": "Public runtime values reside in untracked gitignored web/.env; sign-in was worker-verified. Durable platform environment-settings persistence has not been independently established."
+  },
+  "latest_verified_transfer": {
+    "observed_at": "2026-10-09T08:45:03.081Z",
+    "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+    "source_tree": "7b3a25613f2f323d700b1c27c3cd2a2bc67503a6",
+    "target_commit": "1a625d6e9a1d3e8d7be7e7f50d348abc004fa886",
+    "message_id": "umsg_01m4fx1brzfqmaanepv5gtfezj",
+    "thread_id": "main",
+    "archive_sha256": "be9b56e683c296f13c7e1962c977a12191aa5c597008acfd0f56775be9c7f8f3",
+    "saved_files_exact": 333,
+    "independent_proof": {
+      "unchanged_from_prior_exact_parity": 302,
+      "changed_raw_files_read_and_exact_compared": 31,
+      "missing": 0,
+      "mismatched": 0,
+      "canonical_deletions": 0
+    },
+    "worker_checks": "build:dev passed,13contentadapter checks passed; no repeat of unsupported browserenvironment.",
+    "limits": "No nativeGitHubsync, genuinebackendjourney, durable runtime envsetting or production publication. Publicweb/.env unchanged. LaterCORS3828ea2 notyetincluded."
   }
 }
