@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-08T12:58:51.038685+00:00",
+  "task": "SEC-001B",
+  "reviewer_role": "independent-security-reviewer",
+  "source_base": "bb46093f88c88ef1ced1b96d203d804e41f8af0d",
+  "initial_reviewed_sha256": {
+    "web/vite.config.ts": "13ecfa57211e41974d52d81dad64fbcaf60713ee61aab2b1b5162e8afd401217",
+    "web/src/lib/config.ts": "1621785355c15e7524b21bf5050cd4d0faca0260c6c114074a00a4eaddc92ed8",
+    "web/src/lib/directory-api.ts": "2944812b86365c43bc5f0798cf00889a99ad9b01d434b45f1e3c8f256c08b57c",
+    "web/src/lib/runtime.tsx": "85db01a5494b5030e0a6710ae05848db72ab8194ac186deea7d4efb45bb9430e",
+    "web/src/lib/use-directory.ts": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
+    "web/src/lib/errors.ts": "a1facfd7548edf2e86c11f312d35aaddb0c9e810aaa06b6b4e1f0817e874e57b",
+    "web/src/router.tsx": "c590ff430075ae87497c1302d42b918c75ee1e8bddc4ce2174ad8e5b639ec945",
+    "tests/api/identity-directory.test.mjs": "0c033c651800165d887a232c5380582c4654e20ae9c87dfb1e282619ff12f702"
+  },
+  "scope": "Client identity/cache/configuration/redirect boundaries and future synthetic Auth/API provisioning cleanup. No live service execution.",
+  "findings": [
+    {
+      "id": "SEC-001B-R1",
+      "state": "code_correction_independently_reviewed",
+      "finding": "Auth fixture ID was queued for deletion before exact generated-email ownership assertion.",
+      "resolution": "Validate UUID and generated email before registering the ID for cleanup. Never delete an unexpected returned identity. Independent source review on 2026-10-08 confirms ordering at published 283882c; authentic provisioning/cleanup remains unexecuted."
+    },
+    {
+      "id": "SEC-001B-R2",
+      "state": "code_correction_independently_reviewed",
+      "finding": "Runtime-only key validation occurs after Vite embeds VITE values. A wrongly configured secret would be emitted before rejection. No current secret exposure was found.",
+      "required_fix": "Reuse safe URL/key validation at Vite startup/build before output; retain browser validation.",
+      "resolution": "Independent source review confirms Vite invokes shared validation before configuration return; key validation precedes the missing-URL return. Remote run 37803280803 passed the three configuration regressions; integrated candidate rerun remains required."
+    },
+    {
+      "id": "SEC-001B-R3",
+      "state": "code_correction_independently_reviewed",
+      "finding": "Default fetch redirects can forward credential-bearing password/refresh JSON on 307/308 redirects.",
+      "required_fix": "Reject redirects in the credential-bearing runtime transport.",
+      "resolution": "Independent source review confirms redirect:error on runtime fetch. The affected browser fixture must pass on the final integrated candidate."
+    },
+    {
+      "id": "SEC-001B-R4",
+      "state": "code_correction_independently_reviewed_and_fixture_verified",
+      "finding": "Expired-session refresh error makes SDK signOut return before local cleanup; an in-memory UI lock disappears on reload.",
+      "reproduction": "Independent installed-SDK probe and actual browser HTTP fixture both reproduced retained session credentials. Browser case failed in 1.1s with expected false / received true for persisted access_token.",
+      "before_fix_evidence": "docs/00-control/evidence/signout-before-fix.log",
+      "required_fix": "Durable logout boundary/local credential removal with old storage writer blocked; reload cannot resurrect prior session, failed fresh login cannot unlock it.",
+      "resolution": "Final R5 independent review and integrated 25 persistence/7 browser-fixture checks support the bounded correction. Storage refusal, crash erasure, genuine Auth/API and server revocation remain separate limits."
+    },
+    {
+      "id": "SEC-001B-R5",
+      "state": "code_correction_independently_reviewed_and_fixture_verified",
+      "finding": "A stale tab may overwrite or delete a fresh session before its storage event arrives, because new login removes the shared logout marker.",
+      "reproduction": "tests/unit/auth-persistence.test.mjs exercises actual production adapter and interleaved shared Storage.",
+      "required_fix": "Durable generation pointer plus physically separate credential slots and intent per generation; captured logout client/generation; independent review required.",
+      "followup_review": "docs/00-control/reviews/SEC-001B-R5-2026-10-08.json preserves two P2 findings and their corrections. Third review found no blocker; integrated build and seven browser HTTP-fixture journeys passed. Authentic API and release acceptance remain unexecuted."
+    }
+  ],
+  "limits": [
+    "HTTP fixtures are not authentic Supabase Auth/API evidence",
+    "Existing cloud backend remains unchanged",
+    "API harness is prepared but not executed against a service"
+  ],
+  "recovery_observation": {
+    "observed_at": "2026-10-08T13:55:39.917035+00:00",
+    "review_status": "pending final review",
+    "finding": "R5 not fixed in recovered root working tree; initial lease implementation remains. Earlier review statuses are not promoted by this checkpoint."
+  }
+}

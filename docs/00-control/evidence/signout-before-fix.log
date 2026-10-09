@@ -1,0 +1,40 @@
+Command: AUXILIUMOS_BROWSER_EXECUTABLE=<recorded scratch Chromium> npm run test:runtime-ui -- --grep expired-session
+Purpose: demonstrate the independent review finding against the original integrated frontend before correction. Expected failing regression, not acceptance evidence.
+[WebServer] (node:30) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:43) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:77) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/directory.spec.ts:144:5 › fixture browser: expired-session sign-out cannot restore access after refresh failure and reload (1.1s)
+
+
+  1) tests/e2e/directory.spec.ts:144:5 › fixture browser: expired-session sign-out cannot restore access after refresh failure and reload 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: true
+
+      162 |   await expect(page.getByRole('button', { name: /^(Sign in|Try signing out again)$/ })).toBeVisible();
+      163 |   await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toHaveCount(0);
+    > 164 |   expect(await page.evaluate(() => Object.values(localStorage).some((value) => value.includes('access_token')))).toBe(false);
+          |                                                                                                                  ^
+      165 |   await page.clock.resume();
+      166 |   backend.failRefresh = false;
+      167 |   await page.reload();
+        at /workspace/scratch/831a296a4676/auxiliumos/tests/e2e/directory.spec.ts:164:114
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/directory-fixture-browser--9b09d--refresh-failure-and-reload/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/directory-fixture-browser--9b09d--refresh-failure-and-reload/error-context.md
+
+  1 failed
+    tests/e2e/directory.spec.ts:144:5 › fixture browser: expired-session sign-out cannot restore access after refresh failure and reload 
+

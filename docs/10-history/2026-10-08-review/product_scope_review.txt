@@ -1,0 +1,198 @@
+AuxiliumOS product and ontology review for modernization
+Review date: 2026-10-08
+Reviewer scope: read-only review; no repository files changed.
+
+READ COVERAGE
+
+Read every line of all seven docs/01-product files and all seven docs/02-ontology files, plus docs/03-data/RELATIONSHIP_MAP.md, AGENTS.md, docs/03-data/SCHEMA_REGISTRY.md, docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md, supabase/migrations/20260713000100_foundation_slice_schema.sql, and the open-decision sections of both security matrices. Findings below describe the uploaded snapshot; they do not establish cloud/runtime implementation or completeness of inaccessible conversations.
+
+Primary sources:
+P1 docs/01-product/END_STATE_BLUEPRINT.md
+P2 docs/01-product/MODULE_MAP.md
+P3 docs/01-product/DATA_SPINE.md
+P4 docs/01-product/PRODUCT_PRINCIPLES.md
+P5 docs/01-product/V1_SCOPE.md
+P6 docs/01-product/OUT_OF_SCOPE.md
+P7 docs/01-product/CLIENT_TYPES.md
+O1 docs/02-ontology/RELATIONSHIP_TAXONOMY.md
+O2 docs/02-ontology/SERVICE_FAMILIES.md
+O3 docs/02-ontology/ISSUES_INTENTS_MODULES.md
+O4 docs/02-ontology/DELIVERABLES.md
+O5 docs/02-ontology/SAMPLING_ENGINE.md
+O6 docs/02-ontology/SMART_PROMPTS.md
+O7 docs/02-ontology/SCOPE_LIMITATIONS.md
+D1 docs/03-data/RELATIONSHIP_MAP.md
+D2 docs/03-data/SCHEMA_REGISTRY.md
+D3 docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md
+D4 supabase/migrations/20260713000100_foundation_slice_schema.sql
+S1 docs/04-security/ROLE_PERMISSION_MATRIX.md
+S2 docs/04-security/DOCUMENT_ACCESS_MATRIX.md
+
+CURRENT-STATE DISTINCTION
+
+The end-state blueprint, module map, and conceptual data spine are substantial planning artifacts. They are not implementation proof. P7 is a one-line instruction to define dashboard defaults. O2 through O7 are one-line placeholders. O1 supplies a usable relationship vocabulary, but no implemented service catalogue or rules. D1 lists only draft foundation relationships. D2 records a seven-table migration artifact under Issue #80, while earlier sections still say none exists. D4 contains seven initial tables with RLS enabled and no policies: client_accounts, user_profiles, account_memberships, facilities, incident_requests, documents, audit_events. It has no production auth linkage, actual file storage, release engine, final authority model, or 20-module business implementation. It has composite account foreign keys for facilities/requests/documents, useful as a starting safeguard. It is not evidence of database application, runtime denial behavior, or deployability.
+
+P5 is an intentionally restricted historical first-slice plan. The current user explicitly requests the full final platform. The foundation slice remains a dependency milestone and test of the operating model; it must not become the definition of final delivery. Replace current scope labels and stop rules that would incorrectly terminate all development at the foundation, while retaining the historical record and the substantive production/privacy/professional safeguards.
+
+The acceptance outcomes below are a proposed operationalization of P1-P3, not a claim that the original documents already contain executable acceptance tests.
+
+FULL END-STATE MODULE ACCEPTANCE
+
+01 CORE
+Source intent: P2 Core; P3 reference objects. Shared modules, feature flags, object types, global tags, checklists, notes, sequence numbers, settings, cross-object links, platform utilities.
+Acceptance: reusable platform services are consistently used across modules; account/program module visibility can differ without creating client-specific tables; shared configurations that affect scope, pricing, authority, or release carry controlled versions; identifiers and cross-object links remain stable; feature flags never serve as authorization. Domain business logic resides in its owning module.
+Existing distinction: no completed Core module demonstrated in the assigned sources; demo/static foundation should not be counted as this module.
+
+02 ACCOUNTS
+Source intent: P2 Accounts and P3 Client Account. Account types, contacts/users, dashboard defaults, enabled modules, terminology, request templates, billing profile, signers, approval rules, access/safety instructions.
+Acceptance: one account can have multiple client types, users, and scoped relationships; simple and enterprise clients receive appropriate navigation without service hard limits; billing contact, requester, payer, signer, property owner, and approver can be different parties; account changes do not rewrite historical project/authorization facts; unassigned accounts remain inaccessible.
+Existing distinction: client_accounts and account_memberships are minimal dev-schema artifacts. CLIENT_TYPES has no completed behavior specification.
+
+03 PROGRAMS / MSA
+Source intent: P2 and P3 Programs. Terms, covered sites, activation, included/billable services, rates, response/emergency rules, scope boundary matrix, approvals, reporting/QBR requirements.
+Acceptance: an account can operate with zero, one, or several programs; coverage and activation are explicit per facility and effective period; the correct versioned terms/rate basis are attached to an engagement; an MSA never bypasses project scope and authorization; program-specific commitments are configurable and auditable; out-of-coverage work enters a controlled approval route.
+Existing distinction: planned only in reviewed sources.
+
+04 PORTFOLIOS
+Source intent: P2 Portfolio and P3 Portfolio. Regional/site groupings, managers, risks, documents, history, financial/executive rollups.
+Acceptance: assets can be grouped into multiple permitted portfolios; changes preserve site-level truth and historical group membership where relevant; executive/portfolio views derive from authorized underlying records; grouping never grants unintended cross-account access; an ordinary one-property engagement does not need an invented portfolio.
+Existing distinction: planned only.
+
+05 ASSETS / FACILITIES
+Source intent: P2 Assets and P3 Asset/Zone. Physical site truth, buildings/floors/units/areas, occupancy, contacts, access, users, linked history.
+Acceptance: repeat work can attach to the same stable site and physical areas; observations and scope identify actual included/excluded areas; facility history preserves linked incidents/projects/docs instead of copying them into one notes field; facility assignments restrict site users; physical site identity, paying account, and business relationship are not accidentally conflated.
+Existing distinction: minimal facilities table, no full hierarchy/site history implementation demonstrated.
+
+06 READINESS / SITE PASSPORT
+Source intent: P2 Readiness, P1 enterprise list. Site passports, champions/training, response maps, critical assets, cache plans, readiness reviews, deficiencies/risks, schedules, drills, activation checklists.
+Acceptance: a facility has a versioned passport with owners, source evidence and review dates; readiness gaps have responsible owners, actions and follow-up; activation reflects completed requirements and explicit exceptions; response information is available to assigned people; recurring work surfaces due/overdue items; reporting distinguishes verified readiness facts from unknown or expired information.
+Boundary: does not impersonate a client's CMMS, engineering certification or regulated healthcare compliance system. Companion mapping is not a prerequisite to storing response-map documents or field references.
+Existing distinction: planned only.
+
+07 INTAKE
+Source intent: P2 Intake; P1 structured scoping list; P3 Request. Issue, intent, dynamic questions, affected areas, timeline/prior work, safety/access, uploads, sampling/deliverable preference, urgency, payer/signer/change approver, prompts, missing information, review.
+Acceptance: original submitted wording and attachments remain preserved; structured review can reclassify without erasing that original; requirements adapt to issue and intent using versioned rules; missing information has ownership and response tracking; a request can be accepted, limited, referred, declined or returned; submission alone never mobilizes or authorizes work.
+Existing distinction: incident_requests is a minimal title/status table and conflates two eventual concepts. Full ontology and smart prompts are placeholders.
+
+08 SCOPE
+Source intent: P2 Scope and P3 Scope Record. Included/excluded modules and areas, deliverables, sampling status, recommendations accepted/declined, assumptions, limitations, review, approval/lock, changes.
+Acceptance: approved scope is a specific preserved revision; inclusions and exclusions, areas, assumptions and required deliverables are unambiguous; accepted/declined recommendations are evidenced; changes produce a reviewed amendment linked to its authorization and effective time; unauthorized edits cannot alter active scope; chat can suggest a change but cannot approve one.
+Existing distinction: planned domain behavior, not implemented in seven-table foundation; limitation library is a placeholder.
+
+09 SAMPLING
+Source intent: P2 Sampling; P3 Scope/Authorization/Deliverable relationships. Sample types, analytes, methods/media, modules, recommendations, approvals/declinations, plans/locations, lab orders/results, COC, interpretation, limitations.
+Acceptance: requested, recommended, authorized, collected, lab-reported and professionally interpreted information are distinct; plans and collected samples trace to scope and location; collection identifiers reconcile with COC/lab records; revised lab data preserves previous records; decisions and declinations affect scope/cost/deliverables visibly; unqualified users and AI cannot approve strategy or issue conclusions.
+Existing distinction: O5 is a placeholder. No finished method catalogue, lab interface or rules demonstrated. Do not invent technical thresholds or universal sampling protocols from general memory.
+
+10 ROM
+Source intent: P2 ROM. T&M assumptions, labor/reporting/travel/lab/equipment/PPE ranges, rate cards, confidence, cap recommendations, actual calibration.
+Acceptance: estimates show assumptions, ranges, exclusions and rate version; scope/sampling/travel inputs have traceable effects; revisions preserve their bases; recommended cap differs from granted cap; actual work costs can be compared to the applicable estimate without retroactively changing it; confidence is justified by data quality, not a fabricated precision score.
+Boundary: T&M default; fixed-price offering requires an explicit separate commercial workflow.
+Existing distinction: planned only; no claim of calibrated history.
+
+11 AGREEMENTS / AUTHORIZATION
+Source intent: P2 Agreements and P3 Authorization. Service/emergency/change/cap/sampling authorizations, signature requests/events, terms, linked agreement docs, expiration/supersession.
+Acceptance: authorized scope version, signer authority, payer, rate basis, cap, sampling and terms are captured as an immutable approved record; signature evidence attaches to the exact version; valid authority controls mobilization and changes; expiry/revocation/supersession has deterministic effects; emergency exceptions are explicit, limited and reviewed; retries cannot create duplicate commitments.
+Existing distinction: planned only. Build configurable logic and synthetic examples while unapproved legal terms/authority remain flagged and inactive for real commitments.
+
+12 OPERATIONS / PROJECTS
+Source intent: P2 Operations; P3 Incident/Project/Tasks. Incident lifecycle, accepted projects, PM/reviewer/field assignments, tasks/work orders, visits/scheduling, field logs/observations/issues, closeout, lessons.
+Acceptance: one incident can produce several related requests/projects; project creation links accepted request, applicable scope and authorization; role-specific queues state next actions and owner; scheduling and visits have clear status; field conditions can trigger a change request; closeout checks deliverables/open items before final state; history remains inspectable.
+Existing distinction: no final project engine present in reviewed schema. The OS still needs basic field logs/observations/photos; companion redesign stays deferred.
+
+13 DOCUMENTS
+Source intent: P2 Documents; P3 Documents/Deliverables; P1 controls. Classes/sensitivity, versions, storage reference, linked objects, reviews, releases/grants, access logs, packages, supersession, retention/holds.
+Acceptance: uploads begin hidden; classification, exact version, owning context, required approval and recipient permissions are checked together before release; authorized viewers/downloaders receive only the approved version; direct object URL/API attempts respect access restrictions; new drafts cannot inherit old release approval; superseded/withdrawn records have explicit access behavior; holds prevent destructive retention cleanup; packages cannot disclose a restricted child document.
+Existing distinction: metadata table only, no version record model/storage/release implementation demonstrated. Technical review and release are separate capabilities even when one authorized person performs both.
+
+14 COMMUNICATIONS
+Source intent: P2 Communications and P3 Communications. Threads/participants, linked objects, classifications/routing, questions, review requests, notifications, calls, email/SMS events.
+Acceptance: every thread is linked to an account/object; participants and notification content honor the same access model; messages have ownership and response status; technical questions route to qualified reviewers; calls and external messages can be logged without changing approved records; requests for changed scope/cap/sampling/releases create drafts or tasks; failed notifications are visible and retryable without duplicate commitments.
+Existing distinction: planned only.
+
+15 VENDORS
+Source intent: P2 Vendors. Profiles, contacts, categories/coverage, licenses/insurance, rates, program/site approval, assignments, document requirements, scorecards/restrictions/training.
+Acceptance: assignment checks category, site/program authorization, active credential status and applicable restrictions; vendors see assigned instructions/work only; required closeout documents and evidence are tracked; scorecards derive from recorded facts; financial and professional responsibility remain explicit; a vendor upload is not automatically client-released.
+Existing distinction: planned only. Vendor subcontracting and payment terms are owner review candidates, not silently activated authority.
+
+16 FINANCE
+Source intent: P2 Finance and P3 Financial Records. Billing/invoices/lines, costs/pass-throughs, purchases/approvals, reserves/transactions, payment status, POs, caps/spend authority, accounting export.
+Acceptance: money records trace to scope/project/authorization and correct client/program; authorized cap, committed amount, incurred amount and invoiced amount are not conflated; approval requirements are enforced on mutations; rate/tax/markup/terms changes do not alter issued history; invoice/export retries reconcile; reserve balances derive from immutable transactions and explicit permitted uses; reporting can show the inputs behind a total.
+Boundary: operational finance with accounting export/integration; full statutory accounting is not implied by the product goal.
+Existing distinction: planned only. Reserve legal/commercial model and final rates/approvals require owner decisions before activation.
+
+17 REPORTING / QBR
+Source intent: P2 Reporting and P3 Reports. Configurations/widgets/metrics/snapshots, facility/executive/incident views, vendor scorecards, QBR sections, action lists, value ledgers, risks.
+Acceptance: totals and risk/readiness metrics resolve to authorized source records and defined denominators; period snapshots are reproducible; executive action items have owners and status; released QBRs are versioned packages; exports follow visibility rules; missing data is shown as unknown rather than zero or compliant; claimed value is supported and labeled accurately.
+Existing distinction: planned final module; static demo dashboards are not these capabilities.
+
+18 AI
+Source intent: P2 AI and P1 AI rules. Jobs, prompt templates/versions, summaries/classifications/extractions/flags, reviews/feedback, prohibited actions/audit.
+Acceptance: each output records source context, prompt/model version and resulting review status; AI respects the user's access; source content is treated as data rather than system instructions; uncertain or incomplete extraction is visible; adoption/rejection is recorded; AI proposes and drafts but cannot grant professional scope, sampling, signatures, caps, final release or technical conclusions; jobs have failure/cost/timeout visibility.
+Existing distinction: planned application module; development agents are separate from this runtime product capability.
+
+19 AUDIT
+Source intent: P2 Audit and P3 Audit Events. Actor, object/account, action/time, before/after, result/reason, access/security, rule changes, release/signature/export/AI decisions.
+Acceptance: consequential state changes and denials produce usable, protected history; audit events correlate to exact records and versions; events cannot be casually changed/deleted; access to the log itself is restricted; sensitive payloads/secrets are not copied into logs; exports and incident investigations can reconstruct what happened; background/system actors are represented explicitly.
+Existing distinction: audit_events table is only a starting record schema. No automatic event generation, tamper resistance or event policy demonstrated.
+
+20 INTEGRATIONS
+Source intent: P2 Integrations; current user direction adds Moldo. E-signature/accounting/email/SMS/calendar/CMMS/storage/lab/vendor interfaces, webhooks, external IDs, sync jobs.
+Acceptance: each connector declares record ownership, allowed operations, external identity mapping and version; least-privilege credentials are server-controlled; events/retries are idempotent; ordering/conflicts/partial failures and reconciliation are visible; changes still use domain authorization/release/audit rules; sync cannot expose drafts or overwrite approved scope; connector revocation and export/offboarding are supported.
+Moldo acceptance: staff and Moldo-only managers operate in Moldo without OS access; authorized Auxilium managers see permitted operational projections in OS; enterprise clients see only released/allowed Moldo information scoped to their account/portfolio; scoped enterprise assignments can enter Moldo without requiring Moldo staff to use OS; Moldo ordinary operations survive OS unavailability; integration can be removed without destroying Moldo's essential records.
+Existing distinction: Moldo integration is new direction and absent in this snapshot; no full completed integration exists. Companion is explicitly deferred.
+
+CROSS-MODULE END-STATE OUTCOMES
+
+A. Four coherent experiences: simple project portal, enterprise facility portal, internal command center, restricted vendor portal. Product complexity must be disclosed by role/context, not dumped into every screen. Module enabling never substitutes for backend access checks. Mobile journeys should be tested as completed actions, with actionable errors and recovery, not only viewport screenshots.
+B. Full lifecycle: request/incident -> reviewed scope and recommendations -> ROM -> agreement/authorization -> assigned execution -> qualified review -> exact-version release -> appropriate client access -> operational finance -> closeout/property memory -> reporting/QBR -> audit. Include controlled exceptions and denial behavior.
+C. Recurring enterprise lifecycle: program/coverage -> site activation/passport -> readiness/risks/drills -> incidents -> vendor work/evidence -> reserve/spend -> executive review/QBR. No MSA implies blanket authority.
+D. Distinct source truth: original request vs approved scope; commercial authorization vs tasks; actual lab result vs interpretation; work-product deliverable vs file version; source record vs dashboard; physical site vs paying party; runtime AI vs development agents.
+E. No-PHI remains the authorized boundary. No medical, legal/coverage, engineering, specialty-license or regulated compliance promises arise merely because a form exists.
+F. Full product delivery requires working behavior, access-denial evidence, upgrade/migration/recovery and operational documentation. Screens, stubs, static data, TODO files and green text-contract tests cannot count as completed modules.
+
+CONFLICTS AND MISSING DOMAIN DECISIONS
+
+1. Full end state vs historical first-slice controls.
+P1-P3 define 20 modules, while P5/P6 and AGENTS restrict implementation to an early slice. Current user supersedes scope limitation for development; preserve slices as milestones. Label final delivery against all 20 modules and do not silently discard enterprise, readiness, vendors, ROM, sampling or QBR.
+
+2. Shared data spine vs independent Moldo.
+P1-P3 assume one operational source of truth and prohibit disconnected apps. New user direction deliberately retains an autonomous Moldo app. Resolve with a recorded architectural decision: canonical OS account/portfolio context and mapped external Moldo records, explicit ownership for each exchanged field/workflow, separate business access boundaries, no circular authority. Avoid treating client_accounts as operating brands/holding-company legal entities; those are different concepts. The original universal data-spine wording must be qualified, not silently ignored.
+
+3. Incident vs Project Request collapsed in dev schema.
+P3 explicitly permits one incident -> several requests/projects. D4 creates incident_requests. Before dependent modules proliferate, choose an additive transition that separates incident event/context from submitted request and preserves IDs/history. A universal rename without migration would be unsafe. Parent decision needed as technical ADR, not user interview.
+
+4. Source-of-truth hierarchy has amendment ambiguity.
+P3 orders signed authorization first, approved scope second, approved change third. A literal implementation could make an older original trump a properly authorized amendment. Recommended clarified rule: effective approved agreement/scope version including valid superseding amendments governs its domain; never compare by a static rank alone. Preserve original records and amendment chain. Professional facts still retain their own provenance rather than being rewritten by commercial authority.
+
+5. Mandatory linear chain could be over-read.
+P3 explicitly allows zero Programs/MSAs, assets in multiple portfolios, and simple clients omitting enterprise layers. Treat the spine as a relational model, not mandatory wizard fields or one row in every layer. This avoids forced fake MSAs/portfolios/incidents for routine work and prevents later cardinality rework.
+
+6. Tenancy and physical property ownership.
+P3 says every asset belongs to one client account, while the business can serve a property through a PA, attorney, operator and owner over time. Recommended development default: account-owned site records with explicit external/site identity matching and authorized links; never automatically merge or grant access by matching address. Final long-term shared-site identity/ownership transfer policy needs an ADR and owner review where it changes client rights.
+
+7. Client type and service ontology missing.
+P7, O2-O7 are placeholders. Build versioned catalogues from authoritative available business inputs: issue, service intent, technical module, methodology, deliverable, scope depth, modifier and specialist referral remain separate. Use O1's relation types, not freeform pseudo-services. Recommendations can be drafted and synthetic-tested; methods, limits, licensing rules and professional templates stay clearly proposed until reviewed. Do not claim the entire ontology was already specified.
+
+8. Configuration scope and version precedence missing.
+Global defaults, account settings, program terms and project exceptions exist conceptually but no conflict-resolution precedence is specified. Recommend immutable effective versions, explicit authorized overrides, visible provenance and an unambiguous resolved configuration per engagement. A lower-level override cannot expand authority beyond its approver's grant.
+
+9. Authority and document choices explicitly unresolved.
+S1/S2 list final release/scope/cap/change powers, thresholds, reviewer requirements, executive/site/billing visibility, signer vs approver powers, PM routine-document releases, uploader access, superseded access, QBR and dispute approvals. Implement candidate configurations and deny-by-default tests without manufacturing approval. Defaults: professional reports require designated qualified review; release authority remains explicit; financial powers are independent of viewing; restricted/dispute materials require explicit grants; historical released versions labeled superseded remain accessible only if policy permits; uploader access does not release a file to the whole account.
+
+10. Enterprise commercial promises and reserves.
+P1/P2 include P0-P4 routing, response rules, included/billable services, activation, reserve ledgers, QBR and risk scoring, but do not supply final SLAs, fees, cap amounts, reserve custody/use/refund, risk model or value metric definitions. Build policy engines and proposed presets with activation flags. Do not populate invented contractual time guarantees or classify an unvalidated score as legal compliance.
+
+11. T&M vs Moldo consumer commercial model.
+P2 establishes T&M default. Moldo has its own operating/commercial model per user direction. OS integration should project Moldo's actual authorized commercial records rather than coercing them into an invented OS T&M estimate. Entity holding the client agreement and invoice must be explicit per engagement. Commercial/referral arrangements for a future Moldo sale remain owner-reviewed.
+
+12. Core platform lifecycle requirements need acceptance elaboration.
+P1-P3 cover meaningful audit, release, control and privacy but not full performance/service targets, recovery objectives, retention periods, import/export, identity revocation, notification delivery, data correction/deletion, backups or observability. These should be defined in the engineering plan with measured baseline targets and proposed service objectives, not falsely attributed as already approved user promises.
+
+OWNER-REVIEW DEFAULT HANDLING
+
+The user authorizes building logically consistent candidate defaults without stopping unrelated development. A useful decision register entry should include ID, issue, recommendation/rationale, impact, alternatives, configured development default, affected modules, tests, final approver/qualification, and activation status. Distinguish accepted user direction, recorded historical approval, recommended development default, externally constrained decision, and unresolved missing evidence. Carry decisions forward in the repository rather than relying on chat.
+
+Recommended nonblocking defaults: scoped capabilities instead of all-powerful role names; designated qualified reviewer plus explicit release action for professional outputs; least-privilege client views; T&M for native Auxilium estimates; configurable commercial rates with synthetic values; no implied emergency mobilization; no-PHI; unapproved contracts/signature authorities remain test-only; Moldo owns Moldo operations; OS owns enterprise accounts/programs/portfolio context; companion deferred; no claim of production readiness until runtime evidence exists. Final report to owner must enumerate every provisional choice actually used, not an unbounded list of hypothetical questions.
+
+Suggested implementation risk priority: settle authoritative records/tenancy/permission model and exact document-version workflow before broad parallel feature work; then establish a full lifecycle with synthetic data and extend all 20 modules through traceable acceptance. This is dependency ordering toward the complete OS, not a reduced product scope.

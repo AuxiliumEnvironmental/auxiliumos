@@ -1,0 +1,27 @@
+["node","--test","tests/unit/private-object-gateway.test.mjs","tests/unit/private-object-provision.test.mjs"]
+✔ actual handler: provider round trip is readback verified and finalized only by fresh user RPC (14.581455ms)
+✔ ambiguous provider success and repeated PUT recover without overwrite or new attempt (3.670188ms)
+✔ provider put failure never claims receipt; exact retry recovers (1.801834ms)
+✔ receipt commit failure preserves bytes; finalization readback reconciles without reupload (2.26354ms)
+✔ content/type/readback mismatches remain quarantined, never finalizable (3.252199ms)
+✔ current authorization before and after I/O controls finalization and status (2.232924ms)
+✔ unavailable/invalid identities never reach service; client data cannot choose actor/path/digest (2.097679ms)
+✔ UTF8/size/header and synthetic-only bounds are enforced without accepting active content (1.491156ms)
+✔ read/clearance/scan/adoption/URL routes do not exist, and status is safely projected (0.80358ms)
+✔ disabled/origin boundaries and opaque operational faults do not leak backend details (3.48503ms)
+✔ malformed server targets fail closed before Storage, and streams are bounded without content-length trust (8.042725ms)
+✔ bucket preflight is read-only by default and never repairs or overwrites existing storage (0.838714ms)
+✔ verify-only cannot create a missing bucket; explicit create uses exact supported API settings (1.736966ms)
+✔ existing entries require an explicit review acknowledgment on every run, without update or deletion (0.294554ms)
+✔ even create plus review cannot adopt or repair unsafe existing bucket settings (0.251409ms)
+✔ ambiguous provider errors fail closed, reveal no raw details and never retry a creation (0.338499ms)
+✔ strings cannot accidentally authorize create/reuse (0.285029ms)
+✔ CLI refuses unsupported targets, missing secrets and unknown options without emitting supplied values (160.269058ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 263.571374

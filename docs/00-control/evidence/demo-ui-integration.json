@@ -1,0 +1,92 @@
+{
+  "observed_at": "2026-10-09T18:50:34.744364+00:00",
+  "worker_commit": "dd7961fea7a57b0f71651c4ca260687a6f8badba",
+  "lovable_base_commit": "74cb2628f398dfce12a14c1435d316011f423b31",
+  "lovable_with_spatial": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+  "focused_unit_checks": 14,
+  "focused_browser_fixture_journeys": 11,
+  "responsive_route_width_combinations": 60,
+  "widths": [
+    1440,
+    390,
+    360
+  ],
+  "responsive_failures": 0,
+  "evidence_reused": true,
+  "spatial_build_log_sha256": "6b7773fd2ae3b73ca904dba4845dc3e3622cd0d9f4f7c5d2392d3ec6518bd019",
+  "boundary": "Injected HTTP browser/sample evidence plus production build; actual hosted save/reopen and complete business-module acceptance remain open.",
+  "mobile_increment": {
+    "observed_at": "2026-10-09T19:55:51.770Z",
+    "source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+    "base": "89227e331463eed0ea0844055cf43714e5969627",
+    "message_id": "umsg_01m4h37sx5e1fs19xfksj2bgpv",
+    "edit_id": "edt-bcda6535-648b-40fc-9c4a-9ffc75493ed2",
+    "allowed_paths": 4,
+    "root_full_readback": "Passed: every provider hunk applies to exact canonical base and matches final complete file bytes.",
+    "independent_review": "mobile_review clear on57f637a",
+    "provider_report": {
+      "existing_fixtures_passed": 6,
+      "temporary_checks_passed": 2,
+      "raw_logs_retrieved": false,
+      "new_phone_images_visually_inspected_by_root": false,
+      "manual_production_build": "Not run: provider runtime prohibits manual build. Automatic preview ready is not a production build claim.",
+      "failures": "Missing default browser path initially; existing Chromium1194 used. Download fixture failed after disclosure rename, then passed after original label restored according to provider report.",
+      "commands": [
+        "node_modules/.bin/playwright test --config=/tmp/browser/document-presentation/focused.config.ts --grep 'current-facility assignee|needs-information validation and conflict reload|explicit adoption creates|explicit request verifies exact bytes|lost request response remains uncertain|phone keyboard flow keeps exact references'",
+        "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome node_modules/.bin/playwright test --config=/tmp/browser/document-presentation/focused.config.ts --grep 'current-facility assignee|needs-information validation and conflict reload|explicit adoption creates|explicit request verifies exact bytes|lost request response remains uncertain|phone keyboard flow keeps exact references'",
+        "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome node_modules/.bin/playwright test --config=/tmp/browser/document-presentation/temporary.config.ts",
+        "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome node_modules/.bin/playwright test --config=/tmp/browser/document-presentation/focused.config.ts --grep 'explicit request verifies exact bytes'",
+        "AUXILIUMOS_BROWSER_EXECUTABLE=/opt/ms-playwright/chromium-1194/chrome-linux/chrome node_modules/.bin/playwright test --config=/tmp/browser/document-presentation/temporary.config.ts --grep 'temporary documents'"
+      ],
+      "log_directory": "/tmp/browser/document-presentation"
+    },
+    "provider_summary_hashes": "Rejected: inconsistent with independently calculated actual readback hashes.",
+    "actual_sha256_computed_by": "ui_integration; files independently matched byte-for-byte by root hunk application",
+    "actual_sha256": {
+      "web/src/pages/intake.tsx": "75fb4b645f003c5484c64f507370fb73eca62b7e10ba13f751a62fdd9e4490f4",
+      "web/src/pages/private-files.tsx": "2d8623dd7626d0957d42365db53f4a47a45e3bd6efbb1c7d5d073a99a0681310",
+      "web/src/components/document-versions.tsx": "69114ddbbc4ca44d91be80eca3f49a6103a1c9842f577752d51d081a058474f9",
+      "web/src/components/private-object-upload.tsx": "cfd91d0b3d290755621d708e5e4f2c5a9f519552332b46383f73213499c52fa0"
+    },
+    "required_gate": "Integrated GitHub CI for actual registered regression results and production build; pending at source save.",
+    "runtime_boundary": "Not genuine owner/private-storage or actual hosted planning acceptance.",
+    "integrated_ci": {
+      "run": 66,
+      "run_id": 37986270507,
+      "commit": "4cf0815879ee31c5374880c28747ef6429a5ef93",
+      "status": "passed",
+      "failed_profile": null,
+      "build": "passed",
+      "content_review_browser": "passed",
+      "next_action": "Publication accepted; provider public asset observations recorded separately. Continue actual hosted acceptance after protected configuration.",
+      "diagnosed_cause": "Strict warning locator matched two copies after intentional disclosure layout. 13/14 version tests passed; content/review browser profiles not run.",
+      "diagnostic_run_id": 37985960594,
+      "corrected_fixture": "Visible warning plus keyboard-open exact metadata, ID/hash, restriction and hold; no permission assertions removed.",
+      "restored_workflow": "Byte-for-byte db0f003 in corrected candidate."
+    },
+    "publication": {
+      "deployment_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242",
+      "status": "accepted_pending",
+      "observed_at": "2026-10-09T20:29:13.428Z",
+      "provider_public_observation": {
+        "source": "Lovable read-only messageumsg_01m4h5ez2hfw4vykmv8qg7efcf",
+        "domain_status": 200,
+        "final_url": "https://auxiliumos.io/",
+        "lovable_url_redirects_to_primary": true,
+        "bundle": "/assets/index-Dg2HQ7Vn.js",
+        "reported_bytes": 750039,
+        "markers_found": [
+          "Exact-version details · Version",
+          "Uploads start in quarantine"
+        ],
+        "boundary": "Provider-reported anonymous HTTP observations; root did not independently inspect public bytes or deployment status. No actual owner/Storage acceptance."
+      },
+      "provider_side_effect": {
+        "commit": "b9bfbfc666a5c8a751f1a8da1150549ce879437d",
+        "only_path": ".lovable/plan.md",
+        "application_source_unchanged": true,
+        "status": "awaiting human plan--show decision"
+      }
+    }
+  }
+}

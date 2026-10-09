@@ -1,0 +1,88 @@
+▶ synthetic exact-version metadata release — PostgreSQL/PGlite simulated Auth, not hosted or concurrent-session proof
+  ✔ approved exact revision plus separate controller and explicit recipient produces metadata only with protected provenance (143.247896ms)
+  ✔ review assignment, technical clearance, administrator, uploader, content, and audience alone confer no release authority (80.322256ms)
+  ✔ release denies missing exact internal approval (37.752005ms)
+  ✔ release denies changes_requested exact internal approval (48.894984ms)
+  ✔ release denies rejected exact internal approval (42.7746ms)
+  ✔ identical bytes in another immutable version do not transfer review, controller, or recipient authority (99.021693ms)
+  ✔ new draft and internal review preserve current release; replacement hides prior until explicit history grant (89.523867ms)
+  ✔ retired reviewer assignment preserves approval; dual routine roles require independently provisioned controller (33.165516ms)
+  ✔ audience set validates nonempty bounded unique UUIDs and deliberate attestation (78.447657ms)
+  ✔ class internal_note cannot inherit routine synthetic release (39.173763ms)
+  ✔ class draft_report cannot inherit routine synthetic release (37.564663ms)
+  ✔ class final_report cannot inherit routine synthetic release (32.679495ms)
+  ✔ class legal_dispute_sensitive cannot inherit routine synthetic release (43.821974ms)
+  ✔ class executive_document cannot inherit routine synthetic release (35.746778ms)
+  ✔ class invoice cannot inherit routine synthetic release (44.436059ms)
+  ✔ class signed_authorization cannot inherit routine synthetic release (34.529858ms)
+  ✔ full intent retries preserve release receipt after unrelated advances and changed intent conflicts (72.930658ms)
+  ✔ CAS independently fences logical document, review, release authority, and digest changes (72.764579ms)
+  ✔ grant provisioning retries bind whole intent and revoked grants cannot restore current audience (67.563746ms)
+  ✔ revoked or replacement controller cannot replay original release receipt (46.1589ms)
+  ✔ cross-account and wrong-facility users cannot provision, release or read even with forged claims (37.202378ms)
+  ✔ current authorization rechecks controller_identity on release, read, and retry (38.026898ms)
+  ✔ current authorization rechecks controller_membership on release, read, and retry (32.550511ms)
+  ✔ current authorization rechecks controller_content on release, read, and retry (34.340623ms)
+  ✔ current authorization rechecks recipient_identity on release, read, and retry (34.076606ms)
+  ✔ current authorization rechecks recipient_membership on release, read, and retry (33.16828ms)
+  ✔ current authorization rechecks recipient_facility on release, read, and retry (39.494826ms)
+  ✔ current authorization rechecks content_switch on release, read, and retry (32.282727ms)
+  ✔ current authorization rechecks reservation_switch on release, read, and retry (56.100683ms)
+  ✔ current authorization rechecks restricted on release, read, and retry (43.162984ms)
+  ✖ current authorization rechecks phi on release, read, and retry (29.89719ms)
+  ✔ preservation hold leaves eligible current and historical metadata visible and never deletes bytes (77.847284ms)
+  ✔ human withdrawal narrows current visibility, retains immutable history, and never revives previous release (101.161592ms)
+  ✔ withdrawal requires explicit active controller; stale and wrong actor cannot remove a release (52.065604ms)
+  ✔ trusted narrowing withdrawal and revocation survive all switches, access and safety removal (48.834214ms)
+  ✔ withdrawn version or older ordinal cannot be released again and a new version starts without automatic fallback (138.037499ms)
+  ✔ withdrawal of superseded history leaves current release intact (69.200908ms)
+  ✔ audit failures roll back release head and authoritative history atomically (43.684098ms)
+  ✔ immutable release, withdrawal, grants, heads, and audit reject owner-level history edits and deletion (49.536059ms)
+  ✔ forged public provenance and stale backend roles do not become human authority (37.315187ms)
+  ✔ default-deny tables and exact function ACLs retain service/human separation with no exposed definer (48.431057ms)
+✖ synthetic exact-version metadata release — PostgreSQL/PGlite simulated Auth, not hosted or concurrent-session proof (4401.172249ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 40
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4550.38321
+
+✖ failing tests:
+
+test at tests/database/document-version-releases.test.mjs:117:33
+✖ current authorization rechecks phi on release, read, and retry (29.89719ms)
+  error: permission denied for function private_object_service_context
+      at pe.Ue (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:17959)
+      at pe.tt (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:15347)
+      at pe.parse (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:14021)
+      at N.qe (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/index.js:5:1762)
+      at file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/index.js:5:1155
+      at wasm://wasm/0267bb86:wasm-function[10930]:0x5a5ccf
+      at wasm://wasm/0267bb86:wasm-function[3585]:0x27eaeb
+      at wasm://wasm/0267bb86:wasm-function[3627]:0x2869d1
+      at wasm://wasm/0267bb86:wasm-function[3637]:0x286c2d
+      at wasm://wasm/0267bb86:wasm-function[9914]:0x54fd4d {
+    length: 271,
+    severity: 'ERROR',
+    code: '42501',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: 'SQL statement "SELECT private.private_object_service_context()"\nPL/pgSQL function private.guard_private_object_security_history() line 19 at PERFORM',
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'aclchk.c',
+    line: '2795',
+    routine: 'aclcheck_error',
+    query: 'update private.private_object_security set security_revision=security_revision+1,phi_suspected=true where object_id=$1',
+    params: [ 'b7e3103d-e6fd-4c89-9df1-6d9ebc77d1fe' ],
+    queryOptions: undefined
+  }

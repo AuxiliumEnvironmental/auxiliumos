@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "profile": "api-fixture-safety",
+  "level": "control_unit",
+  "recorded_at": "2026-10-08T17:04:18.272Z",
+  "result": "passed",
+  "digest": "987dabbb3281717ffefd2ce98cae8909ad17a791bb953a4afcc856136fcbba84",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-Node-synthetic-cleanup-transport-no-service",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "52394806bac22aed7619acf5a7d36ecb4c9b0929652a9a2e408e9ec63ec2b4c2",
+      "TZ": "796751c31e4ef1b1d8e344c13d017179f3ef862a00f2127eab63a5161945a77f"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "scripts/os-control.mjs": "bb85c0951c912ef99b0d471f162686a82a20552f23e4ea2bddb1d48aa1913215",
+    "tests/api/fixture-cleanup.mjs": "5eaed0cb98ee249d9ea9f70a8fbbf8d99d54cefa0236920e800a21f36e11440a",
+    "tests/api/identity-directory.test.mjs": "d83207dd618c54841d9c76e7a5375021068ab90d1e0556f3d2d6f58bcd7e7fe2",
+    "tests/api/README.md": "08ce459ae4f713616acf5d41718ee60cac7f8fc952146940824bda84a685f1a6",
+    "tests/unit/api-fixture-cleanup.test.mjs": "4f471a45fb9d5f130809c0e516a9aaf23175b60719ed951bec2a663971b8e6d1",
+    "VERIFICATION_PROFILES.json": "88a034be88007ab5f8c8a52d972919abf907a8a113f8e50531697688155cea48"
+  },
+  "observed_git_head": "0773cce60f030084a8a321ec42429d6a91fce838",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--check",
+        "tests/api/identity-directory.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    },
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/unit/api-fixture-cleanup.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/api-fixture-safety.log",
+  "log_sha256": "bf0b0284bc661a1f6dfa2ff6a0ced4ad1b851aedda037fa16069bd3ab6188f61"
+}

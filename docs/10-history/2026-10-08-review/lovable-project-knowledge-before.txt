@@ -1,0 +1,134 @@
+Project name:
+AuxiliumOS Launch Platform
+
+Project purpose:
+AuxiliumOS is a modular operating suite for Auxilium Environmental. It will support simple project/document clients and future enterprise/MSA clients such as healthcare or real estate portfolio clients.
+
+The platform must eventually support:
+- Client accounts
+- Programs/MSAs
+- Portfolios
+- Assets/facilities/properties
+- Zones/areas
+- Incidents
+- Project requests
+- Scope records
+- Authorizations
+- Projects
+- Tasks/work orders
+- Deliverables
+- Documents
+- Communications
+- Financial records
+- Reports/dashboards
+- Audit events
+
+Canonical data spine:
+Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.
+
+Permanent project rule:
+The GitHub repository is the source of truth. Lovable must follow the repository architecture, rules, GitHub issues, and project guardrails. Lovable is a UI/app-building worker, not the decision-maker.
+
+Current phase:
+Prep / AI software factory setup. Lovable is not yet authorized to create production backend, schema, RLS, auth, storage, or real workflows.
+
+Allowed current Lovable behavior:
+- Visual-only UI shell work
+- Professional interface mockups
+- Navigation placeholders
+- Status cards
+- Empty states
+- Layout exploration
+- Client portal visual concepts
+- Admin command center visual concepts
+- Enterprise facility portal visual concepts
+- Document/project portal visual concepts
+- Component structure suggestions
+
+Disallowed current Lovable behavior:
+- Do not create or modify database schema.
+- Do not create Supabase tables.
+- Do not create RLS policies.
+- Do not create auth logic.
+- Do not create storage buckets.
+- Do not connect to production Supabase.
+- Do not create edge functions.
+- Do not create real client workflows.
+- Do not create payment/finance workflows.
+- Do not create e-signature workflows.
+- Do not create document-release behavior.
+- Do not create scope-change behavior.
+- Do not create sampling authorization behavior.
+- Do not create agreement/signature authority.
+- Do not create professional/legal boundary logic.
+- Do not use real client data.
+- Do not use PHI.
+- Do not use secrets, passwords, service-role keys, API keys, or unredacted private documents.
+
+Core product surfaces:
+1. Simple Project Portal
+   - For PA firms, attorneys, restoration contractors, individual property owners, and simple project clients.
+   - Main purpose: submit requests, view projects, access released documents, ask project-linked questions, and view agreements/invoices if permitted.
+
+2. Enterprise Facility Portal
+   - For portfolio, healthcare, property management, industrial, and MSA clients.
+   - Main purpose: view facilities/assets, submit incidents/requests, access site passports, view open risks, view released documents, view dashboards, and support site-level workflows.
+
+3. Internal Admin Command Center
+   - For Auxilium internal users.
+   - Main purpose: manage intake, project review, scope review, document release, missing information, authorizations, vendors, incidents, QBR prep, and risk queues.
+
+4. Vendor Portal
+   - Future surface only.
+   - Main purpose: limited vendor assignments, credential uploads, and closeout packages.
+   - Vendors must not see unrelated client, financial, executive, or internal records.
+
+First build slice after prep:
+Account -> User Role -> Facility -> Incident Request -> Admin Queue -> Document Upload -> Document Release -> Client View -> Audit Event.
+
+The first build slice proves:
+- An account can exist.
+- A user can belong to an account.
+- A user can have a role.
+- A facility can belong to an account.
+- A site user can submit an incident/request.
+- An admin can review it.
+- A document can be uploaded but not automatically released.
+- A document can be released only through a controlled workflow.
+- A client can see only released documents they are permitted to see.
+- Every meaningful action creates an audit event.
+
+Design direction:
+- The UI should feel premium, controlled, clean, and enterprise-grade.
+- Do not make it feel like a generic website contact form.
+- Do not overwhelm users with every technical service at once.
+- Use simple client-facing language and progressive disclosure.
+- Use strong visual hierarchy, clear status cards, plain labels, and obvious next actions.
+- Smaller clients should see a simple project/document experience.
+- Enterprise clients should see facility/asset/program views only when enabled.
+- Avoid clutter, fake complexity, and unnecessary dashboards.
+
+Client-facing simplicity vs internal truth:
+Clients may see simple tiles and pages. Internally, the system must eventually support issue, intent, service modules, sampling, deliverables, scope limitations, ROM assumptions, review gates, agreements, permissions, and audit events.
+
+Scope-control rule:
+A chat/message cannot change approved scope. It may create a task, question, clarification, review request, or change request draft only.
+
+Document-control rule:
+No document becomes client-visible by default. Client-visible documents require classification, versioning, release approval, permission check, and audit event.
+
+AI authority rule:
+Lovable may help build UI and controlled surfaces. Lovable may not decide business/legal/professional authority, scope approval, sampling strategy approval, document release authority, agreement authority, financial/cap authority, production deployment, or whether PHI is allowed.
+
+Security posture:
+- No real client data during prep.
+- No PHI during v1 setup.
+- No secrets in Lovable.
+- No service-role keys in frontend/browser code.
+- No production systems during prep.
+- No client-data table without RLS plan and tests.
+
+If a request requires schema, auth, storage, RLS, backend functions, document release logic, scope control, sampling authorization, agreement logic, finance/cap rules, professional boundaries, or production deployment, Lovable must stop and ask before building.
+
+First safe prompt type:
+Visual-only UI shell work is allowed. Backend/data/security work is not allowed until approved through GitHub issues and repository docs.

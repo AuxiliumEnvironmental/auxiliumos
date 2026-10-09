@@ -1,3 +1,5 @@
+> Current interpretation, 2026-10-08: this is a proposed domain contract, not runtime proof. Development may implement the recommended configurable defaults under AGENTS.md. OWNER_DECISIONS.json controls pending live business activation. ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md refines membership lifecycle, Incident/Request, effective amendments and Moldo ownership.
+
 # Document Access Matrix
 
 ## Purpose
@@ -209,7 +211,7 @@ A user may download a document only if:
 - The document is released or otherwise explicitly granted.
 - The user has account, asset, project, and/or document-level permission.
 - The document class allows download for that user type.
-- The document is not restricted, withdrawn, or blocked by legal hold.
+- The document is not restricted or withdrawn under the applicable access policy. A preservation/legal hold prevents destruction separately; it does not itself remove visibility unless a separately authorized access restriction applies.
 - The download creates an audit event.
 
 ---

@@ -12,9 +12,14 @@ build/
 .env
 .env.*
 !.env.example
+# Reviewed public browser settings for the existing development target only.
+!web/.env.development
+# Published frontend still uses the reviewed synthetic development backend.
+!web/.env.production
 
 # Supabase local
 .supabase/
+supabase/.temp/
 
 # OS/editor
 .DS_Store
@@ -26,3 +31,7 @@ Thumbs.db
 playwright-report/
 test-results/
 coverage/
+
+# Sanitized, hash-tied verification logs are durable source evidence, even when
+# an editor's global ignore rules exclude ordinary application logs.
+!docs/00-control/evidence/*.log

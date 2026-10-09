@@ -1,3 +1,5 @@
+> 2026-10-08 clarification: the spine is a relational domain map, not a mandatory wizard. Program/MSA and Portfolio are optional; Incident and Project Request remain distinct. Effective approved amendments govern their domain. Independent Moldo ownership and cross-system projections are specified in docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md. Preserve the original detailed model below.
+
 # AuxiliumOS Data Spine
 
 Last updated: 2026-06-22
@@ -1466,7 +1468,7 @@ Client Account
 
 → Audit Events
 
-They may also use site passports, critical asset registries, response maps, readiness reserves, vendor matrices, site champions, QBR packets, and executive dashboards.
+They may also use site passports, critical asset registries, response maps, readiness reserves, vendor matrices, facility coordinators, QBR packets, and executive dashboards.
 
 ---
 
@@ -1561,4 +1563,3 @@ The data spine is not a feature list.
 It is the structure that keeps every feature organized.
 
 Every future AuxiliumOS module must connect to the spine, respect the source-of-truth hierarchy, enforce role/document/scope controls, and create audit events when meaningful actions occur.
-

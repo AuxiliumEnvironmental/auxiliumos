@@ -1,0 +1,1806 @@
+{
+  "version": 1,
+  "rule": "Dependency roadmap for the full destination. Expand a ready task into bounded owned-file tasks before parallel writes. Implemented is not verified unless its current evidence passes. Never mark placeholder modules complete.",
+  "tasks": [
+    {
+      "id": "OWNER-ONBOARD-001",
+      "title": "Secure owner account, password setup/recovery and first successful access",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "C01",
+        "C05"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "allowed_paths": [
+        "scripts/owner-onboarding.mjs",
+        "supabase/migrations/20261009130331_owner_onboarding_activation.sql",
+        "tests/database/owner-onboarding.test.mjs",
+        "tests/unit/owner-onboarding.test.mjs",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/auth-links.ts",
+        "web/src/components/auth.tsx",
+        "tests/unit/auth-links.test.mjs",
+        "tests/e2e/auth-onboarding.spec.ts",
+        ".github/workflows/ci.yml",
+        "tests/api/README.md",
+        "docs/03-data/OWNER_ONBOARDING.md",
+        "scripts/provision-owner-from-dashboard.sql",
+        "tests/database/dashboard-owner-onboarding.test.mjs",
+        "web/.env.production",
+        "web/vite.config.ts"
+      ],
+      "assigned_to": "root integration lead",
+      "branch": "wip/recovery-2026-10-08",
+      "owner_decisions": [
+        "OD-012"
+      ],
+      "verification_profiles": [
+        "owner-onboarding",
+        "runtime-build",
+        "auth-onboarding-browser-fixture",
+        "directory-api",
+        "development-ui"
+      ],
+      "next_action": "Account setup, personal password, actual app login and scoped workflow access are complete. Recovery implementation retained; continue full integration separately from owner usability.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "implementation_status": "Actual browser owner account/facility access, synthetic submission and triage revision2 verified, with matching hosted DB readback. No professional authority granted."
+    },
+    {
+      "id": "UI-2026-10-09",
+      "title": "Responsive application and full-destination module interfaces",
+      "status": "implemented",
+      "dependencies": [],
+      "requirements": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "allowed_paths": [
+        "web/src/components/**",
+        "web/src/pages/**",
+        "web/src/styles.css",
+        "web/src/router.tsx",
+        "web/src/lib/modules.ts",
+        "tests/e2e/directory.spec.ts",
+        "docs/00-control/**",
+        "BUILD_QUEUE.json",
+        "BUILD_STATE.json",
+        "web/src/lib/workspace-plan-api.ts",
+        "web/src/lib/use-workspace-plans.ts",
+        "tests/unit/workspace-plan-api.test.mjs",
+        "supabase/migrations/20261009170854_workspace_plans.sql",
+        "tests/database/workspace-plans.test.mjs",
+        "docs/03-data/WORKSPACE_PLANS.md",
+        "web/src/spatial-generated/**",
+        "web/src/lib/sample-case.ts",
+        "tests/unit/sample-case.test.mjs"
+      ],
+      "assigned_to": "root integration lead; ui_integration sole Lovable writer",
+      "branch": "wip/recovery-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture",
+        "intake-browser-fixture",
+        "document-versions-browser-fixture",
+        "document-content-browser-fixture",
+        "document-reviews-browser-fixture"
+      ],
+      "next_action": "Mobile candidate57f637a passed corrected CI66 and publication accepted0cf4e56e; provider anonymous public asset check supports new mobile delivery. Resolve report-only Lovable pause, then integrate reviewed metadata-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "requested_copy_changes": [
+        {
+          "requested_at": "2026-10-09T12:22:19-05:00",
+          "source": "Explicit owner instruction",
+          "replace": "Site Champion",
+          "with": "Facility Coordinator",
+          "scope": "User-facing titles, field labels, navigation, active product documentation and demo copy. Preserve role/capability semantics and historical source attribution. Coordinate the typed planning catalogue if its stored field key changes.",
+          "status": "implemented_UI_and_current_docs; legacy_internal_keys_and_history_preserved"
+        }
+      ]
+    },
+    {
+      "id": "CTRL-001",
+      "title": "Modernized continuation controls",
+      "status": "implemented",
+      "dependencies": [],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "scripts/**",
+        "tests/unit/control-system.test.mjs",
+        "config/**",
+        "docs/**",
+        "AGENTS.md",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "OWNER_DECISIONS.json",
+        "REQUIREMENTS.json",
+        "VERIFICATION_PROFILES.json"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls",
+        "package-importer"
+      ],
+      "next_action": "Use current evidence or run the controls profile when its fingerprint changed.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "CTRL-002",
+      "title": "Worktree-safe evidence fingerprints, runtime evidence floors and bounded source freshness",
+      "status": "implemented",
+      "dependencies": [
+        "CTRL-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "scripts/os-control.mjs",
+        "tests/unit/control-system.test.mjs",
+        "VERIFICATION_PROFILES.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/EXECUTION_PROTOCOL.md"
+      ],
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls"
+      ],
+      "next_action": "Use reviewed current controls; linked-worktree metadata is excluded, runtime task evidence floors enforced, and noncacheable evidence must have a bounded nonfuture timestamp.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "SYNC-001",
+      "title": "Reconcile current GitHub, Lovable and existing Supabase backend",
+      "status": "implemented",
+      "dependencies": [
+        "CTRL-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/**",
+        "docs/03-data/SCHEMA_REGISTRY.md",
+        "scripts/verify-source-reconciliation.mjs",
+        "VERIFICATION_PROFILES.json"
+      ],
+      "assigned_to": "integration-lead",
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "source-reconciliation"
+      ],
+      "next_action": "Initial source reconciliation and recovery publication are recorded. Recheck current main/feature refs before publication; no GitHub/Lovable parity is claimed.",
+      "blocker": null,
+      "issue": null,
+      "completion_mode": "historical_source"
+    },
+    {
+      "id": "ARCH-001",
+      "title": "Finalize domain boundaries and production app basis",
+      "status": "implemented",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "requirements": [
+        "M01",
+        "M20",
+        "C06"
+      ],
+      "allowed_paths": [
+        "docs/03-data/**",
+        "docs/08-ai/**",
+        "BUILD_QUEUE.json"
+      ],
+      "assigned_to": "integration-lead",
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-016"
+      ],
+      "verification_profiles": [
+        "controls"
+      ],
+      "next_action": "ADR-002 reviewed as development engineering contract. Implement bounded SEC-001 slices; business activation gates stay closed.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "directory-database"
+      ],
+      "blocker": null,
+      "issue": null,
+      "id": "SEC-001A",
+      "title": "Database account/facility directory and immediate membership revocation",
+      "status": "implemented",
+      "dependencies": [
+        "ARCH-001"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "C01"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "tests/database/**",
+        "tests/helpers/**",
+        "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+      ],
+      "next_action": "Reviewed additive migration and 19 PostgreSQL checks implemented. Reuse matching database evidence. This proves database behavior with simulated Auth only. Continue SEC-001C; authentic hosted Auth/API remains SEC-001B."
+    },
+    {
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture",
+        "directory-api",
+        "development-ui",
+        "document-connected-ui"
+      ],
+      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed.",
+      "issue": null,
+      "id": "SEC-001B",
+      "title": "Supabase login and account/facility interface",
+      "status": "blocked",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "C01",
+        "C05"
+      ],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ],
+      "allowed_paths": [
+        "web/**",
+        "tests/e2e/directory.spec.ts",
+        "tests/api/**",
+        "playwright.runtime.config.ts",
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/ci.yml",
+        "playwright.config.ts",
+        "tests/unit/runtime-configuration.test.mjs",
+        "tests/unit/auth-persistence.test.mjs"
+      ],
+      "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
+      "implementation_status": "Actual owner login/directory/intake/triage passed. Protected full connected harness remains unexecuted without missing development-only service secret; subsequent browser file upload blocked by credential-runtime restriction."
+    },
+    {
+      "assigned_to": null,
+      "branch": "build/continuation-2026-10-08",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "blocker": null,
+      "issue": null,
+      "id": "SEC-001C",
+      "title": "Private storage and protected audit provenance",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "allowed_paths": [
+        "supabase/**",
+        "tests/**",
+        "web/**",
+        "docs/03-data/**",
+        "docs/04-security/**"
+      ],
+      "next_action": "Protected access-change audit is independently reviewed and locally verified. Continue private-object authorization and durable denied-attempt collection as bounded tasks; authentic API gating remains separate."
+    },
+    {
+      "id": "SEC-001B-R5",
+      "title": "Generation-isolated browser authentication persistence",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M01",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "web/src/lib/auth-storage.ts",
+        "web/src/lib/runtime.tsx",
+        "web/README.md",
+        "tests/unit/auth-persistence.test.mjs",
+        "tests/e2e/directory.spec.ts"
+      ],
+      "assigned_to": "frontend-engineer",
+      "branch": "work/sec-001b-r5",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "runtime-build",
+        "directory-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Reuse matching build, 25 persistence tests and 7 browser-fixture journeys. Independent review closed both cleanup findings. These bounded layers do not satisfy authentic API/browser requirements of parent SEC-001B or atomic crash-erasure guarantees.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83"
+    },
+    {
+      "id": "SEC-001C-AUDIT",
+      "title": "Append-only server provenance for access lifecycle changes",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "tests/database/access-audit.test.mjs",
+        "tests/database/identity-directory.test.mjs",
+        "docs/03-data/ACCESS_AUDIT_IMPLEMENTATION.md"
+      ],
+      "assigned_to": "backend-engineer",
+      "branch": "work/sec-001c-audit",
+      "owner_decisions": [
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "access-audit-database",
+        "directory-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reuse matching 30 audit and 19 directory PostgreSQL checks; independent migration review found no blocker. Verify actual target/roles/advisors and authentic API before cloud acceptance. Private storage and durable denial collection remain incomplete.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
+    },
+    {
+      "id": "SEC-001B-API-FIXTURES",
+      "title": "Audit-preserving synthetic API fixture preflight and cleanup",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "allowed_paths": [
+        "tests/api/identity-directory.test.mjs",
+        "tests/api/fixture-cleanup.mjs",
+        "tests/api/README.md",
+        "tests/unit/api-fixture-cleanup.test.mjs"
+      ],
+      "assigned_to": "verification-engineer",
+      "branch": "work/sec-001b-api-fixtures",
+      "owner_decisions": [
+        "OD-011"
+      ],
+      "verification_profiles": [
+        "api-fixture-safety"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "next_action": "Reuse matching 22 synthetic cleanup tests and independent review. Execute authentic acceptance only after reviewed migrations and secure target configuration; retain audited fixture rows and verify exact Auth cleanup. No live API evidence is claimed.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/85"
+    },
+    {
+      "id": "SEC-001C-STORAGE-CONTRACT",
+      "title": "Private object and quarantine implementation contract",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "M12",
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md"
+      ],
+      "assigned_to": "product-architect",
+      "branch": "work/sec-001c-storage-contract",
+      "owner_decisions": [
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "controls"
+      ],
+      "next_action": "ADR-003 defines the private ingest/quarantine and future exact-version boundary. Independent contract review found no blocker for the lead's reservation-only first subset. Actual code review and runtime evidence remain required; the ADR proves no application behavior.",
+      "blocker": null,
+      "issue": null
+    },
+    {
+      "id": "SEC-001C-OBJECT-RESERVATIONS",
+      "title": "Synthetic private-object reservation authorization",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-STORAGE-CONTRACT"
+      ],
+      "requirements": [
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "tests/database/private-object-reservations.test.mjs",
+        "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md",
+        "tests/database/identity-directory.test.mjs",
+        "tests/database/access-audit.test.mjs"
+      ],
+      "assigned_to": "backend-engineer",
+      "branch": "work/sec-001c-object-reservations",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "private-object-reservations-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed reservation-only code and original evidence recovered by exact hashes and saved at a749b7d. Continue coherent transport/finalization under SEC-001C-FILE-WORKFLOW; this does not authorize bytes or complete storage.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/86"
+    },
+    {
+      "id": "SEC-001",
+      "title": "Identity, account/facility isolation and audit foundation",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001B",
+        "SEC-001C"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M05",
+        "M19",
+        "C01",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/**",
+        "app/**",
+        "src/**",
+        "tests/**",
+        "docs/03-data/**",
+        "docs/04-security/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-012",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "next_action": "Finish directory policies, authentic identity/UI verification, then private storage/provenance/denial audit before this parent can verify.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "INTAKE-001",
+      "title": "Structured intake, incidents and project queue",
+      "status": "planned",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C03",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/02-ontology/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "verification_profiles": [],
+      "next_action": "Integrate INTAKE-001A/B against docs/03-data/INTAKE_RUNTIME_CONTRACT.md; genuine Auth/API/browser acceptance remains required before parent completion.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "status": "implemented",
+      "verification_profiles": [
+        "intake-database"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "INTAKE-001A",
+      "title": "Authorized request/incident persistence and internal triage",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C01",
+        "C03",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "tests/database/intake-triage.test.mjs",
+        "tests/api/intake-triage.test.mjs",
+        "tests/fixtures/intake/**"
+      ],
+      "assigned_to": "intake_backend",
+      "branch": "work/intake-backend",
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed backend is saved in6163fc9 and its migration is applied with matching hash. Run authentic intake-api after secure test key is configured; full intake remains incomplete."
+    },
+    {
+      "status": "implemented",
+      "verification_profiles": [
+        "runtime-build",
+        "intake-unit",
+        "intake-browser-fixture"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "INTAKE-001B",
+      "title": "Connected request submission and internal triage interface",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001B-R5"
+      ],
+      "requirements": [
+        "M07",
+        "M12",
+        "C01",
+        "C03",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/lib/intake-api.ts",
+        "web/src/pages/intake.tsx",
+        "web/src/pages/intake.css",
+        "web/src/router.tsx",
+        "web/src/components/app-shell.tsx",
+        "web/src/lib/modules.ts",
+        "tests/e2e/intake.spec.ts",
+        "tests/unit/intake-api.test.mjs"
+      ],
+      "assigned_to": "intake_ui",
+      "branch": "work/intake-ui",
+      "owner_decisions": [
+        "OD-005",
+        "OD-008",
+        "OD-009"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Connected submission/triage is integrated; build and8 intercepted-HTTP journeys passed with current shared navigation. Run prepared genuine development-ui and intake-api after secure key configuration; full intake acceptance remains open."
+    },
+    {
+      "status": "implemented",
+      "verification_profiles": [
+        "private-file-database",
+        "private-file-unit",
+        "private-file-entrypoint"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "id": "SEC-001C-FILE-WORKFLOW",
+      "title": "Private upload transport and verified immutable finalization",
+      "dependencies": [
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-OBJECT-RESERVATIONS"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/functions/private-objects/**",
+        "tests/database/private-file-transport.test.mjs",
+        "tests/unit/private-object-gateway.test.mjs",
+        "tests/api/private-file-transport.test.mjs",
+        "scripts/private-object-provision.mjs",
+        "web/src/lib/private-object-api.ts",
+        "web/src/components/private-object-upload.tsx"
+      ],
+      "assigned_to": "private_file_workflow",
+      "branch": "work/private-file-workflow",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "unit"
+      ],
+      "next_action": "Private65536-byte text/plain bucket and revision2 synthetic ingest/content gates are configured on actualdev; both exact-domain JWT gateways deployed. Complete focused authenticated upload/finalization/retrieval acceptance after protected automated credentials; retain quarantine and separate release authority."
+    },
+    {
+      "id": "DOC-001",
+      "title": "Immutable documents and release lifecycle",
+      "status": "planned",
+      "dependencies": [
+        "ARCH-001",
+        "SEC-001A",
+        "SEC-001C-AUDIT",
+        "SEC-001C-FILE-WORKFLOW"
+      ],
+      "requirements": [
+        "M13",
+        "C02",
+        "C01"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/DOCUMENT_RELEASE_WORKFLOW.md"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-011"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement exact-revision reviews, release grants, storage authorization, packages, withdrawal and replacement semantics with allowed/denied runtime tests.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "SCOPE-001",
+      "title": "Versioned scopes and sampling",
+      "status": "planned",
+      "dependencies": [
+        "INTAKE-001",
+        "DOC-001"
+      ],
+      "requirements": [
+        "M08",
+        "M09",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/02-ontology/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-005",
+        "OD-009"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement approved scope revisions, recommendations/declinations, qualified review, sample/COC/lab provenance and separately reviewed interpretation.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "COMMERCIAL-001",
+      "title": "ROM, agreements and change authority",
+      "status": "planned",
+      "dependencies": [
+        "SCOPE-001"
+      ],
+      "requirements": [
+        "M10",
+        "M11",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-006",
+        "OD-007",
+        "OD-008"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement versioned T&M estimates, effective authorization and cap controls, exact signature revision and bounded emergency/change workflow using synthetic commercial data.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "OPERATIONS-001",
+      "title": "Projects, assignments and closeout",
+      "status": "planned",
+      "dependencies": [
+        "COMMERCIAL-001",
+        "DOC-001"
+      ],
+      "requirements": [
+        "M12",
+        "M14",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/05-workflows/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-005",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Complete scheduling, visits, field records, change escalation, document-linked questions, tasks and audited closeout. Companion redesign is not a dependency.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "ENTERPRISE-001",
+      "title": "Programs, portfolios and readiness",
+      "status": "planned",
+      "dependencies": [
+        "SEC-001",
+        "COMMERCIAL-001"
+      ],
+      "requirements": [
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-003",
+        "OD-007",
+        "OD-008"
+      ],
+      "verification_profiles": [],
+      "next_action": "Build program coverage/activation, optional portfolio hierarchy, site passports, champions, critical assets, drills, readiness gaps and recurring work.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "VENDOR-001",
+      "title": "Qualified assigned-work vendor operations",
+      "status": "planned",
+      "dependencies": [
+        "OPERATIONS-001",
+        "ENTERPRISE-001"
+      ],
+      "requirements": [
+        "M15",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-010"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement scoped vendor portal, credentials, work orders, closeout evidence and documented contracting relationship.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "FINANCE-001",
+      "title": "Operational finance and reserves",
+      "status": "planned",
+      "dependencies": [
+        "COMMERCIAL-001",
+        "OPERATIONS-001"
+      ],
+      "requirements": [
+        "M16",
+        "C03"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-006",
+        "OD-007"
+      ],
+      "verification_profiles": [],
+      "next_action": "Build traceable commitments/costs/invoices, reserve ledger, cap/change approvals and reconciled accounting exports; no unapproved live money defaults.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "REPORT-001",
+      "title": "Executive reporting and QBR",
+      "status": "planned",
+      "dependencies": [
+        "ENTERPRISE-001",
+        "VENDOR-001",
+        "FINANCE-001"
+      ],
+      "requirements": [
+        "M17",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-002",
+        "OD-003"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement permission-filtered metrics, explicit denominators/unknowns, reproducible snapshots, actions, evidence-supported value ledger and released QBR packages.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "AI-001",
+      "title": "Source-grounded runtime assistance",
+      "status": "planned",
+      "dependencies": [
+        "SCOPE-001",
+        "DOC-001",
+        "SEC-001"
+      ],
+      "requirements": [
+        "M18",
+        "C07"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-014"
+      ],
+      "verification_profiles": [],
+      "next_action": "Implement access-scoped AI drafts/extraction with source/prompt/model versions, injection-resistant content handling, evaluation, cost/time limits and human adoption.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "CONNECT-001",
+      "title": "Independent Moldo and external adapters",
+      "status": "planned",
+      "dependencies": [
+        "ARCH-001",
+        "DOC-001",
+        "COMMERCIAL-001",
+        "ENTERPRISE-001"
+      ],
+      "requirements": [
+        "M20",
+        "C06"
+      ],
+      "allowed_paths": [
+        "src/integrations/**",
+        "app/**",
+        "supabase/**",
+        "tests/**",
+        "docs/03-data/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-016",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Review the actual current Moldo source contract before edits. Build versioned minimal projection, idempotency, retries/reconciliation and outage/revocation tests with simulated peers. Enable live connectors only at their recorded activation gates.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "HARDEN-001",
+      "title": "Cross-module scale, mobile and recovery evidence",
+      "status": "planned",
+      "dependencies": [
+        "OPERATIONS-001",
+        "ENTERPRISE-001",
+        "VENDOR-001",
+        "FINANCE-001",
+        "REPORT-001",
+        "AI-001",
+        "CONNECT-001"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07"
+      ],
+      "allowed_paths": [
+        "app/**",
+        "src/**",
+        "supabase/**",
+        "tests/**",
+        "docs/07-testing/**",
+        "docs/09-release/**"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-011",
+        "OD-015"
+      ],
+      "verification_profiles": [],
+      "next_action": "Exercise complete ordinary and enterprise lifecycles; measure realistic workloads and test migrations/restore, revocation, retries and partial failure. Fix measured bottlenecks; do not add services speculatively.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "RELEASE-001",
+      "title": "Full destination acceptance and owner activation",
+      "status": "planned",
+      "dependencies": [
+        "HARDEN-001"
+      ],
+      "requirements": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20"
+      ],
+      "allowed_paths": [
+        "docs/09-release/**",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "REQUIREMENTS.json",
+        "OWNER_DECISIONS.json"
+      ],
+      "assigned_to": null,
+      "branch": null,
+      "owner_decisions": [
+        "OD-001",
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-005",
+        "OD-006",
+        "OD-007",
+        "OD-008",
+        "OD-009",
+        "OD-010",
+        "OD-011",
+        "OD-012",
+        "OD-013",
+        "OD-014",
+        "OD-015",
+        "OD-016",
+        "OD-017"
+      ],
+      "verification_profiles": [],
+      "next_action": "Verify all 20 modules against current runtime evidence, complete bounded owner review, recovery drill and deployment authorization, then release and verify the actual deployed revision.",
+      "blocker": null,
+      "issue": null,
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ]
+    },
+    {
+      "id": "SYNC-PUBLISH-001",
+      "title": "Publish locally reviewed continuation and runtime work to GitHub",
+      "status": "implemented",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "requirements": [
+        "GOV-001"
+      ],
+      "allowed_paths": [
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "docs/00-control/**"
+      ],
+      "assigned_to": "integration-lead",
+      "branch": "wip/recovery-2026-10-08",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "source-reconciliation"
+      ],
+      "next_action": "Recovery published and fetched at a749b7d; continue exact-tree/expected-SHA API publication to existing draft PR84. Historical completion does not replace fresh target checks.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
+      "completion_mode": "historical_source"
+    },
+    {
+      "id": "DOC-001-UPLOAD-UI",
+      "title": "Connected private-file upload staging interface",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001B-R5",
+        "SEC-001C-FILE-WORKFLOW"
+      ],
+      "requirements": [
+        "M13",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/pages/private-files.tsx",
+        "tests/e2e/private-files.spec.ts",
+        "tests/unit/private-object-api.test.mjs",
+        "web/src/components/private-object-upload.tsx"
+      ],
+      "assigned_to": "private_ui_current",
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "private-file-client-unit",
+        "private-file-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Connected scoped upload page integrated under /documents. Review c22551c passed; 7 adapter and12 intercepted browser journeys pass. Actual signed-in Edge/Storage/CORS checks remain gated by secure configuration; separate security-status/report panel is next.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "SEC-001C-CLEARANCE",
+      "title": "Exact-object synthetic scan and human security clearance",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001C-FILE-WORKFLOW"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "tests/database/private-object-clearance.test.mjs",
+        "tests/api/private-object-clearance.test.mjs",
+        "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md"
+      ],
+      "assigned_to": "private_clearance_current",
+      "branch": "work/private-clearance-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "private-clearance-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Independent SQL/API review closed at a32a5d0.39 focused PostgreSQL checks pass with simulated Auth. Publish source, apply once to verified development target, then genuine private-clearance-api remains gated by secure credentials/Storage; no actual scanner or release claim.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001-SECURITY-UI",
+      "title": "Current private-object security status and narrowing concern report",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001-UPLOAD-UI",
+        "SEC-001C-CLEARANCE"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C05",
+        "C07",
+        "M13"
+      ],
+      "allowed_paths": [
+        "web/src/lib/private-object-security-api.ts",
+        "web/src/components/private-object-security-status.tsx",
+        "web/src/components/private-object-upload.tsx",
+        "tests/unit/private-object-security-api.test.mjs",
+        "tests/e2e/private-files.spec.ts"
+      ],
+      "assigned_to": "private_ui_current",
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "private-security-client-unit",
+        "private-file-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewed35611d0 integrated;10 adapter checks and20 integrated upload/security fixture journeys pass. Root fixed test-only initial-read sequencing race and preserved first failure log. Run real-service journeys after secure configuration; no content viewer, human-clearance or release action.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001A",
+      "title": "Immutable document versions and exact-object adoption",
+      "status": "implemented",
+      "dependencies": [
+        "SEC-001C-CLEARANCE",
+        "SEC-001C-FILE-WORKFLOW",
+        "SEC-001C-AUDIT"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009072201_document_versions.sql",
+        "tests/database/document-versions.test.mjs",
+        "tests/api/document-versions.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_CONTRACT.md"
+      ],
+      "assigned_to": null,
+      "branch": "work/private-clearance-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-versions-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed immutable adoption deployed as eighth exact migration;38 local DB checks and CI53 pass. Continue exact-version content authority, then human review/release. Genuine Auth/API/two-session concurrency remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001A-UI",
+      "title": "Connected document version list, history and adoption interface",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001-UPLOAD-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C05",
+        "C07",
+        "M13"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-version-api.ts",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-version-api.test.mjs",
+        "tests/e2e/document-versions.spec.ts",
+        "web/src/components/private-object-upload.tsx",
+        "web/src/components/private-object-security-status.tsx"
+      ],
+      "assigned_to": null,
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "document-versions-client-unit",
+        "document-versions-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewed1ae9c72 integrated asda38bb5;10 adapter tests,14 integrated version browser fixtures and20 upload/security regressions pass. Parent route/config/fixture/copy integrated. Continue actual hosted acceptance separately; never treat fixture success as Auth/Storage proof.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-BACKEND",
+      "title": "Exact-version internal content grants and audited current authority",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009080505_document_version_content.sql",
+        "tests/database/document-version-content.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_CONTENT_CONTRACT.md"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-backend-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-content-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed ninth migration deployed unchanged; exact stored hashes,29allRLS tables, direct role denials and RPC separation verified. CI54 passes45simulatedDB checks. Authentic API/concurrency remain open; continue exact-version internal review.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-GATEWAY",
+      "title": "Verified exact-version byte serving with current reauthorization",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/functions/document-version-content/index.ts",
+        "supabase/functions/document-version-content/gateway.mjs",
+        "tests/unit/document-version-content-gateway.test.mjs",
+        "tests/unit/document-version-content-entrypoint.test.mjs",
+        "tests/api/document-versions.test.mjs"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-gateway-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-content-gateway-unit"
+      ],
+      "required_evidence_levels": [
+        "unit"
+      ],
+      "next_action": "Reviewed bounded gatewayv1 deployed with JWT verification and exact two-file source readback; CI54passes30injected checks. Real Auth/Storage remains unexecuted. Root exact existing editor CORS fix3828ea2 awaits review/publication/deployment.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-UI",
+      "title": "Connected current-version secure download interaction",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-content-api.ts",
+        "web/src/components/document-content-download.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-content-api.test.mjs",
+        "tests/e2e/document-content.spec.ts"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "document-content-client-unit",
+        "document-content-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewedc681c31 integrated007fb35.13 adapter,22 content browser and14 prior version regression checks passed. Root permanent wiring/page copy integrated;22 new browser journeys and build pass. Await actual hosted acceptance separately; attachment handoff is not saved/delivered/released.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001C-BACKEND",
+      "title": "Exact immutable-version human internal review",
+      "dependencies": [
+        "DOC-001B-BACKEND"
+      ],
+      "allowed_paths": [
+        "tests/database/document-version-reviews.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+        "supabase/migrations/20261009172736_document_version_reviews.sql"
+      ],
+      "assigned_to": "root integration; completed owner_onboarding_backend",
+      "branch": "agent/document-review-backend",
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Exact eb65040 backend integrated/deployed/hash-matched.37focused simulated-Auth DB tests and independent review pass. No actual reviewer assigned. Continue connected review UI and actual authorized human workflow once protected integration fixture is available.",
+      "status": "implemented",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-reviews-database"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001C-UI",
+      "title": "Connected exact-version internal review request and decision interface",
+      "dependencies": [
+        "DOC-001B-UI"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-review-api.ts",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-review-api.test.mjs",
+        "tests/e2e/document-reviews.spec.ts"
+      ],
+      "assigned_to": "ui_integration; root integration; integration_review",
+      "branch": "agent/frontend-current",
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewedf3b1b706 integrated and exact five-file Lovable89227e readback complete. Focused adapter/browser checks and build passed. Publicationac37eb2f accepted pending. Genuine assigned-human hosted workflow remains open.",
+      "status": "implemented",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-reviews-client-unit",
+        "document-reviews-browser-fixture"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001D-BACKEND",
+      "title": "Synthetic exact-version release, explicit audiences, replacement and withdrawal",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001C-BACKEND"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009184724_document_version_releases.sql",
+        "tests/database/document-version-releases.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md"
+      ],
+      "assigned_to": "release_backend; root integration; integration_review",
+      "branch": "agent/document-release-backend",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-releases-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed3203c08 integrated;45/45 simulated-Auth DB checks pass. Actual preflight found canonical migration already present with exact final SQL hash, so root did not reapply it. Four RLS/direct-CRUD-denied tables,9RPC ACL split andzero release grants/records verified. Next bounded slice is released-byte authorization/gateway plus UI; hosted actual human workflow/concurrency remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001D-CONTENT",
+      "title": "Exact released-version private byte authorization and gateway",
+      "status": "in_progress",
+      "dependencies": [
+        "DOC-001D-BACKEND",
+        "DOC-001B-GATEWAY"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009194030_document_release_content.sql",
+        "supabase/functions/document-release-content/index.ts",
+        "supabase/functions/document-release-content/gateway.mjs",
+        "tests/database/document-release-content.test.mjs",
+        "tests/unit/document-release-content-gateway.test.mjs",
+        "tests/unit/document-release-content-entrypoint.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md"
+      ],
+      "assigned_to": "release_delivery; root integration lead",
+      "branch": "wip/release-content-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-release-content-database",
+        "document-release-content-gateway-unit"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "next_action": "Run registered focused checks for integrated e250336d, including new withdrawal discovery. Independent source review clear. After pass, apply exact migration to verified development target and deploy separate disabled gateway; deliberately configure transport before real released-byte acceptance. No owner/reviewer grants or internal-content changes.",
+      "blocker": "Native executor unavailable; use reviewed GitHub CI for executable checks. No cloud deployment yet.",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
+    },
+    {
+      "id": "DOC-001D-UI",
+      "title": "Exact-version release metadata, explicit audience and narrowing withdrawal interface",
+      "status": "in_progress",
+      "dependencies": [
+        "DOC-001D-BACKEND",
+        "DOC-001C-UI"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-release-api.ts",
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/pages/private-files.tsx",
+        "tests/unit/document-release-api.test.mjs",
+        "tests/e2e/document-releases.spec.ts"
+      ],
+      "assigned_to": "ui_integration; root integration lead",
+      "branch": "wip/release-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "document-releases-client-unit",
+        "document-releases-browser-fixture",
+        "document-reviews-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Run focused unit/browser/build plus existing review regressions against exact43d1ea48. Source review clear; 12 unit and16browser cases authored but unexecuted. Transfer only passing reviewed source to existing Lovable after report-only card is resolved.",
+      "blocker": "Native executor unavailable; source work continues through GitHub. Lovable transfer waits for report-only plan card resolution.",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    }
+  ]
+}

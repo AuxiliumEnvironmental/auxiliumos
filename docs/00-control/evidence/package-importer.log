@@ -1,0 +1,31 @@
+["node","--test","tools/package-importer/tests/apply-package.test.mjs"]
+✔ default preflight does not create targets, journals, commits or branches (87.018276ms)
+✔ successful import preserves unrelated files and repeats exactly without rewriting (143.852433ms)
+✔ a newer unrelated committed change is preserved when all baseline targets still match (76.644624ms)
+✔ target conflict refuses the entire import before any writes (52.769179ms)
+✔ new-file collision refuses updates to other target files (41.519762ms)
+✔ a corrupt or missing payload refuses all target changes (57.019566ms)
+✔ unsafe paths, duplicate paths and case collisions are rejected (31.999185ms)
+✔ symlink destination parents and payload symlinks are rejected (57.633606ms)
+✔ wrong origin is rejected and SSH origin is accepted (57.995121ms)
+✔ apply rejects main and detached HEAD while dry run permits inspection (89.996891ms)
+✔ dirty first import and unrelated dirt during repeat are rejected (121.796265ms)
+✔ staged content different from the package is not mistaken for an exact repeat (101.588274ms)
+✔ source commit must exist and be an ancestor of HEAD (60.347778ms)
+✔ target must be the repository root (29.317944ms)
+✔ write failure rolls back earlier writes and removes only new empty directories (133.625916ms)
+✔ failure after adding a new file restores both updated and added targets (90.872922ms)
+✔ journal directory symlinks are rejected before target changes (56.295104ms)
+✔ abrupt interruption is detected, then explicit recovery restores original files (257.123327ms)
+✔ recovery refuses newer edits and preserves the journal for later resolution (159.413455ms)
+✔ recovery rejects a changed HEAD even when package target bytes still match (175.68999ms)
+✔ CLI requires a target and rejects conflicting or unknown flags (337.661775ms)
+✔ CLI accepts an explicit package root separate from the script location (109.429963ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2416.604634

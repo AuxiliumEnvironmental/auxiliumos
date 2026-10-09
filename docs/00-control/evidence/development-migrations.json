@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "project_id": "txofqxictwecgcnvezlb",
+  "environment": "development",
+  "source_commit": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+  "method": "Supabase apply_migration of unchanged reviewed SQL; exact newly-created history row locked and mapped to canonical filename version with complete stored-statement equality and exactly-one-row assertion. No SQL rerun, reset or history deletion.",
+  "independent_method_review": "/root/intake_backend, 2026-10-09; conditional approval of bounded reconciliation, not provider endorsement of direct history DML. CLI push preferred if securely configured.",
+  "preflight": {
+    "observed_at": "2026-10-09T00:05:37.467679Z",
+    "application_tables": 0,
+    "migrations": 0,
+    "auth_users": 0,
+    "storage_buckets": 0
+  },
+  "migrations": [
+    {
+      "canonical_version": "20260713000100",
+      "generated_version": "20261009000637",
+      "name": "foundation_slice_schema",
+      "sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:08:10.767856+00"
+    },
+    {
+      "canonical_version": "20261008120645",
+      "generated_version": "20261009001032",
+      "name": "identity_access_directory",
+      "sha256": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:11:21.801305+00"
+    },
+    {
+      "canonical_version": "20261008154950",
+      "generated_version": "20261009001145",
+      "name": "access_audit_provenance",
+      "sha256": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:12:31.358123+00"
+    },
+    {
+      "canonical_version": "20261008164758",
+      "generated_version": "20261009001236",
+      "name": "private_object_reservations",
+      "sha256": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09 00:15:29.094077+00"
+    },
+    {
+      "canonical_version": "20261008234951",
+      "name": "intake_triage",
+      "sha256": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T06:57:29.697291Z",
+      "evidence": "Fresh hosted migration-history readback, one stored statement with matching SHA256. Original apply receipt was not saved in the restored workspace; this record does not invent its generated history version."
+    },
+    {
+      "canonical_version": "20261008234953",
+      "name": "private_file_transport",
+      "sha256": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T06:57:29.697291Z",
+      "evidence": "Fresh hosted migration-history readback, one stored statement with matching SHA256. Original apply receipt was not saved in the restored workspace; this record does not invent its generated history version."
+    },
+    {
+      "canonical_version": "20261009065625",
+      "generated_version": "20261009074106",
+      "name": "private_object_clearance",
+      "sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+      "source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T07:47:40.745295Z",
+      "evidence": "Reviewed exact SQL applied once after fresh six-migration/hash/disabled-config preflight. Provider-generated history version mapped under table lock after name, single statement, exact hash, absent canonical version and exactly-one-row checks. Seven canonical hashes read back; no existing migration rerun. Five new private tables have RLS and no direct CRUD for anon/authenticated/service_role; public RPC ACLs and empty search_path match source."
+    },
+    {
+      "canonical_version": "20261009072201",
+      "generated_version": "20261009080413",
+      "name": "document_versions",
+      "sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+      "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T08:05:38.520655Z",
+      "evidence": "Exact reviewed SQL applied once after fresh seven-migration/hash/disabled-config preflight. Generated history version mapped under lock with exact-name/single-statement/SHA/absent-target checks. Three new private tables RLS/direct-CRUD-denied including service_role; five public invoker wrappers and corresponding private empty-search-path definers have exact human/service ACL separation."
+    },
+    {
+      "canonical_version": "20261009080505",
+      "generated_version": "20261009083426",
+      "name": "document_version_content",
+      "sha256": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T08:37:20.503219Z",
+      "evidence": "Exact reviewed SQL applied once after fresh eight-hash/disabled-config/emptyversion preflight. Generated history normalized underlock after exactname/single-statement/hash/absent-canonical checks. Six new private tables RLS with no direct anon/authenticated/service privileges. Public invokers/private checkeddefiners and exact user/service ACLsplit verified; initial-close-only clearance predicate present."
+    },
+    {
+      "canonical_version": "20261009130331",
+      "name": "owner_onboarding_activation",
+      "sha256": "db2c6834a4441cb317f68bbf6d4cf9fbdca545aa26fc57dc9b70b5e4754b0f9d",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T18:50:34.744364+00:00",
+      "evidence": "Canonical deployed migration and exact source hash verified. Planning/review apply_migration succeeded; current stored SQL hashes independently match. No deployment or history operation repeated for this record."
+    },
+    {
+      "canonical_version": "20261009170854",
+      "name": "workspace_plans",
+      "sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T18:50:34.744364+00:00",
+      "evidence": "Canonical deployed migration and exact source hash verified. Planning/review apply_migration succeeded; current stored SQL hashes independently match. No deployment or history operation repeated for this record."
+    },
+    {
+      "canonical_version": "20261009172736",
+      "name": "document_version_reviews",
+      "sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T18:50:34.744364+00:00",
+      "evidence": "Canonical deployed migration and exact source hash verified. Planning/review apply_migration succeeded; current stored SQL hashes independently match. No deployment or history operation repeated for this record."
+    },
+    {
+      "canonical_version": "20261009184724",
+      "name": "document_version_releases",
+      "sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T19:22:32.686930+00:00",
+      "evidence": "Actual preflight already contained the canonical13th migration with exact reviewed source hash; root did not apply or normalize history for this slice. Catalog readback confirms4newRLS tables/directCRUDdenied and9public invokerRPCs with exactuser/service separation. No release grants/records/withdrawals."
+    }
+  ],
+  "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
+  "production": false,
+  "latest_source_commit": "870fc25",
+  "latest_readback": {
+    "observed_at": "2026-10-09T19:22:32.686930+00:00",
+    "migration_count": 13,
+    "latest_two_source_hashes_match": true,
+    "planning_and_review_tables_rls": true,
+    "new_direct_crud_denied": [
+      "anon",
+      "authenticated",
+      "service_role"
+    ],
+    "new_public_rpc_security": "Invoker wrappers; checked private definers; exact authenticated/service-only split; no anonymous execution",
+    "runtime_boundary": "Deployment/catalog evidence, not hosted full workflow/concurrency proof.",
+    "all_source_hashes_match": true,
+    "release_tables_rls": true,
+    "release_grants": 0,
+    "releases": 0,
+    "withdrawals": 0
+  },
+  "canonical_seed": {
+    "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",
+    "file": "supabase/seed/foundation_demo_seed.sql",
+    "sha256": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "source_unchanged": true,
+    "method": "Exact reviewed seed SQL executed once using trusted postgres session after read-only zero-row preflight. No migration recreation, fake Auth identities, linked credentials or privilege grants.",
+    "verification": {
+      "accounts": 1,
+      "profiles": 7,
+      "profiles_linked_to_auth": 0,
+      "auth_users": 0,
+      "facilities": 1,
+      "legacy_requests": 1,
+      "project_requests": 1,
+      "documents": 2,
+      "mapped_documents": 2,
+      "private_enabled": false
+    },
+    "claim_limit": "Real PostgreSQL17 bootstrap/persistence evidence, not genuine Auth/Data API or client document visibility."
+  }
+}

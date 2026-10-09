@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "status": "development_only_proposed_defaults",
+  "no_phi": true,
+  "companion_work": "deferred",
+  "roles": {
+    "identity_status": [
+      "active",
+      "suspended",
+      "removed"
+    ],
+    "membership_status": [
+      "invited",
+      "active",
+      "suspended",
+      "removed"
+    ],
+    "inactive_denies_other_roles": true,
+    "technical_admin_confers_business_authority": false
+  },
+  "documents": {
+    "technical_review": "qualified_assigned_reviewer",
+    "release_actor": "explicit_document_controller",
+    "approval_binds_to": "immutable_revision_and_checksum",
+    "high_risk_distinct_people": true,
+    "routine_dual_role": "proposed_owner_review"
+  },
+  "visibility": {
+    "rule": "membership AND object_scope AND class_state AND release_audience",
+    "restricted_grants": "explicit"
+  },
+  "history": {
+    "new_draft_replaces_released": false,
+    "superseded_client_default": "hidden",
+    "preservation_hold_is_visibility_restriction": false
+  },
+  "scope": {
+    "approved_revision_mutable": false,
+    "methods_and_limits": "qualified_review_required",
+    "chat_changes_authority": false
+  },
+  "commercial": {
+    "native_auxilium_pricing": "time_and_materials",
+    "live_rates": null,
+    "default_spending_cap": null,
+    "change_threshold": null,
+    "validity_days": null,
+    "reserve_custody_terms": null
+  },
+  "programs": {
+    "required_for_simple_project": false,
+    "coverage_from": "executed_effective_terms",
+    "site_activation": "explicit"
+  },
+  "emergency": {
+    "submission_authorizes_mobilization": false,
+    "on_call_approver": null,
+    "automatic_cap": null,
+    "p0": "emergency_services_and_facility_protocol"
+  },
+  "qualifications": {
+    "unknown_eligibility": "review_required",
+    "published_catalogue": "proposed_until_qualified_review"
+  },
+  "vendors": {
+    "visibility": "assigned_work_only",
+    "upload_auto_release": false
+  },
+  "retention": {
+    "automated_permanent_destruction": false,
+    "approved_periods": null,
+    "hold_separate_from_access": true
+  },
+  "identity": {
+    "access": "invitation_based",
+    "privileged_mfa": "required_proposed",
+    "recovery_contacts": null
+  },
+  "phi": {
+    "policy": "prohibited_v1",
+    "suspected_content": "quarantine_and_human_review",
+    "ai_processing": false
+  },
+  "ai": {
+    "real_sensitive_external_processing": false,
+    "professional_or_commercial_authority": false
+  },
+  "production": {
+    "target": null,
+    "spend_budget": null,
+    "rpo": null,
+    "rto": null,
+    "sla": null
+  },
+  "moldo": {
+    "operational_owner": "Moldo",
+    "enterprise_context_owner": "AuxiliumOS",
+    "default_os_access_for_moldo_users": false,
+    "billing_owner": "explicit_per_engagement",
+    "live_connector_enabled": false
+  },
+  "notifications": {
+    "transport": "development_sink",
+    "real_sends_enabled": false
+  },
+  "actions": {
+    "grant_roles": [
+      "OD-001",
+      "OD-012"
+    ],
+    "release_document": [
+      "OD-001",
+      "OD-002",
+      "OD-003",
+      "OD-004",
+      "OD-009"
+    ],
+    "onboard_client": [
+      "OD-001",
+      "OD-003",
+      "OD-012",
+      "OD-013",
+      "OD-015"
+    ],
+    "approve_scope": [
+      "OD-001",
+      "OD-005",
+      "OD-009"
+    ],
+    "commit_spend": [
+      "OD-001",
+      "OD-006"
+    ],
+    "activate_msa": [
+      "OD-001",
+      "OD-006",
+      "OD-007"
+    ],
+    "mobilize_emergency": [
+      "OD-001",
+      "OD-005",
+      "OD-006",
+      "OD-008",
+      "OD-009"
+    ],
+    "assign_vendor": [
+      "OD-001",
+      "OD-009",
+      "OD-010"
+    ],
+    "destroy_records": [
+      "OD-001",
+      "OD-011"
+    ],
+    "process_sensitive_ai": [
+      "OD-013",
+      "OD-014"
+    ],
+    "deploy_production": [
+      "OD-015"
+    ],
+    "sync_moldo": [
+      "OD-003",
+      "OD-016"
+    ],
+    "send_notification": [
+      "OD-003",
+      "OD-017"
+    ]
+  }
+}

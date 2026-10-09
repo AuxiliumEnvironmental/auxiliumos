@@ -1,0 +1,522 @@
+{
+  "version": 1,
+  "owner": "Christian Duarte or explicitly delegated qualified authority",
+  "rule": "Owner authorized development of recommendations, not fabricated final approval. Pending entries block only their affected live action. Do not reopen no-PHI, full scope, Moldo independence or companion deferral.",
+  "decisions": [
+    {
+      "id": "OD-001",
+      "topic": "Roles and delegation",
+      "status": "configured_for_development",
+      "recommendation": "Scoped capabilities, active identity and independent membership status; technical administration never automatically grants professional, signature or release authority.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm actual people, roles, client representatives and delegation limits before live grants.",
+      "config_path": "config/policy-defaults.json#roles",
+      "source_references": [
+        "FD-01",
+        "FD-02",
+        "FD-11",
+        "FD-12",
+        "FD-13",
+        "FD-15",
+        "FD-16"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Independent membership lifecycle and explicit directory capabilities implemented in additive migration; no role grants business authority. PostgreSQL evidence does not certify authentic API or remaining workflows.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Use existing view_account/view_asset capabilities with separate account_access lifecycle and explicit facility/all_facilities scope; legacy role rows grant nothing automatically.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "directory",
+            "identity",
+            "membership_revocation"
+          ],
+          "activation_gate": "Confirm actual people, roles, client representatives and delegation limits before live grants.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
+    },
+    {
+      "id": "OD-002",
+      "topic": "Technical review and document release",
+      "status": "configured_for_development",
+      "recommendation": "Qualified technical reviewer approves exact scientific revision; separate release action by explicitly assigned controller. Same qualified person may hold both routine roles when permitted; sensitive/high-risk classes require distinct people by proposed default.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm permitted dual roles, sensitive categories and designated reviewers/releasers before live release.",
+      "config_path": "config/policy-defaults.json#documents",
+      "source_references": [
+        "FD-03",
+        "Q004"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "provisional_choices": [
+        {
+          "id": "OD-002-synthetic-exact-version-review",
+          "choice": "Explicit exact-version synthetic reviewer assignment models qualified-human review only for development fixtures. Decisions bind version/digest and deliberate human attestation; they never assert real professional qualifications or grant release. Requester needs current create_version/view_versions; decider needs current assignment and exact-content authority.",
+          "rationale": "Build the complete human-controlled review workflow without inventing actual credentials, scientific thresholds or owner approval. Preserved decisions and current operational eligibility remain distinct.",
+          "affected_capabilities": [
+            "M13 internal review",
+            "M19 immutable human decision audit"
+          ],
+          "activation_gate": "Existing OD-002 live designated reviewer/releaser/dual-role review and OD-013 safe inspection gates remain closed. Actual qualification evidence and genuine runtime verification required before professional use.",
+          "production_enabled": false
+        },
+        {
+          "id": "OD-002-synthetic-explicit-release",
+          "choice": "Routine synthetic document class only: separately assigned exact-version release controller, immutable approved_internal decision, explicit current-recipient grant set; no implied carryover on replacement. Distinct historical recipient grants, immutable withdrawal, and no automatic restoration of a previous release. Reviewer assignment retirement preserves historical approval but grants no current actor/audience authority.",
+          "rationale": "Develop exact controlled release independently of live qualifications/audience decisions, preserving current released version while replacement drafts evolve.",
+          "activation_gate": "Real professional qualifications, dual-role policy, sensitive classes, live audiences and safe handling remain closed. Metadata slice does not implement released-byte serving.",
+          "production_enabled": false
+        }
+      ]
+    },
+    {
+      "id": "OD-003",
+      "topic": "Client and executive visibility",
+      "status": "configured_for_development",
+      "recommendation": "Active membership plus assigned object scope, allowed class/state and approved audience; explicit grants for restricted/executive content. Billing sees commercial context, not technical contents.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm per-account audiences and portal defaults before client onboarding.",
+      "config_path": "config/policy-defaults.json#visibility",
+      "source_references": [
+        "FD-04",
+        "FD-11",
+        "FD-12",
+        "FD-13",
+        "FD-16"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Account/facility read visibility implemented for synthetic directory only. Document classes, version releases, audience grants and storage remain later acceptance.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Directory exposes only permitted names and stable IDs. Account-level view does not imply all-facilities access.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "account_directory",
+            "facility_directory"
+          ],
+          "activation_gate": "Confirm per-account audiences and portal defaults before client onboarding.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        },
+        {
+          "id": "OD-003-exact-version-internal-content",
+          "choice": "Synthetic internal content requires a separate exact immutable version/digest/recipient view_content grant plus current logical-version view and active facility access. A separate audited development content-enable switch defaults false; it is an operational control, not new owner approval.",
+          "rationale": "Metadata, uploader, directory, technical role and prior authorization cannot become content authority. Current access is rechecked before and after bounded Storage retrieval; preserve holds independently of visibility.",
+          "affected_capabilities": [
+            "M13 internal version download",
+            "M19 read authorization and system-observed outcome audit"
+          ],
+          "activation_gate": "No client release or professional approval. Real actors, safe inspection environment and no-PHI incident procedure plus genuine runtime/provider/concurrency checks remain required under OD001/003/013.",
+          "production_enabled": false
+        }
+      ]
+    },
+    {
+      "id": "OD-004",
+      "topic": "Uploads, replacement and history",
+      "status": "configured_for_development",
+      "recommendation": "Uploader sees safe own-submission receipt; quarantine can restrict it. Keep current released revision while replacement is drafted. Hide superseded files from ordinary lists; explicit historical grant required.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm client historical access and withdrawal notices before live document operations.",
+      "config_path": "config/policy-defaults.json#history",
+      "source_references": [
+        "DOCUMENT_ACCESS_MATRIX",
+        "DOCUMENT_RELEASE_WORKFLOW"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "provisional_choices": [
+        {
+          "id": "OD-004-synthetic-explicit-historical-recipient",
+          "choice": "An explicit audited synthetic historical grant may authorize an active scoped recipient absent the original current audience, only for a superseded nonwithdrawn exact version. New current grant IDs never silently restore a preserved pinned audience. Same/older ordinal re-release is disabled in this development slice.",
+          "rationale": "Separate current and historical entitlements without implicit carryover or fallback restoration after withdrawal.",
+          "activation_gate": "Live history/re-release policy and client notices still require owner activation; this is metadata-only synthetic behavior.",
+          "production_enabled": false
+        }
+      ],
+      "development_choices": [
+        {
+          "id": "OD-004-synthetic-release-history",
+          "choice": "Explicit audited historical-recipient grants may authorize synthetic recipients absent the original current audience, only forsuperseded nonwithdrawn versions withcurrent scope/safety. Replacement recipientgrants never repin a preserved currentaudience. Withdrawal doesnotrestore olderreleases.",
+          "rationale": "Separate deliberate historical visibility from ordinary currentrelease access and immutable prior audience intent.",
+          "activation_gate": "Live historical portal audiences/withdrawal notices remain unapproved; metadata-onlydevelopment behavior. Conservative monotonically newer releaseversions are an engineeringconstraint, not permanentpolicy.",
+          "production_enabled": false
+        }
+      ]
+    },
+    {
+      "id": "OD-005",
+      "topic": "Scope, sampling and templates",
+      "status": "configured_for_development",
+      "recommendation": "PM prepares; assigned qualified reviewer approves technical content. Repeat templates require unchanged approved boundaries. Declination produces limitations, never a sampling-supported conclusion.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Approve actual templates, methods, review exceptions and delegate boundaries before professional use.",
+      "config_path": "config/policy-defaults.json#scope",
+      "source_references": [
+        "FD-05",
+        "FD-10",
+        "Q005",
+        "Q014"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-006",
+      "topic": "Rates, caps, terms and reserves",
+      "status": "configured_for_development",
+      "recommendation": "Native Auxilium ROM defaults to traceable T&M; actual rate cards, caps, thresholds and validity periods remain null until supplied. Reserves use a ledger with explicit permitted uses; no inferred custody or refund commitment.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Approve actual rates, payment terms, caps, change thresholds, expiration, reserve custody/use/refunds and finance delegates before binding commitments.",
+      "config_path": "config/policy-defaults.json#commercial",
+      "source_references": [
+        "FD-06",
+        "FD-08",
+        "Q006"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-007",
+      "topic": "MSA coverage and enterprise packaging",
+      "status": "configured_for_development",
+      "recommendation": "Optional versioned programs and portfolios; explicit site activation and service coverage. Classify included, billable, separate-authorization, change, specialist and out-of-scope work using executed terms.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Approve commercial packaging and translate each executed MSA into reviewed structured terms before enabling coverage.",
+      "config_path": "config/policy-defaults.json#programs",
+      "source_references": [
+        "Q001",
+        "Q009",
+        "Q013"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-008",
+      "topic": "Emergency mobilization",
+      "status": "configured_for_development",
+      "recommendation": "Urgent alerts create triage work. P0 directs to emergency/facility protocols. Mobilization requires valid MSA clause, signed authorization or a recorded bounded human exception.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Name on-call approvers and agree response promises, cap/duration/after-hours terms and emergency exceptions before live use.",
+      "config_path": "config/policy-defaults.json#emergency",
+      "source_references": [
+        "FD-07",
+        "FD-08"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-009",
+      "topic": "Qualifications and offered services",
+      "status": "configured_for_development",
+      "recommendation": "Version services/templates by jurisdiction and required qualification. Unknown or expired eligibility requires review. Specialist disciplines route to qualified people rather than generated promises.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Qualified reviewer confirms actual credentials, jurisdiction and professional boundaries; owner approves offerings.",
+      "config_path": "config/policy-defaults.json#qualifications",
+      "source_references": [
+        "FD-10",
+        "Q014"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-010",
+      "topic": "Vendors and contracting model",
+      "status": "configured_for_development",
+      "recommendation": "Assigned-work-only portal with credential/site/program checks. Vendor uploads remain unreleased. Distinguish client-direct, referral and Auxilium-managed engagements.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm real contracting/payment responsibility, credentials and vendor/program access.",
+      "config_path": "config/policy-defaults.json#vendors",
+      "source_references": [
+        "FD-14"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-011",
+      "topic": "Audit, retention and holds",
+      "status": "configured_for_development",
+      "recommendation": "Protected append-only event history; client activity is filtered separately. Preservation hold is independent of visibility restriction. Automatic permanent destruction disabled pending retention policy.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Approve retention schedule, hold/restriction authorities and audit-export recipients before destructive automation or client audit exports.",
+      "config_path": "config/policy-defaults.json#retention",
+      "source_references": [
+        "FD-17",
+        "D-SCHEMA-005"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Client access to audit remains closed; profile preservation uses Auth link nulling. Server access-change provenance is the bounded SEC-001C-AUDIT increment; durable denial collection remains separate.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "audit",
+            "identity_deletion"
+          ],
+          "activation_gate": "Approve retention schedule, hold/restriction authorities and audit-export recipients before destructive automation or client audit exports.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        },
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Retain synthetic audit-linked application records in API acceptance fixtures; cleanup revokes their access and removes only verified test-created Auth identities. Never delete audit history to satisfy fixture foreign keys.",
+          "rationale": "Exercises the append-only preservation boundary without inventing a live retention duration or destruction approval. Exact fixture ownership and fail-closed schema preflight prevent a test cleanup from becoming a broad data sweep.",
+          "affected_capabilities": [
+            "audit",
+            "identity_deletion",
+            "synthetic_api_verification"
+          ],
+          "activation_gate": "Synthetic development only. Authentic execution still requires a securely configured authorized target and reviewed migrations. Real-data retention, destruction and exports remain subject to OD-011 approval.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        }
+      ]
+    },
+    {
+      "id": "OD-012",
+      "topic": "Identity and recovery",
+      "status": "configured_for_development",
+      "recommendation": "Invitation-based verified identities; privileged internal MFA recommended. Membership removal denies access independently of other roles and cached sessions. No credentials in source or chat.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm administrators, recovery contacts, client login approach and any SSO commitments.",
+      "config_path": "config/policy-defaults.json#identity",
+      "source_references": [
+        "FD-18",
+        "FD-15"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Directory identity-link enforcement implemented and PostgreSQL-tested. Authentic login/API, production MFA, recovery and live activation remain unverified or unimplemented.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Development login uses invited synthetic password identities; no registration or automatic membership. Production login/MFA/recovery not activated.",
+          "rationale": "Conservative development implementation of ADR-002 with no implicit authority and no real clients.",
+          "affected_capabilities": [
+            "authentication",
+            "session_recovery"
+          ],
+          "activation_gate": "Confirm administrators, recovery contacts, client login approach and any SSO commitments.",
+          "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        },
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "Auth-link recovery remains closed. An immutable history bit prevents previously linked profiles from receiving another Auth link after manual unlink or Auth deletion. Browser users cannot write identity, membership or grants.",
+          "rationale": "Independent review showed that unlinking then relinking could otherwise transfer retained capabilities to another identity. Initial synthetic provisioning remains available for never-linked suspended profiles.",
+          "affected_capabilities": [
+            "identity_linkage",
+            "account_access",
+            "recovery"
+          ],
+          "activation_gate": "Define and independently review identity-recovery evidence, actors, revocation and audit before enabling relinking; live administrator/login decisions remain unapproved.",
+          "source": "docs/00-control/reviews/SEC-001A-2026-10-08.json"
+        }
+      ]
+    },
+    {
+      "id": "OD-013",
+      "topic": "No-PHI incident handling",
+      "status": "configured_for_development",
+      "recommendation": "No-PHI v1 remains decided. Suspected PHI is quarantined, excluded from AI and routed to designated security staff; do not automatically destroy potential held records.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Name incident contact and approve the handling procedure before real uploads. This does not reopen or enable PHI support.",
+      "config_path": "config/policy-defaults.json#phi",
+      "source_references": [
+        "Decision 014",
+        "D-SCHEMA-009"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Reviewed synthetic reservation and transport/finalization source saved remotely; all6 migrations and private-objects Edge v1 deployed. Bucket/config remain disabled; real uploads, scanner effectiveness and live clearance unapproved.",
+      "development_choices": [
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "No automatic uploader content readback. Future normal internal inspection requires current scan evidence plus exact designated human clearance; a separately granted quarantine-inspection route may bypass only ordinary visibility restriction after malware pass. The reservation-only increment exposes none of those byte routes.",
+          "rationale": "Separates receipt, security review and document release, avoids turning uploader ownership or technical roles into content authority, and keeps all real-file handling gated under the existing no-PHI decision.",
+          "affected_capabilities": [
+            "upload_readback",
+            "quarantine_inspection",
+            "content_clearance",
+            "private_storage"
+          ],
+          "activation_gate": "Before real grants/uploads, approve designated actors, safe inspection environment, incident contact and false-positive handling. OD-001/003 audiences and DOC-001 professional/release authority remain independent and unapproved.",
+          "source": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+          "implementation": "proposed_for_future_synthetic_slices"
+        },
+        {
+          "recorded_at": "2026-10-08",
+          "choice": "The synthetic reservation configuration is private and disabled by default, with text/plain and at most 65536 requested bytes. A default 900-second reservation TTL is configurable within a 1..3600-second test bound; expiry never deletes a record or grants content access.",
+          "rationale": "Small reproducible engineering limits exercise safe state and authorization without inventing a product-format promise, retention schedule or scientific threshold. Trusted configuration does not replace current identity/membership/capability checks.",
+          "affected_capabilities": [
+            "synthetic_upload_reservation",
+            "reservation_expiry"
+          ],
+          "activation_gate": "Synthetic development only. Real uploads still require OD-013 handling approval and actual gateway/Storage/scanner/security/restore acceptance; limits must be reviewed for the selected live workload.",
+          "source": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
+          "implementation": "implemented_synthetic_only"
+        },
+        {
+          "recorded_at": "2026-10-09",
+          "choice": "Only the exact existing development project defaults Edge transport to synthetic-only with exact localhost/127.0.0.1 port4179 origins. Invalid target/origin/mode disables transport; explicit empty origins clear CORS access. Separate SQL reservation enablement and verified private bucket remain required.",
+          "rationale": "Nonsecret bounded development configuration permits the authorized integration without enabling a production project, arbitrary web origin, bucket creation or real uploads.",
+          "affected_capabilities": [
+            "synthetic_private_file_transport",
+            "development_browser_integration"
+          ],
+          "activation_gate": "Development synthetic payloads only. Real file handling still requires designated people/procedure, scanner/provider and full authorization/recovery acceptance under OD-013.",
+          "source": "supabase/functions/private-objects/index.ts",
+          "implementation": "deployed_development_only"
+        },
+        {
+          "recorded_at": "2026-10-09",
+          "choice": "Only typed synthetic_fixture scan observations are accepted. Exact-object human security decisions are separate from system scan/grant actions, document authority and professional approval. A current authorized uploader/object grantee may report suspicion without a content/free-text payload, which only restricts visibility and invalidates clearance.",
+          "rationale": "Exercises the complete security transition and UI failure behavior while neither inventing scanner effectiveness nor exposing sensitive content. Current eligibility never grants download, adoption or release.",
+          "affected_capabilities": [
+            "private_object_security_status",
+            "synthetic_scan_evidence",
+            "human_security_disposition",
+            "narrowing_phi_report"
+          ],
+          "activation_gate": "No real scanner/PHI processing or human grant is approved. Live actors, safe inspection, handling procedure and actual runtime/provider/restore evidence remain required; OD001/003 document and professional authority remain independent.",
+          "source": "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md",
+          "implementation": "implemented_synthetic_only"
+        }
+      ]
+    },
+    {
+      "id": "OD-014",
+      "topic": "Runtime AI data use",
+      "status": "configured_for_development",
+      "recommendation": "Source-grounded proposed output with review status; no professional sign-off, autonomous releases or commercial authority. External processing of sensitive real content disabled pending a specific policy.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm permitted providers/data categories, contractual controls and activation authority.",
+      "config_path": "config/policy-defaults.json#ai",
+      "source_references": [
+        "Decision 008",
+        "Decision 009"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-015",
+      "topic": "Production, spend and recovery",
+      "status": "configured_for_development",
+      "recommendation": "Separate owner-controlled dev/test and production. Define measurable performance, recovery and cost targets from representative workloads; no invented uptime promise.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm production destination, spend budget, recovery objectives, deployment authority and real-data onboarding.",
+      "config_path": "config/policy-defaults.json#production",
+      "source_references": [
+        "FD-20",
+        "FD-21",
+        "FD-22",
+        "FD-23"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-016",
+      "topic": "Moldo integration and separation",
+      "status": "configured_for_development",
+      "recommendation": "Moldo owns daily mold operations; OS owns enterprise program/portfolio context. Explicit IDs, minimal scoped projections and a per-engagement authorization/billing owner. Moldo-only users gain no OS access.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm enterprise contracting/billing relationship, sharing rights and separation/export obligations before live sync. Entity/IP/sale arrangements remain owner and qualified-adviser decisions.",
+      "config_path": "config/policy-defaults.json#moldo",
+      "source_references": [
+        "Current owner direction 2026-10-08"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    },
+    {
+      "id": "OD-017",
+      "topic": "External notifications and actions",
+      "status": "configured_for_development",
+      "recommendation": "Development messages go to a local sink. Senders, recipients, content, retries and opt-outs follow explicit object permissions; workflow review requests do not themselves authorize a release or spend.",
+      "rationale": "Preserves the documented domain authority while permitting reversible synthetic implementation without blocking unrelated work.",
+      "activation_gate": "Confirm real sender identities, channels, templates, recipients and automated outbound actions before enabling them.",
+      "config_path": "config/policy-defaults.json#notifications",
+      "source_references": [
+        "MODULE_MAP Communications",
+        "Current owner direction 2026-10-08"
+      ],
+      "production_enabled": false,
+      "required_for_full_release": true,
+      "approved_by": null,
+      "approved_at": null,
+      "approval_evidence": null,
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+    }
+  ]
+}

@@ -231,3 +231,15 @@ Not authorized:
 - Real client data
 - PHI
 - Secrets
+
+## Decision 015: full-system development and nonblocking recommendations
+Date: 2026-10-08. Source: current explicit owner instructions.
+The destination remains all 20 modules. Build recommended reversible defaults and record owner-only choices without stopping unrelated development. Existing preparation-only restrictions and tool phasing in Decision 013 are historical; the foundation in Decision 012 is a milestone, not final scope. Decision 008 continues to prohibit silently fabricating final business/professional approval. Current execution: AGENTS.md and EXECUTION_PROTOCOL.md. Status: owner-directed development mandate, not blanket production authorization.
+
+## Decision 016: independent Moldo integration; companion deferred
+Date: 2026-10-08. Source: current explicit owner direction.
+Moldo runs its own daily operation. OS serves enterprise/portfolio customers and authorized Auxilium executives/managers through scoped Moldo integration; Moldo-only users have no OS visibility. Software boundaries preserve optional future separation. Companion redesign is deferred. Technical contract: ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md. Legal entity/IP/sale terms are not decided by this record.
+
+## Decision 017: evidence-based continuation and minimal owner interruption
+Date: 2026-10-08. Source: current explicit owner instructions.
+Meaningful source changes, decisions, tests and handoffs belong in GitHub with verified push when available. Cursor opens that same repository. Use bounded specialist agents, one integration lead, current evidence and compact checkpoints. Never claim every inaccessible conversation was reviewed, a static test proved production, or the repository was pushed without observation. Platform access gaps block only the affected external step.

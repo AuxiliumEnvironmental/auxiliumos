@@ -1,0 +1,44 @@
+{
+  "reviewed_at": "2026-10-09T19:22:32.686930+00:00",
+  "reviewer": "integration_review",
+  "source_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
+  "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+  "blocking_findings": [],
+  "scope": "Separate exactcontroller and priorapprovedinternal version; pinned recipientgrantIDs; explicit historical access; immutable replacement/withdrawal; current scope/safety; CAS/frozen retries; checked audience discovery",
+  "focused_checks": "45/45 PostgreSQL/PGlite with simulatedAuth passed",
+  "final_log_sha256": "1f276a3d4039215d2785e2d7584cb4cfb5454a68a20a2c0cb1564a7742b055c7",
+  "initial_failures": "Three fixture expectation/provenance failures were diagnosed and corrected; initial logs retained. Production SQL did not require changes for them.",
+  "limitations": [
+    "Metadata only; released-byte authorization/gateway/UI remains nextslice",
+    "No live actor grants or actual release",
+    "Hosted Auth/API/concurrency not verified"
+  ],
+  "release_content_followup": {
+    "reviewed_at": "2026-10-09T20:40:15.839Z",
+    "reviewer": "mobile_review",
+    "source_commit": "e250336d4f14a53472d260e052ba5de0e101ab48",
+    "migration_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
+    "blocking_findings": [],
+    "source_reviewed": [
+      "Original released-byte SQL/contract10887dfd",
+      "Gateway/entrypoint/tests0d54cc4",
+      "Withdrawal discovery deltae250336d"
+    ],
+    "fixed_finding": "Fresh restricted withdrawal needed a separate authorized status read; resolved with no content prerequisite and no widening of exact controller/logical/ingest boundaries.",
+    "runtime": "Pending registered database and gateway/entrypoint checks.",
+    "limitations": [
+      "No application-level rate limiter",
+      "Separate DB transactions cannot recall bytes after the final check",
+      "No hosted Auth/Storage/concurrency acceptance or new cloud deployment"
+    ]
+  },
+  "release_ui_followup": {
+    "reviewed_at": "2026-10-09T20:40:15.839Z",
+    "reviewer": "mobile_review",
+    "source_commit": "43d1ea48989f753445510f030584a91a4211fb6c",
+    "blocking_findings": [],
+    "scope": "Exact metadata release and explicit recipients, independent withdrawal discovery, current/head revision binding, frozen uncertain retries, scope cancellation and cross-review pending fences.",
+    "runtime": "12 unit and16browser cases authored; execution pending. Existing review regressions registered.",
+    "limits": "No recipient byte UI, actual professional grants, human release acceptance or Lovable transfer."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "reviewed_at": "2026-10-09T18:50:34.744364+00:00",
+  "reviewer": "integration_security_review",
+  "mode": "independent_read_only",
+  "scope": [
+    "Creator-owned typed planning-draft backend",
+    "Current client retry/open/scope handling"
+  ],
+  "backend_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+  "backend_blocking_findings": [],
+  "corrected_backend_findings": [
+    "Catalogue dollar quoting",
+    "PL/pgSQL ambiguous value identifier",
+    "CASE expression grouping"
+  ],
+  "client_blocking_findings": [],
+  "status": "backend_and_final_client_clear",
+  "authority_boundary": "Personal synthetic preparation using existing scoped submit_request/view_account/view_asset; creator only; no professional/commercial/release rights.",
+  "remaining_evidence": [
+    "Hosted authenticated planning save/reopen",
+    "Concurrent real PostgreSQL sessions"
+  ],
+  "client_reviewed_commit": "dd7961fea7a57b0f71651c4ca260687a6f8badba",
+  "client_reviewed_editor_sha256": "3c87d745ddcc5ba0c6bf57bc36851d7fa9719b048bccea76eb299426f9fc2396",
+  "corrected_client_findings": [
+    "Uncertain save freezes edits/create/cancel and retries identical full intent",
+    "Same-scope open responses fenced",
+    "Failed post-save current-head readback preserves recoverable state",
+    "GET cannot prove an uncertain mutation",
+    "Discard/conflict recovery controls are correctly fenced"
+  ]
+}

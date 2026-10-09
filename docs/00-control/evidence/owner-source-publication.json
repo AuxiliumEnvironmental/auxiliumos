@@ -1,0 +1,38 @@
+{
+  "observed_at": "2026-10-09T13:20:24.709400+00:00",
+  "github": {
+    "implementation_commit": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
+    "tree": "430d3969de0fbda12a09437faaf6a3c60ad6f21b",
+    "branch": "wip/recovery-2026-10-08",
+    "fetch_and_remote_ref_verified": true,
+    "ci_run": 37935336603,
+    "ci_conclusion": "success"
+  },
+  "lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "commit": "cc8828319079e0c4fac3e5bba4e1f288258418d8",
+    "message": "umsg_01m4gcsnk2e9ka9whjwcppqbhd",
+    "worker_exact_file_count": 37,
+    "root_independent_exact_files": [
+      "web/src/lib/runtime.tsx",
+      "web/src/lib/auth-links.ts",
+      "web/src/components/auth.tsx",
+      "web/src/components/app-shell.tsx",
+      ".github/workflows/ci.yml"
+    ],
+    "worker_build": "passed",
+    "worker390px_login_recovery_display": "passed_without_submission",
+    "ready": true,
+    "published": false,
+    "visibility": "workspace_edit",
+    "root_signed_out_browser": "redirected_to_lovable_login"
+  },
+  "unexecuted": [
+    "owner Auth invitation and delivery",
+    "personal password setup and first login",
+    "private Storage provisioning",
+    "synthetic gate activation after verified bucket",
+    "actual connected browser acceptance"
+  ],
+  "next_private_action": "Ensure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY through protected GitHub Actions repository secret form. Dispatch ci.yml against reviewed feature branch with owner invite and independent create-if-absent storage preparation; no broad acceptance until gates ready."
+}

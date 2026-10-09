@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+# Public configuration only; keep every other local environment file ignored.
+!/.env.development
+!/.env.production
+dist/
+*.tsbuildinfo

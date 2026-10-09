@@ -1,0 +1,34 @@
+["npm","run","test:runtime-ui","--","directory.spec.ts"]
+
+> auxiliumos@0.0.0 test:runtime-ui
+> playwright test --config playwright.runtime.config.ts directory.spec.ts
+
+
+Running 7 tests using 1 worker
+
+  ✓  1 tests/e2e/directory.spec.ts:113:5 › fixture browser: keyboard login, account selection, directory and sign-out (825ms)
+  ✓  2 tests/e2e/directory.spec.ts:131:5 › fixture browser: credential-bearing redirects fail without forwarding the login (417ms)
+  ✓  3 tests/e2e/directory.spec.ts:144:5 › fixture browser: expired-session sign-out cannot restore access after refresh failure and reload (1.2s)
+  ✓  4 tests/e2e/directory.spec.ts:187:5 › fixture browser: recoverable service error, empty access and profile revocation clear rows (804ms)
+  ✓  5 tests/e2e/directory.spec.ts:207:5 › fixture browser: late response from a previous account cannot replace the selected account (659ms)
+  ✓  6 tests/e2e/directory.spec.ts:224:5 › fixture browser: bounded cursor pages and an expired session (770ms)
+  ✓  7 tests/e2e/directory.spec.ts:242:5 › fixture browser: phone navigation, keyboard close, honest module state and layout (969ms)
+
+  7 passed (6.8s)
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:51) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:64) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:98) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] 9:11:46 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:46.182Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:47 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:47.010Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:47 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:47.382Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:47 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:12:18.794Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:48 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:12:19.117Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:48 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:48.607Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:49 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:49.408Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:50 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:50.046Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.
+[WebServer] 9:11:50 AM [vite] (client) [console.warn] GoTrueClient@auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co:1 (2.117.3) 2026-10-09T07:11:50.815Z Multiple GoTrueClient instances detected in the same browser context. It is not an error, but this should be avoided as it may produce undefined behavior when used concurrently under the same storage key.

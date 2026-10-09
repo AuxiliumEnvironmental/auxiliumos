@@ -1,0 +1,64 @@
+AuxiliumOS continuity/control review, 2026-10-08. Read-only review. No repository edits.
+
+REVIEWED COVERAGE
+AGENTS.md, CLAUDE.md, README.md, package.json; all .cursor/rules/*.mdc; .github workflow and issue/PR templates; all docs/00-control/*.md; all docs/06-ui/*.md; all docs/07-testing/*.md; all docs/08-ai/*.md; all docs/09-release/*.md. Other team reviewers own product/data/security/workflow domain inspection. The first combined controls output truncated a portion of FIRST_BUILD_IMPLEMENTATION_PLAN; a focused subsequent read of lines 1-130 covered the omitted passage. All assigned source text was read. Core findings verified with targeted rg.
+
+VERIFIED FINDINGS
+1. AGENTS.md current phase/gate, README.md:22, CURRENT_HANDOFF.md:45, PROJECT_STATE.md:27/101, NEXT_ACTIONS all instruct creation of an absent migration. Existing repository migration and registry are later evidence; reconcile these active entrypoints.
+2. docs/07-testing/PLAYWRIGHT_TEST_PLAN.md:7 says not installed; package.json contains Playwright and existing static tests. Update plan to distinguish static harness implemented from real-user workflow tests not implemented.
+3. docs/00-control/TRANSITION_PROTOCOL.md:111 forces summary then user confirmation every new chat. Its 15-file blanket boot package causes repeated broad reading. Replace with compact current-state + task + relevant sources, preserving optional deep-reference files.
+4. AGENTS/CURRENT_HANDOFF manual ~22-step GitHub Desktop workflow is overly coupled to owner-operated UI; preserve issue/branch/review/PR traceability but permit tools/CLI to do routine actions under existing authorization. Tool prohibition lists should reference current mandate rather than conflict.
+5. AI_AGENT_ROLES.md is three-line placeholder. CURSOR_RULES.md is a placeholder instructing mirrored copies. Favor pointers to one canonical workflow instead of duplicate rules that drift.
+6. Six docs/06-ui files (Admin, Client, Executive, Vendor maps, Design System, Component Rules) and all five docs/09-release files (backup, deploy, release, rollback, support) are empty template placeholders. ACCEPTANCE_TEST_MATRIX.md and EDGE_CASES.md are also placeholders.
+7. AI_TOOL_RULES and PROMPT_LIBRARY have useful audit/scope/document/security protections but require new explicit owner mandate: owner-review issues receive provisionally implemented, configurable recommendations with approval status; uncertainty does not silently become final approval.
+8. SPEC_GATE_REVIEW, FIRST_BUILD_IMPLEMENTATION_PLAN, FOUNDATION_VERTICAL_SLICE_CONTROL_PACKET, FOUNDER_DECISION_CHECKPOINT, LOVABLE_VISUAL_UI_SHELL_V1 are dated history, not current operating policy. Preserve and label historical/replaced where appropriate. Lovable shell documentation has unfilled observation placeholders and unchecked acceptance boxes; don't call it complete evidence.
+9. RLS/UAT/Playwright plans contain sound denial cases but largely duplicate each other and remain unimplemented. Give each requirement stable ID, one acceptance source, mapped lower-layer test plus a small browser journey rather than repeating full matrices in all layers.
+10. CI is intentionally manual placeholder; must never count as green implementation evidence. Authentic CI only runs existing check commands; absent future tools marked pending, never passed.
+11. Decision 001 GitHub authority, 002 spine, 003 modular suite, 006 messages cannot change scope, 007 gated document release, 010 backend RLS, 014 no PHI remain core. Decision 008 can allow recommended draft configurations without finalizing business/professional approval. Decision 011 permits streamlined traceable automation; Decision 013 is historical tool-phasing guidance.
+
+MINIMAL DURABLE CONTROL CONTRACTS
+Use a small number of canonical JSON files plus human-readable concise handoff, not 20 mutually mirrored status docs. Suggested contracts (can combine if implementation simpler):
+- workplan.json: task id, parent milestone, requirement IDs, status enum (planned/ready/in_progress/implemented/verified/blocked/done), dependency IDs, assigned owner, branch, allowed path globs, source refs, acceptance IDs, decision IDs, risk tier, evidence IDs, blocker, next action. Distinguish done code from deployed or user-accepted.
+- evidence.jsonl or per-task evidence JSON: ID, task ID, exact command, exit code, UTC, evidence level (static contract/runtime DB/API/browser/manual), source tree/commit hash, test file hash, relevant dependency manifest+config hashes, environment ID safe label/version, result/log path+sha256. A pass alone without source/env identity is not reusable. Do not fabricate tool runs; skipped/unavailable != pass.
+- checkpoint.json: version, source baseline and observed working tree, active tasks + branches/worktrees, last completed task, first incomplete action, pending blockers, owner decisions, short next command, persistence (local_commit, remote_commit/null, push state, durable package identity). Don't self-reference a commit that contains its own checkpoint; use base commit plus tree/content digest or latest applied commit from git at resume.
+- decisions.json: ID, issue, recommendation/rationale, status proposed/implemented_provisional/approved/rejected/superseded, reversible code/config path, affected requirements/tasks, activation conditions, approved_by/date/evidence nullable. Professional sign-off remains a human action; unspecified real financial defaults cannot be invented as approved authority.
+- source-manifest.json: path/title, origin and date, SHA256/version, read status, authoritative/historical status, exact evidence or access gap. Useful for initial comprehensive audit and later changed-input detection; no need reread everything each task.
+
+ANTI-DRIFT AND PARALLELISM
+- One integration lead owns current state, task registry, dependency graph, schema/API contracts and shared lockfiles. Nine roles can be responsibilities rather than nine continuously running agents.
+- Separate branches/worktrees for concurrent writers; exclusive file ownership for shared migrations, schema registries, auth policies and package locks. Agents writing shared docs return a patch or note to lead. No simultaneous edits to same shared directory assumed isolated.
+- Start workers with bounded task, pinned source, relevant docs only, explicit input/output contract and stopping condition; do not fork entire long chat by default.
+- Lead compares actual changed files to allowlist and merges/reviews code, not agent claims. Worker final includes diff, tests/evidence and unresolved decisions.
+- Cold resume: inspect git branch/head/status; read compact handoff/workplan; compare source/evidence hashes; check remote reachability/persistence; choose first uncompleted ready task; continue under existing authorization. Do not rerun completed tests merely because chat changed.
+- Checkpoint at logical completed changes and before tool/chat handoff, not every minute. Save incomplete work transparently in WIP branch if time/context interruption; never imply acceptance.
+- No unseen background continuation promise. Context-limit trigger means commit/checkpoint and give short resume prompt, not force giant conversation indefinitely.
+- Historical chats help reconstruct requirements but never outrank verified present source or latest explicit user instructions. Missing/private conversations marked unavailable.
+
+EFFICIENT TEST POLICY
+- Map tests to consequential requirements and changed dependencies. Rerun only invalidated evidence during development, then required integration gate at merge/release.
+- Permission/state/document controls: real local database/API denial tests under authentic users, bypassing UI; browser verifies representative end-to-end paths and phone usability. Static SQL-text tests are not RLS runtime proofs.
+- Test changes in implementation without just mirroring implementation logic. Explicit outcomes: unauthorized account/facility, revoked user with existing session, stale revision release, guessing storage keys, cross-account foreign keys, incorrect stage or role, repeat requests and retries, partial failures/audit omissions.
+- Reuse evidence only when code/test/config/dependency/environment relevant to claim are unchanged. Docs-only copy change need not rerun database matrix; auth change invalidates all dependent authorization evidence.
+- Avoid flaky re-run-until-green. Capture first failure, classify cause, fix and rerun scoped test. Failures must be visible and not converted to skips.
+
+BASELINE-AWARE PACKAGE IMPORTER RECOMMENDATION
+- Deliver original baseline identity + overlay and SHA256 manifest; never tell user to replace whole live repo with ZIP.
+- Validate clean git working tree and intended remote; don't require branch literally named main, don't discard unrelated local work, don't force push.
+- Read all intended target file states first. Old baseline hash means safe update; already new hash means no-op; missing new-only file means safe addition; any divergent hash/addition collision means conflict report and NO partial mutation.
+- Reject unsafe paths, absolute paths, '..', symlinks and archive traversal; no surprise deletes or executable downloads. Imported package should preserve current non-target source.
+- Optional ancestor check using archive commit if present, but archive commit alone does not guarantee remote still current. New unrelated source may require reconciliation before claiming package status current.
+- Provide dry run with exact add/update/already/conflict counts, then intentional apply; no need ask approval repeatedly since user authorized. Transactional staging/backups or git diff recoverability; rerun importer should be idempotent.
+- Commit onto new branch, run meaningful control/importer tests, review diff, push/PR if access available. GitHub blocked => local package/persistence explicitly pending, not complete.
+
+MEANINGFUL VALIDATIONS FOR THE MODERNIZATION ITSELF
+1. Golden path importer applies overlay; second application makes no change.
+2. Modify existing target => whole import rejects and no target mutates.
+3. New-file collision, dirty working tree, unsafe path, symlink => rejected without destructive action.
+4. In-memory invalid task dependencies/cycle or done task with absent evidence => validator fails.
+5. Edit code/test/config covered by passing evidence => evidence stale, affected task/release not verified.
+6. A child claim of completion with files outside allocation => lead rejects integration.
+7. Cold-start audit can name correct first remaining task and source without reading old chats.
+8. Check active rule files don't retain contradicting stage-only stop gates; historical docs clearly labeled and linked to current mandate.
+
+OWNER EXPERIENCE / EXACT DIRECTIONS
+Recommend new build chat in same AuxiliumOS project after importing/pushing modernization branch to GitHub. New chat uses current remote revision and compact prompt, not old ZIP as fresh truth. Cursor opens same clone, pulls accepted branch; Cursor is an editor and separate local working copy, not automatic cloud backup. Chat deliverable persists separately; verify push via remote commit, never claim GitHub/Cursor saved from Library upload. While GitHub connector blocked, owner's minimal action is grant repository access or open/pull/import package in current clone; no secrets in chat. Provide one ordered setup sequence with precise artifact names and commands tested on paths with spaces. Provide outstanding decisions at end, provisional features already implemented/tested but not silently activated as final business authority.

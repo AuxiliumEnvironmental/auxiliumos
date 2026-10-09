@@ -1,0 +1,26 @@
+["node","--test","tests/database/private-object-reservations.test.mjs"]
+▶ private reservations: PostgreSQL with simulated Auth/gateway, single session only
+  ✔ additive migration preserves legacy rows/seed and directory helper definitions (20.386253ms)
+  ✔ allowed reservation/status expose four safe fields and exact server provenance (24.711138ms)
+  ✔ role-only, unlinked, inactive, absent and anonymous subjects cannot reserve (62.203293ms)
+  ✔ actual gateway session/role are required; service_role and forged GUCs cannot impersonate (18.061118ms)
+  ✔ exact facility scope, cross-account boundaries and creator-only status privacy (32.295236ms)
+  ✔ revocation denies next reserve/status/replay with unchanged simulated subject and roles (82.02799ms)
+  ✔ idempotent replay never renews or duplicates audit; changed canonical request conflicts (15.963195ms)
+  ✔ operational expiry returns expired without mutation, renewal, bytes or deletion (1115.951491ms)
+  ✔ private configuration is bounded/audited and client GUCs cannot enable or raise limits (38.270443ms)
+  ✔ constraints keep narrow request types and preserve all old directory capability shapes (32.945638ms)
+  ✔ ACLs/RLS defeat broad default grants and private function invocation (38.118344ms)
+  ✔ empty search paths resist temporary relation/function shadowing (15.021275ms)
+  ✔ immutability and NO ACTION references protect metadata including upstream cascades (43.494349ms)
+  ✔ protected audit scope and failure rollback leave no orphan reservation/config change (17.182143ms)
+✔ private reservations: PostgreSQL with simulated Auth/gateway, single session only (3413.513699ms)
+ℹ PostgreSQL 18.3 (PGlite 0.5.8) on wasm32-unknown-emscripten, compiled by emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 3.1.74 (1092ec30a3fb1d46b1782ff1b4db5094d3d06ae5), 32-bit
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3561.78791

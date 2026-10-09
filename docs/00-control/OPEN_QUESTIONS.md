@@ -1,3 +1,5 @@
+> Legacy question history. Current proposed choices and scoped activation gates are in OWNER_DECISIONS.json. Do not ask the owner to repeat already-settled answers or stop unrelated implementation.
+
 # Open Questions
 
 This file tracks unresolved AuxiliumOS decisions. If a question requires founder, legal, security, technical, or business authority, it belongs here until answered.
@@ -255,6 +257,8 @@ docs/04-security/DOCUMENT_ACCESS_MATRIX.md
 ---
 
 ## Q008 — What is the v1 no-PHI policy?
+
+Current status: RESOLVED by Decision 014 and D-SCHEMA-009. No PHI v1. Only incident-handling contacts/procedure remain OD-013 owner review; the historical discussion below is not a live policy question.
 
 Area:
 Security / healthcare

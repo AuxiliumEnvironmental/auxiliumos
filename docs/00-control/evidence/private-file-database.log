@@ -1,0 +1,20 @@
+["node","--test","tests/database/private-file-transport.test.mjs"]
+▶ private-file transport — PostgreSQL, simulated gateway; no provider/concurrency proof
+  ✔ receipt precedes user finalization; exact retries preserve attempt, bytes and audits (60.738147ms)
+  ✔ real handler and SQL RPC contract compose through verified byte receipt and finalization (47.315699ms)
+  ✔ changed body, forged receipt, wrong attempt and stale revision cannot finalize (27.549356ms)
+  ✔ revocation during provider gap denies finalization and hides existing status (21.09201ms)
+  ✔ private table, service receipt and user authority are separately least privileged (25.76606ms)
+  ✔ read, signing, release, scan and human-clearance placeholders are absent (27.054601ms)
+  ✔ bucket-scoped restrictive denial defeats broad allow without breaking unrelated buckets (12.489603ms)
+  ✔ audit failure rolls back receipt; recovery is idempotent and non-destructive (31.387297ms)
+  ✔ operational expiry blocks new upload/finalize without deleting reservations or receipts (1120.300173ms)
+✔ private-file transport — PostgreSQL, simulated gateway; no provider/concurrency proof (4606.359244ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4742.502056

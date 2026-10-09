@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "created_at": "2026-10-09T19:23:24.643Z",
+  "source": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
+    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
+  },
+  "first_unfinished_action": "Finish bounded document mobile/readability and intake-name polish, verify exact Lovable source parity, publish the reviewed UI and run one integrated CI gate. Owner account/login and request/triage are already verified. Configure missing development-only GitHub Actions service secret, then run the focused real connected workflow; current cloud-browser credential-state restriction prevents further manual verification. Next backend slice is released-byte access, distinct from completed metadata release.",
+  "git": {
+    "is_repository_root": true,
+    "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
+    "branch": "wip/recovery-2026-10-08",
+    "upstream": null,
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json\n?? docs/00-control/evidence/document-release-final-test.log\n?? docs/00-control/evidence/document-release-first-test.log\n?? docs/00-control/evidence/document-release-second-test.log",
+    "remote": {
+      "status": "head_matches_remote",
+      "branch": "wip/recovery-2026-10-08",
+      "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
+      "checked_at": "2026-10-09T19:23:24.641Z"
+    }
+  },
+  "controls_digest": "a134d334ea6394464ee44dcd792616114656803d7fe6920847ca4444bc0a565d",
+  "next_ready_task": "UI-2026-10-09",
+  "blocked_tasks": [
+    {
+      "id": "SEC-001B",
+      "title": "Supabase login and account/facility interface",
+      "declared_status": "blocked",
+      "verified": false,
+      "historical_completion": false,
+      "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
+      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed."
+    }
+  ],
+  "evidence": {
+    "controls": {
+      "status": "stale",
+      "profile": "controls"
+    },
+    "foundation-contract": {
+      "status": "stale",
+      "profile": "foundation-contract"
+    },
+    "package-importer": {
+      "status": "stale",
+      "profile": "package-importer"
+    },
+    "source-reconciliation": {
+      "status": "stale",
+      "profile": "source-reconciliation",
+      "reason": "Evidence timestamp is future-dated or expired."
+    },
+    "directory-database": {
+      "status": "stale",
+      "profile": "directory-database"
+    },
+    "access-audit-database": {
+      "status": "stale",
+      "profile": "access-audit-database"
+    },
+    "private-object-reservations-database": {
+      "status": "stale",
+      "profile": "private-object-reservations-database"
+    },
+    "runtime-build": {
+      "status": "stale",
+      "profile": "runtime-build"
+    },
+    "directory-browser-fixture": {
+      "status": "stale",
+      "profile": "directory-browser-fixture"
+    },
+    "api-fixture-safety": {
+      "status": "stale",
+      "profile": "api-fixture-safety"
+    },
+    "directory-api": {
+      "status": "not_run",
+      "profile": "directory-api"
+    },
+    "intake-database": {
+      "status": "stale",
+      "profile": "intake-database"
+    },
+    "intake-unit": {
+      "status": "stale",
+      "profile": "intake-unit"
+    },
+    "intake-browser-fixture": {
+      "status": "stale",
+      "profile": "intake-browser-fixture"
+    },
+    "private-file-database": {
+      "status": "stale",
+      "profile": "private-file-database"
+    },
+    "private-file-unit": {
+      "status": "stale",
+      "profile": "private-file-unit"
+    },
+    "intake-api": {
+      "status": "not_run",
+      "profile": "intake-api"
+    },
+    "private-file-api": {
+      "status": "not_run",
+      "profile": "private-file-api"
+    },
+    "private-file-entrypoint": {
+      "status": "stale",
+      "profile": "private-file-entrypoint"
+    },
+    "private-file-browser-fixture": {
+      "status": "stale",
+      "profile": "private-file-browser-fixture"
+    },
+    "private-file-client-unit": {
+      "status": "stale",
+      "profile": "private-file-client-unit"
+    },
+    "development-ui": {
+      "status": "not_run",
+      "profile": "development-ui"
+    },
+    "private-clearance-database": {
+      "status": "stale",
+      "profile": "private-clearance-database"
+    },
+    "private-clearance-api": {
+      "status": "not_run",
+      "profile": "private-clearance-api"
+    },
+    "private-security-client-unit": {
+      "status": "stale",
+      "profile": "private-security-client-unit"
+    },
+    "document-versions-database": {
+      "status": "stale",
+      "profile": "document-versions-database"
+    },
+    "document-versions-client-unit": {
+      "status": "stale",
+      "profile": "document-versions-client-unit"
+    },
+    "document-versions-browser-fixture": {
+      "status": "stale",
+      "profile": "document-versions-browser-fixture"
+    },
+    "document-versions-api": {
+      "status": "not_run",
+      "profile": "document-versions-api"
+    },
+    "document-content-database": {
+      "status": "not_run",
+      "profile": "document-content-database"
+    },
+    "document-content-gateway-unit": {
+      "status": "not_run",
+      "profile": "document-content-gateway-unit"
+    },
+    "document-content-client-unit": {
+      "status": "not_run",
+      "profile": "document-content-client-unit"
+    },
+    "document-content-browser-fixture": {
+      "status": "stale",
+      "profile": "document-content-browser-fixture"
+    },
+    "document-connected-ui": {
+      "status": "not_run",
+      "profile": "document-connected-ui"
+    },
+    "owner-onboarding": {
+      "status": "stale",
+      "profile": "owner-onboarding"
+    },
+    "auth-onboarding-browser-fixture": {
+      "status": "stale",
+      "profile": "auth-onboarding-browser-fixture"
+    },
+    "workspace-plans-database": {
+      "status": "stale",
+      "profile": "workspace-plans-database"
+    },
+    "workspace-plans-client-unit": {
+      "status": "not_run",
+      "profile": "workspace-plans-client-unit"
+    },
+    "document-reviews-database": {
+      "status": "not_run",
+      "profile": "document-reviews-database"
+    },
+    "document-reviews-client-unit": {
+      "status": "not_run",
+      "profile": "document-reviews-client-unit"
+    },
+    "document-reviews-browser-fixture": {
+      "status": "not_run",
+      "profile": "document-reviews-browser-fixture"
+    },
+    "document-releases-database": {
+      "status": "not_run",
+      "profile": "document-releases-database"
+    }
+  },
+  "pending_owner_decisions": [
+    "OD-001",
+    "OD-002",
+    "OD-003",
+    "OD-004",
+    "OD-005",
+    "OD-006",
+    "OD-007",
+    "OD-008",
+    "OD-009",
+    "OD-010",
+    "OD-011",
+    "OD-012",
+    "OD-013",
+    "OD-014",
+    "OD-015",
+    "OD-016",
+    "OD-017"
+  ],
+  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
+  "cloud_recovery": {
+    "recorded_at": "2026-10-09T20:40:15.839Z",
+    "base_remote_commit": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9",
+    "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
+    "not_claimed": [
+      "Local checkpoint regeneration",
+      "Local source parity after outage",
+      "Uncollected tests",
+      "Completed released-byte backend"
+    ],
+    "next_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
+    "ui_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+    "exact_source_parity": true,
+    "ci64_diagnosis": "Exact sanitized artifact excerpt verified within GitHub; duplicate warning locator caused sole version failure. Corrected fixture and original workflow restoration saved together; next CI pending.",
+    "ci66": {
+      "run_id": 37986270507,
+      "commit": "4cf0815879ee31c5374880c28747ef6429a5ef93",
+      "controls": "passed",
+      "application_foundation": "passed",
+      "actual_privileged_profiles": "not_run"
+    },
+    "release_content_source": "e250336d4f14a53472d260e052ba5de0e101ab48",
+    "release_ui_wip": "06f54fd4a269b6dfaf32dfd5c8eec055d8a1a238",
+    "release_ui_source": "43d1ea48989f753445510f030584a91a4211fb6c",
+    "release_runtime_status": "Pending integrated CI, not executed in unavailable workspace."
+  }
+}

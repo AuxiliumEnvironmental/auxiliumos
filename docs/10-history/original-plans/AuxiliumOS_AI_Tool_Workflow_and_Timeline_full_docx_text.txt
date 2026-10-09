@@ -1,0 +1,135 @@
+AuxiliumOS AI Tool Workflow & Realistic Timeline
+How to use current AI coding tools without losing control of the product
+Prepared for Auxilium Environmental | Working Blueprint | June 14, 2026
+Operating rule: AI can accelerate execution, but it must not own business rules, permissions, document release, scope authority, or professional judgment. The system wins only if the durable docs, tickets, tests, and review gates are stronger than the chat.
+1. Tool roles
+Need
+Recommended tool class
+How Auxilium should use it
+Strategic reasoning / specs
+ChatGPT / Claude / Gemini-style planning chats
+Use for architecture, homework reviews, edge cases, prompt design, user stories, and acceptance criteria. Never treat a chat as the source of truth after a session ends.
+Primary coding agent
+Claude Code or OpenAI Codex
+Use for repository-aware implementation, multi-file changes, refactors, test generation, and iteration against failing tests.
+IDE coding environment
+Cursor or VS Code with AI tools
+Use for interactive editing, code review, debugging, component iteration, and developer control of changes.
+Git workflow
+GitHub with Issues, Pull Requests, Actions, branch protection
+Use every feature as a ticket, every code change as a branch, every merge as a reviewed PR, and every regression as a test.
+Testing
+Unit tests + integration tests + Playwright end-to-end tests
+Use tests as the contract that prevents AI from silently breaking permissions, workflows, and document release logic.
+Security baseline
+OWASP ASVS / NIST SSDF checklist, dependency scanning, secret scanning, RLS policy tests, backup testing
+Use before storing sensitive client data or releasing to real external users.
+Database / auth candidate
+Postgres-backed stack such as Supabase, or a similar secure backend with strong authorization controls
+Use row-level or equivalent object-level access controls. Do not rely on UI hiding.
+Monitoring / operations
+Sentry, uptime checks, audit logs, admin alerts, backup/export scripts
+Use after alpha, before production client use.
+2. Golden workflow for AI-assisted development
+Update the durable docs first: PROJECT_BRIEF, ROADMAP, DECISION_LOG, GLOSSARY, RULE_REGISTRY, PERMISSIONS_MATRIX, DOCUMENT_CONTROL, TEST_SCENARIOS, AI_HANDOFF.
+Create one GitHub Issue per feature. The issue must include purpose, users, objects, states, permissions, audit events, acceptance criteria, tests, and out-of-scope notes.
+Start a new AI coding session with the AI_CONTEXT_PACKET plus the single issue. Do not ask the agent to build multiple modules at once.
+Require the agent to produce an implementation plan before code. Approve or correct the plan before it edits files.
+Let the agent implement on a feature branch. Require tests with the feature, not after the feature.
+Run tests locally and in CI. The PR cannot merge if tests fail or if no tests were added for permission-sensitive work.
+Review the diff against the ticket. Reject changes that rename objects, bypass permissions, weaken document release, or add hidden business rules.
+Merge only after human review. Update decision log and handoff file immediately.
+At the end of each chat, generate a handoff summary: decisions, files changed, tests added, risks, unresolved homework, next three tickets.
+3. Build phases and realistic timing
+Reality check: The estimates below assume disciplined full-time focus, modern AI coding tools, a tight v1 scope, no custom accounting, and no production storage of highly sensitive healthcare-adjacent enterprise data in the first prototype. Part-time work, unresolved homework, weak specs, or permission rework can double these ranges.
+Milestone
+Realistic timing
+Exit condition
+Phase 0 — Logic foundation
+2–6 weeks
+Finish homework enough to freeze v1 object names, roles, document classes, request states, scope ledger, and initial PA portal requirements.
+Phase 1A — Internal prototype
+4–8 weeks after Phase 0
+Local/staging app: login, accounts, users, projects, documents, messages, simple request form, admin queue, audit events. Not production-safe yet.
+Phase 1B — Basic PA client v1
+8–14 weeks after Phase 0
+Usable with select PA clients if permissions, release controls, backups, admin workflows, and support process are tested.
+Phase 2 — Scoping / ROM / Authorization v1
+3–6 additional months
+Issue × intent logic, dynamic questions, smart prompts, sampling preference, deliverables, scope ledger, limitations, agreement workflow.
+Phase 3 — Asset / Portfolio Lite
+2–4 additional months
+Assets/properties, asset documents, asset-level users, projects by asset, portfolio summary.
+Phase 4 — Enterprise MSA / Site Passport
+6–12 additional months after core stability
+Site passports, incident command, critical asset registry, vendor matrix, readiness reserve ledger, QBR dashboards.
+Full monster end-state
+12–24+ months
+Possible if done as disciplined phases; unrealistic as one continuous AI chat or one mega-ticket.
+4. Minimum useful PA/client portal
+Client login and account isolation.
+Client project list with status and project summary.
+Released document download area with document version and release state.
+Project-linked message thread with message classification and routing.
+Simple project request form capturing issue, intent, property, affected areas, urgency, payer/signer, and attachments.
+Admin intake queue with request status, assignment, missing info, and decision buttons.
+Scope summary and limitation record, even if the full smart-prompt engine is not finished.
+Audit log for uploads, releases, downloads, messages, role changes, and admin decisions.
+Backup/export process and a clear way to remove or disable access.
+5. What not to build first
+Custom accounting system.
+Full enterprise site passport suite.
+Vendor scorecard marketplace.
+AI-generated technical conclusions to clients.
+Automated scope acceptance without Auxilium review.
+Healthcare PHI-capable workflow before security, contracts, and platform selection are resolved.
+Complex dashboards that do not drive client action or internal decisions.
+Multiple apps with separate client/user/document tables.
+6. Definition of done for every feature
+Gate
+Required proof
+Business rule
+Written in durable docs and feature issue; not buried only in chat.
+Object ownership
+Feature clearly states which domain owns the data.
+Permissions
+Allowed and denied roles are listed and tested.
+Audit
+Important actions create audit events.
+Document control
+Any file-related feature respects version, release, class, and download audit rules.
+Workflow states
+Feature cannot create impossible states or skip required approvals.
+Professional review
+Technical opinions, scope approvals, sampling decisions, and report releases have human gates.
+Tests
+Unit/integration/e2e tests exist for the normal path and at least one failure/denial path.
+Handoff
+AI_HANDOFF and DECISION_LOG are updated.
+7. New chat start packet
+Paste this before asking an AI agent to help with any new coding or architecture task:
+Paste-in instruction: You are continuing AuxiliumOS. Use the canonical data spine and guardrails. Do not invent business rules. Ask or mark homework gaps when internal information is missing. Work on one ticket at a time. Preserve permissions, document control, audit events, professional review gates, and state machines. Before coding, produce a plan, tests, and files to change.
+8. Recommended order for the first 12 tickets
+Create repo structure and durable /docs folder.
+Create glossary and canonical object naming docs.
+Create role and permission matrix for PA v1.
+Create document classes and release-state rules.
+Create request/project/document/message/audit state machines.
+Set up app shell, auth, database, seed data, test framework, and CI.
+Build account/user roles with permission tests.
+Build project list and project detail page.
+Build document upload/release/download with audit tests.
+Build project-linked messages with routing categories.
+Build simple project request form and admin intake queue.
+Build handoff/export/backup process for early production use.
+9. Security and production readiness warning
+Security rule: Before real client use with sensitive documents, complete permission tests, backup/restore test, document release audit, dependency/secret scan, admin MFA, and outside security/code review. A working demo is not a production-safe portal.
+10. Source notes for tool selection
+Claude Code is documented as an agentic coding tool that can read codebases, edit files, run commands, and integrate with development tools.
+OpenAI Codex is presented as a coding agent for planning, building features, refactors, reviews, and releases across development tools.
+Cursor documents Agent, Rules, MCP, Skills, CLI, and AI-first IDE workflows.
+GitHub Copilot coding agent can be started from issues and can produce pull requests, but still requires review before merge.
+OWASP ASVS and NIST SSDF should guide secure development requirements and verification practices.
+Supabase/Postgres row-level security or an equivalent backend enforcement layer is important for multi-tenant object-level protection.
+Playwright is appropriate for end-to-end testing of web workflows and permissions from the user interface.
+AuxiliumOS Planning Packet | AI Tool Workflow and Realistic Timeline | June 14, 2026

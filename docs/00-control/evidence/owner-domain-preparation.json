@@ -1,0 +1,131 @@
+{
+  "observed_at": "2026-10-09T18:50:34.744364+00:00",
+  "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+  "github_ci": {
+    "run_id": 37961286796,
+    "run_number": 63,
+    "conclusion": "success"
+  },
+  "lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "commit": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+    "sync_message": "umsg_01m4grv07wen993jephhsf8c9f",
+    "base_web_package_files_matched": 44,
+    "increment_files_matched": 15,
+    "production_build": "passed_root_dist_with_public_development_config",
+    "domain": "auxiliumos.io",
+    "domain_verification": "provider_reported_connected_ownership_verified",
+    "is_published": true,
+    "publish_attempt": "Owner explicitly authorized and manually published; provider and actual HTTPS browser readback confirmed.",
+    "current_reviewed_commit": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+    "root_publication": {
+      "deployment_id": "d2b3a167-2fd8-4348-af02-ce0100eeb854",
+      "result": "pending",
+      "owner_authorized": true
+    }
+  },
+  "supabase": {
+    "project_ref": "txofqxictwecgcnvezlb",
+    "operator_context": {
+      "session_user": "postgres",
+      "current_user": "postgres"
+    },
+    "migration_count": 13,
+    "auth_users": 1,
+    "owner_profile_present": true,
+    "site_url": "https://auxiliumos.io",
+    "redirect_urls": [
+      "https://auxiliumos.io",
+      "https://auxiliumos.io/?auth=invite",
+      "https://auxiliumos.io/?auth=recovery"
+    ],
+    "invite_template": "Observed default .ConfirmationURL",
+    "email_delivery": "Invite accepted by owner; email confirmed and password configured observed through boolean/timestamp readback only.",
+    "bucket": {
+      "id": "os-private-ingest",
+      "public": false,
+      "file_size_limit": 65536,
+      "allowed_mime_types": [
+        "text/plain"
+      ],
+      "created_via": "supported_dashboard_storage_operation"
+    },
+    "storage_rls": true,
+    "restrictive_browser_bucket_object_denials": true,
+    "ingest": {
+      "enabled": true,
+      "revision": 2,
+      "max_bytes": 65536,
+      "reservation_ttl_seconds": 900
+    },
+    "content": {
+      "enabled": true,
+      "revision": 2,
+      "synthetic_only": true
+    },
+    "config_audit_actor": "database_privileged_operation",
+    "edge_functions": [
+      {
+        "slug": "private-objects",
+        "version": 3,
+        "verify_jwt": true
+      },
+      {
+        "slug": "document-version-content",
+        "version": 4,
+        "verify_jwt": true
+      }
+    ],
+    "cors_preflight": {
+      "origin": "https://auxiliumos.io",
+      "private_objects_status": 204,
+      "document_version_content_status": 204,
+      "allow_credentials": null
+    },
+    "owner_identity_status": "active",
+    "owner_scoped_capabilities": [
+      "view_account",
+      "view_asset",
+      "submit_request",
+      "triage_request",
+      "ingest_private_object"
+    ]
+  },
+  "checks": {
+    "dashboard_owner_database_scenarios": 30,
+    "production_configuration_checks": 12,
+    "independent_security_review": "no_blockers_for_exact_operator_path_and_domain_CORS",
+    "hosted_authenticated_workflow": "partial_pass_directory_intake_triage_only",
+    "owner_invitation_sent": true,
+    "owner_password_set": true,
+    "owner_first_login_verified": true,
+    "owner_application_permissions_active": true,
+    "https_sign_in_and_recovery_browser": "passed",
+    "owner_first_authentication_verified": true,
+    "application_browser_verification": "passed_owner_account_facility_submission_triage"
+  },
+  "screenshots": [
+    "Private owner-auth-domain-20261009.jpg retained outside the public repository.",
+    "Private owner-invitation-sent-20261009.jpg retained outside the public repository."
+  ],
+  "next_action": "Finish and review the connected exact-version internal review UI while the release backend proceeds independently. Securely configure the verified missing development-only GitHub Actions service secret, then dispatch the focused connected browser harness with freshly reconciled fixture revision/bucket. Resume actual upload/finalization/retrieval and planning save/reopen browser verification when the cloud browser credential-state restriction is cleared. Account setup and actual login are complete.",
+  "actual_browser_journey": {
+    "origin": "https://auxiliumos.io",
+    "actor": "Provisioned owner, personal Auth identifier omitted from public source",
+    "account": "AuxiliumOS Development",
+    "facility": "Owner Workflow Sandbox",
+    "request_id": "b82a3beb-6ed9-43a4-bdf5-04781d5a8a37",
+    "synthetic": true,
+    "submission_created_at": "2026-10-09T18:40:38.612656Z",
+    "triage_saved_at": "2026-10-09T18:41:13.606359Z",
+    "revision": 2,
+    "status": "intake_completeness_review",
+    "backend_readback": "Exact request/revision/status agrees with actual browser success",
+    "remaining": [
+      "private upload and finalization",
+      "separate authorized content retrieval",
+      "planning save/reopen"
+    ],
+    "browser_blocker": "CUA file-chooser command refused retained native credential state; prescribed new-document/runtime recovery also refused. No file upload success asserted."
+  }
+}

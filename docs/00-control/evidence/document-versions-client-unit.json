@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "profile": "document-versions-client-unit",
+  "level": "unit",
+  "recorded_at": "2026-10-09T07:52:15.816Z",
+  "result": "passed",
+  "digest": "cb5b3ca43b708c29147ccb26426321c09f4b7d4ce406d9864b07a8673d635c00",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "837ab464f0d29de01137e1c5a2eb33c004e2fe7e0bd967890368b3a31da680f3",
+      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
+    "tests/unit/document-version-api.test.mjs": "ed4347f2055c69b1afcd4c9f69219b62849c9289049193c8a7e2ac99206a845f",
+    "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+    "web/src/lib/document-version-api.ts": "8bf5927a5f4dc05be31a09dba9da86fc0370e0a9628e7773b78cc54f0ac87d0b",
+    "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434"
+  },
+  "observed_git_head": "da38bb595cd33b05f71dad299ed147a2e7951fbf",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/unit/document-version-api.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/document-versions-client-unit.log",
+  "log_sha256": "6e23ff511ebf9c647be49291cd1d546e045d4f7824999295b0199f6dcdcf3c93"
+}

@@ -1,89 +1,21 @@
 # AuxiliumOS
+AuxiliumOS is the planned 20-module operating platform for Auxilium Environmental. Moldo remains an independently operated application with a controlled enterprise/management integration. Companion work is deferred.
 
-AuxiliumOS is a modular operating suite with one canonical data spine for client intake, account and facility management, project coordination, scope control, authorization, document control, reporting, and auditability for Auxilium Environmental.
+The uploaded source contains a static UI shell, seven-table development migration, demo seed and static test harnesses. The continuation package adds working build controls, proposed specifications and a complete delivery register. It does not claim a finished or deployed OS.
 
-## Current Stage
+Start with AGENTS.md, BUILD_STATE.json and `npm run os:status`. REQUIREMENTS.json preserves the full destination; BUILD_QUEUE.json sequences it; OWNER_DECISIONS.json tracks proposed business defaults. Detailed plans remain in docs/01-product. Current GitHub access and live deployments must be reconciled before treating this archive as current.
 
-Dev-Only Foundation Schema Migration Preparation.
+Node 24 (used for package verification and CI), or a compatible supported Node version is recommended for the control tools. The controls have no new dependency packages.
 
-The repo currently contains:
+```sh
+npm run os:check
+npm run os:verify -- controls
+npm run os:verify -- package-importer
+npm run os:verify -- foundation-contract
+npm run os:status
+npm run os:checkpoint
+```
 
-- Durable control and handoff documents
-- Canonical data spine and module map
-- Initial permission and document-access specifications
-- Request and document workflows
-- Static app shell
-- Playwright static-shell baseline
-- Foundation schema design packet
-- Schema implementation readiness gate
-- Minimum dev-schema blocker decisions
-- Foundation migration control packet
+The existing `npm run test:e2e` needs dependencies and a Playwright browser. Static shell tests do not establish production workflows. `npm run os:release-check` intentionally fails until full implementation, current runtime evidence, owner activation decisions and production authorization are recorded.
 
-No Supabase migration has been created or applied yet.
-
-## Current Next Work
-
-Create the issue:
-
-`Initial dev-only foundation schema migrations`
-
-That future issue must explicitly authorize exact migration, seed, documentation, and test files.
-
-The migration must remain:
-
-- Dev-only
-- Fake/demo-data-only
-- No PHI
-- No secrets
-- No cloud Supabase connection
-- No auth provider setup
-- No storage buckets
-- No RLS policies
-- No production
-- No app/database connection
-
-## Source of Truth
-
-The GitHub repository is the source of truth.
-
-ChatGPT, Cursor, Lovable, Claude Code, Codex, GitHub Copilot, and future AI agents are workers.
-
-## Start Here
-
-Read in this order:
-
-1. `AGENTS.md`
-2. `docs/00-control/CURRENT_HANDOFF.md`
-3. `docs/00-control/TRANSITION_PROTOCOL.md`
-4. `docs/00-control/PROJECT_STATE.md`
-5. `docs/00-control/NEXT_ACTIONS.md`
-6. `docs/01-product/END_STATE_BLUEPRINT.md`
-7. `docs/01-product/DATA_SPINE.md`
-8. The active GitHub issue
-
-## Canonical Data Spine
-
-Client Account -> Program/MSA -> Portfolio -> Asset/Facility -> Zone/Area -> Incident -> Project Request -> Scope Record -> Authorization -> Project -> Tasks/Work Orders -> Deliverables -> Documents -> Communications -> Financial Records -> Reports/Dashboards -> Audit Events.
-
-## Current Static App
-
-Static files:
-
-- `app/index.html`
-- `app/styles.css`
-- `app/app.js`
-
-The app is a prototype shell only.
-
-It has no backend, auth, storage, RLS, production behavior, real client data, or PHI.
-
-## Current Tests
-
-Playwright baseline:
-
-- `tests/e2e/static-app-shell.spec.ts`
-
-Run from the repo root:
-
-```text
-npm test
+A saved checkpoint is a snapshot before its own commit. Verify Git status and the pushed branch separately. ChatGPT with the existing Lovable and Supabase projects is the primary continuation path; follow docs/08-ai/FULL_STACK_BUILD_PROTOCOL.md. Cursor is optional and must use the same repository/branch if used. Hosted setup observations are in docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json.

@@ -1,0 +1,16 @@
+["node","--test","tests/unit/private-object-api.test.mjs"]
+✔ reserve sends only exact scoped wire fields and preserves supplied idempotency key (1.751118ms)
+✔ bytes remain raw and finalization/status carry only the object and expected revision (0.335275ms)
+✔ invalid scope, empty and oversized byte sizes fail before SDK invocation (0.592983ms)
+✔ safe response projection cannot carry provider paths, content or implicit authority into UI (0.184047ms)
+✔ malformed and non-quarantined successes are rejected instead of reported as finalized (0.866275ms)
+✔ known conflict and access errors are bounded; unknown provider errors stay opaque (3.884112ms)
+✔ cancellation prevents both outgoing requests and publication of late responses (0.433574ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 397.104648

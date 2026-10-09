@@ -1,14 +1,446 @@
-name: CI Placeholder
-
+name: Repository checks
 on:
+  pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
-
+    inputs:
+      owner_onboarding_action:
+        description: 'Independent owner access task; preflight never invites or grants access'
+        type: choice
+        required: true
+        default: preflight-only
+        options: [preflight-only, invite-and-provision, send-recovery, skip]
+      owner_email:
+        description: 'Authorized owner email (nonsecret); checked against the fixed recipient allowlist'
+        type: string
+        required: false
+      reviewed_owner_auth_id:
+        description: 'Only for independently reconciled pre-existing unlinked owner Auth identity; otherwise leave empty'
+        type: string
+        required: false
+      run_development_acceptance:
+        description: 'Run the existing genuine API acceptance profiles'
+        type: boolean
+        required: true
+        default: true
+      run_connected_ui:
+        description: 'Run focused real browser account/intake/private-file/document journey independently'
+        type: boolean
+        required: true
+        default: false
+      connected_document_id:
+        description: 'Exact reviewed persistent synthetic logical document UUID for the connected browser journey'
+        type: string
+        required: false
+      connected_document_revision:
+        description: 'Current read-back revision of that synthetic document; never reset existing history'
+        type: string
+        required: false
+      private_bucket_mode:
+        description: 'Private synthetic bucket: verify only, or explicitly create if absent (never update)'
+        type: choice
+        required: true
+        default: verify-only
+        options: [verify-only, create-if-absent]
+      reviewed_existing_private_bucket:
+        description: 'I reconciled any existing bucket entries, manifests, policies and signing history for this development run'
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
 jobs:
-  placeholder:
+  controls:
+    if: github.event_name != 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
-      - name: Placeholder only
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - run: npm run os:verify -- controls
+      - run: npm run os:verify -- package-importer
+      - run: npm run os:verify -- foundation-contract
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: repository-check-evidence
+          path: docs/00-control/evidence/
+  application-foundation:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run os:verify -- directory-database
+      - run: npm run os:verify -- access-audit-database
+      - run: npm run os:verify -- private-object-reservations-database
+      - run: npm run os:verify -- intake-database
+      - run: npm run os:verify -- intake-unit
+      - run: npm run os:verify -- private-file-database
+      - run: npm run os:verify -- private-clearance-database
+      - run: npm run os:verify -- document-versions-database
+      - run: npm run os:verify -- document-content-database
+      - run: npm run os:verify -- workspace-plans-database
+      - run: npm run os:verify -- document-reviews-database
+      - run: npm run os:verify -- document-releases-database
+      - run: npm run os:verify -- document-release-content-database
+      - run: npm run os:verify -- document-release-content-gateway-unit
+      - run: npm run os:verify -- document-content-gateway-unit
+      - run: npm run os:verify -- private-file-unit
+      - run: npm run os:verify -- private-file-entrypoint
+      - run: npm run os:verify -- private-file-client-unit
+      - run: npm run os:verify -- private-security-client-unit
+      - run: npm run os:verify -- document-versions-client-unit
+      - run: npm run os:verify -- document-content-client-unit
+      - run: npm run os:verify -- workspace-plans-client-unit
+      - run: npm run os:verify -- document-reviews-client-unit
+      - run: npm run os:verify -- document-releases-client-unit
+      - run: node --test tests/unit/sample-case.test.mjs
+      - run: npm run os:verify -- api-fixture-safety
+      - run: node --test tests/unit/owner-onboarding.test.mjs tests/database/owner-onboarding.test.mjs
+      - run: npm run os:verify -- runtime-build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run os:verify -- directory-browser-fixture
+      - run: npm run os:verify -- intake-browser-fixture
+      - run: npm run os:verify -- private-file-browser-fixture
+      - run: npm run os:verify -- document-versions-browser-fixture
+      - run: npm run os:verify -- document-content-browser-fixture
+      - run: npm run os:verify -- document-reviews-browser-fixture
+      - run: npm run os:verify -- document-releases-browser-fixture
+      - name: Show bounded diagnostics for new synthetic release checks
+        if: failure()
         run: |
-          echo "CI is intentionally manual-only for now."
-          echo "Do not treat this as real CI."
-          echo "Real lint, typecheck, unit tests, RLS tests, Playwright tests, and build checks will be added after the app exists."
+          python - <<'PY'
+          import json, os, pathlib, re
+          for profile in ('document-release-content-database', 'document-release-content-gateway-unit', 'document-releases-client-unit', 'document-releases-browser-fixture'):
+              try:
+                  root = pathlib.Path('docs/00-control/evidence')
+                  record = json.loads((root / (profile + '.json')).read_text())
+                  if record.get('result') != 'failed' or record.get('observed_git_head') != os.environ.get('GITHUB_SHA'):
+                      continue
+                  with (root / (profile + '.log')).open('rb') as handle:
+                      handle.seek(0, 2)
+                      handle.seek(max(0, handle.tell() - 16000))
+                      excerpt = handle.read(16000).decode('utf-8', errors='replace')
+                  excerpt = re.sub(r'\x1b\[[0-9;]*m', '', excerpt)
+                  print('Synthetic release check failed: ' + profile)
+                  for line in excerpt.splitlines():
+                      if re.search(r'authorization|bearer|sb_secret_|password|eyJ[A-Za-z0-9_-]{12,}', line, re.I):
+                          continue
+                      print('synthetic | ' + line.replace('##[', '## ['))
+              except Exception:
+                  print('No readable current failure excerpt for ' + profile)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: browser-failure-evidence
+          path: |
+            test-results/
+            docs/00-control/evidence/
+# Local database tests use simulated Auth claims; UI tests use HTTP fixtures.
+# These jobs do not establish genuine hosted Auth/API or full-system acceptance.
+
+  owner-onboarding:
+    # Independent of all acceptance, private storage and document-release jobs.
+    if: github.event_name == 'workflow_dispatch' && inputs.owner_onboarding_action != 'skip'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: auxiliumos-development-owner
+      cancel-in-progress: false
+    steps:
+      - name: Restrict owner provisioning to the reviewed repository and feature branch
+        run: |
+          if [ "$GITHUB_REPOSITORY" != 'AuxiliumEnvironmental/auxiliumos' ] || [ "$GITHUB_REF" != 'refs/heads/wip/recovery-2026-10-08' ]; then
+            echo 'Owner onboarding is restricted to the reviewed AuxiliumOS feature branch. No secure step ran.' >&2
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Clear prior owner receipt in this disposable checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import { rm } from 'node:fs/promises';
+          for (const name of ['owner-access-configuration.json', 'owner-access-configuration.log']) {
+            await rm(`docs/00-control/evidence/${name}`, { force: true });
+          }
+          NODE
+      - name: Perform the explicit bounded owner access action
+        env:
+          AUXILIUMOS_TEST_URL: https://txofqxictwecgcnvezlb.supabase.co
+          AUXILIUMOS_TEST_PUBLISHABLE_KEY: sb_publishable_F60QaaQSqT86r0WWg8NfVA_ywSonnGz
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+          OWNER_ONBOARDING_ACTION: ${{ inputs.owner_onboarding_action }}
+          OWNER_ONBOARDING_EMAIL: ${{ inputs.owner_email }}
+          REVIEWED_OWNER_AUTH_ID: ${{ inputs.reviewed_owner_auth_id }}
+        # Only sanitized receipt/error text is persisted. No invitation URL,
+        # password, OTP, hashed token, provider body or owner email is emitted.
+        run: node scripts/owner-onboarding.mjs > docs/00-control/evidence/owner-access-configuration.json 2> docs/00-control/evidence/owner-access-configuration.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: owner-onboarding-evidence
+          path: |
+            docs/00-control/evidence/owner-access-configuration.json
+            docs/00-control/evidence/owner-access-configuration.log
+
+  development-api:
+    # A deliberate run against the selected reviewed branch, never a PR/fork
+    # secret injection. Missing secure configuration fails rather than skips.
+    if: github.event_name == 'workflow_dispatch' && inputs.run_development_acceptance
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: auxiliumos-development-api
+      cancel-in-progress: false
+    env:
+      AUXILIUMOS_TEST_URL: https://txofqxictwecgcnvezlb.supabase.co
+      AUXILIUMOS_TEST_PUBLISHABLE_KEY: sb_publishable_F60QaaQSqT86r0WWg8NfVA_ywSonnGz
+    steps:
+      - name: Restrict manual integration to the reviewed repository and feature branch
+        run: |
+          if [ "$GITHUB_REPOSITORY" != 'AuxiliumEnvironmental/auxiliumos' ] || [ "$GITHUB_REF" != 'refs/heads/wip/recovery-2026-10-08' ]; then
+            echo 'Development integration is restricted to the reviewed AuxiliumOS feature branch. No secure test step ran.' >&2
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Clear only prior runtime receipt copies in this disposable checkout
+        # Prevent always-upload from presenting tracked old evidence after an
+        # early prerequisite failure. Git history is not modified by this step.
+        run: |
+          node --input-type=module <<'NODE'
+          import { rm } from 'node:fs/promises';
+          for (const name of ['directory-api.json', 'directory-api.log', 'intake-api.json', 'intake-api.log', 'private-file-api.json', 'private-file-api.log', 'private-clearance-api.json', 'private-clearance-api.log', 'development-ui.json', 'development-ui.log']) {
+            await rm(`docs/00-control/evidence/${name}`, { force: true });
+          }
+          NODE
+      - name: Validate protected configuration without printing credentials
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node --input-type=module -e "import { configuration } from './tests/api/fixture-cleanup.mjs'; configuration();"
+      - name: Genuine synthetic Auth and directory Data API acceptance
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node scripts/os-control.mjs verify directory-api
+      - name: Genuine synthetic intake Data API acceptance
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node scripts/os-control.mjs verify intake-api
+      - name: Genuine browser sign-in, directory, intake and revocation journey
+        shell: bash
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        # No browser traces, screenshots, HAR, saved sessions or password files.
+        # Only safe Node test diagnostics enter the hash-tied receipt and log.
+        # Independent of the separately protected private-object activation gate.
+        run: node scripts/os-control.mjs verify development-ui
+      - name: Verify or explicitly provision private synthetic bucket through Storage API
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+          PRIVATE_BUCKET_MODE: ${{ inputs.private_bucket_mode }}
+          REVIEWED_EXISTING_PRIVATE_BUCKET: ${{ inputs.reviewed_existing_private_bucket }}
+        run: |
+          args=()
+          case "$PRIVATE_BUCKET_MODE" in
+            verify-only) ;;
+            create-if-absent) args+=(--create) ;;
+            *) echo 'An explicit supported bucket mode is required.' >&2; exit 1 ;;
+          esac
+          case "$REVIEWED_EXISTING_PRIVATE_BUCKET" in
+            true) args+=(--reviewed-existing) ;;
+            false) ;;
+            *) echo 'An explicit existing-bucket review decision is required.' >&2; exit 1 ;;
+          esac
+          node scripts/private-object-provision.mjs "${args[@]}"
+      - name: Genuine private-file Auth, Edge and Storage acceptance
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node scripts/os-control.mjs verify private-file-api
+      - name: Genuine private-object security API acceptance with synthetic scan fixtures
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node scripts/os-control.mjs verify private-clearance-api
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: development-api-evidence
+          path: |
+            docs/00-control/evidence/directory-api.json
+            docs/00-control/evidence/directory-api.log
+            docs/00-control/evidence/intake-api.json
+            docs/00-control/evidence/intake-api.log
+            docs/00-control/evidence/private-file-api.json
+            docs/00-control/evidence/private-file-api.log
+            docs/00-control/evidence/private-clearance-api.json
+            docs/00-control/evidence/private-clearance-api.log
+            docs/00-control/evidence/development-ui.log
+            docs/00-control/evidence/development-ui.json
+
+  development-connected-ui:
+    # Select this focused journey without rerunning unaffected broader profiles.
+    # The owner job has no dependency on this job's storage/document gates.
+    if: github.event_name == 'workflow_dispatch' && inputs.run_connected_ui
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    concurrency:
+      # Serialize with other actual development tests that share Storage state.
+      group: auxiliumos-development-api
+      cancel-in-progress: false
+    env:
+      AUXILIUMOS_TEST_URL: https://txofqxictwecgcnvezlb.supabase.co
+      AUXILIUMOS_TEST_PUBLISHABLE_KEY: sb_publishable_F60QaaQSqT86r0WWg8NfVA_ywSonnGz
+    steps:
+      - name: Restrict connected verification to the reviewed repository and feature branch
+        run: |
+          if [ "$GITHUB_REPOSITORY" != 'AuxiliumEnvironmental/auxiliumos' ] || [ "$GITHUB_REF" != 'refs/heads/wip/recovery-2026-10-08' ]; then
+            echo 'Connected verification is restricted to the reviewed AuxiliumOS feature branch. No secure step ran.' >&2
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Clear prior connected receipt in this disposable checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import { rm } from 'node:fs/promises';
+          for (const name of ['document-connected-ui.json', 'document-connected-ui.log']) {
+            await rm(`docs/00-control/evidence/${name}`, { force: true });
+          }
+          NODE
+      - name: Validate protected configuration without printing credentials
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node --input-type=module -e "import { configuration } from './tests/api/fixture-cleanup.mjs'; configuration();"
+      - name: Verify or explicitly provision the private synthetic bucket
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+          PRIVATE_BUCKET_MODE: ${{ inputs.private_bucket_mode }}
+          REVIEWED_EXISTING_PRIVATE_BUCKET: ${{ inputs.reviewed_existing_private_bucket }}
+        run: |
+          args=()
+          case "$PRIVATE_BUCKET_MODE" in
+            verify-only) ;;
+            create-if-absent) args+=(--create) ;;
+            *) echo 'An explicit supported bucket mode is required.' >&2; exit 1 ;;
+          esac
+          case "$REVIEWED_EXISTING_PRIVATE_BUCKET" in
+            true) args+=(--reviewed-existing) ;;
+            false) ;;
+            *) echo 'An explicit existing-bucket review decision is required.' >&2; exit 1 ;;
+          esac
+          node scripts/private-object-provision.mjs "${args[@]}"
+      - name: Genuine connected browser journey against the current development backend
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+          AUXILIUMOS_TEST_VERSION_DOCUMENT_ID: ${{ inputs.connected_document_id }}
+          AUXILIUMOS_TEST_VERSION_DOCUMENT_REVISION: ${{ inputs.connected_document_revision }}
+        run: node scripts/os-control.mjs verify document-connected-ui
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: document-connected-ui-evidence
+          path: |
+            docs/00-control/evidence/document-connected-ui.json
+            docs/00-control/evidence/document-connected-ui.log
+
+  development-storage-preparation:
+    # An explicit create-if-absent choice can prepare storage without starting
+    # acceptance before the separate database-owner gates are enabled.
+    if: github.event_name == 'workflow_dispatch' && inputs.private_bucket_mode == 'create-if-absent' && !inputs.run_connected_ui && !inputs.run_development_acceptance
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      # Serialize with other actual development tests that share Storage state.
+      group: auxiliumos-development-api
+      cancel-in-progress: false
+    env:
+      AUXILIUMOS_TEST_URL: https://txofqxictwecgcnvezlb.supabase.co
+      AUXILIUMOS_TEST_PUBLISHABLE_KEY: sb_publishable_F60QaaQSqT86r0WWg8NfVA_ywSonnGz
+    steps:
+      - name: Restrict storage preparation to the reviewed repository and feature branch
+        run: |
+          if [ "$GITHUB_REPOSITORY" != 'AuxiliumEnvironmental/auxiliumos' ] || [ "$GITHUB_REF" != 'refs/heads/wip/recovery-2026-10-08' ]; then
+            echo 'Storage preparation is restricted to the reviewed AuxiliumOS feature branch. No secure step ran.' >&2
+            exit 1
+          fi
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Clear prior storage receipt in this disposable checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import { rm } from 'node:fs/promises';
+          for (const name of ['development-storage-preparation.json', 'development-storage-preparation.log']) {
+            await rm(`docs/00-control/evidence/${name}`, { force: true });
+          }
+          NODE
+      - name: Validate protected configuration without printing credentials
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+        run: node --input-type=module -e "import { configuration } from './tests/api/fixture-cleanup.mjs'; configuration();"
+      - name: Verify or explicitly provision the private synthetic bucket
+        env:
+          AUXILIUMOS_TEST_SERVICE_ROLE_KEY: ${{ secrets.AUXILIUMOS_TEST_SERVICE_ROLE_KEY }}
+          PRIVATE_BUCKET_MODE: ${{ inputs.private_bucket_mode }}
+          REVIEWED_EXISTING_PRIVATE_BUCKET: ${{ inputs.reviewed_existing_private_bucket }}
+        run: |
+          args=()
+          case "$PRIVATE_BUCKET_MODE" in
+            verify-only) ;;
+            create-if-absent) args+=(--create) ;;
+            *) echo 'An explicit supported bucket mode is required.' >&2; exit 1 ;;
+          esac
+          case "$REVIEWED_EXISTING_PRIVATE_BUCKET" in
+            true) args+=(--reviewed-existing) ;;
+            false) ;;
+            *) echo 'An explicit existing-bucket review decision is required.' >&2; exit 1 ;;
+          esac
+          node scripts/private-object-provision.mjs "${args[@]}" > docs/00-control/evidence/development-storage-preparation.json 2> docs/00-control/evidence/development-storage-preparation.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: development-storage-preparation-evidence
+          path: |
+            docs/00-control/evidence/development-storage-preparation.json
+            docs/00-control/evidence/development-storage-preparation.log

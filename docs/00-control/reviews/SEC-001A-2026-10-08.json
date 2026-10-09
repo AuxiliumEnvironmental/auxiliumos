@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-08T12:42:09.032547+00:00",
+  "task": "SEC-001A",
+  "requirements": [
+    "M01",
+    "M02",
+    "M05",
+    "C01"
+  ],
+  "source_base": "bb46093f88c88ef1ced1b96d203d804e41f8af0d",
+  "implementation_role": "backend-engineer",
+  "independent_reviewer_role": "security-reviewer",
+  "integration_role": "integration-lead",
+  "reviewed_sha256": {
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "tests/database/identity-directory.test.mjs": "ba2ef43276c46537ceaa0d0bcad00b3169d107bef6561103bc7cf347412d2ba0",
+    "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba"
+  },
+  "review_method": "Read actual migration and regression changes; independent reviewer reproduced original exploit and reran that focused exploit after correction. No full-suite duplicate in re-review.",
+  "findings": [
+    {
+      "id": "SEC-001A-R1",
+      "severity": "P2",
+      "state": "resolved",
+      "finding": "Trusted provisioning could null and relink a stable profile, inheriting existing grants despite recovery being deferred.",
+      "resolution": "Database-owned immutable auth_linked_once history; initial suspended-profile attachment only. Manual unlink and Auth deletion preserve history and cannot reopen linking eligibility.",
+      "focused_verification": "service_role replacement rejected with SQLSTATE 23514; history remained true; replacement subject saw zero accounts."
+    }
+  ],
+  "database_suite": {
+    "result": "19 passed, 0 failed in worker; canonical hash-tied profile records integration run",
+    "environment": "PGlite with explicitly simulated Auth context"
+  },
+  "integration_review": [
+    "Original foundation migration and seed unchanged",
+    "Column ACL revocation as well as table privilege revocation",
+    "Empty search_path and qualified security-definer helpers; no caller-supplied actor ID",
+    "Membership status independent of role rows; exact account/facility capabilities",
+    "Anonymous/missing claims and non-demo data denied",
+    "Transactional orphan-link failure and seed-before/after compatibility"
+  ],
+  "remaining_gates": [
+    "Authentic Supabase Auth and Data API acceptance",
+    "Real-service browser acceptance",
+    "SEC-001C audit provenance, durable denial collection and private object authorization",
+    "Reviewed migration application to existing development backend",
+    "No production activation authorized or performed"
+  ],
+  "decision": "Accepted as a reviewed development database slice, not complete SEC-001 or product acceptance."
+}

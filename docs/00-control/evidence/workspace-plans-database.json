@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "profile": "workspace-plans-database",
+  "level": "database",
+  "recorded_at": "2026-10-09T18:07:12.109Z",
+  "result": "passed",
+  "digest": "bfd75776b0a8957982100fb96872fcd55bbc243b3d7dc87ecb49e3db7c946be0",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-hosted-or-concurrency-proof",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "087159f4a2cf94eadabc87d0dccea30431a01f0f41b439007c4f8870d4e1d5af",
+      "TZ": "fd8d3b93c3d8ae77e47a9ab113cc2e7c923ed9732f12f3a0d7e9aba9111da038"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "35354859711624945d76690ad5e4396f88ab748542c762e1f12ed900db4064e4",
+    "scripts/os-control.mjs": "7975ec94287ad1f782f2e44c89028fd3635f44f4ece18e83f43014f5478f4f22",
+    "supabase/migrations/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+    "supabase/migrations/20261008234951_intake_triage.sql": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+    "supabase/migrations/20261008234953_private_file_transport.sql": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+    "supabase/migrations/20261009065625_private_object_clearance.sql": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+    "supabase/migrations/20261009072201_document_versions.sql": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+    "supabase/migrations/20261009080505_document_version_content.sql": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+    "supabase/migrations/20261009130331_owner_onboarding_activation.sql": "db2c6834a4441cb317f68bbf6d4cf9fbdca545aa26fc57dc9b70b5e4754b0f9d",
+    "supabase/migrations/20261009170854_workspace_plans.sql": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+    "supabase/migrations/20261009172736_document_version_reviews.sql": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+    "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "tests/database/workspace-plans.test.mjs": "4eb4cdd6b22e1a43ce30fa132a9fe43ef2ac91148539f921bd540c94729b7016",
+    "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba",
+    "web/src/pages/module-screen-definitions.ts": "66f8ae4c19de7c5a15803b30906fd67010bbda53d56066f6432987990843ede3"
+  },
+  "observed_git_head": "acab490b8c78abcc8ad98286ea223d56bf2199c0",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/database/workspace-plans.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/workspace-plans-database.log",
+  "log_sha256": "70cd4f7638bfc62d2c9f97efd88bfe12cc0a016bef48e656a3ccc4887ce71732"
+}

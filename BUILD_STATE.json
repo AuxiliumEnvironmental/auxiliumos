@@ -1,0 +1,526 @@
+{
+  "version": 1,
+  "as_of": "2026-10-09T20:40:15.839Z",
+  "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
+  "source": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
+    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
+    "current_verified_feature_commit": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9"
+  },
+  "live_repository_reconciled": true,
+  "production_authorization": {
+    "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
+  },
+  "external_access": {
+    "github": "Mobile checkpoint4cd547c saved and read back; application CI66 passed at4cf08158. This candidate integrates backend e250336d and UI43d1ea48 with four focused profiles. Their source reviews pass; executable verification is pending.",
+    "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
+    "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
+    "lovable": "Mobile source57f637a passed CI66 and publication0cf4e56e acceptedpending. Provider anonymous HTTP observation reports auxiliumos.io200 and public bundle contains new mobile markers. Deployment status record/full bundle equality not verified. Read-only provider check unexpectedly created only .lovable/plan.md asb9bfbfc and paused at plan--show; owner decision required before further provider turn. App source unchanged by exact diff.",
+    "workspace_execution": "Current native workspace is unavailable after exec-server transport failure. A later bounded read-only recovery check returned no output and was terminated. GitHub and Lovable connectors remain operational; no local parity or recovered disk content claimed."
+  },
+  "source_precedence": [
+    "Latest explicit owner instructions within platform permissions",
+    "Current verified Git source and recorded approved product decisions",
+    "Effective approved domain versions including valid amendments",
+    "Canonical acceptance contracts and clearly provisional configuration",
+    "Historical plans and retrieved chat as attributed evidence"
+  ],
+  "first_runtime_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
+  "active_remote_work": [
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09"
+  ],
+  "baseline_observed_facts": [
+    "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
+    "Seven-table SQL migration and deterministic demo seed exist. Do not recreate Issue #80.",
+    "RLS is enabled in SQL, but no policies, real auth integration, private storage or exact-version release implementation are established.",
+    "Playwright dependency/config and three static shell tests exist. This package does not claim browser execution this session.",
+    "Modernization adds working repository controls and proposed detailed specifications; it does not implement the OS runtime.",
+    "Connected setup corrected and verified on 2026-10-08; see docs/00-control/CONNECTED_SETUP_OBSERVATIONS.json. Existing Supabase backend must be used after source/config reconciliation."
+  ],
+  "observed_facts": [
+    "Canonical source safely reconciled and reviewed continuation imported without conflicts. Initial GitHub write failures were resolved after installation; the recovered source is saved in draft PR #84 with exact remote source-tree verification.",
+    "SEC-001A additive directory migration implemented and independently reviewed, including fixed immutable Auth-link history. Original foundation migration and demo seed remain byte-identical.",
+    "PostgreSQL-engine acceptance uses PGlite with explicitly simulated Auth context. It does not certify authentic Supabase login or HTTP API authorization.",
+    "Canonical web/ React/TypeScript app implements sign-in and permitted account/facility directory with safe unavailable states, paging and cache clearing. All other module destinations remain visibly unfinished.",
+    "Seven intercepted-HTTP browser journeys exercise the actual app and SDK. Authentic Auth/API harness is prepared but unexecuted without secure service credentials and applied migrations.",
+    "SEC-001C-AUDIT is implemented with an additive migration and independent security/migration review. Thirty audit checks plus nineteen directory checks after migration three pass in PostgreSQL 18.3/PGlite with simulated Auth; no hosted migration is claimed.",
+    "The API fixture harness now preflights required columns and retains audit-linked application rows while disabling exact synthetic access and deleting only verified test-created Auth identities. Twenty-two mock/unit checks and independent review pass; authentic API execution remains unexecuted.",
+    "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
+    "2026-10-09: foundation, directory, audit and reservation SQL applied unchanged to actual PostgreSQL17 development target. Schema/history readback confirms all11 tables RLS; this is deployment evidence, not Auth/API acceptance.",
+    "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open.",
+    "2026-10-09 owner access: public domain, secure invitation, password configuration, first Auth sign-in, actual account/facility access, synthetic Project Request and triage verified. No professional authority granted. Full private-file workflow remains unverified.",
+    "2026-10-09 current: owner authenticated at auxiliumos.io, viewed its account and exact facility, submitted synthetic Project Request b82a3beb-6ed9-43a4-bdf5-04781d5a8a37 and saved triage revision2; actual database readback agrees. The later file-chooser command was blocked by retained native credential state and a clean runtime could not resume. No upload, finalization, retrieval or hosted planning save/reopen claimed from this journey."
+  ],
+  "runtime_implementation": {
+    "app": "web/",
+    "migration": "supabase/migrations/20261008120645_identity_access_directory.sql",
+    "review": "docs/00-control/reviews/SEC-001A-2026-10-08.json",
+    "verification_profiles": [
+      "directory-database",
+      "runtime-build",
+      "directory-browser-fixture"
+    ],
+    "authentic_api_status": "owner_directory_intake_and_triage_observed_remaining_connected_harness_blocked",
+    "deployed": true,
+    "verification_status": "Owner actual login/account/facility/submission/triage passed. Full20module navigation and representative synthetic planning/demo views implemented; real operational module acceptance is not claimed. Private upload/finalization/retrieval and planning hosted save/reopen remain open; protected CI secret and current cloud browser restriction are explicit.",
+    "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
+    "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
+    "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
+    "database_deployment": {
+      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
+      "receipt": "docs/00-control/evidence/development-migrations.json",
+      "migration_count": 13,
+      "authentic_api_status": "awaiting_secure_key",
+      "private_config_enabled": true,
+      "storage_bucket_count": 1,
+      "owner_preparation_receipt": "docs/00-control/evidence/development-owner-preparation.json",
+      "current_configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
+    },
+    "edge_deployment": {
+      "receipt": "docs/00-control/evidence/development-private-function.json",
+      "slug": "private-objects",
+      "version": 3,
+      "verify_jwt": true,
+      "full_runtime_acceptance": false,
+      "current_configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
+    },
+    "reviewed_integration": {
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "upload_ui_local_commit": "99f9a4a",
+      "secure_workflow_worker_commits": [
+        "aae2dc62ecd7c8bc0881858efe00ad79c75c4aed",
+        "205880e38e8a204d0577b5ec1456e40ccbe94639"
+      ],
+      "verification": "Build passed; directory7, intake8 and upload12 intercepted-HTTP browser journeys passed. Upload adapter7 unit checks passed; hosted authenticated acceptance unexecuted.",
+      "limitation": "No complete module or real-data activation is certified."
+    },
+    "clearance": {
+      "source_worker_commits": [
+        "f91e60e72f40b267cc35b8258c41adafe56e71f6",
+        "a32a5d008b7a92ce2ccb7f9df8c4ae4547af601b"
+      ],
+      "migration_sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "database_checks": 39,
+      "deployed": true,
+      "ui_worker_commit": "35611d0ab677ae2e3fde56598c33de56b0015f65",
+      "security_adapter_checks": 10,
+      "integrated_upload_security_browser_fixture_checks": 20,
+      "hosted_api_acceptance": false
+    },
+    "document_versions": {
+      "worker_backend_commit": "17cfadd76ea81230626d3f8f7b179e74dbceaf26",
+      "worker_ui_commit": "1ae9c72ae5a3a392c1f851a624cadb10b77657de",
+      "migration_sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "database_checks": 38,
+      "client_unit_checks": 10,
+      "browser_fixture_checks": 14,
+      "upload_security_regression_checks": 20,
+      "deployed": true,
+      "hosted_api_acceptance": false
+    },
+    "document_content": {
+      "backend_worker_commit": "7c0e658ed8036aee2bd8e65e5cd1c4bb8d057231",
+      "gateway_worker_commit": "fd0f06c68686b4683158b2c7de7c8c5d4cbf1ce8",
+      "ui_worker_commit": "c681c31dc4816d4bdfbc44c48e701cd21434721d",
+      "migration_sha256": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "worker_database_checks": 45,
+      "worker_gateway_unit_checks": 30,
+      "worker_client_unit_checks": 13,
+      "integrated_browser_fixture_checks": 22,
+      "version_browser_regression_checks": 14,
+      "deployed": true,
+      "hosted_api_acceptance": false,
+      "operational_gates_enabled": true,
+      "edge_version": 4,
+      "ci_run": 37908695151
+    },
+    "development_connection": {
+      "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+      "reviewed": true,
+      "implemented": true,
+      "location": "web/.env.development",
+      "public_only": true,
+      "tests": "12 focused configuration/ignore checks and production build passed; CI63 passed on exact source.",
+      "build": "Both build and build:dev emit root dist using the reviewed public auxiliumos-dev configuration; wrong backend/secret validation retained.",
+      "deployed_to_production": false,
+      "real_backend_acceptance": false,
+      "locations": [
+        "web/.env.development",
+        "web/.env.production"
+      ],
+      "deployed_public_frontend": true
+    },
+    "owner_onboarding": {
+      "implemented": true,
+      "migration_deployed": true,
+      "migration_version": "20261009130331",
+      "review": "docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json",
+      "owner_invitation_sent": true,
+      "owner_password_set": true,
+      "owner_first_login_verified": true,
+      "independent_of_document_release": true,
+      "provisioning_path": "Supported Dashboard invitation followed by scripts/provision-owner-from-dashboard.sql as genuine database operator, independently reviewed.",
+      "requires_ci_service_credential": false,
+      "auth_site_url": "https://auxiliumos.io",
+      "auth_redirects": [
+        "https://auxiliumos.io",
+        "https://auxiliumos.io/?auth=invite",
+        "https://auxiliumos.io/?auth=recovery"
+      ],
+      "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json",
+      "owner_application_permissions_active": true,
+      "invitation_recorded_at": "2026-10-09T17:09:12.240731Z",
+      "owner_first_authentication_verified": true,
+      "auth_sign_in_recorded_at": "2026-10-09T17:15:03.447640Z",
+      "application_browser_verification": "passed_actual_owner_account_facility_request_submit_and_triage",
+      "application_browser_observed_at": "2026-10-09T18:50:34.744364+00:00"
+    },
+    "frontend_ui": {
+      "source_lovable_revision": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+      "canonical_parent": "d177692db1a3056d271000434631abdda3dfaa4d",
+      "status": "implemented_bounded_demo_and_planning_surfaces",
+      "scope": "Full20module navigation;45distinct preparation/review/status panels with40creator-owned persisted planning editors; coherent Harbour Point sample and four illustrative audience views; authorized Spatial host.",
+      "data_behavior": "Planning mutations use actual typed creator-scoped Supabase RPCs, immutable revisions/CAS and frozen uncertain retries. Sample cases remain explicitly illustrative. Existing connected workflows preserved; commercial/professional actions remain gated.",
+      "verification": "Final dd7961f UI:14focused unit and11browser fixtures passed;20routes at1440/390/360 passed without overflow/errors/unexpected requests. Independent client review clear. New Spatial-only source77a1cf6 matched external64f5b2a,8asset hashes and one build:dev passed, targeted review clear. Reused matching evidence without broad rerun.",
+      "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json",
+      "next_increment": "Metadata release UI source underway separately; actual hosted private-file and planning save/reopen acceptance remain open.",
+      "candidate_lovable_revision": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "candidate_status": "Source reviewed, exact file parity and CI66 passed; publication accepted and provider reports new public mobile markers."
+    },
+    "workspace_plans": {
+      "status": "implemented_deployed_hosted_workflow_pending",
+      "migration": "20261009170854_workspace_plans.sql",
+      "migration_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+      "editable_panels": 40,
+      "authority": "Personal synthetic preparation using existing scoped submit_request/view_account/view_asset; creator only; no professional/commercial/release rights.",
+      "review": "Independent backend review clear including narrow terminology delta.",
+      "verification": "Integrated workspace-plans-database profile passed at18:07:12Z including current Facility coordinator catalogue. Final client/fixture checks passed and independent review clear. Actual hosted save/reopen and true concurrent sessions remain unexecuted.",
+      "deployed": true
+    },
+    "document_reviews": {
+      "implemented": true,
+      "deployed": true,
+      "worker_commit": "eb650409aeb2947d385e337efbbfdd812b46ff6d",
+      "migration": "20261009172736_document_version_reviews.sql",
+      "migration_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+      "focused_database_tests": "37/37 passed with simulated Auth; reused exact worker evidence",
+      "independent_review": "clear; lock-order finding corrected",
+      "actual_reviewer_assigned": false,
+      "hosted_human_workflow_verified": false,
+      "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json",
+      "ui_worker_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+      "ui_status": "reviewed_hosted_source_with_mobile_polish_integrated_ci_publication_pending",
+      "ui_lovable_revision": "89227e331463eed0ea0844055cf43714e5969627"
+    },
+    "spatial": {
+      "owner_authorized": true,
+      "source_head": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+      "os_packaging_commit": "64f5b2aa604a155761e99ec4189b3cdd2a365d39",
+      "integration_worker_commit": "77a1cf6f96a87ccd8b5db2268078ae9a70f0a938",
+      "lovable_commit": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+      "exact_generated_asset_hashes": 8,
+      "host_review": "clear",
+      "runtime_boundary": "Personal synthetic profile-scoped browser editor; no project/server/professional authority or native Apple acceptance claimed."
+    },
+    "document_release": {
+      "source_worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
+      "migration": "20261009184724_document_version_releases.sql",
+      "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+      "status": "reviewed_integrated_deployed_observed",
+      "deployed": true,
+      "focused_database_checks": "45/45 passed, no skips; simulated Auth, exact worker evidence reused",
+      "review": "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
+      "scope": "Explicit exact-version controller/audience discovery and metadata release, replacement, separate historical recipients, immutable narrowing withdrawal. No released bytes/notifications/signatures or real professional authority.",
+      "deployment_observation": "Already present with exact canonical hash during actual preflight, matching document_releases record; root did not reapply."
+    },
+    "document_releases": {
+      "worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
+      "migration": "20261009184724_document_version_releases.sql",
+      "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+      "implemented": true,
+      "deployed_observed": true,
+      "deployment_observation": "Canonical exact migration already present in actual preflight. No root DDL replay or history mapping performed for this slice.",
+      "focused_checks": "45/45 simulatedAuth PostgreSQL checks, reused",
+      "review": "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
+      "scope": "Synthetic metadata release, explicitaudience discovery/grants, replacement/current/history/withdrawal; no releasedbytes",
+      "actual_release_grants": 0,
+      "actual_releases": 0,
+      "hosted_workflow_verified": false
+    },
+    "document_release_content": {
+      "source_commit": "e250336d4f14a53472d260e052ba5de0e101ab48",
+      "branch": "wip/release-content-2026-10-09",
+      "status": "source_reviewed_integration_candidate_runtime_pending",
+      "migration": "20261009194030_document_release_content.sql",
+      "migration_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
+      "review": "mobile_review cleared original SQL/gateway and final withdrawal discovery delta; executable checks pending.",
+      "transport_default": "disabled",
+      "authority": "Separate explicit current/historical recipient authority; no changes to internal content or owner grants.",
+      "remaining": "Required CI: document-release-content-database and document-release-content-gateway-unit. Then exact development deployment/catalog verification; dedicated byte transport remains disabled until deliberately configured. Hosted Auth/Storage and concurrency not verified.",
+      "withdrawal_discovery": "Separate exact seven-field authenticated read uses withdrawal scope/controller locks and existing head, excluding content/safety prerequisites. No head write or added authority."
+    },
+    "document_release_ui": {
+      "source_commit": "43d1ea48989f753445510f030584a91a4211fb6c",
+      "branch": "wip/release-ui-2026-10-09",
+      "status": "source_reviewed_integration_candidate_runtime_pending",
+      "files": 7,
+      "unit_cases_authored": 12,
+      "browser_cases_authored": 16,
+      "executed": false,
+      "authority": "Metadata-only release/current/historical discovery plus independently authorized narrowing withdrawal. Explicit grants, exact revisions, uncertain retries, scope/session fences and cross-review pending locks. No recipient-byte UI or owner professional grants.",
+      "review": "mobile_review clear on be41c31f plus heading-only43d1ea48; discovered unsafe-withdrawal status gap resolved by e250336d.",
+      "deployment": "Not transferred to Lovable; provider paused on report-only plan approval."
+    }
+  },
+  "execution_recovery": {
+    "observed_at": "2026-10-08T23:58:57.452Z",
+    "status": "actual_reviewed_patch_recovered_and_published",
+    "remote_head": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+    "source_tree": "f91e442d44c67e92f9b89217a31aff5677b2903b",
+    "original_local_commit": "33123e5b206d11dca8b75cb702157144258cf600",
+    "verification": "Six frozen reviewed files match; fetched remote tree equals local recovery commit. Prior checkpoint entries remain historical."
+  },
+  "publication_recovery": {
+    "observed_at": "2026-10-08T15:55:04Z",
+    "status": "saved_remotely_as_wip",
+    "branch": "wip/recovery-2026-10-08",
+    "remote_head": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+    "source_tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
+    "draft_pr": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+    "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/83",
+    "verification": "Fetched remote source equals recovered local 8aa8482. Later worker patches and current register edits are not covered until separately published.",
+    "cloud_mutations": false,
+    "latest_verified_increment": {
+      "head": "0773cce60f030084a8a321ec42429d6a91fce838",
+      "tree": "94dfa1765320d820d46e19c1e6c75647aca124b3",
+      "local_commit": "6699b4dd08106ba50c1d94faccd09a07d66e4723",
+      "scope": "Reviewed authentication increment after audit/fixtures, fetched source equality and successful GitHub CI. Later storage contract/reservation work requires separate review/publication."
+    }
+  },
+  "continuation_recovery": {
+    "observed_at": "2026-10-09T06:57:29Z",
+    "remote_head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+    "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
+    "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
+    "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
+    "active_agents": [],
+    "first_unfinished_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
+    "latest_verified_remote": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9",
+    "lovable_transfer": {
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
+      "thread_id": "main",
+      "source_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+      "target_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "status": "completed_five_files_independently_read_back_exact",
+      "native_github_sync": false,
+      "next_action": "Current-source mobile increment through provider; root integration/publication."
+    },
+    "execution_outage": {
+      "observed_at": "2026-10-09T08:56:23.132Z",
+      "root_last_local_head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
+      "remote_base": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+      "root_pending_cell_terminated": "169",
+      "read_only_check": "pwd did not return within30s",
+      "backend": {
+        "worktree": "/workspace/scratch/831a296a4676/document-review-backend",
+        "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+        "cell": "21",
+        "sessions": [
+          95415,
+          40105
+        ],
+        "files_saved_uncommitted": [
+          "supabase/migrations/20261009083206_document_version_reviews.sql",
+          "tests/database/document-version-reviews.test.mjs"
+        ],
+        "last_confirmed_tests": 45,
+        "pending_expected_test_count": 47,
+        "warning": "Contract creation failed before later result collection.45checks remain confirmed;47-resultuncollected. Do not certify the submitted contract's premature47claim or recreate it fromprose. Localmigration-listECONNREFUSED54322 wasnotahostedfailure.",
+        "first_unfinished_action": "After execution recovers, make document_version_review_status read the review head, event history and capability flags in one SQL snapshot after current metadata authorization. Separate statements can observe a concurrent decision between head and history; the strict UI rejects that transient mismatch. Preserve the existing contract and authorization checks; collect session95415 before rerunning focused affected tests.",
+        "cell_status": "failed",
+        "contract_doc_creation": {
+          "path": "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+          "status": "write_failed",
+          "partial_file_state": "inspect actual filesystem after reconnect; no byte snapshot available"
+        }
+      },
+      "ui": {
+        "worktree": "/workspace/scratch/831a296a4676/document-review-ui",
+        "head": "df0ed913d556ac32f33d81ae055437a8964798e5",
+        "cell": "47",
+        "browser_session": 68533,
+        "last_confirmed_adapter_tests": 12,
+        "last_confirmed_review_browser_tests": 18,
+        "final_54_case_run_last_observed_pass": 27,
+        "build_passed": true,
+        "files_saved_uncommitted": [
+          "web/src/lib/document-review-api.ts",
+          "web/src/components/document-version-review.tsx",
+          "web/src/components/document-versions.tsx",
+          "tests/unit/document-review-api.test.mjs",
+          "tests/e2e/document-reviews.spec.ts"
+        ],
+        "temporary_changes": [
+          "playwright.runtime.config.ts testMatch addition",
+          "node_modules symlink"
+        ],
+        "port4179_release_unverified": true,
+        "cell_status": "failed"
+      },
+      "saved_remotely": false,
+      "latest_read_only_check": "pwd no response within15seconds; no actual new filesystem state observed",
+      "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative.",
+      "final_transport_failure": {
+        "observed_at": "2026-10-09T09:28:32.925Z",
+        "ui": {
+          "cell": "47",
+          "status": "failed",
+          "error": "409 Conflict, environment_offline: Environment is not connected.",
+          "browser_session": 68533,
+          "result_uncollected": true
+        },
+        "backend": {
+          "cell": "21",
+          "status": "failed",
+          "exit_code": 1,
+          "wall_time_seconds": 608.7,
+          "error": "Failed to write file /workspace/scratch/831a296a4676/document-review-backend/docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
+          "sessions": [
+            95415,
+            40105
+          ],
+          "subsequent_commands_executed": false
+        },
+        "no_new_filesystem_requests": true
+      }
+    },
+    "latest_workspace_interruption": {
+      "observed_at": "2026-10-09T19:46:12.409Z",
+      "error": "exec-server transport disconnected; failed to resume; recovery timed out25s",
+      "root_readonly_cell": "31",
+      "readonly_result": "No output; read-only waiting cell terminated. No additional filesystem probes.",
+      "repeat_policy": "No additional filesystem attempts while same read-only check is pending.",
+      "ui": {
+        "worktree": "/workspace/scratch/f283daedfed1/frontend-reconcile",
+        "branch": "agent/frontend-current",
+        "local_wip_commit": "569ab1af032b2df104e4599d64ba3b47aca7accc",
+        "remote_saved": false,
+        "uncommitted_changes": [
+          "Intake eyebrow: Requests and triage",
+          "Request references summary minHeight44px",
+          "Upload boundary: Uploads start in quarantine."
+        ],
+        "collected_checks": "Production build and3focused name/query/fallback fixtures passed.",
+        "pending_session": 20615,
+        "pending_check": "Final phone/keyboard check uncollected. Regression log only run-start, no pass claimed.",
+        "full_patch_recovery": "Unavailable in tool store; checked once. Do not reconstruct supposedly passing code from prose.",
+        "continuation": "Fresh bounded implementation against verified current Lovable source; preserve and later reconcile actual local patch if workspace returns."
+      },
+      "release_delivery": {
+        "worktree": "/workspace/scratch/f283daedfed1/release-delivery",
+        "base_commit": "1ed3d836e868b8518458997bd4275ef5e0560765",
+        "pending_cell": "10",
+        "last_confirmed_file": "Empty CLI-created20261009194030_document_release_content.sql",
+        "pending_write": "Migration write waiting cell terminated by worker; disk state unknown. No subsequent gateway/tests/commit/cloud write.",
+        "next_action": "Source continuation resumed through GitHub on isolated wip/release-content-2026-10-09, based on db0f003. Preserve interrupted local file if environment returns; no disk recovery claim."
+      }
+    },
+    "lovable_mobile_recovery": {
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "base_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "message_id": "umsg_01m4h37sx5e1fs19xfksj2bgpv",
+      "thread_id": "main",
+      "status": "source_verified_ci_passed_publication_accepted_provider_public_asset_observation",
+      "writer": "ui_integration",
+      "paths": [
+        "web/src/components/document-versions.tsx",
+        "web/src/components/private-object-upload.tsx",
+        "web/src/pages/private-files.tsx",
+        "web/src/pages/intake.tsx"
+      ],
+      "published": "accepted_pending_with_provider_public_asset_observation",
+      "target_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "edit_id": "edt-bcda6535-648b-40fc-9c4a-9ffc75493ed2",
+      "source_verification": "All4complete files read by root; every structured hunk applied exactly to canonical GitHub base and matched final provider bytes. Independent mobile_review source review clear.",
+      "provider_hash_warning": "Provider summary hashes disagreed with actual file bytes and were rejected. Source acceptance uses exact file/diff readback; recorded hashes independently calculated by ui_integration.",
+      "publication_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242"
+    },
+    "ci64_failure": {
+      "commit": "db0f003d616855bad19dca5fc18d38eefac1d6f1",
+      "run_id": 37983627412,
+      "job_id": 114000027596,
+      "failed_profile": "document-versions-browser-fixture",
+      "previous_steps": "Repository controls; all preceding DB/unit profiles; production build; directory/intake/private-upload browser fixtures passed.",
+      "artifact_id": 11642431670,
+      "artifact_sha256": "1dfe386851ea9291081a8fa5d464b9e9001d61e17c01f99e5eb2224a735098fc",
+      "artifact_provider_disclosure": "Automatic approval review rejected sending signed archive URL to Lovable: possible internal logs/source disclosure without explicit destination authorization. No turn/edit started.",
+      "safe_diagnostic": "Temporary fixed-artifact read within GitHub. Exact archive hash; one capped synthetic log; identifiers/emails/credential-looking lines filtered; read-only repository token never forwarded to storage; intentional nonzero exit keeps gate closed. Original workflow must be restored before candidate verification.",
+      "diagnostic_commit": "80be05020e75c3e6587dece4ff6cc3261030e4fc",
+      "diagnostic_run_id": 37985960594,
+      "diagnostic_job_id": 114007890438,
+      "diagnostic_result": "Exact pinned archive/member read successfully within GitHub; diagnostic intentionally failed before checkout/tests. 13/14 version fixtures passed. Sole failure: strict locator matched visible warning and disclosure metadata.",
+      "correction": "Test now targets the visible warning, opens native details by keyboard and verifies exact ID/hash, restriction and preservation hold; all read-only authority assertions retained.",
+      "workflow_restoration": "Original db0f003 .github/workflows/ci.yml restored byte-for-byte in this candidate; no diagnostic code or additional Actions permission retained.",
+      "verification": "Corrected candidate4cf08158 passed CI66 run37986270507: controls and application-foundation, including all three document browser profiles. Temporary workflow removed; no testing skipped to obtain pass."
+    }
+  },
+  "immediate_delivery": {
+    "lead": "root integration lead",
+    "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
+    "owner_onboarding": "account_password_and_scoped_application_access_complete",
+    "owner_first_login": "actual_public_browser_login_account_facility_request_submission_and_triage_verified",
+    "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+    "unpublished_patch_check": "unavailable_checked_once",
+    "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
+    "independent_work": "Reviewed backend e250336d and UI43d1ea48 are included in this integration candidate with focused tests registered. No runtime pass or new cloud deployment claimed. Moldo independent; companion deferred.",
+    "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
+    "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
+    "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
+    "publication_blocker": null,
+    "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json",
+    "latest_publication_request": {
+      "lovable_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "deployment_id": "0cf4e56e-9963-4cdb-8865-ed09b9675242",
+      "status": "accepted_pending; provider public asset observation supports mobile delivery"
+    },
+    "lovable_report_pause": {
+      "tool_id": "plan--show",
+      "params": {
+        "path": ".lovable/plan.md"
+      },
+      "message_id": "umsg_01m4h5ez2hfw4vykmv8qg7efcf",
+      "event_id": "main:agent#00000000010736#tcb:APON2MMN",
+      "requires_secure_form": false,
+      "application_change": false,
+      "next_action": "Owner may reject the report-only card. Connector requires a human decision on this specific pending card; do not bypass with another message."
+    }
+  },
+  "remaining_defects": [
+    {
+      "id": "INTAKE-NAMES-001",
+      "observed_at": "2026-10-09T18:56:56.112222+00:00",
+      "source": "Actual authenticated owner request detail at auxiliumos.io",
+      "finding": "Facility and assignee summaries show raw reference UUIDs; triage select already resolves permitted assignee name. Improve visible names using already authorized data without expanding directory visibility.",
+      "scope": "Intake queue/detail presentation",
+      "status": "source_fix_reviewed_hosted_confirmation_pending",
+      "resolution": "Current permitted facility names and exact current-profile/eligible-triage assignee names replace default raw references. Unknown authorized names remain unavailable; references are accessible in disclosure. No broader directory query or person cache.",
+      "candidate": "57f637a9461ca1180df77bea487aa9fd12ac9c7b"
+    },
+    {
+      "id": "RELEASE-WITHDRAWAL-DISCOVERY-001",
+      "observed_at": "2026-10-09T20:40:15.839Z",
+      "finding": "Original content-gated release status prevented preparing a fresh narrowing withdrawal for restricted/content-disabled objects.",
+      "status": "source_fix_reviewed_runtime_pending",
+      "resolution": "Separate withdrawal discovery mirrors actual withdrawal authority without content/safety requirement; exact returned release/head CAS frozen in UI. Focused database/browser cases authored; no fabricated unsafe status success."
+    }
+  ]
+}

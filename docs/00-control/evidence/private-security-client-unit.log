@@ -1,0 +1,19 @@
+["node","--test","tests/unit/private-object-security-api.test.mjs"]
+✔ security status uses exact read-only RPC, current signal and no SDK retries (1.930305ms)
+✔ report sends only object and displayed revision, with no body, actor, grants or clearance authority (0.363987ms)
+✔ a report can confirm a restriction while scan stays pending or running (0.328415ms)
+✔ all bounded server disposition states are supported without translating eligibility into release (0.75053ms)
+✔ redacted unavailable success, missing RPC and errors never become fabricated pending status (1.123761ms)
+✔ invalid request IDs and unsafe revisions make no RPC (0.582817ms)
+✔ malformed, wrong-object and contradictory security claims fail closed (1.07635ms)
+✔ report success needs actual narrowed response and exact revision progression (0.466092ms)
+✔ security projection never exposes extra provider, content or release fields (0.187583ms)
+✔ aborted requests cannot send or publish a late security response (0.419141ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 392.701573

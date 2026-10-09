@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "task": "SEC-001B-API-FIXTURES",
+  "reviewed_on": "2026-10-08",
+  "reviewer_role": "independent-security-reviewer",
+  "source_base": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "outcome": "no_blocking_finding_for_bounded_development_test_harness",
+  "sha256": {
+    "tests/api/identity-directory.test.mjs": "d83207dd618c54841d9c76e7a5375021068ab90d1e0556f3d2d6f58bcd7e7fe2",
+    "tests/api/README.md": "08ce459ae4f713616acf5d41718ee60cac7f8fc952146940824bda84a685f1a6",
+    "tests/api/fixture-cleanup.mjs": "5eaed0cb98ee249d9ea9f70a8fbbf8d99d54cefa0236920e800a21f36e11440a",
+    "tests/unit/api-fixture-cleanup.test.mjs": "4f471a45fb9d5f130809c0e516a9aaf23175b60719ed951bec2a663971b8e6d1"
+  },
+  "findings": [],
+  "reviewed_boundaries": [
+    "No application/audit DELETE; exact generated demo lifecycle targets only",
+    "Created response ownership, current UUID/email, unrestricted linkage and disabled access before Auth deletion",
+    "Visible zero-row, unexpected-link, partial/ambiguous failure handling with independent cleanup continuation",
+    "Separate Auth absence and preserved-profile unlink/history verification",
+    "No emails, secrets, tokens or raw provider responses in diagnostics",
+    "Read-only preflight before creation with explicit schema/read-only scope",
+    "Held-token denial depends on backend lifecycle, not claimed token invalidation by Auth deletion"
+  ],
+  "independent_evidence": [
+    "22 supplied pure-mock tests passed and both API modules syntax-checked",
+    "Cleanup replay made no mutations",
+    "Unexpected active access prevented only the associated Auth deletion and remained untouched",
+    "Installed SDK 2.117.3 with intercepted fetch constructed exact UUID Auth GET/DELETE routes and hard-delete request payload"
+  ],
+  "integration_profile": "api-fixture-safety",
+  "authentic_api_status": "unexecuted",
+  "limits": [
+    "Separate Auth/Data API requests cannot eliminate races with concurrent privileged changes; use an isolated controlled synthetic target",
+    "Mocks do not prove live Auth, RLS, trigger/FK effects, installed migration state or deployment parity",
+    "The expected missing-configuration failure is not API acceptance"
+  ]
+}

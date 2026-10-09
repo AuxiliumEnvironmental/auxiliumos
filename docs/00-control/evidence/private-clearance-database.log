@@ -1,0 +1,49 @@
+["node","--test","tests/database/private-object-clearance.test.mjs"]
+▶ private-object clearance — PostgreSQL with simulated Auth; no detection/provider/concurrency claim
+  ✔ finalized immutable bytes → exact grant → scan → separately authorized human clearance (102.161188ms)
+  ✔ cross-account, cross-object and facility-only scopes are not discoverable (105.477161ms)
+  ✔ uploader, inspection grant, admin role and account read do not imply clearance (37.910136ms)
+  ✔ service-only synthetic routines cannot manufacture a human actor, even with forged claims (37.189991ms)
+  ✔ base tables and internal helpers deny all application roles despite hostile defaults (91.338286ms)
+  ✔ profile suspension denies retained subject with remaining system_admin role (34.079083ms)
+  ✔ membership removal denies retained subject with remaining system_admin role (30.100655ms)
+  ✔ view-account revocation denies retained subject with remaining system_admin role (30.221958ms)
+  ✔ facility revocation denies retained subject with remaining system_admin role (30.712377ms)
+  ✔ profile no longer demo denies retained subject with remaining system_admin role (33.459106ms)
+  ✔ object-grant revocation is audited, denies immediately, cannot restore in place (35.284463ms)
+  ✔ byte digest, observation object and current scan attempt are exact; stale CAS denies (56.417477ms)
+  ✔ claim/result/decision exact retries append once; changed retry cannot replace evidence (46.199678ms)
+  ✔ synthetic_malware_blocked has no human-clearance fallback (30.821611ms)
+  ✔ synthetic_scan_error has no human-clearance fallback (22.552819ms)
+  ✔ synthetic_scan_timeout has no human-clearance fallback (32.478454ms)
+  ✔ provider/unknown adapters and arbitrary outcomes/reports are rejected without interpreting content (31.300113ms)
+  ✔ false-positive resolution records reason but cannot erase signal or independent restrictions/holds (45.035263ms)
+  ✔ not_checked is still quarantined until explicit human disposition (35.586492ms)
+  ✔ all four preservation/visibility combinations remain independent (47.370122ms)
+  ✔ new suspicion invalidates clearance; lifting restriction and scan retries do not resurrect it (42.180656ms)
+  ✔ suspicion before or during a scan is visible and cannot be erased by no_signal (26.225294ms)
+  ✔ a new scan immediately invalidates clearance; only a fresh current-human decision restores it (40.898468ms)
+  ✔ rejection and human suspicion remain immutable and require a new explicit decision (38.919856ms)
+  ✔ ingest closure is one-way; no old grant or cleared status permits new workflow action (43.143872ms)
+  ✔ all evidence/history and object identity resist update, delete and truncate (36.322351ms)
+  ✔ composite foreign keys reject cross-account/object/hash references even under privileged constraint probes (54.325264ms)
+  ✔ audit failure atomically rolls back scan (27.492744ms)
+  ✔ audit failure atomically rolls back observation (31.309347ms)
+  ✔ audit failure atomically rolls back clearance (29.846611ms)
+  ✔ audit failure atomically rolls back grant (25.693423ms)
+  ✔ audit failure atomically rolls back phi (30.105172ms)
+  ✔ audit failure atomically rolls back restriction (25.151776ms)
+  ✔ audit failure atomically rolls back hold (32.2872ms)
+  ✔ audit failure atomically rolls back closure (29.901735ms)
+  ✔ audit allowlists retain prior families and safe technical/human provenance (35.476857ms)
+  ✔ disabled synthetic config and unfinalized bytes cannot enter scanning/clearance (27.358743ms)
+  ✔ canonical seed replay remains non-destructive and no serving/adoption RPC exists (26.820671ms)
+✔ private-object clearance — PostgreSQL with simulated Auth; no detection/provider/concurrency claim (3361.793255ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3485.248475

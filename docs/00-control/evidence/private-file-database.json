@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "profile": "private-file-database",
+  "level": "database",
+  "recorded_at": "2026-10-09T00:30:45.789Z",
+  "result": "passed",
+  "digest": "b4c36298b6db52a05a0f262c4e23cc496704bec86d9c38021dcefc420bc91f12",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-PGlite-PostgreSQL-simulated-Auth-and-provider-not-hosted-API",
+    "environment_hashes": {
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "eb8594c0c2ff48353275730e32b35888eb6e54c9e6766bff8c5947f5be834d29",
+      "TZ": "a77b7136d7ecc350d85920c42820c60e5af14172c4213eba09856c2db6e35e7a"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
+    "supabase/functions/private-objects/gateway.mjs": "777973ba23670c469211db8ab022bc6ada4fefb3f389138530bc0722f5a21a58",
+    "supabase/migrations/20260713000100_foundation_slice_schema.sql": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+    "supabase/migrations/20261008120645_identity_access_directory.sql": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "supabase/migrations/20261008164758_private_object_reservations.sql": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+    "supabase/migrations/20261008234951_intake_triage.sql": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+    "supabase/migrations/20261008234953_private_file_transport.sql": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+    "supabase/seed/foundation_demo_seed.sql": "06ec2f8f18f02ace1695a1bb3f95e881cf90364f86941d423090ab16084a706a",
+    "tests/database/private-file-transport.test.mjs": "e6fd74b86501cf32fef3c9413591fa243fda34ce68a70c616ba32c86f8e40d24",
+    "tests/helpers/pglite-database.mjs": "752ad4639f8d3ccdefc24420032d556d9272b704bdee034f199f3936e3475bba"
+  },
+  "observed_git_head": "1eb967fe7a692e022d2e9484b1de08daf3a2b3da",
+  "results": [
+    {
+      "argv": [
+        "node",
+        "--test",
+        "tests/database/private-file-transport.test.mjs"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/private-file-database.log",
+  "log_sha256": "005b8808647b251d4360b2214758489dc2c895eb1fc11c582c7232a07d12342e"
+}

@@ -1,0 +1,2 @@
+# Historical evidence
+These original files and pre-modernization controls are retained for traceability. They are not startup instructions or current phase restrictions. Follow root AGENTS.md, BUILD_STATE.json, BUILD_QUEUE.json and the effective current decisions. Unanswered founder workbooks are questions and proposed structures, not approval evidence. Do not paste this entire directory into every worker or new chat.

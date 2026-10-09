@@ -1,0 +1,58 @@
+{
+  "reviewed_at": "2026-10-09T18:50:34.744364+00:00",
+  "reviewer": "integration_security_review",
+  "source_commit": "eb650409aeb2947d385e337efbbfdd812b46ff6d",
+  "migration_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+  "scope": "Exact immutable-version synthetic human review SQL/contract/tests",
+  "blocking_findings": [],
+  "corrected_findings": [
+    "Consistent document/review lock order"
+  ],
+  "focused_checks": "37/37 PostgreSQL/PGlite with simulated Auth passed, reused worker result",
+  "limits": [
+    "No actual reviewer assignment",
+    "No hosted review workflow or real professional approval",
+    "No release implementation in this slice"
+  ],
+  "ui_followup": {
+    "reviewer": "integration_review",
+    "source_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+    "blocking_findings": [],
+    "scope": "Exact typed RPC/receipt contract; current authority; frozen uncertain retries, explicit attestation, denied-state clearing, history/navigation and scope/session fences",
+    "reused_focused_checks": {
+      "adapter": 10,
+      "new_browser_fixture": 17,
+      "additional_denial": 2,
+      "existing_route_regressions": 3
+    },
+    "limits": "No actual qualified person or hosted review/release acceptance.",
+    "hosted_transfer": {
+      "source_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+      "lovable_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "edit_id": "edt-38eb3568-c44d-4013-bc8c-139222a92226",
+      "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
+      "exact_files_read_back": 5,
+      "readback_by": "ui_integration",
+      "build": "Provider production build passed",
+      "publication_request": "ac37eb2f-5c63-4d77-93f5-f958163cd4a5 accepted pending"
+    }
+  },
+  "mobile_followup": {
+    "source_commit": "569ab1af032b2df104e4599d64ba3b47aca7accc",
+    "reviewer": "mobile_review",
+    "blocking_findings": [],
+    "scope": "Four-file disclosure, document action order and authorized intake-name presentation",
+    "observation": "44px touch target correction is uncommitted; workspace outage interrupted final browser checks.",
+    "status": "local_unfinished_not_remote_saved",
+    "limitations": "No completed final phone/regression result; later provider implementation requires its own actual source review."
+  },
+  "native_mobile_followup": {
+    "source_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+    "base_commit": "89227e331463eed0ea0844055cf43714e5969627",
+    "reviewer": "mobile_review",
+    "blocking_findings": [],
+    "scope": "Exactly4files; permitted names from existing resources, key/abort scope isolation, preserved upload/review/retry/adoption fences, native disclosure and44px targets",
+    "source_readback": "Root fullfile bytes match applying every provider diff hunk to exact canonical GitHub base",
+    "verification_boundary": "Provider reports6existing fixtures and2temporary checks; raw output/images are not connector-accessible, so these are provider-reported only. Manual production build was prohibited. Integrated GitHub CI must supply actual build/registered regressions. Genuine hosted private-file workflow remains unverified."
+  }
+}

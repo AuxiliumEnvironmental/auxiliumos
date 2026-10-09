@@ -1,0 +1,22 @@
+["node","scripts/verify-source-reconciliation.mjs"]
+{
+  "canonical_main": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "foundation_preserved": true,
+  "source_relationship": "Separate Lovable prototype explicitly recorded",
+  "github_write": "verified through connected GitHub Git Data API; command-line push remains unavailable",
+  "published_source": {
+    "recorded_commit": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+    "recorded_tree": "20d22a62a867ca859dd365cf3fbf1690cece04be",
+    "recorded_increments": [
+      {
+        "head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+        "tree": "98b449123f881f6913508ef06ac976de14bda7c4"
+      }
+    ],
+    "current_branch_head": "6b93ee34cee1ddc946cd3cae17db95f91f09f4e9",
+    "preserved_in_remote_history": true
+  },
+  "scope": "Current Git reads and historical published-tree verification plus dated connector observations. Not a push, runtime acceptance or deployment."
+}
+From https://github.com/AuxiliumEnvironmental/auxiliumos
+ * branch            wip/recovery-2026-10-08 -> FETCH_HEAD

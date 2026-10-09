@@ -1,3 +1,5 @@
+> 2026-10-08 integration clarification: all 20 modules remain in final scope. OS owns its domain records and enterprise context; Moldo retains independent operational ownership through explicit contracts. See ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md.
+
 # # AuxiliumOS Module Map
 
 Last updated: 2026-06-22
@@ -378,9 +380,9 @@ It supports:
 
 - Site passports
 
-- Site champion records
+- Facility coordinator records
 
-- Site champion training
+- Facility coordinator training
 
 - Response maps
 
@@ -1571,4 +1573,3 @@ No future module may bypass:
 - Professional/legal boundaries
 
 A module is only useful if it makes AuxiliumOS easier to understand, safer to operate, easier to train, and more future-proof.
-

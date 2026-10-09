@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "task": "SEC-001C-AUDIT",
+  "reviewed_on": "2026-10-08",
+  "reviewer_role": "independent-security-migration-reviewer",
+  "source_base": "283882ced0f8e7be119f4b3c4c75a3f913572bde",
+  "outcome": "no_blocking_finding_for_bounded_local_integration",
+  "sha256": {
+    "supabase/migrations/20261008154950_access_audit_provenance.sql": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+    "tests/database/access-audit.test.mjs": "c8ea4a76c54ccc504fe5487d4406aa11a23d403275aa1a1a696d761e39fc2c27",
+    "docs/03-data/ACCESS_AUDIT_IMPLEMENTATION.md": "0a1b91af1ec7038110b536fea0213f992a479d304f46dd3267262f35ed1f0a63"
+  },
+  "findings": [],
+  "reviewed_boundaries": [
+    "Historical fields and original account/actor-profile NO ACTION FKs preserved",
+    "Trusted gateway session and request-role classification; privileged claims cannot impersonate humans",
+    "Self-unlink prior-state exception confined to the changed profile",
+    "Private definer, empty search path, qualified references and explicit table/column/function ACLs",
+    "Allowlisted metadata, restrictive event scope, rollback and correlated two-tenant changes",
+    "Append-only sink and source TRUNCATE guards; legacy default asserts no runtime actor"
+  ],
+  "independent_probes": {
+    "passed": 6,
+    "environment": "Node 24.19.0 / PGlite 0.5.8 / PostgreSQL 18.3 with simulated sessions",
+    "source_sha256": "b147b9e42138d2d2ef6d1b372225e3ca295f0dced8c85f9373f7c0d3a228e167",
+    "cases": [
+      "Untrusted session with authenticated membership cannot forge gateway provenance",
+      "JSON-only claims work without legacy per-claim GUCs",
+      "Self-unlink fallback cannot authorize attribution for a subsequent unrelated mutation; transaction rolls back",
+      "Upstream client_accounts/auth.users TRUNCATE CASCADE cannot bypass history",
+      "MERGE mutations and no-op upsert produce only real lifecycle events",
+      "Temporary-object/search-path shadowing cannot intercept the audit sink"
+    ]
+  },
+  "integration_evidence": {
+    "directory-database": "19 passed after the third migration; original isolated orphan/backfill failure boundary retained",
+    "access-audit-database": "30 passed",
+    "profiles": ["directory-database", "access-audit-database"]
+  },
+  "remaining_gates": [
+    "Preservation-safe API fixture adaptation and independent review",
+    "Actual target PostgreSQL version, migration identity, ownership, roles, ACLs and provider advisors",
+    "Authentic Auth/PostgREST denial evidence",
+    "Durable rejected-attempt collection, private storage and remaining parent requirements"
+  ],
+  "deployed": false
+}

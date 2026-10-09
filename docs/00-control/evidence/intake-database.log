@@ -1,0 +1,30 @@
+["node","--test","tests/database/intake-triage.test.mjs"]
+▶ intake triage: PostgreSQL/PGlite with simulated gateway and single-session limits
+  ✔ additive migration preserves legacy originals, IDs, status, references and old audit families (28.715453ms)
+  ✔ catalogue includes every exact source issue/intent label without mappings or approvals (8.883605ms)
+  ✔ anonymous, unlinked, suspended, service and forged SQL sessions cannot impersonate intake actors (39.483382ms)
+  ✔ direct tables, joins, aggregates, writes and privileged helpers are denied; no role implies authority (39.106004ms)
+  ✔ own requests and exact triage facilities only; lists/detail never expose cross-account or directory-only rows (24.482998ms)
+  ✔ UUID paging returns only permitted records and last emitted cursor, without counts (24.729409ms)
+  ✔ validation rejects extra authority fields, wrong types, oversized text/flags and invalid catalogue keys (59.729808ms)
+  ✔ authorized submission is immutable, server-attributed and does not create operational authority (26.198731ms)
+  ✔ idempotent retry preserves result after triage and changed payload/scope conflicts without duplicate audits/incidents (29.96801ms)
+  ✔ one optional incident links multiple requests; cross-facility/account links and edits fail (25.031534ms)
+  ✔ assignee directory and assignment require current exact facility triage entitlement (24.075224ms)
+  ✔ classification/current fields separate from original, audited with no narrative and revision conflicts (34.046839ms)
+  ✔ genuine triage of mapped legacy requests still records the authenticated actor (6.571028ms)
+  ✔ needs-information has owner/action and immutable original submitter responses return to completeness review (38.743097ms)
+  ✔ only declared review routing edges exist; approval, expiry, mobilization and terminal reopening stay blocked (88.177658ms)
+  ✔ current grant/membership/profile/demo revocation wins on the next request without changed claims (47.098633ms)
+  ✔ exact capabilities reject wildcards and audit extension retains old reservation events (20.932249ms)
+  ✔ mutations take SHARE authorization locks and a request row lock; public RPCs remain invokers (6.235673ms)
+✔ intake triage: PostgreSQL/PGlite with simulated gateway and single-session limits (3764.897102ms)
+✔ intake bootstrap: fresh all-five-migrations then unchanged foundation seed and replay (1516.492086ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5408.432128

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "observed_at": "2026-10-08T07:28:50.963Z",
+  "scope": "Continuation setup correction; no OS runtime build or database write.",
+  "lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "workspace_id": "tb3Ur6qHQvFY54ZZro0r",
+    "project_knowledge_readback_matches": true,
+    "workspace_readback_matches": true,
+    "original_workspace_content_preserved": true,
+    "project_knowledge_mirror": "docs/08-ai/LOVABLE_KNOWLEDGE.md",
+    "workspace_addendum": "docs/08-ai/LOVABLE_WORKSPACE_ADDENDUM.md",
+    "project_before": "docs/10-history/2026-10-08-review/lovable-project-knowledge-before.txt",
+    "workspace_before": "docs/10-history/2026-10-08-review/lovable-workspace-knowledge-before.txt",
+    "latest_commit_sha": "d271bc5668bc9ad235dd17ee5d9bf92c26a6e146",
+    "agent_finished": true,
+    "is_published": false,
+    "runtime_build_submitted": false
+  },
+  "supabase": {
+    "project_name": "auxiliumos-dev",
+    "project_id": "txofqxictwecgcnvezlb",
+    "read_only_tools": [
+      "list_projects",
+      "list_tables(public)",
+      "list_migrations"
+    ],
+    "public_tables_returned": 0,
+    "migrations_returned": 0,
+    "auth_storage_reviewed": false,
+    "database_write_performed": false
+  },
+  "github": {
+    "accessible_installations": 0,
+    "push_performed": false,
+    "live_repository_reconciled": false
+  }
+}

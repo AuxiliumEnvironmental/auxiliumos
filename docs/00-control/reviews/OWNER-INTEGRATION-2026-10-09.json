@@ -1,0 +1,36 @@
+{
+  "reviewed_at": "2026-10-09T13:06:46.380149+00:00",
+  "reviewer": "integration_security_review",
+  "mode": "independent_read_only",
+  "scope": [
+    "Owner onboarding script and atomic initial activation",
+    "Invitation/recovery callback lifecycle and private session staging",
+    "Protected manual owner and connected-browser workflow jobs",
+    "Dedicated synthetic fixture and real connected-browser harness"
+  ],
+  "blocking_findings": [],
+  "corrected_findings": [
+    "Connected content audit assertions matched unordered array positions; changed to pair every result by exact authorization ID."
+  ],
+  "authority_boundary": "Owner account/facility viewing, request submission/triage and ingest only; no professional clearance, review, release or financial authority.",
+  "remaining_evidence": [
+    "Hosted Auth callback/email behavior",
+    "Personal owner password/first login",
+    "Actual connected backend/browser journey",
+    "Concurrent PostgreSQL sessions"
+  ],
+  "workflow_followup": {
+    "sha256": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
+    "blocking_findings": [],
+    "scope": "Separate hosted/local receipts and independent explicit storage preparation, without database gate activation."
+  },
+  "dashboard_domain_followup": {
+    "observed_at": "2026-10-09T16:51:42.711394+00:00",
+    "reviewer": "integration_security_review",
+    "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+    "conclusion": "no_blocking_findings",
+    "operator_sql_sha256": "2319f1b0fd0f8fc0b61cb524db95f602cdd3956964d63d9d2a5ae2418269c5fb",
+    "scope": "Genuine operator application DML after supported Auth invitation, same exact identity/lifecycle/audit and five scoped capabilities; exact-domain CORS on canonicaldev only; no Auth writes, session impersonation, helper changes, professional clearance/release authority.",
+    "deployment_requirement": "Actual host HTTPS and callback browser verification before owner invitation; CORS override verified by actual204preflight."
+  }
+}

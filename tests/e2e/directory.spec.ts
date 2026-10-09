@@ -1,0 +1,578 @@
+import { expect, test, type Page, type Route } from '@playwright/test';
+
+// HTTP fixtures exercise the real React/SDK browser path. They do not issue
+// authentic tokens, execute RLS, certify tenancy, or contact a cloud backend.
+const ORIGIN = 'https://txofqxictwecgcnvezlb.supabase.co';
+const uuid = (n: number) => `00000000-0000-4000-8000-${n.toString(16).padStart(12, '0')}`;
+const accountA = { id: uuid(100), display_name: 'Synthetic East account', is_demo: true };
+const accountB = { id: uuid(200), display_name: 'Synthetic West account', is_demo: true };
+const facilityA = { id: uuid(1001), account_id: accountA.id, display_name: 'Synthetic East facility', is_demo: true };
+const facilityB = { id: uuid(2001), account_id: accountB.id, display_name: 'Synthetic West facility', is_demo: true };
+type Account = typeof accountA;
+type Facility = typeof facilityA;
+
+function deferred() {
+  let resolve!: () => void;
+  const promise = new Promise<void>((done) => { resolve = done; });
+  return { promise, resolve };
+}
+
+async function mockBackend(page: Page) {
+  const user = {
+    id: uuid(1), aud: 'authenticated', role: 'authenticated',
+    email: 'browser-fixture@example.invalid', email_confirmed_at: '2026-10-08T00:00:00Z',
+    phone: '', app_metadata: { provider: 'email', providers: ['email'] }, user_metadata: {},
+    identities: [], created_at: '2026-10-08T00:00:00Z', is_anonymous: false,
+  };
+  const encode = (value: unknown) => Buffer.from(JSON.stringify(value)).toString('base64url');
+  const token = `${encode({ alg: 'HS256', typ: 'JWT' })}.${encode({ sub: user.id, role: 'authenticated', is_anonymous: false, exp: Math.floor(Date.now() / 1000) + 3600 })}.synthetic-signature`;
+  const state = {
+    accounts: [accountA, accountB] as Account[], facilities: [facilityA, facilityB] as Facility[],
+    profileAvailable: true, sessionValid: true, failAccounts: false,
+    failRefresh: false, rejectSignIn: false, redirectSignIn: false,
+    redirectedCredentialRequests: 0,
+    facilityGate: null as null | { accountId: string; arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> },
+    unexpected: [] as string[], requests: [] as URL[],
+    planBackend: false, plans: [] as Record<string, unknown>[], planCalls: [] as { name: string; body: Record<string, unknown> }[],
+    dropNextSaveAck: false, loseNextSave: false, failNextGet: false, saveGate: null as null | { arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> }, getGate: null as null | { arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> },
+  };
+  const json = (route: Route, value: unknown, status = 200) => route.fulfill({
+    status, contentType: 'application/json', body: JSON.stringify(value),
+  });
+  await page.route(`${ORIGIN}/**`, async (route) => {
+    const url = new URL(route.request().url());
+    state.requests.push(url);
+    if (url.pathname === '/auth/v1/token' && route.request().method() === 'POST') {
+      if (url.searchParams.get('grant_type') === 'refresh_token' && state.failRefresh) {
+        return json(route, { message: 'Synthetic refresh connection unavailable' }, 503);
+      }
+      if (url.searchParams.get('grant_type') === 'password') {
+        if (state.rejectSignIn) return json(route, { code: 'invalid_credentials', msg: 'Synthetic rejected login' }, 400);
+        if (state.redirectSignIn) return route.fulfill({ status: 307, headers: { location: 'http://127.0.0.1:4179/credential-capture' } });
+      }
+      return json(route, { access_token: token, refresh_token: 'synthetic-refresh-token', token_type: 'bearer', expires_in: 3600, user });
+    }
+    if (url.pathname === '/auth/v1/user') {
+      return state.sessionValid ? json(route, user) : json(route, { code: 'bad_jwt', msg: 'Fixture session expired' }, 401);
+    }
+    if (url.pathname === '/auth/v1/logout') return json(route, {});
+    if (url.pathname === '/rest/v1/user_profiles') {
+      expect(url.searchParams.get('select')).toBe('id,display_name,identity_status,is_demo');
+      return json(route, state.profileAvailable ? [{ id: uuid(2), display_name: 'Synthetic operator', identity_status: 'active', is_demo: true }] : []);
+    }
+    if (url.pathname === '/rest/v1/client_accounts') {
+      expect(url.searchParams.get('select')).toBe('id,display_name,is_demo');
+      expect(url.searchParams.get('order')).toBe('id.asc');
+      expect(url.searchParams.get('limit')).toBe('51');
+      if (state.failAccounts) return json(route, { message: 'Do not expose provider internals' }, 503);
+      const after = url.searchParams.get('id')?.replace(/^gt\./, '');
+      return json(route, state.accounts.filter((row) => !after || row.id > after).slice(0, 51));
+    }
+    if (url.pathname === '/rest/v1/facilities') {
+      expect(url.searchParams.get('select')).toBe('id,account_id,display_name,is_demo');
+      expect(url.searchParams.get('order')).toBe('id.asc');
+      expect(url.searchParams.get('limit')).toBe('51');
+      const filter = url.searchParams.get('account_id');
+      expect(filter).toMatch(/^eq\.[0-9a-f-]{36}$/);
+      const accountId = filter!.slice(3);
+      const after = url.searchParams.get('id')?.replace(/^gt\./, '');
+      const rows = state.facilities.filter((row) => row.account_id === accountId && (!after || row.id > after)).slice(0, 51);
+      if (state.facilityGate?.accountId === accountId) {
+        state.facilityGate.arrived.resolve();
+        await state.facilityGate.release.promise;
+      }
+      return json(route, rows);
+    }
+    if (state.planBackend && url.pathname.startsWith('/rest/v1/rpc/') && route.request().method() === 'POST') {
+      const name = url.pathname.slice('/rest/v1/rpc/'.length);
+      const body = route.request().postDataJSON() as Record<string, unknown>;
+      state.planCalls.push({ name, body });
+      if (name === 'list_workspace_plans') return json(route, state.plans.filter((plan) => plan.account_id === body.p_account_id && plan.facility_id === body.p_facility_id && plan.panel_key === body.p_panel_key).map(({ values, rows, checks, ...summary }) => summary));
+      if (name === 'get_workspace_plan' && state.getGate) { const gate = state.getGate; state.getGate = null; gate.arrived.resolve(); await gate.release.promise; }
+      if (name === 'get_workspace_plan' && state.failNextGet) { state.failNextGet = false; return json(route, { message: 'Synthetic readback unavailable' }, 503); }
+      if (name === 'get_workspace_plan') { const found = state.plans.find((plan) => plan.id === body.p_plan_id); return found ? json(route, found) : route.fulfill({ status: 403, contentType: 'application/json', body: JSON.stringify({ code: '42501', message: 'denied' }) }); }
+      if (name === 'save_workspace_plan') {
+        const existing = state.plans.find((plan) => plan.id === body.p_plan_id);
+        // Idempotent: an identical retry returns the original saved revision.
+        if (state.saveGate) { const gate = state.saveGate; state.saveGate = null; gate.arrived.resolve(); await gate.release.promise; }
+        if (state.loseNextSave) { state.loseNextSave = false; return json(route, { message: 'Synthetic gateway timeout' }, 504); }
+        if (existing && existing.request_id === body.p_request_id) return json(route, existing);
+        if ((existing ? existing.revision : 0) !== body.p_expected_revision) return route.fulfill({ status: 409, contentType: 'application/json', body: JSON.stringify({ code: '40001', message: 'stale' }) });
+        const plan = { request_id: body.p_request_id, id: body.p_plan_id, account_id: body.p_account_id, facility_id: body.p_facility_id, module_key: body.p_module_key, panel_key: body.p_panel_key, title: body.p_title, revision: (body.p_expected_revision as number) + 1, values: body.p_values, rows: body.p_rows, checks: body.p_checks, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' };
+        state.plans = [plan, ...state.plans.filter((item) => item !== existing)];
+        if (state.dropNextSaveAck) { state.dropNextSaveAck = false; return json(route, { message: 'Synthetic gateway timeout' }, 504); }
+        return json(route, plan);
+      }
+    }
+    state.unexpected.push(`${route.request().method()} ${url.pathname}`);
+    await route.abort('blockedbyclient');
+  });
+  // No request from this fixture suite may fall through to the actual cloud.
+  await page.route('**/*', (route) => {
+    const url = new URL(route.request().url());
+    const origin = url.origin;
+    if (origin === 'http://127.0.0.1:4179' && url.pathname === '/credential-capture') {
+      state.redirectedCredentialRequests += 1;
+      return json(route, {});
+    }
+    if (origin === ORIGIN) return route.fallback();
+    if (origin === 'http://127.0.0.1:4179') return route.continue();
+    state.unexpected.push(`external ${origin}`);
+    return route.abort('blockedbyclient');
+  });
+  return state;
+}
+
+async function signIn(page: Page) {
+  await page.goto('/');
+  await page.getByLabel('Email', { exact: true }).fill('browser-fixture@example.invalid');
+  await page.getByLabel('Password', { exact: true }).fill('synthetic-browser-password');
+  await page.getByLabel('Password', { exact: true }).press('Tab');
+  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toBeVisible();
+}
+
+test('fixture browser: keyboard login, account selection, directory and sign-out', async ({ page }, testInfo) => {
+  const backend = await mockBackend(page);
+  await signIn(page);
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+  await page.screenshot({ path: testInfo.outputPath('directory-desktop.png'), fullPage: true });
+  await page.getByRole('link', { name: `View facilities for ${accountA.display_name}` }).click();
+  await expect(page.getByRole('heading', { name: facilityA.display_name, exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: facilityB.display_name, exact: true })).toHaveCount(0);
+  await page.getByLabel('Account', { exact: true }).selectOption(accountB.id);
+  await expect(page.getByRole('heading', { name: facilityB.display_name, exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: facilityA.display_name, exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
+  await expect(page.getByText(facilityB.display_name, { exact: true })).toHaveCount(0);
+  expect(await page.evaluate(() => Object.values(localStorage).some((value) => value.includes('access_token')))).toBe(false);
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture browser: credential-bearing redirects fail without forwarding the login', async ({ page }) => {
+  const backend = await mockBackend(page);
+  backend.redirectSignIn = true;
+  await page.goto('/');
+  await page.getByLabel('Email', { exact: true }).fill('browser-fixture@example.invalid');
+  await page.getByLabel('Password', { exact: true }).fill('synthetic-browser-password');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('could not be reached');
+  expect(backend.redirectedCredentialRequests).toBe(0);
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toHaveCount(0);
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture browser: expired-session sign-out cannot restore access after refresh failure and reload', async ({ page }) => {
+  const backend = await mockBackend(page);
+  await signIn(page);
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+  await page.clock.install();
+  backend.failRefresh = true;
+  await page.evaluate(() => {
+    const namespace = 'auxiliumos.auth.txofqxictwecgcnvezlb.supabase.co';
+    const generation = localStorage.getItem(`${namespace}.generation`);
+    if (!generation) throw new Error('Expected the fixture login to commit a generation.');
+    const key = `${namespace}.generation.${generation}`;
+    const session = JSON.parse(localStorage.getItem(key)!);
+    session.expires_at = Math.floor(Date.now() / 1000) - 60;
+    localStorage.setItem(key, JSON.stringify(session));
+  });
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  await expect.poll(async () => backend.requests.some((url) => url.searchParams.get('grant_type') === 'refresh_token')
+    || await page.getByRole('button', { name: /^(Sign in|Try signing out again)$/ }).isVisible()).toBe(true);
+  // Advance the real SDK's bounded exponential refresh retry window without
+  // waiting 30 wall-clock seconds. The endpoint still returns the actual 503.
+  await page.clock.fastForward(31_000);
+  await expect(page.getByRole('button', { name: /^(Sign in|Try signing out again)$/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toHaveCount(0);
+  expect(await page.evaluate(() => Object.values(localStorage).some((value) => value.includes('access_token')))).toBe(false);
+  await page.clock.resume();
+  backend.failRefresh = false;
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toHaveCount(0);
+  backend.rejectSignIn = true;
+  await page.getByLabel('Email', { exact: true }).fill('browser-fixture@example.invalid');
+  await page.getByLabel('Password', { exact: true }).fill('synthetic-rejected-password');
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(page.getByRole('alert')).toContainText('Unable to sign in');
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Sign in', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toHaveCount(0);
+  backend.rejectSignIn = false;
+  await signIn(page);
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture browser: recoverable service error, empty access and profile revocation clear rows', async ({ page }) => {
+  const backend = await mockBackend(page);
+  backend.failAccounts = true;
+  await signIn(page);
+  await expect(page.getByRole('heading', { name: 'Information could not be loaded' })).toBeVisible();
+  await expect(page.getByText('Do not expose provider internals')).toHaveCount(0);
+  backend.failAccounts = false;
+  await page.getByRole('button', { name: 'Try again', exact: true }).click();
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+  backend.accounts = [];
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'No accounts available' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toHaveCount(0);
+  backend.profileAvailable = false;
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Access unavailable', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Accounts', exact: true })).toHaveCount(0);
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture browser: late response from a previous account cannot replace the selected account', async ({ page }) => {
+  const backend = await mockBackend(page);
+  const gate = { accountId: accountA.id, arrived: deferred(), release: deferred() };
+  backend.facilityGate = gate;
+  try {
+    await signIn(page);
+    await page.getByRole('link', { name: `View facilities for ${accountA.display_name}` }).click();
+    await gate.arrived.promise;
+    await page.getByLabel('Account', { exact: true }).selectOption(accountB.id);
+    await expect(page.getByRole('heading', { name: facilityB.display_name, exact: true })).toBeVisible();
+    gate.release.resolve();
+    await expect(page.getByRole('heading', { name: facilityA.display_name, exact: true })).toHaveCount(0);
+    await expect(page.getByLabel('Account', { exact: true })).toHaveValue(accountB.id);
+    expect(backend.unexpected).toEqual([]);
+  } finally { gate.release.resolve(); }
+});
+
+test('fixture browser: bounded cursor pages and an expired session', async ({ page }) => {
+  const backend = await mockBackend(page);
+  backend.accounts = Array.from({ length: 51 }, (_, index) => ({ id: uuid(100 + index), display_name: `Synthetic account ${index + 1}`, is_demo: true }));
+  await signIn(page);
+  await expect(page.getByRole('heading', { name: 'Synthetic account 50', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Synthetic account 51', exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Next page', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Synthetic account 51', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Next page', exact: true })).toBeDisabled();
+  await page.getByRole('button', { name: 'Previous page', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Synthetic account 1', exact: true })).toBeVisible();
+  backend.sessionValid = false;
+  await page.getByRole('button', { name: 'Refresh', exact: true }).click();
+  await expect(page.getByText('Your session has expired. Sign in again to continue.')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Synthetic account 1', exact: true })).toHaveCount(0);
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture browser: phone navigation, keyboard close, honest module state and layout', async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const backend = await mockBackend(page);
+  await signIn(page);
+  const open = page.getByRole('button', { name: 'Open navigation', exact: true });
+  await open.click();
+  await expect(page.getByRole('dialog', { name: 'Workspace navigation' })).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog', { name: 'Workspace navigation' })).not.toBeVisible();
+  await expect(open).toBeFocused();
+  await open.click();
+  await page.getByRole('dialog').getByRole('link', { name: 'Documents', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Private files', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Upload synthetic file', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  // Documents now has a scoped upload workflow; unfinished modules must still
+  // disclose their unavailable state rather than imply a completed product.
+  await open.click();
+  await page.getByRole('dialog').getByRole('link', { name: 'Projects', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Operations / Projects', level: 1, exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Sample case illustration' })).toBeVisible();
+  await expect(page.getByText('Records are not available yet')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByText('Unsaved draft', { exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Save project plan', exact: true })).toBeDisabled();
+  await page.getByRole('tab', { name: 'Assigned tasks', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Schedule work orders', exact: true })).toBeDisabled();
+  await expect(page.getByRole('dialog')).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await open.click();
+  await page.getByRole('dialog').getByRole('link', { name: 'Accounts', exact: true }).click();
+  await expect(page.getByRole('heading', { name: accountA.display_name, exact: true })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.screenshot({ path: testInfo.outputPath('directory-phone.png'), fullPage: true });
+  expect(backend.unexpected).toEqual([]);
+});
+
+test('fixture module drafts: field and repeatable values survive tabs but never call mutation endpoints', async ({ page }) => {
+  const state = await mockBackend(page);
+  await signIn(page);
+  await page.goto('/scope');
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toBeVisible();
+  await page.getByLabel('Project request reference', { exact: true }).fill('Synthetic request reference');
+  await page.getByLabel('Inclusions', { exact: true }).fill('Synthetic non-sensitive draft');
+  await page.getByRole('tab', { name: 'Revision review', exact: true }).click();
+  await page.getByRole('tab', { name: 'Scope records', exact: true }).click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('Synthetic request reference');
+  await expect(page.getByLabel('Inclusions', { exact: true })).toHaveValue('Synthetic non-sensitive draft');
+  await page.getByRole('button', { name: 'Add item', exact: true }).click();
+  await page.getByLabel('Deliverable', { exact: true }).fill('Synthetic deliverable');
+  await page.getByRole('tab', { name: 'Revision review', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare review notes', exact: true }).click();
+  await page.getByLabel('Scope revision reference', { exact: true }).fill('Exact revision reference');
+  await page.getByLabel('Confirm the exact scope revision', { exact: true }).check();
+  await expect(page.getByRole('button', { name: 'Request review', exact: true })).toBeDisabled();
+  await page.getByRole('tab', { name: 'Scope records', exact: true }).click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('Synthetic request reference');
+  await expect(page.getByLabel('Deliverable', { exact: true })).toHaveValue('Synthetic deliverable');
+  await page.getByRole('button', { name: 'Discard draft', exact: true }).click();
+  await page.getByRole('button', { name: 'Keep editing', exact: true }).click();
+  await expect(page.getByLabel('Inclusions', { exact: true })).toHaveValue('Synthetic non-sensitive draft');
+  await page.getByRole('button', { name: 'Remove item 1', exact: true }).click();
+  await expect(page.getByLabel('Deliverable', { exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Discard draft', exact: true }).click();
+  await page.getByRole('button', { name: 'Discard changes', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('');
+  await expect(page.getByLabel('Inclusions', { exact: true })).toHaveValue('');
+  await expect(page.getByRole('button', { name: 'Save scope revision', exact: true })).toBeDisabled();
+  expect(state.unexpected).toEqual([]);
+  expect(state.requests.every(url => url.pathname.startsWith('/auth/') || ['/rest/v1/user_profiles', '/rest/v1/client_accounts'].includes(url.pathname))).toBe(true);
+});
+
+test('fixture module drafts: phone schedule filter and quantity values stay unsaved', async ({ page }) => {
+  const state = await mockBackend(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await signIn(page);
+  await page.goto('/projects');
+  await page.getByRole('tab', { name: 'Assigned tasks', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await page.getByRole('button', { name: 'Add item', exact: true }).click();
+  await page.getByLabel('Work order title', { exact: true }).fill('Synthetic work preparation');
+  await page.getByLabel('Planned date', { exact: true }).fill('2026-10-12');
+  await page.getByLabel('Planning month', { exact: true }).fill('2026-10');
+  await expect(page.locator('.planned-date')).toHaveCount(1);
+  await page.getByLabel('Planning month', { exact: true }).fill('2026-11');
+  await expect(page.locator('.planned-date')).toHaveCount(0);
+  await expect(page.getByLabel('Planned date', { exact: true })).toHaveValue('2026-10-12');
+  await expect(page.getByRole('button', { name: 'Schedule work orders', exact: true })).toBeDisabled();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.goto('/estimates');
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(page.getByLabel('Planning range lower', { exact: true })).toBeVisible();
+  await page.getByLabel('Planning range lower', { exact: true }).fill('12.50');
+  await page.getByRole('button', { name: 'Add item', exact: true }).click();
+  await page.getByLabel('Quantity', { exact: true }).fill('2');
+  await page.getByLabel('Planning unit amount', { exact: true }).fill('3.25');
+  await page.getByRole('tab', { name: 'Assumptions', exact: true }).click();
+  await page.getByRole('tab', { name: 'Estimates', exact: true }).click();
+  await expect(page.getByLabel('Quantity', { exact: true })).toHaveValue('2');
+  await expect(page.getByLabel('Planning unit amount', { exact: true })).toHaveValue('3.25');
+  await expect(page.getByRole('button', { name: 'Save estimate revision', exact: true })).toBeDisabled();
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture planning drafts: one scope draft saves, reopens with rows, and clears on facility change', async ({ page }) => {
+  // Fixture evidence only: simulated RPC responses, not the deployed backend.
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  state.facilities.push({ id: uuid(1002), account_id: accountA.id, display_name: 'Synthetic East annex', is_demo: true });
+  await signIn(page);
+  await page.goto(`/scope?account=${accountA.id}`);
+  await page.getByLabel('Facility', { exact: true }).selectOption(facilityA.id);
+  const panel = page.getByRole('tabpanel').first();
+  await panel.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  await panel.getByLabel('Planning draft title').fill('East roof scope notes');
+  await panel.getByLabel('Inclusions').fill('Roof membrane survey');
+  await panel.getByRole('button', { name: 'Add item' }).click();
+  await panel.getByLabel('Deliverable').fill('Survey memo');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  const save = state.planCalls.find((call) => call.name === 'save_workspace_plan')!;
+  expect(save.body.p_expected_revision).toBe(0);
+  expect(save.body.p_panel_key).toBe('scope.1');
+  expect(save.body.p_rows).toEqual([{ Deliverable: 'Survey memo' }]);
+  await expect(panel.getByRole('button', { name: 'Save scope revision', exact: true })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Create another' }).click();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('');
+  await panel.getByRole('button', { name: 'Open East roof scope notes' }).click();
+  await expect(panel.getByLabel('Deliverable')).toHaveValue('Survey memo');
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('Roof membrane survey');
+  await page.getByLabel('Facility', { exact: true }).selectOption(uuid(1002));
+  await expect(panel.getByText('East roof scope notes')).toHaveCount(0);
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  expect(state.unexpected).toEqual([]);
+});
+
+async function openScopeWithFacility(page: Page) {
+  await page.goto(`/scope?account=${accountA.id}`);
+  await page.getByLabel('Facility', { exact: true }).selectOption(facilityA.id);
+  const panel = page.getByRole('tabpanel').first();
+  await panel.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  return panel;
+}
+
+test('fixture planning drafts: lost CREATE acknowledgement locks editing and retries the exact request without a duplicate', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  state.dropNextSaveAck = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Retry same save' })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Cancel retry' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Load sample example' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Create another' })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Retry same save' }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  const saves = state.planCalls.filter((call) => call.name === 'save_workspace_plan');
+  expect(saves).toHaveLength(2);
+  expect(saves[1].body).toEqual(saves[0].body);
+  expect(state.plans).toHaveLength(1);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+  expect(state.unexpected).toEqual([]);
+});
+
+const otherTab = (plan: Record<string, unknown>, revision: number, title: string) => ({ ...plan, request_id: `other-tab-${revision}`, revision, title });
+
+test('fixture planning drafts: lost UPDATE with an independently advanced head stays locked and exact retry returns conflict', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  await panel.getByLabel('Inclusions').fill('My update');
+  state.loseNextSave = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Retry same save' })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Recheck saved draft' })).toHaveCount(0);
+  // Another tab commits different data; our UPDATE never committed.
+  state.plans = [otherTab(state.plans[0], 2, 'Other tab title')];
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('My update');
+  await panel.getByRole('button', { name: 'Retry same save' }).click();
+  await expect(panel.getByText(/changed or the save was already used/)).toBeVisible();
+  await expect(panel.getByText(/recorded/)).toHaveCount(0);
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('My update');
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  const saves = state.planCalls.filter((call) => call.name === 'save_workspace_plan');
+  expect(saves[2].body).toEqual(saves[1].body);
+  expect(state.plans[0].title).toBe('Other tab title');
+});
+
+test('fixture planning drafts: a pending discard confirmation cannot clear an in-flight save', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Discard draft' }).click();
+  await expect(panel.getByRole('button', { name: 'Discard changes' })).toBeVisible();
+  const gate = { arrived: deferred(), release: deferred() };
+  state.saveGate = gate;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByRole('button', { name: 'Discard changes' })).toHaveCount(0);
+  await expect(panel.getByRole('button', { name: 'Discard draft' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('Corridor notes');
+  expect(state.plans).toHaveLength(1);
+});
+
+test('fixture planning drafts: conflict Keep my changes is disabled while Open latest is pending', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  state.plans = [otherTab(state.plans[0], 2, 'Other tab title')];
+  await panel.getByLabel('Inclusions').fill('Mine');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Open latest saved version' })).toBeVisible();
+  const gate = { arrived: deferred(), release: deferred() };
+  state.getGate = gate;
+  await panel.getByRole('button', { name: 'Open latest saved version' }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByRole('button', { name: 'Keep my changes as a new draft' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('Other tab title');
+  await expect(panel.getByRole('button', { name: 'Keep my changes as a new draft' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+});
+
+test('fixture planning drafts: failed readback keeps editing locked until the same plan reloads', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  state.failNextGet = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toBeVisible();
+  await expect(panel.getByLabel('Planning draft title')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Create another' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Load sample example' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Discard draft' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Open Corridor notes' })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Reload latest' }).click();
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+  await panel.getByRole('button', { name: 'Create another' }).click();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('');
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toHaveCount(0);
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture planning drafts: open locks editing until readback and a facility change discards a late read', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  state.facilities.push({ id: uuid(1002), account_id: accountA.id, display_name: 'Synthetic East annex', is_demo: true });
+  const plan = (n: number, title: string) => ({ id: uuid(5000 + n), account_id: accountA.id, facility_id: facilityA.id, module_key: 'scope', panel_key: 'scope.1', title, revision: 1, values: { Inclusions: `${title} inclusions` }, rows: [], checks: {}, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' });
+  state.plans = [plan(1, 'First notes'), plan(2, 'Second notes')];
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  const gate = { arrived: deferred(), release: deferred() };
+  state.getGate = gate;
+  await panel.getByRole('button', { name: 'Open First notes' }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Open Second notes' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('First notes inclusions');
+  await expect(panel.getByLabel('Inclusions')).toBeEnabled();
+  const late = { arrived: deferred(), release: deferred() };
+  state.getGate = late;
+  await panel.getByRole('button', { name: 'Open Second notes' }).click();
+  await late.arrived.promise;
+  await page.getByLabel('Facility', { exact: true }).selectOption(uuid(1002));
+  late.release.resolve();
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  await expect(panel.getByText('Second notes')).toHaveCount(0);
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture sample case: home journey, audience views and scope landing at phone width', async ({ page }, testInfo) => {
+  const state = await mockBackend(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await signIn(page);
+  await page.goto('/core');
+  await expect(page.getByRole('heading', { name: /Harbour Point/ })).toBeVisible();
+  await page.getByRole('button', { name: 'Internal team', exact: true }).click();
+  await expect(page.getByText('Owner and next-action queue')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.screenshot({ path: testInfo.outputPath('home-phone.png'), fullPage: true });
+  await page.getByRole('link', { name: /Open the scope example/ }).click();
+  await expect(page.getByRole('region', { name: 'Sample case illustration' })).toContainText('SAMPLE-SCP-03');
+  await expect(page.getByRole('table')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Load sample example', exact: true }).first().click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('SAMPLE-REQ-21');
+  await page.screenshot({ path: testInfo.outputPath('scope-phone.png'), fullPage: true });
+  expect(state.planCalls).toEqual([]);
+  expect(state.unexpected).toEqual([]);
+});

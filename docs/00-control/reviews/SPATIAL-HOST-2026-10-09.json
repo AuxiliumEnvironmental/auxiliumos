@@ -1,0 +1,12 @@
+{
+  "reviewed_at": "2026-10-09T18:50:34.744364+00:00",
+  "reviewer": "integration_review",
+  "source_commit": "77a1cf6f96a87ccd8b5db2268078ae9a70f0a938",
+  "external_packaging_commit": "64f5b2aa604a155761e99ec4189b3cdd2a365d39",
+  "underlying_spatial_source": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+  "blocking_findings": [],
+  "scope": "Actual10file delta, AuthGate/profile context/session fencing, generated asset hashes/provenance and CSS/lazy loading",
+  "verified_generated_hashes": 8,
+  "build": "build:dev passed; reused worker log",
+  "limits": "No exhaustive generated bundle, native Apple or hosted Spatial authoring acceptance claim."
+}

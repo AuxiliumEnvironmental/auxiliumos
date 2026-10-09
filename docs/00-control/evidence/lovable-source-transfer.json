@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+  "source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+  "source_archive_sha256": "4fa4183e6089d62cd007eb00ee0155be3bcddab78a0e10453442234c6664eeaf",
+  "initial_transfer": {
+    "message_id": "umsg_01m4ft56hnea699016ctcgap4y",
+    "thread_id": "main",
+    "target_commit": "72b861c3e42787fa2a3de9564fe63967cb18b491",
+    "worker_report": "304 files on disk byte-identical; build passed; 133 local database tests passed; controls30/31 (git-add unavailable in linked-worktree unit fixture)",
+    "independent_saved_source_check": {
+      "exact_files": 279,
+      "canonical_total": 304,
+      "mismatched_files": [],
+      "missing_files": [
+        "docs/00-control/evidence/access-audit-database.log",
+        "docs/00-control/evidence/api-fixture-safety.log",
+        "docs/00-control/evidence/auth-persistence-recovery.log",
+        "docs/00-control/evidence/controls.log",
+        "docs/00-control/evidence/directory-browser-fixture.log",
+        "docs/00-control/evidence/directory-browser-fixture.route-change-failure.log",
+        "docs/00-control/evidence/directory-database.log",
+        "docs/00-control/evidence/foundation-contract.log",
+        "docs/00-control/evidence/intake-browser-fixture.log",
+        "docs/00-control/evidence/intake-database.log",
+        "docs/00-control/evidence/intake-unit.log",
+        "docs/00-control/evidence/package-importer.log",
+        "docs/00-control/evidence/private-clearance-database.log",
+        "docs/00-control/evidence/private-file-browser-fixture.initial-status-race.log",
+        "docs/00-control/evidence/private-file-browser-fixture.log",
+        "docs/00-control/evidence/private-file-client-unit.log",
+        "docs/00-control/evidence/private-file-database.log",
+        "docs/00-control/evidence/private-file-entrypoint.log",
+        "docs/00-control/evidence/private-file-unit.log",
+        "docs/00-control/evidence/private-object-reservations-database.log",
+        "docs/00-control/evidence/private-security-client-unit.log",
+        "docs/00-control/evidence/runtime-build.log",
+        "docs/00-control/evidence/signout-before-fix.log",
+        "docs/00-control/evidence/source-reconciliation.completed.log",
+        "docs/00-control/evidence/source-reconciliation.log"
+      ],
+      "method": "274 new-file diffs compared by Git blob hash, with complete raw reads for60 edited/omitted/newline-sensitive paths. All279 retrievable canonical files match source;25 log paths return404."
+    },
+    "accepted": false
+  },
+  "public_configuration": {
+    "message_id": "umsg_01m4ftdhntez3s4w9mkyre3fnd",
+    "thread_id": "main",
+    "target_commit": "6c31aa8faf2c70eb7dd71e4414520f6dbea893c3",
+    "location": "gitignored web/.env; public development URL and publishable key only",
+    "worker_report": "Canonical sign-in renders without browser errors.76 superseded noncanonical shell files removed; recoverable from previous Git history. Platform build:dev alias missing; canonical build passes.",
+    "independently_verified": false,
+    "saved_deletion_diff": {
+      "deleted_noncanonical_files": 75,
+      "canonical_changes": 0,
+      "source_commit": "72b861c3e42787fa2a3de9564fe63967cb18b491",
+      "target_commit": "6c31aa8faf2c70eb7dd71e4414520f6dbea893c3"
+    }
+  },
+  "next_action": "Continue from exactcanonicalsource; do not recreate the ignoredweb/.env. Track onlyreviewedpublicweb/.env.development. Transfer future coherentcodeincrements and verifyactualsavedsource. Recover localreviewpatches beforeimplementationoverlap; genuineAuthacceptance requiresprotectedworkflow.",
+  "native_github_sync": false,
+  "hosted_authenticated_acceptance": false,
+  "production_published": false,
+  "latest_transfer": {
+    "message_id": "umsg_01m4fv360ce1erhq9zvnj8449n",
+    "thread_id": "main",
+    "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+    "target_commit": "cdd271be8a6ef5402a843f34324885eea20d1706",
+    "total": 320,
+    "unchanged_previously_verified": 261,
+    "new_hash_verified": 41,
+    "raw_read_hash_verified": 18,
+    "errors": [],
+    "source_archive_sha256": "ca3aa6cb691442477e53bac8b328240a72403e6db2cebbe2cc8b32c7139b1463",
+    "saved_parity_verified": true,
+    "worker_checks": {
+      "build_dev": "passed canonical exact build alias",
+      "adapter": "10/10 passed",
+      "browser_fixture": "14 could not launch: missing expected Chromium/system library; do not count as passed",
+      "controls": "Prior git-add restricted environment failure retained"
+    },
+    "root_checks": "Same source passed GitHub CI53 run37902541444 including14 document-version,20 private-file,7 directory and8 intake browser fixture journeys. No genuine hosted Auth proof.",
+    "configuration_durability": "Public runtime values reside in untracked gitignored web/.env; sign-in was worker-verified. Durable platform environment-settings persistence has not been independently established."
+  },
+  "latest_verified_transfer": {
+    "observed_at": "2026-10-09T09:23:33.105Z",
+    "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+    "source_tree": "1303312225d1d37e452ab2496adea2a6acab37f1",
+    "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+    "canonical_files": 334,
+    "unchanged_from_previous_verified": 327,
+    "changed_raw_files_independently_compared": 7,
+    "mismatches": [],
+    "noncanonical_platform_files_preserved": [
+      "web/.lovable/project.json",
+      "bun.lock"
+    ],
+    "source_parity_not_native_sync": true,
+    "production_published": false,
+    "message_id": "umsg_01m4fze89fe7sbjjxg6xddbqb7",
+    "thread_id": "main",
+    "saved_parity_verified": true,
+    "worker_checks": {
+      "configuration_eight": "passed; behavior unchangedbyanchoringfix",
+      "exact_ignore_new_case": "1passed,0failed; other8excludedbyexplicitfilter",
+      "structural_controls": "npm runos:checkvalid; notapplicationacceptance",
+      "development_build": "passed;rootdist/index.htmlandassetscontaincorrectpublicpair",
+      "production_build": "passed;devpublickeynotinunconfiguredproductionbundle",
+      "platform_build": "2026-10-09T09:18:49Z buildOKafterrootdistcorrection"
+    },
+    "limits": "No nativeGitHubsync, authenticAuth/Storagejourney or productionpublication. Checkpoint-onlyrecords afterthissourcepinwilldiffer untilnextcoherenttransfer."
+  },
+  "configuration_durability": {
+    "previous_failure": "Ignoredweb/.env disappeared during sandboxreset; previousdurability wasnotverified.",
+    "initial_candidate": "b15a23b98ccdf017cc9d50cbf12ede7f717c0671",
+    "initial_save_failure": "Nestedweb/.gitignore excludedpublicmodefile;4of5files saved atd4fb0b3. DiskpresencewasnotGitpersistence.",
+    "artifact_failure": "Hostexpectedrootdist whilepreviousbuild:devemittedwebdist.",
+    "fixed_source": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+    "fixed_saved_target": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+    "persistence": "Publicmodefile independentlyreadfromsavedGit; existingtargetonly. Productioncommand/configvalidator unchanged."
+  }
+}

@@ -1,4 +1,3 @@
-
 ## 2026-07-06 — Static shell and Playwright baseline sprint
 
 Completed:
@@ -85,3 +84,12 @@ Important:
 This next issue may be considered only if the founder chooses to proceed with dev-only migrations under the migration control packet.
 
 The next issue must explicitly authorize exact migration files and seed files before any migration is created.
+
+## 2026-10-08 continuation modernization
+Added full-destination requirement/task registers, owner-default configuration, evidence/checkpoint controls, agent/editor instructions, scoped integration ADR, recovered specifications and real repository CI definition. Corrected stale migration/Playwright state and historical phase restrictions. Preserved original detailed plans/history. This is a source package based on the uploaded archive, not a pushed/deployed OS release; current GitHub and live environments remain to be reconciled.
+
+## 2026-10-08 prompt and connected setup correction
+
+The follow-up audit found that live Lovable knowledge still prohibited backend work and the delivered startup remained Cursor-first. Replaced startup and launch instructions with the ChatGPT project path, added the full-stack feature delivery protocol, and applied/read back corrected OS project knowledge plus an OS-only workspace addendum. Preserved the entire previous workspace content, including the Moldo approval record, and archived both prior knowledge texts.
+
+Read-only Supabase inspection confirmed access to the existing auxiliumos-dev project; public table and migration-history lists returned empty. Auth/storage remain unreviewed. No application code build, database write, GitHub push or production action occurred. GitHub access still blocks current-source reconciliation. Updated evidence and package verification distinguish these setup changes from runtime completion.
