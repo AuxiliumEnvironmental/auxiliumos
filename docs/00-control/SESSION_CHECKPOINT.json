@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T16:51:55.757Z",
+  "created_at": "2026-10-09T17:13:32.616Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,21 +8,21 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
+  "first_unfinished_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
   "git": {
     "is_repository_root": true,
-    "head": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+    "head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
     "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json\n?? docs/00-control/evidence/owner-auth-domain-20261009.jpg\n?? docs/00-control/evidence/owner-domain-preparation.json",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/RESUME.md\n M docs/00-control/SESSION_CHECKPOINT.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/owner-domain-preparation.json",
     "remote": {
       "status": "head_matches_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
-      "checked_at": "2026-10-09T16:51:55.756Z"
+      "head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
+      "checked_at": "2026-10-09T17:13:32.615Z"
     }
   },
-  "controls_digest": "2e203dfb4e5d18eabfb50edbddf2d7e061cb350ce35fa1ba32e9754c60b42373",
+  "controls_digest": "654f8db3bdbfe068244da25f839714ee06e74fba1e422d1731efbff2c5a6cfca",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -31,8 +31,8 @@
       "declared_status": "blocked",
       "verified": false,
       "historical_completion": false,
-      "next_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
-      "blocker": "Automatic approval review requires explicit public-publication approval. Owner invitation, scoped application provisioning, personal password and first successful login are pending; no CI service credential dependency for this owner path."
+      "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
+      "blocker": "Owner must personally choose the password and sign in using the delivered invitation. No publication, document or CI-service-key dependency remains for owner access."
     },
     {
       "id": "SEC-001B",
@@ -41,7 +41,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
-      "blocker": "Automated authentic acceptance still needs protected service credential/manual dispatch. Owner login uses supported Dashboard onboarding and waits only for explicit frontend publication approval and personal setup."
+      "blocker": "Automated authentic acceptance needs the protected development service credential and authorized manual dispatch. Owner invitation and scoped permissions are complete; personal password setup and login remain pending."
     }
   ],
   "evidence": {
@@ -50,7 +50,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T16:51:45.610Z"
+      "recorded_at": "2026-10-09T17:13:25.699Z"
     },
     "foundation-contract": {
       "status": "stale",

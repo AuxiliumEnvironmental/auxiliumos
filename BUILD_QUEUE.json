@@ -48,15 +48,15 @@
         "runtime-build",
         "auth-onboarding-browser-fixture"
       ],
-      "next_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
-      "blocker": "Automatic approval review requires explicit public-publication approval. Owner invitation, scoped application provisioning, personal password and first successful login are pending; no CI service credential dependency for this owner path.",
+      "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules.",
+      "blocker": "Owner must personally choose the password and sign in using the delivered invitation. No publication, document or CI-service-key dependency remains for owner access.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "implementation_status": "Owner Auth UI, original protected workflow and alternative genuine-operator transaction independently reviewed. Auth URLs saved; deployment source parity and build verified. No owner Auth identity created yet."
+      "implementation_status": "Supported invitation sent; exact Auth identity independently confirmed; reviewed atomic operator transaction completed with active profile and exactly the authorized five capabilities. Password and first login remain unverified."
     },
     {
       "id": "UI-2026-10-09",
       "title": "Responsive application and full-destination module interfaces",
-      "status": "implemented",
+      "status": "in_progress",
       "dependencies": [],
       "requirements": [
         "M01",
@@ -93,9 +93,15 @@
         "tests/e2e/directory.spec.ts",
         "docs/00-control/**",
         "BUILD_QUEUE.json",
-        "BUILD_STATE.json"
+        "BUILD_STATE.json",
+        "web/src/lib/workspace-plan-api.ts",
+        "web/src/lib/use-workspace-plans.ts",
+        "tests/unit/workspace-plan-api.test.mjs",
+        "supabase/migrations/20261009170854_workspace_plans.sql",
+        "tests/database/workspace-plans.test.mjs",
+        "docs/03-data/WORKSPACE_PLANS.md"
       ],
-      "assigned_to": "Lovable frontend; root integration",
+      "assigned_to": "root integration lead; owner_auth_ui single Lovable writer; owner_onboarding_backend; integration_security_review",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -103,7 +109,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Canonical44web/package files matched Lovable and the15file domain increment is saved at797c9c99. Production build now includes approved public development config and rootdist. Obtain explicit publication approval, verify hosted auth screens, then continue genuine scoped module connections;45 new module panels remain preparation-only.",
+      "next_action": "Complete one cohesive responsive demo across all 20 modules, preserve connected workflows, integrate bounded creator-owned synthetic planning save/reopen with exact revisions, independently review, run focused representative desktop/mobile checks, save matching source in GitHub, then publish in existing Lovable project under explicit owner approval.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -279,7 +285,7 @@
         "development-ui",
         "document-connected-ui"
       ],
-      "blocker": "Automated authentic acceptance still needs protected service credential/manual dispatch. Owner login uses supported Dashboard onboarding and waits only for explicit frontend publication approval and personal setup.",
+      "blocker": "Automated authentic acceptance needs the protected development service credential and authorized manual dispatch. Owner invitation and scoped permissions are complete; personal password setup and login remain pending.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",

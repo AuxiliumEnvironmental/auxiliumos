@@ -1,5 +1,5 @@
 {
-  "observed_at": "2026-10-09T16:51:42.711394+00:00",
+  "observed_at": "2026-10-09T17:12:35.373540+00:00",
   "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
   "github_ci": {
     "run_id": 37961286796,
@@ -15,8 +15,8 @@
     "production_build": "passed_root_dist_with_public_development_config",
     "domain": "auxiliumos.io",
     "domain_verification": "provider_reported_connected_ownership_verified",
-    "is_published": false,
-    "publish_attempt": "rejected_by_automatic_approval_review_explicit_publication_authorization_required"
+    "is_published": true,
+    "publish_attempt": "Owner explicitly authorized and manually published; provider and actual HTTPS browser readback confirmed."
   },
   "supabase": {
     "project_ref": "txofqxictwecgcnvezlb",
@@ -25,8 +25,8 @@
       "current_user": "postgres"
     },
     "migration_count": 10,
-    "auth_users": 0,
-    "owner_profile_present": false,
+    "auth_users": 1,
+    "owner_profile_present": true,
     "site_url": "https://auxiliumos.io",
     "redirect_urls": [
       "https://auxiliumos.io",
@@ -34,7 +34,7 @@
       "https://auxiliumos.io/?auth=recovery"
     ],
     "invite_template": "Observed default .ConfirmationURL",
-    "email_delivery": "built_in_provider_observed_delivery_unverified",
+    "email_delivery": "Supported invite accepted; invited_at independently observed. Receipt in owner inbox not independently observed.",
     "bucket": {
       "id": "os-private-ingest",
       "public": false,
@@ -75,19 +75,30 @@
       "private_objects_status": 204,
       "document_version_content_status": 204,
       "allow_credentials": null
-    }
+    },
+    "owner_identity_status": "active",
+    "owner_scoped_capabilities": [
+      "view_account",
+      "view_asset",
+      "submit_request",
+      "triage_request",
+      "ingest_private_object"
+    ]
   },
   "checks": {
     "dashboard_owner_database_scenarios": 30,
     "production_configuration_checks": 12,
     "independent_security_review": "no_blockers_for_exact_operator_path_and_domain_CORS",
     "hosted_authenticated_workflow": "not_executed",
-    "owner_invitation_sent": false,
+    "owner_invitation_sent": true,
     "owner_password_set": false,
-    "owner_first_login_verified": false
+    "owner_first_login_verified": false,
+    "owner_application_permissions_active": true,
+    "https_sign_in_and_recovery_browser": "passed"
   },
   "screenshots": [
-    "Private owner-auth-domain-20261009.jpg retained outside the public repository."
+    "Private owner-auth-domain-20261009.jpg retained outside the public repository.",
+    "Private owner-invitation-sent-20261009.jpg retained outside the public repository."
   ],
-  "next_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules."
+  "next_action": "Owner opens the delivered invitation, personally sets a password at auxiliumos.io and signs in. Verify first login from actual Auth/application evidence. In parallel, integrate and publish the full-destination demo UI and creator-owned synthetic planning drafts after focused backend/security/browser checks. Do not wait for document release or all modules."
 }

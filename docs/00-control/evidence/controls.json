@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T16:51:45.610Z",
+  "recorded_at": "2026-10-09T17:13:25.699Z",
   "result": "passed",
-  "digest": "3d16c25c4eaab4bc213e099742778ee2a80d0e67b260dec722202f70a9a3e530",
+  "digest": "eb39c32e86d9c159e20b09eb3eddaf572d89083553af5028868699f732a7b191",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -45,8 +45,8 @@
     ".github/workflows/ci.yml": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
     ".gitignore": "34fc960968677f85e01a6325224b565b97ee27deff865d8d9719ec43f6cca648",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "e84a43ac8a9b2d13f17173fd2aa7cc9e0e01c162b8fa3e83c31fd9377bd08fdc",
-    "BUILD_STATE.json": "3a9dd7d6ade20ae40d69bea932cb82abbc60f2cbe908f3c89b4dd97024962cad",
+    "BUILD_QUEUE.json": "a3b3d5b2b2069efe1136e74c0e681e2068a14f3820fbd1ea678d303b2beb4918",
+    "BUILD_STATE.json": "827470e393451c6fd01a77fcd07b4798354e0e254c720ff0816cb3159595ff5e",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -201,7 +201,7 @@
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
     "VERIFICATION_PROFILES.json": "dcf2cfca17122156d5665908f8e629049162ebcce656120157669e61f475334c"
   },
-  "observed_git_head": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+  "observed_git_head": "bd090fe9194e05d0dd35bef06dc18fcad57d9530",
   "results": [
     {
       "argv": [
@@ -235,5 +235,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "77951b0b067bc371c108136ee578e366d9322a627686e579f490af85338504d6"
+  "log_sha256": "2f631fd303d829bfccf80e0061089b0ad6fc51cdaeb34d60ce0651a38d4c6ae1"
 }
