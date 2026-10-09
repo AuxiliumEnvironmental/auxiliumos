@@ -1,0 +1,217 @@
+["npm","run","test:runtime-ui","--","private-files.spec.ts"]
+
+> auxiliumos@0.0.0 test:runtime-ui
+> playwright test --config playwright.runtime.config.ts private-files.spec.ts
+
+
+Running 20 tests using 1 worker
+
+  ✘   1 tests/e2e/private-files.spec.ts:196:5 › fixture browser: permitted scope, loading and recoverable directory failure gate uploads (2ms)
+  ✘   2 tests/e2e/private-files.spec.ts:223:5 › fixture browser: unlisted deep links and empty account/facility pages do not imply access (2ms)
+  ✘   3 tests/e2e/private-files.spec.ts:242:5 › fixture browser: confirmation, exact scoped wire contract and pending finalization never imply release (1ms)
+  ✘   4 tests/e2e/private-files.spec.ts:273:5 › fixture browser: invalid bytes are rejected before an endpoint request (2ms)
+  ✘   5 tests/e2e/private-files.spec.ts:292:5 › fixture browser: ambiguous reservation keeps immutable file and idempotency key for retry (2ms)
+  ✘   6 tests/e2e/private-files.spec.ts:312:5 › fixture browser: conflict is recoverable with current status and exact same bytes (2ms)
+  ✘   7 tests/e2e/private-files.spec.ts:333:5 › fixture browser: lost finalization response is not a success until status confirms it (2ms)
+  ✘   8 tests/e2e/private-files.spec.ts:351:5 › fixture browser: disabled transport and malformed authority response cannot report a successful upload (2ms)
+  ✘   9 tests/e2e/private-files.spec.ts:369:5 › fixture browser: access denial clears file and prior status; expired Auth closes the page (2ms)
+  ✘  10 tests/e2e/private-files.spec.ts:391:5 › fixture browser: expired attempt preserves history and requires a new file choice (3ms)
+  ✘  11 tests/e2e/private-files.spec.ts:411:5 › fixture browser: scope changes and sign-out discard in-flight UI without claiming cancellation on the server (2ms)
+  ✘  12 tests/e2e/private-files.spec.ts:437:5 › fixture browser: directory pagination clears scoped file choices and phone layout stays usable (2ms)
+  ✘  13 tests/e2e/private-files.spec.ts:465:5 › fixture security: loading and current dispositions are separate from legacy transport status (2ms)
+  ✘  14 tests/e2e/private-files.spec.ts:502:5 › fixture security: missing RPC and malformed eligibility remain unavailable with no fake pending state (2ms)
+  ✘  15 tests/e2e/private-files.spec.ts:521:5 › fixture security: confirmed narrowing report has no text payload and preserves pending scan on phone (2ms)
+  ✘  16 tests/e2e/private-files.spec.ts:557:5 › fixture security: conflict hides stale eligibility and requires refreshed revision plus confirmation (2ms)
+  ✘  17 tests/e2e/private-files.spec.ts:583:5 › fixture security: ambiguous report does not claim success even when later status is restricted (2ms)
+  ✘  18 tests/e2e/private-files.spec.ts:602:5 › fixture security: revoked access clears upload metadata and aborts late transport refresh (2ms)
+  ✘  19 tests/e2e/private-files.spec.ts:623:5 › fixture security: late security responses cannot repopulate a changed facility (2ms)
+  ✘  20 tests/e2e/private-files.spec.ts:638:5 › fixture security: sign-out during report and invalid Auth discard all security metadata (2ms)
+
+
+  1) tests/e2e/private-files.spec.ts:196:5 › fixture browser: permitted scope, loading and recoverable directory failure gate uploads 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-3c9a4-ectory-failure-gate-uploads/error-context.md
+
+  2) tests/e2e/private-files.spec.ts:223:5 › fixture browser: unlisted deep links and empty account/facility pages do not imply access 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-9eac2-y-pages-do-not-imply-access/error-context.md
+
+  3) tests/e2e/private-files.spec.ts:242:5 › fixture browser: confirmation, exact scoped wire contract and pending finalization never imply release 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-4cb93-ization-never-imply-release/error-context.md
+
+  4) tests/e2e/private-files.spec.ts:273:5 › fixture browser: invalid bytes are rejected before an endpoint request 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-abaac--before-an-endpoint-request/error-context.md
+
+  5) tests/e2e/private-files.spec.ts:292:5 › fixture browser: ambiguous reservation keeps immutable file and idempotency key for retry 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-58aa6-d-idempotency-key-for-retry/error-context.md
+
+  6) tests/e2e/private-files.spec.ts:312:5 › fixture browser: conflict is recoverable with current status and exact same bytes 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-6025f-status-and-exact-same-bytes/error-context.md
+
+  7) tests/e2e/private-files.spec.ts:333:5 › fixture browser: lost finalization response is not a success until status confirms it 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-669a9-ss-until-status-confirms-it/error-context.md
+
+  8) tests/e2e/private-files.spec.ts:351:5 › fixture browser: disabled transport and malformed authority response cannot report a successful upload 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-0967f--report-a-successful-upload/error-context.md
+
+  9) tests/e2e/private-files.spec.ts:369:5 › fixture browser: access denial clears file and prior status; expired Auth closes the page 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-e16b8-xpired-Auth-closes-the-page/error-context.md
+
+  10) tests/e2e/private-files.spec.ts:391:5 › fixture browser: expired attempt preserves history and requires a new file choice 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-8b28e--requires-a-new-file-choice/error-context.md
+
+  11) tests/e2e/private-files.spec.ts:411:5 › fixture browser: scope changes and sign-out discard in-flight UI without claiming cancellation on the server 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-3e03c--cancellation-on-the-server/error-context.md
+
+  12) tests/e2e/private-files.spec.ts:437:5 › fixture browser: directory pagination clears scoped file choices and phone layout stays usable 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-brow-8fb7d-d-phone-layout-stays-usable/error-context.md
+
+  13) tests/e2e/private-files.spec.ts:465:5 › fixture security: loading and current dispositions are separate from legacy transport status 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-b4a0c-rom-legacy-transport-status/error-context.md
+
+  14) tests/e2e/private-files.spec.ts:502:5 › fixture security: missing RPC and malformed eligibility remain unavailable with no fake pending state 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-f9a4d--with-no-fake-pending-state/error-context.md
+
+  15) tests/e2e/private-files.spec.ts:521:5 › fixture security: confirmed narrowing report has no text payload and preserves pending scan on phone 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-315c3-erves-pending-scan-on-phone/error-context.md
+
+  16) tests/e2e/private-files.spec.ts:557:5 › fixture security: conflict hides stale eligibility and requires refreshed revision plus confirmation 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-b960d--revision-plus-confirmation/error-context.md
+
+  17) tests/e2e/private-files.spec.ts:583:5 › fixture security: ambiguous report does not claim success even when later status is restricted 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-1ceb1--later-status-is-restricted/error-context.md
+
+  18) tests/e2e/private-files.spec.ts:602:5 › fixture security: revoked access clears upload metadata and aborts late transport refresh 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-6c4da-orts-late-transport-refresh/error-context.md
+
+  19) tests/e2e/private-files.spec.ts:623:5 › fixture security: late security responses cannot repopulate a changed facility 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-266c3-populate-a-changed-facility/error-context.md
+
+  20) tests/e2e/private-files.spec.ts:638:5 › fixture security: sign-out during report and invalid Auth discard all security metadata 
+
+    Error: browserType.launch: Failed to launch chromium because executable doesn't exist at /usr/bin/chromium
+
+    Error Context: test-results/private-files-fixture-secu-c0b80-scard-all-security-metadata/error-context.md
+
+  20 failed
+    tests/e2e/private-files.spec.ts:196:5 › fixture browser: permitted scope, loading and recoverable directory failure gate uploads 
+    tests/e2e/private-files.spec.ts:223:5 › fixture browser: unlisted deep links and empty account/facility pages do not imply access 
+    tests/e2e/private-files.spec.ts:242:5 › fixture browser: confirmation, exact scoped wire contract and pending finalization never imply release 
+    tests/e2e/private-files.spec.ts:273:5 › fixture browser: invalid bytes are rejected before an endpoint request 
+    tests/e2e/private-files.spec.ts:292:5 › fixture browser: ambiguous reservation keeps immutable file and idempotency key for retry 
+    tests/e2e/private-files.spec.ts:312:5 › fixture browser: conflict is recoverable with current status and exact same bytes 
+    tests/e2e/private-files.spec.ts:333:5 › fixture browser: lost finalization response is not a success until status confirms it 
+    tests/e2e/private-files.spec.ts:351:5 › fixture browser: disabled transport and malformed authority response cannot report a successful upload 
+    tests/e2e/private-files.spec.ts:369:5 › fixture browser: access denial clears file and prior status; expired Auth closes the page 
+    tests/e2e/private-files.spec.ts:391:5 › fixture browser: expired attempt preserves history and requires a new file choice 
+    tests/e2e/private-files.spec.ts:411:5 › fixture browser: scope changes and sign-out discard in-flight UI without claiming cancellation on the server 
+    tests/e2e/private-files.spec.ts:437:5 › fixture browser: directory pagination clears scoped file choices and phone layout stays usable 
+    tests/e2e/private-files.spec.ts:465:5 › fixture security: loading and current dispositions are separate from legacy transport status 
+    tests/e2e/private-files.spec.ts:502:5 › fixture security: missing RPC and malformed eligibility remain unavailable with no fake pending state 
+    tests/e2e/private-files.spec.ts:521:5 › fixture security: confirmed narrowing report has no text payload and preserves pending scan on phone 
+    tests/e2e/private-files.spec.ts:557:5 › fixture security: conflict hides stale eligibility and requires refreshed revision plus confirmation 
+    tests/e2e/private-files.spec.ts:583:5 › fixture security: ambiguous report does not claim success even when later status is restricted 
+    tests/e2e/private-files.spec.ts:602:5 › fixture security: revoked access clears upload metadata and aborts late transport refresh 
+    tests/e2e/private-files.spec.ts:623:5 › fixture security: late security responses cannot repopulate a changed facility 
+    tests/e2e/private-files.spec.ts:638:5 › fixture security: sign-out during report and invalid Auth discard all security metadata 
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:261) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:274) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:323) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:347) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:359) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:371) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:383) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:395) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:419) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:431) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:443) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:455) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:467) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:479) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:491) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:503) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:515) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:527) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:539) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

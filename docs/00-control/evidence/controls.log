@@ -7,43 +7,43 @@
 
 ["node","scripts/check-docs.mjs"]
 {
-  "files_checked": 97,
+  "files_checked": 98,
   "errors": []
 }
 
 
 ["node","--test","tests/unit/control-system.test.mjs","tests/unit/document-integrity.test.mjs"]
-✔ baseline model preserves all 20 modules and validates its actual references (10.294203ms)
-✔ missing module and duplicate IDs are rejected (3.036947ms)
-✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.621714ms)
-✔ unapproved activation and unsupported completed status cannot forge completion (0.837893ms)
-✔ active writer leases must be identified and must not overlap (0.672263ms)
-✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.276597ms)
-✔ missing source, config and policy decision references are rejected on disk (4.650759ms)
-✔ source inventory rejects missing inputs, traversal and symbolic links (1.762316ms)
-✔ root inventory and verification work in a real linked Git worktree (94.125476ms)
-✔ real fixture command produces evidence and a current cache prevents redundant execution (130.649865ms)
-✔ noncacheable profiles require a declared positive finite freshness bound (1.211787ms)
-✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (130.394003ms)
-✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (555.194258ms)
-✔ declared environment input change invalidates a cached pass without storing the raw value (124.418308ms)
-✔ unrelated profile registration does not invalidate another profile, including root-file inventory (58.618528ms)
-✔ expired source observations preserve historical setup but never become current release evidence (66.452654ms)
-✔ failed fresh source checks cannot erase the original successful operation (116.02515ms)
-✔ historical completion cannot be used to bypass runtime task requirements (0.282025ms)
-✔ runtime identity participates in evidence freshness (127.871633ms)
-✔ failed verification replaces prior success and cannot be reused as passing (171.550908ms)
-✔ tampered verification log is rejected and fresh execution repairs evidence (118.28117ms)
-✔ tracked input changed during execution invalidates a zero-exit command (63.688002ms)
-✔ implemented declaration needs current evidence and required runtime evidence levels (62.721491ms)
-✔ declared task evidence levels must be nonempty distinct strings (0.690711ms)
-✔ SEC runtime task cannot unblock its dependent with static evidence alone (198.186132ms)
-✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (5.216982ms)
-✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.368806ms)
-✔ partial approvals activate only actions whose complete decision set is approved (0.213051ms)
-✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.208273ms)
-✔ handoff checker distinguishes closed examples from an unclosed fence (1.951441ms)
-✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.039657ms)
+✔ baseline model preserves all 20 modules and validates its actual references (7.297809ms)
+✔ missing module and duplicate IDs are rejected (1.153799ms)
+✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.621824ms)
+✔ unapproved activation and unsupported completed status cannot forge completion (0.605173ms)
+✔ active writer leases must be identified and must not overlap (0.541316ms)
+✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.313352ms)
+✔ missing source, config and policy decision references are rejected on disk (7.089935ms)
+✔ source inventory rejects missing inputs, traversal and symbolic links (1.990409ms)
+✔ root inventory and verification work in a real linked Git worktree (94.547956ms)
+✔ real fixture command produces evidence and a current cache prevents redundant execution (123.589227ms)
+✔ noncacheable profiles require a declared positive finite freshness bound (1.300961ms)
+✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (128.566719ms)
+✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (532.041893ms)
+✔ declared environment input change invalidates a cached pass without storing the raw value (114.357655ms)
+✔ unrelated profile registration does not invalidate another profile, including root-file inventory (59.248937ms)
+✔ expired source observations preserve historical setup but never become current release evidence (66.630376ms)
+✔ failed fresh source checks cannot erase the original successful operation (114.284905ms)
+✔ historical completion cannot be used to bypass runtime task requirements (0.294554ms)
+✔ runtime identity participates in evidence freshness (135.824176ms)
+✔ failed verification replaces prior success and cannot be reused as passing (194.571298ms)
+✔ tampered verification log is rejected and fresh execution repairs evidence (119.127714ms)
+✔ tracked input changed during execution invalidates a zero-exit command (66.563931ms)
+✔ implemented declaration needs current evidence and required runtime evidence levels (68.515728ms)
+✔ declared task evidence levels must be nonempty distinct strings (0.710931ms)
+✔ SEC runtime task cannot unblock its dependent with static evidence alone (234.275729ms)
+✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (5.126186ms)
+✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.381505ms)
+✔ partial approvals activate only actions whose complete decision set is approved (0.367174ms)
+✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.22569ms)
+✔ handoff checker distinguishes closed examples from an unclosed fence (1.543095ms)
+✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.166187ms)
 ℹ tests 31
 ℹ suites 0
 ℹ pass 31
@@ -51,4 +51,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2142.144964
+ℹ duration_ms 2182.574112

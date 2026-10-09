@@ -14,10 +14,10 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Latest verified remote59eb21faf5a1d8ef366780c4eac5da5da31f1c5c exactly matches localbb744a9 tree5f56c35fd9d7b62fdf020352c086efbec48db880. CI run37898799381 (run51) SUCCESS. PR84 draft open; API publication works.",
+    "github": "Latest verified remote7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e exactly matches locald20c372 tree79bbd5a8e1692f8400bf879288c2fdb0f693ca6a. CI run37900339479 (run52) SUCCESS. PR84 draft open; API publication works.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "All6 canonical migration hashes match deployed source. Canonical synthetic seed applied unchanged on2026-10-09 and read back (receipt development-migrations.json). Private-objects Edge v1 ACTIVE verify_jwt=true; zero Auth users/buckets and reservation config disabled at latest check. Genuine Auth/API/Storage/browser requires securely configured test key.",
-    "lovable": "2026-10-09 readback: existing project0b7bbfc6-627f-4ca0-9217-98f5b164b419 still0d48e1adfa63fa05ee0436bb5d83dd56ca94f523, agent finished, unpublished older shell. Owner requests lossless transfer if viable; no transfer or GitHub sync claimed. Official Git sync cannot import/link an arbitrary existing repository."
+    "supabase": "All7 canonical migration hashes match deployed source as of2026-10-09T07:47:40Z. Canonical synthetic seed unchanged; clearance schema/ACL readback verified (receipt development-migrations.json). Private-objects Edge v1 ACTIVE verify_jwt=true; zero Auth users/buckets and reservation config disabled. Genuine Auth/API/Storage/browser requires securely configured test key.",
+    "lovable": "Transferred canonical7aa5aa0 into existing project, final configuration commit6c31aa8faf2c70eb7dd71e4414520f6dbea893c3. Independent saved-source check279/304 exact;25 evidence logs missing despite worker disk parity. Noncanonical75-file deletion diff has zero canonical changes; previous history recoverable. Public development configuration/sign-in worker-verified only. Exact source durability and platform build:dev alias correction in progress; no native GitHub sync/production publish/hosted Auth acceptance."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Publish reviewed clearance and security-status/report UI; apply only new20261009065625 migration after fresh target checks. Continue active DOC-001A backend/UI work. If transferring to existing Lovable, preserve exact pinned canonical files and verify parity; no rewrite, replacement backend, reduced scope or unsupported sync claim.",
+  "first_runtime_action": "Publish reviewed integrated document versions and the two narrow Lovable durability/build compatibility fixes; apply only new20261009072201 migration after fresh target checks. Transfer latest pinned source to existing Lovable and verify saved Git parity including evidence logs. Genuine authenticated workflow remains separately gated.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -61,14 +61,14 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "All6 database migrations and Edge v1 deployed to existing development target. Genuine Auth/Data API/Storage and real-service browser acceptance remain unexecuted; product hosting and full20module acceptance not claimed.",
+    "verification_status": "All7 database migrations and Edge v1 deployed to existing development target. Genuine Auth/Data API/Storage and real-service browser acceptance remain unexecuted; product hosting and full20module acceptance not claimed.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
     "database_deployment": {
-      "source_commit": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+      "source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
       "receipt": "docs/00-control/evidence/development-migrations.json",
-      "migration_count": 6,
+      "migration_count": 7,
       "authentic_api_status": "awaiting_secure_key",
       "private_config_enabled": false,
       "storage_bucket_count": 0
@@ -98,10 +98,22 @@
       "migration_sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
       "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
       "database_checks": 39,
-      "deployed": false,
+      "deployed": true,
       "ui_worker_commit": "35611d0ab677ae2e3fde56598c33de56b0015f65",
       "security_adapter_checks": 10,
       "integrated_upload_security_browser_fixture_checks": 20,
+      "hosted_api_acceptance": false
+    },
+    "document_versions": {
+      "worker_backend_commit": "17cfadd76ea81230626d3f8f7b179e74dbceaf26",
+      "worker_ui_commit": "1ae9c72ae5a3a392c1f851a624cadb10b77657de",
+      "migration_sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+      "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
+      "database_checks": 38,
+      "client_unit_checks": 10,
+      "browser_fixture_checks": 14,
+      "upload_security_regression_checks": 20,
+      "deployed": false,
       "hosted_api_acceptance": false
     }
   },
@@ -136,12 +148,18 @@
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
     "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
-    "active_agents": [
-      "/root/private_ui_current",
-      "/root/private_clearance_current",
-      "/root/integration_security_review"
-    ],
-    "first_unfinished_action": "Publish reviewed clearance and security-status/report UI; apply only new20261009065625 migration after fresh target checks. Continue active DOC-001A backend/UI work. If transferring to existing Lovable, preserve exact pinned canonical files and verify parity; no rewrite, replacement backend, reduced scope or unsupported sync claim.",
-    "latest_verified_remote": "6164ffcae620694648bf29a9b120aec943c7d03d"
+    "active_agents": [],
+    "first_unfinished_action": "Publish reviewed integrated document versions and the two narrow Lovable durability/build compatibility fixes; apply only new20261009072201 migration after fresh target checks. Transfer latest pinned source to existing Lovable and verify saved Git parity including evidence logs. Genuine authenticated workflow remains separately gated.",
+    "latest_verified_remote": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+    "lovable_transfer": {
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "message_id": "umsg_01m4ft56hnea699016ctcgap4y",
+      "thread_id": "main",
+      "source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+      "archive_sha256": "4fa4183e6089d62cd007eb00ee0155be3bcddab78a0e10453442234c6664eeaf",
+      "status": "partial_saved_parity_279_of_304",
+      "native_github_sync": false,
+      "receipt": "docs/00-control/evidence/lovable-source-transfer.json"
+    }
   }
 }

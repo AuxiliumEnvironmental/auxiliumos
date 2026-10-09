@@ -44,7 +44,6 @@
     "Full M13/M19/C01/C02/C07 acceptance"
   ],
   "later_work_excluded": [
-    "Document adoption/version implementation 20261009072201 and frontend followup",
     "Any Lovable source transfer",
     "Hosted activation and full acceptance"
   ],
@@ -66,6 +65,20 @@
       "disposition": "No blocking finding in all5 scoped files. Exact identity/scope binding, stale suppression, bounded projection and conservative report with no authority elevation.",
       "integrated_fix": "Root reproduced fixture initial-status race, preserved failure and awaits initial pending response before injecting next Auth failure.20 final browser fixture journeys pass."
     },
-    "workflow": "Existing protected manual target/branch guard and step-scoped secret retained for new evidence profiles; no hosted execution claimed."
+    "workflow": "Existing protected manual target/branch guard and step-scoped secret retained for new evidence profiles; no hosted execution claimed.",
+    "document_versions": {
+      "backend": "17cfadd76ea81230626d3f8f7b179e74dbceaf26",
+      "ui": "1ae9c72ae5a3a392c1f851a624cadb10b77657de",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C07"
+      ],
+      "disposition": "No concrete consequential blocker found in frozen10-file slice. Exact current source/target authority, CAS/idempotency, mandatory same-transaction immutable provenance/closure/audit; bounded UI projection and immutable retry reviewed.",
+      "evidence_reuse": "Worker38 DB/10 adapter/14 fixture checks reused for review. Root integrated profiles pass38/10/14 plus20 existing upload/security browser journeys. Initial wrong browser executable failure preserved; rerun used existing supported Chromium with no app/test weakening.",
+      "limits": "No hosted/Auth/API/two-session concurrency/real scanner/professional approval/release/content proof."
+    }
   }
 }

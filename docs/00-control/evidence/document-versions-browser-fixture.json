@@ -1,34 +1,32 @@
 {
   "version": 1,
-  "profile": "runtime-build",
-  "level": "build",
-  "recorded_at": "2026-10-09T07:53:11.401Z",
+  "profile": "document-versions-browser-fixture",
+  "level": "browser_fixture",
+  "recorded_at": "2026-10-09T07:56:00.293Z",
   "result": "passed",
-  "digest": "8b5225cac762095a29bf006243a42d74a1b48ee46499db01b34f15008ee0088a",
+  "digest": "21432cbb1a4d92711e44b2e73ffb08666444a2fa3a29453a4bdce6b9fc18321e",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
     "arch": "x64",
-    "environment": "local-Node-24-TypeScript-Vite-production-bundle",
+    "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
     "environment_hashes": {
+      "AUXILIUMOS_BROWSER_EXECUTABLE": "619926da800ed84ebff8e2a3363252bff68ea835a7fdfd7701027bb546c3e3bc",
       "CI": null,
       "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
       "PATH": "837ab464f0d29de01137e1c5a2eb33c004e2fe7e0bd967890368b3a31da680f3",
-      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0",
-      "VITE_ALLOW_LOCAL_TEST_BACKEND": null,
-      "VITE_SUPABASE_PUBLISHABLE_KEY": null,
-      "VITE_SUPABASE_URL": null
+      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0"
     }
   },
   "inputs": {
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "playwright.runtime.config.ts": "70ed4a6435e17a2fe61c831b4952ca5c309ba8e8f2c658f8c6789340e343cd69",
     "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
-    "tests/unit/auth-persistence.test.mjs": "062ea0693db1dcd6020c5fb5227d6a393c53ac769a68e27c611a7b871d86e771",
-    "tests/unit/runtime-configuration.test.mjs": "b13fd015fd8815684d4dad9f44c1b15954120b04cf6882a98a79b704726ce860",
+    "tests/e2e/document-versions.spec.ts": "7bf8d56864c4ba18691c739cf1f82db98959a7b1af858319c3e8beaccd6d13f8",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
@@ -68,24 +66,15 @@
       "argv": [
         "npm",
         "run",
-        "build"
-      ],
-      "exit_code": 0,
-      "signal": null,
-      "error": null
-    },
-    {
-      "argv": [
-        "node",
-        "--test",
-        "tests/unit/runtime-configuration.test.mjs",
-        "tests/unit/auth-persistence.test.mjs"
+        "test:runtime-ui",
+        "--",
+        "document-versions.spec.ts"
       ],
       "exit_code": 0,
       "signal": null,
       "error": null
     }
   ],
-  "log_path": "docs/00-control/evidence/runtime-build.log",
-  "log_sha256": "a79868537f95a1039fbb811a43858ac68582459566eea07c2c96558edb07509a"
+  "log_path": "docs/00-control/evidence/document-versions-browser-fixture.log",
+  "log_sha256": "d06c82be9c0ae42132ae6f444633898581cb6a43d04cb345230025979cd386cc"
 }

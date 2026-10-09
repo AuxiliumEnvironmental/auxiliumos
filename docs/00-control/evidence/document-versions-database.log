@@ -1,0 +1,48 @@
+["node","--test","tests/database/document-versions.test.mjs"]
+▶ immutable document versions — PostgreSQL with simulated Auth; no hosted or concurrency proof
+  ✔ exact cleared object becomes one immutable internal draft and ingest closes atomically (108.912352ms)
+  ✔ bounded document/version reads require explicit exact view grants, not roles/ingest/source grants (94.533561ms)
+  ✔ both target capabilities and current source entitlement are independently necessary (66.226316ms)
+  ✔ cross-account/facility and account-only targets cannot receive versions or grants (65.324292ms)
+  ✔ stale document/security revisions, digest and changed idempotent inputs conflict (92.669772ms)
+  ✔ later drafts have server ordinals and cannot inherit or supersede legacy release labels (78.173533ms)
+  ✔ pagination and cursor bounds expose only permitted documents/versions (125.114662ms)
+  ✔ profile suspension defeats retained identity and system_admin role (48.27518ms)
+  ✔ membership removal defeats retained identity and system_admin role (42.723993ms)
+  ✔ account read revocation defeats retained identity and system_admin role (45.82723ms)
+  ✔ facility read revocation defeats retained identity and system_admin role (44.61989ms)
+  ✔ demo identity revocation defeats retained identity and system_admin role (38.316821ms)
+  ✔ exact target-grant revocation denies replay without altering history or another document (63.118342ms)
+  ✔ source ingest revocation defeats adoption despite target authority (38.632006ms)
+  ✔ unscanned object cannot be adopted (33.397327ms)
+  ✔ running object cannot be adopted (38.366906ms)
+  ✔ no_signal object cannot be adopted (53.744333ms)
+  ✔ malware_blocked object cannot be adopted (43.088362ms)
+  ✔ scan_error object cannot be adopted (47.610929ms)
+  ✔ rejected object cannot be adopted (41.529042ms)
+  ✔ suspected object cannot be adopted (41.923296ms)
+  ✔ restricted object cannot be adopted (42.768651ms)
+  ✔ closed object cannot be adopted (41.735433ms)
+  ✔ preservation hold is carried without becoming a visibility or adoption prohibition (56.486626ms)
+  ✔ service role, forged sessions, anonymous and unlinked subjects cannot adopt as human (37.624227ms)
+  ✔ base tables, helpers and public invoker/checked-definer boundaries resist hostile defaults (39.905505ms)
+  ✔ no GUC/standalone human update can close ingest without an exact just-inserted version (40.497758ms)
+  ✔ mandatory insert triggers overwrite caller provenance and cannot omit atomic closure (38.315428ms)
+  ✔ disabled synthetic context and malformed inputs cannot produce versions (48.315776ms)
+  ✔ closed ingest cannot rescan/report/clear or adopt the same object again (43.778102ms)
+  ✔ existing technical closure and clearance protections survive the additive guard extension (31.041265ms)
+  ✔ versions and grant identities are append-only and same-scope composite FKs remain authoritative (44.046327ms)
+  ✔ document_version_adopted audit failure rolls back version, closure and ordinal/revision together (46.264669ms)
+  ✔ private_object_ingest_closed audit failure rolls back version, closure and ordinal/revision together (50.116706ms)
+  ✔ grant retries are stable; changed target/request or audit failure cannot invent authority (16.428471ms)
+  ✔ adoption and closure audit exact versions/objects and real human provenance; grants remain system (33.818341ms)
+  ✔ unchanged seed and legacy bytes survive; no approval/release/content API is created (22.094551ms)
+✔ immutable document versions — PostgreSQL with simulated Auth; no hosted or concurrency proof (4359.395816ms)
+ℹ tests 38
+ℹ suites 0
+ℹ pass 38
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4525.567034

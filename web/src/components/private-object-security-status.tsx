@@ -2,6 +2,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { PrivateObjectSecurityApi, PrivateObjectSecurityError, type PrivateObjectSecuritySnapshot } from '../lib/private-object-security-api';
 import { asRuntimeError, isAbort, type RuntimeError } from '../lib/errors';
 import { useRuntime } from '../lib/runtime';
+import type { EligibleDocumentSource } from '../lib/document-version-api';
 import { LoadingState } from './shared';
 
 const labels: Record<PrivateObjectSecuritySnapshot['state'], string> = {
@@ -15,7 +16,8 @@ const scanLabels = { pending: 'Pending', running: 'Running', result: 'Result rec
 const malwareLabels = { pass: 'Synthetic check passed', blocked: 'Blocked', error: 'Check failed' };
 const phiLabels = { no_signal: 'No signal recorded; not a PHI guarantee', suspected: 'Suspicion recorded', not_checked: 'Not checked' };
 const decisionLabels = { cleared_no_phi: 'No-PHI security disposition recorded', rejected: 'Rejected', suspected_phi: 'Suspicion recorded' };
-type Props = { objectId: string; accountId: string; facilityId: string; onAccessUnavailable: () => void };
+type Props = { objectId: string; accountId: string; facilityId: string; onAccessUnavailable: () => void;
+  onEligibleSourceChange?: (source: EligibleDocumentSource | undefined) => void; refreshKey?: number };
 type Resource = { state: 'loading' | 'reporting' } | { state: 'ready'; value: PrivateObjectSecuritySnapshot }
   | { state: 'error'; error: RuntimeError };
 
@@ -25,12 +27,14 @@ export function PrivateObjectSecurityStatus(props: Props) {
   return <SecurityPanel key={`${state.context.profileId}:${state.revision}:${props.accountId}:${props.facilityId}:${props.objectId}`} {...props} />;
 }
 
-function SecurityPanel({ objectId, onAccessUnavailable }: Props) {
+function SecurityPanel({ objectId, onAccessUnavailable, onEligibleSourceChange, refreshKey }: Props) {
   const { api: runtimeApi, handleFailure } = useRuntime();
   const api = useMemo(() => new PrivateObjectSecurityApi(runtimeApi.client), [runtimeApi.client]);
   const inputId = useId();
   const controller = useRef<AbortController | null>(null);
   const mounted = useRef(false);
+  const sourceCallback = useRef(onEligibleSourceChange);
+  sourceCallback.current = onEligibleSourceChange;
   const [resource, setResource] = useState<Resource>({ state: 'loading' });
   const [confirmed, setConfirmed] = useState(false);
   const [reportOutcome, setReportOutcome] = useState<'none' | 'unconfirmed' | 'confirmed'>('none');
@@ -39,6 +43,7 @@ function SecurityPanel({ objectId, onAccessUnavailable }: Props) {
     if (controller.current) return;
     const current = new AbortController();
     controller.current = current;
+    sourceCallback.current?.(undefined);
     // Hide the prior snapshot while checking. In particular, never leave an
     // earlier eligible indication visible during an uncertain narrowing action.
     setResource({ state: operation }); setConfirmed(false);
@@ -48,6 +53,9 @@ function SecurityPanel({ objectId, onAccessUnavailable }: Props) {
       const value = await request(current.signal);
       if (!mounted.current || current.signal.aborted || controller.current !== current) return;
       setResource({ state: 'ready', value });
+      sourceCallback.current?.(value.security_clearance_eligible && value.verified_sha256 ? {
+        objectId: value.object_id, verifiedSha256: value.verified_sha256, securityRevision: value.security_revision,
+      } : undefined);
       if (operation === 'reporting') setReportOutcome('confirmed');
     } catch (error) {
       if (!mounted.current || current.signal.aborted || isAbort(error) || controller.current !== current) return;
@@ -61,8 +69,8 @@ function SecurityPanel({ objectId, onAccessUnavailable }: Props) {
   useEffect(() => {
     mounted.current = true;
     void refresh();
-    return () => { mounted.current = false; controller.current?.abort(); controller.current = null; };
-  }, [refresh]);
+    return () => { mounted.current = false; controller.current?.abort(); controller.current = null; sourceCallback.current?.(undefined); };
+  }, [refresh, refreshKey]);
 
   const busy = resource.state === 'loading' || resource.state === 'reporting';
   const snapshot = resource.state === 'ready' ? resource.value : null;

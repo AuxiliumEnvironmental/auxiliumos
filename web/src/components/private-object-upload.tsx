@@ -4,6 +4,8 @@ import { useRuntime } from '../lib/runtime';
 import { RuntimeError } from '../lib/errors';
 import { SyntheticBadge } from './shared';
 import { PrivateObjectSecurityStatus } from './private-object-security-status';
+import { DocumentVersions } from './document-versions';
+import type { EligibleDocumentSource } from '../lib/document-version-api';
 
 const labels: Record<PrivateObjectStatus['state'], string> = {
   reserved: 'Reserved; bytes not yet received', receiving: 'Upload pending confirmation',
@@ -35,10 +37,16 @@ function UploadForm({ clientApi, accountId, facilityId }: {
   const [confirmed, setConfirmed] = useState(false);
   const [attempted, setAttempted] = useState(false);
   const [inputVersion, setInputVersion] = useState(0);
+  const [eligibleSource, setEligibleSource] = useState<EligibleDocumentSource>();
+  const [securityCheck, setSecurityCheck] = useState(0);
+  const onAdopted = useCallback(() => {
+    // An immutable transaction receipt cannot establish continuing eligibility.
+    setEligibleSource(undefined); setSecurityCheck(value => value + 1);
+  }, []);
   const onSecurityUnavailable = useCallback(() => {
     controller.current?.abort(); controller.current = null; setBusy(false);
     key.current = crypto.randomUUID(); setAttempted(false); setStatus(null); setFile(null); setConfirmed(false);
-    setInputVersion(value => value + 1); setError('This upload is unavailable to your current access.');
+    setInputVersion(value => value + 1); setEligibleSource(undefined); setError('This upload is unavailable to your current access.');
   }, []);
   useEffect(() => { mounted.current = true; return () => { mounted.current = false; controller.current?.abort(); }; }, []);
 
@@ -46,7 +54,7 @@ function UploadForm({ clientApi, accountId, facilityId }: {
     // The ref also prevents duplicate events before React paints busy=true.
     if (controller.current) return;
     const current = new AbortController(); controller.current = current;
-    setBusy(true); setError(null);
+    setBusy(true); setError(null); setEligibleSource(undefined);
     try { await operation(current.signal); }
     catch (failure) {
       if (mounted.current && !current.signal.aborted) {
@@ -59,7 +67,9 @@ function UploadForm({ clientApi, accountId, facilityId }: {
       }
     } finally {
       if (controller.current === current) controller.current = null;
-      if (mounted.current && !current.signal.aborted) setBusy(false);
+      if (mounted.current && !current.signal.aborted) {
+        setBusy(false); setEligibleSource(undefined); setSecurityCheck(value => value + 1);
+      }
     }
   }
   function show(value: PrivateObjectStatus, signal: AbortSignal) {
@@ -91,9 +101,9 @@ function UploadForm({ clientApi, accountId, facilityId }: {
   }
   function newFile() {
     if (busy || controller.current) return;
-    key.current = crypto.randomUUID(); setAttempted(false); setFile(null); setStatus(null); setError(null); setConfirmed(false); setInputVersion(v => v + 1);
+    key.current = crypto.randomUUID(); setAttempted(false); setFile(null); setStatus(null); setError(null); setConfirmed(false); setInputVersion(v => v + 1); setEligibleSource(undefined);
   }
-  return <section className="account-selector-panel" aria-labelledby={`${inputId}-title`}>
+  return <><section className="account-selector-panel" aria-labelledby={`${inputId}-title`}>
     <div className="section-intro"><h2 id={`${inputId}-title`}>Private synthetic upload</h2><SyntheticBadge /></div>
     <p className="muted">Development text files only, up to 64 KiB. Start the file with “AuxiliumOS synthetic fixture” and a newline. No PHI or real client data.</p>
     <form onSubmit={submit} aria-busy={busy} style={{ marginTop: 'var(--space-4)' }}>
@@ -117,6 +127,9 @@ function UploadForm({ clientApi, accountId, facilityId }: {
         {(status || file) && <button className="button secondary" type="button" disabled={busy} onClick={newFile}>Choose a new file</button>}</div>
       <p id={`${inputId}-constraints`} className="field-hint">UTF-8 text only, 1–65,536 bytes. Retries reconcile the same immutable attempt. A failed or interrupted response does not prove that nothing was saved. Choosing a new file does not delete previous bytes or history.</p>
     </form>
-    {status?.state === 'finalized' && <PrivateObjectSecurityStatus objectId={status.objectId} accountId={accountId} facilityId={facilityId} onAccessUnavailable={onSecurityUnavailable} />}
-  </section>;
+    {status?.state === 'finalized' && <PrivateObjectSecurityStatus objectId={status.objectId} accountId={accountId} facilityId={facilityId}
+      onAccessUnavailable={onSecurityUnavailable} onEligibleSourceChange={setEligibleSource} refreshKey={securityCheck} />}
+  </section>
+    <DocumentVersions accountId={accountId} facilityId={facilityId} source={status?.state === 'finalized' && !busy ? eligibleSource : undefined} onAdopted={onAdopted} />
+  </>;
 }

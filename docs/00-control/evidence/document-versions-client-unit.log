@@ -1,0 +1,19 @@
+["node","--test","tests/unit/document-version-api.test.mjs"]
+✔ exact scoped list and ordinal history RPCs use bounded cursor arguments, abort signal and no SDK retries (2.272285ms)
+✔ adoption sends only frozen exact references, digest, both revisions and idempotency request ID (0.496669ms)
+✔ receipt projection excludes live flags and provider extras; history retains separate current flags (0.349437ms)
+✔ SDK, missing-RPC, conflict and access errors have safe distinct meanings without leaking SQL (1.286068ms)
+✔ invalid identifiers, unsafe revisions, digests and page bounds cause no RPC (1.434983ms)
+✔ document lists reject wrong account, unbounded fields, malformed scalars and nonprogressing cursors (0.942961ms)
+✔ history accepts only bounded immutable drafts, independent boolean flags and ascending unique exact versions (1.271256ms)
+✔ adoption receipts must match exact object, digest, document and both revision increments (0.476498ms)
+✔ mutating a caller request while awaiting the SDK cannot alter the response binding (0.223006ms)
+✔ canceled requests do not dispatch or publish late document metadata or adoption receipts (0.582368ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 393.668355

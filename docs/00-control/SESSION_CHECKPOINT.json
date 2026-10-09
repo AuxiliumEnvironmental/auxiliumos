@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T07:33:38.591Z",
+  "created_at": "2026-10-09T08:00:29.647Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,17 +10,17 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "eb6d5ea26f48be4f574525b69f2f3b4353946228",
+    "head": "da38bb595cd33b05f71dad299ed147a2e7951fbf",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/private-file-browser-fixture.json\n M docs/00-control/evidence/private-file-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M tests/e2e/private-files.spec.ts\n?? docs/00-control/evidence/private-clearance-database.json\n?? docs/00-control/evidence/private-clearance-database.log\n?? docs/00-control/evidence/private-file-browser-fixture.initial-status-race.log\n?? docs/00-control/evidence/private-security-client-unit.json\n?? docs/00-control/evidence/private-security-client-unit.log\n?? node_modules",
+    "working_tree": "M .github/workflows/ci.yml\n M .gitignore\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/RESUME.md\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/private-file-browser-fixture.json\n M docs/00-control/evidence/private-file-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M package.json\n M playwright.runtime.config.ts\n M tests/e2e/private-files.spec.ts\n M web/src/pages/private-files.tsx\n?? docs/00-control/evidence/document-versions-browser-fixture.json\n?? docs/00-control/evidence/document-versions-browser-fixture.log\n?? docs/00-control/evidence/document-versions-client-unit.json\n?? docs/00-control/evidence/document-versions-client-unit.log\n?? docs/00-control/evidence/document-versions-database.json\n?? docs/00-control/evidence/document-versions-database.log\n?? docs/00-control/evidence/lovable-source-transfer.json\n?? docs/00-control/evidence/private-file-browser-fixture.missing-browser-failure.log\n?? node_modules",
     "remote": {
       "status": "not_checked",
       "branch": "build/continuation-2026-10-09",
       "head": null
     }
   },
-  "controls_digest": "37af12ad6df471d1a743b2d34104748f5aae5e37575bc1b86c8cd49ce91cde1f",
+  "controls_digest": "dc81df4e72bd40bd9ec65136e6d25086d62f1455df4d99d5e1d676c113ebe7d4",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -30,7 +30,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
-      "blocker": "All6 reviewed migrations are applied to the existing development backend. Genuine Auth/API and real-service browser checks await securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY; no secret value should be supplied in chat."
+      "blocker": "All7 reviewed migrations are applied to auxiliumos-dev;8th document-version increment is reviewed and awaiting publication/application. Genuine Auth/API/browser acceptance requires securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and the protected manual workflow, not a secret in chat."
     }
   ],
   "evidence": {
@@ -39,7 +39,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T07:33:38.372Z"
+      "recorded_at": "2026-10-09T08:00:29.421Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -67,11 +67,8 @@
       "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "passed",
-      "profile": "runtime-build",
-      "evidence": "docs/00-control/evidence/runtime-build.json",
-      "level": "build",
-      "recorded_at": "2026-10-09T07:27:28.175Z"
+      "status": "stale",
+      "profile": "runtime-build"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -102,11 +99,8 @@
       "profile": "private-file-database"
     },
     "private-file-unit": {
-      "status": "passed",
-      "profile": "private-file-unit",
-      "evidence": "docs/00-control/evidence/private-file-unit.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T07:17:57.331Z"
+      "status": "stale",
+      "profile": "private-file-unit"
     },
     "intake-api": {
       "status": "not_run",
@@ -117,47 +111,48 @@
       "profile": "private-file-api"
     },
     "private-file-entrypoint": {
-      "status": "passed",
-      "profile": "private-file-entrypoint",
-      "evidence": "docs/00-control/evidence/private-file-entrypoint.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T07:00:14.011Z"
+      "status": "stale",
+      "profile": "private-file-entrypoint"
     },
     "private-file-browser-fixture": {
-      "status": "passed",
-      "profile": "private-file-browser-fixture",
-      "evidence": "docs/00-control/evidence/private-file-browser-fixture.json",
-      "level": "browser_fixture",
-      "recorded_at": "2026-10-09T07:29:56.760Z"
+      "status": "stale",
+      "profile": "private-file-browser-fixture"
     },
     "private-file-client-unit": {
-      "status": "passed",
-      "profile": "private-file-client-unit",
-      "evidence": "docs/00-control/evidence/private-file-client-unit.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T07:17:58.002Z"
+      "status": "stale",
+      "profile": "private-file-client-unit"
     },
     "development-ui": {
       "status": "not_run",
       "profile": "development-ui"
     },
     "private-clearance-database": {
-      "status": "passed",
-      "profile": "private-clearance-database",
-      "evidence": "docs/00-control/evidence/private-clearance-database.json",
-      "level": "database",
-      "recorded_at": "2026-10-09T07:25:03.952Z"
+      "status": "stale",
+      "profile": "private-clearance-database"
     },
     "private-clearance-api": {
       "status": "not_run",
       "profile": "private-clearance-api"
     },
     "private-security-client-unit": {
-      "status": "passed",
-      "profile": "private-security-client-unit",
-      "evidence": "docs/00-control/evidence/private-security-client-unit.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T07:27:48.247Z"
+      "status": "stale",
+      "profile": "private-security-client-unit"
+    },
+    "document-versions-database": {
+      "status": "stale",
+      "profile": "document-versions-database"
+    },
+    "document-versions-client-unit": {
+      "status": "stale",
+      "profile": "document-versions-client-unit"
+    },
+    "document-versions-browser-fixture": {
+      "status": "stale",
+      "profile": "document-versions-browser-fixture"
+    },
+    "document-versions-api": {
+      "status": "not_run",
+      "profile": "document-versions-api"
     }
   },
   "pending_owner_decisions": [

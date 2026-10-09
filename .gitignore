@@ -27,3 +27,7 @@ Thumbs.db
 playwright-report/
 test-results/
 coverage/
+
+# Sanitized, hash-tied verification logs are durable source evidence, even when
+# an editor's global ignore rules exclude ordinary application logs.
+!docs/00-control/evidence/*.log

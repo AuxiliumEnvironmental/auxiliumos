@@ -173,7 +173,7 @@
         "directory-api",
         "development-ui"
       ],
-      "blocker": "All6 reviewed migrations are applied to the existing development backend. Genuine Auth/API and real-service browser checks await securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY; no secret value should be supplied in chat.",
+      "blocker": "All7 reviewed migrations are applied to auxiliumos-dev;8th document-version increment is reviewed and awaiting publication/application. Genuine Auth/API/browser acceptance requires securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and the protected manual workflow, not a secret in chat.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1259,7 +1259,7 @@
     {
       "id": "DOC-001A",
       "title": "Immutable document versions and exact-object adoption",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "SEC-001C-CLEARANCE",
         "SEC-001C-FILE-WORKFLOW",
@@ -1278,7 +1278,7 @@
         "tests/api/document-versions.test.mjs",
         "docs/03-data/DOCUMENT_VERSION_CONTRACT.md"
       ],
-      "assigned_to": "private_clearance_current",
+      "assigned_to": null,
       "branch": "work/private-clearance-2026-10-09",
       "owner_decisions": [
         "OD-002",
@@ -1287,18 +1287,20 @@
         "OD-011",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "document-versions-database"
+      ],
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Implement frozen list_version_documents/list_document_versions/adopt_private_object contract, exact document grants and atomic immutable version+ingest closure. Basea32a5d0. Lead owns shared migration ordering and review. No legacy release-label authority or content route.",
+      "next_action": "Reviewed17cfadd integrated as8ba91db.38 PostgreSQL/PGlite checks pass; authentic API harness prepared only. Publish then apply only new20261009072201 SQL after fresh target checks. Exact immutable adoption/history and atomic ingest closure are not review/release/content access.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
     {
       "id": "DOC-001A-UI",
       "title": "Connected document version list, history and adoption interface",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "DOC-001-UPLOAD-UI"
       ],
@@ -1313,9 +1315,11 @@
         "web/src/lib/document-version-api.ts",
         "web/src/components/document-versions.tsx",
         "tests/unit/document-version-api.test.mjs",
-        "tests/e2e/document-versions.spec.ts"
+        "tests/e2e/document-versions.spec.ts",
+        "web/src/components/private-object-upload.tsx",
+        "web/src/components/private-object-security-status.tsx"
       ],
-      "assigned_to": "private_ui_current",
+      "assigned_to": null,
       "branch": "work/private-ui-2026-10-09",
       "owner_decisions": [
         "OD-002",
@@ -1323,12 +1327,16 @@
         "OD-011",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "runtime-build",
+        "document-versions-client-unit",
+        "document-versions-browser-fixture"
+      ],
       "required_evidence_levels": [
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Build against DOC-001A frozen RPC contract with active account/facility and optional current eligible source; preserve exact retry request, stale/uncertain/denied states. Lead wires existing Documents route and security candidate. No paste-a-digest UI or fake save.",
+      "next_action": "Reviewed1ae9c72 integrated asda38bb5;10 adapter tests,14 integrated version browser fixtures and20 upload/security regressions pass. Parent route/config/fixture/copy integrated. Continue actual hosted acceptance separately; never treat fixture success as Auth/Storage proof.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

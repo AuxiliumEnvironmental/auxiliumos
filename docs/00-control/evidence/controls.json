@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T07:33:38.372Z",
+  "recorded_at": "2026-10-09T08:00:29.421Z",
   "result": "passed",
-  "digest": "6a237d88ee435e412d96090180f85176eb1c569b7f0b740efda646644306f027",
+  "digest": "3039564fc346940fdc31a83158275424381f02c2e844f269aa288c8e31969f84",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -42,11 +42,11 @@
     ".github/ISSUE_TEMPLATE/decision_required.md": "255c2f1e6faee2f867fe9701976ffa6dd6b842700735c571e745ea3de098f247",
     ".github/ISSUE_TEMPLATE/feature_ticket.md": "28efae09a269cdd41df8e1287b98089221002c34b28417722e032468e274e5cb",
     ".github/PULL_REQUEST_TEMPLATE.md": "d025bd4eb9f16ba101c4f43ec123f94abd5709f59a531cf9e188b1c92af9d026",
-    ".github/workflows/ci.yml": "f959d6cfef702e8229583db1e3b26c4cd64bcbd1bfd2b430a1ed548acc52a688",
-    ".gitignore": "6635fca58934cc8e6833a1cc01d129039cde7e0ab19ce20ad5a3bab2c9f9f648",
+    ".github/workflows/ci.yml": "20fcfb8b895d5e122ba494687444e891db1b2392a861c873906957a048946f86",
+    ".gitignore": "e1e70fb70ae0bd8ed6f5f9e4d99fbb5c7eddf2754fe02146770f376b44b272e9",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "94e44264ee323e96636832ea3a537776b8541f89b94de3846f22cade6a536996",
-    "BUILD_STATE.json": "2449ceac943f76b3b176b0ad975fd348a0537b35e311886cd914e2de907a9c36",
+    "BUILD_QUEUE.json": "4686b19eddea567d99d187635056ffa062ce4f285a29bf9212b3810d9e43e3ef",
+    "BUILD_STATE.json": "21b3386be5663e0695eb8bff0aea9b58e8b8dae56a71914c7472fcacda4798d5",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -66,7 +66,7 @@
     "docs/00-control/OWNER_REVIEW.md": "aaf1978b62595837097b223d7aaa0a860b151b159a003f326521e5dab6572fb2",
     "docs/00-control/PROJECT_STATE.md": "bf9f2b723461bb0e795ad07d3cb23fc8ea0ff86f11da808cd788055f17094d65",
     "docs/00-control/reviews/CAPABILITY-INTEGRATION-2026-10-09.json": "dbb927234abfe181e94ee72de6db4590b104e47df3e259102d530260e69c4148",
-    "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json": "24cab616dbfa0f0deb9f5ba519b681c21c20e64242c5c536ef615d02911c4764",
+    "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json": "b222bfa0b8df0d2f7f609958660d10bf1b35775e6e040febc1532821b3d1024f",
     "docs/00-control/reviews/SEC-001A-2026-10-08.json": "e5596c049716bbbbbecbf8c70e019dc05dfc647cf73760b7eea053d89b6dccb2",
     "docs/00-control/reviews/SEC-001B-2026-10-08.json": "0350b83a31079ae023a73af84c55c5568e6ea399756123b974a8dba09948134a",
     "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json": "4cb9ddd5f72899bd0f857b0d02d4d670e439c1bb9efd77aea7cc70692ebeba31",
@@ -99,6 +99,7 @@
     "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md": "62b42b247ef670c1bc6382a101576f70054ab2e124200fc5529217ccfdbccfb4",
     "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md": "71c9145b87a0780441c6e33701cb4afe8e759e64904736afaa917b788ea10ab4",
     "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md": "d2c778f6a4289fad3544cd62c2989314eb32b7cfd386ed19b811bbe6afea3fa6",
+    "docs/03-data/DOCUMENT_VERSION_CONTRACT.md": "9b23443b8eb3b88d64d8b2c38c3bcce7691f32fe32e553bb63059bca5f34576c",
     "docs/03-data/FIELD_DICTIONARY.md": "240f089042ee3d29602a30132c69fedae0d8cfce7e52b9878470bd5042656098",
     "docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md": "39dcd6cfd669605f7aa0211587d70fb9c576ffeb82e9e7b50adee6c1d6853d27",
     "docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md": "b43cc86ed40038fdfbfffd8627fd18b7348d14b1a21bd650432349fadc9bf7ed",
@@ -181,9 +182,9 @@
     "docs/10-history/README.md": "94c85a43e127866dd38f8ae3898c76b6addb2a2517bcb0b39a6ddf9e230f4f18",
     "OWNER_DECISIONS.json": "39e11772722e363e3454364cb07d9a7adba923e5f7a8c069a465b9a547cbd092",
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
-    "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
+    "package.json": "00a24b70c3ba14882900ca75c319f50d662d1a49884b20b199ef79aa6e5d4284",
     "playwright.config.ts": "2c4ab092a3456a331ea96f441d80f63a8b5b60d42e47e347431d6b0b3999f9c7",
-    "playwright.runtime.config.ts": "c14775caf987ee4b3dacf31ca55e3c847c9f06723a05100b49a1708f7a062368",
+    "playwright.runtime.config.ts": "70ed4a6435e17a2fe61c831b4952ca5c309ba8e8f2c658f8c6789340e343cd69",
     "README.md": "4fdb7a94ac14fd70be61f3c97c1156b8d4db34068106ea70057084d8bb7deb19",
     "REQUIREMENTS.json": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
     "scripts/check-docs.mjs": "c874e58a9cc8e1037ba207886836fea36fd6afe97413aaa2437c519ed945b108",
@@ -193,9 +194,9 @@
     "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "tests/unit/control-system.test.mjs": "c7e95b8a28f7db0e4a93861ed5240c6d6e48fd147440a8385cadaf0e48d9b17e",
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
-    "VERIFICATION_PROFILES.json": "121bd02739a5b3c3726709fe3adf0c8bfa1a3556296c3f9a7d0668d83ca55c66"
+    "VERIFICATION_PROFILES.json": "9e5a82bff2338fcafa188c9394eb2e3612ed88f2a2237d67f4caee5eeb436873"
   },
-  "observed_git_head": "eb6d5ea26f48be4f574525b69f2f3b4353946228",
+  "observed_git_head": "da38bb595cd33b05f71dad299ed147a2e7951fbf",
   "results": [
     {
       "argv": [
@@ -229,5 +230,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "5747634790ab77ef110fdb78fb913db4c35a53af41837b005177256c0c20a098"
+  "log_sha256": "b4ab93ea06fcdc2c273c1990cb785f2538c301e2e1c7e79819971ec030d16ce9"
 }

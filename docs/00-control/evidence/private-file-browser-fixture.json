@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "private-file-browser-fixture",
   "level": "browser_fixture",
-  "recorded_at": "2026-10-09T07:29:56.760Z",
+  "recorded_at": "2026-10-09T07:55:44.532Z",
   "result": "passed",
-  "digest": "98fd434d5c7012795d1eff473795b87801062464bbc08bdec6c283cdab104fdc",
+  "digest": "34043804dd89156be44526f507930ef1a402c43ff61867c5897aff62d6ca7316",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -24,22 +24,24 @@
   "inputs": {
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35d8dc0992eb72238e7ee03271f9739add4110d80ad48ec7c51700a401a52346",
-    "playwright.runtime.config.ts": "c14775caf987ee4b3dacf31ca55e3c847c9f06723a05100b49a1708f7a062368",
+    "playwright.runtime.config.ts": "70ed4a6435e17a2fe61c831b4952ca5c309ba8e8f2c658f8c6789340e343cd69",
     "scripts/os-control.mjs": "be13ca3cbd5ff0ef9d36832c4f8cb61ef3cd8a2220205690d199c58f6335509e",
-    "tests/e2e/private-files.spec.ts": "4b40966efdaaa28cc2fad36d6fbcd55f7aa4805c53fe4cae4940c891435b2b43",
+    "tests/e2e/private-files.spec.ts": "a34d47dd9f4197d4d1d8265295f0fa7eb64640e9a5d65e19ca0ba25036a256dd",
     "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
     "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
     "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
     "web/README.md": "979684798830da44d55c2e7a75f681119086675e5b2aafc779a7c5d4ce4db561",
     "web/src/components/app-shell.tsx": "12e3244ff6536a3770e6754ef971bda5319f227b26f75d33735ad7164d04cc7a",
     "web/src/components/auth.tsx": "302394656ed85b5aa8d587444763ef077e406774678a4c61f6f8dc4254e5d07e",
-    "web/src/components/private-object-security-status.tsx": "f82a666b1d7b4a9b02c24bf2ac7af66184c96668f0f89ad51606e1cffa7642ff",
-    "web/src/components/private-object-upload.tsx": "621e0ef06fc7de10705bb34e3622d9bb4a86cd810d824c8a218bfd0804b0cb62",
+    "web/src/components/document-versions.tsx": "6b2f38460f405f44e22904fcc4639f9aa4e9bff20ed208a9933f3949f638d009",
+    "web/src/components/private-object-security-status.tsx": "363a6ed8605c366f239e68182560a6fa1e59036a85473b38c12fdd86a914d60b",
+    "web/src/components/private-object-upload.tsx": "8fccad50a08ee5e1863a1b2b8132a333d2d8664e17774561bfd7ec2aea2d1e30",
     "web/src/components/shared.tsx": "4848e60dea3dafaf161cc6057997a80622f1fe68d0d83d86e74e357613fbdcc4",
     "web/src/env.d.ts": "60767326176b42460c4b67e6e7e10d071a832882e5410ce7df08e6ebf413af5b",
     "web/src/lib/auth-storage.ts": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
     "web/src/lib/config.ts": "09c2f6e970f6a7435b822e9964ef959aa67a5423712afb9a20321ecd05deed64",
     "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+    "web/src/lib/document-version-api.ts": "8bf5927a5f4dc05be31a09dba9da86fc0370e0a9628e7773b78cc54f0ac87d0b",
     "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434",
     "web/src/lib/intake-api.ts": "e8b36480135b5424477d554455803df31277fbc8e8abdda0f977890f882a2b82",
     "web/src/lib/modules.ts": "dfebe2cb67d8a4a46b3b2a3d1463c03fd2527819095890e83931ed49dae4d74f",
@@ -51,14 +53,14 @@
     "web/src/pages/directory.tsx": "71f87c4ffdc1ef37ca532d38fd6a143739827a332719df54efbc15b9ef173553",
     "web/src/pages/intake.css": "5cd741294d8569b3c1128912e034262815cb25ac252487f22aec9031859f3371",
     "web/src/pages/intake.tsx": "cdca638fbcee0bb9a9174f877236a7d45dafb8c9c99d78df69174d6e1ad7e56b",
-    "web/src/pages/private-files.tsx": "d51281c7d5aa479bf37dc4463503572b7df177cdb609f713f9d36eee8ba09c34",
+    "web/src/pages/private-files.tsx": "6b600bc0b95047abd7369e8faeaa923ad7f38864520b6921ff85f775c7d905c4",
     "web/src/pages/workspace.tsx": "49b11e741f9ad8743a1327f3ceaed2dbb9d91dd77a19fb8f0386395c8c4a4375",
     "web/src/router.tsx": "0e9156c2b42489ef2d5de991de3d70148a28b35e7020c270ccb6ed16d371605f",
     "web/src/styles.css": "3fe7f0d33c0c927cfcf755e62c4291bab7dc95775b3d4dfe8b6721b9087875d0",
     "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
     "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
   },
-  "observed_git_head": "eb6d5ea26f48be4f574525b69f2f3b4353946228",
+  "observed_git_head": "da38bb595cd33b05f71dad299ed147a2e7951fbf",
   "results": [
     {
       "argv": [
@@ -74,5 +76,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/private-file-browser-fixture.log",
-  "log_sha256": "818d1fd84669db70fffffdf24e824600a767a717f2c06ad6e046041a1074fe04"
+  "log_sha256": "6f342a53bb00f7f6ce0b0429ee6d76c4a032ee54c32bff496f0b70ffcf59301a"
 }

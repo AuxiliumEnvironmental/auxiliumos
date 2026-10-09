@@ -64,20 +64,38 @@
       "exact_source_match": true,
       "observed_at": "2026-10-09T06:57:29.697291Z",
       "evidence": "Fresh hosted migration-history readback, one stored statement with matching SHA256. Original apply receipt was not saved in the restored workspace; this record does not invent its generated history version."
+    },
+    {
+      "canonical_version": "20261009065625",
+      "generated_version": "20261009074106",
+      "name": "private_object_clearance",
+      "sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+      "source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T07:47:40.745295Z",
+      "evidence": "Reviewed exact SQL applied once after fresh six-migration/hash/disabled-config preflight. Provider-generated history version mapped under table lock after name, single statement, exact hash, absent canonical version and exactly-one-row checks. Seven canonical hashes read back; no existing migration rerun. Five new private tables have RLS and no direct CRUD for anon/authenticated/service_role; public RPC ACLs and empty search_path match source."
     }
   ],
   "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
   "production": false,
-  "latest_source_commit": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+  "latest_source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
   "latest_readback": {
-    "observed_at": "2026-10-09T06:57:29.697291Z",
-    "migration_count": 6,
+    "observed_at": "2026-10-09T07:47:40.745295Z",
+    "migration_count": 7,
     "all_source_hashes_match": true,
-    "application_tables": 15,
+    "application_tables": 20,
+    "public_application_tables": 12,
     "tables_without_rls": 0,
     "auth_users": 0,
     "storage_buckets": 0,
-    "private_reservations_enabled": false
+    "private_reservations_enabled": false,
+    "new_clearance_tables": 5,
+    "new_clearance_tables_all_rls": true,
+    "new_clearance_tables_direct_crud_denied": ["anon", "authenticated", "service_role"],
+    "new_public_rpc_security": "Invoker wrappers; empty search_path; human and service EXECUTE grants separated exactly as source. No anonymous EXECUTE.",
+    "advisors": "Intentional deny-by-default RLS without policies retained. Platform public.rls_auto_enable has anon/authenticated EXECUTE warnings but returns event_trigger, not application JSON; recorded for bounded platform review, not changed opportunistically.",
+    "advisor_references": ["https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy", "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable", "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"]
   },
   "canonical_seed": {
     "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",

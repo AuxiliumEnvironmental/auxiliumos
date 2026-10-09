@@ -90,8 +90,14 @@ async function fixture(page: Page) {
     if (url.pathname.startsWith('/rest/v1/rpc/')) {
       const name = url.pathname.split('/').at(-1)!;
       const args = request.postDataJSON() as Record<string, unknown>;
-      state.securityCalls.push({ name, args });
       expect(request.headers().authorization).toBe(`Bearer ${token}`);
+      if (name === 'list_version_documents') {
+        expect(state.accounts.some(account => account.id === args.p_account_id)).toBe(true);
+        expect(args.p_after_id).toBeNull();
+        expect(args.p_limit).toBe(25);
+        return json(route, { items: [], next_cursor: null });
+      }
+      state.securityCalls.push({ name, args });
       if (name === 'private_object_security_status') {
         expect(args).toEqual({ p_object_id: uuid(300) });
         const response = state.security;
