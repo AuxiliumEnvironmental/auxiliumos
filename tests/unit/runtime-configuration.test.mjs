@@ -101,3 +101,22 @@ test('development mode still rejects an explicitly supplied different backend be
 test('development-mode builds never enable the development-server-only loopback fixture escape', (t) => {
   rejectedBeforeEmission(t, { mode: 'development', url: 'http://127.0.0.1:54321', key: 'sb_publishable_synthetic_development_mode_regression', allowLocal: 'true' });
 });
+
+test('public development ignore exceptions apply to exactly the reviewed file', () => {
+  const cases = [
+    ['web/.env.development', 1],
+    ['web/.env', 0],
+    ['web/.env.local', 0],
+    ['web/.env.development.local', 0],
+    ['web/.env.production', 0],
+    ['web/src/.env.development', 0],
+    ['tools/.env.development', 0],
+  ];
+  for (const [file, expected] of cases) {
+    const result = spawnSync('git', ['check-ignore', '--no-index', '--quiet', '--', file], {
+      cwd: root, encoding: 'utf8', timeout: 10_000,
+    });
+    assert.equal(result.error, undefined);
+    assert.equal(result.status, expected, 'Unexpected ignore decision for ' + file);
+  }
+});

@@ -186,7 +186,8 @@
       "inputs": [
         "web",
         "tests/unit/runtime-configuration.test.mjs",
-        "tests/unit/auth-persistence.test.mjs"
+        "tests/unit/auth-persistence.test.mjs",
+        ".gitignore"
       ],
       "commands": [
         [
