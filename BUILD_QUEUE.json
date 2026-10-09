@@ -114,7 +114,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Full demo and Spatial checkpoint saved. Current bounded polish reduces repeated phone-page policy copy, moves document actions forward, collapses technical metadata and uses already-permitted intake names without extra directory calls. Current exact review-UI transfer is running separately at frozenf3b1b706; preserve its parity before next hosted edit.",
+      "next_action": "Full demo, Spatial and review UI source saved. Local mobileWIP569ab1af and3finishing edits interrupted by workspace outage. Actual full patch unavailable, checked once; reimplement bounded mobile presentation against verified current provider source, inspect exact diff, save GitHub source and run integrated CI before publication.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -1645,7 +1645,7 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Reviewed exact f3b1b706 UI integrated.10 adapter checks,17 new browser fixtures,2 focused denial cases and3 existing route regressions passed; final build and exact Lovable source transfer in progress. Genuine assigned-human hosted workflow remains gated separately.",
+      "next_action": "Reviewedf3b1b706 integrated and exact five-file Lovable89227e readback complete. Focused adapter/browser checks and build passed. Publicationac37eb2f accepted pending. Genuine assigned-human hosted workflow remains open.",
       "status": "implemented",
       "requirements": [
         "M13",
@@ -1705,6 +1705,49 @@
       "next_action": "Reviewed3203c08 integrated;45/45 simulated-Auth DB checks pass. Actual preflight found canonical migration already present with exact final SQL hash, so root did not reapply it. Four RLS/direct-CRUD-denied tables,9RPC ACL split andzero release grants/records verified. Next bounded slice is released-byte authorization/gateway plus UI; hosted actual human workflow/concurrency remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001D-CONTENT",
+      "title": "Exact released-version private byte authorization and gateway",
+      "status": "blocked",
+      "dependencies": [
+        "DOC-001D-BACKEND",
+        "DOC-001B-GATEWAY"
+      ],
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009194030_document_release_content.sql",
+        "supabase/functions/document-release-content/index.ts",
+        "supabase/functions/document-release-content/gateway.mjs",
+        "tests/database/document-release-content.test.mjs",
+        "tests/unit/document-release-content-gateway.test.mjs",
+        "tests/unit/document-release-content-entrypoint.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md"
+      ],
+      "assigned_to": "release_delivery; root integration lead",
+      "branch": "agent/release-delivery-20261009",
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "next_action": "Workspace generation call pending; collect actual result before claiming source. Complete separate current/historical released-content authorization and hash-verified bounded gateway with fresh checks before/after Storage. Independently review and run focused checks before integration/deployment; internal content/metadata contracts unchanged.",
+      "blocker": "Workspace transport disconnected; terminated migration-generation wait with disk state unverified.",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
     }
   ]
 }

@@ -1,23 +1,24 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T19:22:32.686930+00:00",
+  "as_of": "2026-10-09T19:46:12.409Z",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
-    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
+    "current_verified_feature_commit": "1ed3d836e868b8518458997bd4275ef5e0560765"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Verified feature source a880eb0 remotely before current integration. Protected GitHub Actions settings showed no repository or environment secrets; registered ci.yml dispatch supports the feature-branch inputs. AUXILIUMOS_TEST_SERVICE_ROLE_KEY is genuinely missing; no secret read or requested in chat.",
+    "github": "Feature branch HEAD1ed3d836 read back through GitHub connector during workspace outage. Protected GitHub Actions settings last showed no repository/environment secrets. Development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY requires protected configuration; no secret read or requested in chat.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
-    "lovable": "Existing project source7f3027cbbd0fcd700cff7a3aac8d30cd25487735 ready and published per provider; real auxiliumos.io app showed the full navigation and connected owner workflow. Root publication of this reviewed full-demo plus Spatial revision was accepted pending as deploymentd2b3a167-2fd8-4348-af02-ce0100eeb854. DOC-001C UI next work remains local pending review.",
+    "lovable": "Existing project89227e is ready after exact five-file review UI transfer, independently read back againstf3b1b706. Root publication requestac37eb2f-5c63-4d77-93f5-f958163cd4a5 accepted pending. Four-file mobile recovery will use current provider source and focused verification.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -27,7 +28,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish bounded document mobile/readability and intake-name polish, verify exact Lovable source parity, publish the reviewed UI and run one integrated CI gate. Owner account/login and request/triage are already verified. Configure missing development-only GitHub Actions service secret, then run the focused real connected workflow; current cloud-browser credential-state restriction prevents further manual verification. Next backend slice is released-byte access, distinct from completed metadata release.",
+  "first_runtime_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -50,7 +51,7 @@
     "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
     "2026-10-09: foundation, directory, audit and reservation SQL applied unchanged to actual PostgreSQL17 development target. Schema/history readback confirms all11 tables RLS; this is deployment evidence, not Auth/API acceptance.",
     "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open.",
-    "2026-10-09 owner access: public root domain verified, invitation sent through supported Dashboard, exact Auth identity independently verified and scoped application provisioning completed. Owner password/first login and actual connected API/browser acceptance remain unverified.",
+    "2026-10-09 owner access: public domain, secure invitation, password configuration, first Auth sign-in, actual account/facility access, synthetic Project Request and triage verified. No professional authority granted. Full private-file workflow remains unverified.",
     "2026-10-09 current: owner authenticated at auxiliumos.io, viewed its account and exact facility, submitted synthetic Project Request b82a3beb-6ed9-43a4-bdf5-04781d5a8a37 and saved triage revision2; actual database readback agrees. The later file-chooser command was blocked by retained native credential state and a clean runtime could not resume. No upload, finalization, retrieval or hosted planning save/reopen claimed from this journey."
   ],
   "runtime_implementation": {
@@ -188,9 +189,9 @@
       "data_behavior": "Planning mutations use actual typed creator-scoped Supabase RPCs, immutable revisions/CAS and frozen uncertain retries. Sample cases remain explicitly illustrative. Existing connected workflows preserved; commercial/professional actions remain gated.",
       "verification": "Final dd7961f UI:14focused unit and11browser fixtures passed;20routes at1440/390/360 passed without overflow/errors/unexpected requests. Independent client review clear. New Spatial-only source77a1cf6 matched external64f5b2a,8asset hashes and one build:dev passed, targeted review clear. Reused matching evidence without broad rerun.",
       "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json",
-      "next_increment": "DOC-001C exact-version review UI in isolated frontend-reconcile worktree; one Lovable writer; source transfer only after review.",
-      "candidate_lovable_revision": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
-      "candidate_status": "Reviewed full UI and Spatial integrated; root publication accepted pending; actual public app owner directory/intake/triage observed."
+      "next_increment": "Complete bounded mobile/intake-name provider increment; preserve full20module demo/planning and Spatial.",
+      "candidate_lovable_revision": "89227e331463eed0ea0844055cf43714e5969627",
+      "candidate_status": "Internal-review UI exact hosted transfer complete; publication request pending. Mobile source recovery in provider, not yet accepted."
     },
     "workspace_plans": {
       "status": "implemented_deployed_hosted_workflow_pending",
@@ -214,7 +215,8 @@
       "hosted_human_workflow_verified": false,
       "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json",
       "ui_worker_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
-      "ui_status": "reviewed_integrated_transfer_in_progress"
+      "ui_status": "reviewed_integrated_lovable_exact_five_file_parity",
+      "ui_lovable_revision": "89227e331463eed0ea0844055cf43714e5969627"
     },
     "spatial": {
       "owner_authorized": true,
@@ -285,17 +287,17 @@
     "active_agents": [
       "ui_integration"
     ],
-    "first_unfinished_action": "Finish bounded document mobile/readability and intake-name polish, verify exact Lovable source parity, publish the reviewed UI and run one integrated CI gate. Owner account/login and request/triage are already verified. Configure missing development-only GitHub Actions service secret, then run the focused real connected workflow; current cloud-browser credential-state restriction prevents further manual verification. Next backend slice is released-byte access, distinct from completed metadata release.",
-    "latest_verified_remote": "4fdf78d2b3a49efede03c9ddc866206c977ece49",
+    "first_unfinished_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers.",
+    "latest_verified_remote": "1ed3d836e868b8518458997bd4275ef5e0560765",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
-      "message_id": "umsg_01m4grv07wen993jephhsf8c9f",
+      "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
       "thread_id": "main",
-      "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
-      "target_commit": "797c9c99c339e5e7bec18efe814b5e57127b074a",
-      "status": "completed15changed_files_exact_worker_verified_root3critical_files_readback",
+      "source_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+      "target_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "status": "completed_five_files_independently_read_back_exact",
       "native_github_sync": false,
-      "receipt": "docs/00-control/evidence/owner-domain-preparation.json"
+      "next_action": "Current-source mobile increment through provider; root integration/publication."
     },
     "execution_outage": {
       "observed_at": "2026-10-09T08:56:23.132Z",
@@ -375,22 +377,73 @@
         },
         "no_new_filesystem_requests": true
       }
+    },
+    "latest_workspace_interruption": {
+      "observed_at": "2026-10-09T19:46:12.409Z",
+      "error": "exec-server transport disconnected; failed to resume; recovery timed out25s",
+      "root_readonly_cell": "31",
+      "readonly_result": "No output; read-only waiting cell terminated. No additional filesystem probes.",
+      "repeat_policy": "No additional filesystem attempts while same read-only check is pending.",
+      "ui": {
+        "worktree": "/workspace/scratch/f283daedfed1/frontend-reconcile",
+        "branch": "agent/frontend-current",
+        "local_wip_commit": "569ab1af032b2df104e4599d64ba3b47aca7accc",
+        "remote_saved": false,
+        "uncommitted_changes": [
+          "Intake eyebrow: Requests and triage",
+          "Request references summary minHeight44px",
+          "Upload boundary: Uploads start in quarantine."
+        ],
+        "collected_checks": "Production build and3focused name/query/fallback fixtures passed.",
+        "pending_session": 20615,
+        "pending_check": "Final phone/keyboard check uncollected. Regression log only run-start, no pass claimed.",
+        "full_patch_recovery": "Unavailable in tool store; checked once. Do not reconstruct supposedly passing code from prose.",
+        "continuation": "Fresh bounded implementation against verified current Lovable source; preserve and later reconcile actual local patch if workspace returns."
+      },
+      "release_delivery": {
+        "worktree": "/workspace/scratch/f283daedfed1/release-delivery",
+        "base_commit": "1ed3d836e868b8518458997bd4275ef5e0560765",
+        "pending_cell": "10",
+        "last_confirmed_file": "Empty CLI-created20261009194030_document_release_content.sql",
+        "pending_write": "Migration write waiting cell terminated by worker; disk state unknown. No subsequent gateway/tests/commit/cloud write.",
+        "next_action": "Collect actual result/diff once execution recovers and preserve any real written source before finishing."
+      }
+    },
+    "lovable_mobile_recovery": {
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "base_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "message_id": "umsg_01m4h37sx5e1fs19xfksj2bgpv",
+      "thread_id": "main",
+      "status": "running",
+      "writer": "ui_integration",
+      "paths": [
+        "web/src/components/document-versions.tsx",
+        "web/src/components/private-object-upload.tsx",
+        "web/src/pages/private-files.tsx",
+        "web/src/pages/intake.tsx"
+      ],
+      "published": false
     }
   },
   "immediate_delivery": {
     "lead": "root integration lead",
     "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
-    "owner_onboarding": "password_configured_and_provider_authenticated",
-    "owner_first_login": "provider_authentication_verified_application_browser_pending",
-    "ui_presentation_source": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+    "owner_onboarding": "account_password_and_scoped_application_access_complete",
+    "owner_first_login": "actual_public_browser_login_account_facility_request_submission_and_triage_verified",
+    "ui_presentation_source": "89227e331463eed0ea0844055cf43714e5969627",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
-    "independent_work": "Single UI writer corrects demo presentation and save/open defects. Backend planning persistence reviewed and saved locally, awaiting matching UI catalogue then deployment. Backend worker continues exact-version internal human review from current contracts; root integrates. Moldo independent and companion deferred.",
-    "connected_workflow": "synthetic_bucket_and_gates_configured_harness_prepared_actual_authenticated_acceptance_unexecuted",
-    "focused_verification": "New owner transaction30 PostgreSQL scenarios, production config12 checks and production build passed. Existing UI44file parity and15file increment parity confirmed. CI63 passed. Both hosted gateways returned204 exact-domain CORS preflight on valid routes; this is not authenticated workflow acceptance.",
+    "independent_work": "Single UI writer completes mobile source recovery in existing Lovable. Released-byte backend has unfinished local work blocked by workspace outage. Root owns integration, remote save, CI and publication. Moldo independent; companion deferred.",
+    "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
+    "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
     "publication_blocker": null,
-    "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
+    "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json",
+    "latest_publication_request": {
+      "lovable_commit": "89227e331463eed0ea0844055cf43714e5969627",
+      "deployment_id": "ac37eb2f-5c63-4d77-93f5-f958163cd4a5",
+      "status": "accepted_pending"
+    }
   },
   "remaining_defects": [
     {

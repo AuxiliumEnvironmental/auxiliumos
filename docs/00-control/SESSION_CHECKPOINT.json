@@ -225,5 +225,17 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file."
+  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
+  "cloud_recovery": {
+    "recorded_at": "2026-10-09T19:46:12.409Z",
+    "base_remote_commit": "1ed3d836e868b8518458997bd4275ef5e0560765",
+    "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
+    "not_claimed": [
+      "Local checkpoint regeneration",
+      "Local source parity after outage",
+      "Uncollected tests",
+      "Completed released-byte backend"
+    ],
+    "next_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers."
+  }
 }
