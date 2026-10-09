@@ -1079,6 +1079,100 @@
           "tests/database/document-version-releases.test.mjs"
         ]
       ]
+    },
+    {
+      "id": "document-release-content-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-hosted-or-concurrency-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "supabase/migrations/20261009072201_document_versions.sql",
+        "supabase/migrations/20261009080505_document_version_content.sql",
+        "supabase/migrations/20261009130331_owner_onboarding_activation.sql",
+        "supabase/migrations/20261009170854_workspace_plans.sql",
+        "supabase/migrations/20261009172736_document_version_reviews.sql",
+        "supabase/migrations/20261009184724_document_version_releases.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "supabase/migrations/20261009194030_document_release_content.sql",
+        "tests/database/document-release-content.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/document-release-content.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-release-content-gateway-unit",
+      "level": "unit",
+      "environment": "Node-real-TypeScript-entrypoint-and-pinned-SDK-injected-network-no-Deno-or-provider",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/functions/document-release-content/gateway.mjs",
+        "supabase/functions/document-release-content/index.ts",
+        "tests/unit/document-release-content-gateway.test.mjs",
+        "tests/unit/document-release-content-entrypoint.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/document-release-content-gateway.test.mjs",
+          "tests/unit/document-release-content-entrypoint.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-releases-client-unit",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-injected-SDK-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/document-release-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/document-release-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/document-release-api.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-releases-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-injected-HTTP-no-hosted-Auth-or-Storage-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "web",
+        "tests/e2e/document-releases.spec.ts",
+        "playwright.runtime.config.ts"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "test:runtime-ui",
+          "--",
+          "document-releases.spec.ts"
+        ]
+      ]
     }
   ]
 }

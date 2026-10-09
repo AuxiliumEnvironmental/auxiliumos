@@ -8,6 +8,7 @@ import { useDirectoryPage } from '../lib/use-directory';
 import { EmptyState, ErrorState, LoadingState, Pagination } from './shared';
 import { DocumentContentDownload } from './document-content-download';
 import { DocumentVersionReview } from './document-version-review';
+import { DocumentVersionRelease } from './document-version-release';
 
 type Props = {
   accountId: string; facilityId: string; source?: EligibleDocumentSource;
@@ -49,7 +50,7 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
   return <section className="account-selector-panel" aria-labelledby={titleId} style={wrap}>
     <div className="section-intro"><div><h2 id={titleId}>Document versions</h2></div>
       <button type="button" className="button secondary" onClick={refresh} disabled={reviewPending || documents.state.status === 'loading'}>Refresh documents</button></div>
-    {reviewPending && <p className="field-hint" role="status">Document navigation is paused while a review submission is pending or uncertain. Resolve its exact retry below before refreshing this history.</p>}
+    {reviewPending && <p className="field-hint" role="status">Document navigation is paused while an operation is pending or uncertain. Resolve its exact retry below before refreshing this history.</p>}
     {denied && <p role="alert" className="form-error">Document access is unavailable. The selected document, history and local adoption attempt were cleared; current list access is being checked again.</p>}
     {documents.state.status === 'loading' ? <LoadingState label="Loading permitted documents" />
       : documents.state.status === 'error' ? <ErrorState error={documents.state.error} onRetry={refresh} />
@@ -72,7 +73,7 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
       onUnavailable={unavailable} onAdopted={onAdopted} onReviewPending={setReviewPending} />}
     <details><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Document access and history boundaries</summary>
       <p>Only provisioned logical documents with an exact version-view grant appear, filtered to the selected facility from permitted account pages. Account or facility membership alone does not grant access. A class label conveys no review or release authority.</p>
-      <p>Exact-version internal review needs separate current authority. Logical-document creation, inline viewing, professional approval and release are unavailable. An internal draft never supersedes an existing release. Changing scope clears local attempts, not saved history.</p>
+      <p>Exact-version internal review needs separate current authority. Logical-document creation, inline viewing, professional approval and released-file downloads are unavailable. An internal draft never supersedes an existing release. Changing scope clears local attempts, not saved history.</p>
       <p>Synthetic development only. Audience, actor, preservation, export and real-upload security activation remain gated.</p>
     </details>
   </section>;
@@ -129,11 +130,17 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
           {resource.value.items.length === 0 ? <p role="status">No internal draft versions on this page.</p>
             : <ol aria-label="Immutable version history" style={{ listStyle: 'none', padding: 0 }}>
               {resource.value.items.map(version => <li key={version.version_id} className="notice" style={{ marginBlock: 'var(--space-3)' }}>
-                <h4>Version {version.version_ordinal} · Internal draft</h4>
+                <h4>Version {version.version_ordinal}{document.document_class !== 'routine_synthetic_document' && ' · Internal draft'}</h4>
                 {version.visibility_restricted && <p className="form-error">Restricted; no content access is provided</p>}
                 <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
                 <DocumentVersionReview key={`review:${resource.key}:${version.version_id}:${version.verified_sha256}`}
-                  documentId={document.document_id} version={version} onPendingChange={pending => reviewPendingChanged(version.version_id, pending)} />
+                  documentId={document.document_id} version={version} blocked={reviewPending}
+                  releaseMetadataEnabled={document.document_class === 'routine_synthetic_document'}
+                  onPendingChange={pending => reviewPendingChanged(version.version_id, pending)} />
+                {document.document_class === 'routine_synthetic_document' && <DocumentVersionRelease
+                  key={'release:' + resource.key + ':' + version.version_id + ':' + version.verified_sha256}
+                  documentId={document.document_id} version={version} blocked={reviewPending}
+                  onPendingChange={pending => reviewPendingChanged('release:' + version.version_id, pending)} />}
                 <details style={wrap}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Exact-version details · Version {version.version_ordinal}</summary>
                 <dl><dt>Immutable version reference</dt><dd style={wrap}>{version.version_id}</dd>
                   <dt>Verified SHA-256</dt><dd style={wrap}><code>{version.verified_sha256}</code></dd>

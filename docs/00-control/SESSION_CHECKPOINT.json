@@ -227,8 +227,8 @@
   ],
   "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
   "cloud_recovery": {
-    "recorded_at": "2026-10-09T20:29:13.428Z",
-    "base_remote_commit": "4cf0815879ee31c5374880c28747ef6429a5ef93",
+    "recorded_at": "2026-10-09T20:40:15.839Z",
+    "base_remote_commit": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9",
     "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
     "not_claimed": [
       "Local checkpoint regeneration",
@@ -236,7 +236,7 @@
       "Uncollected tests",
       "Completed released-byte backend"
     ],
-    "next_action": "Integrate and execute focused release-content and metadata-release UI checks from their isolated GitHub source branches, then deploy only reviewed passing source. Mobile UI 57f637a passed CI66 and publication was accepted; anonymous public asset observations are provider-reported. Finish the actual private-file workflow after the protected development-only service secret is configured. Lovable report-only plan approval must be resolved by the owner before another provider turn.",
+    "next_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
     "ui_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "exact_source_parity": true,
     "ci64_diagnosis": "Exact sanitized artifact excerpt verified within GitHub; duplicate warning locator caused sole version failure. Corrected fixture and original workflow restoration saved together; next CI pending.",
@@ -247,7 +247,9 @@
       "application_foundation": "passed",
       "actual_privileged_profiles": "not_run"
     },
-    "release_content_source": "536a3e9d66eb761d59633352e53388712467be88",
-    "release_ui_wip": "06f54fd4a269b6dfaf32dfd5c8eec055d8a1a238"
+    "release_content_source": "e250336d4f14a53472d260e052ba5de0e101ab48",
+    "release_ui_wip": "06f54fd4a269b6dfaf32dfd5c8eec055d8a1a238",
+    "release_ui_source": "43d1ea48989f753445510f030584a91a4211fb6c",
+    "release_runtime_status": "Pending integrated CI, not executed in unavailable workspace."
   }
 }

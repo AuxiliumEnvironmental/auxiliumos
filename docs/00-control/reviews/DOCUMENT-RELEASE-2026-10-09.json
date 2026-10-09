@@ -12,5 +12,33 @@
     "Metadata only; released-byte authorization/gateway/UI remains nextslice",
     "No live actor grants or actual release",
     "Hosted Auth/API/concurrency not verified"
-  ]
+  ],
+  "release_content_followup": {
+    "reviewed_at": "2026-10-09T20:40:15.839Z",
+    "reviewer": "mobile_review",
+    "source_commit": "e250336d4f14a53472d260e052ba5de0e101ab48",
+    "migration_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
+    "blocking_findings": [],
+    "source_reviewed": [
+      "Original released-byte SQL/contract10887dfd",
+      "Gateway/entrypoint/tests0d54cc4",
+      "Withdrawal discovery deltae250336d"
+    ],
+    "fixed_finding": "Fresh restricted withdrawal needed a separate authorized status read; resolved with no content prerequisite and no widening of exact controller/logical/ingest boundaries.",
+    "runtime": "Pending registered database and gateway/entrypoint checks.",
+    "limitations": [
+      "No application-level rate limiter",
+      "Separate DB transactions cannot recall bytes after the final check",
+      "No hosted Auth/Storage/concurrency acceptance or new cloud deployment"
+    ]
+  },
+  "release_ui_followup": {
+    "reviewed_at": "2026-10-09T20:40:15.839Z",
+    "reviewer": "mobile_review",
+    "source_commit": "43d1ea48989f753445510f030584a91a4211fb6c",
+    "blocking_findings": [],
+    "scope": "Exact metadata release and explicit recipients, independent withdrawal discovery, current/head revision binding, frozen uncertain retries, scope cancellation and cross-review pending fences.",
+    "runtime": "12 unit and16browser cases authored; execution pending. Existing review regressions registered.",
+    "limits": "No recipient byte UI, actual professional grants, human release acceptance or Lovable transfer."
+  }
 }

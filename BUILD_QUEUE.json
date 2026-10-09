@@ -1742,12 +1742,15 @@
         "OD-004",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "document-release-content-database",
+        "document-release-content-gateway-unit"
+      ],
       "required_evidence_levels": [
         "database",
         "api"
       ],
-      "next_action": "Source536a3e9d saved and exact7file readback passed; independent SQL/gateway review clear. Register and execute database+gateway+entrypoint tests before canonical integration/deployment acceptance. Preserve disabled transport until deliberately configured. Hosted Auth/Storage remains unverified.",
+      "next_action": "Run registered focused checks for integrated e250336d, including new withdrawal discovery. Independent source review clear. After pass, apply exact migration to verified development target and deploy separate disabled gateway; deliberately configure transport before real released-byte acceptance. No owner/reviewer grants or internal-content changes.",
       "blocker": "Native executor unavailable; use reviewed GitHub CI for executable checks. No cloud deployment yet.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
@@ -1785,12 +1788,17 @@
         "OD-004",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "runtime-build",
+        "document-releases-client-unit",
+        "document-releases-browser-fixture",
+        "document-reviews-browser-fixture"
+      ],
       "required_evidence_levels": [
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Six-file WIP06f54fd4 saved/read back. Complete browser fixtures and self-review; independent source review and executable checks required. Metadata only; no recipient bytes, real professional grants or live release claimed.",
+      "next_action": "Run focused unit/browser/build plus existing review regressions against exact43d1ea48. Source review clear; 12 unit and16browser cases authored but unexecuted. Transfer only passing reviewed source to existing Lovable after report-only card is resolved.",
       "blocker": "Native executor unavailable; source work continues through GitHub. Lovable transfer waits for report-only plan card resolution.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

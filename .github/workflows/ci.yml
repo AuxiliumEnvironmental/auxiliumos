@@ -93,6 +93,8 @@ jobs:
       - run: npm run os:verify -- workspace-plans-database
       - run: npm run os:verify -- document-reviews-database
       - run: npm run os:verify -- document-releases-database
+      - run: npm run os:verify -- document-release-content-database
+      - run: npm run os:verify -- document-release-content-gateway-unit
       - run: npm run os:verify -- document-content-gateway-unit
       - run: npm run os:verify -- private-file-unit
       - run: npm run os:verify -- private-file-entrypoint
@@ -102,6 +104,7 @@ jobs:
       - run: npm run os:verify -- document-content-client-unit
       - run: npm run os:verify -- workspace-plans-client-unit
       - run: npm run os:verify -- document-reviews-client-unit
+      - run: npm run os:verify -- document-releases-client-unit
       - run: node --test tests/unit/sample-case.test.mjs
       - run: npm run os:verify -- api-fixture-safety
       - run: node --test tests/unit/owner-onboarding.test.mjs tests/database/owner-onboarding.test.mjs
@@ -114,6 +117,31 @@ jobs:
       - run: npm run os:verify -- document-versions-browser-fixture
       - run: npm run os:verify -- document-content-browser-fixture
       - run: npm run os:verify -- document-reviews-browser-fixture
+      - run: npm run os:verify -- document-releases-browser-fixture
+      - name: Show bounded diagnostics for new synthetic release checks
+        if: failure()
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, re
+          for profile in ('document-release-content-database', 'document-release-content-gateway-unit', 'document-releases-client-unit', 'document-releases-browser-fixture'):
+              try:
+                  root = pathlib.Path('docs/00-control/evidence')
+                  record = json.loads((root / (profile + '.json')).read_text())
+                  if record.get('result') != 'failed' or record.get('observed_git_head') != os.environ.get('GITHUB_SHA'):
+                      continue
+                  with (root / (profile + '.log')).open('rb') as handle:
+                      handle.seek(0, 2)
+                      handle.seek(max(0, handle.tell() - 16000))
+                      excerpt = handle.read(16000).decode('utf-8', errors='replace')
+                  excerpt = re.sub(r'\x1b\[[0-9;]*m', '', excerpt)
+                  print('Synthetic release check failed: ' + profile)
+                  for line in excerpt.splitlines():
+                      if re.search(r'authorization|bearer|sb_secret_|password|eyJ[A-Za-z0-9_-]{12,}', line, re.I):
+                          continue
+                      print('synthetic | ' + line.replace('##[', '## ['))
+              except Exception:
+                  print('No readable current failure excerpt for ' + profile)
+          PY
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
