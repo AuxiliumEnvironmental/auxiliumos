@@ -47,7 +47,7 @@ final class PlanCanvasView: UIView, UIGestureRecognizerDelegate {
     private var draggedPoint: Point2?
     private var dragOrigin: Point2?
     private var base: CGFloat = 1
-    private var center = Point2(x: 0, z: 0)
+    private var worldCenter = Point2(x: 0, z: 0)
     override init(frame: CGRect) {
         super.init(frame: frame)
         isOpaque = true; backgroundColor = .systemBackground
@@ -76,14 +76,14 @@ final class PlanCanvasView: UIView, UIGestureRecognizerDelegate {
         needsFraming = false; previousSize = bounds.size
         guard let floor else { return }
         let points = floor.nodes.map(\.point) + floor.areas.flatMap(\.polygon)
-        guard !points.isEmpty else { base = 50; center = .init(x: 0, z: 0); return }
+        guard !points.isEmpty else { base = 50; worldCenter = .init(x: 0, z: 0); return }
         let xs = points.map(\.x), zs = points.map(\.z)
         let loX = xs.min()!, hiX = xs.max()!, loZ = zs.min()!, hiZ = zs.max()!
-        center = .init(x: (loX + hiX) / 2, z: (loZ + hiZ) / 2)
+        worldCenter = .init(x: (loX + hiX) / 2, z: (loZ + hiZ) / 2)
         base = min(max(1, bounds.width - 64) / CGFloat(max(hiX - loX, 1)), max(1, bounds.height - 64) / CGFloat(max(hiZ - loZ, 1)))
     }
-    private func screen(_ p: Point2) -> CGPoint { .init(x: bounds.midX + pan.x + CGFloat(p.x - center.x) * base * zoom, y: bounds.midY + pan.y + CGFloat(p.z - center.z) * base * zoom) }
-    private func world(_ p: CGPoint) -> Point2 { .init(x: center.x + Double((p.x - bounds.midX - pan.x) / (base * zoom)), z: center.z + Double((p.y - bounds.midY - pan.y) / (base * zoom))) }
+    private func screen(_ p: Point2) -> CGPoint { .init(x: bounds.midX + pan.x + CGFloat(p.x - worldCenter.x) * base * zoom, y: bounds.midY + pan.y + CGFloat(p.z - worldCenter.z) * base * zoom) }
+    private func world(_ p: CGPoint) -> Point2 { .init(x: worldCenter.x + Double((p.x - bounds.midX - pan.x) / (base * zoom)), z: worldCenter.z + Double((p.y - bounds.midY - pan.y) / (base * zoom))) }
     override func draw(_ rect: CGRect) {
         guard var floor, let context = UIGraphicsGetCurrentContext() else { return }
         UIColor.systemBackground.setFill(); context.fill(bounds); framing()
@@ -248,7 +248,7 @@ final class PlanCanvasView: UIView, UIGestureRecognizerDelegate {
     @objc private func pinch(_ recognizer: UIPinchGestureRecognizer) {
         zoom = max(0.2, min(15, zoom * recognizer.scale)); recognizer.scale = 1; setNeedsDisplay()
     }
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard mutationEnabled, tool == .select, let selection,
               [.node, .wall].contains(selection.kind) else { return false }
         return hits(gestureRecognizer.location(in: self)).contains(selection)

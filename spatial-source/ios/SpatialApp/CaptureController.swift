@@ -464,6 +464,7 @@ private final class CaptureSessionObserver: NSObject, ARSessionDelegate {
 }
 
 /// Every callback carries the generation installed when this view was made.
+@objc(AuxiliumCaptureAttemptDelegate)
 private final class CaptureAttemptDelegate: NSObject, RoomCaptureSessionDelegate, RoomCaptureViewDelegate {
     weak var owner: CaptureController?
     let generation: UUID

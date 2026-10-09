@@ -12,6 +12,8 @@ jobs:
   unsigned:
     runs-on: macos-15
     timeout-minutes: 45
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     defaults:
       run:
         working-directory: spatial-source
@@ -26,7 +28,19 @@ jobs:
           xcodebuild -showsdks | tee build-evidence/sdks.txt
           swift --version | tee build-evidence/swift.txt
           git rev-parse HEAD > build-evidence/input-commit.txt
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Build the maintained web workspace
+        run: |
+          npm --prefix web ci --no-audit --no-fund
+          npm --prefix web run build
+      - name: Compile installed Capacitor application without signing
+        run: |
+          set -o pipefail
+          bash capacitor/build_unsigned.sh 2>&1 | tee build-evidence/capacitor-unsigned-build.log
       - name: Compile existing native capture composition without signing
+        if: always()
         run: |
           set -o pipefail
           python3 ios/generate_project.py
@@ -37,11 +51,12 @@ jobs:
           set -o pipefail
           swift test --package-path packages/SpatialInterop 2>&1 | tee build-evidence/apple-interop.log
       - name: Native synthetic composition tests on available simulator
+        if: always()
         run: |
           set -o pipefail
           xcrun simctl list devices available --json > build-evidence/simulators.json
           DEVICE_ID=$(python3 -c 'import json; d=json.load(open("build-evidence/simulators.json")); print(next(x["udid"] for k,v in d["devices"].items() if "iOS" in k for x in v if x.get("isAvailable") and "iPhone" in x["name"]))')
-          xcodebuild -project ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination "id=$DEVICE_ID" -derivedDataPath build-evidence/DerivedData CODE_SIGNING_ALLOWED=NO test 2>&1 | tee build-evidence/native-synthetic.log
+          xcodebuild -project capacitor/ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination "id=$DEVICE_ID" -derivedDataPath build-evidence/CapacitorSimulator CODE_SIGNING_ALLOWED=NO test 2>&1 | tee build-evidence/native-synthetic.log
       - uses: actions/upload-artifact@v7
         if: always()
         with:
