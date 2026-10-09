@@ -49,6 +49,16 @@
       "web/src/components/private-object-upload.tsx": "cfd91d0b3d290755621d708e5e4f2c5a9f519552332b46383f73213499c52fa0"
     },
     "required_gate": "Integrated GitHub CI for actual registered regression results and production build; pending at source save.",
-    "runtime_boundary": "Not genuine owner/private-storage or actual hosted planning acceptance."
+    "runtime_boundary": "Not genuine owner/private-storage or actual hosted planning acceptance.",
+    "integrated_ci": {
+      "run": 64,
+      "run_id": 37983627412,
+      "commit": "db0f003d616855bad19dca5fc18d38eefac1d6f1",
+      "status": "failed",
+      "failed_profile": "document-versions-browser-fixture",
+      "build": "passed",
+      "content_review_browser": "not_run",
+      "next_action": "Read captured exact failure within GitHub; fix only established cause and restore original workflow before next gate."
+    }
   }
 }

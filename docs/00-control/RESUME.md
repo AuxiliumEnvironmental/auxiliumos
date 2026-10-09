@@ -1,6 +1,6 @@
 # Resume AuxiliumOS
 
-Recorded first unfinished action: Run the integrated GitHub CI gate on the exact57f637a mobile/review UI source, inspect any concrete failures, then publish the reviewed candidate. Configure missing development-only GitHub Actions service secret for focused actual private-file workflow. Workspace and secure-browser runtime blockers remain distinct; released-byte backend source is unfinished.
+Recorded first unfinished action: Inspect only the bounded CI64 document-version failure inside GitHub using the temporary diagnostic step, then restore .github/workflows/ci.yml exactly to db0f003 before the corrected candidate gate. Do not publish57f637a while this failure remains unresolved. No CI archive or signed URL may be sent to Lovable without recognized explicit disclosure authorization.
 
 Last filesystem-generated checkpoint: 2026-10-09T19:23:24.643Z. Workspace is currently unavailable; the cloud continuation below updates current facts without claiming a new computed verification result.
 
