@@ -4,9 +4,26 @@ import { boundedBytes, createPrivateObjectGateway, MAX_BYTES } from './gateway.m
 const url = Deno.env.get('SUPABASE_URL') ?? '';
 const publishable = Deno.env.get('PRIVATE_OBJECT_PUBLISHABLE_KEY') ?? Deno.env.get('SUPABASE_ANON_KEY') ?? '';
 const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '';
-const allowedOrigins = (Deno.env.get('PRIVATE_OBJECT_ALLOWED_ORIGINS') ?? '').split(',').filter(Boolean);
-const intendedTarget = url === 'https://txofqxictwecgcnvezlb.supabase.co'
-  || (Deno.env.get('PRIVATE_OBJECT_ALLOW_LOCAL_TEST') === 'true' && /^http:\/\/(localhost|127\.0\.0\.1|kong):[0-9]+$/.test(url));
+// Nonsecret, DEVELOPMENT-ONLY defaults for the existing auxiliumos-dev backend.
+// They authorize neither bucket provisioning nor SQL reservation enablement.
+const canonicalDevelopment = url === 'https://txofqxictwecgcnvezlb.supabase.co';
+const mode = Deno.env.get('PRIVATE_OBJECT_TRANSPORT_MODE') ?? (canonicalDevelopment ? 'synthetic-only' : 'disabled');
+const originSetting = Deno.env.get('PRIVATE_OBJECT_ALLOWED_ORIGINS')
+  ?? (canonicalDevelopment ? 'http://127.0.0.1:4179,http://localhost:4179' : '');
+const allowedOrigins = originSetting.trim() ? originSetting.split(',').map(origin => origin.trim()) : [];
+// Overrides can select exact local development origins, never production hosts,
+// wildcard/subdomain patterns, opaque origins, paths, credentials or redirects.
+const validOrigins = allowedOrigins.every(origin => {
+  try {
+    const parsed = new URL(origin);
+    return ['http:', 'https:'].includes(parsed.protocol)
+      && ['localhost', '127.0.0.1'].includes(parsed.hostname)
+      && Number(parsed.port) > 0 && origin === parsed.origin;
+  } catch { return false; }
+});
+const localTarget = url.match(/^http:\/\/(localhost|127\.0\.0\.1|kong):([0-9]+)$/);
+const intendedTarget = canonicalDevelopment || (Deno.env.get('PRIVATE_OBJECT_ALLOW_LOCAL_TEST') === 'true'
+  && localTarget !== null && Number(localTarget[2]) > 0 && Number(localTarget[2]) <= 65535);
 
 // Bound provider responses before SDK Blob/JSON decoding, including a changed
 // bucket or oversized provider response. Never forward credentials on redirects.
@@ -28,7 +45,7 @@ async function boundedFetch(input: RequestInfo | URL, init?: RequestInit) {
 const options = { auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }, global: { fetch: boundedFetch } };
 
 Deno.serve(createPrivateObjectGateway({
-  enabled: intendedTarget && Boolean(publishable && serviceKey) && Deno.env.get('PRIVATE_OBJECT_TRANSPORT_MODE') === 'synthetic-only',
+  enabled: intendedTarget && validOrigins && Boolean(publishable && serviceKey) && mode === 'synthetic-only',
   allowedOrigins,
   createUserClient: (token: string) => createClient(url, publishable, {
     ...options, global: { ...options.global, headers: { Authorization: `Bearer ${token}` } },

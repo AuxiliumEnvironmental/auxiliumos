@@ -48,8 +48,35 @@
       "apply_success": true,
       "exact_source_match": true,
       "observed_at": "2026-10-09 00:15:29.094077+00"
+    },
+    {
+      "canonical_version": "20261008234951",
+      "name": "intake_triage",
+      "sha256": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T06:57:29.697291Z",
+      "evidence": "Fresh hosted migration-history readback, one stored statement with matching SHA256. Original apply receipt was not saved in the restored workspace; this record does not invent its generated history version."
+    },
+    {
+      "canonical_version": "20261008234953",
+      "name": "private_file_transport",
+      "sha256": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T06:57:29.697291Z",
+      "evidence": "Fresh hosted migration-history readback, one stored statement with matching SHA256. Original apply receipt was not saved in the restored workspace; this record does not invent its generated history version."
     }
   ],
   "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
-  "production": false
+  "production": false,
+  "latest_source_commit": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+  "latest_readback": {
+    "observed_at": "2026-10-09T06:57:29.697291Z",
+    "migration_count": 6,
+    "all_source_hashes_match": true,
+    "application_tables": 15,
+    "tables_without_rls": 0,
+    "auth_users": 0,
+    "storage_buckets": 0,
+    "private_reservations_enabled": false
+  }
 }

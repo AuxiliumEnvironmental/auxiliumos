@@ -14,9 +14,9 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Connected Git Data API publication and exact fetched tree equality verified at a749b7d; GitHub CI run37861401950 passed. Existing draft PR84 and feature branch remain canonical. CLI credentials are not needed for publication.",
+    "github": "Read/write Git Data API and exact fetched tree verified. Current canonical feature branch wip/recovery-2026-10-08 is6163fc914f68899c6a86d8d6ab12d6c186f7201a; CI run37865800700 passed. Draft PR84 remains open. CLI fetch works; publication uses reviewed expected-SHA API updates.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb: four reviewed migrations applied and exact source/history verified on2026-10-09; 11 application tables have RLS. Zero Auth users/buckets; private reservation config disabled. See docs/00-control/evidence/development-migrations.json. Genuine Auth/Data API still needs securely configured server-side test key.",
+    "supabase": "2026-10-09T06:57:29Z readback: all6 canonical migration hashes match6163fc9; 15 application tables allRLS. private-objects Edge v1 ACTIVE verify_jwt=true; exact deployed source recovered. Zero Auth users/buckets; reservation config disabled. Genuine Auth/Data API needs securely configured test key.",
     "lovable": "Read-only inspection completed at 0d48e1ad. Separate React/TypeScript shell with no visible GitHub sync or Supabase binding. Message umsg_01m4dp5xgkexmakp6g6b27ck1b, main, completed. No code edits or deployment."
   },
   "source_precedence": [
@@ -26,7 +26,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish coherent capability publication, then apply reviewed intake/transport migrations; integrate private-file UI from work/private-files-ui. Genuine Auth/API needs GitHub Actions secret AUXILIUMOS_TEST_SERVICE_ROLE_KEY, never a chat value.",
+  "first_runtime_action": "Integrate and publish active private upload UI and secure live-test workflow; review new private-object clearance migration before integration. Do not reapply the6 deployed migrations or redo intake/auth. Secure API tests await AUXILIUMOS_TEST_SERVICE_ROLE_KEY in GitHub Actions.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -61,17 +61,24 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "Application deployment and genuine Auth/API acceptance remain unverified. Separate database deployment receipt records four successful exact-source migrations. Worker-local capability checks are bounded simulated/fixture evidence.",
+    "verification_status": "All6 database migrations and Edge v1 deployed to existing development target. Genuine Auth/Data API/Storage and real-service browser acceptance remain unexecuted; product hosting and full20module acceptance not claimed.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
     "database_deployment": {
-      "source_commit": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+      "source_commit": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
       "receipt": "docs/00-control/evidence/development-migrations.json",
-      "migration_count": 4,
+      "migration_count": 6,
       "authentic_api_status": "awaiting_secure_key",
       "private_config_enabled": false,
       "storage_bucket_count": 0
+    },
+    "edge_deployment": {
+      "receipt": "docs/00-control/evidence/development-private-function.json",
+      "slug": "private-objects",
+      "version": 1,
+      "verify_jwt": true,
+      "full_runtime_acceptance": false
     }
   },
   "execution_recovery": {
@@ -98,5 +105,18 @@
       "local_commit": "6699b4dd08106ba50c1d94faccd09a07d66e4723",
       "scope": "Reviewed authentication increment after audit/fixtures, fetched source equality and successful GitHub CI. Later storage contract/reservation work requires separate review/publication."
     }
+  },
+  "continuation_recovery": {
+    "observed_at": "2026-10-09T06:57:29Z",
+    "remote_head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+    "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
+    "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
+    "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
+    "active_agents": [
+      "/root/private_ui_current",
+      "/root/secure_api_current",
+      "/root/private_clearance_current"
+    ],
+    "first_unfinished_action": "Integrate and publish active private upload UI and secure live-test workflow; review new private-object clearance migration before integration. Do not reapply the6 deployed migrations or redo intake/auth. Secure API tests await AUXILIUMOS_TEST_SERVICE_ROLE_KEY in GitHub Actions."
   }
 }

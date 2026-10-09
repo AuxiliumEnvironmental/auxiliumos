@@ -172,7 +172,7 @@
         "directory-browser-fixture",
         "directory-api"
       ],
-      "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed.",
+      "blocker": "All6 reviewed migrations are applied to the existing development backend. Genuine Auth/API and real-service browser checks await securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY; no secret value should be supplied in chat.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -203,7 +203,7 @@
         "tests/unit/runtime-configuration.test.mjs",
         "tests/unit/auth-persistence.test.mjs"
       ],
-      "next_action": "R5 code findings are corrected, independently reviewed and fixture-verified. Reconcile dev migrations and securely configure authentic Auth/API as described in tests/api/README.md; run real-service browser acceptance afterward.",
+      "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
       "implementation_status": "Frontend and preservation-safe API harness implemented and independently reviewed; build and synthetic browser/unit profiles pass. Authentic API and real-service browser acceptance remain unexecuted."
     },
     {
@@ -536,7 +536,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Reviewed backend and bootstrap fix integrated (950cb08/068e82c); run hosted intake-api after published migration application and secure Auth fixture configuration. Parent full intake remains incomplete."
+      "next_action": "Reviewed backend is saved in6163fc9 and its migration is applied with matching hash. Run authentic intake-api after secure test key is configured; full intake remains incomplete."
     },
     {
       "status": "implemented",
@@ -629,7 +629,7 @@
         "database",
         "unit"
       ],
-      "next_action": "Reviewed 457eb0b gateway/transport/finalization integrated. Apply published migration, deploy reviewed Edge function, provision private bucket via supported API and enable synthetic config only after target review. Real API/Storage and scan/human-clearance/version adoption remain unfinished."
+      "next_action": "Source saved6163fc9; transport migration applied and private-objects Edge v1 deployed. Provision private bucket via supported API, verify settings, then enable synthetic reservation config through owner-controlled SQL. Genuine Auth/Storage checks await protected test key. New clearance work is separate, not yet deployed."
     },
     {
       "id": "DOC-001",
@@ -1153,8 +1153,48 @@
         "tests/unit/private-object-api.test.mjs",
         "web/src/components/private-object-upload.tsx"
       ],
-      "assigned_to": "intake_ui",
-      "branch": "work/private-files-ui",
+      "assigned_to": "private_ui_current",
+      "branch": "work/private-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "private-file-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Implement scoped page against saved real gateway adapter and run explicit fixture browser journeys. Earlier unpublished page source unavailable after workspace snapshot recovery; this is newly verified work, not reconstructed reviewed code.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "SEC-001C-CLEARANCE",
+      "title": "Exact-object synthetic scan and human security clearance",
+      "status": "in_progress",
+      "dependencies": [
+        "SEC-001C-FILE-WORKFLOW"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "tests/database/private-object-clearance.test.mjs",
+        "tests/api/private-object-clearance.test.mjs",
+        "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md"
+      ],
+      "assigned_to": "private_clearance_current",
+      "branch": "work/private-clearance-2026-10-09",
       "owner_decisions": [
         "OD-001",
         "OD-003",
@@ -1163,10 +1203,9 @@
       ],
       "verification_profiles": [],
       "required_evidence_levels": [
-        "build",
-        "browser_fixture"
+        "database"
       ],
-      "next_action": "Finish scoped account/facility upload staging UI and representative browser journeys; lead owns shared route/config integration. Quarantined finalized files are not document versions or releases.",
+      "next_action": "Implement independent security state and immutable attempt/observation/human-decision history under ADR003, then independent review. No content route, real scanner, professional approval or release is implied.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

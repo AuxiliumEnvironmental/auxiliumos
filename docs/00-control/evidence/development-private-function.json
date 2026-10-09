@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "project_id": "txofqxictwecgcnvezlb",
+  "environment": "development",
+  "observed_on": "2026-10-09",
+  "function": {
+    "id": "2727d9ce-5651-4519-abb4-64f3e532f70f",
+    "slug": "private-objects",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "ezbr_sha256": "7c29aa4ff901132045388050b527072cf3fe421cf219644de06cda63b38c2988",
+    "created_at": 1791506655249
+  },
+  "source_sha256": {
+    "index.ts": "c2eaded3307612123396e755f4014b2f30407ee461bd5de09c9502ab5c8f2aa4",
+    "gateway.mjs": "777973ba23670c469211db8ab022bc6ada4fefb3f389138530bc0722f5a21a58"
+  },
+  "recovery": "Exact index.ts bytes fetched from get_edge_function and recovered into repository; gateway.mjs unchanged from6163fc9. No redeployment performed during this recovery.",
+  "acceptance": "Deployment/readback is not genuine signed-in Auth/Storage acceptance. Upload configuration disabled and bucket absent. No production deployment or real files."
+}

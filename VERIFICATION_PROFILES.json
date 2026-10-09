@@ -443,13 +443,57 @@
         "supabase/migrations/20261008164758_private_object_reservations.sql",
         "supabase/migrations/20261008234951_intake_triage.sql",
         "supabase/migrations/20261008234953_private_file_transport.sql",
-        "supabase/functions/private-objects"
+        "supabase/functions/private-objects",
+        "scripts/private-object-provision.mjs"
       ],
       "commands": [
         [
           "node",
           "--test",
           "tests/api/private-file-transport.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-entrypoint",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-real-entrypoint-injected-SDK-no-Deno-or-provider",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/functions/private-objects/index.ts",
+        "supabase/functions/private-objects/gateway.mjs",
+        "tests/unit/private-object-entrypoint.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/private-object-entrypoint.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "private-file-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE"
+      ],
+      "inputs": [
+        "web",
+        "tests/e2e/private-files.spec.ts",
+        "playwright.runtime.config.ts"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "test:runtime-ui",
+          "--",
+          "private-files.spec.ts"
         ]
       ]
     }

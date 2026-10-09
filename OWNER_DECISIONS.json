@@ -336,7 +336,7 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Reservation-only slice implemented, reviewed and recovered remotely. Actual transport/finalization implementation is underway; no real uploads or live clearance approved.",
+      "implementation_status": "Reviewed synthetic reservation and transport/finalization source saved remotely; all6 migrations and private-objects Edge v1 deployed. Bucket/config remain disabled; real uploads, scanner effectiveness and live clearance unapproved.",
       "development_choices": [
         {
           "recorded_at": "2026-10-08",
@@ -363,6 +363,18 @@
           "activation_gate": "Synthetic development only. Real uploads still require OD-013 handling approval and actual gateway/Storage/scanner/security/restore acceptance; limits must be reviewed for the selected live workload.",
           "source": "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md",
           "implementation": "implemented_synthetic_only"
+        },
+        {
+          "recorded_at": "2026-10-09",
+          "choice": "Only the exact existing development project defaults Edge transport to synthetic-only with exact localhost/127.0.0.1 port4179 origins. Invalid target/origin/mode disables transport; explicit empty origins clear CORS access. Separate SQL reservation enablement and verified private bucket remain required.",
+          "rationale": "Nonsecret bounded development configuration permits the authorized integration without enabling a production project, arbitrary web origin, bucket creation or real uploads.",
+          "affected_capabilities": [
+            "synthetic_private_file_transport",
+            "development_browser_integration"
+          ],
+          "activation_gate": "Development synthetic payloads only. Real file handling still requires designated people/procedure, scanner/provider and full authorization/recovery acceptance under OD-013.",
+          "source": "supabase/functions/private-objects/index.ts",
+          "implementation": "deployed_development_only"
         }
       ]
     },

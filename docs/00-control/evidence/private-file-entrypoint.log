@@ -1,0 +1,16 @@
+["node","--test","tests/unit/private-object-entrypoint.test.mjs"]
+✔ exact development target has bounded synthetic defaults (2.8403ms)
+✔ mode overrides disable rather than silently enable (4.284295ms)
+✔ unknown targets, incomplete credentials and lookalike hosts remain disabled (3.578272ms)
+✔ explicit origins replace defaults and an empty value clears CORS access (1.124705ms)
+✔ invalid or nonlocal origins disable the transport (5.343772ms)
+✔ local stack is opt-in with explicit synthetic mode and no inherited CORS defaults (5.185213ms)
+✔ per-request user credentials never contaminate privileged Storage client (0.946215ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 355.631675

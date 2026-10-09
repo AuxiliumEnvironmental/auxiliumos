@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T00:35:26.963Z",
+  "created_at": "2026-10-09T07:00:35.909Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -10,17 +10,17 @@
   },
   "git": {
     "is_repository_root": true,
-    "head": "1eb967fe7a692e022d2e9484b1de08daf3a2b3da",
-    "branch": "build/capability-integration-2026-10-08",
-    "upstream": "origin/wip/recovery-2026-10-08",
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/03-data/INTAKE_RUNTIME_CONTRACT.md\n M docs/03-data/SCHEMA_REGISTRY.md\n M playwright.runtime.config.ts\n M scripts/os-control.mjs\n M tests/unit/control-system.test.mjs\n?? docs/00-control/evidence/development-migrations.json\n?? docs/00-control/evidence/intake-database.json\n?? docs/00-control/evidence/intake-database.log\n?? docs/00-control/evidence/intake-unit.json\n?? docs/00-control/evidence/intake-unit.log\n?? docs/00-control/evidence/private-file-database.json\n?? docs/00-control/evidence/private-file-database.log\n?? docs/00-control/evidence/private-file-unit.json\n?? docs/00-control/evidence/private-file-unit.log\n?? docs/00-control/evidence/source-reconciliation.completed.json\n?? docs/00-control/evidence/source-reconciliation.completed.log\n?? docs/00-control/reviews/CAPABILITY-INTEGRATION-2026-10-09.json",
+    "head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
+    "branch": "build/continuation-2026-10-09",
+    "upstream": null,
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/development-migrations.json\n M supabase/functions/private-objects/README.md\n M supabase/functions/private-objects/index.ts\n?? docs/00-control/evidence/development-private-function.json\n?? docs/00-control/evidence/private-file-entrypoint.json\n?? docs/00-control/evidence/private-file-entrypoint.log\n?? node_modules\n?? tests/unit/private-object-entrypoint.test.mjs",
     "remote": {
       "status": "not_checked",
-      "branch": "build/capability-integration-2026-10-08",
+      "branch": "build/continuation-2026-10-09",
       "head": null
     }
   },
-  "controls_digest": "efc2f7d262cc1fb52f7d80b0435a908611532bf4367a60405b7449f2663662d6",
+  "controls_digest": "05d05f97bc924182601451a0dbef051002f7e8d466ae7231d19b8bc47b71c290",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -29,17 +29,14 @@
       "declared_status": "blocked",
       "verified": false,
       "historical_completion": false,
-      "next_action": "R5 code findings are corrected, independently reviewed and fixture-verified. Reconcile dev migrations and securely configure authentic Auth/API as described in tests/api/README.md; run real-service browser acceptance afterward.",
-      "blocker": "Existing development backend has no applied application migrations. Available connector does not expose Auth-admin credential; no secure test environment is configured. No actual Auth/API or real-service browser acceptance is claimed."
+      "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
+      "blocker": "All6 reviewed migrations are applied to the existing development backend. Genuine Auth/API and real-service browser checks await securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY; no secret value should be supplied in chat."
     }
   ],
   "evidence": {
     "controls": {
-      "status": "passed",
-      "profile": "controls",
-      "evidence": "docs/00-control/evidence/controls.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-09T00:33:05.203Z"
+      "status": "stale",
+      "profile": "controls"
     },
     "foundation-contract": {
       "status": "stale",
@@ -67,11 +64,8 @@
       "profile": "private-object-reservations-database"
     },
     "runtime-build": {
-      "status": "passed",
-      "profile": "runtime-build",
-      "evidence": "docs/00-control/evidence/runtime-build.json",
-      "level": "build",
-      "recorded_at": "2026-10-09T00:33:08.294Z"
+      "status": "stale",
+      "profile": "runtime-build"
     },
     "directory-browser-fixture": {
       "status": "stale",
@@ -86,36 +80,24 @@
       "profile": "directory-api"
     },
     "intake-database": {
-      "status": "passed",
-      "profile": "intake-database",
-      "evidence": "docs/00-control/evidence/intake-database.json",
-      "level": "database",
-      "recorded_at": "2026-10-09T00:30:46.409Z"
+      "status": "stale",
+      "profile": "intake-database"
     },
     "intake-unit": {
-      "status": "passed",
-      "profile": "intake-unit",
-      "evidence": "docs/00-control/evidence/intake-unit.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T00:30:41.487Z"
+      "status": "stale",
+      "profile": "intake-unit"
     },
     "intake-browser-fixture": {
       "status": "not_run",
       "profile": "intake-browser-fixture"
     },
     "private-file-database": {
-      "status": "passed",
-      "profile": "private-file-database",
-      "evidence": "docs/00-control/evidence/private-file-database.json",
-      "level": "database",
-      "recorded_at": "2026-10-09T00:30:45.789Z"
+      "status": "stale",
+      "profile": "private-file-database"
     },
     "private-file-unit": {
-      "status": "passed",
-      "profile": "private-file-unit",
-      "evidence": "docs/00-control/evidence/private-file-unit.json",
-      "level": "unit",
-      "recorded_at": "2026-10-09T00:30:41.282Z"
+      "status": "stale",
+      "profile": "private-file-unit"
     },
     "intake-api": {
       "status": "not_run",
@@ -124,6 +106,17 @@
     "private-file-api": {
       "status": "not_run",
       "profile": "private-file-api"
+    },
+    "private-file-entrypoint": {
+      "status": "passed",
+      "profile": "private-file-entrypoint",
+      "evidence": "docs/00-control/evidence/private-file-entrypoint.json",
+      "level": "unit",
+      "recorded_at": "2026-10-09T07:00:14.011Z"
+    },
+    "private-file-browser-fixture": {
+      "status": "not_run",
+      "profile": "private-file-browser-fixture"
     }
   },
   "pending_owner_decisions": [

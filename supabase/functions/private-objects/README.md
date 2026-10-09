@@ -82,7 +82,13 @@ operation-source names. The immediately preceding intake audit families are
 preserved. Gateway denial collection and provider/direct-denial coverage remain
 explicit M19 gaps; this is not a full audit-investigation/export workflow.
 
-## Deployment/provisioning prerequisites (operator-owned, not executed here)
+## Deployment/provisioning prerequisites
+
+The integration lead has applied the six reviewed migrations and deployed
+`private-objects` version 1 to the existing development target. Exact source
+readback is recorded in `docs/00-control/evidence/development-private-function.json`.
+This does not establish genuine signed-in upload acceptance. The latest database
+receipt records the private bucket absent and reservation configuration disabled.
 
 Use only the existing `auxiliumos-dev` project `txofqxictwecgcnvezlb`, or an explicit
 local Supabase test stack. The integration lead owns migration review, target
@@ -114,9 +120,16 @@ Edge `index.ts` pins `npm:@supabase/supabase-js@2.117.3`, matching the existing 
 Keep platform `verify_jwt=true`; the handler still verifies every user's token
 itself. Built-in `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and either
 `PRIVATE_OBJECT_PUBLISHABLE_KEY` or built-in `SUPABASE_ANON_KEY` are needed.
-`PRIVATE_OBJECT_TRANSPORT_MODE=synthetic-only` is required; absent/other values
-disable transport. `PRIVATE_OBJECT_ALLOWED_ORIGINS` is an exact comma-separated
-origin allowlist. Local serving additionally needs `PRIVATE_OBJECT_ALLOW_LOCAL_TEST=true`.
+Only the exact existing development URL defaults
+`PRIVATE_OBJECT_TRANSPORT_MODE` to `synthetic-only`, with exact origins
+`http://127.0.0.1:4179,http://localhost:4179`. An explicit disabled, empty or unknown
+mode disables transport. `PRIVATE_OBJECT_ALLOWED_ORIGINS` replaces that list;
+an empty setting clears CORS access, and invalid/nonlocal origins disable the
+transport. Overrides accept exact HTTP(S) localhost/127.0.0.1 origins with an
+explicit nondefault port, not production hosts, wildcards, paths or credentials.
+Local stack serving additionally needs `PRIVATE_OBJECT_ALLOW_LOCAL_TEST=true`
+and explicit synthetic mode; it inherits no origin defaults. Unknown project
+URLs remain disabled. These defaults neither provision a bucket nor enable SQL.
 Only a trusted database owner can enable the existing synthetic reservation config;
 there is no client/service enable RPC. Broad backend credentials remain privileged,
 not magically bucket-scoped. Never lower user/Storage checks to clear a deployment
