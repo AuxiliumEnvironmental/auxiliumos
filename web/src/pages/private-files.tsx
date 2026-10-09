@@ -2,7 +2,7 @@ import { useCallback, useId, useState } from 'react';
 import { Building2, FolderOpen } from 'lucide-react';
 import { PageHeader } from '../components/app-shell';
 import { PrivateObjectUpload } from '../components/private-object-upload';
-import { EmptyState, ErrorState, LoadingState, Pagination, SyntheticBadge } from '../components/shared';
+import { EmptyState, ErrorState, LoadingState, Pagination } from '../components/shared';
 import type { AccountDirectoryItem } from '../lib/directory-api';
 import { useRuntime } from '../lib/runtime';
 import { useAccounts, useDirectoryPage } from '../lib/use-directory';
@@ -25,26 +25,21 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
     ? accounts.state.result.items.find(item => item.id === accountId) : undefined;
 
   return <>
-    <PageHeader eyebrow="M13 · Private files and document versions" title="Private files"
-      description="Stage synthetic files, manage immutable internal drafts and request separately authorized exact-version downloads."
+    <PageHeader title="Private files"
+      description="Internal document versions and synthetic uploads."
       action={<RefreshButton />} />
-    <section className="notice module-notice" aria-label="Private-file development boundary">
-      <div><strong>Quarantined uploads are not document versions or releases.</strong>
-        <p>Synthetic data only. No PHI or real client data. Exact cleared files can become immutable internal drafts only with separate document authority. Downloads require their own current exact-version permission and an enabled service. Real scanning, professional approval, inline preview and release are not available here.</p>
-        <p>OD-001/003 actor and audience approval, OD-011 retention/export approval, and OD-013 incident handling and real-upload approval remain gated. The text marker and acknowledgment do not detect PHI or grant authority.</p>
-      </div>
-    </section>
+    <p className="field-hint">Synthetic data only. No PHI or real client data. Uploads start in quarantine; review and downloads need separate current permission. Release is unavailable.</p>
     {accounts.state.status === 'loading' ? <LoadingState label="Loading accounts" />
       : accounts.state.status === 'error' ? <ErrorState error={accounts.state.error} onRetry={accounts.retry} />
         : <>
           <section className="account-selector-panel" aria-label="Private-file account selection">
             <div className="field account-select"><label htmlFor={inputId}>Account</label>
               <select id={inputId} value={selected?.id ?? ''} onChange={event => onAccountChange(event.target.value)}
-                aria-describedby={`${inputId}-hint`}>
+>
                 <option value="">Choose an account</option>
                 {accounts.state.result.items.map(account => <option key={account.id} value={account.id}>{account.displayName}</option>)}
               </select>
-              <p id={`${inputId}-hint`} className="field-hint">Only accounts on this directory page appear. Changing scope clears the on-screen upload attempt, not preserved bytes or history.</p>
+
             </div>
             <Pagination page={accounts.page} nextCursor={accounts.state.result.nextCursor}
               onNext={accounts.next} onPrevious={accounts.previous} label="Private-file account pages" />
@@ -56,7 +51,13 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
                 : 'Select a permitted account to see its available facilities. Contact your workspace administrator if you expected access.'}</p>
             </EmptyState>}
         </>}
-    <p className="field-hint">Directory visibility does not grant upload, document or content authority. Every operation rechecks current access. The upload attempt is in memory; permitted version history comes from the backend. Verified downloads use a browser attachment handoff, not an inline viewer.</p>
+    <details style={{ overflowWrap: 'anywhere' }}>
+      <summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Upload, access and preservation boundaries</summary>
+      <p>Only accounts and facilities on the current permitted directory page appear. Directory visibility does not grant upload, document, review or content authority. Every operation rechecks current access.</p>
+      <p>Changing account or facility clears only local upload attempts, not preserved bytes, saved versions or history. The upload attempt is held in memory; permitted version history comes from the server.</p>
+      <p>Uploads start in quarantine. Exact cleared files can become immutable internal drafts only with separate document authority. The text marker and acknowledgment do not detect PHI or grant authority. Real scanning and real-upload security activation remain unavailable.</p>
+      <p>Review and exact-version downloads require separate current permission. Downloads use a verified browser attachment handoff, not an inline viewer. Professional approval, document creation and release are unavailable. Actor, audience, preservation, export and incident-handling activation decisions remain gated.</p>
+    </details>
   </>;
 }
 
@@ -71,9 +72,8 @@ function FacilityScope({ account }: { account: AccountDirectoryItem }) {
     ? facilities.state.result.items.find(item => item.id === facilityId) : undefined;
 
   return <>
-    <section className="account-selector-panel" aria-labelledby={`${inputId}-title`}>
-      <div className="section-intro"><div><p className="entity-type">Facilities for</p>
-        <h2 id={`${inputId}-title`}>{account.displayName}</h2></div><SyntheticBadge /></div>
+    <section className="account-selector-panel" aria-label="Private-file facility selection">
+
       {facilities.state.status === 'loading' ? <LoadingState label="Loading facilities" />
         : facilities.state.status === 'error' ? <ErrorState error={facilities.state.error} onRetry={facilities.retry} />
           : <>
@@ -81,11 +81,11 @@ function FacilityScope({ account }: { account: AccountDirectoryItem }) {
               <p>No facility entries are available on this page. Account access does not automatically include facilities or upload permission.</p>
             </EmptyState> : <div className="field account-select"><label htmlFor={inputId}>Facility</label>
               <select id={inputId} value={selected?.id ?? ''} onChange={event => setFacilityId(event.target.value)}
-                aria-describedby={`${inputId}-hint`}>
+>
                 <option value="">Choose a facility</option>
                 {facilities.state.result.items.map(facility => <option key={facility.id} value={facility.id}>{facility.displayName}</option>)}
               </select>
-              <p id={`${inputId}-hint`} className="field-hint">The upload is bound to this exact account and facility. Changing facilities clears the on-screen attempt.</p>
+
             </div>}
             <Pagination page={facilities.page} nextCursor={facilities.state.result.nextCursor}
               onNext={() => { setFacilityId(''); facilities.next(); }}

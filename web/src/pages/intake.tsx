@@ -22,7 +22,7 @@ import {
   SyntheticBadge,
 } from "../components/shared";
 import { asRuntimeError, isAbort, RuntimeError } from "../lib/errors";
-import type { AccountDirectoryItem } from "../lib/directory-api";
+import type { AccountDirectoryItem, FacilityDirectoryItem } from "../lib/directory-api";
 import {
   IntakeApi,
   IntakeError,
@@ -33,6 +33,8 @@ import {
   type CatalogueEntry,
   type IntakeCatalogue,
   type IntakeDetail,
+  type IntakeAssignee,
+  type IntakeItem,
   type IntakeSubmission,
   type TriageChanges,
 } from "../lib/intake-api";
@@ -210,7 +212,7 @@ export function IntakePage({
   return (
     <div className="intake-page">
       <PageHeader
-        eyebrow="M07 · Intake development slice"
+        eyebrow="Synthetic requests"
         title="Intake"
         description="Submit a synthetic request, follow its next action, or triage within your assigned facilities."
       />
@@ -220,7 +222,7 @@ export function IntakePage({
         </strong>
         <p>
           Synthetic data only. No real names, PHI or real client data. Review
-          states request human review; they do not approve it. OD-005/008/009
+          states request human review; they do not approve it. Development
           defaults remain provisional.
         </p>
       </div>
@@ -302,6 +304,16 @@ function AccountIntake({
   intake: IntakeApi;
   catalogue: IntakeCatalogue;
 }) {
+  const { api } = useRuntime();
+  const facilityQuery = useCallback(
+    (afterId: string | undefined, signal: AbortSignal) =>
+      api.listFacilities({ accountId: account.id, afterId, signal }),
+    [account.id, api],
+  );
+  const facilities = useDirectoryPage(
+    `${account.id}:intake-facilities`,
+    facilityQuery,
+  );
   const [mode, setMode] = useState<"queue" | "new">("queue");
   const [requestId, setRequestId] = useState<string | null>(null);
   const [refresh, setRefresh] = useState(0);
@@ -338,6 +350,7 @@ function AccountIntake({
           account={account}
           intake={intake}
           catalogue={catalogue}
+          facilities={facilities}
           onSubmitted={(id) => {
             setRequestId(id);
             setRefresh((value) => value + 1);
@@ -356,6 +369,7 @@ function AccountIntake({
             accountId={account.id}
             intake={intake}
             catalogue={catalogue}
+            facilities={facilities}
             onBack={() => {
               setRequestId(null);
               setNotice("");
@@ -368,6 +382,7 @@ function AccountIntake({
             intake={intake}
             catalogue={catalogue}
             refresh={refresh}
+            facilities={facilities}
             onOpen={(id) => {
               setRequestId(id);
               setNotice("");
@@ -383,23 +398,15 @@ function SubmissionForm({
   account,
   intake,
   catalogue,
+  facilities,
   onSubmitted,
 }: {
   account: AccountDirectoryItem;
   intake: IntakeApi;
   catalogue: IntakeCatalogue;
+  facilities: FacilityPage;
   onSubmitted: (id: string) => void;
 }) {
-  const { api } = useRuntime();
-  const facilityQuery = useCallback(
-    (afterId: string | undefined, signal: AbortSignal) =>
-      api.listFacilities({ accountId: account.id, afterId, signal }),
-    [account.id, api],
-  );
-  const facilities = useDirectoryPage(
-    `${account.id}:intake-facilities`,
-    facilityQuery,
-  );
   const [facilityId, setFacilityId] = useState("");
   const [draft, setDraft] = useState<IntakeSubmission>({
     title: "",
@@ -804,17 +811,38 @@ function SubmissionForm({
   );
 }
 
+type FacilityPage = ReturnType<typeof useDirectoryPage<FacilityDirectoryItem>>;
+type AssigneeResource = ReturnType<typeof useIntakeResource<IntakeAssignee[]>>;
+function facilityName(facilities: FacilityPage, item: IntakeItem) {
+  return (facilities.state.status === "ready"
+    ? facilities.state.result.items.find(facility => facility.accountId === item.account_id && facility.id === item.facility_id)?.displayName
+    : undefined) ?? "Facility name unavailable";
+}
+function RequestReferences({ item }: { item: IntakeItem }) {
+  return <details className="intake-disclosure">
+    <summary style={{ minHeight: "44px", paddingBlock: "var(--space-3)", cursor: "pointer" }}>Request references</summary>
+    <dl style={{ overflowWrap: "anywhere" }}>
+      <dt>Request ID</dt><dd>{item.id}</dd>
+      <dt>Facility ID</dt><dd>{item.facility_id}</dd>
+      <dt>Assignee ID</dt><dd>{item.assigned_to_profile_id ?? "Unassigned"}</dd>
+      <dt>Incident ID</dt><dd>{item.incident_id ?? "None linked"}</dd>
+    </dl>
+  </details>;
+}
+
 function RequestQueue({
   accountId,
   intake,
   catalogue,
   refresh,
+  facilities,
   onOpen,
 }: {
   accountId: string;
   intake: IntakeApi;
   catalogue: IntakeCatalogue;
   refresh: number;
+  facilities: FacilityPage;
   onOpen: (id: string) => void;
 }) {
   const [status, setStatus] = useState("");
@@ -846,6 +874,7 @@ function RequestQueue({
         accountId={accountId}
         status={status}
         intake={intake}
+        facilities={facilities}
         onOpen={onOpen}
       />
     </section>
@@ -856,11 +885,13 @@ function QueueRows({
   accountId,
   status,
   intake,
+  facilities,
   onOpen,
 }: {
   accountId: string;
   status: string;
   intake: IntakeApi;
+  facilities: FacilityPage;
   onOpen: (id: string) => void;
 }) {
   const query = useCallback(
@@ -869,6 +900,7 @@ function QueueRows({
     [accountId, status, intake],
   );
   const page = useDirectoryPage(`${accountId}:${status}:intake`, query);
+  const { state } = useRuntime();
   return (
     <>
       {page.state.status === "loading" ? (
@@ -902,7 +934,7 @@ function QueueRows({
                   <dl className="intake-queue-meta">
                     <div>
                       <dt>Facility</dt>
-                      <dd className="intake-identifier">{item.facility_id}</dd>
+                      <dd>{facilityName(facilities, item)}</dd>
                     </div>
                     <div>
                       <dt>Urgency</dt>
@@ -910,9 +942,9 @@ function QueueRows({
                     </div>
                     <div>
                       <dt>Owner</dt>
-                      <dd className="intake-identifier">
-                        {item.assigned_to_profile_id ?? "Unassigned"}
-                      </dd>
+                      <dd>{item.assigned_to_profile_id === null ? "Unassigned"
+                        : state.status === "ready" && state.context.profileId === item.assigned_to_profile_id
+                          ? state.context.displayName : "Assignee name unavailable"}</dd>
                     </div>
                     <div>
                       <dt>Last activity</dt>
@@ -923,6 +955,7 @@ function QueueRows({
                     <strong>Next action</strong>
                     {item.next_action || "Not recorded"}
                   </p>
+                  <RequestReferences item={item} />
                 </li>
               ))}
             </ul>
@@ -952,12 +985,14 @@ function RequestDetail({
   accountId,
   intake,
   catalogue,
+  facilities,
   onBack,
 }: {
   requestId: string;
   accountId: string;
   intake: IntakeApi;
   catalogue: IntakeCatalogue;
+  facilities: FacilityPage;
   onBack: () => void;
 }) {
   const [latest, setLatest] = useState<IntakeDetail | null | undefined>(
@@ -978,6 +1013,18 @@ function RequestDetail({
         : undefined;
   const unavailable =
     item === null || (item !== undefined && item.account_id !== accountId);
+  const { state } = useRuntime();
+  const triageItem = item && !unavailable && item.can_triage ? item : undefined;
+  const assigneeQuery = useCallback(
+    (signal: AbortSignal) => triageItem
+      ? intake.assignees(triageItem.account_id, triageItem.facility_id, signal)
+      : Promise.resolve<IntakeAssignee[]>([]),
+    [intake, triageItem?.id, triageItem?.account_id, triageItem?.facility_id, triageItem?.revision],
+  );
+  const assignees = useIntakeResource(
+    triageItem ? `${triageItem.id}:${triageItem.account_id}:${triageItem.facility_id}:assignees:${triageItem.revision}` : `${requestId}:assignees:unavailable`,
+    assigneeQuery,
+  );
   useEffect(() => {
     if (item && !unavailable)
       detailHeading.current?.focus({ preventScroll: true });
@@ -1031,13 +1078,11 @@ function RequestDetail({
             <dl className="intake-facts">
               <div>
                 <dt>Facility</dt>
-                <dd className="intake-identifier">{item.facility_id}</dd>
+                <dd>{facilityName(facilities, item)}</dd>
               </div>
               <div>
                 <dt>Incident context</dt>
-                <dd className="intake-identifier">
-                  {item.incident_id ?? "None linked"}
-                </dd>
+                <dd>{item.incident_id ? "Incident linked" : "None linked"}</dd>
               </div>
               <div>
                 <dt>Urgency</dt>
@@ -1045,9 +1090,11 @@ function RequestDetail({
               </div>
               <div>
                 <dt>Assignee</dt>
-                <dd className="intake-identifier">
-                  {item.assigned_to_profile_id ?? "Unassigned"}
-                </dd>
+                <dd>{item.assigned_to_profile_id === null ? "Unassigned"
+                  : (assignees.state.status === "ready" && triageItem
+                    ? assignees.state.value.find(person => person.profile_id === item.assigned_to_profile_id)?.display_name : undefined)
+                    ?? (state.status === "ready" && state.context.profileId === item.assigned_to_profile_id
+                      ? state.context.displayName : "Assignee name unavailable")}</dd>
               </div>
               <div>
                 <dt>Original issue</dt>
@@ -1078,6 +1125,7 @@ function RequestDetail({
               <strong>Next action</strong>
               {item.next_action || "Not recorded"}
             </p>
+            <RequestReferences item={item} />
             <section className="intake-original">
               <h3>Original submission (read-only)</h3>
               <p className="field-hint">
@@ -1143,6 +1191,7 @@ function RequestDetail({
               item={item}
               intake={intake}
               catalogue={catalogue}
+              assignees={assignees}
               onReload={reload}
               onUnavailable={() => setLatest(null)}
               onSaved={() =>
@@ -1206,10 +1255,11 @@ function TriageForm({
   item,
   intake,
   catalogue,
+  assignees,
   onReload,
   onUnavailable,
   onSaved,
-}: EditProps & { catalogue: IntakeCatalogue }) {
+}: EditProps & { catalogue: IntakeCatalogue; assignees: AssigneeResource }) {
   const mutation = useIntakeMutation();
   const [draft, setDraft] = useState({
     assignee: item.assigned_to_profile_id ?? "",
@@ -1219,15 +1269,6 @@ function TriageForm({
     next: item.next_action ?? "",
   });
   const [reloaded, setReloaded] = useState(false);
-  const assigneeQuery = useCallback(
-    (signal: AbortSignal) =>
-      intake.assignees(item.account_id, item.facility_id, signal),
-    [intake, item.account_id, item.facility_id],
-  );
-  const assignees = useIntakeResource(
-    `${item.account_id}:${item.facility_id}:assignees:${item.revision}`,
-    assigneeQuery,
-  );
   const allowed = INTAKE_TRANSITIONS[item.status] ?? [];
   const validStatus =
     draft.status === item.status || allowed.includes(draft.status);

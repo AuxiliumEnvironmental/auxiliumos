@@ -103,7 +103,9 @@ function UploadForm({ clientApi, accountId, facilityId }: {
     if (busy || controller.current) return;
     key.current = crypto.randomUUID(); setAttempted(false); setFile(null); setStatus(null); setError(null); setConfirmed(false); setInputVersion(v => v + 1); setEligibleSource(undefined);
   }
-  return <><section className="account-selector-panel" aria-labelledby={`${inputId}-title`}>
+  return <>
+    <DocumentVersions accountId={accountId} facilityId={facilityId} source={status?.state === 'finalized' && !busy ? eligibleSource : undefined} onAdopted={onAdopted} />
+    <section className="account-selector-panel" aria-labelledby={`${inputId}-title`}>
     <div className="section-intro"><h2 id={`${inputId}-title`}>Private synthetic upload</h2><SyntheticBadge /></div>
     <p className="muted">Development text files only, up to 64 KiB. Start the file with “AuxiliumOS synthetic fixture” and a newline. No PHI or real client data.</p>
     <form onSubmit={submit} aria-busy={busy} style={{ marginTop: 'var(--space-4)' }}>
@@ -130,6 +132,5 @@ function UploadForm({ clientApi, accountId, facilityId }: {
     {status?.state === 'finalized' && <PrivateObjectSecurityStatus objectId={status.objectId} accountId={accountId} facilityId={facilityId}
       onAccessUnavailable={onSecurityUnavailable} onEligibleSourceChange={setEligibleSource} refreshKey={securityCheck} />}
   </section>
-    <DocumentVersions accountId={accountId} facilityId={facilityId} source={status?.state === 'finalized' && !busy ? eligibleSource : undefined} onAdopted={onAdopted} />
   </>;
 }

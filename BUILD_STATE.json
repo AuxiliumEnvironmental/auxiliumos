@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T19:46:12.409Z",
+  "as_of": "2026-10-09T19:54:55.830Z",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -18,7 +18,7 @@
     "github": "Feature branch HEAD1ed3d836 read back through GitHub connector during workspace outage. Protected GitHub Actions settings last showed no repository/environment secrets. Development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY requires protected configuration; no secret read or requested in chat.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
-    "lovable": "Existing project89227e is ready after exact five-file review UI transfer, independently read back againstf3b1b706. Root publication requestac37eb2f-5c63-4d77-93f5-f958163cd4a5 accepted pending. Four-file mobile recovery will use current provider source and focused verification.",
+    "lovable": "Current project57f637a ready/agentFinished after bounded mobile increment; exactly4source files read back and independently reviewed. Root publication of previous89227e was accepted pending asac37eb2f. Final57f637a publication waits for integrated CI; no latest-live-revision claim.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -28,7 +28,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers.",
+  "first_runtime_action": "Run the integrated GitHub CI gate on the exact57f637a mobile/review UI source, inspect any concrete failures, then publish the reviewed candidate. Configure missing development-only GitHub Actions service secret for focused actual private-file workflow. Workspace and secure-browser runtime blockers remain distinct; released-byte backend source is unfinished.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -189,9 +189,9 @@
       "data_behavior": "Planning mutations use actual typed creator-scoped Supabase RPCs, immutable revisions/CAS and frozen uncertain retries. Sample cases remain explicitly illustrative. Existing connected workflows preserved; commercial/professional actions remain gated.",
       "verification": "Final dd7961f UI:14focused unit and11browser fixtures passed;20routes at1440/390/360 passed without overflow/errors/unexpected requests. Independent client review clear. New Spatial-only source77a1cf6 matched external64f5b2a,8asset hashes and one build:dev passed, targeted review clear. Reused matching evidence without broad rerun.",
       "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json",
-      "next_increment": "Complete bounded mobile/intake-name provider increment; preserve full20module demo/planning and Spatial.",
-      "candidate_lovable_revision": "89227e331463eed0ea0844055cf43714e5969627",
-      "candidate_status": "Internal-review UI exact hosted transfer complete; publication request pending. Mobile source recovery in provider, not yet accepted."
+      "next_increment": "Publish reviewed57f637a after integrated CI. Actual private-file and planning hosted workflows remain open; released-byte backend waits for recovered executor.",
+      "candidate_lovable_revision": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "candidate_status": "Full demo, Spatial, internal review and bounded mobile/intake-name source integrated. Source review and exact4file parity passed; production build/CI and publication pending."
     },
     "workspace_plans": {
       "status": "implemented_deployed_hosted_workflow_pending",
@@ -215,7 +215,7 @@
       "hosted_human_workflow_verified": false,
       "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json",
       "ui_worker_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
-      "ui_status": "reviewed_integrated_lovable_exact_five_file_parity",
+      "ui_status": "reviewed_hosted_source_with_mobile_polish_integrated_ci_publication_pending",
       "ui_lovable_revision": "89227e331463eed0ea0844055cf43714e5969627"
     },
     "spatial": {
@@ -284,11 +284,9 @@
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
     "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
-    "active_agents": [
-      "ui_integration"
-    ],
-    "first_unfinished_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers.",
-    "latest_verified_remote": "1ed3d836e868b8518458997bd4275ef5e0560765",
+    "active_agents": [],
+    "first_unfinished_action": "Run the integrated GitHub CI gate on the exact57f637a mobile/review UI source, inspect any concrete failures, then publish the reviewed candidate. Configure missing development-only GitHub Actions service secret for focused actual private-file workflow. Workspace and secure-browser runtime blockers remain distinct; released-byte backend source is unfinished.",
+    "latest_verified_remote": "a37834600c14048b0bd2e79f3316cb230aebd3ca",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
@@ -414,7 +412,7 @@
       "base_commit": "89227e331463eed0ea0844055cf43714e5969627",
       "message_id": "umsg_01m4h37sx5e1fs19xfksj2bgpv",
       "thread_id": "main",
-      "status": "running",
+      "status": "completed_independently_source_reviewed_ci_publication_pending",
       "writer": "ui_integration",
       "paths": [
         "web/src/components/document-versions.tsx",
@@ -422,7 +420,11 @@
         "web/src/pages/private-files.tsx",
         "web/src/pages/intake.tsx"
       ],
-      "published": false
+      "published": false,
+      "target_commit": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+      "edit_id": "edt-bcda6535-648b-40fc-9c4a-9ffc75493ed2",
+      "source_verification": "All4complete files read by root; every structured hunk applied exactly to canonical GitHub base and matched final provider bytes. Independent mobile_review source review clear.",
+      "provider_hash_warning": "Provider summary hashes disagreed with actual file bytes and were rejected. Source acceptance uses exact file/diff readback; recorded hashes independently calculated by ui_integration."
     }
   },
   "immediate_delivery": {
@@ -430,10 +432,10 @@
     "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
     "owner_onboarding": "account_password_and_scoped_application_access_complete",
     "owner_first_login": "actual_public_browser_login_account_facility_request_submission_and_triage_verified",
-    "ui_presentation_source": "89227e331463eed0ea0844055cf43714e5969627",
+    "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
-    "independent_work": "Single UI writer completes mobile source recovery in existing Lovable. Released-byte backend has unfinished local work blocked by workspace outage. Root owns integration, remote save, CI and publication. Moldo independent; companion deferred.",
+    "independent_work": "Mobile/review source completed in existing Lovable and independently reviewed; root saves exact files and runs GitHub CI before publication. Released-byte backend remains unfinished due workspace outage. Moldo independent and companion deferred.",
     "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
     "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
@@ -452,7 +454,9 @@
       "source": "Actual authenticated owner request detail at auxiliumos.io",
       "finding": "Facility and assignee summaries show raw reference UUIDs; triage select already resolves permitted assignee name. Improve visible names using already authorized data without expanding directory visibility.",
       "scope": "Intake queue/detail presentation",
-      "status": "queued_after_current_review_UI"
+      "status": "source_fix_reviewed_hosted_confirmation_pending",
+      "resolution": "Current permitted facility names and exact current-profile/eligible-triage assignee names replace default raw references. Unknown authorized names remain unavailable; references are accessible in disclosure. No broader directory query or person cache.",
+      "candidate": "57f637a9461ca1180df77bea487aa9fd12ac9c7b"
     }
   ]
 }

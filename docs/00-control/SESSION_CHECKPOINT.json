@@ -227,8 +227,8 @@
   ],
   "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
   "cloud_recovery": {
-    "recorded_at": "2026-10-09T19:46:12.409Z",
-    "base_remote_commit": "1ed3d836e868b8518458997bd4275ef5e0560765",
+    "recorded_at": "2026-10-09T19:54:55.830Z",
+    "base_remote_commit": "a37834600c14048b0bd2e79f3316cb230aebd3ca",
     "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
     "not_claimed": [
       "Local checkpoint regeneration",
@@ -236,6 +236,8 @@
       "Uncollected tests",
       "Completed released-byte backend"
     ],
-    "next_action": "Finish bounded four-file mobile/intake-name recovery in Lovable against verified89227e, review actual source, save exact files through GitHub connector and run one integrated CI gate before publishing that increment. Owner login/account/facility/request/triage already passed. Configure missing development-only GitHub Actions service secret for the focused real connected workflow. Cloud-browser security state and current workspace outage are distinct verification blockers."
+    "next_action": "Run the integrated GitHub CI gate on the exact57f637a mobile/review UI source, inspect any concrete failures, then publish the reviewed candidate. Configure missing development-only GitHub Actions service secret for focused actual private-file workflow. Workspace and secure-browser runtime blockers remain distinct; released-byte backend source is unfinished.",
+    "ui_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
+    "exact_source_parity": true
   }
 }

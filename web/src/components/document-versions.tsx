@@ -47,10 +47,8 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
     setSelectedId(undefined); setDenied(true); documents.retry();
   }, [documents.retry]);
   return <section className="account-selector-panel" aria-labelledby={titleId} style={wrap}>
-    <div className="section-intro"><div><p className="entity-type">M13 · Immutable internal drafts</p><h2 id={titleId}>Document versions</h2></div>
+    <div className="section-intro"><div><h2 id={titleId}>Document versions</h2></div>
       <button type="button" className="button secondary" onClick={refresh} disabled={reviewPending || documents.state.status === 'loading'}>Refresh documents</button></div>
-    <p>Only owner-provisioned logical documents with an exact version-view grant appear. Account or facility membership alone does not grant access.</p>
-    <p className="field-hint">This list is filtered to the selected facility from account-wide permitted pages. Exact-version internal review is available with separate authority. Logical-document creation, inline content viewing and release are unavailable. Changing scope clears local attempts, not saved history.</p>
     {reviewPending && <p className="field-hint" role="status">Document navigation is paused while a review submission is pending or uncertain. Resolve its exact retry below before refreshing this history.</p>}
     {denied && <p role="alert" className="form-error">Document access is unavailable. The selected document, history and local adoption attempt were cleared; current list access is being checked again.</p>}
     {documents.state.status === 'loading' ? <LoadingState label="Loading permitted documents" />
@@ -60,7 +58,7 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
             <p>No matching permitted logical documents were returned here. Check another page if available, or contact your workspace administrator. An empty page does not establish why access is absent.</p>
           </EmptyState> : <ul style={{ listStyle: 'none', padding: 0 }} aria-label="Permitted documents">
             {rows.map(document => <li key={document.document_id} className="notice" style={{ marginBlock: 'var(--space-3)' }}>
-              <div><strong>{document.title}</strong><p className="field-hint">Class label: {document.document_class}. This label conveys no review or release authority.</p>
+              <div><strong>{document.title}</strong><p className="field-hint">Class: {document.document_class}</p>
                 <button type="button" className="button secondary" aria-expanded={selectedId === document.document_id}
                   disabled={reviewPending}
                   onClick={() => { setDenied(false); setSelectedId(document.document_id); }} aria-label={`View version history: ${document.title}`}>View version history</button></div>
@@ -72,7 +70,11 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
         </>}
     {selected && <VersionHistory key={selected.document_id} api={api} document={selected} source={source}
       onUnavailable={unavailable} onAdopted={onAdopted} onReviewPending={setReviewPending} />}
-    <p className="field-hint">Synthetic development only. An internal draft never supersedes an existing release. OD-001/003 audience and actor decisions, OD-011 preservation/export and OD-013 real-upload/security activation remain gated.</p>
+    <details><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Document access and history boundaries</summary>
+      <p>Only provisioned logical documents with an exact version-view grant appear, filtered to the selected facility from permitted account pages. Account or facility membership alone does not grant access. A class label conveys no review or release authority.</p>
+      <p>Exact-version internal review needs separate current authority. Logical-document creation, inline viewing, professional approval and release are unavailable. An internal draft never supersedes an existing release. Changing scope clears local attempts, not saved history.</p>
+      <p>Synthetic development only. Audience, actor, preservation, export and real-upload security activation remain gated.</p>
+    </details>
   </section>;
 }
 
@@ -119,10 +121,6 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
   const sourceKey = source ? `${source.objectId}:${source.verifiedSha256}:${source.securityRevision}` : 'no-source';
   return <section className="notice" aria-labelledby={headingId} style={{ marginBlock: 'var(--space-4)', ...wrap }}>
     <h3 id={headingId}>Version history: {document.title}</h3>
-    <p>History shows metadata, not content permission. Current restrictions and preservation holds are separate from the hold recorded at adoption. Neither an old release label nor a prior receipt permits reading content.</p>
-    <details style={{ marginBlock: 'var(--space-3)' }}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Secure download boundary</summary>
-      <p>Each request checks separate current permission for the exact immutable version, then verifies its bytes before a browser attachment handoff. This synthetic development feature does not approve or release a document. Content is not shown inline or kept in workspace browser storage. Already downloaded files cannot be recalled by changing scope, signing out or revoking access.</p>
-    </details>
     <div className="button-row"><button type="button" className="button secondary" disabled={reviewPending || resource.status === 'loading'} onClick={refresh}>Refresh version history</button></div>
     {resource.status === 'loading' ? <LoadingState label="Checking current version history" />
       : resource.status === 'error' ? <ErrorState error={resource.error} onRetry={refresh} />
@@ -132,6 +130,11 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
             : <ol aria-label="Immutable version history" style={{ listStyle: 'none', padding: 0 }}>
               {resource.value.items.map(version => <li key={version.version_id} className="notice" style={{ marginBlock: 'var(--space-3)' }}>
                 <h4>Version {version.version_ordinal} · Internal draft</h4>
+                {version.visibility_restricted && <p className="form-error">Restricted; no content access is provided</p>}
+                <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
+                <DocumentVersionReview key={`review:${resource.key}:${version.version_id}:${version.verified_sha256}`}
+                  documentId={document.document_id} version={version} onPendingChange={pending => reviewPendingChanged(version.version_id, pending)} />
+                <details style={wrap}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Exact-version details · Version {version.version_ordinal}</summary>
                 <dl><dt>Immutable version reference</dt><dd style={wrap}>{version.version_id}</dd>
                   <dt>Verified SHA-256</dt><dd style={wrap}><code>{version.verified_sha256}</code></dd>
                   <dt>Verified size and media type</dt><dd>{version.byte_size} bytes · {version.media_type}</dd>
@@ -140,9 +143,7 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
                   <dt>Current preservation hold</dt><dd>{version.preservation_hold ? 'Hold recorded; preservation is required' : 'No hold recorded; destruction is not authorized'}</dd>
                   <dt>Current visibility restriction</dt><dd>{version.visibility_restricted ? 'Restricted; no content access is provided' : 'No restriction recorded; this does not grant content access'}</dd>
                 </dl>
-                <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
-                <DocumentVersionReview key={`review:${resource.key}:${version.version_id}:${version.verified_sha256}`}
-                  documentId={document.document_id} version={version} onPendingChange={pending => reviewPendingChanged(version.version_id, pending)} />
+                </details>
               </li>)}
             </ol>}
           <fieldset disabled={reviewPending} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}><Pagination page={cursors.length + 1} nextCursor={resource.value.next_cursor === null ? null : String(resource.value.next_cursor)}
@@ -150,6 +151,10 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted, onRev
             onPrevious={() => setCursors(values => values.slice(0, -1))} label="Version history pages" />
           </fieldset>
         </>}
+    <details style={{ marginBlock: 'var(--space-3)' }}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Secure download boundary</summary>
+      <p>History shows metadata, not content permission. Current restrictions and preservation holds are separate from the hold recorded at adoption. Neither an old release label nor a prior receipt permits reading content.</p>
+      <p>Each download checks separate current permission for the exact immutable version and verifies its bytes before a browser attachment handoff. This does not approve or release a document. Content is not shown inline or kept in workspace browser storage. Already downloaded files cannot be recalled by changing scope, signing out or revoking access.</p>
+    </details>
     {!document.can_create_version ? <p className="field-hint">Read-only history. No version-creation affordance was returned for this document; the server checks exact grants on every operation.</p>
       : !source ? <p className="field-hint">No current eligible source is selected. Finalize a synthetic upload and check its security status before adopting it. Security eligibility alone is not document authority.</p>
         : <fieldset disabled={reviewPending} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}><AdoptionForm key={sourceKey} api={api} document={document} source={source}

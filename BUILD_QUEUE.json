@@ -58,7 +58,7 @@
     {
       "id": "UI-2026-10-09",
       "title": "Responsive application and full-destination module interfaces",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [],
       "requirements": [
         "M01",
@@ -112,9 +112,12 @@
       "verification_profiles": [
         "runtime-build",
         "directory-browser-fixture",
-        "intake-browser-fixture"
+        "intake-browser-fixture",
+        "document-versions-browser-fixture",
+        "document-content-browser-fixture",
+        "document-reviews-browser-fixture"
       ],
-      "next_action": "Full demo, Spatial and review UI source saved. Local mobileWIP569ab1af and3finishing edits interrupted by workspace outage. Actual full patch unavailable, checked once; reimplement bounded mobile presentation against verified current provider source, inspect exact diff, save GitHub source and run integrated CI before publication.",
+      "next_action": "Current-source57f637a mobile/intake-name source is independently reviewed and exact4file readback passes. Preserve interruptedlocal569ab1af separately; do not replay it. Run integrated CI then publish reviewed candidate. Full20module operational acceptance and actual hosted private-file/planning workflows remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
