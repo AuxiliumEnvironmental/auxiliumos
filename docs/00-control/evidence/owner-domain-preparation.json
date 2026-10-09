@@ -1,0 +1,93 @@
+{
+  "observed_at": "2026-10-09T16:51:42.711394+00:00",
+  "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+  "github_ci": {
+    "run_id": 37961286796,
+    "run_number": 63,
+    "conclusion": "success"
+  },
+  "lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "commit": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+    "sync_message": "umsg_01m4grv07wen993jephhsf8c9f",
+    "base_web_package_files_matched": 44,
+    "increment_files_matched": 15,
+    "production_build": "passed_root_dist_with_public_development_config",
+    "domain": "auxiliumos.io",
+    "domain_verification": "provider_reported_connected_ownership_verified",
+    "is_published": false,
+    "publish_attempt": "rejected_by_automatic_approval_review_explicit_publication_authorization_required"
+  },
+  "supabase": {
+    "project_ref": "txofqxictwecgcnvezlb",
+    "operator_context": {
+      "session_user": "postgres",
+      "current_user": "postgres"
+    },
+    "migration_count": 10,
+    "auth_users": 0,
+    "owner_profile_present": false,
+    "site_url": "https://auxiliumos.io",
+    "redirect_urls": [
+      "https://auxiliumos.io",
+      "https://auxiliumos.io/?auth=invite",
+      "https://auxiliumos.io/?auth=recovery"
+    ],
+    "invite_template": "Observed default .ConfirmationURL",
+    "email_delivery": "built_in_provider_observed_delivery_unverified",
+    "bucket": {
+      "id": "os-private-ingest",
+      "public": false,
+      "file_size_limit": 65536,
+      "allowed_mime_types": [
+        "text/plain"
+      ],
+      "created_via": "supported_dashboard_storage_operation"
+    },
+    "storage_rls": true,
+    "restrictive_browser_bucket_object_denials": true,
+    "ingest": {
+      "enabled": true,
+      "revision": 2,
+      "max_bytes": 65536,
+      "reservation_ttl_seconds": 900
+    },
+    "content": {
+      "enabled": true,
+      "revision": 2,
+      "synthetic_only": true
+    },
+    "config_audit_actor": "database_privileged_operation",
+    "edge_functions": [
+      {
+        "slug": "private-objects",
+        "version": 3,
+        "verify_jwt": true
+      },
+      {
+        "slug": "document-version-content",
+        "version": 4,
+        "verify_jwt": true
+      }
+    ],
+    "cors_preflight": {
+      "origin": "https://auxiliumos.io",
+      "private_objects_status": 204,
+      "document_version_content_status": 204,
+      "allow_credentials": null
+    }
+  },
+  "checks": {
+    "dashboard_owner_database_scenarios": 30,
+    "production_configuration_checks": 12,
+    "independent_security_review": "no_blockers_for_exact_operator_path_and_domain_CORS",
+    "hosted_authenticated_workflow": "not_executed",
+    "owner_invitation_sent": false,
+    "owner_password_set": false,
+    "owner_first_login_verified": false
+  },
+  "screenshots": [
+    "Private owner-auth-domain-20261009.jpg retained outside the public repository."
+  ],
+  "next_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules."
+}

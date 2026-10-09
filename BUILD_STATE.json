@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09",
+  "as_of": "2026-10-09T16:51:42.711394+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -14,10 +14,10 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Implementation source b577b5a94eec09bf6ff175b26f3c19f09061dd35 published, fetched and exact tree430d3969de0fbda12a09437faaf6a3c60ad6f21b verified. CI59/run37935336603 passed on that implementation. Registered ci.yml appears as CI Placeholder from main, workflow_dispatch supported. Current connector cannot inspect Actions secrets or create a dispatch; browser is signed out.",
+    "github": "Implementation 52b7ec4f23a2a6136f7fcefbf8eeb4307f427290 saved/fetched with exact tree ef8073c53315b54bebbe78372db8259e36345d52; CI63/run37961286796 passed. Protected workflow dispatch/service credential remain separate automated acceptance prerequisites. Secret existence is not inspectable through the connector.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb: ten migrations including owner_onboarding_activation20261009130331 applied and ACLs read back. Existing private-objects v2 and document-version-content v3 remain JWT protected. Auth0 and buckets0; ingest/content gates false revision1. Separate synthetic connected document provisioned at revision0. No Moldo changes.",
-    "lovable": "Combined canonical UI and owner-onboarding source from 5f560c384825b9dcfe8fa2bc6f33b294e049a1ec imported into existing Lovable project; tool-reported saved revision f717551cb26164fc0bbeb1ab3a779a7b5ac17891. Eleven differing file hashes confirmed by the transfer agent. No native two-way sync or hosted owner login claimed.",
+    "supabase": "Authorized dashboard session established through secure user sign-in. auxiliumos-dev txofqxictwecgcnvezlb active: ten migrations, private-objects v3 and document-version-content v4 JWT protected. Site URL auxiliumos.io and three exact redirects saved/read back. Private 65536-byte text/plain bucket created through supported Dashboard. Synthetic ingest/content gates enabled revision2 with system audit. Auth users0; owner profile absent. Moldo untouched.",
+    "lovable": "Existing project saved 797c9c99c339e5e7bec18efe814b5e57127b074a, 15 changed files match GitHub 52b7ec4f23a2a6136f7fcefbf8eeb4307f427290; normal production-mode build passed with approved public development config in root dist. Root domain ownership/DNS verified by provider. Publishing was rejected by automatic approval review because explicit public-publication authorization was required; no workaround attempted, no publication occurred.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
+  "first_runtime_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -49,7 +49,8 @@
     "The API fixture harness now preflights required columns and retains audit-linked application rows while disabling exact synthetic access and deleting only verified test-created Auth identities. Twenty-two mock/unit checks and independent review pass; authentic API execution remains unexecuted.",
     "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
     "2026-10-09: foundation, directory, audit and reservation SQL applied unchanged to actual PostgreSQL17 development target. Schema/history readback confirms all11 tables RLS; this is deployment evidence, not Auth/API acceptance.",
-    "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open."
+    "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open.",
+    "2026-10-09 current owner access preparation: supported Dashboard/operator onboarding removes CI-key dependency; Auth URLs configured, domain verified, private storage and synthetic gates configured. Publication rejected by automatic approval review pending explicit owner approval. Owner account/password/first login and actual connected acceptance remain incomplete."
   ],
   "runtime_implementation": {
     "app": "web/",
@@ -62,7 +63,7 @@
     ],
     "authentic_api_status": "prepared_unexecuted",
     "deployed": false,
-    "verification_status": "Ten development migrations deployed, private-objects v2 and document-version-content v3 deployed. Owner invitation/recovery UI and bounded provisioning implemented and independently reviewed. Actual Auth/API/Storage/browser acceptance remains unexecuted; full20module destination remains open.",
+    "verification_status": "Ten migrations and both reviewed gateways deployed; synthetic private storage configured. Frontend source parity and publication build verified. Actual owner invitation/password/login and connected Auth/API/browser acceptance remain incomplete. Full20module destination remains open.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
@@ -71,16 +72,18 @@
       "receipt": "docs/00-control/evidence/development-migrations.json",
       "migration_count": 10,
       "authentic_api_status": "awaiting_secure_key",
-      "private_config_enabled": false,
-      "storage_bucket_count": 0,
-      "owner_preparation_receipt": "docs/00-control/evidence/development-owner-preparation.json"
+      "private_config_enabled": true,
+      "storage_bucket_count": 1,
+      "owner_preparation_receipt": "docs/00-control/evidence/development-owner-preparation.json",
+      "current_configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
     },
     "edge_deployment": {
       "receipt": "docs/00-control/evidence/development-private-function.json",
       "slug": "private-objects",
-      "version": 2,
+      "version": 3,
       "verify_jwt": true,
-      "full_runtime_acceptance": false
+      "full_runtime_acceptance": false,
+      "current_configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
     },
     "reviewed_integration": {
       "review": "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json",
@@ -131,20 +134,24 @@
       "version_browser_regression_checks": 14,
       "deployed": true,
       "hosted_api_acceptance": false,
-      "operational_gates_enabled": false,
-      "edge_version": 3,
+      "operational_gates_enabled": true,
+      "edge_version": 4,
       "ci_run": 37908695151
     },
     "development_connection": {
-      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+      "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
       "reviewed": true,
       "implemented": true,
       "location": "web/.env.development",
       "public_only": true,
-      "tests": "8configuration checks passed in Lovable on same runtime/build behavior; added exact-ignore test1passed afterP3fix; final source GitHubCI required.",
-      "build": "build:dev emits the same complete canonicalweb app into rootdist; normalbuild remainsproductionmode/webdist and doesnotembeddevkey whenunconfigured.",
+      "tests": "12 focused configuration/ignore checks and production build passed; CI63 passed on exact source.",
+      "build": "Both build and build:dev emit root dist using the reviewed public auxiliumos-dev configuration; wrong backend/secret validation retained.",
       "deployed_to_production": false,
-      "real_backend_acceptance": false
+      "real_backend_acceptance": false,
+      "locations": [
+        "web/.env.development",
+        "web/.env.production"
+      ]
     },
     "owner_onboarding": {
       "implemented": true,
@@ -154,10 +161,19 @@
       "owner_invitation_sent": false,
       "owner_password_set": false,
       "owner_first_login_verified": false,
-      "independent_of_document_release": true
+      "independent_of_document_release": true,
+      "provisioning_path": "Supported Dashboard invitation followed by scripts/provision-owner-from-dashboard.sql as genuine database operator, independently reviewed.",
+      "requires_ci_service_credential": false,
+      "auth_site_url": "https://auxiliumos.io",
+      "auth_redirects": [
+        "https://auxiliumos.io",
+        "https://auxiliumos.io/?auth=invite",
+        "https://auxiliumos.io/?auth=recovery"
+      ],
+      "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
     },
     "frontend_ui": {
-      "source_lovable_revision": "4ce078da0e412e5f50e3d70836faaf7d1f095956",
+      "source_lovable_revision": "797c9c99c339e5e7bec18efe814b5e57127b074a",
       "canonical_parent": "d177692db1a3056d271000434631abdda3dfaa4d",
       "status": "implemented",
       "scope": "Responsive shell and existing connected pages; 45 distinct preparation/review/status panels across the remaining 15 modules. Four audience layout components remain inactive pending server capabilities.",
@@ -195,20 +211,20 @@
     "observed_at": "2026-10-09T06:57:29Z",
     "remote_head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
-    "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
+    "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
-    "latest_verified_remote": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
+    "first_unfinished_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
+    "latest_verified_remote": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
-      "message_id": "umsg_01m4gcsnk2e9ka9whjwcppqbhd",
+      "message_id": "umsg_01m4grv07wen993jephhsf8c9f",
       "thread_id": "main",
-      "source_commit": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
-      "target_commit": "cc8828319079e0c4fac3e5bba4e1f288258418d8",
-      "status": "completed37changed_files_exact_worker_verified_root5critical_files_verified",
+      "source_commit": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+      "target_commit": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+      "status": "completed15changed_files_exact_worker_verified_root3critical_files_readback",
       "native_github_sync": false,
-      "receipt": "docs/00-control/evidence/owner-source-publication.json"
+      "receipt": "docs/00-control/evidence/owner-domain-preparation.json"
     },
     "execution_outage": {
       "observed_at": "2026-10-09T08:56:23.132Z",
@@ -293,14 +309,16 @@
   "immediate_delivery": {
     "lead": "root integration lead",
     "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
-    "owner_onboarding": "implemented_deployed_helper_awaiting_protected_execution",
+    "owner_onboarding": "ready_for_dashboard_invitation_after_explicit_publication_approval",
     "owner_first_login": "not_completed",
-    "ui_presentation_source": "cc8828319079e0c4fac3e5bba4e1f288258418d8",
+    "ui_presentation_source": "797c9c99c339e5e7bec18efe814b5e57127b074a",
     "unpublished_patch_check": "unavailable_checked_once",
-    "protected_configuration": "Current runner has no development service credential; GitHub secret existence cannot be inspected. Configure AUXILIUMOS_TEST_SERVICE_ROLE_KEY in protected GitHub form only. Exact provider callback resolution is checked before owner email. Manual dispatch must be performed from an authorized GitHub session.",
+    "protected_configuration": "Owner onboarding now has a supported Dashboard/operator path independent of CI credentials. Automated connected acceptance still needs the development-only GitHub Actions service secret and authorized manual dispatch; no secret requested in chat.",
     "independent_work": "Backend/UI implementation and independent security review completed. Root owns whole integration. Document review worktrees unavailable once; reimplementation uses current contracts after immediate access acceptance.",
-    "connected_workflow": "harness_and_actual_synthetic_context_prepared_unexecuted",
-    "focused_verification": "Integrated build and runtime units passed; 15 owner unit checks and 18 PostgreSQL scenarios passed; 20 integrated auth/directory browser fixtures passed, including 320px password setup and 390px navigation. Synthetic HTTP evidence only.",
-    "hosted_preview_access": "Existing preview requires Lovable workspace sign-in, observed directly. No public publication or relaxed permissions. Open inside the authorized existing workspace before personal onboarding; callback delivery/session still unverified."
+    "connected_workflow": "synthetic_bucket_and_gates_configured_harness_prepared_actual_authenticated_acceptance_unexecuted",
+    "focused_verification": "New owner transaction30 PostgreSQL scenarios, production config12 checks and production build passed. Existing UI44file parity and15file increment parity confirmed. CI63 passed. Both hosted gateways returned204 exact-domain CORS preflight on valid routes; this is not authenticated workflow acceptance.",
+    "hosted_preview_access": "Private preview still uses existing Lovable workspace access. Verified custom domain prepared, publication explicitly blocked by automatic approval review. No owner invitation sent to the unavailable host.",
+    "publication_blocker": "Automatic approval review rejected deploy_project because public publication of the development-connected app needs explicit owner approval.",
+    "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
   }
 }

@@ -32,7 +32,11 @@
         "tests/e2e/auth-onboarding.spec.ts",
         ".github/workflows/ci.yml",
         "tests/api/README.md",
-        "docs/03-data/OWNER_ONBOARDING.md"
+        "docs/03-data/OWNER_ONBOARDING.md",
+        "scripts/provision-owner-from-dashboard.sql",
+        "tests/database/dashboard-owner-onboarding.test.mjs",
+        "web/.env.production",
+        "web/vite.config.ts"
       ],
       "assigned_to": "root integration lead; owner_onboarding_backend and owner_auth_ui",
       "branch": "wip/recovery-2026-10-08",
@@ -44,10 +48,10 @@
         "runtime-build",
         "auth-onboarding-browser-fixture"
       ],
-      "next_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
-      "blocker": "Protected service credential and authorized manual dispatch unavailable here. Private preview also requires existing Lovable workspace sign-in. Actual invitation/callback delivery, personal password and first owner login remain unverified.",
+      "next_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
+      "blocker": "Automatic approval review requires explicit public-publication approval. Owner invitation, scoped application provisioning, personal password and first successful login are pending; no CI service credential dependency for this owner path.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "implementation_status": "UI/script implemented and independently reviewed; activation migration deployed to actual development backend. No owner account created yet."
+      "implementation_status": "Owner Auth UI, original protected workflow and alternative genuine-operator transaction independently reviewed. Auth URLs saved; deployment source parity and build verified. No owner Auth identity created yet."
     },
     {
       "id": "UI-2026-10-09",
@@ -99,7 +103,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "UI source from Lovable 4ce078da is preserved in this canonical increment. Keep existing connected adapters and integrate owner onboarding. Connect the 45 module panels to genuine scoped records/actions and server-supplied audience capabilities as those contracts are implemented. Draft preparation is in-memory only; no full module or hosted acceptance is claimed.",
+      "next_action": "Canonical44web/package files matched Lovable and the15file domain increment is saved at797c9c99. Production build now includes approved public development config and rootdist. Obtain explicit publication approval, verify hosted auth screens, then continue genuine scoped module connections;45 new module panels remain preparation-only.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -275,7 +279,7 @@
         "development-ui",
         "document-connected-ui"
       ],
-      "blocker": "Ten migrations and two gateway functions deployed; actual Auth/API/browser requires protected service credential and manual branch dispatch.",
+      "blocker": "Automated authentic acceptance still needs protected service credential/manual dispatch. Owner login uses supported Dashboard onboarding and waits only for explicit frontend publication approval and personal setup.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -733,7 +737,7 @@
         "database",
         "unit"
       ],
-      "next_action": "Actual private-objects v2 and restrictive private-bucket RLS verified. Bucket inventory0; supported API provisioning prepared. After creation, lead verifies private settings/policies then enables synthetic ingest/content gates and runs focused actual browser transport/retrieval. Clearance and immutable-content migrations are deployed, not accepted end to end."
+      "next_action": "Private65536-byte text/plain bucket and revision2 synthetic ingest/content gates are configured on actualdev; both exact-domain JWT gateways deployed. Complete focused authenticated upload/finalization/retrieval acceptance after protected automated credentials; retain quarantine and separate release authority."
     },
     {
       "id": "DOC-001",

@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T13:20:28.460Z",
+  "recorded_at": "2026-10-09T16:51:45.610Z",
   "result": "passed",
-  "digest": "5b5870a268c35f02ba7bc069d6ed7ec6fe1e834484e2dc8369d2d432957ee39e",
+  "digest": "3d16c25c4eaab4bc213e099742778ee2a80d0e67b260dec722202f70a9a3e530",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -19,8 +19,8 @@
       "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
       "NODE_OPTIONS": null,
       "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
-      "PATH": "e4175b8bf88fa89797668762042018804a73a0582cfcfac71b4ec2bff2baf74a",
-      "TZ": "58c885a79d98507ffb7c33da1c03d9717ee83e00902b882db2598bac4a7da463"
+      "PATH": "087159f4a2cf94eadabc87d0dccea30431a01f0f41b439007c4f8870d4e1d5af",
+      "TZ": "fd8d3b93c3d8ae77e47a9ab113cc2e7c923ed9732f12f3a0d7e9aba9111da038"
     }
   },
   "inputs": {
@@ -43,10 +43,10 @@
     ".github/ISSUE_TEMPLATE/feature_ticket.md": "28efae09a269cdd41df8e1287b98089221002c34b28417722e032468e274e5cb",
     ".github/PULL_REQUEST_TEMPLATE.md": "d025bd4eb9f16ba101c4f43ec123f94abd5709f59a531cf9e188b1c92af9d026",
     ".github/workflows/ci.yml": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
-    ".gitignore": "3ab4ea703e5d14df8b9f0529def9ede8136f4749be390ae9ecfeb3219449837b",
+    ".gitignore": "34fc960968677f85e01a6325224b565b97ee27deff865d8d9719ec43f6cca648",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "c9bd40ddc02a5b35bc985795f784b55e7a235f766b849e65866aa64c9033818a",
-    "BUILD_STATE.json": "d304cde3dcb9a92c819557d380cd7372d0cf6fe73030095d7a8b7f007191df65",
+    "BUILD_QUEUE.json": "e84a43ac8a9b2d13f17173fd2aa7cc9e0e01c162b8fa3e83c31fd9377bd08fdc",
+    "BUILD_STATE.json": "3a9dd7d6ade20ae40d69bea932cb82abbc60f2cbe908f3c89b4dd97024962cad",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -67,7 +67,7 @@
     "docs/00-control/PROJECT_STATE.md": "bf9f2b723461bb0e795ad07d3cb23fc8ea0ff86f11da808cd788055f17094d65",
     "docs/00-control/reviews/CAPABILITY-INTEGRATION-2026-10-09.json": "dbb927234abfe181e94ee72de6db4590b104e47df3e259102d530260e69c4148",
     "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json": "448da7a51ab59222d6fdb38f0d54d75920e24d198daee00f7849c0257af85f9a",
-    "docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json": "c7effb082014bf8849226f1f4bee4d232536603a5eff56032d4f2f5d400015d5",
+    "docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json": "f303816a40b2c58a10c112eb372cfdd32c10a4b00a20ac194aa4ea59f0ef40a0",
     "docs/00-control/reviews/SEC-001A-2026-10-08.json": "e5596c049716bbbbbecbf8c70e019dc05dfc647cf73760b7eea053d89b6dccb2",
     "docs/00-control/reviews/SEC-001B-2026-10-08.json": "0350b83a31079ae023a73af84c55c5568e6ea399756123b974a8dba09948134a",
     "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json": "4cb9ddd5f72899bd0f857b0d02d4d670e439c1bb9efd77aea7cc70692ebeba31",
@@ -107,7 +107,7 @@
     "docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md": "b43cc86ed40038fdfbfffd8627fd18b7348d14b1a21bd650432349fadc9bf7ed",
     "docs/03-data/INTAKE_RUNTIME_CONTRACT.md": "bdde02bff6220786490bf60044ea4da7cb4737693b6773265557f2c663567716",
     "docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md": "1287867e46af5ef0dafa5c5a2e4fc01d5a9f6a815961a947ec3345ded6266d31",
-    "docs/03-data/OWNER_ONBOARDING.md": "af5567acc1d4219669b3d7ddaaca145c213f57dac6f2a7616586056bf7fa0b82",
+    "docs/03-data/OWNER_ONBOARDING.md": "e87466a47df1b1c74b9de1e5e39742591f57761741ec5fb3c36b7871453ad702",
     "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md": "d045f02ba77e5efb2930598131571fbdd8f4cd234fa81348c96781502be66901",
     "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md": "7f67d78ea69c0a3e3c2e6e127dbd22bf67e3b13ad3a13171eb7d13731e81fe47",
     "docs/03-data/RELATIONSHIP_MAP.md": "8e712d9c20ae1b63e3b7e88ea1ec2de34bafb4eb3f88789b1d1ea67a756128a0",
@@ -192,15 +192,16 @@
     "REQUIREMENTS.json": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
     "scripts/check-docs.mjs": "c874e58a9cc8e1037ba207886836fea36fd6afe97413aaa2437c519ed945b108",
     "scripts/os-control.mjs": "7975ec94287ad1f782f2e44c89028fd3635f44f4ece18e83f43014f5478f4f22",
-    "scripts/owner-onboarding.mjs": "c2ad9fc4d6fb9c6c4a8b2dd924cb5a7ecc25a54d50d0657ed9fe57465c25568c",
+    "scripts/owner-onboarding.mjs": "95e2bb02387ecc1ddaaa89c2d7da04dae793ecf7780bb0d8d811beb486012741",
     "scripts/owner-policy.mjs": "3d8c448ec3b81d242863ba2420b9303c2fa1201a2d7dabb8852c2285c2d0b991",
     "scripts/private-object-provision.mjs": "2d7297cfe63335e5724be4055b9d0ccad62209b6212b15b280364e3495d04c15",
+    "scripts/provision-owner-from-dashboard.sql": "2319f1b0fd0f8fc0b61cb524db95f602cdd3956964d63d9d2a5ae2418269c5fb",
     "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "tests/unit/control-system.test.mjs": "a64dc78e1838d689a50dfd4780dac6b41b0d2f07189013043d46047dba90f692",
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
-    "VERIFICATION_PROFILES.json": "87498ff9b92f43d88b7a6732b9125f4a581a12fd11eecac21e6078d35e43b7a2"
+    "VERIFICATION_PROFILES.json": "dcf2cfca17122156d5665908f8e629049162ebcce656120157669e61f475334c"
   },
-  "observed_git_head": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
+  "observed_git_head": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
   "results": [
     {
       "argv": [
@@ -234,5 +235,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "51039634c04e57dc753bfcd5e282864c477beb50567251d24158bf012e3831c3"
+  "log_sha256": "77951b0b067bc371c108136ee578e366d9322a627686e579f490af85338504d6"
 }
