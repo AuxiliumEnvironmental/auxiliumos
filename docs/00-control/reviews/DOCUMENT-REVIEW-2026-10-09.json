@@ -13,5 +13,18 @@
     "No actual reviewer assignment",
     "No hosted review workflow or real professional approval",
     "No release implementation in this slice"
-  ]
+  ],
+  "ui_followup": {
+    "reviewer": "integration_review",
+    "source_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+    "blocking_findings": [],
+    "scope": "Exact typed RPC/receipt contract; current authority; frozen uncertain retries, explicit attestation, denied-state clearing, history/navigation and scope/session fences",
+    "reused_focused_checks": {
+      "adapter": 10,
+      "new_browser_fixture": 17,
+      "additional_denial": 2,
+      "existing_route_regressions": 3
+    },
+    "limits": "No actual qualified person or hosted review/release acceptance."
+  }
 }

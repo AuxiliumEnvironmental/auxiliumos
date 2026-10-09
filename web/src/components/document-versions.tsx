@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { FileStack } from 'lucide-react';
 import { DocumentVersionApi, DocumentVersionError, type DocumentAdoptionReceipt, type DocumentAdoptionRequest,
   type DocumentVersionsPage, type EligibleDocumentSource, type VersionDocument } from '../lib/document-version-api';
@@ -7,6 +7,7 @@ import { useRuntime } from '../lib/runtime';
 import { useDirectoryPage } from '../lib/use-directory';
 import { EmptyState, ErrorState, LoadingState, Pagination } from './shared';
 import { DocumentContentDownload } from './document-content-download';
+import { DocumentVersionReview } from './document-version-review';
 
 type Props = {
   accountId: string; facilityId: string; source?: EligibleDocumentSource;
@@ -31,6 +32,7 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
   const titleId = useId();
   const [selectedId, setSelectedId] = useState<string>();
   const [denied, setDenied] = useState(false);
+  const [reviewPending, setReviewPending] = useState(false);
   const query = useCallback(async (afterId: string | undefined, signal: AbortSignal) => {
     const result = await api.documents(accountId, afterId ?? null, signal);
     return { items: result.items, nextCursor: result.next_cursor };
@@ -40,15 +42,16 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
   // filtered page is not evidence that this account has no other permitted rows.
   const rows = documents.state.status === 'ready' ? documents.state.result.items.filter(row => row.facility_id === facilityId) : [];
   const selected = rows.find(row => row.document_id === selectedId);
-  const refresh = () => { setSelectedId(undefined); setDenied(false); documents.retry(); };
+  const refresh = () => { if (reviewPending) return; setSelectedId(undefined); setDenied(false); documents.retry(); };
   const unavailable = useCallback(() => {
     setSelectedId(undefined); setDenied(true); documents.retry();
   }, [documents.retry]);
   return <section className="account-selector-panel" aria-labelledby={titleId} style={wrap}>
     <div className="section-intro"><div><p className="entity-type">M13 · Immutable internal drafts</p><h2 id={titleId}>Document versions</h2></div>
-      <button type="button" className="button secondary" onClick={refresh} disabled={documents.state.status === 'loading'}>Refresh documents</button></div>
+      <button type="button" className="button secondary" onClick={refresh} disabled={reviewPending || documents.state.status === 'loading'}>Refresh documents</button></div>
     <p>Only owner-provisioned logical documents with an exact version-view grant appear. Account or facility membership alone does not grant access.</p>
-    <p className="field-hint">This list is filtered to the selected facility from account-wide permitted pages. No logical-document creation, inline content viewer, approval or release is provided. Changing scope clears local attempts, not saved history.</p>
+    <p className="field-hint">This list is filtered to the selected facility from account-wide permitted pages. Exact-version internal review is available with separate authority. Logical-document creation, inline content viewing and release are unavailable. Changing scope clears local attempts, not saved history.</p>
+    {reviewPending && <p className="field-hint" role="status">Document navigation is paused while a review submission is pending or uncertain. Resolve its exact retry below before refreshing this history.</p>}
     {denied && <p role="alert" className="form-error">Document access is unavailable. The selected document, history and local adoption attempt were cleared; current list access is being checked again.</p>}
     {documents.state.status === 'loading' ? <LoadingState label="Loading permitted documents" />
       : documents.state.status === 'error' ? <ErrorState error={documents.state.error} onRetry={refresh} />
@@ -59,26 +62,36 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
             {rows.map(document => <li key={document.document_id} className="notice" style={{ marginBlock: 'var(--space-3)' }}>
               <div><strong>{document.title}</strong><p className="field-hint">Class label: {document.document_class}. This label conveys no review or release authority.</p>
                 <button type="button" className="button secondary" aria-expanded={selectedId === document.document_id}
+                  disabled={reviewPending}
                   onClick={() => { setDenied(false); setSelectedId(document.document_id); }} aria-label={`View version history: ${document.title}`}>View version history</button></div>
             </li>)}
           </ul>}
-          <Pagination page={documents.page} nextCursor={documents.state.result.nextCursor}
+          <fieldset disabled={reviewPending} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}><Pagination page={documents.page} nextCursor={documents.state.result.nextCursor}
             onNext={() => { setSelectedId(undefined); documents.next(); }} onPrevious={() => { setSelectedId(undefined); documents.previous(); }} label="Document list pages" />
+          </fieldset>
         </>}
     {selected && <VersionHistory key={selected.document_id} api={api} document={selected} source={source}
-      onUnavailable={unavailable} onAdopted={onAdopted} />}
+      onUnavailable={unavailable} onAdopted={onAdopted} onReviewPending={setReviewPending} />}
     <p className="field-hint">Synthetic development only. An internal draft never supersedes an existing release. OD-001/003 audience and actor decisions, OD-011 preservation/export and OD-013 real-upload/security activation remain gated.</p>
   </section>;
 }
 
-function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
+function VersionHistory({ api, document, source, onUnavailable, onAdopted, onReviewPending }: {
   api: DocumentVersionApi; document: VersionDocument; source?: EligibleDocumentSource;
-  onUnavailable: () => void; onAdopted?: Props['onAdopted'];
+  onUnavailable: () => void; onAdopted?: Props['onAdopted']; onReviewPending: (pending: boolean) => void;
 }) {
   const { handleFailure } = useRuntime();
   const headingId = useId();
   const [cursors, setCursors] = useState<number[]>([]);
   const [check, setCheck] = useState(0);
+  const pendingReviews = useRef(new Set<string>());
+  const [reviewPending, setReviewPending] = useState(false);
+  const reviewPendingChanged = useCallback((versionId: string, pending: boolean) => {
+    if (pending) pendingReviews.current.add(versionId); else pendingReviews.current.delete(versionId);
+    const blocked = pendingReviews.current.size > 0;
+    setReviewPending(blocked); onReviewPending(blocked);
+  }, [onReviewPending]);
+  useLayoutEffect(() => () => { onReviewPending(false); }, [onReviewPending]);
   const after = cursors.at(-1) ?? 0;
   const key = `${document.document_id}:${after}:${check}`;
   const [stored, setStored] = useState<History>({ status: 'loading', key: '' });
@@ -99,7 +112,7 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
     });
     return () => controller.abort();
   }, [api, after, document.document_id, handleFailure, key]);
-  const refresh = useCallback(() => { setCursors([]); setCheck(value => value + 1); }, []);
+  const refresh = useCallback(() => { if (pendingReviews.current.size) return; setCursors([]); setCheck(value => value + 1); }, []);
   const saved = useCallback((receipt: DocumentAdoptionReceipt) => {
     refresh(); callbacks.current.onAdopted?.(receipt);
   }, [refresh]);
@@ -110,7 +123,7 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
     <details style={{ marginBlock: 'var(--space-3)' }}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Secure download boundary</summary>
       <p>Each request checks separate current permission for the exact immutable version, then verifies its bytes before a browser attachment handoff. This synthetic development feature does not approve or release a document. Content is not shown inline or kept in workspace browser storage. Already downloaded files cannot be recalled by changing scope, signing out or revoking access.</p>
     </details>
-    <div className="button-row"><button type="button" className="button secondary" disabled={resource.status === 'loading'} onClick={refresh}>Refresh version history</button></div>
+    <div className="button-row"><button type="button" className="button secondary" disabled={reviewPending || resource.status === 'loading'} onClick={refresh}>Refresh version history</button></div>
     {resource.status === 'loading' ? <LoadingState label="Checking current version history" />
       : resource.status === 'error' ? <ErrorState error={resource.error} onRetry={refresh} />
         : <>
@@ -128,17 +141,20 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
                   <dt>Current visibility restriction</dt><dd>{version.visibility_restricted ? 'Restricted; no content access is provided' : 'No restriction recorded; this does not grant content access'}</dd>
                 </dl>
                 <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
+                <DocumentVersionReview key={`review:${resource.key}:${version.version_id}:${version.verified_sha256}`}
+                  documentId={document.document_id} version={version} onPendingChange={pending => reviewPendingChanged(version.version_id, pending)} />
               </li>)}
             </ol>}
-          <Pagination page={cursors.length + 1} nextCursor={resource.value.next_cursor === null ? null : String(resource.value.next_cursor)}
+          <fieldset disabled={reviewPending} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}><Pagination page={cursors.length + 1} nextCursor={resource.value.next_cursor === null ? null : String(resource.value.next_cursor)}
             onNext={() => { const next = resource.value.next_cursor; if (next !== null) setCursors(values => [...values, next]); }}
             onPrevious={() => setCursors(values => values.slice(0, -1))} label="Version history pages" />
+          </fieldset>
         </>}
     {!document.can_create_version ? <p className="field-hint">Read-only history. No version-creation affordance was returned for this document; the server checks exact grants on every operation.</p>
       : !source ? <p className="field-hint">No current eligible source is selected. Finalize a synthetic upload and check its security status before adopting it. Security eligibility alone is not document authority.</p>
-        : <AdoptionForm key={sourceKey} api={api} document={document} source={source}
+        : <fieldset disabled={reviewPending} style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}><AdoptionForm key={sourceKey} api={api} document={document} source={source}
           documentRevision={resource.status === 'ready' ? resource.value.document_revision : undefined}
-          checkKey={resource.status === 'ready' ? resource.key : undefined} onRefresh={refresh} onSaved={saved} onUnavailable={onUnavailable} />}
+          checkKey={resource.status === 'ready' ? resource.key : undefined} onRefresh={refresh} onSaved={saved} onUnavailable={onUnavailable} /></fieldset>}
   </section>;
 }
 

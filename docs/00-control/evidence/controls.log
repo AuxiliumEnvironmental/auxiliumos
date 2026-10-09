@@ -7,44 +7,44 @@
 
 ["node","scripts/check-docs.mjs"]
 {
-  "files_checked": 102,
+  "files_checked": 103,
   "errors": []
 }
 
 
 ["node","--test","tests/unit/control-system.test.mjs","tests/unit/document-integrity.test.mjs"]
-✔ baseline model preserves all 20 modules and validates its actual references (8.863889ms)
-✔ missing module and duplicate IDs are rejected (1.182959ms)
-✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.993217ms)
-✔ unapproved activation and unsupported completed status cannot forge completion (0.668476ms)
-✔ active writer leases must be identified and must not overlap (0.621765ms)
-✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.288674ms)
-✔ missing source, config and policy decision references are rejected on disk (4.903754ms)
-✔ source inventory rejects missing inputs, traversal and symbolic links (1.768079ms)
-✔ root inventory and verification work in a real linked Git worktree (97.106793ms)
-✔ real fixture command produces evidence and a current cache prevents redundant execution (159.333567ms)
-✔ noncacheable profiles require a declared positive finite freshness bound (1.337762ms)
-✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (143.512616ms)
-✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (850.312258ms)
-✔ declared environment input change invalidates a cached pass without storing the raw value (167.130451ms)
-✔ unrelated profile registration does not invalidate another profile, including root-file inventory (96.553256ms)
-✔ expired source observations preserve historical setup but never become current release evidence (91.140758ms)
-✔ failed fresh source checks cannot erase the original successful operation (275.91175ms)
-✔ historical completion cannot be used to bypass runtime task requirements (0.334543ms)
-✔ runtime identity participates in evidence freshness (180.292668ms)
-✔ failed verification replaces prior success and cannot be reused as passing (205.055551ms)
-✔ tampered verification log is rejected and fresh execution repairs evidence (145.845559ms)
-✔ tracked input changed during execution invalidates a zero-exit command (73.066879ms)
-✔ implemented declaration needs current evidence and required runtime evidence levels (84.409136ms)
-✔ declared task evidence levels must be nonempty distinct strings (0.7513ms)
-✔ SEC runtime task cannot unblock its dependent with static evidence alone (202.498139ms)
-✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (14.208967ms)
-✔ checkpoint preserves the lead unfinished action without changing evidence or task verification (7.158174ms)
-✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.489186ms)
-✔ partial approvals activate only actions whose complete decision set is approved (0.206721ms)
-✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.27241ms)
-✔ handoff checker distinguishes closed examples from an unclosed fence (2.043052ms)
-✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.402259ms)
+✔ baseline model preserves all 20 modules and validates its actual references (10.383264ms)
+✔ missing module and duplicate IDs are rejected (1.252673ms)
+✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.52325ms)
+✔ unapproved activation and unsupported completed status cannot forge completion (1.92851ms)
+✔ active writer leases must be identified and must not overlap (0.858561ms)
+✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.363747ms)
+✔ missing source, config and policy decision references are rejected on disk (6.834367ms)
+✔ source inventory rejects missing inputs, traversal and symbolic links (2.424706ms)
+✔ root inventory and verification work in a real linked Git worktree (107.256207ms)
+✔ real fixture command produces evidence and a current cache prevents redundant execution (141.555005ms)
+✔ noncacheable profiles require a declared positive finite freshness bound (0.924991ms)
+✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (137.424298ms)
+✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (675.179651ms)
+✔ declared environment input change invalidates a cached pass without storing the raw value (166.827578ms)
+✔ unrelated profile registration does not invalidate another profile, including root-file inventory (74.112185ms)
+✔ expired source observations preserve historical setup but never become current release evidence (74.443076ms)
+✔ failed fresh source checks cannot erase the original successful operation (132.21614ms)
+✔ historical completion cannot be used to bypass runtime task requirements (0.245579ms)
+✔ runtime identity participates in evidence freshness (148.881578ms)
+✔ failed verification replaces prior success and cannot be reused as passing (198.95047ms)
+✔ tampered verification log is rejected and fresh execution repairs evidence (139.321211ms)
+✔ tracked input changed during execution invalidates a zero-exit command (71.566277ms)
+✔ implemented declaration needs current evidence and required runtime evidence levels (72.68021ms)
+✔ declared task evidence levels must be nonempty distinct strings (1.008486ms)
+✔ SEC runtime task cannot unblock its dependent with static evidence alone (209.166644ms)
+✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (6.766801ms)
+✔ checkpoint preserves the lead unfinished action without changing evidence or task verification (8.349445ms)
+✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.387113ms)
+✔ partial approvals activate only actions whose complete decision set is approved (0.203325ms)
+✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.267693ms)
+✔ handoff checker distinguishes closed examples from an unclosed fence (2.152347ms)
+✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.491523ms)
 ℹ tests 32
 ℹ suites 0
 ℹ pass 32
@@ -52,4 +52,4 @@
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2912.134238
+ℹ duration_ms 2503.489532

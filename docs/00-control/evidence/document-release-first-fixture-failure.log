@@ -1,0 +1,136 @@
+▶ synthetic exact-version metadata release — PostgreSQL/PGlite simulated Auth, not hosted or concurrent-session proof
+  ✔ approved exact revision plus separate controller and explicit recipient produces metadata only with protected provenance (133.473217ms)
+  ✔ review assignment, technical clearance, administrator, uploader, content, and audience alone confer no release authority (72.566554ms)
+  ✔ release denies missing exact internal approval (22.315164ms)
+  ✔ release denies changes_requested exact internal approval (42.604022ms)
+  ✔ release denies rejected exact internal approval (33.718001ms)
+  ✔ identical bytes in another immutable version do not transfer review, controller, or recipient authority (84.225406ms)
+  ✔ new draft and internal review preserve current release; replacement hides prior until explicit history grant (93.466606ms)
+  ✔ retired reviewer assignment preserves approval; dual routine roles require independently provisioned controller (34.599485ms)
+  ✔ audience set validates nonempty bounded unique UUIDs and deliberate attestation (75.800687ms)
+  ✔ class internal_note cannot inherit routine synthetic release (32.315892ms)
+  ✔ class draft_report cannot inherit routine synthetic release (35.027049ms)
+  ✔ class final_report cannot inherit routine synthetic release (29.188259ms)
+  ✔ class legal_dispute_sensitive cannot inherit routine synthetic release (32.569693ms)
+  ✔ class executive_document cannot inherit routine synthetic release (30.090955ms)
+  ✔ class invoice cannot inherit routine synthetic release (40.034177ms)
+  ✔ class signed_authorization cannot inherit routine synthetic release (32.715744ms)
+  ✔ full intent retries preserve release receipt after unrelated advances and changed intent conflicts (70.371674ms)
+  ✔ CAS independently fences logical document, review, release authority, and digest changes (65.051054ms)
+  ✔ grant provisioning retries bind whole intent and revoked grants cannot restore current audience (62.990776ms)
+  ✔ revoked or replacement controller cannot replay original release receipt (50.378832ms)
+  ✖ cross-account and wrong-facility users cannot provision, release or read even with forged claims (38.172358ms)
+  ✔ current authorization rechecks controller_identity on release, read, and retry (41.323616ms)
+  ✔ current authorization rechecks controller_membership on release, read, and retry (34.407737ms)
+  ✔ current authorization rechecks controller_content on release, read, and retry (36.318981ms)
+  ✔ current authorization rechecks recipient_identity on release, read, and retry (36.759703ms)
+  ✔ current authorization rechecks recipient_membership on release, read, and retry (33.166701ms)
+  ✔ current authorization rechecks recipient_facility on release, read, and retry (38.867744ms)
+  ✔ current authorization rechecks content_switch on release, read, and retry (31.304612ms)
+  ✔ current authorization rechecks reservation_switch on release, read, and retry (37.439446ms)
+  ✔ current authorization rechecks restricted on release, read, and retry (39.183408ms)
+  ✖ current authorization rechecks phi on release, read, and retry (32.326067ms)
+  ✔ preservation hold leaves eligible current and historical metadata visible and never deletes bytes (76.336864ms)
+  ✔ human withdrawal narrows current visibility, retains immutable history, and never revives previous release (108.570232ms)
+  ✔ withdrawal requires explicit active controller; stale and wrong actor cannot remove a release (51.623373ms)
+  ✔ trusted narrowing withdrawal and revocation survive all switches, access and safety removal (48.85458ms)
+  ✔ withdrawn version or older ordinal cannot be released again and a new version starts without automatic fallback (139.070173ms)
+  ✔ withdrawal of superseded history leaves current release intact (71.521984ms)
+  ✔ audit failures roll back release head and authoritative history atomically (45.603041ms)
+  ✖ immutable release, withdrawal, grants, heads, and audit reject owner-level history edits and deletion (51.729343ms)
+  ✔ forged public provenance and stale backend roles do not become human authority (33.229926ms)
+  ✔ default-deny tables and exact function ACLs retain service/human separation with no exposed definer (55.421305ms)
+✖ synthetic exact-version metadata release — PostgreSQL/PGlite simulated Auth, not hosted or concurrent-session proof (4448.146897ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 38
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4595.814191
+
+✖ failing tests:
+
+test at tests/database/document-version-releases.test.mjs:117:33
+✖ cross-account and wrong-facility users cannot provision, release or read even with forged claims (38.172358ms)
+  AssertionError [ERR_ASSERTION]: Invalid private object actor
+  
+  '28000' !== '42501'
+  
+      at Object.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:27:60)
+      at expectedException (node:assert:578:17)
+      at expectsError (node:assert:703:21)
+      at strict.rejects (node:assert:769:3)
+      at async file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:219:5
+      at async TestContext.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:117:80)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async TestContext.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:216:3)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '28000',
+    expected: '42501',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/database/document-version-releases.test.mjs:117:33
+✖ current authorization rechecks phi on release, read, and retry (32.326067ms)
+  error: Invalid private object service
+      at pe.Ue (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:17959)
+      at pe.tt (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:15347)
+      at pe.parse (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/chunk-2BOC2OMW.js:1:14021)
+      at N.qe (file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/index.js:5:1762)
+      at file:///workspace/scratch/f283daedfed1/auxiliumos/node_modules/@electric-sql/pglite/dist/index.js:5:1155
+      at wasm://wasm/0267bb86:wasm-function[10930]:0x5a5ccf
+      at wasm://wasm/0267bb86:wasm-function[3585]:0x27eaeb
+      at wasm://wasm/0267bb86:wasm-function[3627]:0x2869d1
+      at wasm://wasm/0267bb86:wasm-function[3637]:0x286c2d
+      at wasm://wasm/0267bb86:wasm-function[9914]:0x54fd4d {
+    length: 317,
+    severity: 'ERROR',
+    code: '28000',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: 'PL/pgSQL function private.private_object_service_context() line 5 at RAISE\nSQL statement "SELECT private.private_object_service_context()"\nPL/pgSQL function private.guard_private_object_security_history() line 19 at PERFORM',
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'pl_exec.c',
+    line: '3923',
+    routine: 'exec_stmt_raise',
+    query: 'update private.private_object_security set security_revision=security_revision+1,phi_suspected=true where object_id=$1',
+    params: [ '2fcca135-c1dc-432f-9bda-f35fc603a184' ],
+    queryOptions: undefined
+  }
+
+test at tests/database/document-version-releases.test.mjs:117:33
+✖ immutable release, withdrawal, grants, heads, and audit reject owner-level history edits and deletion (51.729343ms)
+  AssertionError [ERR_ASSERTION]: Invalid private object service
+  
+  '28000' !== '55000'
+  
+      at Object.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:27:60)
+      at expectedException (node:assert:578:17)
+      at expectsError (node:assert:703:21)
+      at strict.rejects (node:assert:769:3)
+      at async ownerDeny (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:29:47)
+      at async file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:293:5
+      at async TestContext.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:117:80)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async TestContext.<anonymous> (file:///workspace/scratch/f283daedfed1/document-release-backend/tests/database/document-version-releases.test.mjs:290:3)
+      at async Test.run (node:internal/test_runner/test:1389:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: '28000',
+    expected: '55000',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

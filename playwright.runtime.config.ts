@@ -4,7 +4,7 @@ import { defineConfig } from '@playwright/test';
 // They do not certify Supabase Auth, RLS or deployed API behavior.
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['auth-onboarding.spec.ts', 'directory.spec.ts', 'intake.spec.ts', 'private-files.spec.ts', 'document-versions.spec.ts', 'document-content.spec.ts'],
+  testMatch: ['auth-onboarding.spec.ts', 'directory.spec.ts', 'intake.spec.ts', 'private-files.spec.ts', 'document-versions.spec.ts', 'document-content.spec.ts', 'document-reviews.spec.ts'],
   timeout: 30_000,
   fullyParallel: false,
   workers: 1,

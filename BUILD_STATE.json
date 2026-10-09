@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T18:50:34.744364+00:00",
+  "as_of": "2026-10-09T19:06:19.842346+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish and review the connected exact-version internal review UI while the release backend proceeds independently. Securely configure the verified missing development-only GitHub Actions service secret, then dispatch the focused connected browser harness with freshly reconciled fixture revision/bucket. Resume actual upload/finalization/retrieval and planning save/reopen browser verification when the cloud browser credential-state restriction is cleared. Account setup and actual login are complete.",
+  "first_runtime_action": "Finish approved mobile/name polish and verify exact Lovable transfer/publication. Save and deploy reviewed metadata release backend. Protected connected upload/finalization/retrieval and hosted planning save/reopen still need the verified missing development GitHub service secret; actual owner login/intake/triage already passed. Continue released-byte/UI contract afterward; do not imply real release from metadata.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -212,7 +212,9 @@
       "independent_review": "clear; lock-order finding corrected",
       "actual_reviewer_assigned": false,
       "hosted_human_workflow_verified": false,
-      "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json"
+      "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json",
+      "ui_worker_commit": "f3b1b70653da9e5b8f0e07bf1dd8aa7a4382de04",
+      "ui_status": "reviewed_integrated_transfer_in_progress"
     },
     "spatial": {
       "owner_authorized": true,
@@ -223,6 +225,16 @@
       "exact_generated_asset_hashes": 8,
       "host_review": "clear",
       "runtime_boundary": "Personal synthetic profile-scoped browser editor; no project/server/professional authority or native Apple acceptance claimed."
+    },
+    "document_release": {
+      "source_worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
+      "migration": "20261009184724_document_version_releases.sql",
+      "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+      "status": "reviewed_integrated_pending_deployment",
+      "deployed": false,
+      "focused_database_checks": "45/45 passed, no skips; simulated Auth, exact worker evidence reused",
+      "review": "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
+      "scope": "Explicit exact-version controller/audience discovery and metadata release, replacement, separate historical recipients, immutable narrowing withdrawal. No released bytes/notifications/signatures or real professional authority."
     }
   },
   "execution_recovery": {
@@ -367,5 +379,15 @@
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
     "publication_blocker": null,
     "configuration_receipt": "docs/00-control/evidence/owner-domain-preparation.json"
-  }
+  },
+  "remaining_defects": [
+    {
+      "id": "INTAKE-NAMES-001",
+      "observed_at": "2026-10-09T18:56:56.112222+00:00",
+      "source": "Actual authenticated owner request detail at auxiliumos.io",
+      "finding": "Facility and assignee summaries show raw reference UUIDs; triage select already resolves permitted assignee name. Improve visible names using already authorized data without expanding directory visibility.",
+      "scope": "Intake queue/detail presentation",
+      "status": "queued_after_current_review_UI"
+    }
+  ]
 }

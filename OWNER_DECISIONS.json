@@ -143,7 +143,16 @@
       "approved_by": null,
       "approved_at": null,
       "approval_evidence": null,
-      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests."
+      "implementation_status": "Proposed configuration and activation helper supplied; application enforcement still requires implementation and runtime tests.",
+      "provisional_choices": [
+        {
+          "id": "OD-004-synthetic-explicit-historical-recipient",
+          "choice": "An explicit audited synthetic historical grant may authorize an active scoped recipient absent the original current audience, only for a superseded nonwithdrawn exact version. New current grant IDs never silently restore a preserved pinned audience. Same/older ordinal re-release is disabled in this development slice.",
+          "rationale": "Separate current and historical entitlements without implicit carryover or fallback restoration after withdrawal.",
+          "activation_gate": "Live history/re-release policy and client notices still require owner activation; this is metadata-only synthetic behavior.",
+          "production_enabled": false
+        }
+      ]
     },
     {
       "id": "OD-005",

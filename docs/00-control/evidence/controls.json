@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T18:50:37.967Z",
+  "recorded_at": "2026-10-09T19:06:22.664Z",
   "result": "passed",
-  "digest": "3340259193d26c6445d9fc1b05f36d7daa54ae4f01fac9a81503c4b4771f35a0",
+  "digest": "6bdb748604bbb823b1d4cf98e51a751d2a25bf92b13bb73e07c495e4cc9bce17",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -42,11 +42,11 @@
     ".github/ISSUE_TEMPLATE/decision_required.md": "255c2f1e6faee2f867fe9701976ffa6dd6b842700735c571e745ea3de098f247",
     ".github/ISSUE_TEMPLATE/feature_ticket.md": "28efae09a269cdd41df8e1287b98089221002c34b28417722e032468e274e5cb",
     ".github/PULL_REQUEST_TEMPLATE.md": "d025bd4eb9f16ba101c4f43ec123f94abd5709f59a531cf9e188b1c92af9d026",
-    ".github/workflows/ci.yml": "bdff3d95169a0fc9c9233e780813ce236a52d1f0a6cfa2ed834e1b02f05487bb",
+    ".github/workflows/ci.yml": "5d34c59a30f4fe46dc68d695c6da2aeb70ffa501673e39ea79095420cf15a8e7",
     ".gitignore": "34fc960968677f85e01a6325224b565b97ee27deff865d8d9719ec43f6cca648",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "8bab217afafa73c0081a3cc7ae7f525129c382d69d94ab557e8d562931aafaf7",
-    "BUILD_STATE.json": "7511dfbcc7b120f2cb49a36b63a8d62687325c4f346de7af0d610d30bca166c6",
+    "BUILD_QUEUE.json": "6e19bff84f4522efb365d34db87d11c13699b679387a0272d99773bc9bd9e622",
+    "BUILD_STATE.json": "606d77c04976873b23d7041ab3213966a28be76155e8e8b4becf0cb54c84ec52",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -66,7 +66,8 @@
     "docs/00-control/OWNER_REVIEW.md": "aaf1978b62595837097b223d7aaa0a860b151b159a003f326521e5dab6572fb2",
     "docs/00-control/PROJECT_STATE.md": "bf9f2b723461bb0e795ad07d3cb23fc8ea0ff86f11da808cd788055f17094d65",
     "docs/00-control/reviews/CAPABILITY-INTEGRATION-2026-10-09.json": "dbb927234abfe181e94ee72de6db4590b104e47df3e259102d530260e69c4148",
-    "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json": "481e6affcdef0a59c2fc53d10413d802b1ea0f5ae74d323814c23831beeb5b45",
+    "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json": "1e12c8995400492177a142e23613b62b9596eb1cb86432bde462a3f7f23e372d",
+    "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json": "24f31b6100d67c5800fa2d6a0aa6ffcfd43ee450b46a0c8117a30b9602ed6ac1",
     "docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json": "448da7a51ab59222d6fdb38f0d54d75920e24d198daee00f7849c0257af85f9a",
     "docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json": "f303816a40b2c58a10c112eb372cfdd32c10a4b00a20ac194aa4ea59f0ef40a0",
     "docs/00-control/reviews/SEC-001A-2026-10-08.json": "e5596c049716bbbbbecbf8c70e019dc05dfc647cf73760b7eea053d89b6dccb2",
@@ -105,6 +106,7 @@
     "docs/03-data/ADR-003-PRIVATE-OBJECT-BOUNDARY.md": "d2c778f6a4289fad3544cd62c2989314eb32b7cfd386ed19b811bbe6afea3fa6",
     "docs/03-data/DOCUMENT_VERSION_CONTENT_CONTRACT.md": "e3bdee0d44e8aec29f853c228beb3a9c1abaa0a05f23b3eb0ab84559f0cd2c7b",
     "docs/03-data/DOCUMENT_VERSION_CONTRACT.md": "9b23443b8eb3b88d64d8b2c38c3bcce7691f32fe32e553bb63059bca5f34576c",
+    "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md": "474aaf2bfafca74c5b2c0ac9d9c7c6bde4421bcd2de076a22642f00b177f5859",
     "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md": "d8cab41d89ff31da59320b638aaa2644c16c9156c6dfeaf608283911750b0a89",
     "docs/03-data/FIELD_DICTIONARY.md": "240f089042ee3d29602a30132c69fedae0d8cfce7e52b9878470bd5042656098",
     "docs/03-data/FOUNDATION_MIGRATION_CONTROL_PACKET.md": "39dcd6cfd669605f7aa0211587d70fb9c576ffeb82e9e7b50adee6c1d6853d27",
@@ -188,11 +190,11 @@
     "docs/10-history/pre-modernization/docs/08-ai/PROMPT_LIBRARY.md": "121cb8fdd52ee8091031968cc78b5fa4fcf2addbffad5becf8a7376148fec5f5",
     "docs/10-history/pre-modernization/README.md": "5d8a374c8dca75d58e872f7a48a2a350db156c904c4e84a105a20b50f53c1b85",
     "docs/10-history/README.md": "94c85a43e127866dd38f8ae3898c76b6addb2a2517bcb0b39a6ddf9e230f4f18",
-    "OWNER_DECISIONS.json": "bdb502406268458994b5b84598e5013ceca469ec8f75403a9ddbb7bcae092887",
+    "OWNER_DECISIONS.json": "57cf838df8f8346283b044acd18fec04a6a949af8badc786d5448adff576e7e9",
     "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
     "package.json": "35354859711624945d76690ad5e4396f88ab748542c762e1f12ed900db4064e4",
     "playwright.config.ts": "2c4ab092a3456a331ea96f441d80f63a8b5b60d42e47e347431d6b0b3999f9c7",
-    "playwright.runtime.config.ts": "e53056e12b9645b7d60d0923393e9c0e7e0e8842bb236937914ca3f0de09b39e",
+    "playwright.runtime.config.ts": "98a085c00f2fcac9ef0dece5507ea91e7bf55ee0deae4f4484628a1752efad2a",
     "README.md": "4fdb7a94ac14fd70be61f3c97c1156b8d4db34068106ea70057084d8bb7deb19",
     "REQUIREMENTS.json": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
     "scripts/check-docs.mjs": "c874e58a9cc8e1037ba207886836fea36fd6afe97413aaa2437c519ed945b108",
@@ -204,9 +206,9 @@
     "scripts/verify-source-reconciliation.mjs": "d0a816ea8a64e6d80404d0405dc156c105d675aa3c3bc598217b3ab8a5bc3133",
     "tests/unit/control-system.test.mjs": "a64dc78e1838d689a50dfd4780dac6b41b0d2f07189013043d46047dba90f692",
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
-    "VERIFICATION_PROFILES.json": "a44be9970a0f3d404b1bbfde8ac67d5ce53b20c2c77df248e97f8c095ddacca7"
+    "VERIFICATION_PROFILES.json": "6ef8b7175bc6ffce11935429707f2f3518c416dc9ad935b66b5df9c86b57bd33"
   },
-  "observed_git_head": "870fc25923c1ec310f6e037e1dcbf47d70c2e1fd",
+  "observed_git_head": "c6b39d26c46977da244caa805e23626d58edb6c0",
   "results": [
     {
       "argv": [
@@ -240,5 +242,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "923a51fb9fa1967c17ad2bead980517ecef7337dacae4a0c136953410bd0e14c"
+  "log_sha256": "dd9b0bcafd5debee222d5b480a60647b98f3d801dc7c9dc5bb76e3395e5afd51"
 }

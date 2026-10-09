@@ -58,7 +58,7 @@
     {
       "id": "UI-2026-10-09",
       "title": "Responsive application and full-destination module interfaces",
-      "status": "implemented",
+      "status": "in_progress",
       "dependencies": [],
       "requirements": [
         "M01",
@@ -106,7 +106,7 @@
         "web/src/lib/sample-case.ts",
         "tests/unit/sample-case.test.mjs"
       ],
-      "assigned_to": "root integration lead; prior owner_auth_ui; independent integration review",
+      "assigned_to": "ui_integration; root integration",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -114,7 +114,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Full demo/planning/Spatial increment integrated and reviewed. Source checkpoint/publication current; preserve actual owner workflow evidence and complete protected connected acceptance once secret/browser dependency clears. DOC-001C UI is the next separate bounded writer task.",
+      "next_action": "Preserve reviewed full20module/Spatial demo. Apply narrow mobile document hierarchy/readable-name polish in private-files, private-object-upload, document-versions and intake only; reuse authorized data and existing mutation fences. Focused affected journeys and source parity, then publication.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -1645,8 +1645,8 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Implement connected exact-version review status/request/decision against deployed20261009172736 contract, frozen uncertain retry, current authority, responsive states; focused adapter/browser verification, independent review, then exact transfer to existing Lovable project.",
-      "status": "in_progress",
+      "next_action": "Reviewed exact f3b1b706 UI integrated.10 adapter checks,17 new browser fixtures,2 focused denial cases and3 existing route regressions passed; final build and exact Lovable source transfer in progress. Genuine assigned-human hosted workflow remains gated separately.",
+      "status": "implemented",
       "requirements": [
         "M13",
         "M19",
@@ -1661,14 +1661,17 @@
         "OD-004",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "document-reviews-client-unit",
+        "document-reviews-browser-fixture"
+      ],
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
     {
       "id": "DOC-001D-BACKEND",
       "title": "Synthetic exact-version release, explicit audiences, replacement and withdrawal",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "DOC-001C-BACKEND"
       ],
@@ -1693,11 +1696,13 @@
         "OD-004",
         "OD-013"
       ],
-      "verification_profiles": [],
+      "verification_profiles": [
+        "document-releases-database"
+      ],
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Build reviewed bounded synthetic exact-version controller/audience metadata contract with immutable replacement/withdrawal. Existing approval remains historical; every action rechecks current authority and safety. Released-byte gateway remains next explicit slice. No cloud/real-person grants.",
+      "next_action": "Reviewed3203c08 backend integrated;45/45 focused simulatedAuth tests pass. Fresh actual target12migration hashes match source. Save reviewed code remotely, deploy once, verify canonical migration/source and ACLs. Metadata only; next released-byte gateway remains separate.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

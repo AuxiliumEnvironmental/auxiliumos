@@ -92,6 +92,7 @@ jobs:
       - run: npm run os:verify -- document-content-database
       - run: npm run os:verify -- workspace-plans-database
       - run: npm run os:verify -- document-reviews-database
+      - run: npm run os:verify -- document-releases-database
       - run: npm run os:verify -- document-content-gateway-unit
       - run: npm run os:verify -- private-file-unit
       - run: npm run os:verify -- private-file-entrypoint
@@ -100,6 +101,7 @@ jobs:
       - run: npm run os:verify -- document-versions-client-unit
       - run: npm run os:verify -- document-content-client-unit
       - run: npm run os:verify -- workspace-plans-client-unit
+      - run: npm run os:verify -- document-reviews-client-unit
       - run: node --test tests/unit/sample-case.test.mjs
       - run: npm run os:verify -- api-fixture-safety
       - run: node --test tests/unit/owner-onboarding.test.mjs tests/database/owner-onboarding.test.mjs
@@ -111,6 +113,7 @@ jobs:
       - run: npm run os:verify -- private-file-browser-fixture
       - run: npm run os:verify -- document-versions-browser-fixture
       - run: npm run os:verify -- document-content-browser-fixture
+      - run: npm run os:verify -- document-reviews-browser-fixture
       - uses: actions/upload-artifact@v7
         if: failure()
         with:

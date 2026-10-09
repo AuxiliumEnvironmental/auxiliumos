@@ -1,0 +1,17 @@
+{
+  "reviewed_at": "2026-10-09T19:06:19.842346+00:00",
+  "reviewer": "integration_review",
+  "source_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
+  "migration_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+  "blocking_findings": [],
+  "scope": "Exact separate controller/approval, synthetic class and current scope/safety, pinned audience, current/history separation, CAS/full-intent retries, immutable narrowing/system provenance, and checked recipient discovery",
+  "focused_tests": 45,
+  "failed_fixture_history": "Earlier expected provenance and trusted PHI-state probe fixture errors diagnosed/corrected; first and second logs preserved. No production SQL correction was needed for those fixture mistakes.",
+  "final_log_sha256": "1f276a3d4039215d2785e2d7584cb4cfb5454a68a20a2c0cb1564a7742b055c7",
+  "limits": [
+    "Simulated Auth only",
+    "No hosted/API or genuine concurrent sessions",
+    "No released-byte gateway or release UI",
+    "No actual professional or recipient grants"
+  ]
+}
