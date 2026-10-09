@@ -134,6 +134,48 @@
         "Actual provider OPTIONS",
         "Genuine signed-in hosted journeys"
       ]
+    },
+    "empty_options_stream": {
+      "reviewed_commit": "ef8600d05726e8acb5d36cc2980a6da396ee1d1d",
+      "requirements": [
+        "C01",
+        "C05",
+        "M19"
+      ],
+      "disposition": "Independent GitHub-only actual patch review found no actionable issue. Non-null empty OPTIONS stream is read with zero-byte limit; payload/read error fails closed. GET and all authorization/audit paths unchanged.",
+      "evidence": "CI56 on3a862d25 passed. Exactv3providerreadback. Lovableorigin and4179providerOPTIONS204; foreign/lookalike403. Initialv2failure andmistyped5173probe preserved in development-private-function.json.",
+      "limits": "Not genuine authenticated content retrieval, Auth isolation, Storage or delivery acceptance."
+    },
+    "durable_public_development_connection": {
+      "reviewed_commits": [
+        "b15a23b98ccdf017cc9d50cbf12ede7f717c0671",
+        "b1ba85ca4a040a8dea5070675667e85fec933d77",
+        "5c4c524ec64fb985a06ebd31063b580f18baa362"
+      ],
+      "requirements": [
+        "ADR-002",
+        "C01",
+        "C05"
+      ],
+      "disposition": "Independent actual patch review: no unresolved actionable finding afterP3fix. PublicdevURL/key only; normalproductionmode, startup/runtimevalidator, auth andloopback restrictions unchanged. Samecompletewebapp buildartifact rootdist only for explicitbuild:dev.",
+      "finding_closed": {
+        "severity": "P3",
+        "path": "web/.gitignore",
+        "impact": "Unanchored!.env.development also unignored descendantmodefiles beyondtheone reviewedpublicfile.",
+        "reproduction": "Gitpattern semantics allowweb/src/.env.development; noactualsecret exposure observed.",
+        "fix": "Anchor!/.env.development; newtest usescheck-ignore--no-index to require exactpublicfile allowedand6otherenvpaths ignored.",
+        "test": "Focused regression1pass afterfix; unchanged8config/buildchecks reused; finalGitHubCI oncontainingcommit required."
+      },
+      "portability_findings_closed": [
+        "Nestedignoreinitiallypreventedpublicmodefile frombeingsaved; independentlyreadsavedfileafterfix.",
+        "Existinghostrequiredrootdist; fullappbuild:devnowemitscorrectartifact andplatformbuildOK."
+      ],
+      "source_parity": "Lovable1eb5a991 independentlymatches334canonicalfiles at5c4c524e;7exactrawreads+327unchanged and noothercanonicaldiff.",
+      "limits": [
+        "Not authentic backend user journey",
+        "No production publication",
+        "Local review-workflow patches remain uncommitted due transport outage"
+      ]
     }
   }
 }

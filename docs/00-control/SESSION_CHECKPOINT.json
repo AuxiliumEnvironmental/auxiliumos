@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T08:56:23.132Z",
+  "created_at": "2026-10-09T09:25:24.023Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,22 +8,23 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
+  "first_unfinished_action": "Collect the interrupted local worker calls without resubmitting writes: backend cell21/sessions95415,40105 and UIcell47/browser68533. The workspace exec transport still does not respond. Backend first fix: read review head, events and capability flags in one SQL snapshot after current authorization; then inspect actual saved code and run focused affected tests. Correct the pending contract's unconfirmed47-test claim. UI first: collect final54-case result, revert only temporary testMatch/dependency symlink, review and commit the five allocated files. Once execution recovers, fetch and deliberately reconcile remote-only commits after localed6b29b; never reset, reimport or recreate code from prose. Securely configure/run the existing protected development API workflow for authentic acceptance; no secret values in chat.",
   "git": {
     "is_repository_root": true,
-    "head": "3828ea26365c9d2d78cf9c305c19cd064a8fa3b7",
+    "head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/development-private-function.json\n M docs/00-control/evidence/lovable-source-transfer.json\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n?? node_modules",
+    "working_tree": "Last confirmed root had only untracked node_modules symlink; not re-observed after transport failure.",
     "remote": {
-      "status": "last_verified_before_remote_only_checkpoint",
       "branch": "wip/recovery-2026-10-08",
-      "head": "42741cdc10544a19aa5ced9d28048c709ef2e416",
-      "tree": "4685dfad125e69dca9bfdcd1c73e5e4b36a79b75"
-    }
+      "head": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b",
+      "tree": "30c88ff4b508fca77743c38db79fc3d5523347ba",
+      "status": "last_read_before_this_checkpoint_publication"
+    },
+    "source_to_publish": "5c4c524ec64fb985a06ebd31063b580f18baa362"
   },
   "controls_digest": "593af7e8f6f5dd033cb7d8932667685f2fd7fb6a8c16c98ca8d890bf602933a7",
-  "next_ready_task": "CTRL-001",
+  "next_ready_task": "DOC-001C-BACKEND",
   "blocked_tasks": [
     {
       "id": "SEC-001B",
@@ -192,7 +193,7 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Remote API checkpoint after execution transport failure, not a fresh filesystem observation or a claim the active local review patches are saved remotely. Preserve active jobs/files and collect their results. Local and remote source must be reconciled before integration; no resets.",
+  "note": "Remote-only checkpoint while workspace execution is unavailable. Local review-workflow code is not remotely saved. Published source and actual local changes must be reconciled without reset when access returns.",
   "execution_outage": {
     "observed_at": "2026-10-09T08:56:23.132Z",
     "root_last_local_head": "ed6b29bccfe650e8de6ee5b399a2399d81e4bad3",
@@ -239,6 +240,29 @@
       ],
       "port4179_release_unverified": true
     },
-    "saved_remotely": false
+    "saved_remotely": false,
+    "latest_read_only_check": "pwd no response within15seconds; no actual new filesystem state observed",
+    "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative."
+  },
+  "verification_context": {
+    "note": "The existing evidence map below is the last filesystem-generated observation, not a fresh rerun; do not restart completed reconciliation/setup because external receipts expire. GitHubCI56 passed3a862d25; currentconfig Lovabletests passed and nextcontainingcommitCI must be checked.",
+    "source_ci_run": 37908695151,
+    "source_ci_status": "success",
+    "lovable_parity": {
+      "observed_at": "2026-10-09T09:23:33.105Z",
+      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+      "source_tree": "1303312225d1d37e452ab2496adea2a6acab37f1",
+      "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+      "canonical_files": 334,
+      "unchanged_from_previous_verified": 327,
+      "changed_raw_files_independently_compared": 7,
+      "mismatches": [],
+      "noncanonical_platform_files_preserved": [
+        "web/.lovable/project.json",
+        "bun.lock"
+      ],
+      "source_parity_not_native_sync": true,
+      "production_published": false
+    }
   }
 }

@@ -14,11 +14,11 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Verified remote42741cdc10544a19aa5ced9d28048c709ef2e416 tree4685dfad125e69dca9bfdcd1c73e5e4b36a79b75 equals lastlocaled6b29b. CI55 run37907152104 SUCCESS. No manual workflow_dispatch run exists for this branch as of08:54Z. Later remote-only diagnostic patch/checkpoint must be fetched before local integration.",
+    "github": "Connected API publication works. Last branch read3a862d25; CI56/run37908695151 SUCCESS. This checkpoint accompanies independently reviewed durable-config source5c4c524e; verify its containing remote commit/CI after publication. Local root remains last-confirmeded6b29b and must reconcile remote-only changes without reset.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "Nine canonical migrations applied with exact hashes;29 application tables allRLS. Both Edge functions are version2 ACTIVE with JWT verification and exact source readback. The content gateway allows-origin preflight still returns400; independently reviewed empty-stream correction awaits CI, deployment and real-provider verification. Operational gates remain disabled. No genuine hostedAuth/API acceptance.",
-    "lovable": "Saved project1a625d6e9a1d3e8d7be7e7f50d348abc004fa886 independently matches all333 canonical files atad72945. Build:dev and13adapter checks passed. Later gateway-origin changes are not yet mirrored. Existing publicweb/.env preserved; durable runtime settings and nativeGitHubsync are not verified. Not published to production.",
-    "workspace_execution": "Shared exec-server transport disconnected during active backend/UI work. One bounded read-only pwd check did not return in30s. Root read-only cell169 terminated. Source already published is safe; next review increment remains only in two local worktrees until connection recovers."
+    "supabase": "Nine canonical migrations confirmed; private-objects Edgev2 and document-version-content Edgev3 ACTIVE/JWT verified. Exact contentv3source readback and intended-origin public preflights pass; foreign/lookalike origins denied. Fresh09:23:33Z check: content/reservation gatesfalse, synthetic-onlytrue, Auth0, buckets0. No genuine signed-in or Storage acceptance.",
+    "lovable": "Existing project saved1eb5a991bce8a48e30418a90ec21654e0936802f independently matches334canonical files at5c4c524e (7changedrawreads+327unchanged); two pre-existing platform files retained. Publicdevsettings now saved in tracked exactpath; fullapp development artifactrootdist passes platformbuild. No nativeGitHubsync, realAuthacceptance or productionpublication.",
+    "workspace_execution": "Shared exec-server transport remains unavailable. Latest bounded read-only pwd attempt had no response in15s; no repeated writes/tests were submitted. Reviewed remote increments are safe; review-workflow backend/UI files remain only in localworktrees. Exact raw patch export was unavailable, so workers did not reconstruct or falsely publish them."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
+  "first_runtime_action": "Collect the interrupted local worker calls without resubmitting writes: backend cell21/sessions95415,40105 and UIcell47/browser68533. The workspace exec transport still does not respond. Backend first fix: read review head, events and capability flags in one SQL snapshot after current authorization; then inspect actual saved code and run focused affected tests. Correct the pending contract's unconfirmed47-test claim. UI first: collect final54-case result, revert only temporary testMatch/dependency symlink, review and commit the five allocated files. Once execution recovers, fetch and deliberately reconcile remote-only commits after localed6b29b; never reset, reimport or recreate code from prose. Securely configure/run the existing protected development API workflow for authentic acceptance; no secret values in chat.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -77,7 +77,7 @@
     "edge_deployment": {
       "receipt": "docs/00-control/evidence/development-private-function.json",
       "slug": "private-objects",
-      "version": 1,
+      "version": 2,
       "verify_jwt": true,
       "full_runtime_acceptance": false
     },
@@ -131,8 +131,19 @@
       "deployed": true,
       "hosted_api_acceptance": false,
       "operational_gates_enabled": false,
-      "edge_version": 1,
-      "ci_run": 37905733746
+      "edge_version": 3,
+      "ci_run": 37908695151
+    },
+    "development_connection": {
+      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+      "reviewed": true,
+      "implemented": true,
+      "location": "web/.env.development",
+      "public_only": true,
+      "tests": "8configuration checks passed in Lovable on same runtime/build behavior; added exact-ignore test1passed afterP3fix; final source GitHubCI required.",
+      "build": "build:dev emits the same complete canonicalweb app into rootdist; normalbuild remainsproductionmode/webdist and doesnotembeddevkey whenunconfigured.",
+      "deployed_to_production": false,
+      "real_backend_acceptance": false
     }
   },
   "execution_recovery": {
@@ -166,22 +177,18 @@
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
     "active_worktree": "/workspace/scratch/831a296a4676/auxiliumos-current",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
-    "active_agents": [
-      "/root/document_review_backend",
-      "/root/document_content_ui"
-    ],
-    "first_unfinished_action": "Recover the interrupted workspace calls and collect backend cell21/sessions95415,40105 and UIcell47/browser68533 without resubmitting pending writes. Backend first: fix the status head/history/flags SQL snapshot coherence issue, then run focused affected checks; correct any premature47-test claim if its result cannot be recovered. UI: collect54-case result, revert only its temporary testMatch/symlink, inspect and commit the five allocated files. Fetch/reconcile remote-only changes against root localed6b29b without reset or overwrite. Preflight fix independently reviewed; require exact-commit CI and real-provider verification before acceptance. No hostedAuth/API acceptance is claimed.",
-    "latest_verified_remote": "42741cdc10544a19aa5ced9d28048c709ef2e416",
+    "active_agents": [],
+    "first_unfinished_action": "Collect the interrupted local worker calls without resubmitting writes: backend cell21/sessions95415,40105 and UIcell47/browser68533. The workspace exec transport still does not respond. Backend first fix: read review head, events and capability flags in one SQL snapshot after current authorization; then inspect actual saved code and run focused affected tests. Correct the pending contract's unconfirmed47-test claim. UI first: collect final54-case result, revert only temporary testMatch/dependency symlink, review and commit the five allocated files. Once execution recovers, fetch and deliberately reconcile remote-only commits after localed6b29b; never reset, reimport or recreate code from prose. Securely configure/run the existing protected development API workflow for authentic acceptance; no secret values in chat.",
+    "latest_verified_remote": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
-      "message_id": "umsg_01m4fx1brzfqmaanepv5gtfezj",
+      "message_id": "umsg_01m4fze89fe7sbjjxg6xddbqb7",
       "thread_id": "main",
-      "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
-      "archive_sha256": "be9b56e683c296f13c7e1962c977a12191aa5c597008acfd0f56775be9c7f8f3",
-      "status": "completed_333_of_333_saved_source_parity",
+      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+      "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+      "status": "completed_334_canonical_files_exact",
       "native_github_sync": false,
-      "receipt": "docs/00-control/evidence/lovable-source-transfer.json",
-      "target_commit": "1a625d6e9a1d3e8d7be7e7f50d348abc004fa886"
+      "receipt": "docs/00-control/evidence/lovable-source-transfer.json"
     },
     "execution_outage": {
       "observed_at": "2026-10-09T08:56:23.132Z",
@@ -229,7 +236,9 @@
         ],
         "port4179_release_unverified": true
       },
-      "saved_remotely": false
+      "saved_remotely": false,
+      "latest_read_only_check": "pwd no response within15seconds; no actual new filesystem state observed",
+      "patch_export": "No programmatic raw-input export was available. No reconstructed patch artifact was created; existing worktrees remain authoritative."
     }
   }
 }

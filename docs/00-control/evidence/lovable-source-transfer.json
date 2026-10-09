@@ -57,7 +57,7 @@
       "target_commit": "6c31aa8faf2c70eb7dd71e4414520f6dbea893c3"
     }
   },
-  "next_action": "Continue canonical implementation; transfer each reviewed code increment to this existing project with source parity. No active Lovable job. Confirm supported durable public runtime settings before hosting acceptance; do not infer native GitHub sync from exact manual transfer.",
+  "next_action": "Continue from exactcanonicalsource; do not recreate the ignoredweb/.env. Track onlyreviewedpublicweb/.env.development. Transfer future coherentcodeincrements and verifyactualsavedsource. Recover localreviewpatches beforeimplementationoverlap; genuineAuthacceptance requiresprotectedworkflow.",
   "native_github_sync": false,
   "hosted_authenticated_acceptance": false,
   "production_published": false,
@@ -83,22 +83,40 @@
     "configuration_durability": "Public runtime values reside in untracked gitignored web/.env; sign-in was worker-verified. Durable platform environment-settings persistence has not been independently established."
   },
   "latest_verified_transfer": {
-    "observed_at": "2026-10-09T08:45:03.081Z",
-    "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
-    "source_tree": "7b3a25613f2f323d700b1c27c3cd2a2bc67503a6",
-    "target_commit": "1a625d6e9a1d3e8d7be7e7f50d348abc004fa886",
-    "message_id": "umsg_01m4fx1brzfqmaanepv5gtfezj",
+    "observed_at": "2026-10-09T09:23:33.105Z",
+    "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+    "source_tree": "1303312225d1d37e452ab2496adea2a6acab37f1",
+    "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+    "canonical_files": 334,
+    "unchanged_from_previous_verified": 327,
+    "changed_raw_files_independently_compared": 7,
+    "mismatches": [],
+    "noncanonical_platform_files_preserved": [
+      "web/.lovable/project.json",
+      "bun.lock"
+    ],
+    "source_parity_not_native_sync": true,
+    "production_published": false,
+    "message_id": "umsg_01m4fze89fe7sbjjxg6xddbqb7",
     "thread_id": "main",
-    "archive_sha256": "be9b56e683c296f13c7e1962c977a12191aa5c597008acfd0f56775be9c7f8f3",
-    "saved_files_exact": 333,
-    "independent_proof": {
-      "unchanged_from_prior_exact_parity": 302,
-      "changed_raw_files_read_and_exact_compared": 31,
-      "missing": 0,
-      "mismatched": 0,
-      "canonical_deletions": 0
+    "saved_parity_verified": true,
+    "worker_checks": {
+      "configuration_eight": "passed; behavior unchangedbyanchoringfix",
+      "exact_ignore_new_case": "1passed,0failed; other8excludedbyexplicitfilter",
+      "structural_controls": "npm runos:checkvalid; notapplicationacceptance",
+      "development_build": "passed;rootdist/index.htmlandassetscontaincorrectpublicpair",
+      "production_build": "passed;devpublickeynotinunconfiguredproductionbundle",
+      "platform_build": "2026-10-09T09:18:49Z buildOKafterrootdistcorrection"
     },
-    "worker_checks": "build:dev passed,13contentadapter checks passed; no repeat of unsupported browserenvironment.",
-    "limits": "No nativeGitHubsync, genuinebackendjourney, durable runtime envsetting or production publication. Publicweb/.env unchanged. LaterCORS3828ea2 notyetincluded."
+    "limits": "No nativeGitHubsync, authenticAuth/Storagejourney or productionpublication. Checkpoint-onlyrecords afterthissourcepinwilldiffer untilnextcoherenttransfer."
+  },
+  "configuration_durability": {
+    "previous_failure": "Ignoredweb/.env disappeared during sandboxreset; previousdurability wasnotverified.",
+    "initial_candidate": "b15a23b98ccdf017cc9d50cbf12ede7f717c0671",
+    "initial_save_failure": "Nestedweb/.gitignore excludedpublicmodefile;4of5files saved atd4fb0b3. DiskpresencewasnotGitpersistence.",
+    "artifact_failure": "Hostexpectedrootdist whilepreviousbuild:devemittedwebdist.",
+    "fixed_source": "5c4c524ec64fb985a06ebd31063b580f18baa362",
+    "fixed_saved_target": "1eb5a991bce8a48e30418a90ec21654e0936802f",
+    "persistence": "Publicmodefile independentlyreadfromsavedGit; existingtargetonly. Productioncommand/configvalidator unchanged."
   }
 }

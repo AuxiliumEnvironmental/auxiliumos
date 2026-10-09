@@ -1477,7 +1477,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Pinneddf0ed913; agreed current requester/create-version authority, explicit synthetic reviewer assignment+current exact-content authority, deliberate exact-version attestation, immutable request/terminal decision and dynamic current eligibility. Workerimplements/tests; lead independent review before integration/deployment.",
+      "next_action": "Execution interrupted; preserve localdocument-review-backend atdf0ed913, cell21/sessions95415,40105. Recover actualfiles/results, fix one-snapshot status coherence, correct unconfirmed47claim, runaffectedchecks, commit and obtain independentconsequentialreview. No tenth migration deployed; seeSESSION_CHECKPOINT.",
       "status": "in_progress",
       "requirements": [
         "M13",
@@ -1516,7 +1516,7 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Pinneddf0ed913; frozen document_version_review_status/request_document_version_review/decide_document_version_review contract. Synthetic-only qualification label; no download→review inference, no real approval/release. Worker owns4179 until finished; root permanent testMatch/profile/pageintegration.",
+      "next_action": "Execution interrupted; preserve localdocument-review-ui atdf0ed913, cell47/session68533 and port4179reservation.12adapter/18newbrowser/build confirmed; final54results uncollected. Recoverresults, restoreonlytemporarytestMatch/symlink, inspectactual5files andcommit; no reconstructedcode. SeeSESSION_CHECKPOINT.",
       "status": "in_progress",
       "requirements": [
         "M13",

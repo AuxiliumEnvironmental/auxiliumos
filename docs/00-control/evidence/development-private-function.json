@@ -150,6 +150,183 @@
       ],
       "passed": false
     },
-    "disposition": "Upload real OPTIONS passes; content allowed-origin OPTIONS fails400. Exact deployedv2source verified. Suspected provider representation of empty OPTIONS body as nonnullstream; bounded correction proposed and new regression appended. Not yet verified or deployed; no Auth/Storage acceptance inferred."
-  }
+    "disposition": "Historicalv2failure preserved. Independently reviewed empty-stream correction published3a862d25, CI56passed, deployedcontentv3 exactreadback. Intendededitor and4179 OPTIONS now204, foreign/lookalike403; genuine signed-in/Auth/Storage acceptance stillnotrun.",
+    "empty_options_correction": {
+      "source_commit": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b",
+      "patch_reviewed": "ef8600d05726e8acb5d36cc2980a6da396ee1d1d",
+      "review": "No actionable finding; prove nonnull OPTIONS stream haszero bytes before route/header checks. GET/currentAuth/doubleauthorization/audit unchanged.",
+      "ci_run": 37908695151,
+      "ci_conclusion": "success",
+      "deployment": {
+        "observed_at": "2026-10-09T09:06:07.013Z",
+        "id": "4bbddcf6-39a8-46b1-9c71-ff2ee7506c41",
+        "version": 3,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "bundle_sha256": "28816bb621eb7f8b747595f048be677e07e16bcd2e9438be3e0fd45b2a0f7421",
+        "exact_source_match": true,
+        "source_commit": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b"
+      },
+      "provider_probe_runner": "Lovable supported terminal, unauthenticated OPTIONS only",
+      "provider_probe_message": "umsg_01m4fyp8rzean90sqw9ds9py9d",
+      "provider_probe_report": [
+        {
+          "fn": "document-version-content",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "status": 204,
+          "allow_origin": "(exact echo)",
+          "allow_methods": "GET,OPTIONS",
+          "allow_headers": "authorization,apikey,content-type,x-client-info",
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "vary": "Accept-Encoding, Origin",
+          "body": ""
+        },
+        {
+          "fn": "private-objects",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app",
+          "status": 204,
+          "allow_origin": "(exact echo)",
+          "allow_methods": "GET,POST,PUT,OPTIONS",
+          "allow_headers": "authorization,apikey,content-type,x-state-revision,x-client-info",
+          "cache_control": null,
+          "allow_credentials": null,
+          "vary": "Accept-Encoding, Origin",
+          "body": ""
+        },
+        {
+          "fn": "document-version-content",
+          "origin": "http://localhost:5173",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "forbidden_origin"
+          }
+        },
+        {
+          "fn": "private-objects",
+          "origin": "http://localhost:5173",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "origin_unavailable"
+          }
+        },
+        {
+          "fn": "document-version-content",
+          "origin": "https://foreign.example.invalid",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "forbidden_origin"
+          }
+        },
+        {
+          "fn": "private-objects",
+          "origin": "https://foreign.example.invalid",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "origin_unavailable"
+          }
+        },
+        {
+          "fn": "document-version-content",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app.evil.invalid",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "forbidden_origin"
+          }
+        },
+        {
+          "fn": "private-objects",
+          "origin": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app.evil.invalid",
+          "status": 403,
+          "allow_origin": null,
+          "cache_control": "private, no-store",
+          "allow_credentials": null,
+          "body": {
+            "error": "origin_unavailable"
+          }
+        }
+      ],
+      "corrected_local_probe_message": "umsg_01m4fz0httfkqb856rq8wm0y9d",
+      "corrected_local_probe_report": [
+        {
+          "fn": "document-version-content",
+          "method": "GET",
+          "status": 204,
+          "body_bytes": 0,
+          "access-control-allow-origin": "http://127.0.0.1:4179",
+          "access-control-allow-methods": "GET,OPTIONS",
+          "access-control-allow-headers": "authorization,apikey,content-type,x-client-info",
+          "access-control-expose-headers": "Content-Disposition,Content-Length,X-Content-Type-Options,Cache-Control",
+          "access-control-allow-credentials": null,
+          "cache-control": "private, no-store",
+          "vary": "Accept-Encoding, Origin"
+        },
+        {
+          "fn": "private-objects",
+          "method": "POST",
+          "status": 204,
+          "body_bytes": 0,
+          "access-control-allow-origin": "http://127.0.0.1:4179",
+          "access-control-allow-methods": "GET,POST,PUT,OPTIONS",
+          "access-control-allow-headers": "authorization,apikey,content-type,x-state-revision,x-client-info",
+          "access-control-allow-credentials": null,
+          "cache-control": null,
+          "vary": "Accept-Encoding, Origin"
+        }
+      ],
+      "test_input_correction": "Initial post-fix probe mistakenly expectedlocalhost5173allowed. Exact defaultsallow4179, so5173correctly403. Two4179followups passed; no applicationpermissions widened.",
+      "target_facts": {
+        "observed_at": "2026-10-09T09:23:33.105Z",
+        "content_enabled": false,
+        "content_synthetic_only": true,
+        "auth_users": 0,
+        "storage_buckets": 0,
+        "configuration_tables": [
+          "document_content_config",
+          "private_object_reservation_config"
+        ],
+        "reservation_enabled": false,
+        "migrations": 9
+      },
+      "authenticated_acceptance": false
+    }
+  },
+  "current_functions": [
+    {
+      "id": "2727d9ce-5651-4519-abb4-64f3e532f70f",
+      "slug": "private-objects",
+      "version": 2,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "ezbr_sha256": "633038dd41cf2b5c3bb722ce61dabbaaff93deb0548a68d45f8c441facbdb7a8",
+      "observed_at": "2026-10-09T08:48:25.809Z",
+      "two_files_exact": true
+    },
+    {
+      "observed_at": "2026-10-09T09:06:07.013Z",
+      "id": "4bbddcf6-39a8-46b1-9c71-ff2ee7506c41",
+      "version": 3,
+      "status": "ACTIVE",
+      "verify_jwt": true,
+      "bundle_sha256": "28816bb621eb7f8b747595f048be677e07e16bcd2e9438be3e0fd45b2a0f7421",
+      "exact_source_match": true,
+      "source_commit": "3a862d25ab0ff1bf41d5a6ddf4df59c85c49e95b",
+      "slug": "document-version-content"
+    }
+  ]
 }
