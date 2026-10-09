@@ -92,6 +92,17 @@
           ],
           "activation_gate": "Confirm per-account audiences and portal defaults before client onboarding.",
           "source": "docs/03-data/ADR-002-RUNTIME-FOUNDATION.md"
+        },
+        {
+          "id": "OD-003-exact-version-internal-content",
+          "choice": "Synthetic internal content requires a separate exact immutable version/digest/recipient view_content grant plus current logical-version view and active facility access. A separate audited development content-enable switch defaults false; it is an operational control, not new owner approval.",
+          "rationale": "Metadata, uploader, directory, technical role and prior authorization cannot become content authority. Current access is rechecked before and after bounded Storage retrieval; preserve holds independently of visibility.",
+          "affected_capabilities": [
+            "M13 internal version download",
+            "M19 read authorization and system-observed outcome audit"
+          ],
+          "activation_gate": "No client release or professional approval. Real actors, safe inspection environment and no-PHI incident procedure plus genuine runtime/provider/concurrency checks remain required under OD001/003/013.",
+          "production_enabled": false
         }
       ]
     },

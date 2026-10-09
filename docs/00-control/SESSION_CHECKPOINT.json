@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T08:00:29.647Z",
+  "created_at": "2026-10-09T08:31:05.476Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,19 +8,20 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
+  "first_unfinished_action": "DOC-001B coherent source is integrated and independently reviewed; finish source publication and verify remote tree/CI, then fresh-preflight/apply only new 20261009080505 migration and deploy exact document-version-content gateway on auxiliumos-dev. Transfer new functional source to existing Lovable and verify saved parity. Nine migration source files exist but only eight are applied at this checkpoint. Genuine hosted Auth/API remains separately blocked by protected configuration; continue exact-version review/release next without restarting auth/SYNC.",
   "git": {
     "is_repository_root": true,
-    "head": "da38bb595cd33b05f71dad299ed147a2e7951fbf",
+    "head": "007fb3599b27df6879e14c117f67618bc1597815",
     "branch": "build/continuation-2026-10-09",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M .gitignore\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/RESUME.md\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/private-file-browser-fixture.json\n M docs/00-control/evidence/private-file-browser-fixture.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M package.json\n M playwright.runtime.config.ts\n M tests/e2e/private-files.spec.ts\n M web/src/pages/private-files.tsx\n?? docs/00-control/evidence/document-versions-browser-fixture.json\n?? docs/00-control/evidence/document-versions-browser-fixture.log\n?? docs/00-control/evidence/document-versions-client-unit.json\n?? docs/00-control/evidence/document-versions-client-unit.log\n?? docs/00-control/evidence/document-versions-database.json\n?? docs/00-control/evidence/document-versions-database.log\n?? docs/00-control/evidence/lovable-source-transfer.json\n?? docs/00-control/evidence/private-file-browser-fixture.missing-browser-failure.log\n?? node_modules",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/reviews/FILE-INTEGRATION-2026-10-09.json\n M playwright.runtime.config.ts\n M tests/api/document-versions.test.mjs\n M web/src/pages/private-files.tsx\n?? docs/00-control/evidence/document-content-browser-fixture.json\n?? docs/00-control/evidence/document-content-browser-fixture.log\n?? node_modules",
     "remote": {
       "status": "not_checked",
       "branch": "build/continuation-2026-10-09",
       "head": null
     }
   },
-  "controls_digest": "dc81df4e72bd40bd9ec65136e6d25086d62f1455df4d99d5e1d676c113ebe7d4",
+  "controls_digest": "be4f421cdf6f100c7f829e8873b8d20c85f03cafb63a78ab53fe5ccd3e221333",
   "next_ready_task": "CTRL-001",
   "blocked_tasks": [
     {
@@ -30,7 +31,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Run the reviewed secure development API/browser workflow after protected configuration; preserve existing independently reviewed authentication code unless a concrete runtime failure warrants a change.",
-      "blocker": "All7 reviewed migrations are applied to auxiliumos-dev;8th document-version increment is reviewed and awaiting publication/application. Genuine Auth/API/browser acceptance requires securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and the protected manual workflow, not a secret in chat."
+      "blocker": "Eight migrations are applied. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat."
     }
   ],
   "evidence": {
@@ -39,7 +40,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T08:00:29.421Z"
+      "recorded_at": "2026-10-09T08:31:05.238Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -153,6 +154,22 @@
     "document-versions-api": {
       "status": "not_run",
       "profile": "document-versions-api"
+    },
+    "document-content-database": {
+      "status": "not_run",
+      "profile": "document-content-database"
+    },
+    "document-content-gateway-unit": {
+      "status": "not_run",
+      "profile": "document-content-gateway-unit"
+    },
+    "document-content-client-unit": {
+      "status": "not_run",
+      "profile": "document-content-client-unit"
+    },
+    "document-content-browser-fixture": {
+      "status": "stale",
+      "profile": "document-content-browser-fixture"
     }
   },
   "pending_owner_decisions": [

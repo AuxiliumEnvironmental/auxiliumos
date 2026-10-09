@@ -476,6 +476,22 @@ test('non-git checkpoint cannot claim a push, remote match or Cursor synchroniza
   assert.equal(releaseReadiness(root).ready, false);
 });
 
+test('checkpoint preserves the lead unfinished action without changing evidence or task verification', t => {
+  const root = fixture(t);
+  const action = 'Continue the active capability; do not repeat completed source reconciliation.';
+  updateJson(root, 'BUILD_STATE.json', state => { state.first_runtime_action = action; });
+  const before = currentStatus(root);
+  const record = checkpoint(root);
+  assert.equal(record.first_unfinished_action, action);
+  assert.equal(record.next_ready_task, before.next_ready_task);
+  assert.deepEqual(record.evidence, before.evidence);
+  const resume = fs.readFileSync(path.join(root, 'docs/00-control/RESUME.md'), 'utf8');
+  assert.ok(resume.includes(action));
+  assert.ok(resume.includes(`${action}\n\nGenerated `));
+  assert.ok(resume.indexOf(action) < resume.indexOf('Computed verification/task candidate'));
+  assert.equal(releaseReadiness(root).ready, false);
+});
+
 function activationFixture() {
   return {
     policy: { actions: { release_document: ['OD-001', 'OD-002'], commit_spend: ['OD-001', 'OD-003'] } },

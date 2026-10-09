@@ -173,7 +173,7 @@
         "directory-api",
         "development-ui"
       ],
-      "blocker": "All7 reviewed migrations are applied to auxiliumos-dev;8th document-version increment is reviewed and awaiting publication/application. Genuine Auth/API/browser acceptance requires securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and the protected manual workflow, not a secret in chat.",
+      "blocker": "Eight migrations are applied. Genuine Auth/API/browser needs securely configured AUXILIUMOS_TEST_SERVICE_ROLE_KEY and protected manual feature-branch workflow; never supply its value in chat.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1293,7 +1293,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Reviewed17cfadd integrated as8ba91db.38 PostgreSQL/PGlite checks pass; authentic API harness prepared only. Publish then apply only new20261009072201 SQL after fresh target checks. Exact immutable adoption/history and atomic ingest closure are not review/release/content access.",
+      "next_action": "Reviewed immutable adoption deployed as eighth exact migration;38 local DB checks and CI53 pass. Continue exact-version content authority, then human review/release. Genuine Auth/API/two-session concurrency remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
@@ -1337,6 +1337,127 @@
         "browser_fixture"
       ],
       "next_action": "Reviewed1ae9c72 integrated asda38bb5;10 adapter tests,14 integrated version browser fixtures and20 upload/security regressions pass. Parent route/config/fixture/copy integrated. Continue actual hosted acceptance separately; never treat fixture success as Auth/Storage proof.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-BACKEND",
+      "title": "Exact-version internal content grants and audited current authority",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/migrations/20261009080505_document_version_content.sql",
+        "tests/database/document-version-content.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_CONTENT_CONTRACT.md"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-backend-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-content-database"
+      ],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Reviewed7c0e658 integrated632c7d0.45 simulated-Auth PGlite checks pass. Narrow hold-only clearance correction independently compared to prior body. Root publishes/preflights/applies only ninth migration; authentic API/concurrency remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-GATEWAY",
+      "title": "Verified exact-version byte serving with current reauthorization",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "supabase/functions/document-version-content/index.ts",
+        "supabase/functions/document-version-content/gateway.mjs",
+        "tests/unit/document-version-content-gateway.test.mjs",
+        "tests/unit/document-version-content-entrypoint.test.mjs",
+        "tests/api/document-versions.test.mjs"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-gateway-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-content-gateway-unit"
+      ],
+      "required_evidence_levels": [
+        "unit"
+      ],
+      "next_action": "Reviewedfd0f06c integrated7f5f52e.30 injected gateway/real-entrypoint-SDK checks pass. Root publishes/deploys exact bounded synthetic gateway; same-request reauthorization and mandatory result audit precede bytes. Existing authentic version harness extended, unexecuted.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001B-UI",
+      "title": "Connected current-version secure download interaction",
+      "status": "implemented",
+      "dependencies": [
+        "DOC-001A",
+        "DOC-001A-UI"
+      ],
+      "requirements": [
+        "C01",
+        "C02",
+        "C07",
+        "M13",
+        "M19"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-content-api.ts",
+        "web/src/components/document-content-download.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-content-api.test.mjs",
+        "tests/e2e/document-content.spec.ts"
+      ],
+      "assigned_to": null,
+      "branch": "work/document-content-ui-2026-10-09",
+      "owner_decisions": [
+        "OD-001",
+        "OD-003",
+        "OD-011",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "runtime-build",
+        "document-content-client-unit",
+        "document-content-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewedc681c31 integrated007fb35.13 adapter,22 content browser and14 prior version regression checks passed. Root permanent wiring/page copy integrated;22 new browser journeys and build pass. Await actual hosted acceptance separately; attachment handoff is not saved/delivered/released.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

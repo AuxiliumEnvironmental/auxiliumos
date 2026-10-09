@@ -75,16 +75,27 @@
       "exact_source_match": true,
       "observed_at": "2026-10-09T07:47:40.745295Z",
       "evidence": "Reviewed exact SQL applied once after fresh six-migration/hash/disabled-config preflight. Provider-generated history version mapped under table lock after name, single statement, exact hash, absent canonical version and exactly-one-row checks. Seven canonical hashes read back; no existing migration rerun. Five new private tables have RLS and no direct CRUD for anon/authenticated/service_role; public RPC ACLs and empty search_path match source."
+    },
+    {
+      "canonical_version": "20261009072201",
+      "generated_version": "20261009080413",
+      "name": "document_versions",
+      "sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+      "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+      "apply_success": true,
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T08:05:38.520655Z",
+      "evidence": "Exact reviewed SQL applied once after fresh seven-migration/hash/disabled-config preflight. Generated history version mapped under lock with exact-name/single-statement/SHA/absent-target checks. Three new private tables RLS/direct-CRUD-denied including service_role; five public invoker wrappers and corresponding private empty-search-path definers have exact human/service ACL separation."
     }
   ],
   "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
   "production": false,
-  "latest_source_commit": "7aa5aa0d1bc87f8e3f80e66420fb933d3f8dff5e",
+  "latest_source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
   "latest_readback": {
-    "observed_at": "2026-10-09T07:47:40.745295Z",
-    "migration_count": 7,
+    "observed_at": "2026-10-09T08:05:38.520655Z",
+    "migration_count": 8,
     "all_source_hashes_match": true,
-    "application_tables": 20,
+    "application_tables": 23,
     "public_application_tables": 12,
     "tables_without_rls": 0,
     "auth_users": 0,
@@ -92,10 +103,26 @@
     "private_reservations_enabled": false,
     "new_clearance_tables": 5,
     "new_clearance_tables_all_rls": true,
-    "new_clearance_tables_direct_crud_denied": ["anon", "authenticated", "service_role"],
+    "new_clearance_tables_direct_crud_denied": [
+      "anon",
+      "authenticated",
+      "service_role"
+    ],
     "new_public_rpc_security": "Invoker wrappers; empty search_path; human and service EXECUTE grants separated exactly as source. No anonymous EXECUTE.",
     "advisors": "Intentional deny-by-default RLS without policies retained. Platform public.rls_auto_enable has anon/authenticated EXECUTE warnings but returns event_trigger, not application JSON; recorded for bounded platform review, not changed opportunistically.",
-    "advisor_references": ["https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy", "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable", "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"]
+    "advisor_references": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+    ],
+    "new_document_version_tables": 3,
+    "new_document_version_tables_all_rls": true,
+    "document_versions": 0,
+    "performance_advisors": "INFO:23 composite foreign-key covering-index notices and41 unused indexes on synthetic nearly-empty target; no measured workload yet. Do not remove integrity indexes because unused. Review actual access paths before load acceptance.",
+    "performance_advisor_references": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    ]
   },
   "canonical_seed": {
     "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",

@@ -26,11 +26,11 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
 
   return <>
     <PageHeader eyebrow="M13 · Private files and document versions" title="Private files"
-      description="Stage a synthetic file, check its security status and manage permitted internal draft versions."
+      description="Stage synthetic files, manage immutable internal drafts and request separately authorized exact-version downloads."
       action={<RefreshButton />} />
     <section className="notice module-notice" aria-label="Private-file development boundary">
       <div><strong>Quarantined uploads are not document versions or releases.</strong>
-        <p>Synthetic data only. No PHI or real client data. Exact cleared files can become immutable internal drafts only with separate document authority. Real scanning, professional approval, preview, download and release are not available here.</p>
+        <p>Synthetic data only. No PHI or real client data. Exact cleared files can become immutable internal drafts only with separate document authority. Downloads require their own current exact-version permission and an enabled service. Real scanning, professional approval, inline preview and release are not available here.</p>
         <p>OD-001/003 actor and audience approval, OD-011 retention/export approval, and OD-013 incident handling and real-upload approval remain gated. The text marker and acknowledgment do not detect PHI or grant authority.</p>
       </div>
     </section>
@@ -56,7 +56,7 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
                 : 'Select a permitted account to see its available facilities. Contact your workspace administrator if you expected access.'}</p>
             </EmptyState>}
         </>}
-    <p className="field-hint">Directory visibility does not grant upload or document authority. Every operation rechecks current access. The upload attempt is in memory; permitted version history comes from the backend. There is no content viewer or download.</p>
+    <p className="field-hint">Directory visibility does not grant upload, document or content authority. Every operation rechecks current access. The upload attempt is in memory; permitted version history comes from the backend. Verified downloads use a browser attachment handoff, not an inline viewer.</p>
   </>;
 }
 

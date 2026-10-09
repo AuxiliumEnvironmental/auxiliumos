@@ -705,7 +705,7 @@
     {
       "id": "document-versions-api",
       "level": "api",
-      "environment": "authentic-Supabase-development-synthetic-scan-designated-document-fixture",
+      "environment": "authentic-Supabase-development-synthetic-scan-designated-document-and-exact-content",
       "cacheable": false,
       "max_age_ms": 900000,
       "timeout_ms": 300000,
@@ -725,16 +725,111 @@
         "supabase/migrations/20261008234953_private_file_transport.sql",
         "supabase/migrations/20261009065625_private_object_clearance.sql",
         "supabase/migrations/20261009072201_document_versions.sql",
+        "supabase/migrations/20261009080505_document_version_content.sql",
         "tests/api/document-versions.test.mjs",
         "tests/api/fixture-cleanup.mjs",
         "supabase/functions/private-objects",
-        "scripts/private-object-provision.mjs"
+        "scripts/private-object-provision.mjs",
+        "supabase/functions/document-version-content"
       ],
       "commands": [
         [
           "node",
           "--test",
           "tests/api/document-versions.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-content-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-hosted-or-concurrency-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "supabase/migrations/20261009072201_document_versions.sql",
+        "supabase/migrations/20261009080505_document_version_content.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/document-version-content.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/document-version-content.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-content-gateway-unit",
+      "level": "unit",
+      "environment": "Node-real-TypeScript-entrypoint-and-pinned-SDK-injected-network-no-Deno-or-provider",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "supabase/functions/document-version-content",
+        "tests/unit/document-version-content-gateway.test.mjs",
+        "tests/unit/document-version-content-entrypoint.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/document-version-content-gateway.test.mjs",
+          "tests/unit/document-version-content-entrypoint.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-content-client-unit",
+      "level": "unit",
+      "environment": "Node-TypeScript-erasure-injected-fetch-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 120000,
+      "inputs": [
+        "web/src/lib/document-content-api.ts",
+        "web/src/lib/document-version-api.ts",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/errors.ts",
+        "tests/unit/document-content-api.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/unit/document-content-api.test.mjs"
+        ]
+      ]
+    },
+    {
+      "id": "document-content-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE"
+      ],
+      "inputs": [
+        "web",
+        "tests/e2e/document-content.spec.ts",
+        "playwright.runtime.config.ts"
+      ],
+      "commands": [
+        [
+          "npm",
+          "run",
+          "test:runtime-ui",
+          "--",
+          "document-content.spec.ts"
         ]
       ]
     }

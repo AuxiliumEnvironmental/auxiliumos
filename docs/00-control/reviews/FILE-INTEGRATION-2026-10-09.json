@@ -79,6 +79,49 @@
       "disposition": "No concrete consequential blocker found in frozen10-file slice. Exact current source/target authority, CAS/idempotency, mandatory same-transaction immutable provenance/closure/audit; bounded UI projection and immutable retry reviewed.",
       "evidence_reuse": "Worker38 DB/10 adapter/14 fixture checks reused for review. Root integrated profiles pass38/10/14 plus20 existing upload/security browser journeys. Initial wrong browser executable failure preserved; rerun used existing supported Chromium with no app/test weakening.",
       "limits": "No hosted/Auth/API/two-session concurrency/real scanner/professional approval/release/content proof."
+    },
+    "document_content": {
+      "reviewed_at": "2026-10-09T08:31:01.421Z",
+      "backend": "7c0e658ed8036aee2bd8e65e5cd1c4bb8d057231",
+      "gateway": "fd0f06c68686b4683158b2c7de7c8c5d4cbf1ce8",
+      "ui": "c681c31dc4816d4bdfbc44c48e701cd21434721d",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "disposition": "Independent actual-patch review found no actionable consequential finding in frozen3+5+5files. Lead reviewed actual patches and coherent integration.",
+      "findings_closed": [
+        {
+          "requirement": "C02",
+          "impact": "Hold-only changes on already adopted closed ingest erased current human clearance, incorrectly making held content unavailable.",
+          "reproduction": "Focused SQL hold=true/restriction=false case failed42501 in lock_document_content_access; preserved in DOCUMENT_VERSION_CONTENT_CONTRACT.md.",
+          "fix": "Ninth migration replaces private.set_private_object_controls with exactly one added predicate: and s.ingest_closed_at is null. Independently compared original/replacement; first technical closure still invalidates, absent clearance is not manufactured, all four hold/restriction combinations remain tested."
+        },
+        {
+          "requirement": "C05",
+          "impact": "Native Window.fetch called as adapter method had an invalid receiver, preventing real browser content requests.",
+          "fix": "Default transport wrapper preserves native invocation; corrected fixture CORS-exposed headers.22 content journeys pass."
+        }
+      ],
+      "evidence_reuse": "45 simulated-Auth PGlite checks;30 injected gateway/entrypoint SDK checks;13 adapter checks;22 content/14 prior version fixtures; final exact-byte and phone2checks/build reused for review. Root integrated22content fixtures and build passed after page/testMatch/profile wiring; no broad local rerun.",
+      "preserved_boundaries": [
+        "Separate version/digest/recipient grant and current directory/logical visibility; authorization retries recheck current authority.",
+        "Server getUser; user-JWT authorization before and after bounded server Storage fetch; exact immutable binding/digest; required response_prepared audit.",
+        "No signed URL, inline viewer, persistent content cache, delivery claim, client release or professional approval.",
+        "Current session/scope/history changes cancel stale bytes; browser attachment URL revoked and buffers cleared.",
+        "Prepared authentic fixture retires only owned access and preserves all history/bytes; still unexecuted."
+      ],
+      "limits": [
+        "Genuine hosted Auth/Data API/Storage/CORS",
+        "Actual Deno and target PostgreSQL/advisors pending deployment",
+        "Two-session concurrent revocation ordering",
+        "Real scanner/no-PHI inspection effectiveness",
+        "Production or complete-module acceptance"
+      ]
     }
   }
 }

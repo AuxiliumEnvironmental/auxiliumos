@@ -6,6 +6,7 @@ import { asRuntimeError, isAbort, type RuntimeError } from '../lib/errors';
 import { useRuntime } from '../lib/runtime';
 import { useDirectoryPage } from '../lib/use-directory';
 import { EmptyState, ErrorState, LoadingState, Pagination } from './shared';
+import { DocumentContentDownload } from './document-content-download';
 
 type Props = {
   accountId: string; facilityId: string; source?: EligibleDocumentSource;
@@ -47,7 +48,7 @@ function DocumentScope({ accountId, facilityId, source, onAdopted }: Props) {
     <div className="section-intro"><div><p className="entity-type">M13 · Immutable internal drafts</p><h2 id={titleId}>Document versions</h2></div>
       <button type="button" className="button secondary" onClick={refresh} disabled={documents.state.status === 'loading'}>Refresh documents</button></div>
     <p>Only owner-provisioned logical documents with an exact version-view grant appear. Account or facility membership alone does not grant access.</p>
-    <p className="field-hint">This list is filtered to the selected facility from account-wide permitted pages. No logical-document creation, content viewer, download, approval or release is provided. Changing scope clears local attempts, not saved history.</p>
+    <p className="field-hint">This list is filtered to the selected facility from account-wide permitted pages. No logical-document creation, inline content viewer, approval or release is provided. Changing scope clears local attempts, not saved history.</p>
     {denied && <p role="alert" className="form-error">Document access is unavailable. The selected document, history and local adoption attempt were cleared; current list access is being checked again.</p>}
     {documents.state.status === 'loading' ? <LoadingState label="Loading permitted documents" />
       : documents.state.status === 'error' ? <ErrorState error={documents.state.error} onRetry={refresh} />
@@ -105,7 +106,10 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
   const sourceKey = source ? `${source.objectId}:${source.verifiedSha256}:${source.securityRevision}` : 'no-source';
   return <section className="notice" aria-labelledby={headingId} style={{ marginBlock: 'var(--space-4)', ...wrap }}>
     <h3 id={headingId}>Version history: {document.title}</h3>
-    <p>Metadata only. Current restrictions and preservation holds are separate from the hold recorded at adoption. Neither an old release label nor a prior receipt permits reading content.</p>
+    <p>History shows metadata, not content permission. Current restrictions and preservation holds are separate from the hold recorded at adoption. Neither an old release label nor a prior receipt permits reading content.</p>
+    <details style={{ marginBlock: 'var(--space-3)' }}><summary style={{ minHeight: '44px', paddingBlock: 'var(--space-3)', cursor: 'pointer' }}>Secure download boundary</summary>
+      <p>Each request checks separate current permission for the exact immutable version, then verifies its bytes before a browser attachment handoff. This synthetic development feature does not approve or release a document. Content is not shown inline or kept in workspace browser storage. Already downloaded files cannot be recalled by changing scope, signing out or revoking access.</p>
+    </details>
     <div className="button-row"><button type="button" className="button secondary" disabled={resource.status === 'loading'} onClick={refresh}>Refresh version history</button></div>
     {resource.status === 'loading' ? <LoadingState label="Checking current version history" />
       : resource.status === 'error' ? <ErrorState error={resource.error} onRetry={refresh} />
@@ -123,6 +127,7 @@ function VersionHistory({ api, document, source, onUnavailable, onAdopted }: {
                   <dt>Current preservation hold</dt><dd>{version.preservation_hold ? 'Hold recorded; preservation is required' : 'No hold recorded; destruction is not authorized'}</dd>
                   <dt>Current visibility restriction</dt><dd>{version.visibility_restricted ? 'Restricted; no content access is provided' : 'No restriction recorded; this does not grant content access'}</dd>
                 </dl>
+                <DocumentContentDownload key={`${resource.key}:${version.version_id}:${version.verified_sha256}`} version={version} />
               </li>)}
             </ol>}
           <Pagination page={cursors.length + 1} nextCursor={resource.value.next_cursor === null ? null : String(resource.value.next_cursor)}

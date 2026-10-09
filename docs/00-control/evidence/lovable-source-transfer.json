@@ -49,10 +49,37 @@
     "target_commit": "6c31aa8faf2c70eb7dd71e4414520f6dbea893c3",
     "location": "gitignored web/.env; public development URL and publishable key only",
     "worker_report": "Canonical sign-in renders without browser errors.76 superseded noncanonical shell files removed; recoverable from previous Git history. Platform build:dev alias missing; canonical build passes.",
-    "independently_verified": false
+    "independently_verified": false,
+    "saved_deletion_diff": {
+      "deleted_noncanonical_files": 75,
+      "canonical_changes": 0,
+      "source_commit": "72b861c3e42787fa2a3de9564fe63967cb18b491",
+      "target_commit": "6c31aa8faf2c70eb7dd71e4414520f6dbea893c3"
+    }
   },
-  "next_action": "Inspect public-configuration diff for canonical preservation; publish narrow canonical evidence-log ignore exception and build:dev alias to the exact same build, then transfer latest complete source and recheck saved parity.",
+  "next_action": "Continue canonical implementation; transfer each reviewed code increment to this existing project with source parity. No active Lovable job. Confirm supported durable public runtime settings before hosting acceptance; do not infer native GitHub sync from exact manual transfer.",
   "native_github_sync": false,
   "hosted_authenticated_acceptance": false,
-  "production_published": false
+  "production_published": false,
+  "latest_transfer": {
+    "message_id": "umsg_01m4fv360ce1erhq9zvnj8449n",
+    "thread_id": "main",
+    "source_commit": "c94e57bfce8b14b7a1d432c6256d098fa520f23f",
+    "target_commit": "cdd271be8a6ef5402a843f34324885eea20d1706",
+    "total": 320,
+    "unchanged_previously_verified": 261,
+    "new_hash_verified": 41,
+    "raw_read_hash_verified": 18,
+    "errors": [],
+    "source_archive_sha256": "ca3aa6cb691442477e53bac8b328240a72403e6db2cebbe2cc8b32c7139b1463",
+    "saved_parity_verified": true,
+    "worker_checks": {
+      "build_dev": "passed canonical exact build alias",
+      "adapter": "10/10 passed",
+      "browser_fixture": "14 could not launch: missing expected Chromium/system library; do not count as passed",
+      "controls": "Prior git-add restricted environment failure retained"
+    },
+    "root_checks": "Same source passed GitHub CI53 run37902541444 including14 document-version,20 private-file,7 directory and8 intake browser fixture journeys. No genuine hosted Auth proof.",
+    "configuration_durability": "Public runtime values reside in untracked gitignored web/.env; sign-in was worker-verified. Durable platform environment-settings persistence has not been independently established."
+  }
 }

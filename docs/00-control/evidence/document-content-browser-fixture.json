@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "profile": "document-content-browser-fixture",
+  "level": "browser_fixture",
+  "recorded_at": "2026-10-09T08:29:03.999Z",
+  "result": "passed",
+  "digest": "356c12edf3c82f57ebe8282baf8112ff73ddf7f5f5757a111b2e2378a31c5fc7",
+  "identity": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64",
+    "environment": "local-Chromium-React-Supabase-SDK-intercepted-HTTP-no-cloud",
+    "environment_hashes": {
+      "AUXILIUMOS_BROWSER_EXECUTABLE": "619926da800ed84ebff8e2a3363252bff68ea835a7fdfd7701027bb546c3e3bc",
+      "CI": null,
+      "LANG": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "LC_ALL": "99fed2d548c2eb1022f4067f97fe838a2c3ea60ee0e0f53086788505c3ababad",
+      "NODE_OPTIONS": null,
+      "NODE_PATH": "dbc7bc884f72c70bb3d320e868da710a56a621286fba48b3c6b610776b41b4fd",
+      "PATH": "837ab464f0d29de01137e1c5a2eb33c004e2fe7e0bd967890368b3a31da680f3",
+      "TZ": "cc31b47c7e352b6428bbfc7d5e6062d6d7e72c99b9f72da980362897f4ead7f0"
+    }
+  },
+  "inputs": {
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d",
+    "package.json": "00a24b70c3ba14882900ca75c319f50d662d1a49884b20b199ef79aa6e5d4284",
+    "playwright.runtime.config.ts": "3bb36f1961377baf490e4dbfa3e9240a1d99eee38fead5dae022f0c6f1cfa437",
+    "scripts/os-control.mjs": "7975ec94287ad1f782f2e44c89028fd3635f44f4ece18e83f43014f5478f4f22",
+    "tests/e2e/document-content.spec.ts": "66f3e952909c6b9978752b4e0581d86bc5aa6d42cba25d9df187d9fff01f283c",
+    "web/.env.example": "f97b4f569cacf6958becac0a8ff4eb398c9d784d107e42cf380a124eba8a0e79",
+    "web/.gitignore": "ceffb1381b4e4b5a015ef80d433f94f7d9793690248ce035907c57eccef9c1e9",
+    "web/index.html": "efe174aca0bf99c147f30c2c2e3580bc8ababb86a647c56dc826ab25dc3a827a",
+    "web/README.md": "979684798830da44d55c2e7a75f681119086675e5b2aafc779a7c5d4ce4db561",
+    "web/src/components/app-shell.tsx": "12e3244ff6536a3770e6754ef971bda5319f227b26f75d33735ad7164d04cc7a",
+    "web/src/components/auth.tsx": "302394656ed85b5aa8d587444763ef077e406774678a4c61f6f8dc4254e5d07e",
+    "web/src/components/document-content-download.tsx": "4f03923de9788e8edaaf9cc4168f74b08c7fed205ce5a12f8e8da81c9831c0d0",
+    "web/src/components/document-versions.tsx": "8a2a988103cf40e98d8480f124a33cb2659d4b3e11107bd2808f1a2f97126b8e",
+    "web/src/components/private-object-security-status.tsx": "363a6ed8605c366f239e68182560a6fa1e59036a85473b38c12fdd86a914d60b",
+    "web/src/components/private-object-upload.tsx": "8fccad50a08ee5e1863a1b2b8132a333d2d8664e17774561bfd7ec2aea2d1e30",
+    "web/src/components/shared.tsx": "4848e60dea3dafaf161cc6057997a80622f1fe68d0d83d86e74e357613fbdcc4",
+    "web/src/env.d.ts": "60767326176b42460c4b67e6e7e10d071a832882e5410ce7df08e6ebf413af5b",
+    "web/src/lib/auth-storage.ts": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
+    "web/src/lib/config.ts": "09c2f6e970f6a7435b822e9964ef959aa67a5423712afb9a20321ecd05deed64",
+    "web/src/lib/directory-api.ts": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+    "web/src/lib/document-content-api.ts": "e1b1196dd0084594565b96f32102796f56a2eb085f728234b295391e6be76ed8",
+    "web/src/lib/document-version-api.ts": "8bf5927a5f4dc05be31a09dba9da86fc0370e0a9628e7773b78cc54f0ac87d0b",
+    "web/src/lib/errors.ts": "e71d39e7cb1ccde5702854714f4a57030f19b2b2f6ad9ad333c4c8071fce2434",
+    "web/src/lib/intake-api.ts": "e8b36480135b5424477d554455803df31277fbc8e8abdda0f977890f882a2b82",
+    "web/src/lib/modules.ts": "dfebe2cb67d8a4a46b3b2a3d1463c03fd2527819095890e83931ed49dae4d74f",
+    "web/src/lib/private-object-api.ts": "7c011126f476b7d8edfcad91ac58ddd5b3763c36cde23968ee8d42221adfd881",
+    "web/src/lib/private-object-security-api.ts": "7dce348cd81a286a02927f38e0c2f238f4d1a821032cce44e3b8de915365391a",
+    "web/src/lib/runtime.tsx": "3ff86cc45c3c4cc990f57e09f6d463634b4f3c51f240d5e0a36eabe25f90bfc4",
+    "web/src/lib/use-directory.ts": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
+    "web/src/main.tsx": "08bb3c4de46d8b6c9ddd967931ed429903593aba902cca3caea5a33878896a71",
+    "web/src/pages/directory.tsx": "71f87c4ffdc1ef37ca532d38fd6a143739827a332719df54efbc15b9ef173553",
+    "web/src/pages/intake.css": "5cd741294d8569b3c1128912e034262815cb25ac252487f22aec9031859f3371",
+    "web/src/pages/intake.tsx": "cdca638fbcee0bb9a9174f877236a7d45dafb8c9c99d78df69174d6e1ad7e56b",
+    "web/src/pages/private-files.tsx": "f5e3db04cab76199853aa3096e576ed43054c7f193d25539e82f19bca59ced2d",
+    "web/src/pages/workspace.tsx": "49b11e741f9ad8743a1327f3ceaed2dbb9d91dd77a19fb8f0386395c8c4a4375",
+    "web/src/router.tsx": "0e9156c2b42489ef2d5de991de3d70148a28b35e7020c270ccb6ed16d371605f",
+    "web/src/styles.css": "3fe7f0d33c0c927cfcf755e62c4291bab7dc95775b3d4dfe8b6721b9087875d0",
+    "web/tsconfig.json": "ad62fbc0c730431c508ef8e3191d344b34ca13844916aa9a65ac11dc6c517706",
+    "web/vite.config.ts": "001de750bbb3e32e92dac7bdac4263bed772603a3d3437fa69e0495b77b8adb0"
+  },
+  "observed_git_head": "007fb3599b27df6879e14c117f67618bc1597815",
+  "results": [
+    {
+      "argv": [
+        "npm",
+        "run",
+        "test:runtime-ui",
+        "--",
+        "document-content.spec.ts"
+      ],
+      "exit_code": 0,
+      "signal": null,
+      "error": null
+    }
+  ],
+  "log_path": "docs/00-control/evidence/document-content-browser-fixture.log",
+  "log_sha256": "59469ce4f01b5a99d72b0ab439fcd0ae5c7ab255c15abf414964176c0ae7dc53"
+}
