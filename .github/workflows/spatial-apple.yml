@@ -1,0 +1,53 @@
+name: Spatial unsigned Apple build
+on:
+  push:
+    branches: ['spatial/integration-2026-10-09']
+    paths: ['spatial-source/**', '.github/workflows/spatial-apple.yml']
+permissions:
+  contents: read
+concurrency:
+  group: spatial-apple-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  unsigned:
+    runs-on: macos-15
+    timeout-minutes: 45
+    defaults:
+      run:
+        working-directory: spatial-source
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Record actual Apple environment
+        run: |
+          mkdir -p build-evidence
+          xcodebuild -version | tee build-evidence/xcode.txt
+          xcodebuild -showsdks | tee build-evidence/sdks.txt
+          swift --version | tee build-evidence/swift.txt
+          git rev-parse HEAD > build-evidence/input-commit.txt
+      - name: Compile existing native capture composition without signing
+        run: |
+          set -o pipefail
+          python3 ios/generate_project.py
+          xcodebuild -project ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination 'generic/platform=iOS' -derivedDataPath build-evidence/DerivedData CODE_SIGNING_ALLOWED=NO build 2>&1 | tee build-evidence/unsigned-build.log
+      - name: Verify Apple drawing encoder and interoperability
+        if: always()
+        run: |
+          set -o pipefail
+          swift test --package-path packages/SpatialInterop 2>&1 | tee build-evidence/apple-interop.log
+      - name: Native synthetic composition tests on available simulator
+        run: |
+          set -o pipefail
+          xcrun simctl list devices available --json > build-evidence/simulators.json
+          DEVICE_ID=$(python3 -c 'import json; d=json.load(open("build-evidence/simulators.json")); print(next(x["udid"] for k,v in d["devices"].items() if "iOS" in k for x in v if x.get("isAvailable") and "iPhone" in x["name"]))')
+          xcodebuild -project ios/AuxiliumSpatial.xcodeproj -scheme AuxiliumSpatial -destination "id=$DEVICE_ID" -derivedDataPath build-evidence/DerivedData CODE_SIGNING_ALLOWED=NO test 2>&1 | tee build-evidence/native-synthetic.log
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: spatial-unsigned-apple-evidence
+          path: |
+            spatial-source/build-evidence/*.txt
+            spatial-source/build-evidence/*.json
+            spatial-source/build-evidence/*.log
+          retention-days: 14

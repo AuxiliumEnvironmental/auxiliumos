@@ -1,0 +1,265 @@
+{
+  "documentID": "synthetic-rotated-golden",
+  "floorElevation": 6,
+  "floorID": "floor-golden",
+  "floorLabel": "Synthetic level",
+  "frameID": "synthetic-frame",
+  "rooms": [
+    {
+      "id": "room-golden",
+      "label": "Asymmetric fixture",
+      "wallIDs": [
+        "wall-3",
+        "wall-1",
+        "wall-4",
+        "wall-0",
+        "wall-2"
+      ]
+    }
+  ],
+  "sdkVersion": "synthetic-1",
+  "sourceArchiveID": "synthetic-source",
+  "surfaces": [
+    {
+      "classificationConfidence": "unknown",
+      "id": "wall-0",
+      "isCurved": false,
+      "kind": "wall",
+      "localCorners": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 5.0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 5.0,
+          "y": 2.7,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 2.7,
+          "z": 0
+        }
+      ],
+      "transform": {
+        "columnMajor": [
+          0.7986355100472927,
+          0,
+          0.6018150231520483,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -0.6018150231520483,
+          0,
+          0.7986355100472927,
+          0,
+          12.0,
+          6,
+          -3.0,
+          1
+        ]
+      }
+    },
+    {
+      "classificationConfidence": "unknown",
+      "id": "wall-1",
+      "isCurved": false,
+      "kind": "wall",
+      "localCorners": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 2.0000000000000004,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 2.0000000000000004,
+          "y": 2.7,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 2.7,
+          "z": 0
+        }
+      ],
+      "transform": {
+        "columnMajor": [
+          -0.6018150231520484,
+          0,
+          0.7986355100472926,
+          0,
+          0,
+          1,
+          0,
+          0,
+          -0.7986355100472926,
+          0,
+          -0.6018150231520484,
+          0,
+          15.993177550236464,
+          6,
+          0.009075115760241559,
+          1
+        ]
+      }
+    },
+    {
+      "classificationConfidence": "unknown",
+      "id": "wall-2",
+      "isCurved": false,
+      "kind": "wall",
+      "localCorners": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 3.60555127546399,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 3.60555127546399,
+          "y": 2.7,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 2.7,
+          "z": 0
+        }
+      ],
+      "transform": {
+        "columnMajor": [
+          -0.998331822637236,
+          0,
+          -0.05773709301492874,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.05773709301492874,
+          0,
+          -0.998331822637236,
+          0,
+          14.789547503932367,
+          6,
+          1.6063461358548272,
+          1
+        ]
+      }
+    },
+    {
+      "classificationConfidence": "unknown",
+      "id": "wall-3",
+      "isCurved": false,
+      "kind": "wall",
+      "localCorners": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 2.236067977499789,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 2.236067977499789,
+          "y": 2.7,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 2.7,
+          "z": 0
+        }
+      ],
+      "transform": {
+        "columnMajor": [
+          -0.44518145555466654,
+          0,
+          -0.8954403786016288,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.8954403786016288,
+          0,
+          -0.44518145555466654,
+          0,
+          11.19001092748639,
+          6,
+          1.3981720864932679,
+          1
+        ]
+      }
+    },
+    {
+      "classificationConfidence": "unknown",
+      "id": "wall-4",
+      "isCurved": false,
+      "kind": "wall",
+      "localCorners": [
+        {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 3.0,
+          "y": 0,
+          "z": 0
+        },
+        {
+          "x": 3.0,
+          "y": 2.7,
+          "z": 0
+        },
+        {
+          "x": 0,
+          "y": 2.7,
+          "z": 0
+        }
+      ],
+      "transform": {
+        "columnMajor": [
+          0.6018150231520482,
+          0,
+          -0.7986355100472928,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0.7986355100472928,
+          0,
+          0.6018150231520482,
+          0,
+          10.194554930543855,
+          6,
+          -0.6040934698581215,
+          1
+        ]
+      }
+    }
+  ],
+  "title": "Synthetic rotated asymmetric fixture"
+}
