@@ -152,6 +152,15 @@
           "activation_gate": "Live history/re-release policy and client notices still require owner activation; this is metadata-only synthetic behavior.",
           "production_enabled": false
         }
+      ],
+      "development_choices": [
+        {
+          "id": "OD-004-synthetic-release-history",
+          "choice": "Explicit audited historical-recipient grants may authorize synthetic recipients absent the original current audience, only forsuperseded nonwithdrawn versions withcurrent scope/safety. Replacement recipientgrants never repin a preserved currentaudience. Withdrawal doesnotrestore olderreleases.",
+          "rationale": "Separate deliberate historical visibility from ordinary currentrelease access and immutable prior audience intent.",
+          "activation_gate": "Live historical portal audiences/withdrawal notices remain unapproved; metadata-onlydevelopment behavior. Conservative monotonically newer releaseversions are an engineeringconstraint, not permanentpolicy.",
+          "production_enabled": false
+        }
       ]
     },
     {

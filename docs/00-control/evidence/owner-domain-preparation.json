@@ -30,7 +30,7 @@
       "session_user": "postgres",
       "current_user": "postgres"
     },
-    "migration_count": 12,
+    "migration_count": 13,
     "auth_users": 1,
     "owner_profile_present": true,
     "site_url": "https://auxiliumos.io",

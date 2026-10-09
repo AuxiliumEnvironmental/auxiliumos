@@ -106,7 +106,7 @@
         "web/src/lib/sample-case.ts",
         "tests/unit/sample-case.test.mjs"
       ],
-      "assigned_to": "ui_integration; root integration",
+      "assigned_to": "root integration lead; ui_integration sole Lovable writer",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -114,7 +114,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Preserve reviewed full20module/Spatial demo. Apply narrow mobile document hierarchy/readable-name polish in private-files, private-object-upload, document-versions and intake only; reuse authorized data and existing mutation fences. Focused affected journeys and source parity, then publication.",
+      "next_action": "Full demo and Spatial checkpoint saved. Current bounded polish reduces repeated phone-page policy copy, moves document actions forward, collapses technical metadata and uses already-permitted intake names without extra directory calls. Current exact review-UI transfer is running separately at frozenf3b1b706; preserve its parity before next hosted edit.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -1702,7 +1702,7 @@
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Reviewed3203c08 backend integrated;45/45 focused simulatedAuth tests pass. Fresh actual target12migration hashes match source. Save reviewed code remotely, deploy once, verify canonical migration/source and ACLs. Metadata only; next released-byte gateway remains separate.",
+      "next_action": "Reviewed3203c08 integrated;45/45 simulated-Auth DB checks pass. Actual preflight found canonical migration already present with exact final SQL hash, so root did not reapply it. Four RLS/direct-CRUD-denied tables,9RPC ACL split andzero release grants/records verified. Next bounded slice is released-byte authorization/gateway plus UI; hosted actual human workflow/concurrency remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

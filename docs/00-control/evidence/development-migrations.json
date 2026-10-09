@@ -121,14 +121,22 @@
       "exact_source_match": true,
       "observed_at": "2026-10-09T18:50:34.744364+00:00",
       "evidence": "Canonical deployed migration and exact source hash verified. Planning/review apply_migration succeeded; current stored SQL hashes independently match. No deployment or history operation repeated for this record."
+    },
+    {
+      "canonical_version": "20261009184724",
+      "name": "document_version_releases",
+      "sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+      "exact_source_match": true,
+      "observed_at": "2026-10-09T19:22:32.686930+00:00",
+      "evidence": "Actual preflight already contained the canonical13th migration with exact reviewed source hash; root did not apply or normalize history for this slice. Catalog readback confirms4newRLS tables/directCRUDdenied and9public invokerRPCs with exactuser/service separation. No release grants/records/withdrawals."
     }
   ],
   "runtime_acceptance": "Not established by migration success or catalog checks. Genuine Auth/Data API and Storage gateway checks remain required.",
   "production": false,
   "latest_source_commit": "870fc25",
   "latest_readback": {
-    "observed_at": "2026-10-09T18:50:34.744364+00:00",
-    "migration_count": 12,
+    "observed_at": "2026-10-09T19:22:32.686930+00:00",
+    "migration_count": 13,
     "latest_two_source_hashes_match": true,
     "planning_and_review_tables_rls": true,
     "new_direct_crud_denied": [
@@ -137,7 +145,12 @@
       "service_role"
     ],
     "new_public_rpc_security": "Invoker wrappers; checked private definers; exact authenticated/service-only split; no anonymous execution",
-    "runtime_boundary": "Deployment/catalog evidence, not hosted full workflow/concurrency proof."
+    "runtime_boundary": "Deployment/catalog evidence, not hosted full workflow/concurrency proof.",
+    "all_source_hashes_match": true,
+    "release_tables_rls": true,
+    "release_grants": 0,
+    "releases": 0,
+    "withdrawals": 0
   },
   "canonical_seed": {
     "applied_and_read_back_at": "2026-10-09T07:03:44.216159Z",

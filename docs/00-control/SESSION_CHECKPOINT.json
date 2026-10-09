@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T19:06:30.684Z",
+  "created_at": "2026-10-09T19:23:24.643Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,21 +8,21 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Finish approved mobile/name polish and verify exact Lovable transfer/publication. Save and deploy reviewed metadata release backend. Protected connected upload/finalization/retrieval and hosted planning save/reopen still need the verified missing development GitHub service secret; actual owner login/intake/triage already passed. Continue released-byte/UI contract afterward; do not imply real release from metadata.",
+  "first_unfinished_action": "Finish bounded document mobile/readability and intake-name polish, verify exact Lovable source parity, publish the reviewed UI and run one integrated CI gate. Owner account/login and request/triage are already verified. Configure missing development-only GitHub Actions service secret, then run the focused real connected workflow; current cloud-browser credential-state restriction prevents further manual verification. Next backend slice is released-byte access, distinct from completed metadata release.",
   "git": {
     "is_repository_root": true,
-    "head": "c6b39d26c46977da244caa805e23626d58edb6c0",
+    "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
     "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json\n M playwright.runtime.config.ts\n?? docs/00-control/evidence/document-release-final.log\n?? docs/00-control/evidence/document-release-first-fixture-failure.log\n?? docs/00-control/evidence/document-release-second-fixture-failure.log\n?? docs/00-control/evidence/document-review-build-final.log\n?? docs/00-control/evidence/document-review-mobile-final.log\n?? docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json\n?? docs/00-control/evidence/document-release-final-test.log\n?? docs/00-control/evidence/document-release-first-test.log\n?? docs/00-control/evidence/document-release-second-test.log",
     "remote": {
-      "status": "head_differs_from_remote",
+      "status": "head_matches_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "4fdf78d2b3a49efede03c9ddc866206c977ece49",
-      "checked_at": "2026-10-09T19:06:30.681Z"
+      "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
+      "checked_at": "2026-10-09T19:23:24.641Z"
     }
   },
-  "controls_digest": "4161fefa366709010725c4cd60bb8fac74a6026a3758847eea157ca2d411e695",
+  "controls_digest": "a134d334ea6394464ee44dcd792616114656803d7fe6920847ca4444bc0a565d",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -37,11 +37,8 @@
   ],
   "evidence": {
     "controls": {
-      "status": "passed",
-      "profile": "controls",
-      "evidence": "docs/00-control/evidence/controls.json",
-      "level": "control_unit",
-      "recorded_at": "2026-10-09T19:06:22.664Z"
+      "status": "stale",
+      "profile": "controls"
     },
     "foundation-contract": {
       "status": "stale",
