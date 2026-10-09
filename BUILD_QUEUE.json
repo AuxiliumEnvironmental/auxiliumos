@@ -5,7 +5,7 @@
     {
       "id": "OWNER-ONBOARD-001",
       "title": "Secure owner account, password setup/recovery and first successful access",
-      "status": "ready",
+      "status": "implemented",
       "dependencies": [
         "SEC-001A"
       ],
@@ -38,7 +38,7 @@
         "web/.env.production",
         "web/vite.config.ts"
       ],
-      "assigned_to": "root integration lead; owner_onboarding_backend and owner_auth_ui",
+      "assigned_to": "root integration lead",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [
         "OD-012"
@@ -46,17 +46,19 @@
       "verification_profiles": [
         "owner-onboarding",
         "runtime-build",
-        "auth-onboarding-browser-fixture"
+        "auth-onboarding-browser-fixture",
+        "directory-api",
+        "development-ui"
       ],
-      "next_action": "Owner invitation, password and provider authentication are observed. Verify usable published application account/facility access and representative workflow in an authenticated browser; do not equate the Auth timestamp with full application acceptance.",
+      "next_action": "Account setup, personal password, actual app login and scoped workflow access are complete. Recovery implementation retained; continue full integration separately from owner usability.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "implementation_status": "Active exact-five scoped access, confirmed email/password configured and Auth sign-in timestamp observed. Application browser evidence remains pending."
+      "implementation_status": "Actual browser owner account/facility access, synthetic submission and triage revision2 verified, with matching hosted DB readback. No professional authority granted."
     },
     {
       "id": "UI-2026-10-09",
       "title": "Responsive application and full-destination module interfaces",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [],
       "requirements": [
         "M01",
@@ -99,9 +101,12 @@
         "tests/unit/workspace-plan-api.test.mjs",
         "supabase/migrations/20261009170854_workspace_plans.sql",
         "tests/database/workspace-plans.test.mjs",
-        "docs/03-data/WORKSPACE_PLANS.md"
+        "docs/03-data/WORKSPACE_PLANS.md",
+        "web/src/spatial-generated/**",
+        "web/src/lib/sample-case.ts",
+        "tests/unit/sample-case.test.mjs"
       ],
-      "assigned_to": "root integration lead; owner_auth_ui single Lovable writer; owner_onboarding_backend; integration_security_review",
+      "assigned_to": "root integration lead; prior owner_auth_ui; independent integration review",
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -109,7 +114,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Complete one cohesive responsive demo across all 20 modules, preserve connected workflows, integrate bounded creator-owned synthetic planning save/reopen with exact revisions, independently review, run focused representative desktop/mobile checks, save matching source in GitHub, then publish in existing Lovable project under explicit owner approval. Apply the owner-requested Facility Coordinator terminology at the current integration boundary; do not pause parallel workflows.",
+      "next_action": "Full demo/planning/Spatial increment integrated and reviewed. Source checkpoint/publication current; preserve actual owner workflow evidence and complete protected connected acceptance once secret/browser dependency clears. DOC-001C UI is the next separate bounded writer task.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -119,7 +124,7 @@
           "replace": "Site Champion",
           "with": "Facility Coordinator",
           "scope": "User-facing titles, field labels, navigation, active product documentation and demo copy. Preserve role/capability semantics and historical source attribution. Coordinate the typed planning catalogue if its stored field key changes.",
-          "status": "queued_for_current_integration_boundary"
+          "status": "implemented_UI_and_current_docs; legacy_internal_keys_and_history_preserved"
         }
       ]
     },
@@ -327,7 +332,7 @@
         "tests/unit/auth-persistence.test.mjs"
       ],
       "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
-      "implementation_status": "Frontend and preservation-safe API harness implemented and independently reviewed; build and synthetic browser/unit profiles pass. Authentic API and real-service browser acceptance remain unexecuted."
+      "implementation_status": "Actual owner login/directory/intake/triage passed. Protected full connected harness remains unexecuted without missing development-only service secret; subsequent browser file upload blocked by credential-runtime restriction."
     },
     {
       "assigned_to": null,
@@ -1594,12 +1599,53 @@
         "docs/03-data/DOCUMENT_VERSION_REVIEW_CONTRACT.md",
         "supabase/migrations/20261009172736_document_version_reviews.sql"
       ],
-      "assigned_to": "owner_onboarding_backend; root integration",
-      "branch": "agent/workspace-plans-backend",
+      "assigned_to": "root integration; completed owner_onboarding_backend",
+      "branch": "agent/document-review-backend",
       "required_evidence_levels": [
         "database"
       ],
-      "next_action": "Reimplement bounded immutable-version internal human review request/decision against current saved authority/content/audit contracts. New CLI-ordered migration after planning persistence; explicit professional authority stays separate from owner administrative access. Keep backend independent of UI demo publication.",
+      "next_action": "Exact eb65040 backend integrated/deployed/hash-matched.37focused simulated-Auth DB tests and independent review pass. No actual reviewer assigned. Continue connected review UI and actual authorized human workflow once protected integration fixture is available.",
+      "status": "implemented",
+      "requirements": [
+        "M13",
+        "M19",
+        "C01",
+        "C02",
+        "C05",
+        "C07"
+      ],
+      "owner_decisions": [
+        "OD-002",
+        "OD-003",
+        "OD-004",
+        "OD-013"
+      ],
+      "verification_profiles": [
+        "document-reviews-database"
+      ],
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "DOC-001C-UI",
+      "title": "Connected exact-version internal review request and decision interface",
+      "dependencies": [
+        "DOC-001B-UI"
+      ],
+      "allowed_paths": [
+        "web/src/lib/document-review-api.ts",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "tests/unit/document-review-api.test.mjs",
+        "tests/e2e/document-reviews.spec.ts"
+      ],
+      "assigned_to": "ui_integration; root integration; integration_review",
+      "branch": "agent/frontend-current",
+      "required_evidence_levels": [
+        "unit",
+        "browser_fixture"
+      ],
+      "next_action": "Implement connected exact-version review status/request/decision against deployed20261009172736 contract, frozen uncertain retry, current authority, responsive states; focused adapter/browser verification, independent review, then exact transfer to existing Lovable project.",
       "status": "in_progress",
       "requirements": [
         "M13",
@@ -1620,26 +1666,12 @@
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
     {
-      "id": "DOC-001C-UI",
-      "title": "Connected exact-version internal review request and decision interface",
+      "id": "DOC-001D-BACKEND",
+      "title": "Synthetic exact-version release, explicit audiences, replacement and withdrawal",
+      "status": "in_progress",
       "dependencies": [
-        "DOC-001B-UI"
+        "DOC-001C-BACKEND"
       ],
-      "allowed_paths": [
-        "web/src/lib/document-review-api.ts",
-        "web/src/components/document-version-review.tsx",
-        "web/src/components/document-versions.tsx",
-        "tests/unit/document-review-api.test.mjs",
-        "tests/e2e/document-reviews.spec.ts"
-      ],
-      "assigned_to": null,
-      "branch": "work/document-review-ui-2026-10-09",
-      "required_evidence_levels": [
-        "unit",
-        "browser_fixture"
-      ],
-      "next_action": "Old unpublished worktree unavailable after one check on 2026-10-09. Reimplement from current saved contracts, not prior descriptions. Immediate owner access and connected hosted integration take priority; preserve full review/release requirement.",
-      "status": "planned",
       "requirements": [
         "M13",
         "M19",
@@ -1648,6 +1680,13 @@
         "C05",
         "C07"
       ],
+      "allowed_paths": [
+        "supabase/migrations/20261009184724_document_version_releases.sql",
+        "tests/database/document-version-releases.test.mjs",
+        "docs/03-data/DOCUMENT_VERSION_RELEASE_CONTRACT.md"
+      ],
+      "assigned_to": "release_backend; root integration; integration_review",
+      "branch": "agent/document-release-backend",
       "owner_decisions": [
         "OD-002",
         "OD-003",
@@ -1655,6 +1694,10 @@
         "OD-013"
       ],
       "verification_profiles": [],
+      "required_evidence_levels": [
+        "database"
+      ],
+      "next_action": "Build reviewed bounded synthetic exact-version controller/audience metadata contract with immutable replacement/withdrawal. Existing approval remains historical; every action rechecks current authority and safety. Released-byte gateway remains next explicit slice. No cloud/real-person grants.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     }

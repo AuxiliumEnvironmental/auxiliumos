@@ -70,6 +70,13 @@
           ],
           "activation_gate": "Existing OD-002 live designated reviewer/releaser/dual-role review and OD-013 safe inspection gates remain closed. Actual qualification evidence and genuine runtime verification required before professional use.",
           "production_enabled": false
+        },
+        {
+          "id": "OD-002-synthetic-explicit-release",
+          "choice": "Routine synthetic document class only: separately assigned exact-version release controller, immutable approved_internal decision, explicit current-recipient grant set; no implied carryover on replacement. Distinct historical recipient grants, immutable withdrawal, and no automatic restoration of a previous release. Reviewer assignment retirement preserves historical approval but grants no current actor/audience authority.",
+          "rationale": "Develop exact controlled release independently of live qualifications/audience decisions, preserving current released version while replacement drafts evolve.",
+          "activation_gate": "Real professional qualifications, dual-role policy, sensitive classes, live audiences and safe handling remain closed. Metadata slice does not implement released-byte serving.",
+          "production_enabled": false
         }
       ]
     },

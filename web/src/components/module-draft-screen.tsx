@@ -1,10 +1,12 @@
-import { useEffect, useId, useMemo, useState, type ChangeEvent } from 'react';
+import { useEffect, useId, useMemo, useRef, useState, type ChangeEvent } from 'react';
 import { CalendarDays, CheckSquare, Clock3, Eye, FileText, FolderOpen, LoaderCircle, LockKeyhole, MessageSquare, Plus, RotateCcw, Save, Sparkles, Trash2 } from 'lucide-react';
 import { Button } from './button';
 import type { DraftField, ScreenDefinition } from '../pages/module-screen-definitions';
 import { useWorkspacePlans } from '../lib/use-workspace-plans';
 import { buildSaveRequest, panelKeyFor, PlanError, PLAN_MODULE_KEYS, type PlanSaveRequest, type PlanFieldSpec, type PlanSchema, type PlanScope, type WorkspacePlan } from '../lib/workspace-plan-api';
 import type { RuntimeError } from '../lib/errors';
+import { sampleRows, sampleTitle, sampleValue } from '../lib/sample-case';
+import { SampleCaseTag } from './sample-case';
 
 type Values = Record<string, string>;
 type DraftRow = { id: number; values: Values };
@@ -21,13 +23,6 @@ export function planSchema(definition: ScreenDefinition): PlanSchema {
 }
 export function isSavablePanel(moduleKey: string | undefined, definition: ScreenDefinition) {
  return !!moduleKey && (PLAN_MODULE_KEYS as readonly string[]).includes(moduleKey) && definition.pattern !== 'history' && definition.pattern !== 'integration' && definition.fields.length > 0;
-}
-
-function sampleValue(field: DraftField) {
- if (field.kind === 'select') return field.options?.[0] ?? '';
- if (field.kind === 'text' || field.kind === undefined) return `SAMPLE – fictional ${field.label.toLowerCase()}`;
- if (field.kind === 'multiline') return `SAMPLE SITE – illustrative ${field.label.toLowerCase()} for planning practice only.`;
- return '';
 }
 
 function Field({ field, value, onChange, prefix }: { field: DraftField; value: string; onChange: (value: string) => void; prefix: string }) {
@@ -51,7 +46,14 @@ export function ModuleDraftScreen({ definition, open = false, moduleKey, index =
  return <DraftBody key={plans.key} definition={definition} open={open} savable={savable} scope={scope} schema={schema} plans={plans} />;
 }
 
-type SaveState = { status: 'idle' } | { status: 'saving'; request: PlanSaveRequest } | { status: 'failed' | 'conflict'; request: PlanSaveRequest; error: RuntimeError };
+/**
+ * - uncertain: network/server/malformed outcome. The save may have committed, so the
+ *   exact frozen request is the only thing that may be resent; the editor stays locked.
+ * - invalid: definitive input rejection; nothing committed, editing resumes with fresh intent.
+ * - conflict: definitive revision conflict.
+ */
+type SaveState = { status: 'idle' } | { status: 'saving'; request: PlanSaveRequest } | { status: 'uncertain' | 'conflict'; request: PlanSaveRequest; error: RuntimeError } | { status: 'invalid'; error: RuntimeError };
+const isDefinitiveRejection = (error: RuntimeError) => error instanceof PlanError && (error.planCode === 'validation' || error.planCode === 'unavailable' || error.planCode === 'not_available');
 
 function DraftBody({ definition, open, savable, scope, schema, plans }: { definition: ScreenDefinition; open: boolean; savable: boolean; scope: PlanScope | null; schema: PlanSchema; plans: ReturnType<typeof useWorkspacePlans> }) {
  const id = useId();
@@ -72,8 +74,15 @@ function DraftBody({ definition, open, savable, scope, schema, plans }: { defini
  const [save, setSave] = useState<SaveState>({ status: 'idle' });
  const [loadError, setLoadError] = useState('');
  const [refreshFailed, setRefreshFailed] = useState<string | null>(null);
+ /** Pending read (open, readback or recheck). Edits are locked so a response cannot erase new typing. */
+ const [reading, setReading] = useState(false);
+ const [fromSample, setFromSample] = useState(false);
+ const operation = useRef(0);
+ const currentRef = useRef(current);
+ currentRef.current = current;
  const isOpen = open || started || current !== null;
- const locked = save.status === 'saving' || save.status === 'conflict';
+ /** Any pending/unresolved operation. A failed post-save readback stays locked until the same plan reloads. */
+ const locked = reading || save.status === 'saving' || save.status === 'uncertain' || save.status === 'conflict' || refreshFailed !== null;
  useEffect(() => {
   if (!dirty) return;
   const warn = (event: BeforeUnloadEvent) => {event.preventDefault();event.returnValue = '';};
@@ -82,46 +91,70 @@ function DraftBody({ definition, open, savable, scope, schema, plans }: { defini
  }, [dirty]);
  const touch = () => { setDirty(true); setMessage(''); };
  const update = (label: string, value: string) => { setValues(old => ({...old,[label]:value})); touch(); };
- const clear = () => { setTitle('');setValues({});setRows([]);setChecks({});setPreview(false);setDiscarding(false);setMonth('');setDirty(false);setCurrent(null);setSave({status:'idle'}); };
- const reset = () => { clear(); setStarted(false); setMessage('Draft discarded.'); };
+ const clear = () => { operation.current++; setReading(false); setPendingOpen(null); setLoadError(''); setRefreshFailed(null); setFromSample(false); setTitle('');setValues({});setRows([]);setChecks({});setPreview(false);setDiscarding(false);setMonth('');setDirty(false);setCurrent(null);setSave({status:'idle'}); };
+ const reset = () => { if (locked) return; clear(); setStarted(false); setMessage('Draft discarded.'); };
  const apply = (plan: WorkspacePlan) => {
-  if (current && current.id === plan.id && current.revision > plan.revision) return;
+  const known = currentRef.current;
+  if (known && known.id === plan.id && known.revision > plan.revision) return;
+  currentRef.current = { id: plan.id, revision: plan.revision };
   let n = 1;
   setTitle(plan.title); setValues({...plan.values}); setChecks({...plan.checks});
   setRows(plan.rows.map(row => ({ id: n++, values: {...row} }))); setNextId(n);
   setCurrent({ id: plan.id, revision: plan.revision }); setDirty(false); setStarted(true); setSave({status:'idle'});
  };
  const loadSample = () => {
-  setTitle(`SAMPLE – ${definition.title}`);
-  setValues(Object.fromEntries(definition.fields.map(field => [field.label, sampleValue(field)])));
-  if (definition.repeat) { setRows([{ id: nextId, values: Object.fromEntries(definition.repeat.fields.map(field => [field.label, sampleValue(field)])) }]); setNextId(nextId + 1); }
-  setDirty(true); setStarted(true); setMessage('Sample example loaded. It is unsaved and fictional.');
+  if (locked) return;
+  setTitle(sampleTitle(definition.title));
+  setValues(Object.fromEntries([...definition.fields, ...(definition.checks ? [{ label: 'Review notes', kind: 'multiline' as const }] : [])].map(field => [field.label, sampleValue(field)])));
+  if (definition.repeat) { const sampled = sampleRows(definition.repeat.fields); setRows(sampled.map((values, n) => ({ id: nextId + n, values }))); setNextId(nextId + sampled.length); }
+  setFromSample(true); setDirty(true); setStarted(true); setMessage('Sample example loaded from the fictional Harbour Point case. It is unsaved; saving makes it your own planning draft.');
+ };
+ /** One read at a time; a newer operation fences any older response out. */
+ const read = async (planId: string) => {
+  const ticket = ++operation.current;
+  setReading(true);
+  const result = await plans.open(planId);
+  if (ticket !== operation.current) return null;
+  setReading(false);
+  return result;
  };
  const openPlan = async (planId: string) => {
-  setPendingOpen(null); setLoadError(''); setMessage('Opening your planning draft…');
-  const result = await plans.open(planId);
+  if (locked) return;
+  setPendingOpen(null); setDiscarding(false); setLoadError(''); setMessage('Opening your planning draft…');
+  const result = await read(planId);
   if (!result) return;
-  if (result.ok) { apply(result.plan); setMessage(`Opened your planning draft · revision ${result.plan.revision}`); }
+  if (result.ok) { currentRef.current = null; apply(result.plan); setMessage(`Opened your planning draft · revision ${result.plan.revision}`); }
   else { setMessage(''); setLoadError(result.error.message); }
  };
+ /** Sends exactly the given frozen request. Never retried automatically. */
  const send = async (request: PlanSaveRequest) => {
+  if (reading || save.status === 'saving') return;
+  const ticket = ++operation.current;
+  setDiscarding(false); setPendingOpen(null); setLoadError('');
   setSave({ status: 'saving', request }); setMessage('Saving planning draft…');
   const result = await plans.save(request);
-  if (!result) return;
+  if (!result || ticket !== operation.current) return;
   if (result.ok) {
-   apply(result.plan); setMessage(`Saved personal planning draft · revision ${result.plan.revision}`);
+   // A retry may return its original (older) revision; apply() never downgrades.
+   setSave({ status: 'idle' }); apply(result.plan); setMessage(`Saved personal planning draft · revision ${result.plan.revision}`);
    await refreshSaved(result.plan.id, result.plan.revision);
    return;
   }
   setMessage('');
-  setSave({ status: result.error instanceof PlanError && result.error.planCode === 'conflict' ? 'conflict' : 'failed', request, error: result.error });
+  if (result.error instanceof PlanError && result.error.planCode === 'conflict') setSave({ status: 'conflict', request, error: result.error });
+  else if (isDefinitiveRejection(result.error)) setSave({ status: 'invalid', error: result.error });
+  else setSave({ status: 'uncertain', request, error: result.error });
  };
  /** Confirmed saves refresh from get_workspace_plan; a refresh failure never reports the save as lost. */
  const refreshSaved = async (planId: string, savedRevision: number) => {
   setRefreshFailed(null);
+  const ticket = ++operation.current;
+  setReading(true);
   const fresh = await plans.refresh(planId);
+  if (ticket !== operation.current) return;
+  setReading(false);
   if (!fresh) return;
-  if (fresh.ok) { if (fresh.plan.revision >= savedRevision) apply(fresh.plan); return; }
+  if (fresh.ok) { if (fresh.plan.revision >= savedRevision) apply(fresh.plan); setMessage(`Showing the latest saved copy · revision ${Math.max(fresh.plan.revision, currentRef.current?.revision ?? 0)}`); return; }
   setRefreshFailed(planId);
  };
  const startSave = () => {
@@ -133,14 +166,14 @@ function DraftBody({ definition, open, savable, scope, schema, plans }: { defini
   } catch (error) { setSave({ status: 'idle' }); setMessage(error instanceof Error ? error.message : 'Check the planning draft and try again.'); }
  };
  const savedRevision = current && !dirty ? current.revision : null;
- const status = save.status === 'saving' ? 'Saving…' : savedRevision ? `Saved personal planning draft · revision ${savedRevision}` : current ? `Unsaved changes · revision ${current.revision}` : 'Unsaved draft';
+ const status = reading ? 'Loading saved copy…' : save.status === 'uncertain' ? 'Save outcome unconfirmed' : save.status === 'saving' ? 'Saving…' : savedRevision ? `Saved personal planning draft · revision ${savedRevision}` : current ? `Unsaved changes · revision ${current.revision}` : 'Unsaved draft';
  return <section className={`draft-screen pattern-${definition.pattern}`} aria-labelledby={`${id}-title`}>
-  <div className="section-intro"><div><p className="entity-type">{definition.pattern === 'review' ? 'Revision review' : definition.pattern === 'schedule' ? 'Planning' : definition.pattern === 'audit' ? 'Permitted inspection' : 'Preparation'}</p><h2 id={`${id}-title`}>{definition.title}</h2></div><div className="draft-header-actions">{!locked && <Button variant="text-button" onClick={loadSample}><Sparkles size={16} />Load sample example</Button>}{!isOpen && <Button variant="primary" onClick={() => {setStarted(true);setMessage(definition.pattern === 'audit' ? 'Search filters opened. No search has been run.' : 'Unsaved draft opened.');}}><Plus size={16} />{definition.pattern === 'audit' ? 'Prepare filters' : definition.pattern === 'review' ? 'Prepare review notes' : 'Prepare draft'}</Button>}</div></div>
-  {savable && scoped && <SavedPlans plans={plans} currentId={current?.id} disabled={locked} onOpen={planId => dirty ? setPendingOpen(planId) : void openPlan(planId)} onNew={() => dirty ? setDiscarding(true) : (clear(), setStarted(true), setMessage('New planning draft opened.'))} />}
+  <div className="section-intro"><div><p className="entity-type">{definition.pattern === 'review' ? 'Revision review' : definition.pattern === 'schedule' ? 'Planning' : definition.pattern === 'audit' ? 'Permitted inspection' : 'Preparation'}</p><h2 id={`${id}-title`}>{definition.title}</h2></div><div className="draft-header-actions">{<Button variant="text-button" disabled={locked} onClick={loadSample}><Sparkles size={16} />Load sample example</Button>}{!isOpen && <Button variant="primary" disabled={locked} onClick={() => {setStarted(true);setMessage(definition.pattern === 'audit' ? 'Search filters opened. No search has been run.' : 'Unsaved draft opened.');}}><Plus size={16} />{definition.pattern === 'audit' ? 'Prepare filters' : definition.pattern === 'review' ? 'Prepare review notes' : 'Prepare draft'}</Button>}</div></div>
+  {savable && scoped && <SavedPlans plans={plans} currentId={current?.id} disabled={locked} onOpen={planId => { if (locked) return; if (dirty) setPendingOpen(planId); else void openPlan(planId); }} onNew={() => { if (locked) return; if (dirty) setDiscarding(true); else { clear(); setStarted(true); setMessage('New planning draft opened.'); } }} />}
   {loadError && <p className="inline-error" role="alert">{loadError}</p>}
-  {pendingOpen && <div className="discard-confirmation" role="alert"><p>Open your saved draft and discard your unsaved changes?</p><Button onClick={() => void openPlan(pendingOpen)}>Discard and open</Button><Button variant="text-button" onClick={() => setPendingOpen(null)}>Keep editing</Button></div>}
+  {pendingOpen && <div className="discard-confirmation" role="alert"><p>Open your saved draft and discard your unsaved changes?</p><Button disabled={locked} onClick={() => void openPlan(pendingOpen)}>Discard and open</Button><Button variant="text-button" disabled={locked} onClick={() => setPendingOpen(null)}>Keep editing</Button></div>}
   {!isOpen ? <div className="draft-start"><FileText size={32} /><div><h3>{definition.pattern === 'audit' ? 'Prepare a search' : 'Start with an unsaved draft'}</h3><p>{definition.pattern === 'review' ? 'Identify the exact revision and prepare review notes.' : definition.pattern === 'schedule' ? 'Arrange work and dates before scheduling.' : definition.pattern === 'report' ? 'Define the reporting period and source basis.' : definition.pattern === 'conversation' ? 'Prepare wording and recipients without sending.' : 'Enter details for review before saving.'}</p></div></div> : <>
-   <div className="draft-state"><span className="status-label">{status}</span><p>{savable ? (scoped ? 'Personal planning draft for the selected development facility. Only you can see it; it is not shared with teammates.' : 'Choose a development account and facility above to save. No personal health information.') : 'Unsaved; leaving this module discards the draft. No sensitive or personal health information.'}</p></div>
+   <div className="draft-state"><span className="status-label">{status}</span>{fromSample && <SampleCaseTag />}<p>{savable ? (scoped ? 'Personal planning draft for the selected development facility. Only you can see it; it is not shared with teammates.' : 'Choose a development account and facility above to save. No personal health information.') : 'Unsaved; leaving this module discards the draft. No sensitive or personal health information.'}</p></div>
    <form onSubmit={event => {event.preventDefault();setPreview(true);setMessage('Draft preview ready. Nothing has been submitted.');}}>
     <fieldset className="draft-fieldset" disabled={locked}>
     {savable && <div className="draft-fields"><div className="field field-wide"><label htmlFor={`${id}-plan-title`}>Planning draft title</label><input id={`${id}-plan-title`} aria-describedby={`${id}-plan-rules`} value={title} maxLength={120} autoComplete="off" onChange={event => {setTitle(event.target.value);touch();}} /><p id={`${id}-plan-rules`} className="field-hint">Notes only: links, files, passwords, keys and personal health information are not accepted.</p></div></div>}
@@ -159,9 +192,11 @@ function DraftBody({ definition, open, savable, scope, schema, plans }: { defini
     </div>
     {definition.consequence && <div className="gated-action"><Button type="button" variant="secondary" disabled><LockKeyhole size={16} />{definition.consequence}</Button><p>Next professional step. Requires the connected workflow and the responsible person's own authority; a planning draft does not perform it.</p></div>}
    </form>
-   {(save.status === 'failed' || save.status === 'conflict') && <div className="save-problem" role="alert"><p>{save.error.message}</p>{save.status === 'failed' ? <><Button onClick={() => void send(save.request)}>Retry save</Button><Button variant="text-button" onClick={() => { setSave({status:'idle'}); setMessage('Retry cancelled. Your changes are still unsaved.'); }}>Cancel retry</Button></> : <><Button onClick={() => void openPlan(save.request.planId)}>Open latest saved version</Button><Button variant="text-button" onClick={() => { setSave({status:'idle'}); setCurrent(null); setMessage('Kept your changes as a new unsaved draft.'); }}>Keep my changes as a new draft</Button></>}</div>}
-   {refreshFailed && <div className="save-problem" role="status"><p>Saved. Revision {current?.revision} is recorded, but the latest copy could not be reloaded.</p><Button onClick={() => void refreshSaved(refreshFailed, current?.revision ?? 1)}>Reload latest</Button></div>}
-   {discarding && <div className="discard-confirmation" role="alert"><p>Discard the unsaved details on this tab?</p><Button onClick={reset}>Discard changes</Button><Button variant="text-button" onClick={() => setDiscarding(false)}>Keep editing</Button></div>}
+   {save.status === 'invalid' && <div className="save-problem" role="alert"><p>{save.error.message}</p><p className="field-hint">Nothing was saved. Correct the draft and save again.</p></div>}
+   {save.status === 'uncertain' && <div className="save-problem" role="alert"><p>{save.error.message}</p><p className="field-hint">The save may already be recorded. Editing is paused so the exact same save can be retried without creating a duplicate.</p><Button disabled={reading} onClick={() => void send(save.request)}>Retry same save</Button></div>}
+   {save.status === 'conflict' && <div className="save-problem" role="alert"><p>{save.error.message}</p> <><Button disabled={reading} onClick={() => { if (reading) return; void (async () => { const planId = save.request.planId; const result = await read(planId); if (!result) return; if (result.ok) { currentRef.current = null; apply(result.plan); setMessage(`Opened the latest saved version · revision ${result.plan.revision}`); } else { setLoadError(result.error.message); } })(); }}>Open latest saved version</Button><Button variant="text-button" disabled={reading} onClick={() => { if (reading || save.status !== 'conflict') return; operation.current++; setSave({status:'idle'}); setCurrent(null); currentRef.current = null; setMessage('Kept your changes as a new unsaved draft.'); }}>Keep my changes as a new draft</Button></></div>}
+   {refreshFailed && <div className="save-problem" role="status"><p>Saved. Revision {current?.revision} is recorded, but this may not be the latest copy and it could not be reloaded. Editing is paused until it reloads.</p><Button disabled={reading || current?.id !== refreshFailed} onClick={() => { if (reading || current?.id !== refreshFailed) return; void refreshSaved(refreshFailed, current.revision); }}>Reload latest</Button></div>}
+   {discarding && <div className="discard-confirmation" role="alert"><p>Discard the unsaved details on this tab?</p><Button disabled={locked} onClick={reset}>Discard changes</Button><Button variant="text-button" disabled={locked} onClick={() => setDiscarding(false)}>Keep editing</Button></div>}
    {preview && <DraftPreview title={title} values={values} rows={rows} definition={definition} savedRevision={savedRevision} />}
   </>}
   <p className="draft-announcement" role="status">{message}</p>

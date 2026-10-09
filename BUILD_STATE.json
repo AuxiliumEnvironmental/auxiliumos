@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T17:29:17.012182+00:00",
+  "as_of": "2026-10-09T18:50:34.744364+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -14,10 +14,10 @@
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Protected GitHub browser sign-in established. Repository Actions settings explicitly show no repository or environment secrets. Existing ci.yml workflow is registered and exposes Run workflow. Integration credential is a verified missing configuration item; secret values never read or requested in chat. Latest remotely saved owner checkpoint d4e76d93b564ec667fcbaf8290d1f15b23cd9289; current UI/backend WIP awaits this checkpoint.",
+    "github": "Verified feature source a880eb0 remotely before current integration. Protected GitHub Actions settings showed no repository or environment secrets; registered ci.yml dispatch supports the feature-branch inputs. AUXILIUMOS_TEST_SERVICE_ROLE_KEY is genuinely missing; no secret read or requested in chat.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "auxiliumos-dev txofqxictwecgcnvezlb active. Supported Dashboard invitation sent and independently confirmed at 2026-10-09T17:09:12Z. Reviewed genuine-operator transaction activated the fixed owner profile/account/facility and exactly five scoped capabilities. Password and first-login confirmation remain pending. Existing ten migrations, private storage, synthetic gates and both JWT-protected gateways remain configured; Moldo untouched.",
-    "lovable": "Existing revision 797c9c99c339e5e7bec18efe814b5e57127b074a is publicly published. Actual HTTPS auxiliumos.io sign-in and recovery screens verified in browser. One delegated UI lead owns the current full-destination demo increment in the same project; root integrates and publishes after focused checks.",
+    "supabase": "auxiliumos-dev txofqxictwecgcnvezlb active with 12 canonical migrations; exact planning/review hashes confirmed in actual history. Owner invitation/password and genuine application login/account/facility/request/triage are verified. Fixed five capabilities remain separate from professional authority. Moldo untouched.",
+    "lovable": "Existing project source7f3027cbbd0fcd700cff7a3aac8d30cd25487735 ready and published per provider; real auxiliumos.io app showed the full navigation and connected owner workflow. Root publication of this reviewed full-demo plus Spatial revision was accepted pending as deploymentd2b3a167-2fd8-4348-af02-ce0100eeb854. DOC-001C UI next work remains local pending review.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -27,7 +27,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish reviewed full-destination demo UI, synchronize the Facility Coordinator field with the typed planning catalogue, run focused affected verification, save exact source and deploy to existing development Supabase/Lovable projects. Owner password and initial Auth session are now confirmed; verify app-level use in the published browser. Protected connected verification awaits the missing development-only GitHub repository secret.",
+  "first_runtime_action": "Finish and review the connected exact-version internal review UI while the release backend proceeds independently. Securely configure the verified missing development-only GitHub Actions service secret, then dispatch the focused connected browser harness with freshly reconciled fixture revision/bucket. Resume actual upload/finalization/retrieval and planning save/reopen browser verification when the cloud browser credential-state restriction is cleared. Account setup and actual login are complete.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
   ],
@@ -50,7 +50,8 @@
     "SEC-001B-R5's reviewed generation-isolated persistence correction passes 25 persistence and 3 configuration tests plus seven Chromium HTTP-fixture journeys. GitHub CI run 37811327001 passed both jobs against the 0773cce PR candidate; it does not certify authentic Supabase acceptance.",
     "2026-10-09: foundation, directory, audit and reservation SQL applied unchanged to actual PostgreSQL17 development target. Schema/history readback confirms all11 tables RLS; this is deployment evidence, not Auth/API acceptance.",
     "Intake backend/UI and private-file transport are implemented and independently reviewed as bounded synthetic increments. Bootstrap regression and legacy-display errors fixed. Complete20module acceptance remains open.",
-    "2026-10-09 owner access: public root domain verified, invitation sent through supported Dashboard, exact Auth identity independently verified and scoped application provisioning completed. Owner password/first login and actual connected API/browser acceptance remain unverified."
+    "2026-10-09 owner access: public root domain verified, invitation sent through supported Dashboard, exact Auth identity independently verified and scoped application provisioning completed. Owner password/first login and actual connected API/browser acceptance remain unverified.",
+    "2026-10-09 current: owner authenticated at auxiliumos.io, viewed its account and exact facility, submitted synthetic Project Request b82a3beb-6ed9-43a4-bdf5-04781d5a8a37 and saved triage revision2; actual database readback agrees. The later file-chooser command was blocked by retained native credential state and a clean runtime could not resume. No upload, finalization, retrieval or hosted planning save/reopen claimed from this journey."
   ],
   "runtime_implementation": {
     "app": "web/",
@@ -61,16 +62,16 @@
       "runtime-build",
       "directory-browser-fixture"
     ],
-    "authentic_api_status": "prepared_unexecuted",
+    "authentic_api_status": "owner_directory_intake_and_triage_observed_remaining_connected_harness_blocked",
     "deployed": true,
-    "verification_status": "Existing frontend publicly published; owner invitation and scoped application access provisioned. Password/first login and genuine connected backend/browser acceptance remain open. Full-destination demo UI plus personal synthetic planning persistence are in progress; complete-module acceptance is not claimed.",
+    "verification_status": "Owner actual login/account/facility/submission/triage passed. Full20module navigation and representative synthetic planning/demo views implemented; real operational module acceptance is not claimed. Private upload/finalization/retrieval and planning hosted save/reopen remain open; protected CI secret and current cloud browser restriction are explicit.",
     "audit_migration": "supabase/migrations/20261008154950_access_audit_provenance.sql",
     "audit_review": "docs/00-control/reviews/SEC-001C-AUDIT-2026-10-08.json",
     "fixture_review": "docs/00-control/reviews/SEC-001B-API-FIXTURES-2026-10-08.json",
     "database_deployment": {
       "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
       "receipt": "docs/00-control/evidence/development-migrations.json",
-      "migration_count": 10,
+      "migration_count": 12,
       "authentic_api_status": "awaiting_secure_key",
       "private_config_enabled": true,
       "storage_bucket_count": 1,
@@ -161,7 +162,7 @@
       "review": "docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json",
       "owner_invitation_sent": true,
       "owner_password_set": true,
-      "owner_first_login_verified": false,
+      "owner_first_login_verified": true,
       "independent_of_document_release": true,
       "provisioning_path": "Supported Dashboard invitation followed by scripts/provision-owner-from-dashboard.sql as genuine database operator, independently reviewed.",
       "requires_ci_service_credential": false,
@@ -176,29 +177,52 @@
       "invitation_recorded_at": "2026-10-09T17:09:12.240731Z",
       "owner_first_authentication_verified": true,
       "auth_sign_in_recorded_at": "2026-10-09T17:15:03.447640Z",
-      "application_browser_verification": "pending"
+      "application_browser_verification": "passed_actual_owner_account_facility_request_submit_and_triage",
+      "application_browser_observed_at": "2026-10-09T18:50:34.744364+00:00"
     },
     "frontend_ui": {
-      "source_lovable_revision": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+      "source_lovable_revision": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
       "canonical_parent": "d177692db1a3056d271000434631abdda3dfaa4d",
-      "status": "in_progress",
-      "scope": "Responsive shell and existing connected pages; 45 distinct preparation/review/status panels across the remaining 15 modules. Four audience layout components remain inactive pending server capabilities.",
-      "data_behavior": "New module drafts stay only in component memory. Missing backend reads/mutations, audience activation and professional/commercial actions remain unavailable.",
-      "verification": "Controller reviewed actual source and passed the development build. Lovable's two final affected browser-fixture cases pass. Hosted backend acceptance and complete-module acceptance remain open.",
+      "status": "implemented_bounded_demo_and_planning_surfaces",
+      "scope": "Full20module navigation;45distinct preparation/review/status panels with40creator-owned persisted planning editors; coherent Harbour Point sample and four illustrative audience views; authorized Spatial host.",
+      "data_behavior": "Planning mutations use actual typed creator-scoped Supabase RPCs, immutable revisions/CAS and frozen uncertain retries. Sample cases remain explicitly illustrative. Existing connected workflows preserved; commercial/professional actions remain gated.",
+      "verification": "Final dd7961f UI:14focused unit and11browser fixtures passed;20routes at1440/390/360 passed without overflow/errors/unexpected requests. Independent client review clear. New Spatial-only source77a1cf6 matched external64f5b2a,8asset hashes and one build:dev passed, targeted review clear. Reused matching evidence without broad rerun.",
       "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json",
-      "next_increment": "Single Lovable UI writer with isolated backend and independent security reviewer; cohesive 20-module presentation and actual creator-owned planning drafts. Commercial/professional transitions remain gated.",
-      "candidate_lovable_revision": "a472b4bbcefa65c640581197986991b99ba503ad",
-      "candidate_status": "WIP, not published: uncertain-save/open races and repetitive sample module presentation require fixes; Facility Coordinator terminology queued in same writer."
+      "next_increment": "DOC-001C exact-version review UI in isolated frontend-reconcile worktree; one Lovable writer; source transfer only after review.",
+      "candidate_lovable_revision": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+      "candidate_status": "Reviewed full UI and Spatial integrated; root publication accepted pending; actual public app owner directory/intake/triage observed."
     },
     "workspace_plans": {
-      "status": "implemented_pending_integrated_checks_and_deployment",
+      "status": "implemented_deployed_hosted_workflow_pending",
       "migration": "20261009170854_workspace_plans.sql",
       "migration_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
       "editable_panels": 40,
       "authority": "Personal synthetic preparation using existing scoped submit_request/view_account/view_asset; creator only; no professional/commercial/release rights.",
       "review": "Independent backend review clear including narrow terminology delta.",
-      "verification": "Original focused PostgreSQL suite69/69 passed. New Facility coordinator save/reopen/old-key rejection passed; strict catalogue parity awaits matching UI change. No hosted Auth/API/concurrency/browser proof.",
-      "deployed": false
+      "verification": "Integrated workspace-plans-database profile passed at18:07:12Z including current Facility coordinator catalogue. Final client/fixture checks passed and independent review clear. Actual hosted save/reopen and true concurrent sessions remain unexecuted.",
+      "deployed": true
+    },
+    "document_reviews": {
+      "implemented": true,
+      "deployed": true,
+      "worker_commit": "eb650409aeb2947d385e337efbbfdd812b46ff6d",
+      "migration": "20261009172736_document_version_reviews.sql",
+      "migration_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+      "focused_database_tests": "37/37 passed with simulated Auth; reused exact worker evidence",
+      "independent_review": "clear; lock-order finding corrected",
+      "actual_reviewer_assigned": false,
+      "hosted_human_workflow_verified": false,
+      "review": "docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json"
+    },
+    "spatial": {
+      "owner_authorized": true,
+      "source_head": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+      "os_packaging_commit": "64f5b2aa604a155761e99ec4189b3cdd2a365d39",
+      "integration_worker_commit": "77a1cf6f96a87ccd8b5db2268078ae9a70f0a938",
+      "lovable_commit": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+      "exact_generated_asset_hashes": 8,
+      "host_review": "clear",
+      "runtime_boundary": "Personal synthetic profile-scoped browser editor; no project/server/professional authority or native Apple acceptance claimed."
     }
   },
   "execution_recovery": {
@@ -232,9 +256,13 @@
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
     "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
-    "active_agents": [],
-    "first_unfinished_action": "Obtain explicit approval to publish the prepared login application at auxiliumos.io, required by automatic approval review. Publish the saved Lovable revision, verify HTTPS and invitation/password browser screens, then send the supported Dashboard invitation and execute the reviewed exact-UUID application provisioning transaction. The owner personally sets the password and signs in. Owner access does not wait for CI credentials, document release or all modules.",
-    "latest_verified_remote": "52b7ec4f23a2a6136f7fcefbf8eeb4307f427290",
+    "active_agents": [
+      "ui_integration",
+      "release_backend",
+      "integration_review"
+    ],
+    "first_unfinished_action": "Finish and review the connected exact-version internal review UI while the release backend proceeds independently. Securely configure the verified missing development-only GitHub Actions service secret, then dispatch the focused connected browser harness with freshly reconciled fixture revision/bucket. Resume actual upload/finalization/retrieval and planning save/reopen browser verification when the cloud browser credential-state restriction is cleared. Account setup and actual login are complete.",
+    "latest_verified_remote": "a880eb0c286e993eeaffa70efd89248323ca1bee",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4grv07wen993jephhsf8c9f",

@@ -414,7 +414,7 @@ body { letter-spacing: 0; }
   .section-intro { grid-template-columns: minmax(0,1fr); gap: 0.75rem; }
   .section-intro > .button { justify-self: start; }
   .record-outline, .module-index, .account-selector-panel dl { grid-template-columns: minmax(0,1fr); }
-  .record-table th { padding: 0.65rem 0.5rem; overflow-wrap: anywhere; }
+  .record-table th { padding: 0.65rem 0.5rem; white-space: nowrap; }
   .unconnected-state { padding: 2rem 1rem; flex-direction: column; }
   .module-tabs { gap: 1rem; }
   .module-tabs .button { font-size: 0.75rem; }
@@ -545,4 +545,43 @@ textarea:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
   .spine-strip ol { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--space-1); }
   .spine-strip li a { white-space: nowrap; }
   .draft-actions .button, .gated-action .button { width: 100%; min-height: 44px; }
+}
+
+/* Standalone Spatial: full-width authoring without workspace navigation. */
+.spatial-standalone { min-height: 100vh; padding: 1rem; }
+
+/* Sample case: one fictional case, visually separate from real work. */
+.sample-case { margin: var(--space-4) 0; padding: var(--space-4); border: 1px dashed var(--notice-text); border-radius: var(--radius); background: var(--surface); }
+.sample-case-head { display: flex; align-items: flex-start; gap: var(--space-2); flex-wrap: wrap; }
+.sample-case-head p, .sample-case-head h2 { margin: 0; }
+.sample-case-head h2 { font-size: 1.05rem; }
+.sample-blocks { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: var(--space-3); }
+.sample-block h3 { margin: 0 0 var(--space-2); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.sample-facts { display: grid; gap: var(--space-1); margin: 0; }
+.sample-facts div { display: grid; grid-template-columns: minmax(7rem, 40%) 1fr; gap: var(--space-2); padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+.sample-facts dt { color: var(--muted); font-size: 0.85rem; }
+.sample-facts dd { margin: 0; }
+.sample-list, .sample-stages, .sample-thread, .sample-journey { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-1); }
+.sample-list li, .sample-stages li, .sample-thread li { display: flex; justify-content: space-between; gap: var(--space-2); align-items: flex-start; padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.sample-list li div, .sample-stages li div, .sample-thread li div, .sample-journey a div, .sample-panel li a div { display: grid; gap: 0.15rem; min-width: 0; }
+.sample-list span, .sample-stages span:not(.status-label), .sample-thread span, .sample-journey span:not(.module-number), .sample-panel li span:not(.status-label) { color: var(--muted); font-size: 0.85rem; }
+.sample-stages { counter-reset: stage; }
+.sample-stages li { border-left: 3px solid var(--notice-text); }
+.sample-thread li:last-child { border-style: dashed; }
+.sample-next { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 44px; margin-top: var(--space-2); font-weight: 600; }
+.sample-next-action { display: grid; gap: 0.35rem; margin: var(--space-3) 0; padding: var(--space-3); border-radius: var(--radius-sm); background: var(--secondary); }
+.sample-next-action .button { justify-self: start; min-height: 44px; display: inline-flex; align-items: center; gap: 0.4rem; }
+.sample-journey { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+.sample-journey a, .sample-panel li a { display: flex; align-items: center; gap: var(--space-2); min-height: 44px; padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: var(--radius-sm); color: inherit; text-decoration: none; }
+.sample-journey a > div, .sample-panel li a > div { flex: 1; }
+.sample-journey a:hover, .sample-panel li a:hover, .sample-journey a:focus-visible, .sample-panel li a:focus-visible { border-color: var(--accent-text); }
+.sample-panel-head { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); }
+.sample-panel-head h3 { margin: 0; }
+.sample-panel ul { list-style: none; padding: 0; display: grid; gap: var(--space-1); }
+.sample-layout-grid ul { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.sample-layout-queue li a { border-left: 3px solid var(--accent-text); }
+.sample-layout-packet { max-width: 34rem; }
+@media (max-width: 520px) {
+  .sample-case { padding: var(--space-3); }
+  .sample-facts div { grid-template-columns: 1fr; gap: 0; }
 }

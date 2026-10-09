@@ -34,6 +34,7 @@ async function mockBackend(page: Page) {
     facilityGate: null as null | { accountId: string; arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> },
     unexpected: [] as string[], requests: [] as URL[],
     planBackend: false, plans: [] as Record<string, unknown>[], planCalls: [] as { name: string; body: Record<string, unknown> }[],
+    dropNextSaveAck: false, loseNextSave: false, failNextGet: false, saveGate: null as null | { arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> }, getGate: null as null | { arrived: ReturnType<typeof deferred>; release: ReturnType<typeof deferred> },
   };
   const json = (route: Route, value: unknown, status = 200) => route.fulfill({
     status, contentType: 'application/json', body: JSON.stringify(value),
@@ -87,11 +88,19 @@ async function mockBackend(page: Page) {
       const body = route.request().postDataJSON() as Record<string, unknown>;
       state.planCalls.push({ name, body });
       if (name === 'list_workspace_plans') return json(route, state.plans.filter((plan) => plan.account_id === body.p_account_id && plan.facility_id === body.p_facility_id && plan.panel_key === body.p_panel_key).map(({ values, rows, checks, ...summary }) => summary));
+      if (name === 'get_workspace_plan' && state.getGate) { const gate = state.getGate; state.getGate = null; gate.arrived.resolve(); await gate.release.promise; }
+      if (name === 'get_workspace_plan' && state.failNextGet) { state.failNextGet = false; return json(route, { message: 'Synthetic readback unavailable' }, 503); }
       if (name === 'get_workspace_plan') { const found = state.plans.find((plan) => plan.id === body.p_plan_id); return found ? json(route, found) : route.fulfill({ status: 403, contentType: 'application/json', body: JSON.stringify({ code: '42501', message: 'denied' }) }); }
       if (name === 'save_workspace_plan') {
         const existing = state.plans.find((plan) => plan.id === body.p_plan_id);
-        const plan = { id: body.p_plan_id, account_id: body.p_account_id, facility_id: body.p_facility_id, module_key: body.p_module_key, panel_key: body.p_panel_key, title: body.p_title, revision: (body.p_expected_revision as number) + 1, values: body.p_values, rows: body.p_rows, checks: body.p_checks, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' };
+        // Idempotent: an identical retry returns the original saved revision.
+        if (state.saveGate) { const gate = state.saveGate; state.saveGate = null; gate.arrived.resolve(); await gate.release.promise; }
+        if (state.loseNextSave) { state.loseNextSave = false; return json(route, { message: 'Synthetic gateway timeout' }, 504); }
+        if (existing && existing.request_id === body.p_request_id) return json(route, existing);
+        if ((existing ? existing.revision : 0) !== body.p_expected_revision) return route.fulfill({ status: 409, contentType: 'application/json', body: JSON.stringify({ code: '40001', message: 'stale' }) });
+        const plan = { request_id: body.p_request_id, id: body.p_plan_id, account_id: body.p_account_id, facility_id: body.p_facility_id, module_key: body.p_module_key, panel_key: body.p_panel_key, title: body.p_title, revision: (body.p_expected_revision as number) + 1, values: body.p_values, rows: body.p_rows, checks: body.p_checks, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' };
         state.plans = [plan, ...state.plans.filter((item) => item !== existing)];
+        if (state.dropNextSaveAck) { state.dropNextSaveAck = false; return json(route, { message: 'Synthetic gateway timeout' }, 504); }
         return json(route, plan);
       }
     }
@@ -273,8 +282,8 @@ test('fixture browser: phone navigation, keyboard close, honest module state and
   await open.click();
   await page.getByRole('dialog').getByRole('link', { name: 'Projects', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Operations / Projects', level: 1, exact: true })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Records are not available yet', exact: true })).toBeVisible();
-  await expect(page.getByText('You can prepare an unsaved draft while this workspace is being connected.', { exact: true })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Sample case illustration' })).toBeVisible();
+  await expect(page.getByText('Records are not available yet')).toHaveCount(0);
   await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
   await expect(page.getByText('Unsaved draft', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Save project plan', exact: true })).toBeDisabled();
@@ -299,8 +308,8 @@ test('fixture module drafts: field and repeatable values survive tabs but never 
   await expect(page.getByLabel('Project request reference', { exact: true })).toBeVisible();
   await page.getByLabel('Project request reference', { exact: true }).fill('Synthetic request reference');
   await page.getByLabel('Inclusions', { exact: true }).fill('Synthetic non-sensitive draft');
-  await page.getByRole('button', { name: 'Records', exact: true }).click();
-  await page.getByRole('button', { name: 'Draft preparation', exact: true }).click();
+  await page.getByRole('tab', { name: 'Revision review', exact: true }).click();
+  await page.getByRole('tab', { name: 'Scope records', exact: true }).click();
   await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('Synthetic request reference');
   await expect(page.getByLabel('Inclusions', { exact: true })).toHaveValue('Synthetic non-sensitive draft');
   await page.getByRole('button', { name: 'Add item', exact: true }).click();
@@ -320,6 +329,7 @@ test('fixture module drafts: field and repeatable values survive tabs but never 
   await expect(page.getByLabel('Deliverable', { exact: true })).toHaveCount(0);
   await page.getByRole('button', { name: 'Discard draft', exact: true }).click();
   await page.getByRole('button', { name: 'Discard changes', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
   await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('');
   await expect(page.getByLabel('Inclusions', { exact: true })).toHaveValue('');
   await expect(page.getByRole('button', { name: 'Save scope revision', exact: true })).toBeDisabled();
@@ -345,7 +355,7 @@ test('fixture module drafts: phone schedule filter and quantity values stay unsa
   await expect(page.getByRole('button', { name: 'Schedule work orders', exact: true })).toBeDisabled();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   await page.goto('/estimates');
-  await page.getByRole('button', { name: 'Draft preparation', exact: true }).click();
+  await page.getByRole('button', { name: 'Prepare draft', exact: true }).click();
   await expect(page.getByLabel('Planning range lower', { exact: true })).toBeVisible();
   await page.getByLabel('Planning range lower', { exact: true }).fill('12.50');
   await page.getByRole('button', { name: 'Add item', exact: true }).click();
@@ -367,8 +377,8 @@ test('fixture planning drafts: one scope draft saves, reopens with rows, and cle
   await signIn(page);
   await page.goto(`/scope?account=${accountA.id}`);
   await page.getByLabel('Facility', { exact: true }).selectOption(facilityA.id);
-  await page.getByRole('button', { name: 'Draft preparation', exact: true }).click();
   const panel = page.getByRole('tabpanel').first();
+  await panel.getByRole('button', { name: 'Prepare draft', exact: true }).click();
   await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
   await panel.getByLabel('Planning draft title').fill('East roof scope notes');
   await panel.getByLabel('Inclusions').fill('Roof membrane survey');
@@ -389,5 +399,180 @@ test('fixture planning drafts: one scope draft saves, reopens with rows, and cle
   await page.getByLabel('Facility', { exact: true }).selectOption(uuid(1002));
   await expect(panel.getByText('East roof scope notes')).toHaveCount(0);
   await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  expect(state.unexpected).toEqual([]);
+});
+
+async function openScopeWithFacility(page: Page) {
+  await page.goto(`/scope?account=${accountA.id}`);
+  await page.getByLabel('Facility', { exact: true }).selectOption(facilityA.id);
+  const panel = page.getByRole('tabpanel').first();
+  await panel.getByRole('button', { name: 'Prepare draft', exact: true }).click();
+  return panel;
+}
+
+test('fixture planning drafts: lost CREATE acknowledgement locks editing and retries the exact request without a duplicate', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  state.dropNextSaveAck = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Retry same save' })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Cancel retry' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Load sample example' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Create another' })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Retry same save' }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  const saves = state.planCalls.filter((call) => call.name === 'save_workspace_plan');
+  expect(saves).toHaveLength(2);
+  expect(saves[1].body).toEqual(saves[0].body);
+  expect(state.plans).toHaveLength(1);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+  expect(state.unexpected).toEqual([]);
+});
+
+const otherTab = (plan: Record<string, unknown>, revision: number, title: string) => ({ ...plan, request_id: `other-tab-${revision}`, revision, title });
+
+test('fixture planning drafts: lost UPDATE with an independently advanced head stays locked and exact retry returns conflict', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  await panel.getByLabel('Inclusions').fill('My update');
+  state.loseNextSave = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Retry same save' })).toBeVisible();
+  await expect(panel.getByRole('button', { name: 'Recheck saved draft' })).toHaveCount(0);
+  // Another tab commits different data; our UPDATE never committed.
+  state.plans = [otherTab(state.plans[0], 2, 'Other tab title')];
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('My update');
+  await panel.getByRole('button', { name: 'Retry same save' }).click();
+  await expect(panel.getByText(/changed or the save was already used/)).toBeVisible();
+  await expect(panel.getByText(/recorded/)).toHaveCount(0);
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('My update');
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  const saves = state.planCalls.filter((call) => call.name === 'save_workspace_plan');
+  expect(saves[2].body).toEqual(saves[1].body);
+  expect(state.plans[0].title).toBe('Other tab title');
+});
+
+test('fixture planning drafts: a pending discard confirmation cannot clear an in-flight save', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Discard draft' }).click();
+  await expect(panel.getByRole('button', { name: 'Discard changes' })).toBeVisible();
+  const gate = { arrived: deferred(), release: deferred() };
+  state.saveGate = gate;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByRole('button', { name: 'Discard changes' })).toHaveCount(0);
+  await expect(panel.getByRole('button', { name: 'Discard draft' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('Corridor notes');
+  expect(state.plans).toHaveLength(1);
+});
+
+test('fixture planning drafts: conflict Keep my changes is disabled while Open latest is pending', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByText('Saved personal planning draft · revision 1').first()).toBeVisible();
+  state.plans = [otherTab(state.plans[0], 2, 'Other tab title')];
+  await panel.getByLabel('Inclusions').fill('Mine');
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Open latest saved version' })).toBeVisible();
+  const gate = { arrived: deferred(), release: deferred() };
+  state.getGate = gate;
+  await panel.getByRole('button', { name: 'Open latest saved version' }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByRole('button', { name: 'Keep my changes as a new draft' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('Other tab title');
+  await expect(panel.getByRole('button', { name: 'Keep my changes as a new draft' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+});
+
+test('fixture planning drafts: failed readback keeps editing locked until the same plan reloads', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  await panel.getByLabel('Planning draft title').fill('Corridor notes');
+  state.failNextGet = true;
+  await panel.getByRole('button', { name: 'Save planning draft', exact: true }).click();
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toBeVisible();
+  await expect(panel.getByLabel('Planning draft title')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Create another' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Load sample example' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Discard draft' })).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Open Corridor notes' })).toBeDisabled();
+  await panel.getByRole('button', { name: 'Reload latest' }).click();
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toHaveCount(0);
+  await expect(panel.getByLabel('Planning draft title')).toBeEnabled();
+  await panel.getByRole('button', { name: 'Create another' }).click();
+  await expect(panel.getByLabel('Planning draft title')).toHaveValue('');
+  await expect(panel.getByRole('button', { name: 'Reload latest' })).toHaveCount(0);
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture planning drafts: open locks editing until readback and a facility change discards a late read', async ({ page }) => {
+  const state = await mockBackend(page);
+  state.planBackend = true;
+  state.facilities.push({ id: uuid(1002), account_id: accountA.id, display_name: 'Synthetic East annex', is_demo: true });
+  const plan = (n: number, title: string) => ({ id: uuid(5000 + n), account_id: accountA.id, facility_id: facilityA.id, module_key: 'scope', panel_key: 'scope.1', title, revision: 1, values: { Inclusions: `${title} inclusions` }, rows: [], checks: {}, created_at: '2026-10-09T00:00:00Z', updated_at: '2026-10-09T00:00:00Z', is_demo: true, state: 'planning_draft' });
+  state.plans = [plan(1, 'First notes'), plan(2, 'Second notes')];
+  await signIn(page);
+  const panel = await openScopeWithFacility(page);
+  const gate = { arrived: deferred(), release: deferred() };
+  state.getGate = gate;
+  await panel.getByRole('button', { name: 'Open First notes' }).click();
+  await gate.arrived.promise;
+  await expect(panel.getByLabel('Inclusions')).toBeDisabled();
+  await expect(panel.getByRole('button', { name: 'Open Second notes' })).toBeDisabled();
+  gate.release.resolve();
+  await expect(panel.getByLabel('Inclusions')).toHaveValue('First notes inclusions');
+  await expect(panel.getByLabel('Inclusions')).toBeEnabled();
+  const late = { arrived: deferred(), release: deferred() };
+  state.getGate = late;
+  await panel.getByRole('button', { name: 'Open Second notes' }).click();
+  await late.arrived.promise;
+  await page.getByLabel('Facility', { exact: true }).selectOption(uuid(1002));
+  late.release.resolve();
+  await expect(panel.getByText('You have no planning drafts for this facility yet.')).toBeVisible();
+  await expect(panel.getByText('Second notes')).toHaveCount(0);
+  expect(state.unexpected).toEqual([]);
+});
+
+test('fixture sample case: home journey, audience views and scope landing at phone width', async ({ page }, testInfo) => {
+  const state = await mockBackend(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await signIn(page);
+  await page.goto('/core');
+  await expect(page.getByRole('heading', { name: /Harbour Point/ })).toBeVisible();
+  await page.getByRole('button', { name: 'Internal team', exact: true }).click();
+  await expect(page.getByText('Owner and next-action queue')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.screenshot({ path: testInfo.outputPath('home-phone.png'), fullPage: true });
+  await page.getByRole('link', { name: /Open the scope example/ }).click();
+  await expect(page.getByRole('region', { name: 'Sample case illustration' })).toContainText('SAMPLE-SCP-03');
+  await expect(page.getByRole('table')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await page.getByRole('button', { name: 'Load sample example', exact: true }).first().click();
+  await expect(page.getByLabel('Project request reference', { exact: true })).toHaveValue('SAMPLE-REQ-21');
+  await page.screenshot({ path: testInfo.outputPath('scope-phone.png'), fullPage: true });
+  expect(state.planCalls).toEqual([]);
   expect(state.unexpected).toEqual([]);
 });

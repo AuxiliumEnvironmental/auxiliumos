@@ -1,0 +1,17 @@
+{
+  "reviewed_at": "2026-10-09T18:50:34.744364+00:00",
+  "reviewer": "integration_security_review",
+  "source_commit": "eb650409aeb2947d385e337efbbfdd812b46ff6d",
+  "migration_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+  "scope": "Exact immutable-version synthetic human review SQL/contract/tests",
+  "blocking_findings": [],
+  "corrected_findings": [
+    "Consistent document/review lock order"
+  ],
+  "focused_checks": "37/37 PostgreSQL/PGlite with simulated Auth passed, reused worker result",
+  "limits": [
+    "No actual reviewer assignment",
+    "No hosted review workflow or real professional approval",
+    "No release implementation in this slice"
+  ]
+}

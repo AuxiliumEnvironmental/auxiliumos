@@ -28,7 +28,7 @@ export const moduleScreens: Record<string, ScreenDefinition[]> = {
   { title: 'Executive reporting brief', pattern: 'report', fields: [...text('Portfolio reference', 'Approved audience'), ...dates('Period start', 'Period end'), ...notes('Reporting questions', 'Released source references')], consequence: 'Generate executive view' },
  ],
  readiness: [
-  { title: 'Prepare site passport', pattern: 'editor', fields: [...text('Facility reference', 'Site champion', 'Accountable contact'), ...notes('Response map', 'Access information')], repeat: { label: 'Critical assets', fields: text('Asset reference', 'Area', 'Operational context') }, consequence: 'Save site passport' },
+  { title: 'Prepare site passport', pattern: 'editor', fields: [...text('Facility reference', 'Facility coordinator', 'Accountable contact'), ...notes('Response map', 'Access information')], repeat: { label: 'Critical assets', fields: text('Asset reference', 'Area', 'Operational context') }, consequence: 'Save site passport' },
   { title: 'Readiness review', pattern: 'checklist', fields: [...text('Facility reference', 'Reviewer'), ...notes('Evidence references')], checks: ['Site contacts reviewed', 'Access information reviewed', 'Response map reviewed', 'Critical asset information reviewed'], repeat: { label: 'Recorded gaps', fields: [...text('Deficiency', 'Accountable owner'), ...dates('Due date'), ...notes('Evidence / next action')] }, consequence: 'Submit readiness review' },
   { title: 'Recurring work plan', pattern: 'schedule', fields: text('Facility reference'), repeat: { label: 'Planned activities', fields: [...text('Activity', 'Accountable owner', 'Recurrence notes'), ...dates('Next planned date')] }, consequence: 'Save recurring plan' },
  ],

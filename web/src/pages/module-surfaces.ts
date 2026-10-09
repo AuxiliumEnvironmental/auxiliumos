@@ -20,9 +20,9 @@ export const moduleSurfaces: Record<string, ModuleSurface> = {
     ], dependency: "Portfolio relationships, scoped aggregate reads and executive audience capabilities are not connected.", boundary: "Grouping facilities never broadens access to their records.",
   },
   readiness: {
-    noun: "site passports", tabs: ["Site passport", "Readiness gaps", "Recurring work"], columns: ["Facility", "Site champion", "Review", "Next action"], action: "Update site passport",
+    noun: "site passports", tabs: ["Site passport", "Readiness gaps", "Recurring work"], columns: ["Facility", "Facility Coordinator", "Review", "Next action"], action: "Update site passport",
     sections: [
-      { title: "Site passport", fields: ["Site champion", "Response map", "Critical assets", "Access information"], note: "Site information remains attached to the facility and its areas." },
+      { title: "Site passport", fields: ["Facility Coordinator", "Response map", "Critical assets", "Access information"], note: "Site information remains attached to the facility and its areas." },
       { title: "Readiness review", fields: ["Recorded deficiencies", "Accountable owner", "Due date", "Evidence"], note: "A readiness indicator describes recorded evidence, not a safety certification." },
     ], dependency: "Facility passport reads, readiness review records and scoped update capabilities are not connected.", boundary: "Readiness is not a professional safety or compliance conclusion.",
   },

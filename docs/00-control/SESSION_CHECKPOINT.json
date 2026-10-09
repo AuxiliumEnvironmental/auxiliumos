@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T17:29:47.809Z",
+  "created_at": "2026-10-09T18:50:54.984Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -8,21 +8,21 @@
     "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
   },
-  "first_unfinished_action": "Finish reviewed full-destination demo UI, synchronize the Facility Coordinator field with the typed planning catalogue, run focused affected verification, save exact source and deploy to existing development Supabase/Lovable projects. Owner password and initial Auth session are now confirmed; verify app-level use in the published browser. Protected connected verification awaits the missing development-only GitHub repository secret.",
+  "first_unfinished_action": "Finish and review the connected exact-version internal review UI while the release backend proceeds independently. Securely configure the verified missing development-only GitHub Actions service secret, then dispatch the focused connected browser harness with freshly reconciled fixture revision/bucket. Resume actual upload/finalization/retrieval and planning save/reopen browser verification when the cloud browser credential-state restriction is cleared. Account setup and actual login are complete.",
   "git": {
     "is_repository_root": true,
-    "head": "b8119d0e2073d9c6ac3959b638957e9868fb99a0",
+    "head": "870fc25923c1ec310f6e037e1dcbf47d70c2e1fd",
     "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/01-product/CLIENT_TYPES.md\n M docs/01-product/DATA_SPINE.md\n M docs/01-product/END_STATE_BLUEPRINT.md\n M docs/01-product/MODULE_MAP.md\n M docs/01-product/V1_SCOPE.md\n M docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md\n?? docs/00-control/reviews/WORKSPACE-PLANS-2026-10-09.json",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/00-control/reviews/WORKSPACE-PLANS-2026-10-09.json\n?? docs/00-control/evidence/demo-ui-integration.json\n?? docs/00-control/evidence/demo-ui-layout-results.json\n?? docs/00-control/evidence/demo-ui-source-parity.json\n?? docs/00-control/evidence/spatial-integration-build.log\n?? docs/00-control/evidence/workspace-plans-database.json\n?? docs/00-control/evidence/workspace-plans-database.log\n?? docs/00-control/reviews/DOCUMENT-REVIEW-2026-10-09.json\n?? docs/00-control/reviews/SPATIAL-HOST-2026-10-09.json",
     "remote": {
       "status": "head_differs_from_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "d4e76d93b564ec667fcbaf8290d1f15b23cd9289",
-      "checked_at": "2026-10-09T17:29:47.808Z"
+      "head": "a880eb0c286e993eeaffa70efd89248323ca1bee",
+      "checked_at": "2026-10-09T18:50:54.983Z"
     }
   },
-  "controls_digest": "2afaeacd065f6fc36c892e82a50782d7437865fc9a504370a80b574666453691",
+  "controls_digest": "f33111ae750694bd5ab87d790678a41258082c6f549cb69645b5d6336cffe4f6",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -41,7 +41,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T17:29:40.618Z"
+      "recorded_at": "2026-10-09T18:50:37.967Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -185,12 +185,19 @@
       "profile": "auth-onboarding-browser-fixture"
     },
     "workspace-plans-database": {
-      "status": "not_run",
-      "profile": "workspace-plans-database"
+      "status": "passed",
+      "profile": "workspace-plans-database",
+      "evidence": "docs/00-control/evidence/workspace-plans-database.json",
+      "level": "database",
+      "recorded_at": "2026-10-09T18:07:12.109Z"
     },
     "workspace-plans-client-unit": {
       "status": "not_run",
       "profile": "workspace-plans-client-unit"
+    },
+    "document-reviews-database": {
+      "status": "not_run",
+      "profile": "document-reviews-database"
     }
   },
   "pending_owner_decisions": [

@@ -1,0 +1,43 @@
+# Exact-version human internal review (DOC-001C)
+
+This synthetic development contract implements the recorded `OD-002-synthetic-exact-version-review` choice. It consumes the immutable adoption, exact-content and protected-audit contracts at source `80893a2`. Migration `20261009172736_document_version_reviews.sql` follows the workspace-plans migration; no missing historical worktree is reconstructed. M13/M19 and C01/C02/C05/C07 apply.
+
+A requester needs current `view_versions` and `create_version` on the logical document. A decider needs a separately provisioned, currently active assignment for this exact immutable version/digest/profile/Auth identity, current `view_versions`, and current exact `view_content`. Both need active synthetic identity/account/facility access and current safe adopted-object state. Administrative role labels, the owner's five onboarding capabilities, uploader equality, previous content authorization, security clearance and AI output grant no review authority.
+
+Assignments accept only the explicit qualification basis `synthetic_fixture`. This models a qualified-reviewer assignment for fixtures; it does not establish a person's actual qualifications or independence. No owner reviewer assignment is made. No new self-review ban is invented: an independently provisioned assignment is still required if requester, author and reviewer happen to be the same fixture identity. OD-002 real-person qualifications, dual-role and sensitive-class activation remain gated. OD-003 audience, OD-004 historical/replacement and OD-013 safe-inspection/no-PHI gates remain unchanged.
+
+## Public RPC contract
+
+All results are scalar JSON. Public invoker wrappers call private checked definers with empty search paths. UUID, text and bigint argument types are explicit below; no actor, timestamp, storage path, URL, content, notes or arbitrary JSON input exists.
+
+| RPC | Ordered arguments | Caller |
+| --- | --- | --- |
+| `provision_document_review_assignment` | `p_version_id uuid`, `p_expected_sha256 text`, `p_profile_id uuid`, `p_request_id uuid`, `p_expected_document_revision bigint`, `p_expected_review_revision bigint`, `p_qualification_basis text` | Trusted service only. Basis must explicitly be `synthetic_fixture`; no default. |
+| `revoke_document_review_assignment` | `p_version_id uuid`, `p_assignment_id uuid`, `p_expected_review_revision bigint` | Trusted service only. Retirement remains possible after access, safety or operational gates are removed. |
+| `request_document_version_review` | `p_version_id uuid`, `p_expected_sha256 text`, `p_expected_document_revision bigint`, `p_expected_review_revision bigint`, `p_request_id uuid` | Current human requester with exact logical create/view grants. |
+| `decide_document_version_review` | `p_review_request_id uuid`, `p_expected_sha256 text`, `p_expected_document_revision bigint`, `p_expected_review_revision bigint`, `p_request_id uuid`, `p_decision text`, `p_attestation_code text` | Current explicitly assigned human with exact content authority. |
+| `document_version_review_status` | `p_version_id uuid`, `p_expected_sha256 text` | Current logical-version metadata viewer in safe synthetic scope. |
+
+Decision values are `approved_internal`, `changes_requested`, or `rejected`. The required deliberate attestation is exactly `reviewed_exact_synthetic_version`. It records the authenticated person's attestation; it does not prove delivery, inspection, professional credentials or approval of real scientific conclusions. There is one immutable review request and one immutable final decision per version. A rejected version or request for changes requires a replacement immutable version; no reopening or mutable decision path exists in this slice.
+
+Assignment receipts contain `assignment_id`, `version_id`, `review_revision`, `revoked`, and `qualification_basis`. Request receipts contain `review_request_id`, `version_id`, `document_id`, `verified_sha256`, `document_revision`, `review_revision`, `requested_at`, and `state: under_review`. Decision receipts contain `decision_id`, `review_request_id`, `assignment_id`, `version_id`, `document_id`, `verified_sha256`, `document_revision`, `review_revision`, `decision`, `attestation_code`, and `decided_at`.
+
+Status returns version/document/digest, current `document_revision` and `review_revision`, `historical_review_state` (`internal_draft`, `under_review`, or a decision value), nullable request/decision summaries, current `can_request` and `can_decide`, and `release_authorized: false`. Summaries expose IDs, times and typed outcome only. A historical approval is preserved if an assignment or access is later revoked; it is never a current access or release permit. Current status is an observation, and mutation authorization and CAS are always rechecked.
+
+Each version has a separate review revision, initially zero. Assignment creation/retirement, review request and decision each advance it once. Fresh assignment provision, request and decision compare both the current logical document revision and review revision; concurrent adoption or document grant changes cause a stale conflict. Review operations do not advance the logical document revision or version ordinal. Grants for one version never transfer to another, even with identical bytes.
+
+Idempotency binds the complete original intent, including version/digest, expected revisions, recipient/basis or decision/attestation. Exact retries first recheck current relevant identity, grants, assignment and safety, then return the preserved operation receipt even if unrelated revisions advanced. Retrying a human decision requires its original assignment still active; a later replacement assignment cannot restore that decision receipt as operational authority. Changed request tuples conflict. Assignment retirement retries are read-only and need no restored access.
+
+Errors: invalid Auth/service provenance `28000`; inaccessible/missing operation `42501` (`not_found_or_unavailable` where checked); invalid typed input `22023`; stale revision/digest `40001`; reused idempotency key for changed intent `23505`; duplicate review round/final decision or illegal history mutation `55000`. Table ACL denial may independently return `42501`. Foreign scope is checked before exposing digest/current-revision differences.
+
+## Atomic boundary and exclusions
+
+The migration adds only private review heads, assignments, requests and decisions with explicit ACL revocation and default-deny RLS. Current authorization, document/head CAS, exact assignment and object-safety checks occur under short database locks. BEFORE triggers revalidate authoritative inserts; AFTER triggers mandatorily advance the review revision and append server-assigned provenance in the same transaction. Human request/decision audits record actual Auth/profile actors. Technical assignment audits have system provenance and null human actors. No user text or content enters audit metadata. Revoked assignments cannot be edited, restored, reparented or deleted; review requests/decisions cannot be edited, deleted or truncated.
+
+Both existing synthetic operational switches must be enabled for new reviews and human reads/retries. Safety matches the adopted exact finalized digest/size/type, closed ingest, current malware-pass scan and human `cleared_no_phi` decision, with no PHI suspicion or visibility restriction. Preservation hold stays independent of visibility. Provider I/O is absent from every transaction.
+
+No immutable version or legacy logical release label is changed. An internal review does not create a release, audience, signature, approved scope/terms, scientific interpretation, notification or Moldo transition. A replacement draft does not supersede any release. Future release must separately reauthorize its own real-person, class, approval, audience and current-safety requirements; this slice provides no release eligibility function.
+
+## Verification boundary
+
+`node --test tests/database/document-version-reviews.test.mjs` passed 37/37 tests (36 focused scenarios plus parent, no skips) on 2026-10-09. It exercises actual PostgreSQL constraints/functions with simulated Auth, including current access and exact assignment, repeated/stale intents, replacement versions, protected provenance, safety changes and immutable history. It does not prove hosted Auth/API/browser behavior, real inspection or concurrent target sessions. The integration lead owns deployment, controlled synthetic assignment and those additional gates. No live assignment or cloud mutation belongs to this backend implementation task.

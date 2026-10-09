@@ -5,7 +5,7 @@ export const modules = [
   { id: "M03", path: "programs", name: "Programs / MSA", description: "Program coverage, facility activation, and effective service periods." },
   { id: "M04", path: "portfolios", name: "Portfolios", description: "Optional account structures and portfolio relationships." },
   { id: "M05", path: "assets", name: "Assets / Facilities", description: "Facility records, critical assets, and scoped site relationships." },
-  { id: "M06", path: "readiness", name: "Readiness / Site Passport", description: "Site information, readiness gaps, champions, and recurring work." },
+  { id: "M06", path: "readiness", name: "Readiness / Site Passport", description: "Site information, readiness gaps, facility coordinators, and recurring work." },
   { id: "M07", path: "intake", name: "Intake", description: "Structured incident and project requests with recorded triage." },
   { id: "M08", path: "scope", name: "Scope", description: "Versioned scopes, qualified review, and approved work boundaries." },
   { id: "M09", path: "sampling", name: "Sampling", description: "Sampling plans, chain of custody, and reviewed laboratory evidence." },

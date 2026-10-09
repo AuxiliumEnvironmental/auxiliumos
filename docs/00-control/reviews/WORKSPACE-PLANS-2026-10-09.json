@@ -1,5 +1,5 @@
 {
-  "reviewed_at": "2026-10-09T17:29:17.012182+00:00",
+  "reviewed_at": "2026-10-09T18:50:34.744364+00:00",
   "reviewer": "integration_security_review",
   "mode": "independent_read_only",
   "scope": [
@@ -13,17 +13,20 @@
     "PL/pgSQL ambiguous value identifier",
     "CASE expression grouping"
   ],
-  "client_blocking_findings": [
-    "Uncertain save retry can conflict with unlocked edits/cancelled creation",
-    "Same-scope detail requests can replace a newer selection",
-    "Post-save latest read failure must preserve safe retry state"
-  ],
-  "status": "backend_clear_client_corrections_in_progress",
+  "client_blocking_findings": [],
+  "status": "backend_and_final_client_clear",
   "authority_boundary": "Personal synthetic preparation using existing scoped submit_request/view_account/view_asset; creator only; no professional/commercial/release rights.",
   "remaining_evidence": [
-    "Exact final client source review",
-    "Integrated Facility coordinator catalogue parity",
-    "Hosted Auth/Data API/browser workflow",
+    "Hosted authenticated planning save/reopen",
     "Concurrent real PostgreSQL sessions"
+  ],
+  "client_reviewed_commit": "dd7961fea7a57b0f71651c4ca260687a6f8badba",
+  "client_reviewed_editor_sha256": "3c87d745ddcc5ba0c6bf57bc36851d7fa9719b048bccea76eb299426f9fc2396",
+  "corrected_client_findings": [
+    "Uncertain save freezes edits/create/cancel and retries identical full intent",
+    "Same-scope open responses fenced",
+    "Failed post-save current-head readback preserves recoverable state",
+    "GET cannot prove an uncertain mutation",
+    "Discard/conflict recovery controls are correctly fenced"
   ]
 }

@@ -9,7 +9,7 @@ import { AccountsPage } from "./directory";
 import { NotFoundPage } from "./workspace";
 import { moduleScreens } from "./module-screen-definitions";
 import { ModuleDraftScreen } from "../components/module-draft-screen";
-import { ModuleRecordList } from "../components/module-record-list";
+import { ModuleSampleCase } from "../components/sample-case";
 import { HomePage, SpineStrip } from "./home";
 import { PlanContextBar, useVerifiedFacility } from "../components/plan-context";
 import { isSavablePanel } from "../components/module-draft-screen";
@@ -51,22 +51,21 @@ function ModuleOutline({ module, surface, accountId }: { module: (typeof modules
   const navigate = useNavigate();
   const [facilityId, setFacilityId] = useState<string | undefined>();
   const context = useVerifiedFacility(accountId, facilityId);
-  const [preparing, setPreparing] = useState(false);
-  const id = useId();
+    const id = useId();
   const screens = moduleScreens[module.path];
   if (!screens) return <NotFoundPage />;
   return <>
     <PageHeader eyebrow={`${module.id} · Workspace`} title={module.name} description={module.description} />
-    <SpineStrip current={`/${module.path}`} />
+    <SpineStrip current={`/${module.path}`} accountId={accountId} />
     <div className="module-boundary"><ShieldCheck size={19} /><p>{surface.boundary}</p></div>
+    <ModuleSampleCase module={module.path} />
     {screens.some(screen => isSavablePanel(module.path, screen)) && <PlanContextBar accountId={accountId} facilityId={facilityId} onAccount={id => { setFacilityId(undefined); void navigate({ to: "/$module", params: { module: module.path }, search: id ? { account: id } : {} }); }} onFacility={id => setFacilityId(id || undefined)} />}
     <div className="module-tabs" role="tablist" aria-label={`${module.name} sections`}>{surface.tabs.map((label, index) => <Button key={label} variant="text-button" role="tab" id={`${id}-tab-${index}`} aria-controls={`${id}-panel-${index}`} aria-selected={tab === index} tabIndex={tab === index ? 0 : -1} className={tab === index ? "selected" : ""} onClick={() => setTab(index)} onKeyDown={event => {
       const next = event.key === "ArrowRight" ? (index + 1) % surface.tabs.length : event.key === "ArrowLeft" ? (index + surface.tabs.length - 1) % surface.tabs.length : event.key === "Home" ? 0 : event.key === "End" ? surface.tabs.length - 1 : null;
       if (next === null) return; event.preventDefault(); setTab(next); document.getElementById(`${id}-tab-${next}`)?.focus();
     }}>{label}</Button>)}</div>
     {screens.map((screen,index) => <section key={surface.tabs[index]} role="tabpanel" id={`${id}-panel-${index}`} aria-labelledby={`${id}-tab-${index}`} hidden={tab !== index} tabIndex={0} className="module-section">
-      {index === 0 && !['integration','audit','conversation'].includes(screen.pattern) && <><div className="workspace-mode" role="group" aria-label="Workspace view"><Button variant={preparing ? 'text-button' : 'secondary'} aria-pressed={!preparing} onClick={()=>setPreparing(false)}>Records</Button><Button variant={preparing ? 'secondary' : 'text-button'} aria-pressed={preparing} onClick={()=>setPreparing(true)}>Draft preparation</Button></div><div hidden={preparing}><ModuleRecordList title={surface.tabs[0]} columns={surface.columns} access={{status:'unavailable'}} onPrepare={()=>setPreparing(true)} /></div></>}
-      <div hidden={index === 0 && !preparing && !['integration','audit','conversation'].includes(screen.pattern)}><ModuleDraftScreen definition={screen} open={index === 0 && preparing} moduleKey={module.path} index={index} context={context} /></div>
+      <ModuleDraftScreen definition={screen} moduleKey={module.path} index={index} context={context} />
     </section>)}
   </>;
 }

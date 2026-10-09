@@ -976,6 +976,37 @@
           "tests/unit/workspace-plan-api.test.mjs"
         ]
       ]
+    },
+    {
+      "id": "document-reviews-database",
+      "level": "database",
+      "environment": "local-PGlite-PostgreSQL-simulated-Auth-no-hosted-or-concurrency-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "supabase/migrations/20260713000100_foundation_slice_schema.sql",
+        "supabase/migrations/20261008120645_identity_access_directory.sql",
+        "supabase/migrations/20261008154950_access_audit_provenance.sql",
+        "supabase/migrations/20261008164758_private_object_reservations.sql",
+        "supabase/migrations/20261008234951_intake_triage.sql",
+        "supabase/migrations/20261008234953_private_file_transport.sql",
+        "supabase/migrations/20261009065625_private_object_clearance.sql",
+        "supabase/migrations/20261009072201_document_versions.sql",
+        "supabase/migrations/20261009080505_document_version_content.sql",
+        "supabase/migrations/20261009130331_owner_onboarding_activation.sql",
+        "supabase/migrations/20261009170854_workspace_plans.sql",
+        "supabase/migrations/20261009172736_document_version_reviews.sql",
+        "supabase/seed/foundation_demo_seed.sql",
+        "tests/helpers/pglite-database.mjs",
+        "tests/database/document-version-reviews.test.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "--test",
+          "tests/database/document-version-reviews.test.mjs"
+        ]
+      ]
     }
   ]
 }

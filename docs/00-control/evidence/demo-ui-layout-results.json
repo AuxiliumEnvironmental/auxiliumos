@@ -1,0 +1,427 @@
+{
+  "kind": "synthetic HTTP fixture; not cloud Auth/RLS proof",
+  "results": [
+    {
+      "path": "core",
+      "heading": "Welcome, Synthetic operator",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "accounts",
+      "heading": "Accounts",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "programs",
+      "heading": "Programs / MSA",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "portfolios",
+      "heading": "Portfolios",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "assets",
+      "heading": "Facilities",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "readiness",
+      "heading": "Readiness / Site Passport",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "intake",
+      "heading": "Intake",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "scope",
+      "heading": "Scope",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "sampling",
+      "heading": "Sampling",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "estimates",
+      "heading": "ROM",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "approvals",
+      "heading": "Agreements / Authorization",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "projects",
+      "heading": "Operations / Projects",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "documents",
+      "heading": "Private files",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "messages",
+      "heading": "Communications",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "vendors",
+      "heading": "Vendors",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "finance",
+      "heading": "Finance",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "reports",
+      "heading": "Reporting / QBR",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "ai",
+      "heading": "AI",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "audit",
+      "heading": "Audit",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "integrations",
+      "heading": "Integrations",
+      "overflow": false,
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    {
+      "path": "core",
+      "heading": "Welcome, Synthetic operator",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "accounts",
+      "heading": "Accounts",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "programs",
+      "heading": "Programs / MSA",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "portfolios",
+      "heading": "Portfolios",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "assets",
+      "heading": "Facilities",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "readiness",
+      "heading": "Readiness / Site Passport",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "intake",
+      "heading": "Intake",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "scope",
+      "heading": "Scope",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "sampling",
+      "heading": "Sampling",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "estimates",
+      "heading": "ROM",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "approvals",
+      "heading": "Agreements / Authorization",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "projects",
+      "heading": "Operations / Projects",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "documents",
+      "heading": "Private files",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "messages",
+      "heading": "Communications",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "vendors",
+      "heading": "Vendors",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "finance",
+      "heading": "Finance",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "reports",
+      "heading": "Reporting / QBR",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "ai",
+      "heading": "AI",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "audit",
+      "heading": "Audit",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "integrations",
+      "heading": "Integrations",
+      "overflow": false,
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "path": "core",
+      "heading": "Welcome, Synthetic operator",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "accounts",
+      "heading": "Accounts",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "programs",
+      "heading": "Programs / MSA",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "portfolios",
+      "heading": "Portfolios",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "assets",
+      "heading": "Facilities",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "readiness",
+      "heading": "Readiness / Site Passport",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "intake",
+      "heading": "Intake",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "scope",
+      "heading": "Scope",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "sampling",
+      "heading": "Sampling",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "estimates",
+      "heading": "ROM",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "approvals",
+      "heading": "Agreements / Authorization",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "projects",
+      "heading": "Operations / Projects",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "documents",
+      "heading": "Private files",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "messages",
+      "heading": "Communications",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "vendors",
+      "heading": "Vendors",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "finance",
+      "heading": "Finance",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "reports",
+      "heading": "Reporting / QBR",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "ai",
+      "heading": "AI",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "audit",
+      "heading": "Audit",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    },
+    {
+      "path": "integrations",
+      "heading": "Integrations",
+      "overflow": false,
+      "width": 360,
+      "scrollWidth": 360
+    }
+  ],
+  "unexpected": [],
+  "errors": []
+}

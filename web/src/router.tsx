@@ -1,5 +1,5 @@
 import { createRootRoute, createRoute, createRouter, Outlet, useRouterState } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { AppShell } from "./components/app-shell";
 import { AuthGate } from "./components/auth";
 import { useRuntime } from "./lib/runtime";
@@ -9,6 +9,18 @@ import { PrivateFilesPage } from "./pages/private-files";
 import { ModulesPage, NotFoundPage, ProfilePage } from "./pages/workspace";
 
 import { ModuleWorkspace } from "./pages/module-workspace";
+
+// The complete Spatial authoring workspace loads only when opened.
+const SpatialPage = lazy(() => import("./pages/spatial").then((module) => ({ default: module.SpatialPage })));
+const SpatialLoading = () => <div className="status-card" role="status"><p>Opening Spatial…</p></div>;
+const SpatialScreen = () => <Suspense fallback={<SpatialLoading />}><SpatialPage /></Suspense>;
+
+/** Standalone Spatial is still behind sign-in, but without workspace navigation. */
+function RootLayout() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const standalone = pathname === "/spatial/standalone";
+  return <><ScreenAccessCheck /><AuthGate>{standalone ? <main className="spatial-standalone"><Outlet /></main> : <AppShell><Outlet /></AppShell>}</AuthGate></>;
+}
 
 function ScreenAccessCheck() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
@@ -23,7 +35,7 @@ function ScreenAccessCheck() {
 }
 
 const rootRoute = createRootRoute({
-  component: () => <><ScreenAccessCheck /><AuthGate><AppShell><Outlet /></AppShell></AuthGate></>,
+  component: RootLayout,
   notFoundComponent: NotFoundPage,
   errorComponent: () => <div className="status-card" role="alert"><h1>This page could not be opened</h1><p>Reload the workspace to try again.</p><a className="button primary" href="/">Reload workspace</a></div>,
 });
@@ -71,9 +83,11 @@ function PrivateFilesRoute() {
   const navigate = privateFilesRoute.useNavigate();
   return <PrivateFilesPage accountId={account} onAccountChange={(id) => { void navigate({ search: id ? { account: id } : {} }); }} />;
 }
+const spatialRoute = createRoute({ getParentRoute: () => rootRoute, path: "/spatial", head: pageHead("Spatial", "Personal synthetic Spatial layouts with full 2D and 3D authoring."), component: SpatialScreen });
+const spatialStandaloneRoute = createRoute({ getParentRoute: () => rootRoute, path: "/spatial/standalone", head: pageHead("Spatial workspace", "Full-screen personal Spatial authoring workspace."), component: SpatialScreen });
 const moduleRoute = createRoute({ getParentRoute: () => rootRoute, path: "/$module", validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }), head: ({ params }) => pageHead(params.module === "core" ? "Home" : params.module.charAt(0).toUpperCase() + params.module.slice(1), `AuxiliumOS ${params.module} workspace and connection status.`)(), component: () => <ModuleWorkspace path={moduleRoute.useParams().module} accountId={moduleRoute.useSearch().account} /> });
 
-const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, moduleRoute]);
+const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, spatialRoute, spatialStandaloneRoute, moduleRoute]);
 export const router = createRouter({ routeTree, defaultPreload: false, scrollRestoration: true });
 
 declare module "@tanstack/react-router" {

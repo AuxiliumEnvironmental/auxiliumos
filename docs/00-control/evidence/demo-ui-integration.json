@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T18:50:34.744364+00:00",
+  "worker_commit": "dd7961fea7a57b0f71651c4ca260687a6f8badba",
+  "lovable_base_commit": "74cb2628f398dfce12a14c1435d316011f423b31",
+  "lovable_with_spatial": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+  "focused_unit_checks": 14,
+  "focused_browser_fixture_journeys": 11,
+  "responsive_route_width_combinations": 60,
+  "widths": [
+    1440,
+    390,
+    360
+  ],
+  "responsive_failures": 0,
+  "evidence_reused": true,
+  "spatial_build_log_sha256": "6b7773fd2ae3b73ca904dba4845dc3e3622cd0d9f4f7c5d2392d3ec6518bd019",
+  "boundary": "Injected HTTP browser/sample evidence plus production build; actual hosted save/reopen and complete business-module acceptance remain open."
+}
