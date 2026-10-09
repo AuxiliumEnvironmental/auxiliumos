@@ -28,7 +28,7 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
     <PageHeader title="Private files"
       description="Internal document versions and synthetic uploads."
       action={<RefreshButton />} />
-    <p className="field-hint">Synthetic data only. No PHI or real client data. Uploads start in quarantine; review and downloads need separate current permission. Release is unavailable.</p>
+    <p className="field-hint">Synthetic data only. No PHI or real client data. Uploads start in quarantine; review and downloads need separate current permission. Released-file downloads are unavailable.</p>
     {accounts.state.status === 'loading' ? <LoadingState label="Loading accounts" />
       : accounts.state.status === 'error' ? <ErrorState error={accounts.state.error} onRetry={accounts.retry} />
         : <>
@@ -56,7 +56,7 @@ function PrivateFiles({ accountId, onAccountChange }: PrivateFilesProps) {
       <p>Only accounts and facilities on the current permitted directory page appear. Directory visibility does not grant upload, document, review or content authority. Every operation rechecks current access.</p>
       <p>Changing account or facility clears only local upload attempts, not preserved bytes, saved versions or history. The upload attempt is held in memory; permitted version history comes from the server.</p>
       <p>Uploads start in quarantine. Exact cleared files can become immutable internal drafts only with separate document authority. The text marker and acknowledgment do not detect PHI or grant authority. Real scanning and real-upload security activation remain unavailable.</p>
-      <p>Review and exact-version downloads require separate current permission. Downloads use a verified browser attachment handoff, not an inline viewer. Professional approval, document creation and release are unavailable. Actor, audience, preservation, export and incident-handling activation decisions remain gated.</p>
+      <p>Review and exact-version downloads require separate current permission. Downloads use a verified browser attachment handoff, not an inline viewer. Professional approval, logical-document creation and released-file downloads are unavailable. Actor, audience, preservation, export and incident-handling activation decisions remain gated.</p>
     </details>
   </>;
 }

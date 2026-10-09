@@ -18,8 +18,8 @@ const wrap = { overflowWrap: 'anywhere' as const };
 const requestAcknowledgment = 'I am requesting an internal human review of this exact immutable version.';
 const decisionAttestation = 'I have reviewed this exact synthetic version and am recording my own internal review decision.';
 
-export function DocumentVersionReview({ documentId, version, onPendingChange }: {
-  documentId: string; version: DocumentVersion; onPendingChange: (pending: boolean) => void;
+export function DocumentVersionReview({ documentId, version, blocked = false, releaseMetadataEnabled = false, onPendingChange }: {
+  documentId: string; version: DocumentVersion; blocked?: boolean; releaseMetadataEnabled?: boolean; onPendingChange: (pending: boolean) => void;
 }) {
   const { api: runtimeApi, handleFailure } = useRuntime();
   const api = useMemo(() => new DocumentReviewApi(runtimeApi.client), [runtimeApi.client]);
@@ -67,6 +67,7 @@ export function DocumentVersionReview({ documentId, version, onPendingChange }: 
 
   const submit = async (kind: DocumentReviewIntent['kind']) => {
     if (!mounted.current || mutationController.current || readController.current || version.visibility_restricted) return;
+    if (blocked && !attempt) return;
     let intent = attempt;
     if (!intent) {
       if (read.state !== 'ready' || !confirmed) return;
@@ -103,7 +104,7 @@ export function DocumentVersionReview({ documentId, version, onPendingChange }: 
   };
 
   const snapshot = read.state === 'ready' ? read.value : null;
-  const canPrepare = !attempt && !busy && read.state === 'ready';
+  const canPrepare = !blocked && !attempt && !busy && read.state === 'ready';
   const canStartNew = attempt && !uncertain && outcome.state === 'error' && read.state === 'ready' && read.check > outcome.check;
   const receipt = outcome.state === 'saved' ? outcome.receipt : null;
   return <section aria-labelledby={`${id}-title`} aria-busy={busy || read.state === 'loading'}
@@ -111,7 +112,7 @@ export function DocumentVersionReview({ documentId, version, onPendingChange }: 
     <div className="section-intro"><div><p className="entity-type">Human review · Exact version {version.version_ordinal}</p>
       <h5 id={`${id}-title`} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', margin: '0.5rem 0' }}>
         <ClipboardCheck size={18} aria-hidden="true" />Internal review</h5></div>
-      <span className="status-label unavailable"><LockKeyhole size={13} aria-hidden="true" />Release unavailable</span></div>
+      <span className="status-label unavailable"><LockKeyhole size={13} aria-hidden="true" />{releaseMetadataEnabled ? 'Separate release authority' : 'Release unavailable'}</span></div>
     <p className="field-hint">An internal decision applies only to this version. It never releases a document or grants content access.</p>
     {version.visibility_restricted ? <p role="status" className="field-hint">Internal review unavailable while this version is restricted.</p> : <>
       <div className="button-row"><button type="button" className="button secondary" disabled={busy || read.state === 'loading'}
