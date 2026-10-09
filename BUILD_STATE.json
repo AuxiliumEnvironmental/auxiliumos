@@ -17,7 +17,7 @@
     "github": "Current feature branch wip/recovery-2026-10-08 at 0113b60d verified via Git and connector, read/push permissions confirmed. Main remains at older foundation. Manual dispatch runs: zero. Connector exposes no fresh dispatch or Actions secret metadata capability; browser is signed out.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb confirmed active with exact nine migration names, private-objects v2 and document-version-content v3 JWT verification enabled. Fresh readback: Auth users 0, buckets 0. No owner login or genuine connected acceptance claimed.",
-    "lovable": "Presentation pass completed at actual saved 2e47b70df86d78dbaf3e38ee2247e15102cc9583; exact 10 web files retrieved and imported for integration. Root build:dev passed. Worker reports 8 focused intercepted browser fixtures and responsive visual checks; hosted Auth/Storage acceptance remains outstanding.",
+    "lovable": "Existing AuxiliumOS project saved frontend UI revision 4ce078da0e412e5f50e3d70836faaf7d1f095956. UI source is integrated as a scoped patch while preserving newer canonical owner-onboarding/backend work. No native two-way synchronization, real Auth acceptance or production publication is claimed.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -144,6 +144,15 @@
       "build": "build:dev emits the same complete canonicalweb app into rootdist; normalbuild remainsproductionmode/webdist and doesnotembeddevkey whenunconfigured.",
       "deployed_to_production": false,
       "real_backend_acceptance": false
+    },
+    "frontend_ui": {
+      "source_lovable_revision": "4ce078da0e412e5f50e3d70836faaf7d1f095956",
+      "canonical_parent": "96e782753d21256178ba7803ddf6afbda30195e5",
+      "status": "implemented",
+      "scope": "Responsive shell and existing connected pages; 45 distinct preparation/review/status panels across the remaining 15 modules. Four audience layout components remain inactive pending server capabilities.",
+      "data_behavior": "New module drafts stay only in component memory. Missing backend reads/mutations, audience activation and professional/commercial actions remain unavailable.",
+      "verification": "Controller reviewed actual source and passed the development build. Lovable's two final affected browser-fixture cases pass. Hosted backend acceptance and complete-module acceptance remain open.",
+      "checkpoint": "docs/00-control/SESSION_CHECKPOINT.json"
     }
   },
   "execution_recovery": {
