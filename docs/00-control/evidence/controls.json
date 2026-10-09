@@ -2,9 +2,9 @@
   "version": 1,
   "profile": "controls",
   "level": "control_unit",
-  "recorded_at": "2026-10-09T13:11:24.851Z",
+  "recorded_at": "2026-10-09T13:20:28.460Z",
   "result": "passed",
-  "digest": "8642baebb6c3333ab9507d1a7905ad1582453f9b991509a304f162b141f75e9b",
+  "digest": "5b5870a268c35f02ba7bc069d6ed7ec6fe1e834484e2dc8369d2d432957ee39e",
   "identity": {
     "node": "v24.19.0",
     "platform": "linux",
@@ -45,8 +45,8 @@
     ".github/workflows/ci.yml": "ce0722a0b6a7373a1a59975c1d2f6c977286cfff679134b3e6c2b138bdaaed8f",
     ".gitignore": "3ab4ea703e5d14df8b9f0529def9ede8136f4749be390ae9ecfeb3219449837b",
     "AGENTS.md": "2c07ebdc06e93927e2b57c4b61ba034088264d8dc669478253159ae2f478ae05",
-    "BUILD_QUEUE.json": "1ae28e4c51fdbd7bb1fc096f33e6be94297967736e9b48a5b3066c327feb5d7c",
-    "BUILD_STATE.json": "17e0b7562476f967cb6e3421112d6c4cd73ebc17a1d431764e5f3501dd34d193",
+    "BUILD_QUEUE.json": "c9bd40ddc02a5b35bc985795f784b55e7a235f766b849e65866aa64c9033818a",
+    "BUILD_STATE.json": "d304cde3dcb9a92c819557d380cd7372d0cf6fe73030095d7a8b7f007191df65",
     "CHANGELOG.md": "7c8f1b31e3ec5ff1fa33d89cd7a0b137ed0266fc10d223fb9667a1de5e8a87b9",
     "CLAUDE.md": "59aaac0aa9bddb83d66b2f5e924e919987b2df2cc478a082e1b8d31623df6018",
     "config/policy-defaults.json": "8e817b3b5d6df9eea50b81df00098daad0c758b4248eb70d58c4f2fdf7f00b0f",
@@ -107,7 +107,7 @@
     "docs/03-data/FOUNDATION_SCHEMA_DESIGN_PACKET.md": "b43cc86ed40038fdfbfffd8627fd18b7348d14b1a21bd650432349fadc9bf7ed",
     "docs/03-data/INTAKE_RUNTIME_CONTRACT.md": "bdde02bff6220786490bf60044ea4da7cb4737693b6773265557f2c663567716",
     "docs/03-data/MINIMUM_SCHEMA_BLOCKER_DECISIONS.md": "1287867e46af5ef0dafa5c5a2e4fc01d5a9f6a815961a947ec3345ded6266d31",
-    "docs/03-data/OWNER_ONBOARDING.md": "cc9859348a26907eefab1f2217edd24759bdd46a737eac82dada078dee249d29",
+    "docs/03-data/OWNER_ONBOARDING.md": "af5567acc1d4219669b3d7ddaaca145c213f57dac6f2a7616586056bf7fa0b82",
     "docs/03-data/PRIVATE_OBJECT_CLEARANCE.md": "d045f02ba77e5efb2930598131571fbdd8f4cd234fa81348c96781502be66901",
     "docs/03-data/PRIVATE_OBJECT_RESERVATIONS.md": "7f67d78ea69c0a3e3c2e6e127dbd22bf67e3b13ad3a13171eb7d13731e81fe47",
     "docs/03-data/RELATIONSHIP_MAP.md": "8e712d9c20ae1b63e3b7e88ea1ec2de34bafb4eb3f88789b1d1ea67a756128a0",
@@ -200,7 +200,7 @@
     "tests/unit/document-integrity.test.mjs": "3b2a490f472aa265564eb0cc44c77ad30efbaafa340306b8b61694f58e74bea4",
     "VERIFICATION_PROFILES.json": "87498ff9b92f43d88b7a6732b9125f4a581a12fd11eecac21e6078d35e43b7a2"
   },
-  "observed_git_head": "f74123867faae6c43bbba05303a2d5d6c75a4825",
+  "observed_git_head": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
   "results": [
     {
       "argv": [
@@ -234,5 +234,5 @@
     }
   ],
   "log_path": "docs/00-control/evidence/controls.log",
-  "log_sha256": "9440c35b54aaf2a48dae1a9731ecbb76f7201e3b8efea3ea0accb7293714395a"
+  "log_sha256": "51039634c04e57dc753bfcd5e282864c477beb50567251d24158bf012e3831c3"
 }

@@ -14,10 +14,10 @@
     "evidence": null
   },
   "external_access": {
-    "github": "Feature source published through connector with exact tree/readback at 96e7827; owner/auth integration now locally committed with reviewed additions. Main registered workflow299844355 already supports manual dispatch. No fresh-dispatch or Actions-secret metadata capability; browser signed out. CI58 failed a stale directory placeholder assertion, reproduced, corrected and passed in the20-case integrated browser profile; new exact-head CI pending.",
+    "github": "Implementation source b577b5a94eec09bf6ff175b26f3c19f09061dd35 published, fetched and exact tree430d3969de0fbda12a09437faaf6a3c60ad6f21b verified. CI59/run37935336603 passed on that implementation. Registered ci.yml appears as CI Placeholder from main, workflow_dispatch supported. Current connector cannot inspect Actions secrets or create a dispatch; browser is signed out.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "Existing auxiliumos-dev txofqxictwecgcnvezlb: ten migrations including owner_onboarding_activation20261009130331 applied and ACLs read back. Existing private-objects v2 and document-version-content v3 remain JWT protected. Auth0 and buckets0; ingest/content gates false revision1. Separate synthetic connected document provisioned at revision0. No Moldo changes.",
-    "lovable": "Existing saved UI2e47b70 imported and published96e7827. Auth/password source integrated and build passed; transfer of final reviewed auth source to same project pending. Provider diagnostic confirmed project has no Lovable Cloud backend; external Supabase Auth config cannot be managed there. No new backend created.",
+    "lovable": "Exact37-file transfer from GitHub b577b5a to existing project saved at cc8828319079e0c4fac3e5bba4e1f288258418d8. Worker verified all37blob hashes, development build and390px login/recovery display passed without sending mail. Root independently fetched and matched4auth/runtime/app-shellfiles plusworkflow. Preview is ready, unpublished, workspace_edit; signed-out root browser redirects to Lovable login before AuxiliumOS. Existing authorized Lovable workspace access is required; hosted owner callback behavior remains unverified.",
     "workspace_execution": "2026-10-09: current workspace /workspace/scratch/f283daedfed1 is operational. Fresh clone and exact feature branch 0113b60d verified. Old /workspace/scratch/831a296a4676/document-review-backend and document-review-ui paths do not exist here; checked once. No old sessions retried and no unpublished source reconstructed from descriptions."
   },
   "source_precedence": [
@@ -190,16 +190,16 @@
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
     "first_unfinished_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
-    "latest_verified_remote": "ae899b234dd4e084ce357e1588fac3f2770b084a",
+    "latest_verified_remote": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
-      "message_id": "umsg_01m4fze89fe7sbjjxg6xddbqb7",
+      "message_id": "umsg_01m4gcsnk2e9ka9whjwcppqbhd",
       "thread_id": "main",
-      "source_commit": "5c4c524ec64fb985a06ebd31063b580f18baa362",
-      "target_commit": "1eb5a991bce8a48e30418a90ec21654e0936802f",
-      "status": "completed_334_canonical_files_exact",
+      "source_commit": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
+      "target_commit": "cc8828319079e0c4fac3e5bba4e1f288258418d8",
+      "status": "completed37changed_files_exact_worker_verified_root5critical_files_verified",
       "native_github_sync": false,
-      "receipt": "docs/00-control/evidence/lovable-source-transfer.json"
+      "receipt": "docs/00-control/evidence/owner-source-publication.json"
     },
     "execution_outage": {
       "observed_at": "2026-10-09T08:56:23.132Z",
@@ -286,11 +286,12 @@
     "authorization": "Owner directive 2026-10-09: owner setup and actual development connected workflow now; no professional authority inferred.",
     "owner_onboarding": "implemented_deployed_helper_awaiting_protected_execution",
     "owner_first_login": "not_completed",
-    "ui_presentation_source": "2e47b70df86d78dbaf3e38ee2247e15102cc9583",
+    "ui_presentation_source": "cc8828319079e0c4fac3e5bba4e1f288258418d8",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "Current runner has no development service credential; GitHub secret existence cannot be inspected. Configure AUXILIUMOS_TEST_SERVICE_ROLE_KEY in protected GitHub form only. Exact provider callback resolution is checked before owner email. Manual dispatch must be performed from an authorized GitHub session.",
     "independent_work": "Backend/UI implementation and independent security review completed. Root owns whole integration. Document review worktrees unavailable once; reimplementation uses current contracts after immediate access acceptance.",
     "connected_workflow": "harness_and_actual_synthetic_context_prepared_unexecuted",
-    "focused_verification": "Integrated build and runtime units passed; 15 owner unit checks and 18 PostgreSQL scenarios passed; 20 integrated auth/directory browser fixtures passed, including 320px password setup and 390px navigation. Synthetic HTTP evidence only."
+    "focused_verification": "Integrated build and runtime units passed; 15 owner unit checks and 18 PostgreSQL scenarios passed; 20 integrated auth/directory browser fixtures passed, including 320px password setup and 390px navigation. Synthetic HTTP evidence only.",
+    "hosted_preview_access": "Existing preview requires Lovable workspace sign-in, observed directly. No public publication or relaxed permissions. Open inside the authorized existing workspace before personal onboarding; callback delivery/session still unverified."
   }
 }

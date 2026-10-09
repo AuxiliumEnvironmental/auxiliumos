@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T13:11:49.371Z",
+  "created_at": "2026-10-09T13:21:17.223Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -11,18 +11,18 @@
   "first_unfinished_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
   "git": {
     "is_repository_root": true,
-    "head": "f74123867faae6c43bbba05303a2d5d6c75a4825",
+    "head": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
     "branch": "wip/recovery-2026-10-08",
     "upstream": null,
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M VERIFICATION_PROFILES.json\n M docs/00-control/RESUME.md\n M docs/00-control/SESSION_CHECKPOINT.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/runtime-build.json\n M docs/00-control/evidence/runtime-build.log\n M docs/03-data/OWNER_ONBOARDING.md\n M docs/03-data/SCHEMA_REGISTRY.md\n M playwright.runtime.config.ts\n M tests/api/README.md\n M tests/api/document-versions.test.mjs\n M tests/e2e/directory.spec.ts\n M web/src/components/app-shell.tsx\n?? docs/00-control/evidence/auth-onboarding-browser-fixture.json\n?? docs/00-control/evidence/auth-onboarding-browser-fixture.log\n?? docs/00-control/evidence/development-owner-preparation.json\n?? docs/00-control/evidence/owner-onboarding.json\n?? docs/00-control/evidence/owner-onboarding.log\n?? docs/00-control/reviews/OWNER-INTEGRATION-2026-10-09.json\n?? tests/api/document-browser.mjs\n?? tests/api/document-connected-ui.test.mjs\n?? tests/api/provision-connected-fixture.sql",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/03-data/OWNER_ONBOARDING.md\n?? docs/00-control/evidence/owner-source-publication.json",
     "remote": {
-      "status": "head_differs_from_remote",
+      "status": "head_matches_remote",
       "branch": "wip/recovery-2026-10-08",
-      "head": "96e782753d21256178ba7803ddf6afbda30195e5",
-      "checked_at": "2026-10-09T13:11:49.370Z"
+      "head": "b577b5a94eec09bf6ff175b26f3c19f09061dd35",
+      "checked_at": "2026-10-09T13:21:17.222Z"
     }
   },
-  "controls_digest": "1cc3f106c1529a9ccf1d4023d2a246d355df1222cfccb8d4e8aeb8c41021ad11",
+  "controls_digest": "2afe0394584ad5ef4a65cf159c07636b5e63642a058c24bb08174439ce4b51a1",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -32,7 +32,7 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
-      "blocker": "Protected development service credential and authorized manual dispatch unavailable here; invitation delivery, personal password and first owner login remain unverified."
+      "blocker": "Protected service credential and authorized manual dispatch unavailable here. Private preview also requires existing Lovable workspace sign-in. Actual invitation/callback delivery, personal password and first owner login remain unverified."
     },
     {
       "id": "SEC-001B",
@@ -50,7 +50,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-09T13:11:24.851Z"
+      "recorded_at": "2026-10-09T13:20:28.460Z"
     },
     "foundation-contract": {
       "status": "stale",

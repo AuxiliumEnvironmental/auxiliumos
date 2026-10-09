@@ -45,7 +45,7 @@
         "auth-onboarding-browser-fixture"
       ],
       "next_action": "Securely configure the development-only GitHub Actions secret and run the independent protected owner onboarding job. Complete the personal invitation/password/first-login flow. Provision the private bucket through Storage API, then integration lead verifies bucket/policies and enables only synthetic ingest/content gates before the focused connected browser run. No owner access dependency on document release.",
-      "blocker": "Protected development service credential and authorized manual dispatch unavailable here; invitation delivery, personal password and first owner login remain unverified.",
+      "blocker": "Protected service credential and authorized manual dispatch unavailable here. Private preview also requires existing Lovable workspace sign-in. Actual invitation/callback delivery, personal password and first owner login remain unverified.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "implementation_status": "UI/script implemented and independently reviewed; activation migration deployed to actual development backend. No owner account created yet."
     },
@@ -94,7 +94,7 @@
         "directory-browser-fixture",
         "intake-browser-fixture"
       ],
-      "next_action": "Publish integrated auth and updated directory fixture with source parity; verify existing Lovable preview. Module outlines remain explicitly unconnected; no complete-module claim.",
+      "next_action": "Implemented UI and owner auth are saved in GitHub b577b5a (CI59pass) and existing Lovable cc8828319.20integratedauth/directory browserfixtures pass; Lovable390pxsign-in/recovery display passes. Next verify personal hosted access through existing authorized Lovable workspace; no module-completion claim.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
     },
