@@ -1,6 +1,6 @@
 import { useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { DocumentReleaseApi, DocumentReleaseError, type DocumentReleaseIntent, type DocumentReleaseReceipt,
-  type ReleaseAudience, type ReleaseStatus, type RecipientReleaseMetadata, type WithdrawalReason } from '../lib/document-release-api';
+  type ReleaseAudience, type ReleaseStatus, type RecipientReleaseMetadata, type WithdrawalReason, type WithdrawalStatus } from '../lib/document-release-api';
 import type { DocumentVersion } from '../lib/document-version-api';
 import { isAbort } from '../lib/errors';
 import { useRuntime } from '../lib/runtime';
@@ -28,6 +28,7 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
   const readCheck = useRef(0), pendingCallback = useRef(onPendingChange);
   pendingCallback.current = onPendingChange;
   const [read, setRead] = useState<Read<ReleaseStatus>>({ state: 'idle' });
+  const [withdrawalRead, setWithdrawalRead] = useState<Read<WithdrawalStatus>>({ state: 'idle' });
   const [audience, setAudience] = useState<Read<ReleaseAudience>>({ state: 'idle' });
   const [metadata, setMetadata] = useState<Read<RecipientReleaseMetadata>>({ state: 'idle' });
   const [outcome, setOutcome] = useState<Outcome>({ state: 'idle' });
@@ -37,7 +38,7 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
   const [confirmed, setConfirmed] = useState(false), [withdrawConfirmed, setWithdrawConfirmed] = useState(false);
   const [reason, setReason] = useState<WithdrawalReason | ''>('');
   const busy = outcome.state === 'sending';
-  const reading = read.state === 'loading' || audience.state === 'loading' || metadata.state === 'loading';
+  const reading = read.state === 'loading' || withdrawalRead.state === 'loading' || audience.state === 'loading' || metadata.state === 'loading';
   const identity = { documentId, versionId: version.version_id, verifiedSha256: version.verified_sha256 };
   useLayoutEffect(() => {
     mounted.current = true;
@@ -56,7 +57,7 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
     readController.current?.abort();
     const controller = new AbortController(); readController.current = controller;
     const check = ++readCheck.current;
-    setRead({ state: 'loading' }); setAudience({ state: 'idle' }); setMetadata({ state: 'idle' }); resetChoice();
+    setRead({ state: 'loading' }); setWithdrawalRead({ state: 'idle' }); setAudience({ state: 'idle' }); setMetadata({ state: 'idle' }); resetChoice();
     try {
       const value = await api.status(identity, controller.signal);
       if (currentRead(controller)) setRead({ state: 'ready', value, check });
@@ -67,6 +68,25 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
         setOutcome(previous => previous.state === 'saved' ? { state: 'idle' } : previous);
       }
       setRead({ state: 'error', error: errorValue }); handleFailure(errorValue);
+    } finally { if (readController.current === controller) readController.current = null; }
+  };
+
+  const checkWithdrawal = async () => {
+    if (!mounted.current || mutationController.current) return;
+    readController.current?.abort();
+    const controller = new AbortController(); readController.current = controller;
+    const check = ++readCheck.current;
+    setWithdrawalRead({ state: 'loading' }); setRead({ state: 'idle' }); setAudience({ state: 'idle' }); setMetadata({ state: 'idle' }); resetChoice();
+    try {
+      const value = await api.withdrawalStatus(identity, controller.signal);
+      if (currentRead(controller)) setWithdrawalRead({ state: 'ready', value, check });
+    } catch (error) {
+      if (!currentRead(controller) || isAbort(error)) return;
+      const errorValue = failure(error);
+      if (errorValue.reason === 'unavailable' || errorValue.reason === 'unauthenticated') {
+        setOutcome(previous => previous.state === 'saved' ? { state: 'idle' } : previous);
+      }
+      setWithdrawalRead({ state: 'error', error: errorValue }); handleFailure(errorValue);
     } finally { if (readController.current === controller) readController.current = null; }
   };
 
@@ -107,9 +127,9 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
     if (!mounted.current || mutationController.current || readController.current || (!attempt && blocked)) return;
     let intent = attempt;
     if (!intent) {
-      if (read.state !== 'ready') return;
-      const observed = read.value;
       if (kind === 'release') {
+        if (read.state !== 'ready') return;
+        const observed = read.value;
         if (version.visibility_restricted || !observed.can_prepare_release || !observed.approved_review_decision_id || !confirmed
           || audience.state !== 'ready' || audience.check !== read.check || selected.length < 1 || selected.length > 32
           || !selected.every(grant => audience.value.recipients.some(recipient => recipient.grant_id === grant))) return;
@@ -118,41 +138,48 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
           previousReleaseId: observed.current_release_id, recipientGrantIds: Object.freeze([...selected].sort()),
           requestId: crypto.randomUUID(), attestationCode: 'released_exact_synthetic_version' as const });
       } else {
-        // controller_eligible covers new release safety/content requirements.
-        // It is NOT a can_withdraw flag. Narrowing rechecks its own server rules.
-        if (!observed.release_id || !['current', 'superseded'].includes(observed.release_state) || !reason || !withdrawConfirmed) return;
+        // The independent read uses narrowing authority without content safety.
+        // New-release status and controller_eligible never supply this permission.
+        if (withdrawalRead.state !== 'ready') return;
+        const observed = withdrawalRead.value;
+        if (!observed.can_withdraw || !observed.release_id || !reason || !withdrawConfirmed) return;
         intent = Object.freeze({ ...identity, kind, releaseId: observed.release_id, releaseRevision: observed.release_revision,
           requestId: crypto.randomUUID(), reasonCode: reason });
       }
     }
     const controller = new AbortController(); mutationController.current = controller;
-    setAttempt(intent); resetChoice(); setAudience({ state: 'idle' }); setMetadata({ state: 'idle' }); setRead({ state: 'idle' });
+    setAttempt(intent); resetChoice(); setAudience({ state: 'idle' }); setMetadata({ state: 'idle' }); setRead({ state: 'idle' }); setWithdrawalRead({ state: 'idle' });
     setOutcome({ state: 'sending' });
     try {
       const receipt = intent.kind === 'release' ? await api.release(intent, controller.signal) : await api.withdraw(intent, controller.signal);
       if (!mounted.current || controller.signal.aborted || mutationController.current !== controller) return;
       setAttempt(null); setUncertain(false); setOutcome({ state: 'saved', receipt });
       mutationController.current = null;
-      void checkStatus();
+      void (intent.kind === 'withdraw' ? checkWithdrawal() : checkStatus());
     } catch (error) {
       if (!mounted.current || controller.signal.aborted || mutationController.current !== controller || isAbort(error)) return;
       const errorValue = failure(error);
       setOutcome({ state: 'error', error: errorValue, check: readCheck.current });
       if (errorValue.reason === 'backend' || errorValue.reason === 'unexpected') setUncertain(true);
       // Later denials and GET observations cannot resolve an earlier lost write.
-      setRead({ state: 'idle' }); handleFailure(errorValue);
+      setRead({ state: 'idle' }); setWithdrawalRead({ state: 'idle' }); handleFailure(errorValue);
     } finally { if (mutationController.current === controller) mutationController.current = null; }
   };
 
   const snapshot = read.state === 'ready' ? read.value : null;
+  const withdrawalSnapshot = withdrawalRead.state === 'ready' ? withdrawalRead.value : null;
   const canPrepare = !blocked && !attempt && !busy && !reading;
-  const canStartNew = attempt && !uncertain && !blocked && outcome.state === 'error' && read.state === 'ready' && read.check > outcome.check;
+  const refreshedAttempt = attempt?.kind === 'withdraw' ? withdrawalRead : read;
+  const canStartNew = attempt && !uncertain && !blocked && outcome.state === 'error'
+    && refreshedAttempt.state === 'ready' && refreshedAttempt.check > outcome.check;
   const receipt = outcome.state === 'saved' ? outcome.receipt : null;
   return <section aria-labelledby={id + '-title'} aria-busy={busy || reading} style={{ marginTop: 'var(--space-5)', ...wrap }}>
     <h5 id={id + '-title'} style={{ fontSize: '1rem' }}>Synthetic metadata release</h5>
     <p className="field-hint">Metadata only. Separate human controller and recipient grants are required. Released-file downloads and professional release are unavailable.</p>
-    <button type="button" className="button secondary" disabled={busy || reading} onClick={() => { void checkStatus(); }}>
+    <div className="button-row"><button type="button" className="button secondary" disabled={busy || reading} onClick={() => { void checkStatus(); }}>
       {read.state === 'idle' ? 'Check release status' : 'Refresh release status'}</button>
+      <button type="button" className="button secondary" disabled={busy || reading} onClick={() => { void checkWithdrawal(); }}>
+        {withdrawalRead.state === 'idle' ? 'Check withdrawal access' : 'Refresh withdrawal access'}</button></div>
     {read.state === 'loading' && <p role="status">Checking this exact version’s release status…</p>}
     {read.state === 'error' && <p role="alert" className="form-error">{read.error.message}</p>}
     {snapshot && <>
@@ -185,7 +212,20 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
           <button type="button" className="button primary" disabled={!confirmed || selected.length === 0} onClick={() => { void submit('release'); }}>Release exact metadata</button>
         </>}
       </div>}
-      {canPrepare && snapshot.release_id && ['current', 'superseded'].includes(snapshot.release_state) && <details style={{ marginTop: 'var(--space-3)' }}>
+      <details><summary style={summaryStyle}>Release version and revisions</summary>
+        <dl><dt>Exact version</dt><dd>{snapshot.version_id}</dd><dt>Verified SHA-256</dt><dd><code>{snapshot.verified_sha256}</code></dd>
+          <dt>Approved review decision</dt><dd>{snapshot.approved_review_decision_id ?? 'None recorded'}</dd>
+          <dt>This version’s release</dt><dd>{snapshot.release_id ?? 'None recorded'}</dd>
+          <dt>Observed current release</dt><dd>{snapshot.current_release_id ?? 'None recorded'}</dd></dl>
+      </details>
+    </>}
+    {withdrawalRead.state === 'loading' && <p role="status">Checking current withdrawal authority without a content-access requirement…</p>}
+    {withdrawalRead.state === 'error' && <p role="alert" className="form-error">{withdrawalRead.error.message}</p>}
+    {withdrawalSnapshot && <>
+      <p><strong>Recorded withdrawal state: {labels[withdrawalSnapshot.release_state]}</strong></p>
+      <p className="field-hint">Withdrawal access is separate from content and new-release eligibility. The server rechecks current authority when you submit.</p>
+      {!withdrawalSnapshot.can_withdraw && <p className="field-hint">There is no active release to withdraw for this exact version. Withdrawal never restores an earlier release.</p>}
+      {canPrepare && withdrawalSnapshot.can_withdraw && <details style={{ marginTop: 'var(--space-3)' }}>
         <summary style={summaryStyle}>Withdraw this exact release</summary>
         <p>Withdrawal narrows recipient visibility. The server checks your current exact controller assignment and logical-view access. Eligibility for a new release does not determine withdrawal authority.</p>
         <div className="field"><label htmlFor={id + '-reason'}>Withdrawal reason</label><select id={id + '-reason'} value={reason}
@@ -196,11 +236,9 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
           onChange={event => setWithdrawConfirmed(event.target.checked)} /><span>{withdrawalAcknowledgment}</span></label>
         <button type="button" className="button secondary" disabled={!reason || !withdrawConfirmed} onClick={() => { void submit('withdraw'); }}>Withdraw exact release</button>
       </details>}
-      <details><summary style={summaryStyle}>Release version and revisions</summary>
-        <dl><dt>Exact version</dt><dd>{snapshot.version_id}</dd><dt>Verified SHA-256</dt><dd><code>{snapshot.verified_sha256}</code></dd>
-          <dt>Approved review decision</dt><dd>{snapshot.approved_review_decision_id ?? 'None recorded'}</dd>
-          <dt>This version’s release</dt><dd>{snapshot.release_id ?? 'None recorded'}</dd>
-          <dt>Observed current release</dt><dd>{snapshot.current_release_id ?? 'None recorded'}</dd></dl>
+      <details><summary style={summaryStyle}>Withdrawal version and revision</summary>
+        <dl><dt>Exact version</dt><dd>{withdrawalSnapshot.version_id}</dd><dt>Verified SHA-256</dt><dd><code>{withdrawalSnapshot.verified_sha256}</code></dd>
+          <dt>Exact release</dt><dd>{withdrawalSnapshot.release_id ?? 'None recorded'}</dd><dt>Release revision</dt><dd>{withdrawalSnapshot.release_revision}</dd></dl>
       </details>
     </>}
     {audience.state === 'loading' && <p role="status">Checking explicitly provisioned recipient grants…</p>}
@@ -214,12 +252,14 @@ export function DocumentVersionRelease({ documentId, version, blocked = false, o
       <p className="field-hint">Request reference: <code>{attempt.requestId}</code> · release revision {attempt.releaseRevision}
         {attempt.kind === 'release' && <> · document revision {attempt.documentRevision} · review revision {attempt.reviewRevision} · {attempt.recipientGrantIds.length} recipient grants</>}</p>
       <details><summary style={summaryStyle}>Frozen exact references</summary><p>{attempt.versionId}<br /><code>{attempt.verifiedSha256}</code></p>
-        {attempt.kind === 'release' ? <ul>{attempt.recipientGrantIds.map(grant => <li key={grant}>{grant}</li>)}</ul> : <p>Release {attempt.releaseId}</p>}</details>
+        {attempt.kind === 'release' ? <><dl><dt>Approved review decision</dt><dd>{attempt.approvedReviewDecisionId}</dd>
+          <dt>Previous current release</dt><dd>{attempt.previousReleaseId ?? 'None recorded'}</dd></dl>
+          <ul>{attempt.recipientGrantIds.map(grant => <li key={grant}>{grant}</li>)}</ul></> : <p>Release {attempt.releaseId}</p>}</details>
       <p className="field-hint">Changing account, facility or login, or leaving this history clears only the local retry context, not a server transaction.</p>
     </div>}
     {outcome.state === 'error' && uncertain && attempt && <button type="button" className="button secondary" disabled={reading}
       onClick={() => { void submit(attempt.kind); }}>Retry exact release operation</button>}
-    {outcome.state === 'error' && attempt && !uncertain && <p className="field-hint">Refresh release status, then deliberately prepare a new operation.</p>}
+    {outcome.state === 'error' && attempt && !uncertain && <p className="field-hint">{attempt.kind === 'withdraw' ? 'Refresh withdrawal access' : 'Refresh release status'}, then deliberately prepare a new operation.</p>}
     {canStartNew && <button type="button" className="button secondary" onClick={() => {
       setAttempt(null); resetChoice(); setAudience({ state: 'idle' }); setOutcome({ state: 'idle' });
     }}>Review a new release operation</button>}

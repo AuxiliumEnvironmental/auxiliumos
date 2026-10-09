@@ -28,6 +28,8 @@ const withdrawal = (changes = {}) => ({ withdrawal_id: id(90), release_id: id(70
 const status = (changes = {}) => ({ ...identity(), document_revision: 4, review_revision: 2, release_revision: 7,
   release_id: null, current_release_id: id(50), approved_review_decision_id: id(40), release_state: 'unreleased',
   controller_eligible: true, can_prepare_release: true, metadata_only: true, released_download_available: false, ...changes });
+const withdrawalStatus = (changes = {}) => ({ ...identity(), release_id: id(70), release_revision: 8,
+  release_state: 'current', can_withdraw: true, ...changes });
 const audience = (changes = {}) => ({ ...identity(), document_revision: 4, review_revision: 2, release_revision: 7, metadata_only: true,
   recipients: [{ grant_id: id(60), recipient_profile_id: id(160), recipient_display_name: 'Synthetic recipient' }], ...changes });
 const metadata = (changes = {}) => ({ ...identity(), release_id: id(70), version_ordinal: 3, release_class: 'routine_synthetic_document',
@@ -68,6 +70,29 @@ test('status fails closed for mixed identities, unsafe revisions, impossible poi
     assert.deepEqual(await setup(valid).api.status(exact()), valid);
     await rejected(setup({ ...valid, current_release_id: state === 'current' ? null : id(70) }).api.status(exact()));
   }
+});
+
+test('withdrawal discovery is independent, exact and typed; only current or superseded releases can be narrowed', async () => {
+  const signal = new AbortController().signal;
+  const s = setup({ ...withdrawalStatus(), controller_eligible: true, can_prepare_release: true, storage_path: 'PRIVATE' });
+  assert.deepEqual(await s.api.withdrawalStatus(exact(), signal), withdrawalStatus());
+  assert.deepEqual(s.calls, [{ name: 'document_release_withdrawal_status',
+    args: { p_version_id: id(20), p_expected_sha256: 'a'.repeat(64) }, retry: false, signal }]);
+  for (const state of ['unreleased', 'current', 'superseded', 'withdrawn']) {
+    const expected = withdrawalStatus({ release_state: state, release_id: state === 'unreleased' ? null : id(70),
+      can_withdraw: state === 'current' || state === 'superseded' });
+    assert.deepEqual(await setup(expected).api.withdrawalStatus(exact()), expected);
+    await rejected(setup({ ...expected, can_withdraw: !expected.can_withdraw }).api.withdrawalStatus(exact()));
+  }
+  for (const change of [{ document_id: id(11) }, { version_id: id(21) }, { verified_sha256: 'b'.repeat(64) },
+    { release_id: null }, { release_id: 'bad' }, { release_revision: 0 }, { release_revision: -1 },
+    { release_revision: '8' }, { release_revision: Number.MAX_SAFE_INTEGER + 1 }, { release_state: 'approved' }, { can_withdraw: 'true' }]) {
+    await rejected(setup(withdrawalStatus(change)).api.withdrawalStatus(exact()));
+  }
+  await rejected(setup(withdrawalStatus({ release_id: id(70), release_state: 'unreleased', can_withdraw: false })).api.withdrawalStatus(exact()));
+  await rejected(setup(null, { code: '42501', message: 'PRIVATE' }, 403).api.withdrawalStatus(exact()), 'unavailable');
+  const invalid = setup(null); await rejected(invalid.api.withdrawalStatus({ ...exact(), versionId: 'bad' }), 'validation');
+  assert.equal(invalid.calls.length, 0);
 });
 
 test('audience rejects duplicate grants, malformed recipients and foreign exact references; empty eligible audience is valid', async () => {
@@ -177,7 +202,7 @@ test('safe typed errors preserve uncertainty and suppress provider details', asy
 });
 
 test('cancellation prevents dispatch and suppresses late receipts and metadata', async () => {
-  for (const [operation, input, data] of [['status', exact(), status()], ['audience', exact(), audience()],
+  for (const [operation, input, data] of [['status', exact(), status()], ['withdrawalStatus', exact(), withdrawalStatus()], ['audience', exact(), audience()],
     ['release', releaseIntent(), receipt()], ['withdraw', withdrawalIntent(), withdrawal()],
     ['current', id(10), metadata()], ['historical', exact(), metadata({ visibility: 'historical' })]]) {
     const before = new AbortController(); before.abort(); const first = setup(data);

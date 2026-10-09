@@ -11,6 +11,10 @@ export type ReleaseStatus = {
   release_state: ReleaseState; controller_eligible: boolean; can_prepare_release: boolean;
   metadata_only: true; released_download_available: false;
 };
+export type WithdrawalStatus = {
+  document_id: string; version_id: string; verified_sha256: string; release_revision: number;
+  release_id: string | null; release_state: ReleaseState; can_withdraw: boolean;
+};
 export type ReleaseAudience = {
   document_id: string; version_id: string; verified_sha256: string;
   document_revision: number; review_revision: number; release_revision: number; metadata_only: true;
@@ -136,6 +140,23 @@ export class DocumentReleaseApi {
       approved_review_decision_id: s.approved_review_decision_id, release_state: state,
       controller_eligible: s.controller_eligible, can_prepare_release: s.can_prepare_release,
       metadata_only: true, released_download_available: false };
+  }
+
+  async withdrawalStatus(version: ReleaseVersion, signal?: AbortSignal): Promise<WithdrawalStatus> {
+    const v = { ...version }; validateVersion(v);
+    const s = record(await this.invoke('document_release_withdrawal_status', {
+      p_version_id: v.versionId, p_expected_sha256: v.verifiedSha256,
+    }, signal));
+    const identity = exact(s, v);
+    if (!revision(s.release_revision) || !nullableUuid(s.release_id)
+      || !['unreleased', 'current', 'superseded', 'withdrawn'].includes(s.release_state as string)
+      || typeof s.can_withdraw !== 'boolean') return unexpected();
+    const state = s.release_state as ReleaseState;
+    if ((state === 'unreleased') !== (s.release_id === null)
+      || s.release_id !== null && s.release_revision < 1
+      || s.can_withdraw !== (state === 'current' || state === 'superseded')) return unexpected();
+    return { ...identity, release_revision: s.release_revision, release_id: s.release_id,
+      release_state: state, can_withdraw: s.can_withdraw };
   }
 
   async audience(version: ReleaseVersion, signal?: AbortSignal): Promise<ReleaseAudience> {
