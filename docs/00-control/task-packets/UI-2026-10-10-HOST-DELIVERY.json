@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "packet_mode": "ready_for_dispatch",
+  "task_id": "UI-2026-10-09",
+  "queue_file": "BUILD_QUEUE.json",
+  "requirement_ids": [
+    "C05",
+    "C01",
+    "M01"
+  ],
+  "goal": "Deliver the 16 exact reviewed UI/context and existing document-release source files to the existing OS Lovable project, then return actual source hashes, build and operation evidence.",
+  "original_intent": "Delivery phase of existing UI-2026-10-09 and DOC-001D-UI; reuses accepted UI-2026-10-10-CONTEXT. No new live task, app, service, role, approval or queue.",
+  "input": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+    "working_tree_requirement": "No repository edits. Existing OS provider must still be at pinned 8d59d222 with terminal prior operation and no active writer. Compare every original destination hash or expected absence before any replacement; stop on unexpected state.",
+    "controlling_sources": [
+      {
+        "path": "web/src/components/document-version-release.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "c21343aa7b5197e702f30c3c8e36b20acfb58550eb99341923556dbadd8ebf6a",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/components/document-version-review.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "d98f928e4eabe5fcbacc593d88330dd641597b34195ac9fe081abae08143863f",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/components/document-versions.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "d9d46c1cf2a66fb3b6ef03fde1a32cfe935dfb3fe1c82695042132440edda50b",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/components/module-draft-screen.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "b33a0bcc274808566dca084247933e698dd8bd25a6462536d5928d6b2bf4c2e7",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/components/plan-context.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "4498a07d2e2c67da943a2b7cd72440bb893fccb2ce58ba655a20d5b18b5d0e60",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/directory-api.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "b63a9f49c0faee99c976fcad879875482132a27974a81a195fbc93667b6e9077",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/document-release-api.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "f59062748433932227e8bb47541dec9c0bd5b11eed38cf91c3ca1086945dfacc",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/runtime.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/use-directory.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "dca51b487dc7e9ed8321d3b4659c26a39500949152a90135300c34462a4daf22",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/use-draft-transition.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/use-planning-context.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/lib/use-workspace-plans.ts",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/pages/directory.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/pages/module-workspace.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/pages/private-files.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "a4f868fe164b081b10de23db03a66e42c8923adaa24c616b38e77f59ff6d7613",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      },
+      {
+        "path": "web/src/router.tsx",
+        "revision": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+        "sha256": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620",
+        "purpose": "Exact reviewed output bytes for provider delivery; original destination hash/absence in HOST_DELIVERY_MANIFEST.json"
+      }
+    ],
+    "external_surfaces": [
+      {
+        "name": "lovable",
+        "identifier": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+        "observed_revision": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+        "observation": "Existing OS host completed.12existing destination files inspected and four expected new files confirmed absent. All divergent document source is older than canonical; no competing edit accepted.",
+        "write_policy": "assigned_writer"
+      },
+      {
+        "name": "spatial",
+        "identifier": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+        "observed_revision": "c160e74dc192d03605eafc8611e4c2e4917394d7",
+        "observation": "Separate lead operation completed; no allocation is reclaimed and no source/selector/adapter/generated file is included.",
+        "write_policy": "none"
+      }
+    ]
+  },
+  "ownership": {
+    "integrator": "integration-lead",
+    "worker_role": "release-engineer",
+    "worker_id": "existing-os-lovable-agent",
+    "branch": "provider-project-at-8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "isolation_mode": "exclusive_files",
+    "worktree_path": null,
+    "allowed_paths": [
+      "web/src/components/document-version-release.tsx",
+      "web/src/components/document-version-review.tsx",
+      "web/src/components/document-versions.tsx",
+      "web/src/components/module-draft-screen.tsx",
+      "web/src/components/plan-context.tsx",
+      "web/src/lib/directory-api.ts",
+      "web/src/lib/document-release-api.ts",
+      "web/src/lib/runtime.tsx",
+      "web/src/lib/use-directory.ts",
+      "web/src/lib/use-draft-transition.ts",
+      "web/src/lib/use-planning-context.ts",
+      "web/src/lib/use-workspace-plans.ts",
+      "web/src/pages/directory.tsx",
+      "web/src/pages/module-workspace.tsx",
+      "web/src/pages/private-files.tsx",
+      "web/src/router.tsx"
+    ],
+    "forbidden_shared_paths": [
+      "All other destination files",
+      "Spatial source, generated files, selectors and adapter",
+      "Supabase",
+      "package.json",
+      "package-lock.json",
+      "bun.lock",
+      "web/src/styles.css",
+      "Provider Auth/Cloud/MCP/permission settings",
+      "DNS/publish settings",
+      "Repository root masters"
+    ],
+    "allocation_check": "node scripts/os-control.mjs allocation TASK PATHS_FILE",
+    "other_writer_check": "Source workers have returned and stopped; source hashes independently reviewed. Existing OS provider turn terminal and exact target pinned. Serialize this one provider write; no standalone Spatial writes."
+  },
+  "dependencies": [
+    {
+      "task_id": "UI-2026-10-10-CONTEXT",
+      "required_contract": "Accepted Auth subject/profile, current-generation directory and planning-action recovery; frozen exact retries. IF-01/02/04/18.",
+      "observed_source": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "verification_limit": "Candidate a54372 CI 38024351341 passed before dispatch; source/fixture acceptance only."
+    },
+    {
+      "task_id": "DOC-001D-UI",
+      "required_contract": "Exact immutable version review, separate release authority, explicit audience and narrowing withdrawal from accepted43d1ea48 source. No released-byte download UI claim.",
+      "observed_source": "43d1ea48989f753445510f030584a91a4211fb6c; included unchanged in a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "verification_limit": "CI67 already passed; current candidate regression retained. Hosted professional/recipient-byte workflow unverified."
+    }
+  ],
+  "authority": {
+    "owner_instruction": "Current OS Integration Lead owner directive authorizes bounded connected integration, preservation of newer source and source saving; earlier frontend publication authority persists separately.",
+    "owner_decision_ids": [
+      "OD-001",
+      "OD-003",
+      "OD-011",
+      "OD-012",
+      "OD-013"
+    ],
+    "development_authorization": "Routine implementation authorized; no whole-plan approval needed.",
+    "affected_live_activation": "Reviewed source/preview delivery only. No public publication, backend change, provider configuration, new identity, permission or full business activation.",
+    "platform_limitations": "Use actual available tools; protected credentials and platform approval routes cannot be bypassed.",
+    "new_business_decisions": [],
+    "prohibited_actions": [
+      "No public publish, DNS or production activation.",
+      "No provider Cloud/MCP/Auth/permission or Supabase operations.",
+      "No dependency/lockfile/schema/root-CSS edits.",
+      "No Spatial source/selector/generated/adapter changes.",
+      "No implementation invention or edits beyond exact16filebytes.",
+      "No external messages or further agents."
+    ]
+  },
+  "contract": {
+    "actors_and_scope": "Existing authenticated identities; current scoped access only. Protected state must disappear on identity change/revocation.",
+    "data_and_states": "Retain exact domain revisions and frozen uncertain operations; personal planning drafts remain personal preparation.",
+    "server_api": "No RPC/schema changes. Existing WorkspacePlanApi, auth storage, document review/version API bytes and exact dependency versions read back from the target host; accepted interfaces match current canonical source.",
+    "ui_and_errors": "Keep useful work on same-user recheck; protect context/route/sample transitions; revalidation must not permit protected mutations until current authority is established.",
+    "compatibility": "Preserve all newer document and Spatial source; transfer exact current Git source only. Migration ID: none.",
+    "shared_invariants": [
+      "No added professional/commercial/release authority.",
+      "No weaker evidence floors or skipped-test substitution.",
+      "Do not conflate a saved personal planning record with a domain workflow."
+    ],
+    "out_of_scope": [
+      "Application redesign",
+      "New features beyond pinned source",
+      "Authentic hosted document acceptance",
+      "Spatial delivery",
+      "Public publication",
+      "Full business activation"
+    ]
+  },
+  "acceptance": [
+    {
+      "id": "C05.A02",
+      "outcome": "Loading, empty, permission-denied, stale-edit, validation, upload-retry and partial-failure states are actionable and preserve entered work.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "C01.A01",
+      "outcome": "An inactive user or membership is denied even with another role row and a previously issued session.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "C01.A02",
+      "outcome": "Cross-account and unassigned-facility reads, writes, joins, exports, object paths and dashboard aggregates are denied server-side.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "M01.A04",
+      "outcome": "identifiers and cross-object links remain stable.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    }
+  ],
+  "verification": {
+    "registered_profiles": [
+      "runtime-build",
+      "workspace-context-browser-fixture",
+      "directory-browser-fixture",
+      "document-releases-client-unit",
+      "document-releases-browser-fixture",
+      "document-reviews-browser-fixture"
+    ],
+    "required_evidence_levels": [
+      "browser_fixture",
+      "build"
+    ],
+    "changed_risks": [
+      "Draft loss, pending retry/context crossing, revoked access and later-page permitted context"
+    ],
+    "evidence_reuse_rule": "Reuse only when all covered source/test/config/profile inputs and actual runtime identity match. Inspect current CI provenance before rerunning old work; a fresh local environment is not proof of regression. Candidate a54372 CI 38024351341 completed success for application-foundation and controls; protected hosted jobs skipped by existing event policy and confer no hosted evidence.",
+    "runtime_target": "Existing OS Lovable development preview from pinned source; provider build and exact hash readback. Browser fixture evidence remains GitHub CI.",
+    "unavailable_evidence": [
+      "Authentic hosted acceptance not established by this packet."
+    ],
+    "independent_review": {
+      "required": true,
+      "role": "integration-lead",
+      "review_scope": "Compare returned provider diff and all16output hashes to reviewed candidate; inspect unexpected paths and actual operation state. Reuse existing independent security reviews for unchanged bytes.",
+      "reviewed_source_must_match_output": true
+    }
+  },
+  "dispatch_guard": {
+    "conditions": [
+      "Current candidate CI completed successfully.",
+      "Provider still at exact input head and previous operation terminal.",
+      "Source workers stopped; no other active write on this project.",
+      "Each original destination hash/absence matches manifest."
+    ],
+    "satisfied": true,
+    "observed_at": "2026-10-10T04:38:03.302272+00:00",
+    "observed_by": "integration-lead",
+    "provider_message_id": "umsg_01m4j1q97veb9v9jt2qt9w1j86",
+    "provider_thread_id": "main"
+  },
+  "stop_conditions": [
+    "Any CI gate fails.",
+    "Input project head or destination bytes differ from manifest.",
+    "Any provider operation is active or paused.",
+    "A requested tool approval/secure form is blocking; return it without bypass.",
+    "Any required change exceeds exact source allocation.",
+    "A timed-out write needs operation/source readback before retry."
+  ],
+  "recovery": {
+    "preserve": "Save actual diff/untracked files, pinned source and first failure; preserve all other writers and historical evidence.",
+    "retry_rule": "Check operation/provider readback before retrying; one bounded diagnostic then change approach if no new evidence.",
+    "rollback_or_forward_fix": "Return the bounded patch for integrator reconciliation. Do not reset shared branches, alter applied migrations or overwrite newer provider work."
+  },
+  "return_contract": [
+    "Actual provider operation/message/thread and final commit.",
+    "All16output file SHA256 hashes and actual full changed-path diff.",
+    "Build command/result and any remaining errors.",
+    "No publish or hosted acceptance claim.",
+    "Exact blockers and first incomplete action."
+  ]
+}

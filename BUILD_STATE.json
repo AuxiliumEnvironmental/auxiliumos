@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-10T04:27:39.832257+00:00",
+  "as_of": "2026-10-10T04:43:02.204640+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -8,17 +8,19 @@
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
     "review_basis": "Fresh isolated clone at 148d74d with current GitHub refs, CI67 and actual provider source/operation readback; maps adopted as reference only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
-    "current_verified_feature_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8"
+    "current_verified_feature_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "canonical_recovery_base": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "integration_branch": "work/integration-2026-10-10"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "GitHub connector saved integration branch at 28880477f1b40da3bf2adf746bf0d5969f0e440f; commit/tree/ref readback verified tree deb561b1f815b687e9145efd0cbc3498bb7033a3 equals local reviewed source. Terminal push has no credentials; connector access is operational.",
+    "github": "Integration candidate a54372cbb40b6c7ef1044f1932aabb997670f585 saved via GitHub connector with exact local tree equality; PR87 targets unchanged recovery148d74d. Subsequent delivery/checkpoint metadata will be saved separately and final ref readback recorded in PR. No terminal push credentials or owner local-clone synchronization claimed.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev PostgreSQL17.6.1.127: all14 applied migration statement hashes match source; private-objects v3, document-version-content v4 and document-release-content v1 JWT-verified. Last Edge two source files match exactly. No hosted document acceptance.",
-    "lovable": "OS 8d59d222 operation completed; prior plan-card blocker is superseded by actual later completed operation readback. Host runtime/router match 148d74d; document release UI is behind canonical. Spatial separate active transfer retained. No native GitHub sync or publication parity claimed.",
+    "lovable": "OS source delivered at 4adbb330c0b4e7832bcae938a6507ee4b27ae0c3; operation completed and all 16 exact hashes/full changed-path diff independently verified against a54372. Provider build reported passed. No public publication or genuine hosted workflow acceptance. Spatial files untouched; separate Spatial project completed its own operation.",
     "workspace_execution": "New workspace /workspace/scratch/4b36780d3567/auxiliumos is operational; npm ci completed. Prior inaccessible workspaces were not reset or claimed recovered."
   },
   "source_precedence": [
@@ -28,7 +30,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Pass candidate CI for the router-only correction of three evidenced navigation-context failures, then deliver exact reviewed UI/context and document-release source to OS Lovable. Authentic hosted document/recipient-byte acceptance remains open; preserve independent Spatial source.",
+  "first_runtime_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
     "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
@@ -316,8 +318,8 @@
     "active_worktree": "/workspace/scratch/4b36780d3567/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Repair the four reproduced draft-loss paths with current-authority recovery (UI-2026-10-10-CONTEXT), and reject publication-only activation evidence (CTRL-003-ACTIVATION). Hosted private-document acceptance remains open.",
-    "latest_verified_remote": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "first_unfinished_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
+    "latest_verified_remote": "a54372cbb40b6c7ef1044f1932aabb997670f585",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
@@ -485,7 +487,7 @@
     "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "unpublished_patch_check": "unavailable_checked_once",
     "protected_configuration": "Previously absent Actions service secret remains an unresolved historical access observation. Current toolset cannot read secret configuration; skipped CI jobs do not establish current availability.",
-    "independent_work": "Current exact packets repair draft/context behavior and activation evidence; source saved, hosted transfer and authentic acceptance remain distinct.",
+    "independent_work": "UI/context repair and activation-control repair passed reviewed source/fixture gates; exact 16-file source delivery accepted at OS host4adbb330. Genuine hosted acceptance and full activation remain distinct and open.",
     "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
     "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
@@ -534,14 +536,15 @@
     "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
     "packets": [
       "docs/00-control/task-packets/UI-2026-10-10-CONTEXT.json",
-      "docs/00-control/task-packets/CTRL-003-ACTIVATION.json"
+      "docs/00-control/task-packets/CTRL-003-ACTIVATION.json",
+      "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json"
     ],
     "external_spatial_operation": {
       "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
-      "head": "0436dbd7d21fb3f7fd1368bd8e20194b97157c11",
+      "head": "c160e74dc192d03605eafc8611e4c2e4917394d7",
       "message_id": "main:user#00000000000005#usr:H4KV6UH5",
-      "agent_finished": false,
-      "response_status": "absent_while_active",
+      "agent_finished": true,
+      "response_status": "completed",
       "owner_source_commit": "1fede19ded45b3ce2b2919d47759a43134533a69",
       "write_allocation": "External Spatial lead; do not edit source, OS Spatial selector/adapter/generated files or transfer"
     },
@@ -561,14 +564,13 @@
       "observation": "Separate project/lead source advanced and operation completed. No Spatial files changed by OS lead; project head differs from operation commit so entire current delivery is not accepted from the message summary."
     },
     "source_save": {
-      "remote_commit": "28880477f1b40da3bf2adf746bf0d5969f0e440f",
-      "tree": "deb561b1f815b687e9145efd0cbc3498bb7033a3",
-      "local_reviewed_equivalent": "b4366914b8681b774ecaeb102fc039e2af2711a7",
-      "readback": "GitHub branch ref and commit tree; identical tree checked again through git fetch",
-      "scope": "Reconciliation, frozen references, accepted activation-gate repair and candidate fixture registration; excludes ongoing UI working files and this later receipt",
-      "recorded_at": "2026-10-10T04:11:14.673302+00:00"
+      "remote_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+      "readback": "GitHub branch ref and identical local Git tree; source packets reviewed and candidate CI passed. Current subsequent handoff metadata pending save.",
+      "scope": "Reviewed UI/context repair, existing document source and activation-gate control repair",
+      "recorded_at": "2026-10-10T04:38:35.398425+00:00"
     },
-    "candidate_gate": "CI38023614711 failures preserved; router-only correction source/typecheck clear with9unchangedscenarios. Corrected candidate CI required before source delivery.",
+    "candidate_gate": "PASS: a54372cbb40b6c7ef1044f1932aabb997670f585 CI 38024351341 application-foundation and controls, including all 9 workspace-context scenarios. Protected hosted jobs skipped; no hosted acceptance.",
     "accepted_contract_changes": [
       "RuntimeContext adds authUserId from existing verified getUser, retaining profile and current generation.",
       "RuntimeProvider owns memory-only identity-scoped draft recovery, replaces it on identity/access loss and revalidates every retained directory and planning action scope before ready.",
@@ -576,6 +578,51 @@
       "Uncertain planning saves retain exact immutable request and original scope; protected mutation requires current verified generation."
     ],
     "ui_review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json",
-    "candidate_ci_receipt": "docs/00-control/evidence/CI-38023614711-workspace-context.json"
+    "candidate_ci_receipt": "docs/00-control/evidence/CI-38024351341-application-foundation.json",
+    "provider_delivery": {
+      "phase": "completed; exact source delivery accepted",
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "input_commit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "packet": "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+      "manifest": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10-manifest.json",
+      "writer": null,
+      "reviewer": "integration-lead",
+      "allowed_paths": [
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/document-release-api.ts",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/lib/use-workspace-plans.ts",
+        "web/src/pages/directory.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/private-files.tsx",
+        "web/src/router.tsx"
+      ],
+      "message_id": "umsg_01m4j1q97veb9v9jt2qt9w1j86",
+      "thread_id": "main",
+      "observed_at": "2026-10-10T04:43:02.204640+00:00",
+      "archive_sha256": "58b724cd0062f31bdbb1a629f63fcce8077bf1dc7a9fa8f443b394ff1981a3c0",
+      "output_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+      "response_status": "completed",
+      "agent_finished": true,
+      "receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
+    },
+    "active_local_writers": [],
+    "active_provider_writers": [],
+    "hosted_verification_access": {
+      "observed_at": "2026-10-10T04:43:02.204640+00:00",
+      "tools": "GitHub read/source-write tools present; workflow-dispatch operation is not available in this toolset. Local Chromium installation failed and was not retried; no local protected service credential was accessed.",
+      "protected_runner": "Existing workflow restricts connected checks to wip/recovery-2026-10-08. PR87 contains reviewed source awaiting integration into that protected execution branch; branch restriction was not weakened.",
+      "next_preflight": "Freshly reconcile existing synthetic document revision, private-bucket metadata, active operations and separately enabled synthetic gates before any fixture writes. Secure credential availability is not inferred from skipped PR jobs.",
+      "not_a_new_owner_approval": "Routine implementation authorization persists. Use existing protected execution/access route; never expose secrets or infer professional/production authority."
+    }
   }
 }

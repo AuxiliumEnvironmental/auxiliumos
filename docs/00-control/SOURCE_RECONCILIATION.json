@@ -101,7 +101,7 @@
     "inspection": "Read-only schema/migration inventory and auth/storage counts. Auth provider settings and real login not certified.",
     "mutations": []
   },
-  "remote_save_status": "Recovery source saved and fetched at a749b7d with exact tree equality and CI run37861401950 success; later capability integration is local until separate publication.",
+  "remote_save_status": "Reviewed application/control source saved at a54372 on work/integration-2026-10-10 and CI passed; recovery branch remains148d74d. Later handoff metadata pending final commit/readback.",
   "published_increments": [
     {
       "task": "SEC-001C-AUDIT and SEC-001B-API-FIXTURES",
@@ -134,11 +134,16 @@
   "remaining_publish_task": null,
   "current_development_database_receipt": "docs/00-control/evidence/development-migrations.json",
   "latest_integration_readback": {
-    "observed_at": "2026-10-10T04:01:04.031305+00:00",
+    "observed_at": "2026-10-10T04:43:02.204640+00:00",
     "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
     "input_tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
     "branch": "work/integration-2026-10-10",
     "receipt": "docs/00-control/evidence/integration-reconciliation-2026-10-10.json",
-    "publication": "pending; no new remote persistence claimed"
+    "publication": "Exact 16-file provider source delivery verified. No new public publication or full activation. Final metadata save/readback is recorded in PR87.",
+    "accepted_source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "accepted_source_tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+    "candidate_ci": 38024351341,
+    "host_output_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+    "host_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
   }
 }

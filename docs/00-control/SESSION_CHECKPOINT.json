@@ -1,29 +1,31 @@
 {
   "version": 1,
-  "created_at": "2026-10-10T04:27:55.720Z",
+  "created_at": "2026-10-10T04:43:32.831Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
     "review_basis": "Fresh isolated clone at 148d74d with current GitHub refs, CI67 and actual provider source/operation readback; maps adopted as reference only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
-    "current_verified_feature_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8"
+    "current_verified_feature_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "canonical_recovery_base": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "integration_branch": "work/integration-2026-10-10"
   },
-  "first_unfinished_action": "Pass candidate CI for the router-only correction of three evidenced navigation-context failures, then deliver exact reviewed UI/context and document-release source to OS Lovable. Authentic hosted document/recipient-byte acceptance remains open; preserve independent Spatial source.",
+  "first_unfinished_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
   "git": {
     "is_repository_root": true,
-    "head": "aa59a4768aab3ca8196e46207885b729224c927c",
+    "head": "a54372cbb40b6c7ef1044f1932aabb997670f585",
     "branch": "work/integration-2026-10-10",
     "upstream": "origin/work/integration-2026-10-10",
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/reviews/UI-CONTEXT-2026-10-10.json\n M docs/00-control/task-packets/UI-2026-10-10-CONTEXT.json\n M web/src/router.tsx\n?? docs/00-control/evidence/CI-38023614711-workspace-context.json\n?? docs/00-control/evidence/CI-38023614711-workspace-context.log",
+    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n?? docs/00-control/evidence/CI-38024351341-application-foundation.json\n?? docs/00-control/evidence/CI-38024351341-application-foundation.log\n?? docs/00-control/evidence/HOST-DELIVERY-2026-10-10-manifest.json\n?? docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json\n?? docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
     "remote": {
       "status": "head_matches_remote",
       "branch": "work/integration-2026-10-10",
-      "head": "aa59a4768aab3ca8196e46207885b729224c927c",
-      "checked_at": "2026-10-10T04:27:55.714Z"
+      "head": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "checked_at": "2026-10-10T04:43:32.818Z"
     }
   },
-  "controls_digest": "71ca99454f9210679344b433c497594a2caf7a30b8661c089e94e59901678e19",
+  "controls_digest": "4f89ab7d7e26ff61d2c81f7a48cfca739e0af050c7270fd3afda28d2dfa39fa6",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -38,8 +40,11 @@
   ],
   "evidence": {
     "controls": {
-      "status": "stale",
-      "profile": "controls"
+      "status": "passed",
+      "profile": "controls",
+      "evidence": "docs/00-control/evidence/controls.json",
+      "level": "control_unit",
+      "recorded_at": "2026-10-10T04:43:26.607Z"
     },
     "foundation-contract": {
       "status": "stale",

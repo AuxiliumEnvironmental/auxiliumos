@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-10T04:43:02.204640+00:00",
+  "parent_task": "UI-2026-10-09",
+  "document_delivery_task": "DOC-001D-UI",
+  "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+  "source_tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+  "source_branch": "work/integration-2026-10-10",
+  "return_channel": "Lovable operation response and direct get_project/get_diff/read_file; GitHub draft PR87",
+  "provider": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "input_commit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "output_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+    "message_id": "umsg_01m4j1q97veb9v9jt2qt9w1j86",
+    "thread_id": "main",
+    "response_status": "completed",
+    "agent_finished": true,
+    "preview_url": "https://id-preview--0b7bbfc6-627f-4ca0-9217-98f5b164b419.lovable.app"
+  },
+  "archive_sha256": "58b724cd0062f31bdbb1a629f63fcce8077bf1dc7a9fa8f443b394ff1981a3c0",
+  "dispatch_packet": "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+  "manifest": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10-manifest.json",
+  "reviewer": "integration-lead",
+  "independent_source_review": "All 16 output file bytes read directly at provider output commit and hashed; every hash matches exact reviewed Git source. Full provider diff contains precisely the 16 allocated files, no incomplete entries and no other files.",
+  "files": [
+    {
+      "path": "web/src/components/document-version-release.tsx",
+      "expected_sha256": "c21343aa7b5197e702f30c3c8e36b20acfb58550eb99341923556dbadd8ebf6a",
+      "actual_sha256": "c21343aa7b5197e702f30c3c8e36b20acfb58550eb99341923556dbadd8ebf6a",
+      "matches": true,
+      "bytes": 25265
+    },
+    {
+      "path": "web/src/components/document-version-review.tsx",
+      "expected_sha256": "d98f928e4eabe5fcbacc593d88330dd641597b34195ac9fe081abae08143863f",
+      "actual_sha256": "d98f928e4eabe5fcbacc593d88330dd641597b34195ac9fe081abae08143863f",
+      "matches": true,
+      "bytes": 14825
+    },
+    {
+      "path": "web/src/components/document-versions.tsx",
+      "expected_sha256": "d9d46c1cf2a66fb3b6ef03fde1a32cfe935dfb3fe1c82695042132440edda50b",
+      "actual_sha256": "d9d46c1cf2a66fb3b6ef03fde1a32cfe935dfb3fe1c82695042132440edda50b",
+      "matches": true,
+      "bytes": 21404
+    },
+    {
+      "path": "web/src/components/module-draft-screen.tsx",
+      "expected_sha256": "b33a0bcc274808566dca084247933e698dd8bd25a6462536d5928d6b2bf4c2e7",
+      "actual_sha256": "b33a0bcc274808566dca084247933e698dd8bd25a6462536d5928d6b2bf4c2e7",
+      "matches": true,
+      "bytes": 30837
+    },
+    {
+      "path": "web/src/components/plan-context.tsx",
+      "expected_sha256": "4498a07d2e2c67da943a2b7cd72440bb893fccb2ce58ba655a20d5b18b5d0e60",
+      "actual_sha256": "4498a07d2e2c67da943a2b7cd72440bb893fccb2ce58ba655a20d5b18b5d0e60",
+      "matches": true,
+      "bytes": 3141
+    },
+    {
+      "path": "web/src/lib/directory-api.ts",
+      "expected_sha256": "b63a9f49c0faee99c976fcad879875482132a27974a81a195fbc93667b6e9077",
+      "actual_sha256": "b63a9f49c0faee99c976fcad879875482132a27974a81a195fbc93667b6e9077",
+      "matches": true,
+      "bytes": 7018
+    },
+    {
+      "path": "web/src/lib/document-release-api.ts",
+      "expected_sha256": "f59062748433932227e8bb47541dec9c0bd5b11eed38cf91c3ca1086945dfacc",
+      "actual_sha256": "f59062748433932227e8bb47541dec9c0bd5b11eed38cf91c3ca1086945dfacc",
+      "matches": true,
+      "bytes": 16753
+    },
+    {
+      "path": "web/src/lib/runtime.tsx",
+      "expected_sha256": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+      "actual_sha256": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+      "matches": true,
+      "bytes": 21300
+    },
+    {
+      "path": "web/src/lib/use-directory.ts",
+      "expected_sha256": "dca51b487dc7e9ed8321d3b4659c26a39500949152a90135300c34462a4daf22",
+      "actual_sha256": "dca51b487dc7e9ed8321d3b4659c26a39500949152a90135300c34462a4daf22",
+      "matches": true,
+      "bytes": 2469
+    },
+    {
+      "path": "web/src/lib/use-draft-transition.ts",
+      "expected_sha256": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+      "actual_sha256": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+      "matches": true,
+      "bytes": 906
+    },
+    {
+      "path": "web/src/lib/use-planning-context.ts",
+      "expected_sha256": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+      "actual_sha256": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+      "matches": true,
+      "bytes": 5461
+    },
+    {
+      "path": "web/src/lib/use-workspace-plans.ts",
+      "expected_sha256": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
+      "actual_sha256": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
+      "matches": true,
+      "bytes": 5710
+    },
+    {
+      "path": "web/src/pages/directory.tsx",
+      "expected_sha256": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
+      "actual_sha256": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
+      "matches": true,
+      "bytes": 8640
+    },
+    {
+      "path": "web/src/pages/module-workspace.tsx",
+      "expected_sha256": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
+      "actual_sha256": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
+      "matches": true,
+      "bytes": 6638
+    },
+    {
+      "path": "web/src/pages/private-files.tsx",
+      "expected_sha256": "a4f868fe164b081b10de23db03a66e42c8923adaa24c616b38e77f59ff6d7613",
+      "actual_sha256": "a4f868fe164b081b10de23db03a66e42c8923adaa24c616b38e77f59ff6d7613",
+      "matches": true,
+      "bytes": 6852
+    },
+    {
+      "path": "web/src/router.tsx",
+      "expected_sha256": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620",
+      "actual_sha256": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620",
+      "matches": true,
+      "bytes": 7172
+    }
+  ],
+  "actual_diff": [
+    {
+      "path": "web/src/components/document-version-release.tsx",
+      "action": "new",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/components/document-version-review.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/components/document-versions.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/components/module-draft-screen.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/components/plan-context.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/directory-api.ts",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/document-release-api.ts",
+      "action": "new",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/runtime.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/use-directory.ts",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/use-draft-transition.ts",
+      "action": "new",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/use-planning-context.ts",
+      "action": "new",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/lib/use-workspace-plans.ts",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/pages/directory.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/pages/module-workspace.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/pages/private-files.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    },
+    {
+      "path": "web/src/router.tsx",
+      "action": "edit",
+      "is_incomplete": false
+    }
+  ],
+  "build": {
+    "command": "npm run build",
+    "result": "passed; exit 0",
+    "provenance": "Provider operation summary, not an independently invoked provider shell. Exact source also passed GitHub CI38024351341.",
+    "duration_ms_reported": 866,
+    "dependencies_changed": false
+  },
+  "candidate_ci": "docs/00-control/evidence/CI-38024351341-application-foundation.json",
+  "accepted_contract_changes": [
+    "No additional contract changes in delivery; exact UI context/recovery contract from reviewed source a54372.",
+    "Existing document-release metadata contract from 43d1ea48 retained; no release authority, recipient byte UI or professional approval invented."
+  ],
+  "document_acceptance_trace": [
+    {
+      "id": "M13.A02",
+      "exact_ordered_criterion": "classification, exact version, owning context, required approval and recipient permissions are checked together before release.",
+      "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+      "scope": "Delivery of previously reviewed source contributes only; original complete acceptance remains open."
+    },
+    {
+      "id": "M13.A05",
+      "exact_ordered_criterion": "new drafts cannot inherit old release approval.",
+      "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+      "scope": "Delivery of previously reviewed source contributes only; original complete acceptance remains open."
+    },
+    {
+      "id": "M13.A06",
+      "exact_ordered_criterion": "superseded/withdrawn records have explicit access behavior.",
+      "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+      "scope": "Delivery of previously reviewed source contributes only; original complete acceptance remains open."
+    },
+    {
+      "id": "M19.A01",
+      "exact_ordered_criterion": "consequential state changes and denials produce usable, protected history.",
+      "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+      "scope": "Delivery of previously reviewed source contributes only; original complete acceptance remains open."
+    },
+    {
+      "id": "M19.A02",
+      "exact_ordered_criterion": "audit events correlate to exact records and versions.",
+      "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+      "scope": "Delivery of previously reviewed source contributes only; original complete acceptance remains open."
+    }
+  ],
+  "migration_id": null,
+  "preserved": [
+    "All unallocated provider files, including newer Spatial generated source/selector/adapter.",
+    "Separate Spatial project and lead allocation.",
+    "Exact document revisions, explicit audience, narrowing withdrawal and separate release authority.",
+    "No PHI controls, Moldo independence and shared-editor destination."
+  ],
+  "facts_separated": {
+    "source_saved": true,
+    "source_verified": true,
+    "provider_source_delivered": true,
+    "provider_preview_build_reported": true,
+    "new_publication_requested": false,
+    "genuine_hosted_workflow_accepted": false,
+    "full_business_activated": false
+  },
+  "limitations": [
+    "No complete host-versus-Git repository parity claimed outside the 16 files and read-only interfaces.",
+    "No genuine Auth/Storage/planning save-reopen, professional release or recipient-byte acceptance from fixture success or source delivery.",
+    "No public deployment of this revision requested or verified; earlier frontend publication authority is separate.",
+    "No background worker remains allocated by this packet."
+  ],
+  "first_incomplete_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately."
+}

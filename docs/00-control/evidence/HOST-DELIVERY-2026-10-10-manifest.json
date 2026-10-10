@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "input_project": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+  "input_project_commit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+  "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+  "source_tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+  "ci_required": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/38024351341",
+  "files": [
+    {
+      "path": "web/src/components/document-version-release.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "c21343aa7b5197e702f30c3c8e36b20acfb58550eb99341923556dbadd8ebf6a",
+      "input_host_sha256": null,
+      "expected_host_missing": true,
+      "bytes": 25265
+    },
+    {
+      "path": "web/src/components/document-version-review.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "d98f928e4eabe5fcbacc593d88330dd641597b34195ac9fe081abae08143863f",
+      "input_host_sha256": "4c75ddcfcc314632c41d0b9a878f350e286089e0ca80409e6712935193183b9c",
+      "expected_host_missing": false,
+      "bytes": 14825
+    },
+    {
+      "path": "web/src/components/document-versions.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "d9d46c1cf2a66fb3b6ef03fde1a32cfe935dfb3fe1c82695042132440edda50b",
+      "input_host_sha256": "69114ddbbc4ca44d91be80eca3f49a6103a1c9842f577752d51d081a058474f9",
+      "expected_host_missing": false,
+      "bytes": 21404
+    },
+    {
+      "path": "web/src/components/module-draft-screen.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "b33a0bcc274808566dca084247933e698dd8bd25a6462536d5928d6b2bf4c2e7",
+      "input_host_sha256": "3c87d745ddcc5ba0c6bf57bc36851d7fa9719b048bccea76eb299426f9fc2396",
+      "expected_host_missing": false,
+      "bytes": 30837
+    },
+    {
+      "path": "web/src/components/plan-context.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "4498a07d2e2c67da943a2b7cd72440bb893fccb2ce58ba655a20d5b18b5d0e60",
+      "input_host_sha256": "0b2df2f0eccce0b744adeeb9226751147da546958c28fdf98e2f7725c0097ce9",
+      "expected_host_missing": false,
+      "bytes": 3141
+    },
+    {
+      "path": "web/src/lib/directory-api.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "b63a9f49c0faee99c976fcad879875482132a27974a81a195fbc93667b6e9077",
+      "input_host_sha256": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+      "expected_host_missing": false,
+      "bytes": 7018
+    },
+    {
+      "path": "web/src/lib/document-release-api.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "f59062748433932227e8bb47541dec9c0bd5b11eed38cf91c3ca1086945dfacc",
+      "input_host_sha256": null,
+      "expected_host_missing": true,
+      "bytes": 16753
+    },
+    {
+      "path": "web/src/lib/runtime.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+      "input_host_sha256": "d3d5e04b8b2248c62a43863342f9ca9b737c4664a5bff3ac1545b16c23396630",
+      "expected_host_missing": false,
+      "bytes": 21300
+    },
+    {
+      "path": "web/src/lib/use-directory.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "dca51b487dc7e9ed8321d3b4659c26a39500949152a90135300c34462a4daf22",
+      "input_host_sha256": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
+      "expected_host_missing": false,
+      "bytes": 2469
+    },
+    {
+      "path": "web/src/lib/use-draft-transition.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+      "input_host_sha256": null,
+      "expected_host_missing": true,
+      "bytes": 906
+    },
+    {
+      "path": "web/src/lib/use-planning-context.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+      "input_host_sha256": null,
+      "expected_host_missing": true,
+      "bytes": 5461
+    },
+    {
+      "path": "web/src/lib/use-workspace-plans.ts",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
+      "input_host_sha256": "19aa6b9f31bec9c071f15e6ac505c8e8b166e7e96a100e440783383ab6e8282d",
+      "expected_host_missing": false,
+      "bytes": 5710
+    },
+    {
+      "path": "web/src/pages/directory.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
+      "input_host_sha256": "c52303c61ec10af45b8e4c822ac91de33452ca29debd48decdc7b6077365b672",
+      "expected_host_missing": false,
+      "bytes": 8640
+    },
+    {
+      "path": "web/src/pages/module-workspace.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
+      "input_host_sha256": "d682697a8e5a30f370f667528925085a16df2983be1467ff9f9551c441d0aef2",
+      "expected_host_missing": false,
+      "bytes": 6638
+    },
+    {
+      "path": "web/src/pages/private-files.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "a4f868fe164b081b10de23db03a66e42c8923adaa24c616b38e77f59ff6d7613",
+      "input_host_sha256": "2d8623dd7626d0957d42365db53f4a47a45e3bd6efbb1c7d5d073a99a0681310",
+      "expected_host_missing": false,
+      "bytes": 6852
+    },
+    {
+      "path": "web/src/router.tsx",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "sha256": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620",
+      "input_host_sha256": "95805f82df554915161616385645fb81161d4aa90302fe99fea8986719d0c81f",
+      "expected_host_missing": false,
+      "bytes": 7172
+    }
+  ],
+  "forbidden": [
+    "all other project files",
+    "Spatial source/selector/adapters/generated files",
+    "Supabase",
+    "package/lockfiles",
+    "permissions/identity/provider/MCP settings",
+    "DNS/publish/production activation"
+  ],
+  "read_only_interfaces": [
+    {
+      "path": "package.json",
+      "host_sha256": "35354859711624945d76690ad5e4396f88ab748542c762e1f12ed900db4064e4",
+      "matches_canonical_bytes": true
+    },
+    {
+      "path": "web/src/lib/workspace-plan-api.ts",
+      "host_sha256": "4a511806efb328248c6f67a60ec68919cf712f5b687d1d9a376e88843edaa0cf",
+      "matches_canonical_bytes": true
+    },
+    {
+      "path": "web/src/lib/auth-storage.ts",
+      "host_sha256": "5cacc20dda0d3dde07fb4dca0adef3d0bbc9bd251e1c79b8642a11f61dae2441",
+      "matches_canonical_bytes": true
+    },
+    {
+      "path": "web/src/lib/document-review-api.ts",
+      "host_sha256": "ba870a129aa541a810bb36645533bbc75ce3a49494ce30910d905a7ee7d8ebb0",
+      "matches_canonical_bytes": true
+    },
+    {
+      "path": "web/src/lib/document-version-api.ts",
+      "host_sha256": "8bf5927a5f4dc05be31a09dba9da86fc0370e0a9628e7773b78cc54f0ac87d0b",
+      "matches_canonical_bytes": true
+    }
+  ],
+  "candidate_ci": {
+    "run_id": 38024351341,
+    "application_foundation": "success",
+    "controls": "success",
+    "protected_hosted_jobs": "skipped; no hosted acceptance",
+    "observed_at": "2026-10-10T04:38:03.302272+00:00"
+  }
+}

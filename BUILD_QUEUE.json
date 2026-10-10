@@ -104,9 +104,23 @@
         "docs/03-data/WORKSPACE_PLANS.md",
         "web/src/spatial-generated/**",
         "web/src/lib/sample-case.ts",
-        "tests/unit/sample-case.test.mjs"
+        "tests/unit/sample-case.test.mjs",
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/document-release-api.ts",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/pages/directory.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/private-files.tsx"
       ],
-      "assigned_to": "root integration lead; ui_integration sole Lovable writer",
+      "assigned_to": null,
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -117,7 +131,7 @@
         "document-content-browser-fixture",
         "document-reviews-browser-fixture"
       ],
-      "next_action": "Current host 8d59d222 completed its later Spatial refresh; old report-only pause is superseded. Complete reviewed child UI-2026-10-10-CONTEXT and candidate CI, then serialize exact transfer with already integrated document-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
+      "next_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -129,7 +143,9 @@
           "scope": "User-facing titles, field labels, navigation, active product documentation and demo copy. Preserve role/capability semantics and historical source attribution. Coordinate the typed planning catalogue if its stored field key changes.",
           "status": "implemented_UI_and_current_docs; legacy_internal_keys_and_history_preserved"
         }
-      ]
+      ],
+      "delivery_packet": "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+      "delivery_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
     },
     {
       "id": "CTRL-001",
@@ -1766,7 +1782,7 @@
     {
       "id": "DOC-001D-UI",
       "title": "Exact-version release metadata, explicit audience and narrowing withdrawal interface",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "DOC-001D-BACKEND",
         "DOC-001C-UI"
@@ -1788,7 +1804,7 @@
         "tests/unit/document-release-api.test.mjs",
         "tests/e2e/document-releases.spec.ts"
       ],
-      "assigned_to": "ui_integration; root integration lead",
+      "assigned_to": null,
       "branch": "wip/release-ui-2026-10-09",
       "owner_decisions": [
         "OD-002",
@@ -1806,9 +1822,10 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "CI67 already passed exact43d1ea48 integrated source; do not rebuild completed controls. Host8d59d222 still lacks release UI. Serialize exact reviewed transfer with UI/context candidate; actual human workflow remains open.",
+      "next_action": "Exact previously reviewed metadata/release/withdrawal UI delivered and independently hash-verified at OS host4adbb330; CI38024351341 release/review fixtures pass. Authentic hosted professional/release/recipient workflow remains open in parent DOC-001.",
       "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "delivery_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
     },
     {
       "id": "UI-2026-10-10-CONTEXT",
@@ -1851,9 +1868,9 @@
         "build",
         "browser_fixture"
       ],
-      "next_action": "Router-only correction addresses three concrete CI38023614711 failures; all9browser assertions unchanged. Candidate CI rerun required, then exact OS host source transfer. Authentic hosted acceptance remains open.",
+      "next_action": "Reviewed source, all 9 browser scenarios and full candidate CI38024351341 passed; exact source delivery independently accepted at OS host4adbb330. Genuine hosted planning save/reopen and revocation acceptance remains in parent UI-2026-10-09.",
       "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/87",
       "review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json"
     },
     {

@@ -144,9 +144,9 @@ jobs:
                   print('No readable current failure excerpt for ' + profile)
           PY
       - uses: actions/upload-artifact@v7
-        if: failure()
+        if: always()
         with:
-          name: browser-failure-evidence
+          name: application-foundation-evidence
           path: |
             test-results/
             docs/00-control/evidence/

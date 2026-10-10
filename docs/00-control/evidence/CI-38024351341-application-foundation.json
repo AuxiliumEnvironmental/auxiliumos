@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-10-10T04:38:35.398425+00:00",
+  "repository": "AuxiliumEnvironmental/auxiliumos",
+  "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+  "source_tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+  "run_id": 38024351341,
+  "run_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/38024351341",
+  "jobs": [
+    {
+      "name": "application-foundation",
+      "id": 114131883724,
+      "conclusion": "success"
+    },
+    {
+      "name": "controls",
+      "id": 114131883865,
+      "conclusion": "success"
+    }
+  ],
+  "workspace_context_scenarios": 9,
+  "workspace_context_result": "all passed",
+  "protected_hosted_jobs": [
+    "development-api",
+    "owner-onboarding",
+    "development-connected-ui",
+    "development-storage-preparation"
+  ],
+  "protected_hosted_conclusion": "skipped by existing workflow event policy; no hosted evidence",
+  "log": "docs/00-control/evidence/CI-38024351341-application-foundation.log",
+  "log_sha256": "00871b05cf74c6da866f61b902e0198bd24e59bdbab9a2c14f3ef15ff19e4c67",
+  "supersedes_failed_candidate_receipt": "CI-38023614711-workspace-context.json for corrected router only; failure evidence retained",
+  "limitations": [
+    "Authentic hosted user/storage/recipient workflows unverified",
+    "No public publication or full activation",
+    "Job log proves registered profile success; successful run did not upload internal profile logs/binary hashes under old failure-only policy. Next candidate retains successful evidence artifacts; no dynamic browser cache identity repair claimed."
+  ]
+}
