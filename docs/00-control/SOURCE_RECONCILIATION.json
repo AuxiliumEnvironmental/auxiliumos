@@ -144,6 +144,20 @@
     "accepted_source_tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
     "candidate_ci": 38024351341,
     "host_output_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
-    "host_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
+    "host_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json",
+    "external_spatial_latest_observation": {
+      "observed_at": "2026-10-10T04:47:23.138200+00:00",
+      "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+      "head": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+      "agent_finished": true,
+      "operation_id": "main:user#00000000000043#usr:A7VUZ6TT",
+      "thread_id": "main",
+      "response_status": "completed",
+      "scope": "Separate Spatial lead repairs standalone offline host worker ownership, byte/MIME cache validation, truthful readiness/listener cleanup, accessibility and common error boundary; exact canonical spatial-source bytes excluded.",
+      "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead.",
+      "local_lead_observation": "Latest external source instruction reports its local lead integrating fresh manual-editor source; filesystem/base/output bytes not independently available here. Do not assume it is this workspace or reclaim files.",
+      "acceptance": "The later operation completed while OS handoff was being recorded. Provider reported 831 canonical hashes preserved and focused offline checks; those claims and changed contracts are not independently accepted by the OS lead. Separate lead retains source ownership pending exact returned contract/diff review.",
+      "operation_reported_commit": "062e651070048da4d8d6a9ff042223089dbd8f9a"
+    }
   }
 }

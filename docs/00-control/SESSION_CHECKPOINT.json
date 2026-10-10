@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "created_at": "2026-10-10T04:43:32.831Z",
+  "created_at": "2026-10-10T04:47:51.775Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
@@ -14,18 +14,18 @@
   "first_unfinished_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
   "git": {
     "is_repository_root": true,
-    "head": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "head": "2a548b00600f0453b089c2e79b32866ccf6b6f16",
     "branch": "work/integration-2026-10-10",
     "upstream": "origin/work/integration-2026-10-10",
-    "working_tree": "M .github/workflows/ci.yml\n M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n?? docs/00-control/evidence/CI-38024351341-application-foundation.json\n?? docs/00-control/evidence/CI-38024351341-application-foundation.log\n?? docs/00-control/evidence/HOST-DELIVERY-2026-10-10-manifest.json\n?? docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json\n?? docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+    "working_tree": "M BUILD_STATE.json\n M docs/00-control/RESUME.md\n M docs/00-control/SESSION_CHECKPOINT.json\n M docs/00-control/SOURCE_RECONCILIATION.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log",
     "remote": {
       "status": "head_matches_remote",
       "branch": "work/integration-2026-10-10",
-      "head": "a54372cbb40b6c7ef1044f1932aabb997670f585",
-      "checked_at": "2026-10-10T04:43:32.818Z"
+      "head": "2a548b00600f0453b089c2e79b32866ccf6b6f16",
+      "checked_at": "2026-10-10T04:47:51.765Z"
     }
   },
-  "controls_digest": "4f89ab7d7e26ff61d2c81f7a48cfca739e0af050c7270fd3afda28d2dfa39fa6",
+  "controls_digest": "638e5b34174f1b72a352ee880133fb8371e9bbf28b466e64f1a20a46cedb9ef3",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -44,7 +44,7 @@
       "profile": "controls",
       "evidence": "docs/00-control/evidence/controls.json",
       "level": "control_unit",
-      "recorded_at": "2026-10-10T04:43:26.607Z"
+      "recorded_at": "2026-10-10T04:47:47.173Z"
     },
     "foundation-contract": {
       "status": "stale",

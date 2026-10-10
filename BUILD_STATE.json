@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-10T04:43:02.204640+00:00",
+  "as_of": "2026-10-10T04:47:23.138200+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -20,7 +20,7 @@
     "github": "Integration candidate a54372cbb40b6c7ef1044f1932aabb997670f585 saved via GitHub connector with exact local tree equality; PR87 targets unchanged recovery148d74d. Subsequent delivery/checkpoint metadata will be saved separately and final ref readback recorded in PR. No terminal push credentials or owner local-clone synchronization claimed.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev PostgreSQL17.6.1.127: all14 applied migration statement hashes match source; private-objects v3, document-version-content v4 and document-release-content v1 JWT-verified. Last Edge two source files match exactly. No hosted document acceptance.",
-    "lovable": "OS source delivered at 4adbb330c0b4e7832bcae938a6507ee4b27ae0c3; operation completed and all 16 exact hashes/full changed-path diff independently verified against a54372. Provider build reported passed. No public publication or genuine hosted workflow acceptance. Spatial files untouched; separate Spatial project completed its own operation.",
+    "lovable": "OS source delivered at 4adbb330c0b4e7832bcae938a6507ee4b27ae0c3; operation completed and all 16 exact hashes/full changed-path diff independently verified against a54372. Provider build reported passed. No public publication or genuine hosted workflow acceptance. Spatial files untouched; separate Spatial offline operation subsequently completed at 062e651; its source remains owned by that lead and unaccepted by OS until exact diff/contract review.",
     "workspace_execution": "New workspace /workspace/scratch/4b36780d3567/auxiliumos is operational; npm ci completed. Prior inaccessible workspaces were not reset or claimed recovered."
   },
   "source_precedence": [
@@ -541,12 +541,12 @@
     ],
     "external_spatial_operation": {
       "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
-      "head": "c160e74dc192d03605eafc8611e4c2e4917394d7",
-      "message_id": "main:user#00000000000005#usr:H4KV6UH5",
+      "head": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+      "message_id": "main:user#00000000000043#usr:A7VUZ6TT",
       "agent_finished": true,
       "response_status": "completed",
       "owner_source_commit": "1fede19ded45b3ce2b2919d47759a43134533a69",
-      "write_allocation": "External Spatial lead; do not edit source, OS Spatial selector/adapter/generated files or transfer"
+      "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead."
     },
     "review_receipt": "docs/00-control/evidence/integration-reconciliation-2026-10-10.json",
     "new_business_decisions": [],
@@ -556,12 +556,18 @@
     ],
     "remaining_source_packets": [],
     "external_spatial_latest_observation": {
-      "head": "c160e74dc192d03605eafc8611e4c2e4917394d7",
+      "observed_at": "2026-10-10T04:47:23.138200+00:00",
+      "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+      "head": "062e651070048da4d8d6a9ff042223089dbd8f9a",
       "agent_finished": true,
-      "operation_id": "main:user#00000000000005#usr:H4KV6UH5",
+      "operation_id": "main:user#00000000000043#usr:A7VUZ6TT",
+      "thread_id": "main",
       "response_status": "completed",
-      "operation_reported_commit": "1b29a80534844c4d4b36a9a213b1dd0b3ad0f547",
-      "observation": "Separate project/lead source advanced and operation completed. No Spatial files changed by OS lead; project head differs from operation commit so entire current delivery is not accepted from the message summary."
+      "scope": "Separate Spatial lead repairs standalone offline host worker ownership, byte/MIME cache validation, truthful readiness/listener cleanup, accessibility and common error boundary; exact canonical spatial-source bytes excluded.",
+      "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead.",
+      "local_lead_observation": "Latest external source instruction reports its local lead integrating fresh manual-editor source; filesystem/base/output bytes not independently available here. Do not assume it is this workspace or reclaim files.",
+      "acceptance": "The later operation completed while OS handoff was being recorded. Provider reported 831 canonical hashes preserved and focused offline checks; those claims and changed contracts are not independently accepted by the OS lead. Separate lead retains source ownership pending exact returned contract/diff review.",
+      "operation_reported_commit": "062e651070048da4d8d6a9ff042223089dbd8f9a"
     },
     "source_save": {
       "remote_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
@@ -623,6 +629,21 @@
       "protected_runner": "Existing workflow restricts connected checks to wip/recovery-2026-10-08. PR87 contains reviewed source awaiting integration into that protected execution branch; branch restriction was not weakened.",
       "next_preflight": "Freshly reconcile existing synthetic document revision, private-bucket metadata, active operations and separately enabled synthetic gates before any fixture writes. Secure credential availability is not inferred from skipped PR jobs.",
       "not_a_new_owner_approval": "Routine implementation authorization persists. Use existing protected execution/access route; never expose secrets or infer professional/production authority."
-    }
+    },
+    "external_spatial_operation_observations": [
+      {
+        "observed_at": "2026-10-10T04:46:26.312905+00:00",
+        "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+        "head": "b48eea7a591c89db0c9b9d0715d52638d63d5d80",
+        "agent_finished": false,
+        "operation_id": "main:user#00000000000043#usr:A7VUZ6TT",
+        "thread_id": "main",
+        "response_status": "absent_while_active",
+        "scope": "Separate Spatial lead repairs standalone offline host worker ownership, byte/MIME cache validation, truthful readiness/listener cleanup, accessibility and common error boundary; exact canonical spatial-source bytes excluded.",
+        "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead.",
+        "local_lead_observation": "Latest external source instruction reports its local lead integrating fresh manual-editor source; filesystem/base/output bytes not independently available here. Do not assume it is this workspace or reclaim files.",
+        "acceptance": "No new Spatial contract or host/source acceptance from a running operation. Require exact committed diff and source hashes through the integration lead."
+      }
+    ]
   }
 }
