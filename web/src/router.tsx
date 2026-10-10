@@ -37,7 +37,11 @@ function ScreenAccessCheck() {
 }
 
 const rootRoute = createRootRoute({
-  validateSearch: (search: Record<string, unknown>): { account?: string; facility?: string } => ({ account: typeof search.account === 'string' ? search.account : undefined, facility: typeof search.facility === 'string' ? search.facility : undefined }),
+  // Omitted keys must stay absent so middleware can distinguish retention from explicit clearing.
+  validateSearch: (search: Record<string, unknown>): { account?: string; facility?: string } => ({
+    ...('account' in search ? { account: typeof search.account === 'string' ? search.account : undefined } : {}),
+    ...('facility' in search ? { facility: typeof search.facility === 'string' ? search.facility : undefined } : {}),
+  }),
   // Context is only a hint: each destination resolves permitted rows again.
   search: { middlewares: [({ search, next }) => {
     const result = next(search);
@@ -57,7 +61,6 @@ const facilitiesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/facilities",
   head: pageHead("Facilities", "Assigned facilities and account context in AuxiliumOS."),
-  validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }),
   component: FacilitiesRoute,
 });
 
@@ -72,7 +75,6 @@ const intakeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/intake",
   head: pageHead("Intake", "Distinct incidents and project requests with assigned review and next actions."),
-  validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }),
   component: IntakeRoute,
 });
 function IntakeRoute() {
@@ -85,7 +87,6 @@ const privateFilesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/documents",
   head: pageHead("Private documents", "Private upload staging, immutable document versions and exact-version download."),
-  validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }),
   component: PrivateFilesRoute,
 });
 function PrivateFilesRoute() {

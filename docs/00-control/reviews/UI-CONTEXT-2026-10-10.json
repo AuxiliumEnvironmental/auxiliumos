@@ -19,7 +19,7 @@
     "web/src/lib/use-workspace-plans.ts": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
     "web/src/pages/directory.tsx": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
     "web/src/pages/module-workspace.tsx": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
-    "web/src/router.tsx": "d1a151a34564aafc3e66e8093e5a7856176494e28ab51c40da4de98fb2b47f0f"
+    "web/src/router.tsx": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620"
   },
   "accepted_contract_changes": [
     "RuntimeContext adds authUserId from existing verified getUser, retaining profile and current generation.",
@@ -58,5 +58,14 @@
     "No authentic hosted Auth/API/Storage acceptance.",
     "No complete domain workflow or full business activation.",
     "Source review does not certify executed browser behavior."
-  ]
+  ],
+  "router_correction": {
+    "input_commit": "aa59a4768aab3ca8196e46207885b729224c927c",
+    "ci_failure_receipt": "docs/00-control/evidence/CI-38023614711-workspace-context.json",
+    "change": "Root validator leaves absent keys absent but normalizes present invalid keys to own undefined; redundant child validators removed. Navigation retains context and explicit clears remain supported.",
+    "worker_checks": "7 installed-router behavior checks plus absent/undefined contract assertions, TypeScript,9scenario discovery and diff/allocation pass. No repeated local browser/build.",
+    "fixture_unchanged_sha256": "cf0dd437f29990a4f954617d7553092a7834e13c6e2fdbc77e42c3e2e13c4e64",
+    "review_status": "Independent reviewer and lead source readback clear at final router hash; P3 malformed-query normalization corrected.",
+    "updated_at": "2026-10-10T04:27:39.832257+00:00"
+  }
 }

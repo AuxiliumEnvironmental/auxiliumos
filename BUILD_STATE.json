@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-10T04:16:35.305138+00:00",
+  "as_of": "2026-10-10T04:27:39.832257+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -28,7 +28,7 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Finish independent review and candidate CI for UI-2026-10-10-CONTEXT, then serialize exact reviewed UI/context and existing document-release source delivery to the current OS Lovable host. Authentic hosted private-document acceptance remains open; preserve the separate active Spatial transfer.",
+  "first_runtime_action": "Pass candidate CI for the router-only correction of three evidenced navigation-context failures, then deliver exact reviewed UI/context and document-release source to OS Lovable. Authentic hosted document/recipient-byte acceptance remains open; preserve independent Spatial source.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
     "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
@@ -568,13 +568,14 @@
       "scope": "Reconciliation, frozen references, accepted activation-gate repair and candidate fixture registration; excludes ongoing UI working files and this later receipt",
       "recorded_at": "2026-10-10T04:11:14.673302+00:00"
     },
-    "candidate_gate": "Source review clear; current integrated GitHub CI, including new workspace-context browser fixture, remains required.",
+    "candidate_gate": "CI38023614711 failures preserved; router-only correction source/typecheck clear with9unchangedscenarios. Corrected candidate CI required before source delivery.",
     "accepted_contract_changes": [
       "RuntimeContext adds authUserId from existing verified getUser, retaining profile and current generation.",
       "RuntimeProvider owns memory-only identity-scoped draft recovery, replaces it on identity/access loss and revalidates every retained directory and planning action scope before ready.",
       "Root account/facility search is a hint only; one generation-scoped paginated directory supplies permitted context.",
       "Uncertain planning saves retain exact immutable request and original scope; protected mutation requires current verified generation."
     ],
-    "ui_review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json"
+    "ui_review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json",
+    "candidate_ci_receipt": "docs/00-control/evidence/CI-38023614711-workspace-context.json"
   }
 }

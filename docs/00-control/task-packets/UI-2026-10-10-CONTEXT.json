@@ -14,7 +14,7 @@
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
     "tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
-    "working_tree_requirement": "Exclusive paths in the new isolated integration branch; root owns other changed files. Inspect diff before edits; no branch switch or reset.",
+    "working_tree_requirement": "Exclusive paths in the new isolated integration branch; root owns other changed files. Inspect diff before edits; no branch switch or reset. Correction continuation base aa59a4768aab3ca8196e46207885b729224c927c; prior worker output matches independent review. Root registers evolve separately; only allocated navigation correction permitted.",
     "controlling_sources": [
       {
         "path": "REQUIREMENTS.json",
