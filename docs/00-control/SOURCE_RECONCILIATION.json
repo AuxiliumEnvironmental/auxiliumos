@@ -132,5 +132,13 @@
     }
   ],
   "remaining_publish_task": null,
-  "current_development_database_receipt": "docs/00-control/evidence/development-migrations.json"
+  "current_development_database_receipt": "docs/00-control/evidence/development-migrations.json",
+  "latest_integration_readback": {
+    "observed_at": "2026-10-10T04:01:04.031305+00:00",
+    "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "input_tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
+    "branch": "work/integration-2026-10-10",
+    "receipt": "docs/00-control/evidence/integration-reconciliation-2026-10-10.json",
+    "publication": "pending; no new remote persistence claimed"
+  }
 }

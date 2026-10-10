@@ -1,0 +1,1831 @@
+{
+  "version": 1,
+  "live_queue": "repo:BUILD_QUEUE.json",
+  "meaning": "34 proposed sequence nodes for connected outcomes. Not durations, completion statuses, exclusive allocations or a second scheduler. Broader nodes are refined into the map-local bounded packets before dispatch. A prerequisite denotes integrated exit readiness; explicit conditional notes allow independent source work sooner.",
+  "slices": [
+    {
+      "id": "S00",
+      "title": "Reconcile current source and active work",
+      "owner": "MAP-08",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "GOV-001",
+        "M13",
+        "M20"
+      ],
+      "affected_acceptance_refs": [
+        "M13.A01",
+        "M13.A02",
+        "M13.A03",
+        "M13.A04",
+        "M13.A05",
+        "M13.A06",
+        "M13.A07",
+        "M13.A08",
+        "M13.A09",
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "GOV-001.A01",
+        "GOV-001.A02",
+        "GOV-001.A03"
+      ],
+      "depends_on": [],
+      "interface_ids": [
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "SYNC-001",
+        "CTRL-001"
+      ],
+      "prior_reference_packages": [
+        "R01",
+        "R02"
+      ],
+      "smallest_first_packet": "Read-only source, status and active-writer reconciliation; preserve any unsaved diff before retiring a stale allocation.",
+      "exit_evidence": "Actual Git/provider/Spatial source and writer readback; documented reconciled head and first incomplete action; no valid release UI or newer Spatial work lost.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S01",
+      "title": "Repair scoped evidence and activation gates",
+      "owner": "MAP-08",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "GOV-001",
+        "C04"
+      ],
+      "affected_acceptance_refs": [
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05",
+        "GOV-001.A01",
+        "GOV-001.A02",
+        "GOV-001.A03"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "CTRL-001",
+        "CTRL-002",
+        "RELEASE-001"
+      ],
+      "prior_reference_packages": [
+        "R01"
+      ],
+      "smallest_first_packet": "One current control-gate defect with a negative regression test and independent review, then the next documented profile gap.",
+      "exit_evidence": "Publication-only record fails business activation; profile fingerprints cover affected browser identity; true API gap registered; existing evidence floors preserved.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S02",
+      "title": "Stop draft loss and preserve authorized context",
+      "owner": "MAP-02",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "C01",
+        "C05"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03",
+        "C05.A01",
+        "C05.A02",
+        "C05.A03"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-04",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "UI-2026-10-09",
+        "SEC-001B"
+      ],
+      "prior_reference_packages": [
+        "R03"
+      ],
+      "smallest_first_packet": "Atomic context/session/form transition repair allocated to one writer with MAP-01 review; use existing reproduction before expanding coverage.",
+      "exit_evidence": "Four reproduced draft-loss paths fixed; same-user return preserves useful work while revoked/changed identity cannot read old protected input.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S03",
+      "title": "Establish useful audience shell and action pattern",
+      "owner": "MAP-02",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "C05"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "C05.A01",
+        "C05.A02",
+        "C05.A03"
+      ],
+      "depends_on": [
+        "S02"
+      ],
+      "interface_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "UI-2026-10-09"
+      ],
+      "prior_reference_packages": [
+        "R04"
+      ],
+      "smallest_first_packet": "One route/landing/context pattern using existing intake or documents; preserve compatible links, then propagate validated pattern.",
+      "exit_evidence": "One real client/internal workflow proves navigation, context, truthful status, exact next action and mobile/keyboard behavior; shared pattern documented for feature teams.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S04",
+      "title": "Close authentic foundation and fixture acceptance",
+      "owner": "MAP-01",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "M02",
+        "M05",
+        "C01",
+        "M19"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "M02.A01",
+        "M02.A02",
+        "M02.A03",
+        "M02.A04",
+        "M02.A05",
+        "M02.A06",
+        "M05.A01",
+        "M05.A02",
+        "M05.A03",
+        "M05.A04",
+        "M05.A05",
+        "M19.A01",
+        "M19.A02",
+        "M19.A03",
+        "M19.A04",
+        "M19.A05",
+        "M19.A06",
+        "M19.A07",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03"
+      ],
+      "depends_on": [
+        "S00",
+        "S01"
+      ],
+      "interface_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-04",
+        "IF-14",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "SEC-001",
+        "SEC-001B-API-FIXTURES"
+      ],
+      "prior_reference_packages": [
+        "R05"
+      ],
+      "smallest_first_packet": "Review fixture preflight/cleanup against protected audit history, then execute the first missing authentic foundation profile.",
+      "exit_evidence": "Real scoped API and connected-browser allowed/denied access on named target; safe synthetic fixtures; revoked access and audit-preserving cleanup demonstrated.",
+      "conditional_dependency": "Protected configuration and one designated fixture operator required for actual hosted tests. Missing credentials block that evidence, not independent UI/domain coding.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S05",
+      "title": "Complete authentic document journey and client action",
+      "owner": "MAP-06",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M13",
+        "C02",
+        "C07"
+      ],
+      "affected_acceptance_refs": [
+        "M13.A01",
+        "M13.A02",
+        "M13.A03",
+        "M13.A04",
+        "M13.A05",
+        "M13.A06",
+        "M13.A07",
+        "M13.A08",
+        "M13.A09",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04",
+        "C07.A01",
+        "C07.A02",
+        "C07.A03"
+      ],
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "interface_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-09",
+        "IF-14",
+        "IF-18",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "DOC-001",
+        "DOC-001D-CONTENT",
+        "DOC-001D-UI"
+      ],
+      "prior_reference_packages": [
+        "R02",
+        "R05"
+      ],
+      "smallest_first_packet": "Reconcile existing release UI and connect exact recipient-content action; close one missing hosted chain step at a time before real-media expansion.",
+      "exit_evidence": "Permitted upload, clearance, immutable adoption, review, release and exact recipient bytes on named target; forbidden audience, withdrawal and replacement behave correctly.",
+      "conditional_dependency": "Existing synthetic gates remain. Real file classes/scanning/data use need the relevant approved policy; do not merely raise bucket limits.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S06",
+      "title": "Complete request-to-triage user journey",
+      "owner": "MAP-03",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M07",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M07.A01",
+        "M07.A02",
+        "M07.A03",
+        "M07.A04",
+        "M07.A05",
+        "M07.A06",
+        "M07.A07",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "interface_ids": [
+        "IF-04",
+        "IF-05",
+        "IF-18",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "INTAKE-001",
+        "INTAKE-001A",
+        "INTAKE-001B"
+      ],
+      "prior_reference_packages": [
+        "R04",
+        "R05"
+      ],
+      "smallest_first_packet": "Take the implemented intake contract and finish one role-appropriate submission-to-internal-triage path; keep incident/request distinct.",
+      "exit_evidence": "Actual submit/readback/triage/next actor with original preserved, safe duplicate retry, source-based prompts and context continuity.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S07",
+      "title": "Version one governed rule family",
+      "owner": "MAP-01",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S04"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-03",
+        "IF-14"
+      ],
+      "existing_queue_parents": [
+        "ARCH-001",
+        "SCOPE-001"
+      ],
+      "prior_reference_packages": [
+        "R06",
+        "R09"
+      ],
+      "smallest_first_packet": "Use scope question/limitation or agreed ROM configuration as the first consumer; review minimal shared versioning mechanics, not a universal new rules language.",
+      "exit_evidence": "Draft/review/effective version rules and owning-domain authority work for one required family; old approved work stays bound to its original version.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S08",
+      "title": "Complete reusable account and site context",
+      "owner": "MAP-05",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M02",
+        "M04",
+        "M05",
+        "C01"
+      ],
+      "affected_acceptance_refs": [
+        "M02.A01",
+        "M02.A02",
+        "M02.A03",
+        "M02.A04",
+        "M02.A05",
+        "M02.A06",
+        "M04.A01",
+        "M04.A02",
+        "M04.A03",
+        "M04.A04",
+        "M04.A05",
+        "M05.A01",
+        "M05.A02",
+        "M05.A03",
+        "M05.A04",
+        "M05.A05",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03"
+      ],
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-04",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "ENTERPRISE-001",
+        "SEC-001"
+      ],
+      "prior_reference_packages": [
+        "R09"
+      ],
+      "smallest_first_packet": "One authorized facility-detail/update and paginated-selection path; add only its required backend command and history, then controlled related records.",
+      "exit_evidence": "Scoped account/contact/facility/area operations, effective grouping, full permitted discovery and stable cross-work links; simple client needs no fake portfolio.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S09",
+      "title": "Make a request into a reviewed versioned scope",
+      "owner": "MAP-03",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M08",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M08.A01",
+        "M08.A02",
+        "M08.A03",
+        "M08.A04",
+        "M08.A05",
+        "M08.A06",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S06",
+        "S07"
+      ],
+      "interface_ids": [
+        "IF-03",
+        "IF-05",
+        "IF-06",
+        "IF-14",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "SCOPE-001"
+      ],
+      "prior_reference_packages": [
+        "R06"
+      ],
+      "smallest_first_packet": "One source-backed service scenario from request through exact reviewed scope with owning API and usable editor.",
+      "exit_evidence": "Source facts, services, limitations, deliverables and qualified approval bind exact scope revision; stale edits and unsupported methods fail; amendment preserves original.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S10",
+      "title": "Complete justified sampling and amendments",
+      "owner": "MAP-03",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M09",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M09.A01",
+        "M09.A02",
+        "M09.A03",
+        "M09.A04",
+        "M09.A05",
+        "M09.A06",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S09"
+      ],
+      "interface_ids": [
+        "IF-03",
+        "IF-06",
+        "IF-09",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "SCOPE-001"
+      ],
+      "prior_reference_packages": [
+        "R06"
+      ],
+      "smallest_first_packet": "One sampling category requiring defensible rationale and exact scope binding, then extend original catalog applicability.",
+      "exit_evidence": "Qualified basis/method/area/quantity/interpretation and related evidence; changed sampling follows effective amendment without implicit commercial expansion.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S11",
+      "title": "Produce traceable nonbinding ROM",
+      "owner": "MAP-04",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M10"
+      ],
+      "affected_acceptance_refs": [
+        "M10.A01",
+        "M10.A02",
+        "M10.A03",
+        "M10.A04",
+        "M10.A05",
+        "M10.A06"
+      ],
+      "depends_on": [
+        "S07",
+        "S09"
+      ],
+      "interface_ids": [
+        "IF-03",
+        "IF-06",
+        "IF-07",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "COMMERCIAL-001"
+      ],
+      "prior_reference_packages": [
+        "R07"
+      ],
+      "smallest_first_packet": "One permitted scope-to-ROM calculation and review using explicit synthetic values; no live rate invention.",
+      "exit_evidence": "ROM derives from exact scope/rate/configuration with assumptions and limits, clear nonbinding state and reproducible revision history.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S12",
+      "title": "Bind effective agreement and authorization",
+      "owner": "MAP-04",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M11",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M11.A01",
+        "M11.A02",
+        "M11.A03",
+        "M11.A04",
+        "M11.A05",
+        "M11.A06",
+        "M11.A07",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S11"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-06",
+        "IF-07",
+        "IF-09",
+        "IF-14",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "COMMERCIAL-001"
+      ],
+      "prior_reference_packages": [
+        "R07"
+      ],
+      "smallest_first_packet": "One agreement/authorization decision against an exact scope and ROM, with missing/stale/wrong signer cases before external signature transport.",
+      "exit_evidence": "Qualified signer and delegation, exact terms/content, cap/period, applicable MSA and emergency exception; invalid/expired authority blocks mobilization.",
+      "conditional_dependency": "Use IF-04 program coverage only when applicable; no-program work remains valid. Required sampling basis must be pinned when this engagement needs it, without forcing sampling for all work.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S13",
+      "title": "Provide reusable domain-linked tasks",
+      "owner": "MAP-03",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M12",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M12.A01",
+        "M12.A02",
+        "M12.A03",
+        "M12.A04",
+        "M12.A05",
+        "M12.A06",
+        "M12.A07",
+        "M12.A08",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S06"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-04",
+        "IF-05",
+        "IF-08",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "OPERATIONS-001"
+      ],
+      "prior_reference_packages": [
+        "R08"
+      ],
+      "smallest_first_packet": "One intake-review task from creation through assignment and response with denied/stale cases; expose the same minimal task contract for readiness/QBR consumers.",
+      "exit_evidence": "Scoped administrative, intake-review, readiness and QBR actions have a responsible actor, source context, due/review basis and durable history. Creation/completion does not change owning professional/commercial decisions or require an unrelated commercial agreement.",
+      "conditional_dependency": "Task context uses an already permitted source record. Engagement conversion and authorized field-work assignment are separately gated in S14; commercial authorization is not a prerequisite for ordinary review/readiness tasks.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S14",
+      "title": "Mobilize, execute, amend and close authorized work",
+      "owner": "MAP-03",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M12",
+        "M09",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M09.A01",
+        "M09.A02",
+        "M09.A03",
+        "M09.A04",
+        "M09.A05",
+        "M09.A06",
+        "M12.A01",
+        "M12.A02",
+        "M12.A03",
+        "M12.A04",
+        "M12.A05",
+        "M12.A06",
+        "M12.A07",
+        "M12.A08",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S09",
+        "S12",
+        "S13",
+        "S05"
+      ],
+      "interface_ids": [
+        "IF-06",
+        "IF-07",
+        "IF-08",
+        "IF-09",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "OPERATIONS-001"
+      ],
+      "prior_reference_packages": [
+        "R08"
+      ],
+      "smallest_first_packet": "One authorization-to-project-to-assigned-work path, then its field deviation and required deliverable through exact release and closeout.",
+      "exit_evidence": "Effective engagement authority gates project conversion, mobilization and qualified field assignment. Field facts, controlled amendments and required deliverable fulfillment lead to truthful closeout with original scope/release history intact.",
+      "conditional_dependency": "S10 is required when the engagement includes sampling. A valid non-sampling engagement can execute and close before sampling implementation is complete; all M09 criteria remain required for full launch. Consumer contract work can use the accepted project/assignment portion before every closeout variant is finished.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S15",
+      "title": "Make enterprise coverage and activation usable",
+      "owner": "MAP-05",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M03",
+        "M04"
+      ],
+      "affected_acceptance_refs": [
+        "M03.A01",
+        "M03.A02",
+        "M03.A03",
+        "M03.A04",
+        "M03.A05",
+        "M03.A06",
+        "M04.A01",
+        "M04.A02",
+        "M04.A03",
+        "M04.A04",
+        "M04.A05"
+      ],
+      "depends_on": [
+        "S07",
+        "S08"
+      ],
+      "interface_ids": [
+        "IF-03",
+        "IF-04",
+        "IF-07",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "ENTERPRISE-001"
+      ],
+      "prior_reference_packages": [
+        "R09"
+      ],
+      "smallest_first_packet": "One program/facility/service coverage lookup and activation gap path with expired/uncovered/no-program comparisons.",
+      "exit_evidence": "Exact program terms, service/site/time coverage, activation requirements, exclusions and optional portfolio history; membership does not become authorization.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S16",
+      "title": "Complete passport and accountable readiness",
+      "owner": "MAP-05",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M05",
+        "M06"
+      ],
+      "affected_acceptance_refs": [
+        "M05.A01",
+        "M05.A02",
+        "M05.A03",
+        "M05.A04",
+        "M05.A05",
+        "M06.A01",
+        "M06.A02",
+        "M06.A03",
+        "M06.A04",
+        "M06.A05",
+        "M06.A06"
+      ],
+      "depends_on": [
+        "S08",
+        "S13"
+      ],
+      "interface_ids": [
+        "IF-04",
+        "IF-08",
+        "IF-09",
+        "IF-12",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "ENTERPRISE-001"
+      ],
+      "prior_reference_packages": [
+        "R09"
+      ],
+      "smallest_first_packet": "One facility readiness gap from evidence to assigned action to reviewed closure; task completion alone cannot certify the site condition.",
+      "exit_evidence": "Sourced site passport, current/unknown/expired information, gaps, owner/action and reviewed evidence closure; controlled recurrence deduplicates occurrences.",
+      "conditional_dependency": "Relevant document links use IF-09; generated passport release integrates after S05. Applicable program activation integrates after S15; simple site readiness does not wait for a full program.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S17",
+      "title": "Complete limited vendor assignment",
+      "owner": "MAP-04",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M15",
+        "C01"
+      ],
+      "affected_acceptance_refs": [
+        "M15.A01",
+        "M15.A02",
+        "M15.A03",
+        "M15.A04",
+        "M15.A05",
+        "M15.A06",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03"
+      ],
+      "depends_on": [
+        "S12",
+        "S13"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-08",
+        "IF-09",
+        "IF-11",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "VENDOR-001"
+      ],
+      "prior_reference_packages": [
+        "R10"
+      ],
+      "smallest_first_packet": "One vendor assignment and evidence return with expired qualification, wrong assignment and unrelated-account denial.",
+      "exit_evidence": "Qualified vendor sees only assigned work/minimum released evidence; submits progress/evidence and receives response under actual commercial model.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S18",
+      "title": "Reconcile operational commitments and finance",
+      "owner": "MAP-04",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M16"
+      ],
+      "affected_acceptance_refs": [
+        "M16.A01",
+        "M16.A02",
+        "M16.A03",
+        "M16.A04",
+        "M16.A05",
+        "M16.A06",
+        "M16.A07",
+        "M16.A08"
+      ],
+      "depends_on": [
+        "S12"
+      ],
+      "interface_ids": [
+        "IF-07",
+        "IF-11",
+        "IF-14",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "FINANCE-001"
+      ],
+      "prior_reference_packages": [
+        "R11"
+      ],
+      "smallest_first_packet": "One authorized commitment-to-invoice/actual reconciliation path with duplicate and variance handling; real payment transport remains its own gated action.",
+      "exit_evidence": "Estimate/cap/commitment/actual/invoice/payment/reserve stay distinct; supported totals reconcile with exact authority and duplicates/conflicts do not charge twice.",
+      "conditional_dependency": "Actual work/vendor detail consumes the relevant S13/S17 outputs as those operations are added; no need to finish every vendor capability before finance contract implementation.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S19",
+      "title": "Make questions and responses work in context",
+      "owner": "MAP-06",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M14",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M14.A01",
+        "M14.A02",
+        "M14.A03",
+        "M14.A04",
+        "M14.A05",
+        "M14.A06",
+        "M14.A07",
+        "M14.A08",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03"
+      ],
+      "depends_on": [
+        "S06"
+      ],
+      "interface_ids": [
+        "IF-05",
+        "IF-08",
+        "IF-09",
+        "IF-10",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "DOC-001",
+        "OPERATIONS-001"
+      ],
+      "prior_reference_packages": [
+        "R12"
+      ],
+      "smallest_first_packet": "One request-linked question/response, then a version-bound document question with explicit participant and attachment denial.",
+      "exit_evidence": "Scoped object/version thread with permitted participants, response owner and durable history; requested changes route to owning workflow without authorizing them.",
+      "conditional_dependency": "Document attachment integration requires S05; external delivery waits for the selected IF-15 adapter and OD-017. Stored communication can be completed independently.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S20",
+      "title": "Add permission-filtered record search",
+      "owner": "MAP-01",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "C01"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03"
+      ],
+      "depends_on": [
+        "S08",
+        "S06",
+        "S05"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-04",
+        "IF-05",
+        "IF-09",
+        "IF-12",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "ARCH-001",
+        "HARDEN-001"
+      ],
+      "prior_reference_packages": [
+        "R04",
+        "R16"
+      ],
+      "smallest_first_packet": "One cross-module query using existing authenticated record contracts and actual supported storage/query facilities; do not install a search platform by default.",
+      "exit_evidence": "Authorized object/content search across first admitted domains, with scoped titles/snippets/counts and no stale or revoked-source leak; extend all required domains as available.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S21",
+      "title": "Produce source-backed enterprise reporting",
+      "owner": "MAP-05",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M17"
+      ],
+      "affected_acceptance_refs": [
+        "M17.A01",
+        "M17.A02",
+        "M17.A03",
+        "M17.A04",
+        "M17.A05",
+        "M17.A06",
+        "M17.A07"
+      ],
+      "depends_on": [
+        "S14",
+        "S16",
+        "S18"
+      ],
+      "interface_ids": [
+        "IF-04",
+        "IF-08",
+        "IF-11",
+        "IF-12",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "REPORT-001"
+      ],
+      "prior_reference_packages": [
+        "R13"
+      ],
+      "smallest_first_packet": "One useful project/readiness/finance metric and its permitted drilldown, then the original dashboard and value-ledger coverage.",
+      "exit_evidence": "Defined metrics, scope/period/denominator/freshness, exact source drilldown and unknown handling; permitted multi-site totals and history remain reproducible.",
+      "conditional_dependency": "Read-only metric contract/mock-free query work can begin earlier with settled producer interfaces. Integrated report acceptance waits only for the actual source domains that metric uses.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S22",
+      "title": "Release a useful QBR and follow-up",
+      "owner": "MAP-05",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M17",
+        "C02"
+      ],
+      "affected_acceptance_refs": [
+        "M17.A01",
+        "M17.A02",
+        "M17.A03",
+        "M17.A04",
+        "M17.A05",
+        "M17.A06",
+        "M17.A07",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04"
+      ],
+      "depends_on": [
+        "S21",
+        "S05",
+        "S19"
+      ],
+      "interface_ids": [
+        "IF-08",
+        "IF-09",
+        "IF-10",
+        "IF-12",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "REPORT-001"
+      ],
+      "prior_reference_packages": [
+        "R13"
+      ],
+      "smallest_first_packet": "One period package with exact source claims and one executive action; then extend preserved QBR sections without fabricated ROI or safety claims.",
+      "exit_evidence": "QBR uses exact source snapshot and reviewed content, reaches correct audience, preserves corrections/history and tracks an action to owning-domain resolution.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S23",
+      "title": "Deliver the shared Spatial editor in both web hosts",
+      "owner": "MAP-07",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M20",
+        "C04"
+      ],
+      "affected_acceptance_refs": [
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-15",
+        "IF-16",
+        "IF-18",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "CONNECT-001",
+        "SYNC-001"
+      ],
+      "prior_reference_packages": [
+        "R02",
+        "R14"
+      ],
+      "smallest_first_packet": "Compare exact packaged shared editor and current tool source, preserve approved work, then one independently hosted parity/saving journey.",
+      "exit_evidence": "Same verified editor source/version and full workspace in OS and independent spatialauxilium.io host; save/reopen/import/export and return context work.",
+      "conditional_dependency": "Hosting/domain configuration must be read back and tested before a deployment claim. Current owner domain direction is recorded; no provider capability is assumed.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S24",
+      "title": "Deliver supported native capture to the owner",
+      "owner": "MAP-07",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M20",
+        "C04"
+      ],
+      "affected_acceptance_refs": [
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-16",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "CONNECT-001"
+      ],
+      "prior_reference_packages": [
+        "R14"
+      ],
+      "smallest_first_packet": "Inspect current native bridge/device evidence and distribution state; finish the first actual capture-to-retained-document device gap.",
+      "exit_evidence": "Owner-usable installed capture path on a supported physical device; durable retained source, reopening, interruption/permission handling and completed export; no owner compilation step.",
+      "conditional_dependency": "Native source can progress independently of standalone hosting. Missing physical hardware/signing/distribution blocks only its real delivery evidence; preserve the full non-native editor.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S25",
+      "title": "Connect controlled Spatial outputs to OS work",
+      "owner": "MAP-07",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M20",
+        "M13",
+        "C02"
+      ],
+      "affected_acceptance_refs": [
+        "M13.A01",
+        "M13.A02",
+        "M13.A03",
+        "M13.A04",
+        "M13.A05",
+        "M13.A06",
+        "M13.A07",
+        "M13.A08",
+        "M13.A09",
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04"
+      ],
+      "depends_on": [
+        "S23",
+        "S14",
+        "S05"
+      ],
+      "interface_ids": [
+        "IF-08",
+        "IF-09",
+        "IF-15",
+        "IF-16",
+        "IF-18"
+      ],
+      "existing_queue_parents": [
+        "CONNECT-001",
+        "DOC-001"
+      ],
+      "prior_reference_packages": [
+        "R14"
+      ],
+      "smallest_first_packet": "Review one reserve/transfer/finalize/status contract against current receiver, then one supported output profile end to end; no unsupported multi-floor wire claim.",
+      "exit_evidence": "Version-compatible source-provenanced tool output is received once into permitted context, reviewed/released through ordinary document controls; wrong context/replay/partial transfer denied or recovered.",
+      "conditional_dependency": "Project linkage uses the accepted project/context portion of S14; contract implementation need not wait for every closeout variant. Native-origin output uses S24 evidence when that origin is claimed. Browser-origin output can complete separately.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S26",
+      "title": "Prove Moldo independence and scoped exchange",
+      "owner": "MAP-07",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M20",
+        "C06"
+      ],
+      "affected_acceptance_refs": [
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C06.A01",
+        "C06.A02",
+        "C06.A03",
+        "C06.A04"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-15",
+        "IF-17",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "CONNECT-001"
+      ],
+      "prior_reference_packages": [
+        "R14"
+      ],
+      "smallest_first_packet": "Read current Moldo source/API authority before choosing the smallest already-intended exchange; prove independence/denial before broad synchronization.",
+      "exit_evidence": "Current peer contract, field ownership, minimum data/authority, mapped IDs and revocation; Moldo-only user needs no OS account; outage and separation/export work.",
+      "conditional_dependency": "OS projections use actual IF-04/08/11/12 consumers when those fields are exchanged. No whole-domain dependency is imposed on native Moldo operation.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S27",
+      "title": "Complete selected original external adapters",
+      "owner": "MAP-07",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M20",
+        "C04"
+      ],
+      "affected_acceptance_refs": [
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05"
+      ],
+      "depends_on": [
+        "S12",
+        "S19"
+      ],
+      "interface_ids": [
+        "IF-07",
+        "IF-10",
+        "IF-11",
+        "IF-15",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "CONNECT-001"
+      ],
+      "prior_reference_packages": [
+        "R14"
+      ],
+      "smallest_first_packet": "One required signature/notification/accounting/calendar/file/result adapter at a time, starting with a concrete missing workflow; no new provider shopping or speculative integration.",
+      "exit_evidence": "Each actually selected original-scope adapter has source ownership, scoped credentials, idempotent delivery/reconciliation, outage and revocation proof, and applicable live-action decision.",
+      "conditional_dependency": "The exact owning-domain readiness and existing owner activation apply only to that adapter; contract work on independent adapters may proceed sooner.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S28",
+      "title": "Reconcile runtime AI function and activation boundaries",
+      "owner": "MAP-06",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M18",
+        "C07"
+      ],
+      "affected_acceptance_refs": [
+        "M18.A01",
+        "M18.A02",
+        "M18.A03",
+        "M18.A04",
+        "M18.A05",
+        "M18.A06",
+        "M18.A07",
+        "C07.A01",
+        "C07.A02",
+        "C07.A03"
+      ],
+      "depends_on": [
+        "S00"
+      ],
+      "interface_ids": [
+        "IF-13",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "AI-001"
+      ],
+      "prior_reference_packages": [
+        "R15"
+      ],
+      "smallest_first_packet": "Map the existing historical functions to concrete current workflow benefit and owner decision; no live provider or real-data execution inferred from coding-agent authorization.",
+      "exit_evidence": "Historical source versus current owner question recorded in existing OD-014; each intended function/data/provider boundary explicit; core workflows function without AI.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S29",
+      "title": "Implement and evaluate bounded AI assistance",
+      "owner": "MAP-06",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M18",
+        "C07",
+        "C03"
+      ],
+      "affected_acceptance_refs": [
+        "M18.A01",
+        "M18.A02",
+        "M18.A03",
+        "M18.A04",
+        "M18.A05",
+        "M18.A06",
+        "M18.A07",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03",
+        "C07.A01",
+        "C07.A02",
+        "C07.A03"
+      ],
+      "depends_on": [
+        "S28",
+        "S20"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-03",
+        "IF-13",
+        "IF-18",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "AI-001"
+      ],
+      "prior_reference_packages": [
+        "R15"
+      ],
+      "smallest_first_packet": "One accepted drafting/retrieval function using synthetic scoped sources, with unsupported-answer, malicious-source, revoked-access and failure cases.",
+      "exit_evidence": "Accepted functions use permitted current sources with attribution/uncertainty, source-instruction isolation, evaluation and deliberate human adoption; ordinary domain authority governs every consequence.",
+      "conditional_dependency": "Real provider/data use remains gated by current OD-014. If owner explicitly changes M18 scope, update canonical requirements/decisions with preserved history; never silently drop it.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S30",
+      "title": "Close consequential audit and lifecycle gaps",
+      "owner": "MAP-01",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M19",
+        "C01",
+        "C04"
+      ],
+      "affected_acceptance_refs": [
+        "M19.A01",
+        "M19.A02",
+        "M19.A03",
+        "M19.A04",
+        "M19.A05",
+        "M19.A06",
+        "M19.A07",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05"
+      ],
+      "depends_on": [
+        "S04"
+      ],
+      "interface_ids": [
+        "IF-02",
+        "IF-14",
+        "IF-20",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "SEC-001C-AUDIT",
+        "HARDEN-001"
+      ],
+      "prior_reference_packages": [
+        "R05",
+        "R16"
+      ],
+      "smallest_first_packet": "One consequential denial family absent from current row-change audit with trusted capture and meaningful negative proof.",
+      "exit_evidence": "Declared denied-event capture survives its transaction boundary, investigation is scoped, anti-forgery/history controls hold, and retention/restriction/hold semantics are testable.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S31",
+      "title": "Prove recovery without repeating side effects",
+      "owner": "MAP-08",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "C04",
+        "C02",
+        "C01"
+      ],
+      "affected_acceptance_refs": [
+        "C01.A01",
+        "C01.A02",
+        "C01.A03",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05"
+      ],
+      "depends_on": [
+        "S05",
+        "S14",
+        "S18",
+        "S30"
+      ],
+      "interface_ids": [
+        "IF-09",
+        "IF-11",
+        "IF-14",
+        "IF-15",
+        "IF-20",
+        "IF-19"
+      ],
+      "existing_queue_parents": [
+        "HARDEN-001"
+      ],
+      "prior_reference_packages": [
+        "R16"
+      ],
+      "smallest_first_packet": "Inventory and isolated restore design can start immediately; execute one representative accepted document/authorized-work restoration when those paths exist.",
+      "exit_evidence": "Consistent isolated database/object/config restore, actual references/checksums, current revoked access, disabled external effects, measured recovery and named owner against approved targets.",
+      "conditional_dependency": "No invented RPO/RTO, retention period or restore credential. Additional adapters/native paths are included when present in the named candidate.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S32",
+      "title": "Accept cross-map usability and adverse journeys",
+      "owner": "MAP-08",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07"
+      ],
+      "affected_acceptance_refs": [
+        "C01.A01",
+        "C01.A02",
+        "C01.A03",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05",
+        "C05.A01",
+        "C05.A02",
+        "C05.A03",
+        "C06.A01",
+        "C06.A02",
+        "C06.A03",
+        "C06.A04",
+        "C07.A01",
+        "C07.A02",
+        "C07.A03"
+      ],
+      "depends_on": [
+        "S03",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S22",
+        "S25",
+        "S26",
+        "S27",
+        "S29",
+        "S30"
+      ],
+      "interface_ids": [
+        "IF-18",
+        "IF-19",
+        "IF-20"
+      ],
+      "existing_queue_parents": [
+        "HARDEN-001"
+      ],
+      "prior_reference_packages": [
+        "R16"
+      ],
+      "smallest_first_packet": "Maintain the acceptance matrix from each first slice; run a focused integrated journey per changed risk, then required full candidate gate.",
+      "exit_evidence": "Representative real desktop/mobile/keyboard and permitted/denied journeys, stale/concurrent/provider-failure cases, performance/large-data behavior and privacy/security review on one candidate.",
+      "conditional_dependency": "This is a candidate gate, not a reason to defer testing until the end. Native delivery evidence comes from S24; external reviews/targets must be actual, not promised.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    },
+    {
+      "id": "S33",
+      "title": "Accept the full launch edition and operating handoff",
+      "owner": "MAP-08",
+      "kind": "frozen_sequence_proposal_not_dispatched",
+      "requirement_ids": [
+        "M01",
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M07",
+        "M08",
+        "M09",
+        "M10",
+        "M11",
+        "M12",
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20",
+        "C01",
+        "C02",
+        "C03",
+        "C04",
+        "C05",
+        "C06",
+        "C07",
+        "GOV-001"
+      ],
+      "affected_acceptance_refs": [
+        "M01.A01",
+        "M01.A02",
+        "M01.A03",
+        "M01.A04",
+        "M01.A05",
+        "M01.A06",
+        "M01.A07",
+        "M02.A01",
+        "M02.A02",
+        "M02.A03",
+        "M02.A04",
+        "M02.A05",
+        "M02.A06",
+        "M03.A01",
+        "M03.A02",
+        "M03.A03",
+        "M03.A04",
+        "M03.A05",
+        "M03.A06",
+        "M04.A01",
+        "M04.A02",
+        "M04.A03",
+        "M04.A04",
+        "M04.A05",
+        "M05.A01",
+        "M05.A02",
+        "M05.A03",
+        "M05.A04",
+        "M05.A05",
+        "M06.A01",
+        "M06.A02",
+        "M06.A03",
+        "M06.A04",
+        "M06.A05",
+        "M06.A06",
+        "M07.A01",
+        "M07.A02",
+        "M07.A03",
+        "M07.A04",
+        "M07.A05",
+        "M07.A06",
+        "M07.A07",
+        "M08.A01",
+        "M08.A02",
+        "M08.A03",
+        "M08.A04",
+        "M08.A05",
+        "M08.A06",
+        "M09.A01",
+        "M09.A02",
+        "M09.A03",
+        "M09.A04",
+        "M09.A05",
+        "M09.A06",
+        "M10.A01",
+        "M10.A02",
+        "M10.A03",
+        "M10.A04",
+        "M10.A05",
+        "M10.A06",
+        "M11.A01",
+        "M11.A02",
+        "M11.A03",
+        "M11.A04",
+        "M11.A05",
+        "M11.A06",
+        "M11.A07",
+        "M12.A01",
+        "M12.A02",
+        "M12.A03",
+        "M12.A04",
+        "M12.A05",
+        "M12.A06",
+        "M12.A07",
+        "M12.A08",
+        "M13.A01",
+        "M13.A02",
+        "M13.A03",
+        "M13.A04",
+        "M13.A05",
+        "M13.A06",
+        "M13.A07",
+        "M13.A08",
+        "M13.A09",
+        "M14.A01",
+        "M14.A02",
+        "M14.A03",
+        "M14.A04",
+        "M14.A05",
+        "M14.A06",
+        "M14.A07",
+        "M14.A08",
+        "M15.A01",
+        "M15.A02",
+        "M15.A03",
+        "M15.A04",
+        "M15.A05",
+        "M15.A06",
+        "M16.A01",
+        "M16.A02",
+        "M16.A03",
+        "M16.A04",
+        "M16.A05",
+        "M16.A06",
+        "M16.A07",
+        "M16.A08",
+        "M17.A01",
+        "M17.A02",
+        "M17.A03",
+        "M17.A04",
+        "M17.A05",
+        "M17.A06",
+        "M17.A07",
+        "M18.A01",
+        "M18.A02",
+        "M18.A03",
+        "M18.A04",
+        "M18.A05",
+        "M18.A06",
+        "M18.A07",
+        "M19.A01",
+        "M19.A02",
+        "M19.A03",
+        "M19.A04",
+        "M19.A05",
+        "M19.A06",
+        "M19.A07",
+        "M20.A01",
+        "M20.A02",
+        "M20.A03",
+        "M20.A04",
+        "M20.A05",
+        "M20.A06",
+        "M20.A07",
+        "M20.A08",
+        "C01.A01",
+        "C01.A02",
+        "C01.A03",
+        "C02.A01",
+        "C02.A02",
+        "C02.A03",
+        "C02.A04",
+        "C03.A01",
+        "C03.A02",
+        "C03.A03",
+        "C04.A01",
+        "C04.A02",
+        "C04.A03",
+        "C04.A04",
+        "C04.A05",
+        "C05.A01",
+        "C05.A02",
+        "C05.A03",
+        "C06.A01",
+        "C06.A02",
+        "C06.A03",
+        "C06.A04",
+        "C07.A01",
+        "C07.A02",
+        "C07.A03",
+        "GOV-001.A01",
+        "GOV-001.A02",
+        "GOV-001.A03"
+      ],
+      "depends_on": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12",
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S29",
+        "S30",
+        "S31",
+        "S32"
+      ],
+      "interface_ids": [
+        "IF-01",
+        "IF-02",
+        "IF-03",
+        "IF-04",
+        "IF-05",
+        "IF-06",
+        "IF-07",
+        "IF-08",
+        "IF-09",
+        "IF-10",
+        "IF-11",
+        "IF-12",
+        "IF-13",
+        "IF-14",
+        "IF-15",
+        "IF-16",
+        "IF-17",
+        "IF-18",
+        "IF-19",
+        "IF-20"
+      ],
+      "existing_queue_parents": [
+        "RELEASE-001"
+      ],
+      "prior_reference_packages": [
+        "R17"
+      ],
+      "smallest_first_packet": "Read current complete criterion matrix and candidate identity; close only remaining specific evidence/decision gaps, then perform authorized activation and post-deployment readback.",
+      "exit_evidence": "All original in-scope criteria have appropriate current evidence, applicable decisions authorize named real capabilities, source/deployment readbacks agree, and support/recovery/rollback owners are prepared.",
+      "conditional_dependency": "Pin only relevant contract revisions; narrower source work can proceed before integrated exit is established.",
+      "dispatch_rule": "Reconcile current implementation and close only missing work. Translate into exact-file child task(s) in the existing queue; this row reserves no paths and grants no external action. Shared files/migrations/provider writes are allocated by the lead.",
+      "evidence_rule": "Affected refs identify coverage, not an assertion that one check closes every criterion. Keep full canonical evidence floors; record criterion-level evidence in the live requirements."
+    }
+  ]
+}

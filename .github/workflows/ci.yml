@@ -112,6 +112,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run os:verify -- directory-browser-fixture
+      - run: npm run os:verify -- workspace-context-browser-fixture
       - run: npm run os:verify -- intake-browser-fixture
       - run: npm run os:verify -- private-file-browser-fixture
       - run: npm run os:verify -- document-versions-browser-fixture

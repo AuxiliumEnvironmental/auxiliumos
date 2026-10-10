@@ -1,0 +1,67 @@
+{
+  "edition": "2026-10-09 America/Chicago",
+  "result": "PASS",
+  "scope": "Reference package validation only, not runtime acceptance",
+  "structural_checks": [
+    "Embedded prior source/reference package passes its unchanged verifier",
+    "20 modules, 28 requirement sets and 163 exact criteria each have one accountable map; evidence floors preserved",
+    "All 171 exact catalog rows and 18 relationship labels retained with source coordinates",
+    "17 decision gates remain exact, with no inferred activation",
+    "20 logical interfaces have one producer and explicit input/result/authority/failure/proof semantics",
+    "34 connected outcome proposals form an acyclic graph; all criteria have owning-map work before final acceptance",
+    "94 unique literal source paths resolve; Markdown fences balance"
+  ],
+  "negative_checks": [
+    {
+      "case": "changed_bytes",
+      "result": "rejected as expected",
+      "hash_inventory_rebuilt": false,
+      "representative_errors": [
+        "Checksum mismatch: maps/01_Platform_Backend_Security.md",
+        "Index byte count differs: maps/01_Platform_Backend_Security.md"
+      ]
+    },
+    {
+      "case": "missing_criterion",
+      "result": "rejected as expected",
+      "hash_inventory_rebuilt": true,
+      "representative_errors": [
+        "Pinned scope counts differ",
+        "Criterion duplicate/omission",
+        "Criterion IDs differ"
+      ]
+    },
+    {
+      "case": "dependency_cycle",
+      "result": "rejected as expected",
+      "hash_inventory_rebuilt": true,
+      "representative_errors": [
+        "Implementation dependency cycle at S00",
+        "Implementation dependency cycle at S00",
+        "Implementation dependency cycle at S00"
+      ]
+    }
+  ],
+  "independent_document_review": {
+    "reviewed": "Shared ownership, interface semantics and outcome sequencing across platform/assurance and professional/commercial/enterprise maps",
+    "material_findings_resolved": [
+      "IF-04 filtered directory absence does not disclose hidden matches; transport failure and pagination remain distinguishable.",
+      "IF-08/S13 separate ordinary administrative/review/readiness/QBR task capability from S14 engagement conversion/mobilization authority.",
+      "S14 requires sampling implementation only for an engagement that includes sampling; full launch still retains M09."
+    ],
+    "limits": "Bounded source-based document review; no runtime or third-party security certification."
+  },
+  "pdf_review": {
+    "file": "Owner_Quickstart.pdf",
+    "pages": 4,
+    "rendered_pages_reviewed": 4,
+    "result": "No clipped, overlapping or missing text observed"
+  },
+  "unchanged_baseline": "The complete embedded prior reference passed its own hash/source/coverage verifier.",
+  "limits": [
+    "Reference integrity and scope allocation only; not a runtime, security or launch certification.",
+    "Checksums detect changed bytes but are not a signature or proof of authorship.",
+    "Logical prose contracts must bind current concrete schemas at task dispatch; unverified external facts remain unverified.",
+    "The verifier does not establish truth of every narrative claim, zero defects or automatic cross-chat access."
+  ]
+}

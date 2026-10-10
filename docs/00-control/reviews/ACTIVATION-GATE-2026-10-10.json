@@ -1,0 +1,31 @@
+{
+  "task": "CTRL-003-ACTIVATION",
+  "reviewed_at": "2026-10-10T04:03:34.685028+00:00",
+  "reviewer": "integration-lead; independent of implementation worker controls_repair",
+  "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "source_sha256": {
+    "scripts/os-control.mjs": "d8b609df31efa8cae59f5a22f42f0689feeea5c42c1b8cfe0b7091f58f052961",
+    "tests/unit/control-system.test.mjs": "7fe44c8a46596f534f357fd845524308c2f7f199fe84ae1b15c5818c8b9a825f"
+  },
+  "result": "accepted_bounded_source",
+  "findings": [],
+  "reviewed_properties": [
+    "Legacy publication evidence cannot satisfy full activation.",
+    "Exact source inventory includes dirty additions; decisions/policy hashes and production target must match.",
+    "Required decisions still require actual approval metadata, enabled status and valid nonfuture timestamps.",
+    "No actual production target, owner approval or privilege was created.",
+    "Existing full requirements, runtime evidence floors, fresh-source gate and fail-closed inventory remain."
+  ],
+  "worker_evidence": {
+    "command": "node --test tests/unit/control-system.test.mjs",
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "Local control fixtures, not production authority or runtime acceptance."
+  },
+  "lead_observation": "Read actual two-file diff and regression cases; release-inputs returns target:null. Current release-check remains false with17pending decisions and missing full_activation.",
+  "limitations": [
+    "Source digest is not deployment attestation or independent proof of human identity.",
+    "Browser environment/profile correction is a separate integration-lead change and will be checked in the candidate gate."
+  ]
+}

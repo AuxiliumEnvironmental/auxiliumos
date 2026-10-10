@@ -208,12 +208,12 @@
         "VERIFICATION_PROFILES.json"
       ],
       "assigned_to": "integration-lead",
-      "branch": "build/continuation-2026-10-08",
+      "branch": "work/integration-2026-10-10",
       "owner_decisions": [],
       "verification_profiles": [
         "source-reconciliation"
       ],
-      "next_action": "Initial source reconciliation and recovery publication are recorded. Recheck current main/feature refs before publication; no GitHub/Lovable parity is claimed.",
+      "next_action": "S00 current readback in integration-reconciliation-2026-10-10.json. New packets have exclusive paths; preserve active external Spatial transfer. Verify remote candidate after save.",
       "blocker": null,
       "issue": null,
       "completion_mode": "historical_source"
@@ -1750,10 +1750,18 @@
         "database",
         "api"
       ],
-      "next_action": "Run registered focused checks for integrated e250336d, including new withdrawal discovery. Independent source review clear. After pass, apply exact migration to verified development target and deploy separate disabled gateway; deliberately configure transport before real released-byte acceptance. No owner/reviewer grants or internal-content changes.",
-      "blocker": "Native executor unavailable; use reviewed GitHub CI for executable checks. No cloud deployment yet.",
+      "next_action": "CI67 and exact14th migration/Edge v1 readback already pass. Do not redeploy. Finish genuine API/recipient bytes acceptance once protected fixture setup is available.",
+      "blocker": "Authentic hosted Auth/Storage/API/concurrency remains unverified; no registered API profile yet for this exact released-byte slice.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
+      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task.",
+      "verification_gap": {
+        "required_level": "api",
+        "registered_levels": [
+          "database",
+          "unit"
+        ],
+        "disposition": "Remain in_progress; no simulated evidence can close missing API acceptance."
+      }
     },
     {
       "id": "DOC-001D-UI",
@@ -1798,9 +1806,84 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Run focused unit/browser/build plus existing review regressions against exact43d1ea48. Source review clear; 12 unit and16browser cases authored but unexecuted. Transfer only passing reviewed source to existing Lovable after report-only card is resolved.",
-      "blocker": "Native executor unavailable; source work continues through GitHub. Lovable transfer waits for report-only plan card resolution.",
+      "next_action": "CI67 already passed exact43d1ea48 integrated source; do not rebuild completed controls. Host8d59d222 still lacks release UI. Serialize exact reviewed transfer with UI/context candidate; actual human workflow remains open.",
+      "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "UI-2026-10-10-CONTEXT",
+      "title": "Planning draft and authorized context repair",
+      "status": "in_progress",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "parent": "UI-2026-10-09",
+      "requirements": [
+        "M01",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "web/src/lib/runtime.tsx",
+        "web/src/router.tsx",
+        "web/src/components/app-shell.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/directory.tsx",
+        "web/src/lib/use-workspace-plans.ts",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "tests/e2e/workspace-context.spec.ts",
+        "playwright.runtime.config.ts",
+        "web/src/lib/directory-api.ts"
+      ],
+      "assigned_to": "ui_repair",
+      "branch": "work/integration-2026-10-10",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "runtime-build",
+        "workspace-context-browser-fixture",
+        "directory-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Execute bounded packet docs/00-control/task-packets/UI-2026-10-10-CONTEXT.json; independent review before integration.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+    },
+    {
+      "id": "CTRL-003-ACTIVATION",
+      "title": "Exact scope and candidate production activation gate",
+      "status": "implemented",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "parent": "CTRL-002",
+      "requirements": [
+        "GOV-001",
+        "C04"
+      ],
+      "allowed_paths": [
+        "scripts/os-control.mjs",
+        "tests/unit/control-system.test.mjs"
+      ],
+      "assigned_to": null,
+      "branch": "work/integration-2026-10-10",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "next_action": "Bounded source independently reviewed; run current controls profile after integrated inputs stabilize, then candidate CI. Full OS release and owner activation remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "review": "docs/00-control/reviews/ACTIVATION-GATE-2026-10-10.json"
     }
   ]
 }

@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "maps": [
+    {
+      "id": "MAP-01",
+      "title": "Platform, backend and security",
+      "file": "maps/01_Platform_Backend_Security.md",
+      "primary_requirements": [
+        "M01",
+        "M19",
+        "C01"
+      ],
+      "criterion_count": 17,
+      "prompt": "chat-prompts/01_Platform_Backend_Security.txt"
+    },
+    {
+      "id": "MAP-02",
+      "title": "User experience",
+      "file": "maps/02_User_Experience.md",
+      "primary_requirements": [
+        "C05"
+      ],
+      "criterion_count": 3,
+      "prompt": "chat-prompts/02_User_Experience.txt"
+    },
+    {
+      "id": "MAP-03",
+      "title": "Professional workflows",
+      "file": "maps/03_Professional_Workflows.md",
+      "primary_requirements": [
+        "M07",
+        "M08",
+        "M09",
+        "M12",
+        "C03"
+      ],
+      "criterion_count": 30,
+      "prompt": "chat-prompts/03_Professional_Workflows.txt"
+    },
+    {
+      "id": "MAP-04",
+      "title": "Commercial authority",
+      "file": "maps/04_Commercial_Authority.md",
+      "primary_requirements": [
+        "M10",
+        "M11",
+        "M15",
+        "M16"
+      ],
+      "criterion_count": 27,
+      "prompt": "chat-prompts/04_Commercial_Authority.txt"
+    },
+    {
+      "id": "MAP-05",
+      "title": "Enterprise, readiness and reporting",
+      "file": "maps/05_Enterprise_Readiness_Reporting.md",
+      "primary_requirements": [
+        "M02",
+        "M03",
+        "M04",
+        "M05",
+        "M06",
+        "M17"
+      ],
+      "criterion_count": 35,
+      "prompt": "chat-prompts/05_Enterprise_Readiness_Reporting.txt"
+    },
+    {
+      "id": "MAP-06",
+      "title": "Evidence, communications and AI",
+      "file": "maps/06_Evidence_Communications_AI.md",
+      "primary_requirements": [
+        "M13",
+        "M14",
+        "M18",
+        "C02",
+        "C07"
+      ],
+      "criterion_count": 31,
+      "prompt": "chat-prompts/06_Evidence_Communications_AI.txt"
+    },
+    {
+      "id": "MAP-07",
+      "title": "Tools, integrations, Spatial and Moldo",
+      "file": "maps/07_Tools_Integrations_Spatial_Moldo.md",
+      "primary_requirements": [
+        "M20",
+        "C06"
+      ],
+      "criterion_count": 12,
+      "prompt": "chat-prompts/07_Tools_Integrations_Spatial_Moldo.txt"
+    },
+    {
+      "id": "MAP-08",
+      "title": "Verification, release and operations",
+      "file": "maps/08_Verification_Release_Operations.md",
+      "primary_requirements": [
+        "C04",
+        "GOV-001"
+      ],
+      "criterion_count": 8,
+      "prompt": "chat-prompts/08_Verification_Release_Operations.txt"
+    }
+  ]
+}
