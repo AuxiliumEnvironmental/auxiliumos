@@ -112,6 +112,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - run: npm run os:verify -- directory-browser-fixture
+      - run: npm run os:verify -- workspace-context-browser-fixture
       - run: npm run os:verify -- intake-browser-fixture
       - run: npm run os:verify -- private-file-browser-fixture
       - run: npm run os:verify -- document-versions-browser-fixture
@@ -143,9 +144,9 @@ jobs:
                   print('No readable current failure excerpt for ' + profile)
           PY
       - uses: actions/upload-artifact@v7
-        if: failure()
+        if: always()
         with:
-          name: browser-failure-evidence
+          name: application-foundation-evidence
           path: |
             test-results/
             docs/00-control/evidence/

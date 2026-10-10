@@ -10,7 +10,8 @@ type PageState<T> =
 
 export function useDirectoryPage<T>(scopeKey: string, query: (afterId: string | undefined, signal: AbortSignal) => Promise<DirectoryPage<T>>) {
   const { handleFailure } = useRuntime();
-  const [cursors, setCursors] = useState<string[]>([]);
+  const [paging, setPaging] = useState<{ scopeKey: string; cursors: string[] }>({ scopeKey, cursors: [] });
+  const cursors = paging.scopeKey === scopeKey ? paging.cursors : [];
   const [attempt, setAttempt] = useState(0);
   const afterId = cursors[cursors.length - 1];
   const key = `${scopeKey}:${afterId ?? "first"}:${attempt}`;
@@ -37,9 +38,9 @@ export function useDirectoryPage<T>(scopeKey: string, query: (afterId: string | 
     page: cursors.length + 1,
     retry: () => setAttempt((value) => value + 1),
     next: () => {
-      if (state.status === "ready" && state.result.nextCursor) setCursors((previous) => [...previous, state.result.nextCursor!]);
+      if (state.status === "ready" && state.result.nextCursor) setPaging({ scopeKey, cursors: [...cursors, state.result.nextCursor] });
     },
-    previous: () => setCursors((previous) => previous.slice(0, -1)),
+    previous: () => setPaging({ scopeKey, cursors: cursors.slice(0, -1) }),
   };
 }
 

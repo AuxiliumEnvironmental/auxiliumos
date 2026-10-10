@@ -1,0 +1,310 @@
+{
+  "schema_version": 1,
+  "packet_mode": "ready_for_dispatch",
+  "task_id": "UI-2026-10-10-CONTEXT",
+  "queue_file": "BUILD_QUEUE.json",
+  "requirement_ids": [
+    "C05",
+    "C01",
+    "M01"
+  ],
+  "goal": "Repair the four reproduced planning draft-loss paths and verified paginated context in one atomic bounded change; preserve exact pending retries and revocation denial.",
+  "original_intent": "Existing full OS outcome; bounded child of UI-2026-10-09. S02/S01 map IDs are references only. No module acceptance is closed by this repair alone.",
+  "input": {
+    "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
+    "commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
+    "working_tree_requirement": "Exclusive paths in the new isolated integration branch; root owns other changed files. Inspect diff before edits; no branch switch or reset. Correction continuation base aa59a4768aab3ca8196e46207885b729224c927c; prior worker output matches independent review. Root registers evolve separately; only allocated navigation correction permitted.",
+    "controlling_sources": [
+      {
+        "path": "REQUIREMENTS.json",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "BUILD_QUEUE.json",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "56469b4fe3f6e003ef6a35248d507f9bdf6545021a70a2eac96dd1c2ed5b7e15",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "OWNER_DECISIONS.json",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "83236cca302a1feb6131bda7d0bbfb8e77df48638cbdb1a5e8db3bf016182874",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "VERIFICATION_PROFILES.json",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "0322b481fdeac3281c0bf31a95239c3bd0fdce4478d38b1909d9b76f932a4b7e",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "docs/00-control/EXECUTION_PROTOCOL.md",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "3f0e164a385ddbb54325c2644705c69dc0910af6ed66cc2fb6b349a8dc7789dc",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/lib/runtime.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "d3d5e04b8b2248c62a43863342f9ca9b737c4664a5bff3ac1545b16c23396630",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/router.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "95805f82df554915161616385645fb81161d4aa90302fe99fea8986719d0c81f",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/components/app-shell.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "9bfad8513199c0a12ca39e9bc94c169f4b3e720599ec84375c613d04890769c2",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/components/module-draft-screen.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "3c87d745ddcc5ba0c6bf57bc36851d7fa9719b048bccea76eb299426f9fc2396",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/components/plan-context.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "0b2df2f0eccce0b744adeeb9226751147da546958c28fdf98e2f7725c0097ce9",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/pages/module-workspace.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "d682697a8e5a30f370f667528925085a16df2983be1467ff9f9551c441d0aef2",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/pages/directory.tsx",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "c52303c61ec10af45b8e4c822ac91de33452ca29debd48decdc7b6077365b672",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/lib/use-workspace-plans.ts",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "19aa6b9f31bec9c071f15e6ac505c8e8b166e7e96a100e440783383ab6e8282d",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/lib/use-directory.ts",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "40174516170e12c19217740fa07c8cad4c65ead0653f2bf323fbd25cca905966",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "playwright.runtime.config.ts",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "7bddb17f32220ef49b79e9f11f3ff6f7e852cac6594b91e0869ecbc634af79a4",
+        "purpose": "Accepted input for UI-2026-10-10-CONTEXT"
+      },
+      {
+        "path": "web/src/lib/directory-api.ts",
+        "revision": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+        "sha256": "cdf2c8e3ddf330b33743c5cad43fb8b8a754875eac0a8bbb915d4716bf757e65",
+        "purpose": "Verified Auth subject in existing RuntimeContext only; lead-approved exact allocation extension."
+      }
+    ],
+    "external_surfaces": [
+      {
+        "name": "lovable",
+        "identifier": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+        "observed_revision": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+        "observation": "Latest OS refresh completed; worker has no provider writes.",
+        "write_policy": "none"
+      },
+      {
+        "name": "spatial",
+        "identifier": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+        "observed_revision": "0436dbd7d21fb3f7fd1368bd8e20194b97157c11",
+        "observation": "External Spatial lead has active source-transfer message main:user#00000000000005#usr:H4KV6UH5; no shared paths allocated here.",
+        "write_policy": "none"
+      }
+    ]
+  },
+  "ownership": {
+    "integrator": "integration-lead",
+    "worker_role": "frontend-engineer",
+    "worker_id": "ui_repair",
+    "branch": "work/integration-2026-10-10",
+    "isolation_mode": "exclusive_files",
+    "worktree_path": "/workspace/scratch/4b36780d3567/auxiliumos",
+    "allowed_paths": [
+      "web/src/lib/runtime.tsx",
+      "web/src/router.tsx",
+      "web/src/components/app-shell.tsx",
+      "web/src/components/module-draft-screen.tsx",
+      "web/src/components/plan-context.tsx",
+      "web/src/pages/module-workspace.tsx",
+      "web/src/pages/directory.tsx",
+      "web/src/lib/use-workspace-plans.ts",
+      "web/src/lib/use-directory.ts",
+      "web/src/lib/use-planning-context.ts",
+      "web/src/lib/use-draft-transition.ts",
+      "tests/e2e/workspace-context.spec.ts",
+      "playwright.runtime.config.ts",
+      "web/src/lib/directory-api.ts"
+    ],
+    "forbidden_shared_paths": [
+      "BUILD_STATE.json",
+      "BUILD_QUEUE.json",
+      "REQUIREMENTS.json",
+      "OWNER_DECISIONS.json",
+      "VERIFICATION_PROFILES.json",
+      "package.json",
+      "package-lock.json",
+      "supabase/**",
+      "web/src/styles.css",
+      "web/src/spatial-generated/**",
+      ".github/**",
+      "docs/**"
+    ],
+    "allocation_check": "node scripts/os-control.mjs allocation TASK PATHS_FILE",
+    "other_writer_check": "Fresh branch from read-back 148d74d; no existing shared checkout. Prior DOC source branches match these integrated exact files; do not claim or edit document files. Spatial transfer active in another provider. Two new workers use disjoint exact paths; lead writes root registers only."
+  },
+  "dependencies": [
+    {
+      "task_id": "SYNC-001",
+      "required_contract": "IF-01/02/04/18: existing directory, RuntimeProvider, generation-scoped persistence and exact planning API at 148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+      "observed_source": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+      "verification_limit": "S00 readback established current source and provider identities; fixture or source evidence does not close authentic hosted acceptance."
+    }
+  ],
+  "authority": {
+    "owner_instruction": "2026-10-09 OS Integration Lead directive explicitly authorizes bounded packets and specialist coordination after S00.",
+    "owner_decision_ids": [
+      "OD-001",
+      "OD-003",
+      "OD-011",
+      "OD-012",
+      "OD-013"
+    ],
+    "development_authorization": "Routine implementation authorized; no whole-plan approval needed.",
+    "affected_live_activation": "No live activation, source transfer or backend mutation in worker task.",
+    "platform_limitations": "Use actual available tools; protected credentials and platform approval routes cannot be bypassed.",
+    "new_business_decisions": [],
+    "prohibited_actions": [
+      "No provider writes, publication or outbound messages.",
+      "No new business roles, core objects, privileges or authority.",
+      "No source generated Spatial edits or native build.",
+      "No edits outside allocation, git commits/pushes or further subagents."
+    ]
+  },
+  "contract": {
+    "actors_and_scope": "Existing authenticated identities; current scoped access only. Protected state must disappear on identity change/revocation.",
+    "data_and_states": "Retain exact domain revisions and frozen uncertain operations; personal planning drafts remain personal preparation.",
+    "server_api": "No RPC/schema changes. Directory pagination and explicit permitted reads only; activation control references existing OWNER_DECISIONS.",
+    "ui_and_errors": "Keep useful work on same-user recheck; protect context/route/sample transitions; revalidation must not permit protected mutations until current authority is established.",
+    "compatibility": "Preserve newer document controls, current source state and Spatial surfaces. Migration: none.",
+    "shared_invariants": [
+      "No added professional/commercial/release authority.",
+      "No weaker evidence floors or skipped-test substitution.",
+      "Do not conflate a saved personal planning record with a domain workflow."
+    ],
+    "out_of_scope": [
+      "Full redesign",
+      "Runtime activation",
+      "Hosted authentication/Storage acceptance",
+      "Spatial source or distribution"
+    ]
+  },
+  "acceptance": [
+    {
+      "id": "C05.A02",
+      "outcome": "Loading, empty, permission-denied, stale-edit, validation, upload-retry and partial-failure states are actionable and preserve entered work.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "C01.A01",
+      "outcome": "An inactive user or membership is denied even with another role row and a previously issued session.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "C01.A02",
+      "outcome": "Cross-account and unassigned-facility reads, writes, joins, exports, object paths and dashboard aggregates are denied server-side.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    },
+    {
+      "id": "M01.A04",
+      "outcome": "identifiers and cross-object links remain stable.",
+      "evidence": [
+        "Changed-risk local browser/unit checks and exact final diff"
+      ],
+      "limitation": "Bounded repair contributes to this criterion; complete canonical acceptance remains open."
+    }
+  ],
+  "verification": {
+    "registered_profiles": [
+      "runtime-build",
+      "workspace-context-browser-fixture",
+      "directory-browser-fixture"
+    ],
+    "required_evidence_levels": [
+      "browser_fixture",
+      "build"
+    ],
+    "changed_risks": [
+      "Draft loss, pending retry/context crossing, revoked access and later-page permitted context"
+    ],
+    "evidence_reuse_rule": "Reuse only when all covered source/test/config/profile inputs and actual runtime identity match. Inspect current CI provenance before rerunning old work; a fresh local environment is not proof of regression.",
+    "runtime_target": "Local synthetic fixture; exact shared runtime packages installed by lead; no cloud mutations.",
+    "unavailable_evidence": [
+      "Authentic hosted acceptance not established by this packet."
+    ],
+    "independent_review": {
+      "required": true,
+      "role": "security-reviewer",
+      "review_scope": "Read final changed source; verify no access leak or lost exact operation and no false activation claim. Lead assigns independent reviewer after implementation.",
+      "reviewed_source_must_match_output": true
+    }
+  },
+  "dispatch_guard": {
+    "conditions": [
+      "Canonical 148d74d read back; document branches match integration.",
+      "New integration branch isolates unknown old chat local work.",
+      "Two exact nonoverlapping worker path sets; external Spatial writer excluded."
+    ],
+    "satisfied": true,
+    "observed_at": "2026-10-10T03:55:21.744424+00:00",
+    "observed_by": "integration-lead",
+    "provider_message_id": null,
+    "provider_thread_id": null
+  },
+  "stop_conditions": [
+    "A required source hash or target head changed.",
+    "An edit would exceed allocation or alter a shared contract.",
+    "An unresolved permission, authority or state-semantic question changes the outcome.",
+    "A protected platform step blocks the particular action.",
+    "The same execution failure repeats without new evidence."
+  ],
+  "recovery": {
+    "preserve": "Save actual diff/untracked files, pinned source and first failure; preserve all other writers and historical evidence.",
+    "retry_rule": "Check operation/provider readback before retrying; one bounded diagnostic then change approach if no new evidence.",
+    "rollback_or_forward_fix": "Return the bounded patch for integrator reconciliation. Do not reset shared branches, alter applied migrations or overwrite newer provider work."
+  },
+  "return_contract": [
+    "Outcome and exact limitations.",
+    "Input/output commits or file hashes and actual changed files.",
+    "Commands/results, environment and reused evidence rationale.",
+    "Independent reviewed revision/findings.",
+    "Local/GitHub/Lovable/deployed states separately.",
+    "Unrun checks, decision questions and first incomplete action."
+  ]
+}

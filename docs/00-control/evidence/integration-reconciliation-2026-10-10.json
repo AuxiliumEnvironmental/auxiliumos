@@ -1,0 +1,313 @@
+{
+  "observed_at": "2026-10-10T04:01:03.567Z",
+  "canonical_input": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "canonical_tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
+  "main": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "branches": [
+    {
+      "name": "main",
+      "head": "1729a525a7a60b86d1498c1300b579eb6775b02c"
+    },
+    {
+      "name": "spatial/integration-2026-10-09",
+      "head": "42b7754265a8755f0f478a135d5506311d731b44"
+    },
+    {
+      "name": "wip/recovery-2026-10-08",
+      "head": "148d74d9720f0799e5d845bb789cd3fc3f43feb8"
+    },
+    {
+      "name": "wip/release-content-2026-10-09",
+      "head": "e250336d4f14a53472d260e052ba5de0e101ab48"
+    },
+    {
+      "name": "wip/release-ui-2026-10-09",
+      "head": "43d1ea48989f753445510f030584a91a4211fb6c"
+    },
+    {
+      "name": "work/lovable-ui-4ce078da",
+      "head": "2501e952104945132cf94eb6d0882edb4e16e62d"
+    }
+  ],
+  "os_lovable": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "head": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "agent_finished": true,
+    "message_id": "main:user#00000000000153#usr:6L7LCUL2",
+    "response_status": "completed",
+    "published": true,
+    "publication_parity": "not_reverified"
+  },
+  "spatial": {
+    "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+    "head": "0436dbd7d21fb3f7fd1368bd8e20194b97157c11",
+    "message_id": "main:user#00000000000005#usr:H4KV6UH5",
+    "agent_finished": false,
+    "response_status": "absent_while_active",
+    "owner_source_commit": "1fede19ded45b3ce2b2919d47759a43134533a69",
+    "write_allocation": "External Spatial lead; do not edit source, OS Spatial selector/adapter/generated files or transfer"
+  },
+  "ci": {
+    "run_id": 37988716325,
+    "head": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "controls",
+        "id": 114017118994,
+        "conclusion": "success"
+      },
+      {
+        "name": "application-foundation",
+        "id": 114017119256,
+        "conclusion": "success"
+      },
+      {
+        "name": "development-connected-ui",
+        "id": 114017120490,
+        "conclusion": "skipped"
+      },
+      {
+        "name": "development-storage-preparation",
+        "id": 114017120521,
+        "conclusion": "skipped"
+      },
+      {
+        "name": "owner-onboarding",
+        "id": 114017120736,
+        "conclusion": "skipped"
+      },
+      {
+        "name": "development-api",
+        "id": 114017162088,
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "backend": {
+    "project_id": "txofqxictwecgcnvezlb",
+    "name": "auxiliumos-dev",
+    "postgres_version": "17.6.1.127",
+    "functions": [
+      {
+        "slug": "private-objects",
+        "version": 3,
+        "verify_jwt": true,
+        "ezbr_sha256": "fa758dfedf6ac295f47f22b8d8e56c46f53c71e777d65fffc4584dfa02b7fb68"
+      },
+      {
+        "slug": "document-version-content",
+        "version": 4,
+        "verify_jwt": true,
+        "ezbr_sha256": "d609bb83b63d2375d0101b7048f7213b572216abf1b3bcde3c86e4a7a1301fd1"
+      },
+      {
+        "slug": "document-release-content",
+        "version": 1,
+        "verify_jwt": true,
+        "ezbr_sha256": "18df8186d92200f4d8b8d0c22da1f645ae16e2822cb826e10eb96d27ac8953e7"
+      }
+    ],
+    "bucket": {
+      "id": "os-private-ingest",
+      "public": false,
+      "file_size_limit": 65536,
+      "allowed_mime_types": [
+        "text/plain"
+      ]
+    },
+    "migrations": [
+      {
+        "version": "20260713000100",
+        "name": "foundation_slice_schema",
+        "statement_count": 1,
+        "statements_sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+        "local_sha256": "5da63f823f7e34c8a33e7fcc0595bb34f3af7108f72340ef624553948c171789",
+        "matches": true
+      },
+      {
+        "version": "20261008120645",
+        "name": "identity_access_directory",
+        "statement_count": 1,
+        "statements_sha256": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+        "local_sha256": "a33bf3701c3ce9b0a7b72bcdfd8fd812a927f5d6c0c72ead2b0675f94380cc44",
+        "matches": true
+      },
+      {
+        "version": "20261008154950",
+        "name": "access_audit_provenance",
+        "statement_count": 1,
+        "statements_sha256": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+        "local_sha256": "65618c7e8433fa1bcffebd6c8e494425cb03f823f24201aa9c22dccd5f845f76",
+        "matches": true
+      },
+      {
+        "version": "20261008164758",
+        "name": "private_object_reservations",
+        "statement_count": 1,
+        "statements_sha256": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+        "local_sha256": "50e4c97d694da3bb7b9e77fa6bdab89e18476dc88eddbe20a673e5ca21ccebd1",
+        "matches": true
+      },
+      {
+        "version": "20261008234951",
+        "name": "intake_triage",
+        "statement_count": 1,
+        "statements_sha256": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+        "local_sha256": "c1606511bf2c8b33fe7fade8699c1f706449fb628cc749bdb77ff3af10938a09",
+        "matches": true
+      },
+      {
+        "version": "20261008234953",
+        "name": "private_file_transport",
+        "statement_count": 1,
+        "statements_sha256": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+        "local_sha256": "5ac6255d9a7878f87fb8f1abc0b8aeff7a9365c09de69427dec5382c136af48d",
+        "matches": true
+      },
+      {
+        "version": "20261009065625",
+        "name": "private_object_clearance",
+        "statement_count": 1,
+        "statements_sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+        "local_sha256": "dee94fd5ec45460cf0d6f9e89e45049967f4556e61215241f03bff0bba1b8d59",
+        "matches": true
+      },
+      {
+        "version": "20261009072201",
+        "name": "document_versions",
+        "statement_count": 1,
+        "statements_sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+        "local_sha256": "a7b34879742a0f5a61253ba9857b4f87851756092f2b03e72abc6f299d24a0a2",
+        "matches": true
+      },
+      {
+        "version": "20261009080505",
+        "name": "document_version_content",
+        "statement_count": 1,
+        "statements_sha256": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+        "local_sha256": "9e4e5d5693a07c7ca4f6bcbe96e0f5cddad572e76574f7496f7ef57991d69415",
+        "matches": true
+      },
+      {
+        "version": "20261009130331",
+        "name": "owner_onboarding_activation",
+        "statement_count": 1,
+        "statements_sha256": "db2c6834a4441cb317f68bbf6d4cf9fbdca545aa26fc57dc9b70b5e4754b0f9d",
+        "local_sha256": "db2c6834a4441cb317f68bbf6d4cf9fbdca545aa26fc57dc9b70b5e4754b0f9d",
+        "matches": true
+      },
+      {
+        "version": "20261009170854",
+        "name": "workspace_plans",
+        "statement_count": 1,
+        "statements_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+        "local_sha256": "1932314d740a110e18f768fbae8ab310c97f87c661b34b7e538d78cfc87d45a4",
+        "matches": true
+      },
+      {
+        "version": "20261009172736",
+        "name": "document_version_reviews",
+        "statement_count": 1,
+        "statements_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+        "local_sha256": "36be1a8a907737beeda9f09ea7f16a789e16589ecd65d6b3ebd266ca37c4c6e5",
+        "matches": true
+      },
+      {
+        "version": "20261009184724",
+        "name": "document_version_releases",
+        "statement_count": 1,
+        "statements_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+        "local_sha256": "d60c6fbaf0573fcbfdddb87080ead5341cfe55d4b70283bdf93d722f457e1b24",
+        "matches": true
+      },
+      {
+        "version": "20261009194030",
+        "name": "document_release_content",
+        "statement_count": 1,
+        "statements_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
+        "local_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
+        "matches": true
+      }
+    ],
+    "edge": {
+      "id": "959cb631-b198-49c7-997a-d2eb93be6034",
+      "slug": "document-release-content",
+      "name": "document-release-content",
+      "status": "ACTIVE",
+      "version": 1,
+      "created_at": 1791578939196,
+      "updated_at": 1791578939196,
+      "verify_jwt": true,
+      "import_map": false,
+      "entrypoint_path": "/tmp/user_fn_txofqxictwecgcnvezlb_959cb631-b198-49c7-997a-d2eb93be6034_1/source/index.ts",
+      "ezbr_sha256": "18df8186d92200f4d8b8d0c22da1f645ae16e2822cb826e10eb96d27ac8953e7"
+    },
+    "edge_files": [
+      {
+        "name": "index.ts",
+        "sha256": "834fcf6a35b89c57353b26dd796920198ac98fca8c8ba29f9a9602a06f93847d",
+        "matches": true
+      },
+      {
+        "name": "gateway.mjs",
+        "sha256": "64bdbb1a5cf29871180cd242844f78db97236df5af4aa9f9943f1b3f976c054b",
+        "matches": true
+      }
+    ]
+  },
+  "frozen_reference": {
+    "reference_archive": "AuxiliumOS_Coordinated_Build_Maps_2026-10-09.zip",
+    "archive_sha256": "56272197bd3b660f16b1d858da0ad9a754fdcacd822c9e2b5d4515035b89baff",
+    "canonical_baseline": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+    "acceptance_reconciliation": "Current REQUIREMENTS.json is byte-identical to reference: all 163 ordered criteria preserved. No acceptance closed.",
+    "verification": "Original tools/verify_maps.py passed all 980 inventory hashes, 163 criteria and acyclic 34-slice graph. This validates reference only."
+  },
+  "source_comparison": [
+    {
+      "path": "web/src/components/document-versions.tsx",
+      "canonical_sha256": "d9d46c1cf2a66fb3b6ef03fde1a32cfe935dfb3fe1c82695042132440edda50b",
+      "lovable_sha256": "69114ddbbc4ca44d91be80eca3f49a6103a1c9842f577752d51d081a058474f9",
+      "equal": false
+    },
+    {
+      "path": "web/src/lib/runtime.tsx",
+      "canonical_sha256": "d3d5e04b8b2248c62a43863342f9ca9b737c4664a5bff3ac1545b16c23396630",
+      "lovable_sha256": "d3d5e04b8b2248c62a43863342f9ca9b737c4664a5bff3ac1545b16c23396630",
+      "equal": true
+    },
+    {
+      "path": "web/src/router.tsx",
+      "canonical_sha256": "95805f82df554915161616385645fb81161d4aa90302fe99fea8986719d0c81f",
+      "lovable_sha256": "95805f82df554915161616385645fb81161d4aa90302fe99fea8986719d0c81f",
+      "equal": true
+    },
+    {
+      "path": "web/src/spatial-generated/SOURCE_MANIFEST.json",
+      "canonical_sha256": "b5901a215bcfed1b05e118f0afe9a5184e09dab736b60839d9c44b351f49424e",
+      "lovable_sha256": "9cc81927b4fcf4de342477cf315bc67fdc65b6101c26911e4942a6e07662c458",
+      "equal": false
+    }
+  ],
+  "source_comparison_scope": "Four exact readbacks only. Runtime/router match; document-versions host lacks integrated release controls; Spatial manifest differs and belongs to separate lead. No blanket source parity claim.",
+  "writer_reconciliation": {
+    "isolation": "New clone and new work/integration-2026-10-10 branch; never reset an older checkout or write old feature refs.",
+    "source_branches": "Every allocated release backend/UI file from e250336d and 43d1ea48 is byte-identical to integrated 148d74d. Preserve both old branches.",
+    "limitation": "No tool exposes execution state of every separate ordinary chat or unsaved disk. Prior stale document allocations were not reclaimed; our two packets avoid their files.",
+    "active_workers": [
+      "ui_repair: exact packet UI-2026-10-10-CONTEXT",
+      "controls_repair: exact packet CTRL-003-ACTIVATION",
+      "external Spatial lead: active provider transfer, no shared allocations"
+    ],
+    "return_channel": "Actual committed GitHub branch and source-reviewed PR; local subagents return via available agent tool and disjoint shared checkout."
+  },
+  "first_incomplete_action": "Repair the four reproduced draft-loss paths with current-authority recovery (UI-2026-10-10-CONTEXT), and reject publication-only activation evidence (CTRL-003-ACTIVATION). Hosted private-document acceptance remains open.",
+  "limitations": [
+    "No hosted Auth/Storage document journey executed by this readback.",
+    "CI success includes skipped authentic API and connected browser jobs.",
+    "14 exact migration hashes and Edge source equality establish deployment/source facts only.",
+    "No protected credential availability claim from skipped jobs; existing secret absence is historical, not reverified.",
+    "No provider write, fixture creation, new privilege, notification or production activation performed."
+  ]
+}

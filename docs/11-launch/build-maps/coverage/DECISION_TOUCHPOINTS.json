@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "source": "repo:OWNER_DECISIONS.json",
+  "source_sha256": "83236cca302a1feb6131bda7d0bbfb8e77df48638cbdb1a5e8db3bf016182874",
+  "rule": "This is a source-linked dispatch index, not a new decision register. Use current live record and any later explicit authorization. Configured synthetic development can proceed; only affected real activation waits for its existing gate.",
+  "decisions": [
+    {
+      "id": "OD-001",
+      "topic": "Roles and delegation",
+      "coordinating_map": "MAP-01",
+      "exact_activation_gate": "Confirm actual people, roles, client representatives and delegation limits before live grants.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "8525effbf23d0fcd497e7db9f3c5c722943ecd9c215066ec796dabe629f88254"
+    },
+    {
+      "id": "OD-002",
+      "topic": "Technical review and document release",
+      "coordinating_map": "MAP-06",
+      "exact_activation_gate": "Confirm permitted dual roles, sensitive categories and designated reviewers/releasers before live release.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "f39b16521a5263381f7987ad8fbde74c10525a2ff269a989fad7de6f85ab1251"
+    },
+    {
+      "id": "OD-003",
+      "topic": "Client and executive visibility",
+      "coordinating_map": "MAP-05",
+      "exact_activation_gate": "Confirm per-account audiences and portal defaults before client onboarding.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "3ee71fbed3d48a5c3f23848d5f4f4ae67cfe8263fc4956bf18617ad2123a9ded"
+    },
+    {
+      "id": "OD-004",
+      "topic": "Uploads, replacement and history",
+      "coordinating_map": "MAP-06",
+      "exact_activation_gate": "Confirm client historical access and withdrawal notices before live document operations.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "1bd1687723049ffdaf96b73162142a2ad0090d0db8f4e56585e11cccf86a6d8f"
+    },
+    {
+      "id": "OD-005",
+      "topic": "Scope, sampling and templates",
+      "coordinating_map": "MAP-03",
+      "exact_activation_gate": "Approve actual templates, methods, review exceptions and delegate boundaries before professional use.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "c21142164df4b8104fd1235f395046f76ff91a3f5c494a3d9cff0776d5b2833d"
+    },
+    {
+      "id": "OD-006",
+      "topic": "Rates, caps, terms and reserves",
+      "coordinating_map": "MAP-04",
+      "exact_activation_gate": "Approve actual rates, payment terms, caps, change thresholds, expiration, reserve custody/use/refunds and finance delegates before binding commitments.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "e18e985d9d31df07270058e57becb53f3a730d1ceed5c5593374df037b2eb6d7"
+    },
+    {
+      "id": "OD-007",
+      "topic": "MSA coverage and enterprise packaging",
+      "coordinating_map": "MAP-05",
+      "exact_activation_gate": "Approve commercial packaging and translate each executed MSA into reviewed structured terms before enabling coverage.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "f91dd82509621504e25399afe52c99bf8b289ac18927ce2b52d47015935ed67c"
+    },
+    {
+      "id": "OD-008",
+      "topic": "Emergency mobilization",
+      "coordinating_map": "MAP-04",
+      "exact_activation_gate": "Name on-call approvers and agree response promises, cap/duration/after-hours terms and emergency exceptions before live use.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "550d09c58b4fdc866f50ea841a026dbc45f09c2a576792b3fec4845602237cdb"
+    },
+    {
+      "id": "OD-009",
+      "topic": "Qualifications and offered services",
+      "coordinating_map": "MAP-03",
+      "exact_activation_gate": "Qualified reviewer confirms actual credentials, jurisdiction and professional boundaries; owner approves offerings.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "0565a5656e0f77ef50ba731e6d44170c1e7f2f20c9428d2261803335768f2dc5"
+    },
+    {
+      "id": "OD-010",
+      "topic": "Vendors and contracting model",
+      "coordinating_map": "MAP-04",
+      "exact_activation_gate": "Confirm real contracting/payment responsibility, credentials and vendor/program access.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "fc3693c4c1de3617dcacf1bdf86bb6adbf5a32242f07ecca737cee097ace0008"
+    },
+    {
+      "id": "OD-011",
+      "topic": "Audit, retention and holds",
+      "coordinating_map": "MAP-01",
+      "exact_activation_gate": "Approve retention schedule, hold/restriction authorities and audit-export recipients before destructive automation or client audit exports.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "a3fb297607f6fcc0de15ac37268e1cebfdb42c21dd30e0e0e9bab3905510c608"
+    },
+    {
+      "id": "OD-012",
+      "topic": "Identity and recovery",
+      "coordinating_map": "MAP-01",
+      "exact_activation_gate": "Confirm administrators, recovery contacts, client login approach and any SSO commitments.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "feb187d954ecff1e379fdfb04a6d967a27e5338add3f9e41dccd387a2565fcae"
+    },
+    {
+      "id": "OD-013",
+      "topic": "No-PHI incident handling",
+      "coordinating_map": "MAP-06",
+      "exact_activation_gate": "Name incident contact and approve the handling procedure before real uploads. This does not reopen or enable PHI support.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "95c013091503b4ba685816cb0ac51cf74979d268a43a4b5b50bb7fdd5959128f"
+    },
+    {
+      "id": "OD-014",
+      "topic": "Runtime AI data use",
+      "coordinating_map": "MAP-06",
+      "exact_activation_gate": "Confirm permitted providers/data categories, contractual controls and activation authority.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "cadface9e8005ac262ad2e832f2ccf7fc123a09daced5a53eca9d0b5f191c52f"
+    },
+    {
+      "id": "OD-015",
+      "topic": "Production, spend and recovery",
+      "coordinating_map": "MAP-08",
+      "exact_activation_gate": "Confirm production destination, spend budget, recovery objectives, deployment authority and real-data onboarding.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "fc709d4119d9044180e708ca07e63b35933c57b821bf2a89ffe85883252fa67b"
+    },
+    {
+      "id": "OD-016",
+      "topic": "Moldo integration and separation",
+      "coordinating_map": "MAP-07",
+      "exact_activation_gate": "Confirm enterprise contracting/billing relationship, sharing rights and separation/export obligations before live sync. Entity/IP/sale arrangements remain owner and qualified-adviser decisions.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "5685e37549bd837f0f69d493195e5b29201e0463d3960d3e084f42c9c66beea3"
+    },
+    {
+      "id": "OD-017",
+      "topic": "External notifications and actions",
+      "coordinating_map": "MAP-06",
+      "exact_activation_gate": "Confirm real sender identities, channels, templates, recipients and automated outbound actions before enabling them.",
+      "baseline_status": "configured_for_development",
+      "baseline_production_enabled": false,
+      "baseline_approval_evidence": null,
+      "source_record_sha256": "bd9293bc1c1e00596ffd76e6ddadb88acfc9fe624fe83d980ba12e430412334e"
+    }
+  ]
+}

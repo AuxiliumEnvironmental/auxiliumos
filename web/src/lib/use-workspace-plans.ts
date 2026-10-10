@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { asRuntimeError, isAbort, type RuntimeError } from "./errors";
 import { useRuntime } from "./runtime";
-import { WorkspacePlanApi, type PlanSaveRequest, type PlanSchema, type PlanScope, type WorkspacePlan, type WorkspacePlanSummary } from "./workspace-plan-api";
+import { PlanError, WorkspacePlanApi, type PlanSaveRequest, type PlanSchema, type PlanScope, type WorkspacePlan, type WorkspacePlanSummary } from "./workspace-plan-api";
 
 type ListState =
   | { status: "idle"; key: string }
@@ -12,14 +12,14 @@ type ListState =
 export type PlanResult = { ok: true; plan: WorkspacePlan } | { ok: false; error: RuntimeError } | null;
 
 /**
- * Planning drafts live only in this React subtree. Nothing is written to
- * browser storage, the URL or a cache. A key change hides previous rows during
- * render, aborts pending requests and rejects late completions.
+ * Server rows live only in this React subtree. Editable recovery snapshots are
+ * held separately by RuntimeProvider, in identity-scoped memory. A key change
+ * hides previous rows, aborts pending requests and rejects late completions.
  */
 export function useWorkspacePlans(scope: PlanScope | null, schema: PlanSchema) {
-  const { api, state, handleFailure } = useRuntime();
-  const planApi = useMemo(() => new WorkspacePlanApi(api.client), [api]);
-  const session = state.status === "ready" ? `${state.context.profileId}:${state.revision}` : null;
+  const { api, state, handleFailure, isCurrentAccess } = useRuntime();
+  const planApi = useMemo(() => new WorkspacePlanApi(api.client), [api.client]);
+  const session = state.status === "ready" ? `${state.context.authUserId}:${state.context.profileId}:${state.revision}` : null;
   const key = session && scope ? `${session}:${scope.accountId}:${scope.facilityId}:${scope.moduleKey}:${scope.panelKey}` : "none";
   const [attempt, setAttempt] = useState(0);
   const [stored, setStored] = useState<ListState>({ status: "idle", key: "" });
@@ -57,20 +57,20 @@ export function useWorkspacePlans(scope: PlanScope | null, schema: PlanSchema) {
 
   const run = useCallback(async (work: (signal: AbortSignal) => Promise<WorkspacePlan>): Promise<PlanResult> => {
     const startedKey = keyRef.current;
-    if (startedKey === "none") return null;
+    if (startedKey === "none" || state.status !== "ready" || !isCurrentAccess(state.revision)) return null;
     const controller = new AbortController();
     pending.current.add(controller);
     try {
       const plan = await work(controller.signal);
-      if (controller.signal.aborted || keyRef.current !== startedKey) return null;
+      if (controller.signal.aborted || keyRef.current !== startedKey || !isCurrentAccess(state.revision)) return null;
       return { ok: true, plan };
     } catch (error) {
-      if (controller.signal.aborted || isAbort(error) || keyRef.current !== startedKey) return null;
+      if (controller.signal.aborted || isAbort(error) || keyRef.current !== startedKey || !isCurrentAccess(state.revision)) return null;
       return { ok: false, error: report(error) };
     } finally {
       pending.current.delete(controller);
     }
-  }, [report]);
+  }, [isCurrentAccess, report, state]);
 
   const open = useCallback((planId: string) => scope ? run((signal) => planApi.get(planId, scope, schema, signal)) : Promise.resolve(null), [planApi, run, schema, scope]);
   /** Sends the exact immutable request supplied, including on an explicit retry. */
@@ -85,10 +85,13 @@ export function useWorkspacePlans(scope: PlanScope | null, schema: PlanSchema) {
     });
   }, [attempt]);
   const save = useCallback(async (request: PlanSaveRequest) => {
+    if (!scope || request.scope.accountId !== scope.accountId || request.scope.facilityId !== scope.facilityId || request.scope.moduleKey !== scope.moduleKey || request.scope.panelKey !== scope.panelKey) {
+      return { ok: false as const, error: new PlanError("unavailable", "Return to this draft's original facility before retrying its save.") };
+    }
     const result = await run((signal) => planApi.save(request, schema, signal));
     if (result?.ok) remember(result.plan);
     return result;
-  }, [planApi, remember, run, schema]);
+  }, [planApi, remember, run, schema, scope]);
   const refresh = useCallback(async (planId: string) => {
     const result = await open(planId);
     if (result?.ok) remember(result.plan);

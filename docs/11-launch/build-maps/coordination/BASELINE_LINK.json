@@ -1,0 +1,13 @@
+{
+  "edition_local": "2026-10-09 America/Chicago",
+  "status": "Frozen source-based build mapping; no new runtime audit or deployment",
+  "baseline_archive": "AuxiliumOS_Launch_Reference_2026-10-09.zip",
+  "baseline_archive_sha256": "5e4ae70ecc9545064becc1296b4afec12ef16722cb9df34eea4ee1709e85999c",
+  "embedded_baseline_directory": "reference",
+  "embedded_baseline_index_sha256": "f676761c89c2ddbac7c898e77b0a7d7666c90d28cedfbdea9fbb12c5fdd4cad2",
+  "canonical_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "canonical_tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
+  "newer_spatial_integration_commit": "42b7754265a8755f0f478a135d5506311d731b44",
+  "scope_updates": "coordination/OWNER_DIRECTION_UPDATES.md",
+  "snapshot_rule": "Read current controlling source before writes. This package does not imply these pins remain latest."
+}

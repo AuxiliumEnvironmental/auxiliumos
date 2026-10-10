@@ -1,25 +1,27 @@
 {
   "version": 1,
-  "as_of": "2026-10-09T20:40:15.839Z",
+  "as_of": "2026-10-10T04:47:23.138200+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
-    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
+    "review_basis": "Fresh isolated clone at 148d74d with current GitHub refs, CI67 and actual provider source/operation readback; maps adopted as reference only.",
     "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
-    "current_verified_feature_commit": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9"
+    "current_verified_feature_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+    "canonical_recovery_base": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "integration_branch": "work/integration-2026-10-10"
   },
   "live_repository_reconciled": true,
   "production_authorization": {
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Mobile checkpoint4cd547c saved and read back; application CI66 passed at4cf08158. This candidate integrates backend e250336d and UI43d1ea48 with four focused profiles. Their source reviews pass; executable verification is pending.",
+    "github": "Integration candidate a54372cbb40b6c7ef1044f1932aabb997670f585 saved via GitHub connector with exact local tree equality; PR87 targets unchanged recovery148d74d. Subsequent delivery/checkpoint metadata will be saved separately and final ref readback recorded in PR. No terminal push credentials or owner local-clone synchronization claimed.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
-    "supabase": "auxiliumos-dev active.13canonical migrations including exact planning, review and release hashes verified. Release migration was already present during fresh preflight; no reapplication or attribution to a new root deployment. All4new release tablesRLS/directCRUDdenied,9public RPC exactACLsplit,zero release grants/records. Actual owner scoped login/request/triage passed; Moldo untouched.",
-    "lovable": "Mobile source57f637a passed CI66 and publication0cf4e56e acceptedpending. Provider anonymous HTTP observation reports auxiliumos.io200 and public bundle contains new mobile markers. Deployment status record/full bundle equality not verified. Read-only provider check unexpectedly created only .lovable/plan.md asb9bfbfc and paused at plan--show; owner decision required before further provider turn. App source unchanged by exact diff.",
-    "workspace_execution": "Current native workspace is unavailable after exec-server transport failure. A later bounded read-only recovery check returned no output and was terminated. GitHub and Lovable connectors remain operational; no local parity or recovered disk content claimed."
+    "supabase": "auxiliumos-dev PostgreSQL17.6.1.127: all14 applied migration statement hashes match source; private-objects v3, document-version-content v4 and document-release-content v1 JWT-verified. Last Edge two source files match exactly. No hosted document acceptance.",
+    "lovable": "OS source delivered at 4adbb330c0b4e7832bcae938a6507ee4b27ae0c3; operation completed and all 16 exact hashes/full changed-path diff independently verified against a54372. Provider build reported passed. No public publication or genuine hosted workflow acceptance. Spatial files untouched; separate Spatial offline operation subsequently completed at 062e651; its source remains owned by that lead and unaccepted by OS until exact diff/contract review.",
+    "workspace_execution": "New workspace /workspace/scratch/4b36780d3567/auxiliumos is operational; npm ci completed. Prior inaccessible workspaces were not reset or claimed recovered."
   },
   "source_precedence": [
     "Latest explicit owner instructions within platform permissions",
@@ -28,11 +30,12 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
+  "first_runtime_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
     "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
-    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09"
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09",
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/work/integration-2026-10-10"
   ],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -74,7 +77,7 @@
     "database_deployment": {
       "source_commit": "ad7294501ff4465c48e8b8b1abffc3b0e5853807",
       "receipt": "docs/00-control/evidence/development-migrations.json",
-      "migration_count": 13,
+      "migration_count": 14,
       "authentic_api_status": "awaiting_secure_key",
       "private_config_enabled": true,
       "storage_bucket_count": 1,
@@ -239,7 +242,8 @@
       "focused_database_checks": "45/45 passed, no skips; simulated Auth, exact worker evidence reused",
       "review": "docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json",
       "scope": "Explicit exact-version controller/audience discovery and metadata release, replacement, separate historical recipients, immutable narrowing withdrawal. No released bytes/notifications/signatures or real professional authority.",
-      "deployment_observation": "Already present with exact canonical hash during actual preflight, matching document_releases record; root did not reapply."
+      "deployment_observation": "Already present with exact canonical hash during actual preflight, matching document_releases record; root did not reapply.",
+      "ui_status": "canonical_source_and_CI67_verified; current_Lovable_host_not_yet_transferred"
     },
     "document_releases": {
       "worker_commit": "3203c08aee5a9054f0bae61ead7be5cb903f1d0a",
@@ -258,14 +262,16 @@
     "document_release_content": {
       "source_commit": "e250336d4f14a53472d260e052ba5de0e101ab48",
       "branch": "wip/release-content-2026-10-09",
-      "status": "source_reviewed_integration_candidate_runtime_pending",
+      "status": "source_and_development_deployment_verified_hosted_acceptance_open",
       "migration": "20261009194030_document_release_content.sql",
       "migration_sha256": "583651e0e75033dafc122f37e9ca04b59e073f9fdb4dfd0d2266794e4613c2e3",
-      "review": "mobile_review cleared original SQL/gateway and final withdrawal discovery delta; executable checks pending.",
-      "transport_default": "disabled",
+      "review": "Existing independent source review retained; CI67 passed exact integrated source. Fresh migration hash and Edge source readback match.",
+      "transport_default": "disabled_in_source; runtime secret setting not inspected",
       "authority": "Separate explicit current/historical recipient authority; no changes to internal content or owner grants.",
-      "remaining": "Required CI: document-release-content-database and document-release-content-gateway-unit. Then exact development deployment/catalog verification; dedicated byte transport remains disabled until deliberately configured. Hosted Auth/Storage and concurrency not verified.",
-      "withdrawal_discovery": "Separate exact seven-field authenticated read uses withdrawal scope/controller locks and existing head, excluding content/safety prerequisites. No head write or added authority."
+      "remaining": "Authentic recipient Auth/Storage/API/browser acceptance is missing; protected test configuration availability must be checked through supported secure workflow. No redundant migration or Edge deployment.",
+      "withdrawal_discovery": "Separate exact seven-field authenticated read uses withdrawal scope/controller locks and existing head, excluding content/safety prerequisites. No head write or added authority.",
+      "deployed": true,
+      "edge_version": 1
     },
     "document_release_ui": {
       "source_commit": "43d1ea48989f753445510f030584a91a4211fb6c",
@@ -309,11 +315,11 @@
     "observed_at": "2026-10-09T06:57:29Z",
     "remote_head": "6163fc914f68899c6a86d8d6ab12d6c186f7201a",
     "preserved_old_worktree": "/workspace/scratch/831a296a4676/auxiliumos",
-    "active_worktree": "/workspace/scratch/f283daedfed1/auxiliumos",
+    "active_worktree": "/workspace/scratch/4b36780d3567/auxiliumos",
     "finding": "Workspace resumed from older0773cce dirty snapshot; no old changes overwritten. New separate worktree fetched6163. Unpublished UI/entrypoint test commits not present in this filesystem; exact Edge source recovered from running provider, UI implemented anew against saved contract rather than reconstructed from prose.",
     "active_agents": [],
-    "first_unfinished_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
-    "latest_verified_remote": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9",
+    "first_unfinished_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
+    "latest_verified_remote": "a54372cbb40b6c7ef1044f1932aabb997670f585",
     "lovable_transfer": {
       "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
       "message_id": "umsg_01m4h0p8ntephreysc5pf0ws8y",
@@ -480,8 +486,8 @@
     "owner_first_login": "actual_public_browser_login_account_facility_request_submission_and_triage_verified",
     "ui_presentation_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
     "unpublished_patch_check": "unavailable_checked_once",
-    "protected_configuration": "GitHub signed-in Actions settings verified no repository/environment secrets. Configure development-only AUXILIUMOS_TEST_SERVICE_ROLE_KEY directly in GitHub secret form. Dispatch UI exists; actual focused run remains pending credential configuration.",
-    "independent_work": "Reviewed backend e250336d and UI43d1ea48 are included in this integration candidate with focused tests registered. No runtime pass or new cloud deployment claimed. Moldo independent; companion deferred.",
+    "protected_configuration": "Previously absent Actions service secret remains an unresolved historical access observation. Current toolset cannot read secret configuration; skipped CI jobs do not establish current availability.",
+    "independent_work": "UI/context repair and activation-control repair passed reviewed source/fixture gates; exact 16-file source delivery accepted at OS host4adbb330. Genuine hosted acceptance and full activation remain distinct and open.",
     "connected_workflow": "actual_owner_account_facility_request_submission_and_triage_passed; private_upload_finalization_authorized_retrieval_and_hosted_planning_save_reopen_unverified",
     "focused_verification": "Actual owner request/triage revision2 matched hosted DB readback. Full demo:14unit,11browser fixtures,60route/viewport observations passed. Internal-review UI:10adapter,17new browser fixtures,2focused denial,3route regression checks and build passed. These fixtures are not genuine Auth/Storage acceptance.",
     "hosted_preview_access": "Public root domain https://auxiliumos.io verified over HTTPS with working sign-in and recovery screens.",
@@ -501,7 +507,8 @@
       "event_id": "main:agent#00000000010736#tcb:APON2MMN",
       "requires_secure_form": false,
       "application_change": false,
-      "next_action": "Owner may reject the report-only card. Connector requires a human decision on this specific pending card; do not bypass with another message."
+      "next_action": "Owner may reject the report-only card. Connector requires a human decision on this specific pending card; do not bypass with another message.",
+      "resolution_observation": "2026-10-10: later completed OS operation at 8d59d222 and agentFinished=true supersede the old paused-status observation. No approval was answered or bypassed by this lead."
     }
   },
   "remaining_defects": [
@@ -522,5 +529,121 @@
       "status": "source_fix_reviewed_runtime_pending",
       "resolution": "Separate withdrawal discovery mirrors actual withdrawal authority without content/safety requirement; exact returned release/head CAS frozen in UI. Focused database/browser cases authored; no fabricated unsafe status success."
     }
-  ]
+  ],
+  "active_integration": {
+    "lead": "OS | Integration Lead",
+    "branch": "work/integration-2026-10-10",
+    "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+    "packets": [
+      "docs/00-control/task-packets/UI-2026-10-10-CONTEXT.json",
+      "docs/00-control/task-packets/CTRL-003-ACTIVATION.json",
+      "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json"
+    ],
+    "external_spatial_operation": {
+      "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+      "head": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+      "message_id": "main:user#00000000000043#usr:A7VUZ6TT",
+      "agent_finished": true,
+      "response_status": "completed",
+      "owner_source_commit": "1fede19ded45b3ce2b2919d47759a43134533a69",
+      "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead."
+    },
+    "review_receipt": "docs/00-control/evidence/integration-reconciliation-2026-10-10.json",
+    "new_business_decisions": [],
+    "completed_source_packets": [
+      "CTRL-003-ACTIVATION",
+      "UI-2026-10-10-CONTEXT"
+    ],
+    "remaining_source_packets": [],
+    "external_spatial_latest_observation": {
+      "observed_at": "2026-10-10T04:47:23.138200+00:00",
+      "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+      "head": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+      "agent_finished": true,
+      "operation_id": "main:user#00000000000043#usr:A7VUZ6TT",
+      "thread_id": "main",
+      "response_status": "completed",
+      "scope": "Separate Spatial lead repairs standalone offline host worker ownership, byte/MIME cache validation, truthful readiness/listener cleanup, accessibility and common error boundary; exact canonical spatial-source bytes excluded.",
+      "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead.",
+      "local_lead_observation": "Latest external source instruction reports its local lead integrating fresh manual-editor source; filesystem/base/output bytes not independently available here. Do not assume it is this workspace or reclaim files.",
+      "acceptance": "The later operation completed while OS handoff was being recorded. Provider reported 831 canonical hashes preserved and focused offline checks; those claims and changed contracts are not independently accepted by the OS lead. Separate lead retains source ownership pending exact returned contract/diff review.",
+      "operation_reported_commit": "062e651070048da4d8d6a9ff042223089dbd8f9a"
+    },
+    "source_save": {
+      "remote_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "tree": "a4fc2c8a7b5d4b3b6660924177cab110c1b36310",
+      "readback": "GitHub branch ref and identical local Git tree; source packets reviewed and candidate CI passed. Current subsequent handoff metadata pending save.",
+      "scope": "Reviewed UI/context repair, existing document source and activation-gate control repair",
+      "recorded_at": "2026-10-10T04:38:35.398425+00:00"
+    },
+    "candidate_gate": "PASS: a54372cbb40b6c7ef1044f1932aabb997670f585 CI 38024351341 application-foundation and controls, including all 9 workspace-context scenarios. Protected hosted jobs skipped; no hosted acceptance.",
+    "accepted_contract_changes": [
+      "RuntimeContext adds authUserId from existing verified getUser, retaining profile and current generation.",
+      "RuntimeProvider owns memory-only identity-scoped draft recovery, replaces it on identity/access loss and revalidates every retained directory and planning action scope before ready.",
+      "Root account/facility search is a hint only; one generation-scoped paginated directory supplies permitted context.",
+      "Uncertain planning saves retain exact immutable request and original scope; protected mutation requires current verified generation."
+    ],
+    "ui_review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json",
+    "candidate_ci_receipt": "docs/00-control/evidence/CI-38024351341-application-foundation.json",
+    "provider_delivery": {
+      "phase": "completed; exact source delivery accepted",
+      "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+      "input_commit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+      "source_commit": "a54372cbb40b6c7ef1044f1932aabb997670f585",
+      "packet": "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+      "manifest": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10-manifest.json",
+      "writer": null,
+      "reviewer": "integration-lead",
+      "allowed_paths": [
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/document-release-api.ts",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/lib/use-workspace-plans.ts",
+        "web/src/pages/directory.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/private-files.tsx",
+        "web/src/router.tsx"
+      ],
+      "message_id": "umsg_01m4j1q97veb9v9jt2qt9w1j86",
+      "thread_id": "main",
+      "observed_at": "2026-10-10T04:43:02.204640+00:00",
+      "archive_sha256": "58b724cd0062f31bdbb1a629f63fcce8077bf1dc7a9fa8f443b394ff1981a3c0",
+      "output_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+      "response_status": "completed",
+      "agent_finished": true,
+      "receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
+    },
+    "active_local_writers": [],
+    "active_provider_writers": [],
+    "hosted_verification_access": {
+      "observed_at": "2026-10-10T04:43:02.204640+00:00",
+      "tools": "GitHub read/source-write tools present; workflow-dispatch operation is not available in this toolset. Local Chromium installation failed and was not retried; no local protected service credential was accessed.",
+      "protected_runner": "Existing workflow restricts connected checks to wip/recovery-2026-10-08. PR87 contains reviewed source awaiting integration into that protected execution branch; branch restriction was not weakened.",
+      "next_preflight": "Freshly reconcile existing synthetic document revision, private-bucket metadata, active operations and separately enabled synthetic gates before any fixture writes. Secure credential availability is not inferred from skipped PR jobs.",
+      "not_a_new_owner_approval": "Routine implementation authorization persists. Use existing protected execution/access route; never expose secrets or infer professional/production authority."
+    },
+    "external_spatial_operation_observations": [
+      {
+        "observed_at": "2026-10-10T04:46:26.312905+00:00",
+        "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+        "head": "b48eea7a591c89db0c9b9d0715d52638d63d5d80",
+        "agent_finished": false,
+        "operation_id": "main:user#00000000000043#usr:A7VUZ6TT",
+        "thread_id": "main",
+        "response_status": "absent_while_active",
+        "scope": "Separate Spatial lead repairs standalone offline host worker ownership, byte/MIME cache validation, truthful readiness/listener cleanup, accessibility and common error boundary; exact canonical spatial-source bytes excluded.",
+        "write_allocation": "External Spatial lead retained. No OS source, shared editor, selector, adapter, generated source or Spatial host writes by this lead.",
+        "local_lead_observation": "Latest external source instruction reports its local lead integrating fresh manual-editor source; filesystem/base/output bytes not independently available here. Do not assume it is this workspace or reclaim files.",
+        "acceptance": "No new Spatial contract or host/source acceptance from a running operation. Require exact committed diff and source hashes through the integration lead."
+      }
+    ]
+  }
 }

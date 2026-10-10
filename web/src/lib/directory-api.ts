@@ -9,7 +9,7 @@ export const DIRECTORY_SELECTORS = {
   facilities: "id,account_id,display_name,is_demo",
 } as const;
 
-export type RuntimeContext = { profileId: string; displayName: string; development: true };
+export type RuntimeContext = { authUserId: string; profileId: string; displayName: string; development: true };
 export type RuntimeContextResult =
   | { status: "ready"; context: RuntimeContext }
   | { status: "unauthenticated" }
@@ -115,7 +115,7 @@ export class DirectoryApi {
     const row = record(response.data[0]);
     const profile = accountItem(row);
     if (row.identity_status !== "active") return { status: "access_unavailable" };
-    return { status: "ready", context: { profileId: profile.id, displayName: profile.displayName, development: true } };
+    return { status: "ready", context: { authUserId: data.user.id, profileId: profile.id, displayName: profile.displayName, development: true } };
   }
 
   async listAccounts(options: PageOptions = {}): Promise<DirectoryPage<AccountDirectoryItem>> {

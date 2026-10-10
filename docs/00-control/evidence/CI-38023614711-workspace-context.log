@@ -1,0 +1,113 @@
+["node","scripts/browser-identity.mjs"]
+{"browser_executable":"/home/runner/.cache/ms-playwright/chromium-1228/chrome-linux64/chrome","browser_version":"Google Chrome for Testing 149.0.7827.55","browser_sha256":"2d18db9d8608b052b6a552ee00ec1e830f93692e928b65ecc67d693bd33fe801"}
+
+
+["npm","run","test:runtime-ui","--","workspace-context.spec.ts"]
+
+> auxiliumos@0.0.0 test:runtime-ui
+> playwright test --config playwright.runtime.config.ts workspace-context.spec.ts
+
+
+Running 9 tests using 1 worker
+
+  ✘  1 tests/e2e/workspace-context.spec.ts:161:5 › draft before context survives first selection; SPA return restores original scoped work (7.0s)
+  ✓  2 tests/e2e/workspace-context.spec.ts:191:5 › sample adoption is confirmed, starts a new draft and clears old review checks on phone (2.0s)
+  ✓  3 tests/e2e/workspace-context.spec.ts:219:5 › same-user verification hides work while pending and restores it after a transient failure (1.8s)
+  ✘  4 tests/e2e/workspace-context.spec.ts:244:5 › facility revocation purges drafts on inactive routes and regrant cannot restore them (7.0s)
+  ✓  5 tests/e2e/workspace-context.spec.ts:264:5 › changed Auth subject, revoked profile and sign-out clear previous recovery state (2.8s)
+  ✓  6 tests/e2e/workspace-context.spec.ts:293:5 › interrupted pending save keeps its exact operation through recheck and blocks scope or route moves (1.7s)
+  ✘  7 tests/e2e/workspace-context.spec.ts:326:5 › later account and facility pages resolve once and directory links carry the exact context (6.7s)
+  ✓  8 tests/e2e/workspace-context.spec.ts:355:5 › a wrong-account facility link never grants planning context or a save (1.4s)
+  ✓  9 tests/e2e/workspace-context.spec.ts:368:5 › directory access alone cannot restore a draft when planning permission is uncertain or revoked (2.1s)
+
+
+  1) tests/e2e/workspace-context.spec.ts:161:5 › draft before context survives first selection; SPA return restores original scoped work 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /account=00000000-0000-4000-8000-000000000064.*facility=00000000-0000-4000-8000-0000000003e9/
+    Received string:  "http://127.0.0.1:4179/projects"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × unexpected value "http://127.0.0.1:4179/projects"
+
+
+      174 |   await navigation(page, 'Projects').click();
+      175 |   await expect(page.getByRole('heading', { name: 'Operations / Projects', exact: true })).toBeVisible();
+    > 176 |   await expect(page).toHaveURL(new RegExp(`account=${accountA.id}.*facility=${facilityA.id}`));
+          |                      ^
+      177 |   await navigation(page, 'Scope').click();
+      178 |   await expect(panel.getByLabel('Inclusions', { exact: true })).toHaveValue('Unsaved edit after revision one');
+      179 |   await expect(panel.getByLabel('Deliverable', { exact: true })).toHaveValue('Synthetic field notes');
+        at /home/runner/work/auxiliumos/auxiliumos/tests/e2e/workspace-context.spec.ts:176:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workspace-context-draft-be-45c40-stores-original-scoped-work/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workspace-context-draft-be-45c40-stores-original-scoped-work/error-context.md
+
+  2) tests/e2e/workspace-context.spec.ts:244:5 › facility revocation purges drafts on inactive routes and regrant cannot restore them 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('This facility is unavailable in the selected account. Choose an available facility.')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for getByText('This facility is unavailable in the selected account. Choose an available facility.')
+
+
+      250 |   backend.facilities = [facilityB];
+      251 |   await recheck(page);
+    > 252 |   await expect(page.getByText('This facility is unavailable in the selected account. Choose an available facility.')).toBeVisible();
+          |                                                                                                                       ^
+      253 |   backend.facilities = [facilityA, facilityB];
+      254 |   await recheck(page);
+      255 |   await expect(page.getByLabel('Facility', { exact: true })).toHaveValue(facilityA.id);
+        at /home/runner/work/auxiliumos/auxiliumos/tests/e2e/workspace-context.spec.ts:252:119
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workspace-context-facility-121b4-regrant-cannot-restore-them/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workspace-context-facility-121b4-regrant-cannot-restore-them/error-context.md
+
+  3) tests/e2e/workspace-context.spec.ts:326:5 › later account and facility pages resolve once and directory links carry the exact context 
+
+    Error: expect(page).toHaveURL(expected) failed
+
+    Expected pattern: /account=00000000-0000-4000-8000-00000000009a.*facility=00000000-0000-4000-8000-00000000041d/
+    Received string:  "http://127.0.0.1:4179/sampling?account=00000000-0000-4000-8000-00000000009a"
+    Timeout: 5000ms
+
+    Call log:
+      - Expect "toHaveURL" with timeout 5000ms
+        14 × unexpected value "http://127.0.0.1:4179/sampling?account=00000000-0000-4000-8000-00000000009a"
+
+
+      349 |   await expect(page.getByLabel('Facility', { exact: true })).toHaveValue(backend.facilities[53].id);
+      350 |   await page.getByRole('navigation', { name: 'Work flow', exact: true }).getByRole('link', { name: 'Sampling', exact: true }).click();
+    > 351 |   await expect(page).toHaveURL(new RegExp(`account=${account.id}.*facility=${backend.facilities[53].id}`));
+          |                      ^
+      352 |   expect(backend.unexpected).toEqual([]);
+      353 | });
+      354 |
+        at /home/runner/work/auxiliumos/auxiliumos/tests/e2e/workspace-context.spec.ts:351:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/workspace-context-later-ac-210c2-nks-carry-the-exact-context/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/workspace-context-later-ac-210c2-nks-carry-the-exact-context/error-context.md
+
+  3 failed
+    tests/e2e/workspace-context.spec.ts:161:5 › draft before context survives first selection; SPA return restores original scoped work 
+    tests/e2e/workspace-context.spec.ts:244:5 › facility revocation purges drafts on inactive routes and regrant cannot restore them 
+    tests/e2e/workspace-context.spec.ts:326:5 › later account and facility pages resolve once and directory links carry the exact context 
+  6 passed (36.1s)

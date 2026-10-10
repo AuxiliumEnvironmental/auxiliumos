@@ -1,0 +1,3913 @@
+{
+  "version": 1,
+  "baseline_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "source_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+  "rule": "Frozen traceability. Axx is the ordered criterion in the pinned canonical source, not a new live requirement ID. Preserve exact text and hash; reconcile position/hash changes when adopting later sources. One accountable map; collaborators are review/implementation partners, not additional owners.",
+  "requirements_count": 28,
+  "criteria_count": 163,
+  "criteria": [
+    {
+      "criterion_ref": "M01.A01",
+      "requirement_id": "M01",
+      "source_index_1_based": 1,
+      "exact_text": "reusable platform services are consistently used across modules.",
+      "text_sha256": "a7d4927134bd79c6ada435598d96d41494da31c9e9e7e6f4d49dd62fee48e51f",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A02",
+      "requirement_id": "M01",
+      "source_index_1_based": 2,
+      "exact_text": "account/program module visibility can differ without creating client-specific tables.",
+      "text_sha256": "254069df2f8e3430efc92d52290eaf59d4f64dfc679997c36dfafb1940673dfc",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A03",
+      "requirement_id": "M01",
+      "source_index_1_based": 3,
+      "exact_text": "shared configurations that affect scope, pricing, authority, or release carry controlled versions.",
+      "text_sha256": "24884d7d5a064dd8b8fa9dd3c7814ff889d34e7c052a9286a2be5383bf1ae836",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A04",
+      "requirement_id": "M01",
+      "source_index_1_based": 4,
+      "exact_text": "identifiers and cross-object links remain stable.",
+      "text_sha256": "b788abd5643af0c10efe5e2f0bbe00598572896c2a5868fe22eee8b08c3d8364",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A05",
+      "requirement_id": "M01",
+      "source_index_1_based": 5,
+      "exact_text": "feature flags never serve as authorization. Domain business logic resides in its owning module.",
+      "text_sha256": "c7213d608b0d90564f386ec91378e3e1a2033ad97a849e601aa0e06e01ab8e37",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A06",
+      "requirement_id": "M01",
+      "source_index_1_based": 6,
+      "exact_text": "Permission-filtered global search finds only authorized objects and content.",
+      "text_sha256": "d8b2414950faf32c494957886250da012a538b6d792be54958e15ac8bfcab280",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M01.A07",
+      "requirement_id": "M01",
+      "source_index_1_based": 7,
+      "exact_text": "Governed rules/template administration versions question banks, routing, scope limitations, agreement blocks, ROM variables and dashboard defaults without retroactively changing approved work.",
+      "text_sha256": "8ca733b311c997ed80a79da74f505dd4d106b8edf69c9d3ce6b3d9bec0198401",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A01",
+      "requirement_id": "M02",
+      "source_index_1_based": 1,
+      "exact_text": "one account can have multiple client types, users, and scoped relationships.",
+      "text_sha256": "d67d043f9fe7c376a5686d4c460f98031ef6a6df1e48b69be8dfa382648ef653",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A02",
+      "requirement_id": "M02",
+      "source_index_1_based": 2,
+      "exact_text": "simple and enterprise clients receive appropriate navigation without service hard limits.",
+      "text_sha256": "4e434fa88d5bd10f6c2082fd636ffdc336b3afb07c8758198e1fc5b476a95ba7",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A03",
+      "requirement_id": "M02",
+      "source_index_1_based": 3,
+      "exact_text": "billing contact, requester, payer, signer, property owner, and approver can be different parties.",
+      "text_sha256": "acb238aff24f72ed7a44bb9ec7af3e1ae93b214d19b0b175c3915e84428df9a8",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A04",
+      "requirement_id": "M02",
+      "source_index_1_based": 4,
+      "exact_text": "account changes do not rewrite historical project/authorization facts.",
+      "text_sha256": "528ac7d770fc85c2b54c766badb069f4b82776ea3f66e8abfc8b9320cc526a8f",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A05",
+      "requirement_id": "M02",
+      "source_index_1_based": 5,
+      "exact_text": "unassigned accounts remain inaccessible.",
+      "text_sha256": "2a510770c63a7769c0ca55b86e366ba1a5b86eb471d97253422c450c7e92dc46",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M02.A06",
+      "requirement_id": "M02",
+      "source_index_1_based": 6,
+      "exact_text": "Client-type defaults prioritize the right requests and terminology without forbidding valid services; role-specific onboarding and quick-reference guidance support common tasks.",
+      "text_sha256": "3907f3195c65d49366e362aed02d6d99f905c5754a3899be7f1d9c9df8f2ceb9",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A01",
+      "requirement_id": "M03",
+      "source_index_1_based": 1,
+      "exact_text": "an account can operate with zero, one, or several programs.",
+      "text_sha256": "a5a535122c9b5c4b69258e37d2d82b5e5a394dc84fa125fe396ee1de46e9b823",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A02",
+      "requirement_id": "M03",
+      "source_index_1_based": 2,
+      "exact_text": "coverage and activation are explicit per facility and effective period.",
+      "text_sha256": "49165c838e53cddbcbe4e5cdfe0f09d5c8d031fef0bf72cff9a96787c7865ebc",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A03",
+      "requirement_id": "M03",
+      "source_index_1_based": 3,
+      "exact_text": "the correct versioned terms/rate basis are attached to an engagement.",
+      "text_sha256": "126ca9fa5edf017e74528479f5202638dc0ff36ac3798ec75ec4929d5ffc0dfe",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A04",
+      "requirement_id": "M03",
+      "source_index_1_based": 4,
+      "exact_text": "an MSA never bypasses project scope and authorization.",
+      "text_sha256": "43f391b982426e13c3a2d15bed9176c76a12346d286bcda3be020014b034f41c",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A05",
+      "requirement_id": "M03",
+      "source_index_1_based": 5,
+      "exact_text": "program-specific commitments are configurable and auditable.",
+      "text_sha256": "36e2edbe966cb348a02c53dab36662f1eac7893e31b2931a44be53bfa32392ae",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M03.A06",
+      "requirement_id": "M03",
+      "source_index_1_based": 6,
+      "exact_text": "out-of-coverage work enters a controlled approval route.",
+      "text_sha256": "0eb38d8196eb90c3a888eba77c2fdcfabafe54a73503c26112dc69c969a24f08",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M04.A01",
+      "requirement_id": "M04",
+      "source_index_1_based": 1,
+      "exact_text": "assets can be grouped into multiple permitted portfolios.",
+      "text_sha256": "55e9329a7bb00fb0e8aaa2caa3bc377da31c8b737b0e7e6df77bfe650f9cae7d",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M04.A02",
+      "requirement_id": "M04",
+      "source_index_1_based": 2,
+      "exact_text": "changes preserve site-level truth and historical group membership where relevant.",
+      "text_sha256": "a35eeba3ebfe2615fb6884bcada71595a66d7ecbb0dc1257c7750945c7613bb9",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M04.A03",
+      "requirement_id": "M04",
+      "source_index_1_based": 3,
+      "exact_text": "executive/portfolio views derive from authorized underlying records.",
+      "text_sha256": "943bd1166292cf53cf96e7d5b78425f02e0036d2b780bbe07b7292076760a8c5",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M04.A04",
+      "requirement_id": "M04",
+      "source_index_1_based": 4,
+      "exact_text": "grouping never grants unintended cross-account access.",
+      "text_sha256": "34d28b06df070db934a72abfa8ecbf8c740db64853e5010765732bf92226bb5b",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M04.A05",
+      "requirement_id": "M04",
+      "source_index_1_based": 5,
+      "exact_text": "an ordinary one-property engagement does not need an invented portfolio.",
+      "text_sha256": "78a162990696ebbf956cc4ecf2e9177ffa81638d3868b99d00056274810370d7",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M05.A01",
+      "requirement_id": "M05",
+      "source_index_1_based": 1,
+      "exact_text": "repeat work can attach to the same stable site and physical areas.",
+      "text_sha256": "a5033a1f41c56da8ed9fae28200246ac13795c6c3877364a6e2b111411925a0c",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M05.A02",
+      "requirement_id": "M05",
+      "source_index_1_based": 2,
+      "exact_text": "observations and scope identify actual included/excluded areas.",
+      "text_sha256": "9977ab32e402622b40b6efcb7f9d96b08283ead0d0be38ae03dab3520ff03b70",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M05.A03",
+      "requirement_id": "M05",
+      "source_index_1_based": 3,
+      "exact_text": "facility history preserves linked incidents/projects/docs instead of copying them into one notes field.",
+      "text_sha256": "94b9ed62346ac12fcdde8ac01ceaefc32fe6f4a72c86ab54e387d1367599d145",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M05.A04",
+      "requirement_id": "M05",
+      "source_index_1_based": 4,
+      "exact_text": "facility assignments restrict site users.",
+      "text_sha256": "239885d6cdcea3b02fe82a21045821d392a7720447b40131b9057cd037489825",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M05.A05",
+      "requirement_id": "M05",
+      "source_index_1_based": 5,
+      "exact_text": "physical site identity, paying account, and business relationship are not accidentally conflated.",
+      "text_sha256": "a22979aaa704c1d20c99f6335c8d54fa103691733694d376d67b3e2f9bd8a5d1",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A01",
+      "requirement_id": "M06",
+      "source_index_1_based": 1,
+      "exact_text": "a facility has a versioned passport with owners, source evidence and review dates.",
+      "text_sha256": "ca5ac08ea3d9f145cf11a95222b0f4175b0ec59edba5eaf719d00b9ec231ed2a",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A02",
+      "requirement_id": "M06",
+      "source_index_1_based": 2,
+      "exact_text": "readiness gaps have responsible owners, actions and follow-up.",
+      "text_sha256": "70a5fdb94495bd3d63a46aec164e97a9f1f467a56e39eb4c2f73d0d753751a35",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A03",
+      "requirement_id": "M06",
+      "source_index_1_based": 3,
+      "exact_text": "activation reflects completed requirements and explicit exceptions.",
+      "text_sha256": "b16769f693caeb0a06b6f1a4602ca48f29b0cb6157e3f8d9381e9e814a01fc35",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A04",
+      "requirement_id": "M06",
+      "source_index_1_based": 4,
+      "exact_text": "response information is available to assigned people.",
+      "text_sha256": "ca20c0ae4e7b39fe0baa8b1a380cd3e0f05b9fe67e1becca79fdadadb7b55649",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A05",
+      "requirement_id": "M06",
+      "source_index_1_based": 5,
+      "exact_text": "recurring work surfaces due/overdue items.",
+      "text_sha256": "a4a0bf7a21bd739d88fc2d4a6dc528d2edc2db1e99b39661c584a2d32ccaf5e4",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M06.A06",
+      "requirement_id": "M06",
+      "source_index_1_based": 6,
+      "exact_text": "reporting distinguishes verified readiness facts from unknown or expired information.",
+      "text_sha256": "888e33d682f2e25b788d9de0a954fd2c2448a9f295c29810eda70ad0f6c4ae81",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A01",
+      "requirement_id": "M07",
+      "source_index_1_based": 1,
+      "exact_text": "original submitted wording and attachments remain preserved.",
+      "text_sha256": "9920cebc4abcafe3d2a113aa99a23fe2cd3e78caf3ea287aa12ffeb11d0c885c",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A02",
+      "requirement_id": "M07",
+      "source_index_1_based": 2,
+      "exact_text": "structured review can reclassify without erasing that original.",
+      "text_sha256": "6cca48fad391bd44cd220548a35fea2906c4077f709ea0e875a677dcf8ef38c4",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A03",
+      "requirement_id": "M07",
+      "source_index_1_based": 3,
+      "exact_text": "requirements adapt to issue and intent using versioned rules.",
+      "text_sha256": "da12b3d397f1c765b98b39610d0b7d71b875107c069484aeae065f073f737e6d",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A04",
+      "requirement_id": "M07",
+      "source_index_1_based": 4,
+      "exact_text": "missing information has ownership and response tracking.",
+      "text_sha256": "6e8d11070ae280e5ef7a23de0c5c985242f3113909b01f9d686343571a356382",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A05",
+      "requirement_id": "M07",
+      "source_index_1_based": 5,
+      "exact_text": "a request can be accepted, limited, referred, declined or returned.",
+      "text_sha256": "b521762761c2d1055ba0d3b0eedb9262cb8d74a653251c4daf03d6865a741019",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A06",
+      "requirement_id": "M07",
+      "source_index_1_based": 6,
+      "exact_text": "submission alone never mobilizes or authorizes work.",
+      "text_sha256": "0561f0c1152df6446a98f0ca767ca27e40f1484883505757920b19dc3b972ce1",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M07.A07",
+      "requirement_id": "M07",
+      "source_index_1_based": 7,
+      "exact_text": "Users can start from a saved template, repeat prior request, asset prefill or help-classify route; prior approval and authorization are never copied as new authority.",
+      "text_sha256": "685a33011dd73eb8a75aa4eed62c4f3a5c988232a3f08ae4be21f2a5a122dedf",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A01",
+      "requirement_id": "M08",
+      "source_index_1_based": 1,
+      "exact_text": "approved scope is a specific preserved revision.",
+      "text_sha256": "1cd800837aaa0ff0b135b332070e01bded75b58ff49c63a6fd80afa9abab6f0f",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A02",
+      "requirement_id": "M08",
+      "source_index_1_based": 2,
+      "exact_text": "inclusions and exclusions, areas, assumptions and required deliverables are unambiguous.",
+      "text_sha256": "23e985b348b6a9fd2af0a2097b41a274e0215de2d7adc52169dbf6a38f7484d4",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A03",
+      "requirement_id": "M08",
+      "source_index_1_based": 3,
+      "exact_text": "accepted/declined recommendations are evidenced.",
+      "text_sha256": "034d384bfcfb196584764240616c8b581d8ee451992d0fd1fe7a74e0288532b1",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A04",
+      "requirement_id": "M08",
+      "source_index_1_based": 4,
+      "exact_text": "changes produce a reviewed amendment linked to its authorization and effective time.",
+      "text_sha256": "136fd31732d238c07925221300a8aff4610426212d1e550436ff4183a94a3549",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A05",
+      "requirement_id": "M08",
+      "source_index_1_based": 5,
+      "exact_text": "unauthorized edits cannot alter active scope.",
+      "text_sha256": "9f00e29112a8c3f2057e1f563b15a2efe9320cd4b0ea450f020a921e6241070a",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M08.A06",
+      "requirement_id": "M08",
+      "source_index_1_based": 6,
+      "exact_text": "chat can suggest a change but cannot approve one.",
+      "text_sha256": "003f6be03c72bc6f88245b118e6ba028eb7e64b9eb69d165595bd8b8e7eb20b6",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A01",
+      "requirement_id": "M09",
+      "source_index_1_based": 1,
+      "exact_text": "requested, recommended, authorized, collected, lab-reported and professionally interpreted information are distinct.",
+      "text_sha256": "6c300de7d38f5109f16d8fa6235119ea3997997d259d8214d25ef22fd8de5e60",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A02",
+      "requirement_id": "M09",
+      "source_index_1_based": 2,
+      "exact_text": "plans and collected samples trace to scope and location.",
+      "text_sha256": "e78e22196a160d1e6b0f5f21b829526ea63b755cff9356e38d4d24bbe73f8e04",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A03",
+      "requirement_id": "M09",
+      "source_index_1_based": 3,
+      "exact_text": "collection identifiers reconcile with COC/lab records.",
+      "text_sha256": "e3ee769d68313f950a81a0cf6a164704f91137238cb97c62549dbfb5b1b18baa",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A04",
+      "requirement_id": "M09",
+      "source_index_1_based": 4,
+      "exact_text": "revised lab data preserves previous records.",
+      "text_sha256": "f6b984ff4446b5e8e424447cf226f8378065ddb498a26e4c7c566bb461c2a673",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A05",
+      "requirement_id": "M09",
+      "source_index_1_based": 5,
+      "exact_text": "decisions and declinations affect scope/cost/deliverables visibly.",
+      "text_sha256": "be2ac820cbee30a64295e286e1da55772c728fc09a9b53777b9a222c13c55889",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M09.A06",
+      "requirement_id": "M09",
+      "source_index_1_based": 6,
+      "exact_text": "unqualified users and AI cannot approve strategy or issue conclusions.",
+      "text_sha256": "ee9c234d5d9e2cf0c3d7bd0058edda3d05d796497316fc5f7220d1e7c8b5b271",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A01",
+      "requirement_id": "M10",
+      "source_index_1_based": 1,
+      "exact_text": "estimates show assumptions, ranges, exclusions and rate version.",
+      "text_sha256": "ed4fe6862d976191e1073ed64579ec89f30fa4d3c0db9f135f3693532260de58",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A02",
+      "requirement_id": "M10",
+      "source_index_1_based": 2,
+      "exact_text": "scope/sampling/travel inputs have traceable effects.",
+      "text_sha256": "1b0c9fc34624a734ee221618ce1593add4704878e50c723e30d2d93d37c31a8d",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A03",
+      "requirement_id": "M10",
+      "source_index_1_based": 3,
+      "exact_text": "revisions preserve their bases.",
+      "text_sha256": "05a86a3b2192a62051130507c7d1ad3ed0b720f92ce9f71534ebf8e54e49505d",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A04",
+      "requirement_id": "M10",
+      "source_index_1_based": 4,
+      "exact_text": "recommended cap differs from granted cap.",
+      "text_sha256": "38547b4c803bb39567b4f2187b1cccdb8cfa0f2ca0b7cef90b4e08f9e3752c8b",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A05",
+      "requirement_id": "M10",
+      "source_index_1_based": 5,
+      "exact_text": "actual work costs can be compared to the applicable estimate without retroactively changing it.",
+      "text_sha256": "2c37e79b70dc91ed4ac269550b1c9901129dfca80b7a4fb2dc1ebc2fdd73ead8",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M10.A06",
+      "requirement_id": "M10",
+      "source_index_1_based": 6,
+      "exact_text": "confidence is justified by data quality, not a fabricated precision score.",
+      "text_sha256": "534d7f38b973f3a745ec55a66a55427d47bb3a33ea67eda1527bf0214a1b9f27",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A01",
+      "requirement_id": "M11",
+      "source_index_1_based": 1,
+      "exact_text": "authorized scope version, signer authority, payer, rate basis, cap, sampling and terms are captured as an immutable approved record.",
+      "text_sha256": "c61e9459e0b17f181a72b858655dbf0f8920800df2a2ac050c39d773b1345e40",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A02",
+      "requirement_id": "M11",
+      "source_index_1_based": 2,
+      "exact_text": "signature evidence attaches to the exact version.",
+      "text_sha256": "d7cb72404ac433cf2379b0b1ea1b80be545e1901c8c8e79a55be8bf960853d93",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A03",
+      "requirement_id": "M11",
+      "source_index_1_based": 3,
+      "exact_text": "valid authority controls mobilization and changes.",
+      "text_sha256": "3d6cb253dd23c34031bc4cb255b230cea569c27fc8b9622de7940bb7983b05c2",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A04",
+      "requirement_id": "M11",
+      "source_index_1_based": 4,
+      "exact_text": "expiry/revocation/supersession has deterministic effects.",
+      "text_sha256": "51e12e22128d9bf64379827e0869d3095f5dc8d3ae7c386b823aebf42d9850df",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A05",
+      "requirement_id": "M11",
+      "source_index_1_based": 5,
+      "exact_text": "emergency exceptions are explicit, limited and reviewed.",
+      "text_sha256": "b198272e6d4bdcd4b3d8f256d8e30699ab52046026cd6db4295232cb0a6e146c",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A06",
+      "requirement_id": "M11",
+      "source_index_1_based": 6,
+      "exact_text": "retries cannot create duplicate commitments.",
+      "text_sha256": "c34d7aabb69e0db05a279f28243869aa7b05d7d954353177c424d2f6e3eec495",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M11.A07",
+      "requirement_id": "M11",
+      "source_index_1_based": 7,
+      "exact_text": "Emergency intake records requester, signer, payer, site/address, access contact, hazard, affected area, occupancy, safety flags, action and cap; follow-up services require further authorization unless explicitly covered.",
+      "text_sha256": "82aef9f43f1e7ce56b0a0d862e4c98490520455fa392fdbdce60f56e81f7ccb1",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A01",
+      "requirement_id": "M12",
+      "source_index_1_based": 1,
+      "exact_text": "one incident can produce several related requests/projects.",
+      "text_sha256": "793b8913ed83885aea6449e28c4eadbe77c76ebda7e14420034dbb9791856374",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A02",
+      "requirement_id": "M12",
+      "source_index_1_based": 2,
+      "exact_text": "project creation links accepted request, applicable scope and authorization.",
+      "text_sha256": "f454d565202b227be69776a96988bcb78b553ba8e3ca213aa218adc810972889",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A03",
+      "requirement_id": "M12",
+      "source_index_1_based": 3,
+      "exact_text": "role-specific queues state next actions and owner.",
+      "text_sha256": "cb4013e68d05c03dc3786e02605356e46ef04c3f848d7af98c99cf6948227378",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A04",
+      "requirement_id": "M12",
+      "source_index_1_based": 4,
+      "exact_text": "scheduling and visits have clear status.",
+      "text_sha256": "36f4dbc34793ee1970dc14335d89a721ec18e5fb34a48a40dcb65976c1854ef3",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A05",
+      "requirement_id": "M12",
+      "source_index_1_based": 5,
+      "exact_text": "field conditions can trigger a change request.",
+      "text_sha256": "9bb987f81a246d45f6568236ff2a23e96daf05abe3412e292fc033b14a35534f",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A06",
+      "requirement_id": "M12",
+      "source_index_1_based": 6,
+      "exact_text": "closeout checks deliverables/open items before final state.",
+      "text_sha256": "b291c66e2ca169e9cb4e97c6ce48e9bf6ba916cb311b4949b47853c03cfe1868",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A07",
+      "requirement_id": "M12",
+      "source_index_1_based": 7,
+      "exact_text": "history remains inspectable.",
+      "text_sha256": "fd7d424ffae6a0c2a595ca251e49d532d1d27cd7f31d236f5e11a1afcb66c515",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M12.A08",
+      "requirement_id": "M12",
+      "source_index_1_based": 8,
+      "exact_text": "Queues expose account/object context, status, priority, owner, next action, due date, blocker, required reviewer, client-facing status and last activity.",
+      "text_sha256": "3dfeb2eb2c8f492831f7e5040071bb2f2d289b9a378f8bdb188c5ff80e6aef94",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A01",
+      "requirement_id": "M13",
+      "source_index_1_based": 1,
+      "exact_text": "uploads begin hidden.",
+      "text_sha256": "0dbc684bcc4f31eaeb6d1815d7b7aa42ae63c3106fcb92702852f0afc35ac254",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A02",
+      "requirement_id": "M13",
+      "source_index_1_based": 2,
+      "exact_text": "classification, exact version, owning context, required approval and recipient permissions are checked together before release.",
+      "text_sha256": "438e4716ffe99049c508270ff5815c14b95120439e1415f341cd13c8a206e7a7",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A03",
+      "requirement_id": "M13",
+      "source_index_1_based": 3,
+      "exact_text": "authorized viewers/downloaders receive only the approved version.",
+      "text_sha256": "1014768f5414c736a7e5c8e249cbb58026b3cb56bcf9ee8e9641efeaad5b4d29",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A04",
+      "requirement_id": "M13",
+      "source_index_1_based": 4,
+      "exact_text": "direct object URL/API attempts respect access restrictions.",
+      "text_sha256": "dedbac9d8e4c493971f41311b2d3584d21c062cb0e84f795a89cdd73393d8a22",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A05",
+      "requirement_id": "M13",
+      "source_index_1_based": 5,
+      "exact_text": "new drafts cannot inherit old release approval.",
+      "text_sha256": "a358a1fe0513769e99c6c7e15e22ab1802a9203903113eec4df301f003560d02",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A06",
+      "requirement_id": "M13",
+      "source_index_1_based": 6,
+      "exact_text": "superseded/withdrawn records have explicit access behavior.",
+      "text_sha256": "5eb8b18f040e11e15e7e28038f9573eb1a4094bb6da7269587958b5651751e10",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A07",
+      "requirement_id": "M13",
+      "source_index_1_based": 7,
+      "exact_text": "holds prevent destructive retention cleanup.",
+      "text_sha256": "e18ad702896fe7edaa026346e24970567a10bc635896a7d86ad34283a3d699e0",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A08",
+      "requirement_id": "M13",
+      "source_index_1_based": 8,
+      "exact_text": "packages cannot disclose a restricted child document.",
+      "text_sha256": "05315b00e35720f005ef2f47872448e407c2044bc06a6a9ca5dd96ef416b66fd",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M13.A09",
+      "requirement_id": "M13",
+      "source_index_1_based": 9,
+      "exact_text": "Document packages reference canonical versions rather than duplicating independent copies; technical drafts are not treated as released final reports.",
+      "text_sha256": "e7ed8a17071948bd13676e271f5d08735acfd9899d28e2d7f6cbba58eb37e554",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A01",
+      "requirement_id": "M14",
+      "source_index_1_based": 1,
+      "exact_text": "every thread is linked to an account/object.",
+      "text_sha256": "53972f1766b953b892ab27f82502908b4132d0fe543601a07622e457a6647ff4",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A02",
+      "requirement_id": "M14",
+      "source_index_1_based": 2,
+      "exact_text": "participants and notification content honor the same access model.",
+      "text_sha256": "77b548a13f1bcd345a311697c4faf7d06737a446eac0aa3e9bb60a7dfee66630",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A03",
+      "requirement_id": "M14",
+      "source_index_1_based": 3,
+      "exact_text": "messages have ownership and response status.",
+      "text_sha256": "9910c1fc501ddc510403d81f095d5fa42ff8b57f89d621d458702ab43e1195de",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A04",
+      "requirement_id": "M14",
+      "source_index_1_based": 4,
+      "exact_text": "technical questions route to qualified reviewers.",
+      "text_sha256": "ce7122ea33738f910d73f20d691784b014e14fc4f0fbbcee320b8d23e3cc3bbe",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A05",
+      "requirement_id": "M14",
+      "source_index_1_based": 5,
+      "exact_text": "calls and external messages can be logged without changing approved records.",
+      "text_sha256": "f5330c661806f152d7db918e2067adcaa9c8479a1d0661efa31d5e4b0866832d",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A06",
+      "requirement_id": "M14",
+      "source_index_1_based": 6,
+      "exact_text": "requests for changed scope/cap/sampling/releases create drafts or tasks.",
+      "text_sha256": "546d63d45e88eaff1d16b32b808f31f6e933ae902b075c92897c2fd01019fc01",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A07",
+      "requirement_id": "M14",
+      "source_index_1_based": 7,
+      "exact_text": "failed notifications are visible and retryable without duplicate commitments.",
+      "text_sha256": "39d3e0f5825c37cbfe1f1415ed73404438df4526d02d5a4a27f8c896c7bb9a93",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M14.A08",
+      "requirement_id": "M14",
+      "source_index_1_based": 8,
+      "exact_text": "Ask-about-document questions retain exact version, scope, author/reviewer and project context; administrative, technical, scope, billing, scheduling, urgent, complaint/dispute and vendor routes keep separate authority.",
+      "text_sha256": "443535eb8a591d00b99a91082ca384d54e4d93e655ad1760c2fa5f79b1e93148",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A01",
+      "requirement_id": "M15",
+      "source_index_1_based": 1,
+      "exact_text": "assignment checks category, site/program authorization, active credential status and applicable restrictions.",
+      "text_sha256": "0e409ec8ce70897efa3e3623ccd8f92faa97062f53d64553621b12fbfac9b087",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A02",
+      "requirement_id": "M15",
+      "source_index_1_based": 2,
+      "exact_text": "vendors see assigned instructions/work only.",
+      "text_sha256": "3023b56447a4fa432ff785fa9eed5d513077e909f805dd2bfac9e02e8284cc83",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A03",
+      "requirement_id": "M15",
+      "source_index_1_based": 3,
+      "exact_text": "required closeout documents and evidence are tracked.",
+      "text_sha256": "4ea72a5829d23af0f200248e50dbef797ab843fb9c49377ec6dd3dc013dd1360",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A04",
+      "requirement_id": "M15",
+      "source_index_1_based": 4,
+      "exact_text": "scorecards derive from recorded facts.",
+      "text_sha256": "d69ce4f92c4c13f99d78dd6d8a21a1e1ac4bafc244cdf73c062a0f6fea3ac78b",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A05",
+      "requirement_id": "M15",
+      "source_index_1_based": 5,
+      "exact_text": "financial and professional responsibility remain explicit.",
+      "text_sha256": "ee7b82216928a15ff421143c79b3259806bd83f5e46872aaf1501a39b7997a42",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M15.A06",
+      "requirement_id": "M15",
+      "source_index_1_based": 6,
+      "exact_text": "a vendor upload is not automatically client-released.",
+      "text_sha256": "b7f1d509e4007ebe8f53117c3a08b61aab9a4fc36ec103431622e32125afd156",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A01",
+      "requirement_id": "M16",
+      "source_index_1_based": 1,
+      "exact_text": "money records trace to scope/project/authorization and correct client/program.",
+      "text_sha256": "432eef30298f81b88db964edbcf3a60e90e1366fbd565e349d6d90d8d0f6ce1f",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A02",
+      "requirement_id": "M16",
+      "source_index_1_based": 2,
+      "exact_text": "authorized cap, committed amount, incurred amount and invoiced amount are not conflated.",
+      "text_sha256": "a7144d953e043dc795ac9f023d923328a5e2f53a3aac4dfc075982198a3efc3b",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A03",
+      "requirement_id": "M16",
+      "source_index_1_based": 3,
+      "exact_text": "approval requirements are enforced on mutations.",
+      "text_sha256": "fe5deabb2d0808f5c98a94082c0fafdaafa18b89d35bd0da33a8f892df33e4af",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A04",
+      "requirement_id": "M16",
+      "source_index_1_based": 4,
+      "exact_text": "rate/tax/markup/terms changes do not alter issued history.",
+      "text_sha256": "cf33f10fdc1943cb2fdab233268ba67c8f5ef779edf812177b0a785e593ee054",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A05",
+      "requirement_id": "M16",
+      "source_index_1_based": 5,
+      "exact_text": "invoice/export retries reconcile.",
+      "text_sha256": "9ccf672942e9c1cb33675d3124fac35e855cdd4e0aaba808dd33041305d9dd78",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A06",
+      "requirement_id": "M16",
+      "source_index_1_based": 6,
+      "exact_text": "reserve balances derive from immutable transactions and explicit permitted uses.",
+      "text_sha256": "0411efe0caf119de67a5f04a0d639b919d2a6aa5e7dce516abe1db42f359c821",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A07",
+      "requirement_id": "M16",
+      "source_index_1_based": 7,
+      "exact_text": "reporting can show the inputs behind a total.",
+      "text_sha256": "7a503e2b75106201ca40130f931f7cb99e4f2db6d955f9682fe504055c70ea61",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M16.A08",
+      "requirement_id": "M16",
+      "source_index_1_based": 8,
+      "exact_text": "Vendor management fees and prepayment/client-direct handling are configurable proposed commercial policies; the system does not silently commit Auxilium to floating major vendor costs.",
+      "text_sha256": "d55532611ef818e6253446d051a0664c118b770dfe4a362e057e3bb46f497dfa",
+      "accountable_map": "MAP-04",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A01",
+      "requirement_id": "M17",
+      "source_index_1_based": 1,
+      "exact_text": "totals and risk/readiness metrics resolve to authorized source records and defined denominators.",
+      "text_sha256": "0752a99ab9a8813023f6d20e27704ccc431431ab451a8f19f299035ab3715cf6",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A02",
+      "requirement_id": "M17",
+      "source_index_1_based": 2,
+      "exact_text": "period snapshots are reproducible.",
+      "text_sha256": "5d1421c85541be2ae9c141d48dbecbfc23cf2e11165850b0fcdab2cce41f17a1",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A03",
+      "requirement_id": "M17",
+      "source_index_1_based": 3,
+      "exact_text": "executive action items have owners and status.",
+      "text_sha256": "3cf981813ec1d709ba1c650fcd7728e022c41d0a105a0a7d2c8eb4eeec447b55",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A04",
+      "requirement_id": "M17",
+      "source_index_1_based": 4,
+      "exact_text": "released QBRs are versioned packages.",
+      "text_sha256": "51bcdcd39e55d0d686868ef363b62465cd6f36c3c54371a23ec3e5daf5e8edc8",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A05",
+      "requirement_id": "M17",
+      "source_index_1_based": 5,
+      "exact_text": "exports follow visibility rules.",
+      "text_sha256": "d0d8150497fb813b1b9fd09802156bcf6a30dc2d74e7607cb0d8e99f2ccafdc6",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A06",
+      "requirement_id": "M17",
+      "source_index_1_based": 6,
+      "exact_text": "missing data is shown as unknown rather than zero or compliant.",
+      "text_sha256": "14db5e685572b5f5d7801d6926f956177fd5135c5c70d4287c3ce23f96954d3a",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M17.A07",
+      "requirement_id": "M17",
+      "source_index_1_based": 7,
+      "exact_text": "claimed value is supported and labeled accurately.",
+      "text_sha256": "acdc34ad2f443a5575d8bc076dc337838b1f45f619a2a94be2e7298980104c3d",
+      "accountable_map": "MAP-05",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A01",
+      "requirement_id": "M18",
+      "source_index_1_based": 1,
+      "exact_text": "each output records source context, prompt/model version and resulting review status.",
+      "text_sha256": "6b2f8489f28a312f03812cfdfabbcf83649f2da6ecff20252ad3e0282786a173",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A02",
+      "requirement_id": "M18",
+      "source_index_1_based": 2,
+      "exact_text": "AI respects the user's access.",
+      "text_sha256": "99f881cb4e28389b4b4da9a5b0d9b4d26856213552e7fbc09a6c31aa9d2a8ee2",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A03",
+      "requirement_id": "M18",
+      "source_index_1_based": 3,
+      "exact_text": "source content is treated as data rather than system instructions.",
+      "text_sha256": "f6ba3741b42e3b3218d4350ad268206736b3c2c8c6f1e01692fbb8c9ad6d9eda",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A04",
+      "requirement_id": "M18",
+      "source_index_1_based": 4,
+      "exact_text": "uncertain or incomplete extraction is visible.",
+      "text_sha256": "02f4bb76e69fe326703953a5c3df1787b7a780a32ae1c590fede3eae82aae7d8",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A05",
+      "requirement_id": "M18",
+      "source_index_1_based": 5,
+      "exact_text": "adoption/rejection is recorded.",
+      "text_sha256": "fc423acc18509afe9b4302b0aff7a434b33905658189610bd82fcf4d0dbbfc31",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A06",
+      "requirement_id": "M18",
+      "source_index_1_based": 6,
+      "exact_text": "AI proposes and drafts but cannot grant professional scope, sampling, signatures, caps, final release or technical conclusions.",
+      "text_sha256": "8c7b39d8b488ac5b4022d042de66543b2c57fa2cab7c6ed701cf1a2cd5d22d94",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M18.A07",
+      "requirement_id": "M18",
+      "source_index_1_based": 7,
+      "exact_text": "jobs have failure/cost/timeout visibility.",
+      "text_sha256": "84c5c098d37b861ae4ce7c9d0b8109cebf35392164ca9e3915f14b5e03b7fe85",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A01",
+      "requirement_id": "M19",
+      "source_index_1_based": 1,
+      "exact_text": "consequential state changes and denials produce usable, protected history.",
+      "text_sha256": "b7684027884b4b1d9a5442131a38289302f80cd3005324658980b22d792e70ab",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A02",
+      "requirement_id": "M19",
+      "source_index_1_based": 2,
+      "exact_text": "audit events correlate to exact records and versions.",
+      "text_sha256": "ef38ccfce7090f9425b71a83636b33def869a97c66fc7df3b62c57fa6867b8a3",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A03",
+      "requirement_id": "M19",
+      "source_index_1_based": 3,
+      "exact_text": "events cannot be casually changed/deleted.",
+      "text_sha256": "c87f25616e79121b6dfaebbd8209665d07b64628a50af6d05590cb0382c5d5ba",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A04",
+      "requirement_id": "M19",
+      "source_index_1_based": 4,
+      "exact_text": "access to the log itself is restricted.",
+      "text_sha256": "60c644537b1192ec09f2d69b31d589e696a6b816eefcfb46713d5de88abde621",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A05",
+      "requirement_id": "M19",
+      "source_index_1_based": 5,
+      "exact_text": "sensitive payloads/secrets are not copied into logs.",
+      "text_sha256": "b4633ba600dce369d372631cf46eef273d46a93d178f1f43208b7bd81d4df93e",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A06",
+      "requirement_id": "M19",
+      "source_index_1_based": 6,
+      "exact_text": "exports and incident investigations can reconstruct what happened.",
+      "text_sha256": "d24f6e6b1963ba3a948a4854e4611f04319e89a0ea905789f6b06d2dc4da105d",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M19.A07",
+      "requirement_id": "M19",
+      "source_index_1_based": 7,
+      "exact_text": "background/system actors are represented explicitly.",
+      "text_sha256": "9ba8b22fdd32d87b69a4d67639ab5f5e608b3b81f2368a5e2988a20dbf8a1f91",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A01",
+      "requirement_id": "M20",
+      "source_index_1_based": 1,
+      "exact_text": "each connector declares record ownership, allowed operations, external identity mapping and version.",
+      "text_sha256": "de680e38446046169092f69e9b6d812e70b7ce6e077a3aa557142751fa026ce3",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A02",
+      "requirement_id": "M20",
+      "source_index_1_based": 2,
+      "exact_text": "least-privilege credentials are server-controlled.",
+      "text_sha256": "5f4bf7424c34f590c4dc5e33877374b94fe6d57806d0207809ae74df41552521",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A03",
+      "requirement_id": "M20",
+      "source_index_1_based": 3,
+      "exact_text": "events/retries are idempotent.",
+      "text_sha256": "a749563813163f633ce98c2ed4771ff6e1b58573f02b66d9e48071cb4531436e",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A04",
+      "requirement_id": "M20",
+      "source_index_1_based": 4,
+      "exact_text": "ordering/conflicts/partial failures and reconciliation are visible.",
+      "text_sha256": "6eedebc3c92160472ca746c669999f703cc4971d47c69cfd1941591b69dcc69e",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A05",
+      "requirement_id": "M20",
+      "source_index_1_based": 5,
+      "exact_text": "changes still use domain authorization/release/audit rules.",
+      "text_sha256": "a577b4f41dff4bc5aae6ffad8acc7534dce04403f436f61ec83c5fcbbd1ad4ab",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A06",
+      "requirement_id": "M20",
+      "source_index_1_based": 6,
+      "exact_text": "sync cannot expose drafts or overwrite approved scope.",
+      "text_sha256": "d2f445f1b3901ab71015dee00483064add7e31624896729b3af1ac2e77de2539",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A07",
+      "requirement_id": "M20",
+      "source_index_1_based": 7,
+      "exact_text": "connector revocation and export/offboarding are supported.",
+      "text_sha256": "3b3d87151fe07958c3f16dec4ab3f7ab40ad7208926ea0803854dd7b74808856",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "M20.A08",
+      "requirement_id": "M20",
+      "source_index_1_based": 8,
+      "exact_text": "staff and Moldo-only managers operate in Moldo without OS access; authorized Auxilium managers see permitted operational projections in OS; enterprise clients see only released/allowed Moldo information scoped to their account/portfolio; scoped enterprise assignments can enter Moldo without requiring Moldo staff to use OS; Moldo ordinary operations survive OS unavailability; integration can be removed without destroying Moldo's essential records.",
+      "text_sha256": "0ade2ce3c6ae79df65e41a524210f9d2ed2a3a44586622a1a6bd16af8e7997a7",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C01.A01",
+      "requirement_id": "C01",
+      "source_index_1_based": 1,
+      "exact_text": "An inactive user or membership is denied even with another role row and a previously issued session.",
+      "text_sha256": "9126625c22906f5626f27d0f5616a237a1515ae6daba7196b87eaedbc716fbad",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C01.A02",
+      "requirement_id": "C01",
+      "source_index_1_based": 2,
+      "exact_text": "Cross-account and unassigned-facility reads, writes, joins, exports, object paths and dashboard aggregates are denied server-side.",
+      "text_sha256": "1ebe6db60bc20ddc2b9e6c4ac5fb27c47e69c039de39f1a68b8b5a92f6e93727",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C01.A03",
+      "requirement_id": "C01",
+      "source_index_1_based": 3,
+      "exact_text": "Technical administrators do not gain implicit scientific, signature or release authority.",
+      "text_sha256": "33d17f8c92fbe16a2ec82de9f7cb119e62e1a501e541601a974288d1a0e9c29b",
+      "accountable_map": "MAP-01",
+      "collaborating_maps": [
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C02.A01",
+      "requirement_id": "C02",
+      "source_index_1_based": 1,
+      "exact_text": "Review approval binds to the exact immutable revision and checksum; a changed draft loses that approval.",
+      "text_sha256": "6d6dca556dabc4f56a08a16978a9539364cac9a2673abfe0adb174c21fabc304",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C02.A02",
+      "requirement_id": "C02",
+      "source_index_1_based": 2,
+      "exact_text": "Creating a replacement draft leaves the released version current until controlled replacement release.",
+      "text_sha256": "1411c1dd482dcd4d6fc2bffdee90d98c8af27ee2182cd7e9d41617132417ec3a",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C02.A03",
+      "requirement_id": "C02",
+      "source_index_1_based": 3,
+      "exact_text": "A package cannot expose restricted child files; direct storage access is denied without current audience authorization.",
+      "text_sha256": "20527240ef55b609e2dc262a7b1ce4ad7b37d04fcb869eb030b5573220501d53",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C02.A04",
+      "requirement_id": "C02",
+      "source_index_1_based": 4,
+      "exact_text": "Preservation holds block destruction separately from visibility restrictions.",
+      "text_sha256": "0ca4019a135c18566308ac9b36e85094b62b86563cd7fb5ce81546859988910c",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C03.A01",
+      "requirement_id": "C03",
+      "source_index_1_based": 1,
+      "exact_text": "Messages and AI outputs can create proposals but cannot change approved scope, caps, samples, signed terms or released files.",
+      "text_sha256": "6a32a8303732ea25589c1439c7334beef7547c0370f2742c4b96f222c59cba64",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C03.A02",
+      "requirement_id": "C03",
+      "source_index_1_based": 2,
+      "exact_text": "Effective approved amendments govern the amended domain while original records and approval chains remain available.",
+      "text_sha256": "28b80f00d6ee52d25911d5a3b016ed2bc8fc6263c876a0a471a6c534efc862ab",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C03.A03",
+      "requirement_id": "C03",
+      "source_index_1_based": 3,
+      "exact_text": "Retries and concurrency do not cause duplicate signatures, commitments or conflicting active revisions.",
+      "text_sha256": "d757f4be781923e7863fc4ff2b5db89250e952f93541c4f097c693a35e6bed11",
+      "accountable_map": "MAP-03",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-04",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C04.A01",
+      "requirement_id": "C04",
+      "source_index_1_based": 1,
+      "exact_text": "Restore a representative backup into an isolated environment and reconcile database records with private objects and audit history.",
+      "text_sha256": "38a60e76279650339de5f999d9642e3359a60fec5b6698b1996911263f419a92",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C04.A02",
+      "requirement_id": "C04",
+      "source_index_1_based": 2,
+      "exact_text": "A failed migration or partial integration has an exercised recovery path; no untested destructive down-migration is assumed safe.",
+      "text_sha256": "5b6c552535a271f70e806eae4812cef4921095982dc86707da7546ee4d3e6576",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C04.A03",
+      "requirement_id": "C04",
+      "source_index_1_based": 3,
+      "exact_text": "Record measured recovery and performance results against explicitly approved targets.",
+      "text_sha256": "e5627faa2dec55e10a098c0ec97bb57b5f16d1a8d598e6ec72c705fc305b88e6",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C04.A04",
+      "requirement_id": "C04",
+      "source_index_1_based": 4,
+      "exact_text": "Candidate release includes dependency and secret scanning, privileged-admin MFA evidence and independent outside security/code review with material findings resolved or explicitly dispositioned.",
+      "text_sha256": "a06ea163a25a00d4c134387f6b88067ea3c09fcda3d9df7c1828a98d686d2d4c",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C04.A05",
+      "requirement_id": "C04",
+      "source_index_1_based": 5,
+      "exact_text": "Operational errors, uptime checks, audit failures and admin alerts are observed with a named support owner before real client use.",
+      "text_sha256": "e8ddfc820d9a8a4aa67bf29bd503e3584ed6e55636b068844045dfe4e2ea90dc",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C05.A01",
+      "requirement_id": "C05",
+      "source_index_1_based": 1,
+      "exact_text": "Simple, enterprise, internal and vendor roles complete representative real workflows on keyboard and supported phone/desktop sizes.",
+      "text_sha256": "e12910b2f9949ba0e7b3b0698f77309c2de07c0f40f12b05f433788a69561737",
+      "accountable_map": "MAP-02",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C05.A02",
+      "requirement_id": "C05",
+      "source_index_1_based": 2,
+      "exact_text": "Loading, empty, permission-denied, stale-edit, validation, upload-retry and partial-failure states are actionable and preserve entered work.",
+      "text_sha256": "76ca67dd7b515abacc73fe00429f8e5720327b534cc76ab2ce2c38c0ea6be151",
+      "accountable_map": "MAP-02",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C05.A03",
+      "requirement_id": "C05",
+      "source_index_1_based": 3,
+      "exact_text": "Unknown, unmeasured and unapproved information is visibly distinguished from zero, compliant and complete.",
+      "text_sha256": "094cd77526500ae88a9406529a7bae4dfa8130191eb13d4e28be1343f9367ded",
+      "accountable_map": "MAP-02",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "api",
+        "browser"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C06.A01",
+      "requirement_id": "C06",
+      "source_index_1_based": 1,
+      "exact_text": "Moldo-only staff and managers have no OS membership by integration alone.",
+      "text_sha256": "20345cb4cac676ec52e64c1975ff18a08ae40f0efab891727229cf82afe1e7e2",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C06.A02",
+      "requirement_id": "C06",
+      "source_index_1_based": 2,
+      "exact_text": "OS outage, connector revocation, duplicate or out-of-order messages do not corrupt or stop ordinary Moldo operations.",
+      "text_sha256": "cb3f8f55fc3ae9b9cf33f94516109774f14f9d2a1479f94fce045eb5a723c069",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C06.A03",
+      "requirement_id": "C06",
+      "source_index_1_based": 3,
+      "exact_text": "Enterprise clients and group managers see only their authorized and appropriately released projection.",
+      "text_sha256": "19f77cd60b59076c98b6fd5bf1a9ca18838f45b52311a708cc05e38c2fb3253a",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C06.A04",
+      "requirement_id": "C06",
+      "source_index_1_based": 4,
+      "exact_text": "Per-engagement commercial owner, data owner and identity mapping can be exported and reconciled without merging databases.",
+      "text_sha256": "39a1d89cb183c60aee32fd16c0917d6629d09042a34bf4492ad7ecb46446335a",
+      "accountable_map": "MAP-07",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C07.A01",
+      "requirement_id": "C07",
+      "source_index_1_based": 1,
+      "exact_text": "Suspected PHI is quarantined and excluded from AI processing under the already-decided no-PHI posture.",
+      "text_sha256": "0f1d0342aca2b32d146d5be091dfa8e872cf44f18ab905fb07583d45e13a3e4a",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C07.A02",
+      "requirement_id": "C07",
+      "source_index_1_based": 2,
+      "exact_text": "Untrusted documents and messages cannot supply agent instructions or elevate permissions.",
+      "text_sha256": "cf37f2b5c59fb8ba252516b0f471594fff7404368bd5dfb30a25ca2252df2bfd",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "C07.A03",
+      "requirement_id": "C07",
+      "source_index_1_based": 3,
+      "exact_text": "Runtime AI outputs carry sources and review state; technical sign-off remains an authorized human action.",
+      "text_sha256": "3bbb55e57fae7532400760fa5b96b8b54d9b8ec178d7ebaa58539284b7f888d7",
+      "accountable_map": "MAP-06",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-07",
+        "MAP-08"
+      ],
+      "required_evidence_levels": [
+        "database",
+        "api"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "planned",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "GOV-001.A01",
+      "requirement_id": "GOV-001",
+      "source_index_1_based": 1,
+      "exact_text": "The complete product scope, dependencies, decisions and source references are machine-checked.",
+      "text_sha256": "42ab5b7626e2419afa5f3e02f731da560ee4a5e57c1425e4f20589eba7ac5238",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "implemented",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "GOV-001.A02",
+      "requirement_id": "GOV-001",
+      "source_index_1_based": 2,
+      "exact_text": "Evidence is invalidated by changed input files, test commands, environment identity or logs; a chat summary is never test evidence.",
+      "text_sha256": "22e28148e1856f828789a8e1f966ca1a4ce0fe976dd316a5a328cf8f65d4d479",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "implemented",
+      "implementation_acceptance": "not asserted by this reference package"
+    },
+    {
+      "criterion_ref": "GOV-001.A03",
+      "requirement_id": "GOV-001",
+      "source_index_1_based": 3,
+      "exact_text": "Checkpoint and importer preserve observed state and refuse unsupported remote-save claims.",
+      "text_sha256": "2b0a44ee1ef16f90bbe4bbb7d2521d1e759e6a0394add2a9dffc9e163dbff49a",
+      "accountable_map": "MAP-08",
+      "collaborating_maps": [
+        "MAP-01",
+        "MAP-02",
+        "MAP-03",
+        "MAP-04",
+        "MAP-05",
+        "MAP-06",
+        "MAP-07"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "source": "repo:REQUIREMENTS.json",
+      "source_status": "implemented",
+      "implementation_acceptance": "not asserted by this reference package"
+    }
+  ]
+}

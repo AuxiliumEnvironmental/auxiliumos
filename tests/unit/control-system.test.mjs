@@ -7,7 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import test from 'node:test';
 import {
   checkAllocation, checkpoint, currentStatus, evidenceStatus, fingerprint,
-  inventory, loadModel, releaseReadiness, safePath, validate, validateModel, verify,
+  inventory, loadModel, productionActivationInputs, releaseReadiness, safePath, validate, validateModel, verify,
 } from '../../scripts/os-control.mjs';
 import { evaluateActivation } from '../../scripts/owner-policy.mjs';
 
@@ -490,6 +490,136 @@ test('checkpoint preserves the lead unfinished action without changing evidence 
   assert.ok(resume.includes(`${action}\n\nGenerated `));
   assert.ok(resume.indexOf(action) < resume.indexOf('Computed verification/task candidate'));
   assert.equal(releaseReadiness(root).ready, false);
+});
+
+function releaseFixture(t) {
+  const root = fixture(t, model => {
+    model.state.live_repository_reconciled = true;
+    model.state.production_authorization.evidence = 'Frontend publication only; real-data activation remains separately gated.';
+    for (const item of [...model.requirements.requirements, ...model.queue.tasks]) Object.assign(item, { status: 'implemented', verification_profiles: ['fixture-check'] });
+    model.decisions.decisions = model.decisions.decisions.map(approve);
+  });
+  updateJson(root, 'config/policy-defaults.json', policy => { policy.production = { target: 'synthetic-production-project' }; });
+  // A real successful command establishes the fixture's deliberately narrow
+  // evidence floor. It does not mutate candidate source or certify actual runtime.
+  write(root, 'tests/fixture-check.mjs', "console.log('synthetic release fixture check');\n");
+  assert.equal(verify(root, 'fixture-check').status, 'passed');
+  const binding = productionActivationInputs(root);
+  updateJson(root, 'BUILD_STATE.json', state => {
+    state.production_authorization.full_activation = {
+      ...binding,
+      approved_by: 'Synthetic owner', approved_at: '2026-10-09T00:00:00Z',
+      evidence: 'Synthetic recorded full-business approval for these exact inputs only.',
+    };
+  });
+  return root;
+}
+
+test('a scoped full-business approval passes only with all existing requirement evidence', t => {
+  const root = releaseFixture(t);
+  assert.equal(releaseReadiness(root).ready, true);
+  const before = fs.readFileSync(path.join(root, 'BUILD_STATE.json'), 'utf8');
+  const result = spawnSync(process.execPath, [path.join(root, 'scripts/os-control.mjs'), 'release-inputs'], { encoding: 'utf8', timeout: 5000 });
+  assert.equal(result.status, 0, result.stderr);
+  const inputs = JSON.parse(result.stdout);
+  assert.equal(inputs.candidate_sha256, productionActivationInputs(root).candidate_sha256);
+  for (const key of ['approved_by', 'approved_at', 'evidence', 'full_activation']) assert.equal(Object.hasOwn(inputs, key), false, 'Input inspection must not manufacture approval.');
+  assert.equal(fs.readFileSync(path.join(root, 'BUILD_STATE.json'), 'utf8'), before);
+  updateJson(root, 'REQUIREMENTS.json', model => { model.requirements[0].required_evidence_levels = ['database', 'api', 'browser']; });
+  updateJson(root, 'BUILD_STATE.json', state => { Object.assign(state.production_authorization.full_activation, productionActivationInputs(root)); });
+  const denied = releaseReadiness(root);
+  assert.equal(denied.ready, false);
+  for (const level of ['database', 'api', 'browser']) assert.ok(denied.gaps.some(gap => gap === `M01: no current ${level} evidence`));
+});
+
+test('legacy publication approval cannot authorize full business activation', t => {
+  const root = releaseFixture(t);
+  updateJson(root, 'BUILD_STATE.json', state => { delete state.production_authorization.full_activation; });
+  const result = releaseReadiness(root);
+  assert.equal(result.ready, false);
+  assert.deepEqual(result.gaps, ['Production full-business activation authorization is not recorded; frontend publication evidence is insufficient.']);
+  assert.equal(loadModel(root).state.production_authorization.evidence, 'Frontend publication only; real-data activation remains separately gated.');
+});
+
+test('full activation rejects missing or wrong scope, environment, target, hashes and approval metadata', t => {
+  const root = releaseFixture(t);
+  const original = clone(loadModel(root).state.production_authorization.full_activation);
+  const cases = [
+    ['scope', undefined, /scope/], ['scope', 'frontend_publication', /scope/], ['scope', 'release_document', /scope/],
+    ['environment', undefined, /environment/], ['environment', 'development', /environment/],
+    ['target', undefined, /target/], ['target', 'other-production-project', /target/],
+    ['candidate_sha256', undefined, /candidate_sha256/], ['candidate_sha256', 'a'.repeat(64), /candidate_sha256/],
+    ['owner_decisions_sha256', undefined, /owner_decisions_sha256/], ['owner_decisions_sha256', 'a'.repeat(64), /owner_decisions_sha256/],
+    ['policy_sha256', undefined, /policy_sha256/], ['policy_sha256', 'a'.repeat(64), /policy_sha256/],
+    ['approved_by', ' ', /approved_by/], ['evidence', {}, /evidence/],
+    ['approved_at', undefined, /approved_at/], ['approved_at', 'not-a-time', /approved_at/],
+    ['approved_at', '2026-02-30T00:00:00Z', /approved_at/], ['approved_at', '2099-01-01T00:00:00Z', /approved_at/],
+    ['approved_at', '2026-10-07T00:00:00Z', /predates/],
+  ];
+  for (const [field, value, expected] of cases) {
+    updateJson(root, 'BUILD_STATE.json', state => { state.production_authorization.full_activation = { ...original, [field]: value }; });
+    const result = releaseReadiness(root);
+    assert.equal(result.ready, false, `Invalid ${field} was accepted`);
+    assert.match(result.gaps.join('\n'), expected);
+  }
+});
+
+test('recorded activation cannot be replayed after source, target, policy or approval changes', t => {
+  const cases = [
+    [root => write(root, 'src/main.txt', 'new candidate source\n'), /candidate_sha256/],
+    [root => write(root, 'src/new.txt', 'uncommitted candidate addition\n'), /candidate_sha256/],
+    [root => updateJson(root, 'config/policy-defaults.json', policy => { policy.production.target = 'another-production-project'; }), /target/],
+    [root => updateJson(root, 'config/policy-defaults.json', policy => { policy.documents.exact_version = false; }), /policy_sha256/],
+    [root => updateJson(root, 'OWNER_DECISIONS.json', model => { model.decisions[0].approval_evidence = 'A different approval record'; }), /owner_decisions_sha256/],
+    [root => updateJson(root, 'OWNER_DECISIONS.json', model => { model.decisions[0].approved_by = 'A different recorded approver'; }), /owner_decisions_sha256/],
+  ];
+  for (const [mutate, expected] of cases) {
+    const root = releaseFixture(t);
+    mutate(root);
+    assert.equal(verify(root, 'fixture-check').status, 'passed', 'A current narrow verification pass must not refresh activation approval.');
+    const result = releaseReadiness(root);
+    assert.equal(result.ready, false);
+    assert.match(result.gaps.join('\n'), expected);
+  }
+});
+
+test('copied current hashes cannot activate disabled decisions, invalid approvals or an unconfigured target', t => {
+  const cases = [
+    ['production_enabled', false], ['approved_by', ' '], ['approval_evidence', ' '],
+    ['approved_at', 'not-a-time'], ['approved_at', '2099-01-01T00:00:00Z'],
+  ];
+  for (const [field, value] of cases) {
+    const root = releaseFixture(t);
+    updateJson(root, 'OWNER_DECISIONS.json', model => { model.decisions[0][field] = value; });
+    updateJson(root, 'BUILD_STATE.json', state => { Object.assign(state.production_authorization.full_activation, productionActivationInputs(root)); });
+    const result = releaseReadiness(root);
+    assert.equal(result.ready, false);
+    assert.match(result.gaps.join('\n'), /OD-001: owner activation decision pending or approval evidence invalid/);
+  }
+  for (const target of [null, '', ' ', {}]) {
+    const root = releaseFixture(t);
+    updateJson(root, 'config/policy-defaults.json', policy => { policy.production.target = target; });
+    assert.equal(verify(root, 'fixture-check').status, 'passed');
+    updateJson(root, 'BUILD_STATE.json', state => { Object.assign(state.production_authorization.full_activation, productionActivationInputs(root)); });
+    const result = releaseReadiness(root);
+    assert.equal(result.ready, false);
+    assert.match(result.gaps.join('\n'), /target is not configured/);
+  }
+});
+
+test('activation input inventory excludes generated receipts but fails closed on unsafe source', t => {
+  const root = releaseFixture(t);
+  const before = productionActivationInputs(root);
+  write(root, 'docs/00-control/evidence/extra-receipt.json', '{"observation":"synthetic"}\n');
+  write(root, 'docs/00-control/SESSION_CHECKPOINT.json', '{"observation":"synthetic"}\n');
+  write(root, 'docs/00-control/RESUME.md', 'Synthetic observed continuation\n');
+  assert.deepEqual(productionActivationInputs(root), before);
+  assert.equal(releaseReadiness(root).ready, true);
+  fs.symlinkSync(path.join(root, 'src/main.txt'), path.join(root, 'unsafe-source.txt'));
+  assert.throws(() => productionActivationInputs(root), /Symlink/);
+  const result = releaseReadiness(root);
+  assert.equal(result.ready, false);
+  assert.match(result.gaps.join('\n'), /activation inputs cannot be verified/);
 });
 
 function activationFixture() {

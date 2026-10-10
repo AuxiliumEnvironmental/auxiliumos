@@ -217,14 +217,20 @@
       "cacheable": true,
       "timeout_ms": 120000,
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "inputs": [
         "web",
         "tests/e2e/directory.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -333,14 +339,20 @@
       "cacheable": true,
       "timeout_ms": 180000,
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "inputs": [
         "web",
         "tests/e2e/intake.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -485,14 +497,20 @@
       "cacheable": true,
       "timeout_ms": 180000,
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "inputs": [
         "web",
         "tests/e2e/private-files.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -688,14 +706,20 @@
       "cacheable": true,
       "timeout_ms": 180000,
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "inputs": [
         "web",
         "tests/e2e/document-versions.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -821,14 +845,20 @@
       "cacheable": true,
       "timeout_ms": 180000,
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "inputs": [
         "web",
         "tests/e2e/document-content.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -920,12 +950,18 @@
         "web",
         "tests/e2e/auth-onboarding.spec.ts",
         "tests/e2e/directory.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "environment_variables": [
-        "AUXILIUMOS_BROWSER_EXECUTABLE"
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -1036,9 +1072,14 @@
       "inputs": [
         "web",
         "tests/e2e/document-reviews.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -1046,6 +1087,10 @@
           "--",
           "document-reviews.spec.ts"
         ]
+      ],
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ]
     },
     {
@@ -1162,9 +1207,14 @@
       "inputs": [
         "web",
         "tests/e2e/document-releases.spec.ts",
-        "playwright.runtime.config.ts"
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
       ],
       "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
         [
           "npm",
           "run",
@@ -1172,6 +1222,40 @@
           "--",
           "document-releases.spec.ts"
         ]
+      ],
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
+      ]
+    },
+    {
+      "id": "workspace-context-browser-fixture",
+      "level": "browser_fixture",
+      "environment": "local-Chromium-injected-HTTP-no-hosted-Auth-proof",
+      "cacheable": true,
+      "timeout_ms": 180000,
+      "inputs": [
+        "web",
+        "tests/e2e/workspace-context.spec.ts",
+        "playwright.runtime.config.ts",
+        "scripts/browser-identity.mjs"
+      ],
+      "commands": [
+        [
+          "node",
+          "scripts/browser-identity.mjs"
+        ],
+        [
+          "npm",
+          "run",
+          "test:runtime-ui",
+          "--",
+          "workspace-context.spec.ts"
+        ]
+      ],
+      "environment_variables": [
+        "AUXILIUMOS_BROWSER_EXECUTABLE",
+        "PLAYWRIGHT_BROWSERS_PATH"
       ]
     }
   ]

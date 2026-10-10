@@ -104,9 +104,23 @@
         "docs/03-data/WORKSPACE_PLANS.md",
         "web/src/spatial-generated/**",
         "web/src/lib/sample-case.ts",
-        "tests/unit/sample-case.test.mjs"
+        "tests/unit/sample-case.test.mjs",
+        "web/src/components/document-version-release.tsx",
+        "web/src/components/document-version-review.tsx",
+        "web/src/components/document-versions.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/lib/directory-api.ts",
+        "web/src/lib/document-release-api.ts",
+        "web/src/lib/runtime.tsx",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/pages/directory.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/private-files.tsx"
       ],
-      "assigned_to": "root integration lead; ui_integration sole Lovable writer",
+      "assigned_to": null,
       "branch": "wip/recovery-2026-10-08",
       "owner_decisions": [],
       "verification_profiles": [
@@ -117,7 +131,7 @@
         "document-content-browser-fixture",
         "document-reviews-browser-fixture"
       ],
-      "next_action": "Mobile candidate57f637a passed corrected CI66 and publication accepted0cf4e56e; provider anonymous public asset check supports new mobile delivery. Resolve report-only Lovable pause, then integrate reviewed metadata-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
+      "next_action": "Use an authorized secure test runner with the reviewed source to run the genuine hosted planning/private-file and document connected journey after fresh shared-fixture, gate and revision preflight; then verify exact released-version recipient bytes separately.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -129,7 +143,9 @@
           "scope": "User-facing titles, field labels, navigation, active product documentation and demo copy. Preserve role/capability semantics and historical source attribution. Coordinate the typed planning catalogue if its stored field key changes.",
           "status": "implemented_UI_and_current_docs; legacy_internal_keys_and_history_preserved"
         }
-      ]
+      ],
+      "delivery_packet": "docs/00-control/task-packets/UI-2026-10-10-HOST-DELIVERY.json",
+      "delivery_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
     },
     {
       "id": "CTRL-001",
@@ -208,12 +224,12 @@
         "VERIFICATION_PROFILES.json"
       ],
       "assigned_to": "integration-lead",
-      "branch": "build/continuation-2026-10-08",
+      "branch": "work/integration-2026-10-10",
       "owner_decisions": [],
       "verification_profiles": [
         "source-reconciliation"
       ],
-      "next_action": "Initial source reconciliation and recovery publication are recorded. Recheck current main/feature refs before publication; no GitHub/Lovable parity is claimed.",
+      "next_action": "S00 actual GitHub/Lovable/Supabase readback is recorded. Reconciliation/reference/control source saved and remote tree verified at28880477. Preserve external Spatial transfer and verify the next reviewed candidate after save.",
       "blocker": null,
       "issue": null,
       "completion_mode": "historical_source"
@@ -303,7 +319,7 @@
         "development-ui",
         "document-connected-ui"
       ],
-      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed.",
+      "blocker": "Authentic automated connected acceptance remains unexecuted. Historical Oct9 settings inspection reported no service secret; current protected secret availability was not reverified in this session. Read back secure workflow configuration before dispatch; do not infer availability from skipped CI jobs. Owner password and initial Auth session remain evidenced.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1750,15 +1766,23 @@
         "database",
         "api"
       ],
-      "next_action": "Run registered focused checks for integrated e250336d, including new withdrawal discovery. Independent source review clear. After pass, apply exact migration to verified development target and deploy separate disabled gateway; deliberately configure transport before real released-byte acceptance. No owner/reviewer grants or internal-content changes.",
-      "blocker": "Native executor unavailable; use reviewed GitHub CI for executable checks. No cloud deployment yet.",
+      "next_action": "CI67 and exact14th migration/Edge v1 readback already pass. Do not redeploy. Finish genuine API/recipient bytes acceptance once protected fixture setup is available.",
+      "blocker": "Authentic hosted Auth/Storage/API/concurrency remains unverified; no registered API profile yet for this exact released-byte slice.",
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
-      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task."
+      "acceptance_boundary": "Simulated Auth PostgreSQL and injected gateway tests are not genuine hosted Auth/Storage/browser or professional release evidence. No cloud mutation in worker task.",
+      "verification_gap": {
+        "required_level": "api",
+        "registered_levels": [
+          "database",
+          "unit"
+        ],
+        "disposition": "Remain in_progress; no simulated evidence can close missing API acceptance."
+      }
     },
     {
       "id": "DOC-001D-UI",
       "title": "Exact-version release metadata, explicit audience and narrowing withdrawal interface",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "DOC-001D-BACKEND",
         "DOC-001C-UI"
@@ -1780,7 +1804,7 @@
         "tests/unit/document-release-api.test.mjs",
         "tests/e2e/document-releases.spec.ts"
       ],
-      "assigned_to": "ui_integration; root integration lead",
+      "assigned_to": null,
       "branch": "wip/release-ui-2026-10-09",
       "owner_decisions": [
         "OD-002",
@@ -1798,9 +1822,86 @@
         "unit",
         "browser_fixture"
       ],
-      "next_action": "Run focused unit/browser/build plus existing review regressions against exact43d1ea48. Source review clear; 12 unit and16browser cases authored but unexecuted. Transfer only passing reviewed source to existing Lovable after report-only card is resolved.",
-      "blocker": "Native executor unavailable; source work continues through GitHub. Lovable transfer waits for report-only plan card resolution.",
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+      "next_action": "Exact previously reviewed metadata/release/withdrawal UI delivered and independently hash-verified at OS host4adbb330; CI38024351341 release/review fixtures pass. Authentic hosted professional/release/recipient workflow remains open in parent DOC-001.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "delivery_receipt": "docs/00-control/evidence/HOST-DELIVERY-2026-10-10.json"
+    },
+    {
+      "id": "UI-2026-10-10-CONTEXT",
+      "title": "Planning draft and authorized context repair",
+      "status": "implemented",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "parent": "UI-2026-10-09",
+      "requirements": [
+        "M01",
+        "C01",
+        "C05"
+      ],
+      "allowed_paths": [
+        "web/src/lib/runtime.tsx",
+        "web/src/router.tsx",
+        "web/src/components/app-shell.tsx",
+        "web/src/components/module-draft-screen.tsx",
+        "web/src/components/plan-context.tsx",
+        "web/src/pages/module-workspace.tsx",
+        "web/src/pages/directory.tsx",
+        "web/src/lib/use-workspace-plans.ts",
+        "web/src/lib/use-directory.ts",
+        "web/src/lib/use-planning-context.ts",
+        "web/src/lib/use-draft-transition.ts",
+        "tests/e2e/workspace-context.spec.ts",
+        "playwright.runtime.config.ts",
+        "web/src/lib/directory-api.ts"
+      ],
+      "assigned_to": null,
+      "branch": "work/integration-2026-10-10",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "runtime-build",
+        "workspace-context-browser-fixture",
+        "directory-browser-fixture"
+      ],
+      "required_evidence_levels": [
+        "build",
+        "browser_fixture"
+      ],
+      "next_action": "Reviewed source, all 9 browser scenarios and full candidate CI38024351341 passed; exact source delivery independently accepted at OS host4adbb330. Genuine hosted planning save/reopen and revocation acceptance remains in parent UI-2026-10-09.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/87",
+      "review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json"
+    },
+    {
+      "id": "CTRL-003-ACTIVATION",
+      "title": "Exact scope and candidate production activation gate",
+      "status": "implemented",
+      "dependencies": [
+        "SYNC-001"
+      ],
+      "parent": "CTRL-002",
+      "requirements": [
+        "GOV-001",
+        "C04"
+      ],
+      "allowed_paths": [
+        "scripts/os-control.mjs",
+        "tests/unit/control-system.test.mjs"
+      ],
+      "assigned_to": null,
+      "branch": "work/integration-2026-10-10",
+      "owner_decisions": [],
+      "verification_profiles": [
+        "controls"
+      ],
+      "required_evidence_levels": [
+        "control_unit"
+      ],
+      "next_action": "Bounded source independently reviewed; run current controls profile after integrated inputs stabilize, then candidate CI. Full OS release and owner activation remain open.",
+      "blocker": null,
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "review": "docs/00-control/reviews/ACTIVATION-GATE-2026-10-10.json"
     }
   ]
 }

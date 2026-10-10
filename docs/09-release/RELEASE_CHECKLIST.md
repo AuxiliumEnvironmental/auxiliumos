@@ -23,3 +23,14 @@ No PHI in v1. Real client onboarding requires tested access/release controls and
 ## Outcome record
 
 Record `approved for identified environment`, `failed`, or `blocked for identified activation`, with precise scope, evidence and next action. Do not infer owner approval from test success. After promotion, verify artifact identity and a focused operational check, then save the release record and handoff. If deployment or evidence is missing, state that explicitly rather than converting a checklist into a completion claim.
+
+
+## Exact full-activation binding (2026-10-10)
+
+Frontend publication permission remains in `BUILD_STATE.json` as its original dated evidence. It does not authorize full business activation. The control gate reads the separate `production_authorization.full_activation` record only when such an actual approval exists.
+
+Run `node scripts/os-control.mjs release-inputs` after the candidate is final. This read-only command returns the required scope (`full_business_activation`), source inventory digest, production environment, configured `config/policy-defaults.json` target, owner-decisions digest and policy digest. It never creates approval fields or changes state. The production target remains unconfigured today.
+
+A real approval record must bind those exact inputs and record the actual `approved_by`, `approved_at` and `evidence`. UTC timestamps use ISO seconds or milliseconds ending in `Z`. The gate rejects missing, impossible or future timestamps, approval preceding a required owner decision, changed source/configuration/decisions, an unconfigured or different target, and publication-only scope. Every decision required for full release must still have its own approved status, actual evidence and `production_enabled: true`. This is technical recording of existing authority, not a new business role or an approval supplied by AI.
+
+The candidate digest includes working source and uncommitted additions. It excludes BUILD_STATE, generated evidence/checkpoints and build/dependency outputs to avoid a self-containing approval. The separate existing requirement/evidence and fresh-source checks still apply. These repository checks cannot authenticate an approver or attest to deployed bytes; actual target readback, operating acceptance and owner authority remain necessary. No full-activation approval was created by this repair.

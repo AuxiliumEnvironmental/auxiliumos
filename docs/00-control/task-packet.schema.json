@@ -1,0 +1,685 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AuxiliumOS bounded task packet",
+  "description": "Proposed structural dispatch format linked to existing BUILD_QUEUE entries. This is not a live task register, authorization, scheduler or evidence of implementation. Integrator must resolve IDs, source freshness, ownership and platform permissions separately.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "packet_mode",
+    "task_id",
+    "queue_file",
+    "requirement_ids",
+    "goal",
+    "original_intent",
+    "input",
+    "ownership",
+    "dependencies",
+    "authority",
+    "contract",
+    "acceptance",
+    "verification",
+    "dispatch_guard",
+    "stop_conditions",
+    "recovery",
+    "return_contract"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "packet_mode": {
+      "enum": [
+        "reference_example",
+        "ready_for_dispatch"
+      ]
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "queue_file": {
+      "const": "BUILD_QUEUE.json"
+    },
+    "requirement_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository",
+        "commit",
+        "tree",
+        "working_tree_requirement",
+        "controlling_sources",
+        "external_surfaces"
+      ],
+      "properties": {
+        "repository": {
+          "const": "https://github.com/AuxiliumEnvironmental/auxiliumos.git"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "tree": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "working_tree_requirement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "controlling_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "minItems": 1
+        },
+        "external_surfaces": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/surface"
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "integrator",
+        "worker_role",
+        "worker_id",
+        "branch",
+        "isolation_mode",
+        "worktree_path",
+        "allowed_paths",
+        "forbidden_shared_paths",
+        "allocation_check",
+        "other_writer_check"
+      ],
+      "properties": {
+        "integrator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "worker_role": {
+          "enum": [
+            "integration-lead",
+            "product-architect",
+            "backend-engineer",
+            "frontend-engineer",
+            "integration-engineer",
+            "security-reviewer",
+            "verification-engineer",
+            "domain-reviewer",
+            "release-engineer"
+          ]
+        },
+        "worker_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isolation_mode": {
+          "enum": [
+            "isolated_worktree",
+            "exclusive_files",
+            "read_only"
+          ]
+        },
+        "worktree_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allowed_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "forbidden_shared_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "allocation_check": {
+          "const": "node scripts/os-control.mjs allocation TASK PATHS_FILE"
+        },
+        "other_writer_check": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency"
+      },
+      "minItems": 0
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner_instruction",
+        "owner_decision_ids",
+        "development_authorization",
+        "affected_live_activation",
+        "platform_limitations",
+        "new_business_decisions",
+        "prohibited_actions"
+      ],
+      "properties": {
+        "owner_instruction": {
+          "type": "string",
+          "minLength": 1
+        },
+        "owner_decision_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "development_authorization": {
+          "type": "string",
+          "minLength": 1
+        },
+        "affected_live_activation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "platform_limitations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "new_business_decisions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "prohibited_actions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "actors_and_scope",
+        "data_and_states",
+        "server_api",
+        "ui_and_errors",
+        "compatibility",
+        "shared_invariants",
+        "out_of_scope"
+      ],
+      "properties": {
+        "actors_and_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "data_and_states": {
+          "type": "string",
+          "minLength": 1
+        },
+        "server_api": {
+          "type": "string",
+          "minLength": 1
+        },
+        "ui_and_errors": {
+          "type": "string",
+          "minLength": 1
+        },
+        "compatibility": {
+          "type": "string",
+          "minLength": 1
+        },
+        "shared_invariants": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "out_of_scope": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "acceptance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/acceptance"
+      },
+      "minItems": 1
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "registered_profiles",
+        "required_evidence_levels",
+        "changed_risks",
+        "evidence_reuse_rule",
+        "runtime_target",
+        "unavailable_evidence",
+        "independent_review"
+      ],
+      "properties": {
+        "registered_profiles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "required_evidence_levels": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "changed_risks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "evidence_reuse_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runtime_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unavailable_evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "independent_review": {
+          "$ref": "#/$defs/review"
+        }
+      }
+    },
+    "dispatch_guard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conditions",
+        "satisfied",
+        "observed_at",
+        "observed_by",
+        "provider_message_id",
+        "provider_thread_id"
+      ],
+      "properties": {
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true,
+          "minItems": 1
+        },
+        "satisfied": {
+          "type": "boolean"
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provider_message_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "provider_thread_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "stop_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "preserve",
+        "retry_rule",
+        "rollback_or_forward_fix"
+      ],
+      "properties": {
+        "preserve": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry_rule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rollback_or_forward_fix": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "return_contract": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true,
+      "minItems": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "packet_mode": {
+            "const": "reference_example"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dispatch_guard": {
+            "properties": {
+              "satisfied": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "packet_mode": {
+            "const": "ready_for_dispatch"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dispatch_guard": {
+            "properties": {
+              "satisfied": {
+                "const": true
+              },
+              "observed_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "observed_by": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "ownership": {
+            "properties": {
+              "worker_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "revision",
+        "sha256",
+        "purpose"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "required_contract",
+        "observed_source",
+        "verification_limit"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_contract": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "verification_limit": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "outcome",
+        "evidence",
+        "limitation"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "outcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "limitation": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "identifier",
+        "observed_revision",
+        "observation",
+        "write_policy"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "github",
+            "lovable",
+            "supabase",
+            "spatial",
+            "public_frontend",
+            "moldo"
+          ]
+        },
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_revision": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "write_policy": {
+          "enum": [
+            "none",
+            "lead_only",
+            "assigned_writer"
+          ]
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "required",
+        "role",
+        "review_scope",
+        "reviewed_source_must_match_output"
+      ],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "role": {
+          "enum": [
+            "integration-lead",
+            "product-architect",
+            "backend-engineer",
+            "frontend-engineer",
+            "integration-engineer",
+            "security-reviewer",
+            "verification-engineer",
+            "domain-reviewer",
+            "release-engineer",
+            "not_applicable"
+          ]
+        },
+        "review_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reviewed_source_must_match_output": {
+          "const": true
+        }
+      }
+    }
+  }
+}

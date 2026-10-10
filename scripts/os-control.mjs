@@ -297,6 +297,61 @@ export function currentStatus(root = ROOT) {
   return { version: 1, product_modules: product.length, verified_product_modules: product.filter(complete).map(x => x.id), tasks, evidence, next_ready_task: ready[0]?.id || null, owner_review_pending: model.decisions.decisions.filter(d => d.status !== 'approved' && d.status !== 'superseded' && d.status !== 'rejected').map(d => d.id) };
 }
 
+const nonblank = value => typeof value === 'string' && value.trim().length > 0;
+function approvalTime(value) {
+  // Use an unambiguous UTC instant; Date.parse alone normalizes impossible dates.
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)) return NaN;
+  const time = Date.parse(value);
+  return Number.isFinite(time) && time <= Date.now() && new Date(time).toISOString().replace('.000Z', 'Z') === value.replace('.000Z', 'Z') ? time : NaN;
+}
+
+export function productionActivationInputs(root = ROOT) {
+  // BUILD_STATE contains observations and the approval itself, not product source.
+  // Excluding it avoids a self-containing approval hash. inventory also excludes
+  // generated evidence/checkpoints and build/dependency outputs. All other source,
+  // including uncommitted additions, is bound; an unsafe/missing input must fail.
+  const entries = fs.readdirSync(root).filter(name => !EXCLUDED.has(name) && name !== 'BUILD_STATE.json');
+  const files = inventory(root, [...new Set([...entries, 'AGENTS.md', 'BUILD_QUEUE.json', 'REQUIREMENTS.json', 'OWNER_DECISIONS.json', 'VERIFICATION_PROFILES.json', 'config/policy-defaults.json', 'scripts/os-control.mjs', 'package.json', 'package-lock.json'])]);
+  const policy = readJson(root, 'config/policy-defaults.json');
+  return {
+    scope: 'full_business_activation',
+    candidate_sha256: sha256(JSON.stringify(files)),
+    environment: 'production',
+    target: policy.production?.target ?? null,
+    owner_decisions_sha256: files['OWNER_DECISIONS.json'],
+    policy_sha256: files['config/policy-defaults.json'],
+  };
+}
+
+function productionAuthorizationGaps(root, model) {
+  const gaps = [];
+  const required = model.decisions.decisions.filter(d => d.required_for_full_release);
+  for (const d of required) {
+    if (d.status !== 'approved' || d.production_enabled !== true || !nonblank(d.approved_by) || !nonblank(d.approval_evidence) || !Number.isFinite(approvalTime(d.approved_at))) gaps.push(`${d.id}: owner activation decision pending or approval evidence invalid`);
+  }
+  // Legacy evidence remains a publication fact. Only this separate, explicitly
+  // scoped record can contribute to the full business activation gate.
+  const authorization = model.state.production_authorization?.full_activation;
+  if (!authorization || typeof authorization !== 'object' || Array.isArray(authorization)) {
+    gaps.push('Production full-business activation authorization is not recorded; frontend publication evidence is insufficient.');
+    return gaps;
+  }
+  let inputs;
+  try { inputs = productionActivationInputs(root); }
+  catch (error) { gaps.push(`Production activation inputs cannot be verified: ${error.message}`); return gaps; }
+  for (const field of ['scope', 'environment']) if (authorization[field] !== inputs[field]) gaps.push(`Production activation ${field} must be ${inputs[field]}.`);
+  if (!nonblank(inputs.target)) gaps.push('Production activation target is not configured in config/policy-defaults.json.');
+  if (!nonblank(authorization.target) || authorization.target !== inputs.target) gaps.push('Production activation target does not match the configured production target.');
+  for (const field of ['candidate_sha256', 'owner_decisions_sha256', 'policy_sha256']) {
+    if (typeof authorization[field] !== 'string' || !/^[a-f0-9]{64}$/.test(authorization[field]) || authorization[field] !== inputs[field]) gaps.push(`Production activation ${field} is missing or does not match current inputs.`);
+  }
+  if (!nonblank(authorization.approved_by) || !nonblank(authorization.evidence)) gaps.push('Production activation approved_by and evidence must record the actual approval.');
+  const approvedAt = approvalTime(authorization.approved_at);
+  if (!Number.isFinite(approvedAt)) gaps.push('Production activation approved_at must be a valid nonfuture UTC timestamp.');
+  else if (required.some(d => approvalTime(d.approved_at) > approvedAt)) gaps.push('Production activation approval predates a required owner decision approval.');
+  return gaps;
+}
+
 export function releaseReadiness(root = ROOT) {
   const model = validate(root); const status = currentStatus(root); const gaps = [];
   for (const r of model.requirements.requirements) {
@@ -304,10 +359,9 @@ export function releaseReadiness(root = ROOT) {
     for (const p of r.verification_profiles) if (status.evidence[p]?.status !== 'passed') gaps.push(`${r.id}: ${p} is not a current pass`);
     for (const level of r.required_evidence_levels || []) if (!r.verification_profiles.some(p => status.evidence[p]?.status === 'passed' && status.evidence[p]?.level === level)) gaps.push(`${r.id}: no current ${level} evidence`);
   }
-  for (const d of model.decisions.decisions) if (d.required_for_full_release && d.status !== 'approved') gaps.push(`${d.id}: owner activation decision pending`);
+  gaps.push(...productionAuthorizationGaps(root, model));
   if (model.state.live_repository_reconciled !== true) gaps.push('Live repository has not been reconciled.');
   if (model.profiles.profiles.some(p => p.id === 'source-reconciliation') && status.evidence['source-reconciliation']?.status !== 'passed') gaps.push('Fresh source reconciliation is required for release; historical completion is insufficient.');
-  if (!model.state.production_authorization?.evidence) gaps.push('Production activation authorization is not recorded.');
   return { ready: gaps.length === 0, gaps, note: 'This repository gate is a necessary check, not a runtime, security, legal or operational certification.' };
 }
 
@@ -346,6 +400,7 @@ async function main() {
   else if (command === 'status') result = currentStatus();
   else if (command === 'verify') result = verify(ROOT, argument, { force: rest.includes('--force') });
   else if (command === 'checkpoint') result = checkpoint(ROOT, { verifyRemote: args.includes('--verify-remote') });
+  else if (command === 'release-inputs') result = { ...productionActivationInputs(), note: 'Binding inputs only; this does not record or grant approval, verify deployment, or authenticate an approver.' };
   else if (command === 'release-check') result = releaseReadiness();
   else if (command === 'allocation') {
     const model = validate(); const task = model.queue.tasks.find(t => t.id === argument);
@@ -355,7 +410,7 @@ async function main() {
     const changed = fs.readFileSync(changedFile, 'utf8').split(/\r?\n/).filter(Boolean);
     result = { outside_allocation: checkAllocation(task.allowed_paths, changed) };
     if (result.outside_allocation.length) process.exitCode = 1;
-  } else throw new Error('Use validate, status, verify PROFILE [--force], checkpoint [--verify-remote], release-check, or allocation TASK PATHS_FILE.');
+  } else throw new Error('Use validate, status, verify PROFILE [--force], checkpoint [--verify-remote], release-inputs, release-check, or allocation TASK PATHS_FILE.');
   console.log(JSON.stringify(result, null, 2));
   if (result?.status === 'failed' || result?.ready === false) process.exitCode = 1;
 }

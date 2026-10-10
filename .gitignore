@@ -31,6 +31,8 @@ Thumbs.db
 playwright-report/
 test-results/
 coverage/
+!docs/11-launch/build-maps/coverage/
+!docs/11-launch/build-maps/coverage/**
 
 # Sanitized, hash-tied verification logs are durable source evidence, even when
 # an editor's global ignore rules exclude ordinary application logs.

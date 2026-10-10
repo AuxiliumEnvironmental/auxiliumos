@@ -7,49 +7,55 @@
 
 ["node","scripts/check-docs.mjs"]
 {
-  "files_checked": 103,
+  "files_checked": 120,
   "errors": []
 }
 
 
 ["node","--test","tests/unit/control-system.test.mjs","tests/unit/document-integrity.test.mjs"]
-✔ baseline model preserves all 20 modules and validates its actual references (7.307509ms)
-✔ missing module and duplicate IDs are rejected (1.552414ms)
-✔ unknown dependencies, requirement/profile/decision references and cycles fail (1.597522ms)
-✔ unapproved activation and unsupported completed status cannot forge completion (0.69836ms)
-✔ active writer leases must be identified and must not overlap (0.683348ms)
-✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.269565ms)
-✔ missing source, config and policy decision references are rejected on disk (4.66832ms)
-✔ source inventory rejects missing inputs, traversal and symbolic links (1.972936ms)
-✔ root inventory and verification work in a real linked Git worktree (99.245164ms)
-✔ real fixture command produces evidence and a current cache prevents redundant execution (140.476598ms)
-✔ noncacheable profiles require a declared positive finite freshness bound (1.647367ms)
-✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (137.63591ms)
-✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (590.985377ms)
-✔ declared environment input change invalidates a cached pass without storing the raw value (124.185989ms)
-✔ unrelated profile registration does not invalidate another profile, including root-file inventory (78.134583ms)
-✔ expired source observations preserve historical setup but never become current release evidence (96.31337ms)
-✔ failed fresh source checks cannot erase the original successful operation (133.659911ms)
-✔ historical completion cannot be used to bypass runtime task requirements (0.231247ms)
-✔ runtime identity participates in evidence freshness (134.749014ms)
-✔ failed verification replaces prior success and cannot be reused as passing (204.757346ms)
-✔ tampered verification log is rejected and fresh execution repairs evidence (180.951974ms)
-✔ tracked input changed during execution invalidates a zero-exit command (68.575457ms)
-✔ implemented declaration needs current evidence and required runtime evidence levels (84.302313ms)
-✔ declared task evidence levels must be nonempty distinct strings (0.808215ms)
-✔ SEC runtime task cannot unblock its dependent with static evidence alone (205.462377ms)
-✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (8.829367ms)
-✔ checkpoint preserves the lead unfinished action without changing evidence or task verification (7.230213ms)
-✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.433211ms)
-✔ partial approvals activate only actions whose complete decision set is approved (0.262094ms)
-✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.3987ms)
-✔ handoff checker distinguishes closed examples from an unclosed fence (1.549029ms)
-✔ handoff checker rejects broken and escaping local references while accepting existing sources (1.09028ms)
-ℹ tests 32
+✔ baseline model preserves all 20 modules and validates its actual references (21.4314ms)
+✔ missing module and duplicate IDs are rejected (2.461094ms)
+✔ unknown dependencies, requirement/profile/decision references and cycles fail (4.619864ms)
+✔ unapproved activation and unsupported completed status cannot forge completion (0.800941ms)
+✔ active writer leases must be identified and must not overlap (1.150134ms)
+✔ allocation checks permit exact/subtree writes and reject siblings and unsafe paths (0.650873ms)
+✔ missing source, config and policy decision references are rejected on disk (10.94382ms)
+✔ source inventory rejects missing inputs, traversal and symbolic links (5.289711ms)
+✔ root inventory and verification work in a real linked Git worktree (256.573985ms)
+✔ real fixture command produces evidence and a current cache prevents redundant execution (309.080328ms)
+✔ noncacheable profiles require a declared positive finite freshness bound (3.148633ms)
+✔ noncacheable evidence reruns and expires; missing, invalid and future timestamps fail closed (286.446847ms)
+✔ source additions, changes, removals, tests, config and profile inputs invalidate evidence (1408.78783ms)
+✔ declared environment input change invalidates a cached pass without storing the raw value (315.847946ms)
+✔ unrelated profile registration does not invalidate another profile, including root-file inventory (173.412139ms)
+✔ expired source observations preserve historical setup but never become current release evidence (152.456584ms)
+✔ failed fresh source checks cannot erase the original successful operation (379.630954ms)
+✔ historical completion cannot be used to bypass runtime task requirements (0.496182ms)
+✔ runtime identity participates in evidence freshness (293.579328ms)
+✔ failed verification replaces prior success and cannot be reused as passing (496.837013ms)
+✔ tampered verification log is rejected and fresh execution repairs evidence (233.153319ms)
+✔ tracked input changed during execution invalidates a zero-exit command (128.120412ms)
+✔ implemented declaration needs current evidence and required runtime evidence levels (137.179759ms)
+✔ declared task evidence levels must be nonempty distinct strings (1.361063ms)
+✔ SEC runtime task cannot unblock its dependent with static evidence alone (346.161571ms)
+✔ non-git checkpoint cannot claim a push, remote match or Cursor synchronization (14.825871ms)
+✔ checkpoint preserves the lead unfinished action without changing evidence or task verification (14.472437ms)
+✔ a scoped full-business approval passes only with all existing requirement evidence (294.650549ms)
+✔ legacy publication approval cannot authorize full business activation (152.723606ms)
+✔ full activation rejects missing or wrong scope, environment, target, hashes and approval metadata (161.652381ms)
+✔ recorded activation cannot be replayed after source, target, policy or approval changes (1337.01395ms)
+✔ copied current hashes cannot activate disabled decisions, invalid approvals or an unconfigured target (1653.289511ms)
+✔ activation input inventory excludes generated receipts but fails closed on unsafe source (134.713737ms)
+✔ activation permits only explicit synthetic dev/test actions and denies real/unknown inputs (0.973489ms)
+✔ partial approvals activate only actions whose complete decision set is approved (0.465862ms)
+✔ production approval is a policy activation result, never proof of actor/runtime authorization (0.90047ms)
+✔ handoff checker distinguishes closed examples from an unclosed fence (4.584265ms)
+✔ handoff checker rejects broken and escaping local references while accepting existing sources (2.964327ms)
+ℹ tests 38
 ℹ suites 0
-ℹ pass 32
+ℹ pass 38
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 2428.906103
+ℹ duration_ms 8980.918272

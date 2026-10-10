@@ -1,3 +1,9 @@
+# Current development readback, 2026-10-10 UTC
+
+The current S00 readback supersedes dated observations below. Existing `auxiliumos-dev` (`txofqxictwecgcnvezlb`) has fourteen applied migrations through `20261009194030_document_release_content.sql`; every stored statement SHA-256 matches the canonical file. PostgreSQL reports `17.6.1.127`. Active JWT-verified functions are `private-objects` v3, `document-version-content` v4 and `document-release-content` v1. The two released-content Edge source files match canonical source exactly.
+
+The private `os-private-ingest` bucket remains limited to `text/plain`, 65,536 bytes. Source defaults leave released-content transport disabled; runtime secret settings were not inspected. These are source/deployment observations, not authentic Auth, recipient-byte retrieval or full release acceptance. No migration was reapplied, no fixture or privilege was created, and Moldo was untouched. Exact readback: [S00 evidence](../00-control/evidence/integration-reconciliation-2026-10-10.json).
+
 # Current development readback, 2026-10-09
 
 This current section supersedes the dated preparation observations below. Existing `auxiliumos-dev` (`txofqxictwecgcnvezlb`) has ten applied migrations through `20261009130331_owner_onboarding_activation.sql`, plus JWT-protected `private-objects` v2 and `document-version-content` v3. No Moldo backend changed. Original foundation/seed bytes remain preserved.

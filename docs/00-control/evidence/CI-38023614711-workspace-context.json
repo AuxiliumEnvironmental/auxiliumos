@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "run_id": 38023614711,
+  "source_head": "aa59a4768aab3ca8196e46207885b729224c927c",
+  "ci_observed_git_head": "c3e189459249027435b8ddddbee055b8473ad750",
+  "artifact_id": 11659061130,
+  "artifact_sha256": "a105654a340a0edc4f6df9fff194f4555317192c0b041c37f027c7daa56b014c",
+  "artifact_digest_verified": true,
+  "profile": "workspace-context-browser-fixture",
+  "profile_result": "failed",
+  "passed_scenarios": 6,
+  "failed_scenarios": 3,
+  "registered_profile_source_mismatches": [],
+  "log_sha256": "c5dfed6a946f661065836c4039ceae838029d0e9f6129025a6099efe4a9df751",
+  "log_path": "docs/00-control/evidence/CI-38023614711-workspace-context.log",
+  "first_failure": "Sidebar Projects drops account/facility context; related revocation-context and workflow Sampling-link assertions also fail.",
+  "disposition": "UI worker correcting actual context propagation; all9assertions retained. Provider delivery guard false."
+}

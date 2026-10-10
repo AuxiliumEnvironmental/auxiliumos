@@ -1,0 +1,52 @@
+{
+  "adopted_at": "2026-10-10T04:01:04.031305+00:00",
+  "reference_archive": "AuxiliumOS_Coordinated_Build_Maps_2026-10-09.zip",
+  "archive_sha256": "56272197bd3b660f16b1d858da0ad9a754fdcacd822c9e2b5d4515035b89baff",
+  "canonical_baseline": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "canonical_tree": "7a7903ee53430c535b5d7eaf54003d805dec6bff",
+  "requirements_sha256": "db2986124b90b612805d09419434f638c8f1d58fb55dc31dae4856714e7ee1d3",
+  "acceptance_reconciliation": "Current REQUIREMENTS.json is byte-identical to reference: all 163 ordered criteria preserved. No acceptance closed.",
+  "copied_reference_files": {
+    "00_Master_Build_Map.md": "9c1c8b67a2b9722f8b82261eb048fff75f1f6a31ebfeb85f75b4e989a5d008d1",
+    "START_HERE.md": "fd79dc4376788bb63bc02b7be103cf5bbdaf80f3d4d176e9d66ef7a7974ea0c0",
+    "maps/02_User_Experience.md": "d33aca1c7b81ec417a291a9ac17e6f4ff181814e162c3eab49a99ccb574dc20f",
+    "maps/07_Tools_Integrations_Spatial_Moldo.md": "9dbe6e3f27c0ef4e62482b2ae612b6f4e6f04868dab9f731685de6d856955575",
+    "maps/08_Verification_Release_Operations.md": "bc758cd1ff17f61a15aac31642f511f59b8c258f73e9fd95aef9f1e83799b730",
+    "maps/04_Commercial_Authority.md": "2987c4f9c9c15781efd47c01666247f67acf7853e8f56e42ca48e00742b703bd",
+    "maps/03_Professional_Workflows.md": "618730e150837b5c7e8b470bcaceb1d38388931560f82af5f1085ace008d1594",
+    "maps/06_Evidence_Communications_AI.md": "c5fd57b47b1a7bf380d7a3c60b4b00dd72f5e5768ef45254f9f037af187ffed9",
+    "maps/05_Enterprise_Readiness_Reporting.md": "6e808fcc3c19dc223abdea2db92b4daeedaf5049dea6be63cb08bbb93c221d7b",
+    "maps/01_Platform_Backend_Security.md": "03337287af12bbcf04b4a9bba1867b3905f9b4d684e27961b5448a36d6e07621",
+    "contracts/SHARED_INTERFACE_CONTRACTS.md": "6573c6db4ee7c4e18c2151b5747ccae87510e6fa078a12f4b95a306f311cd1d4",
+    "contracts/INTERFACE_REGISTER.json": "b6235909e7330810ea5f2a6d80cd43f8a0dfd04bf5b3b39624a1598f091ea8ac",
+    "coordination/ADOPTION_AND_MAINTENANCE.md": "d0bc54fb59e4810423b260bc7d0b6a19aefdf22ab889e07e996e69216152cc8f",
+    "coordination/BASELINE_LINK.json": "7666cb40398d84d09fe76f39d941d7928f7334b85234b5a3da7df3f87c240eb3",
+    "coordination/OWNER_DIRECTION_UPDATES.md": "7e31410bcc1ed35550e8b8f2ceac30c7e8448bc5167077da973eb99faae3bece",
+    "coordination/CROSS_CHAT_PROTOCOL.md": "f85f3fa7613de12971cdd9e490f1c88dfb5ded3ef43894f58e1b63579cde45c4",
+    "coverage/PACKAGE_VALIDATION.json": "42eb91129329a72306031e1f222727ceabcc4e6180cc759733e0b1435b299a60",
+    "coverage/CATALOG_AND_RELATIONSHIP_OWNERSHIP.json": "6650b386c21fb3d4e938d398719dc275c6fb3d94d3b63b59d502cb1595977bcc",
+    "coverage/DELIVERY_SEQUENCE.md": "d536a42f6c8207db249996e89c4e78c155e3a061aba6b03ea04e7560c09b78cf",
+    "coverage/DECISION_TOUCHPOINTS.json": "894447960d19160358f03610cf2af6e885940a58be24c1bed4cd0c57e0f38c41",
+    "coverage/IMPLEMENTATION_SLICES.json": "6abdbfc7e2451d5aa45f8436ca5720b55fb12d744ed100369d228531df62d77d",
+    "coverage/MAP_INDEX.json": "790e6ed33fd58d0359e11bab2da79147a2740bde999afbc4d7698b0917b65ee9",
+    "coverage/ACCEPTANCE_OWNERSHIP.json": "b3ea4528d3d8296bb671a0c590e3fddf6f356da7ff0f80eb9d426a2333fe3cca",
+    "chat-prompts/01_Platform_Backend_Security.txt": "3331e6ca8fe0d275e4a5babe6c2076a8ca750d02bd83abe8cc762115564412cb",
+    "chat-prompts/05_Enterprise_Readiness_Reporting.txt": "3fed120bf3c84f34178cc5696a809f3ad037ae417307be95fe0105f1cca61e1b",
+    "chat-prompts/00_Integration_Lead.txt": "4f0be10ca3feec83137c1d73f04f7265f13d284531b8302e161153e93b46f09c",
+    "chat-prompts/04_Commercial_Authority.txt": "a46fc9b7420f135ce5773c94d45c128f7c4a4170eecb9eef82a7ad0fb9384247",
+    "chat-prompts/06_Evidence_Communications_AI.txt": "9f4bf6ad370bbb54f2d50b13c11cd9f768fd3bbc8a875d88f8d3012f17480679",
+    "chat-prompts/02_User_Experience.txt": "33807c28f73a6ab4670a7645b214db69b8f65a9551941b0d3b88ba644ad31077",
+    "chat-prompts/03_Professional_Workflows.txt": "8b16cdd52c38db4d02bef3c567ba0754e1253be28293c56b9722e0046bc9405a",
+    "chat-prompts/08_Verification_Release_Operations.txt": "bff5a1f3f67940104b37583cde505afc72ea40bd8d30242776b193136f0452a1",
+    "chat-prompts/07_Tools_Integrations_Spatial_Moldo.txt": "ac4b7ca911174bc9b80b01517e1a8f1775c90d2156f0046ea804e2991d01eb16"
+  },
+  "reference_syntax": {
+    "repo:": "Repository root path; actual live source after reconciliation. Frozen readback uses Git commit 148d74d or the archive canonical snapshot.",
+    "baseline:": "Frozen archive reference/; not a live repo path. Attach exact archive or use an adopted contract explicitly listed here; never assume another chat has it.",
+    "spatial:": "Frozen archive reference/sources/spatial/; not the current standalone source. Resolve through the Spatial lead and actual pinned returned bytes."
+  },
+  "omitted_intentionally": [
+    "All frozen application trees, native source copies, screenshots, PDF quickstarts and historical evidence. Original full package remains unchanged; no archive importer was run."
+  ],
+  "verification": "Original tools/verify_maps.py passed all 980 inventory hashes, 163 criteria and acyclic 34-slice graph. This validates reference only."
+}

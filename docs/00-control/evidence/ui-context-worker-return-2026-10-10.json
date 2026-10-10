@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "task_id": "UI-2026-10-10-CONTEXT",
+  "kind": "worker_return_with_independent_source_readback",
+  "input_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8",
+  "changed_files_sha256": {
+    "playwright.runtime.config.ts": "664433ba62d4b3063a3848f442e0aca0539a890bb58735e064588bd54225131c",
+    "tests/e2e/workspace-context.spec.ts": "cf0dd437f29990a4f954617d7553092a7834e13c6e2fdbc77e42c3e2e13c4e64",
+    "web/src/components/module-draft-screen.tsx": "b33a0bcc274808566dca084247933e698dd8bd25a6462536d5928d6b2bf4c2e7",
+    "web/src/components/plan-context.tsx": "4498a07d2e2c67da943a2b7cd72440bb893fccb2ce58ba655a20d5b18b5d0e60",
+    "web/src/lib/directory-api.ts": "b63a9f49c0faee99c976fcad879875482132a27974a81a195fbc93667b6e9077",
+    "web/src/lib/runtime.tsx": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+    "web/src/lib/use-directory.ts": "dca51b487dc7e9ed8321d3b4659c26a39500949152a90135300c34462a4daf22",
+    "web/src/lib/use-draft-transition.ts": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+    "web/src/lib/use-planning-context.ts": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+    "web/src/lib/use-workspace-plans.ts": "2d121cb6f399cb02fc31987a1f4f8f3c4faf49074b93df51873f7adc30275b24",
+    "web/src/pages/directory.tsx": "e6587fd4a1fded9c7a2c202429dd38412185e0757935a06756b15acf8a654081",
+    "web/src/pages/module-workspace.tsx": "84dac7c72128c078a6a3c4cffb151dfb120268f3322233f1dc0386322ce208b2",
+    "web/src/router.tsx": "d1a151a34564aafc3e66e8093e5a7856176494e28ab51c40da4de98fb2b47f0f"
+  },
+  "checks": [
+    {
+      "command": "npm run build",
+      "result": "passed final source after planning-authority correction",
+      "runner": "ui_repair",
+      "limitation": "existing large-chunk warning"
+    },
+    {
+      "command": "node --test tests/unit/workspace-plan-api.test.mjs tests/unit/auth-persistence.test.mjs",
+      "result": "36 passed; no skips",
+      "runner": "ui_repair"
+    },
+    {
+      "command": "playwright test --config playwright.runtime.config.ts workspace-context.spec.ts --list",
+      "result": "9 scenarios discovered; not browser-executed",
+      "runner": "ui_repair"
+    },
+    {
+      "command": "node scripts/os-control.mjs allocation UI-2026-10-10-CONTEXT ../ui_changed_paths.txt",
+      "result": "outside_allocation=[]",
+      "runner": "integration-lead actual output"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed",
+      "runner": "worker, independent reviewer and integration-lead"
+    }
+  ],
+  "review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json",
+  "browser_execution": "pending candidate CI; local Chromium installation failed",
+  "hosted_acceptance": false,
+  "provider_writes_by_worker": false
+}
