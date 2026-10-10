@@ -4,6 +4,9 @@ import type { AuthPersistence, AuthStorageLease } from "./auth-storage";
 import { consumePasswordLink, recoveryRedirect, unavailablePasswordLink, validateNewPassword, type PasswordLink, type PasswordLinkKind } from "./auth-links";
 import { createRuntimeClient, DirectoryApi, type RuntimeContext } from "./directory-api";
 import { asRuntimeError, isAbort, RuntimeError, serviceError } from "./errors";
+import { PlanningDirectory } from "./use-planning-context";
+import type { PlanningDraftEntry } from "./use-draft-transition";
+import { WorkspacePlanApi } from "./workspace-plan-api";
 
 export type RuntimeState =
   | { status: "checking" }
@@ -19,6 +22,9 @@ type RuntimeValue = {
   api: DirectoryApi;
   config: RuntimeConfig;
   state: RuntimeState;
+  planningDirectory: PlanningDirectory | null;
+  draftMemory: Map<string, PlanningDraftEntry>;
+  isCurrentAccess: (revision: number) => boolean;
   recheck: () => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
@@ -36,10 +42,22 @@ const Runtime = createContext<RuntimeValue | null>(null);
 let startupPasswordLink = consumePasswordLink(window.location.href, (url) => window.history.replaceState(null, "", url));
 
 export function RuntimeProvider({ api, config, persistence, children }: { api: DirectoryApi; config: RuntimeConfig; persistence: AuthPersistence; children: ReactNode }) {
-  const [state, setState] = useState<RuntimeState>({ status: "checking" });
+  const [state, updateState] = useState<RuntimeState>({ status: "checking" });
+  const recovery = useRef({ identity: "", drafts: new Map<string, PlanningDraftEntry>() });
+  const planningDirectory = useRef<PlanningDirectory | null>(null);
+  const setState = useCallback((next: RuntimeState) => {
+    // Keep inaccessible work only while verification is pending or transiently
+    // unavailable. Replacing the map fences late cleanup writes into the old map.
+    if (next.status !== "ready" && next.status !== "checking" && !(next.status === "error" && next.error.retryable)) {
+      recovery.current = { identity: "", drafts: new Map() };
+    }
+    if (next.status !== "ready") planningDirectory.current = null;
+    updateState(next);
+  }, []);
   const [client, setClient] = useState(api.client);
   const currentRequest = useRef<AbortController | null>(null);
   const generation = useRef(0);
+  const activeAccess = useRef<number | null>(null);
   const authOperation = useRef(0);
   const scheduledCheck = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const mounted = useRef(false);
@@ -52,6 +70,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
   const passwordSession = useRef<null | { lease: AuthStorageLease; client: DirectoryApi["client"]; operation: number; userId: string }>(null);
 
   const invalidate = useCallback(() => {
+    activeAccess.current = null;
     generation.current += 1;
     currentRequest.current?.abort();
     currentRequest.current = null;
@@ -64,7 +83,8 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
     const request = invalidate();
     const controller = new AbortController();
     currentRequest.current = controller;
-    // Unmount the authenticated subtree immediately. Every row is memory-only.
+    // Hide all protected UI and cancel its requests until access is re-established.
+    // Only identity-scoped draft snapshots survive this unmount, in memory.
     setState({ status: "checking" });
     try {
       if (!persistence.isCurrent()) {
@@ -80,6 +100,29 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
         return;
       }
       if (result.status === "ready") {
+        const identity = `${result.context.authUserId}:${result.context.profileId}`;
+        if (recovery.current.identity !== identity) recovery.current = { identity, drafts: new Map() };
+        const directory = new PlanningDirectory(api, controller.signal);
+        const planApi = new WorkspacePlanApi(api.client);
+        // A profile check alone does not establish facility membership. Recheck
+        // every retained scope, including drafts on inactive module routes.
+        for (const [id, entry] of recovery.current.drafts) {
+          if (!entry.scope) continue;
+          const allowed = await directory.resolve(entry.scope.accountId, entry.scope.facilityId);
+          if (!mounted.current || request !== generation.current) return;
+          if (!allowed.account || !allowed.facility) recovery.current.drafts.delete(id);
+          // Planning uses submit_request, independently revocable from directory
+          // access. Its existing list RPC proves that authority before recovery.
+          else await planApi.list(entry.scope, controller.signal);
+        }
+        if (!mounted.current || request !== generation.current) return;
+        if (!persistence.isCurrent()) {
+          signoutLocked.current = true;
+          setState({ status: "unauthenticated", expired: hadSession.current });
+          return;
+        }
+        planningDirectory.current = directory;
+        activeAccess.current = request;
         hadSession.current = true;
         setState({ status: "ready", context: result.context, revision: request });
       } else if (result.status === "unauthenticated") {
@@ -98,7 +141,7 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
         setState({ status: "error", error: failure });
       }
     }
-  }, [api, invalidate, persistence]);
+  }, [api, invalidate, persistence, setState]);
 
   const retryPasswordLink = useCallback(async () => {
     const link = passwordLink.current;
@@ -349,7 +392,20 @@ export function RuntimeProvider({ api, config, persistence, children }: { api: D
       : { status: "access_unavailable" });
   }, [invalidate]);
 
-  return <Runtime.Provider value={{ api, config, state, recheck, signIn, signOut, requestPasswordReset, setPassword, retryPasswordLink, showSignIn, handleFailure }}>{children}</Runtime.Provider>;
+  const isCurrentAccess = useCallback((revision: number) => {
+    if (activeAccess.current !== revision) return false;
+    try {
+      if (persistence.isCurrent()) return true;
+      signoutLocked.current = true;
+      invalidate();
+      setState({ status: "unauthenticated", expired: hadSession.current });
+    } catch (error) {
+      invalidate();
+      setState({ status: "error", error: asRuntimeError(error) });
+    }
+    return false;
+  }, [invalidate, persistence, setState]);
+  return <Runtime.Provider value={{ api, config, state, planningDirectory: planningDirectory.current, draftMemory: recovery.current.drafts, isCurrentAccess, recheck, signIn, signOut, requestPasswordReset, setPassword, retryPasswordLink, showSignIn, handleFailure }}>{children}</Runtime.Provider>;
 }
 
 export function useRuntime() {

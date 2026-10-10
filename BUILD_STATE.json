@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "as_of": "2026-10-10T04:03:34.685028+00:00",
+  "as_of": "2026-10-10T04:16:35.305138+00:00",
   "destination": "Complete 20-module AuxiliumOS, independent Moldo integration, companion deferred.",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
@@ -15,7 +15,7 @@
     "evidence": "2026-10-09 owner explicitly approved public publication and reported manually publishing the existing Lovable app. This authorizes frontend publication; real-data production activation remains separately gated."
   },
   "external_access": {
-    "github": "Read/push permissions reported; 148d74d source and six refs read back. New integration branch source publication remains pending until actual remote write/readback.",
+    "github": "GitHub connector saved integration branch at 28880477f1b40da3bf2adf746bf0d5969f0e440f; commit/tree/ref readback verified tree deb561b1f815b687e9145efd0cbc3498bb7033a3 equals local reviewed source. Terminal push has no credentials; connector access is operational.",
     "cursor": "Optional editor; no access to owner local clone and no synchronization claimed. ChatGPT plus connected project tools is the primary continuation path.",
     "supabase": "auxiliumos-dev PostgreSQL17.6.1.127: all14 applied migration statement hashes match source; private-objects v3, document-version-content v4 and document-release-content v1 JWT-verified. Last Edge two source files match exactly. No hosted document acceptance.",
     "lovable": "OS 8d59d222 operation completed; prior plan-card blocker is superseded by actual later completed operation readback. Host runtime/router match 148d74d; document release UI is behind canonical. Spatial separate active transfer retained. No native GitHub sync or publication parity claimed.",
@@ -28,11 +28,12 @@
     "Canonical acceptance contracts and clearly provisional configuration",
     "Historical plans and retrieved chat as attributed evidence"
   ],
-  "first_runtime_action": "Repair the four reproduced draft-loss paths with current-authority recovery (UI-2026-10-10-CONTEXT), and reject publication-only activation evidence (CTRL-003-ACTIVATION). Hosted private-document acceptance remains open.",
+  "first_runtime_action": "Finish independent review and candidate CI for UI-2026-10-10-CONTEXT, then serialize exact reviewed UI/context and existing document-release source delivery to the current OS Lovable host. Authentic hosted private-document acceptance remains open; preserve the separate active Spatial transfer.",
   "active_remote_work": [
     "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
     "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-content-2026-10-09",
-    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09"
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/wip/release-ui-2026-10-09",
+    "https://github.com/AuxiliumEnvironmental/auxiliumos/tree/work/integration-2026-10-10"
   ],
   "baseline_observed_facts": [
     "Static HTML/CSS/JavaScript shell exists; it is not a working 20-module application.",
@@ -547,15 +548,33 @@
     "review_receipt": "docs/00-control/evidence/integration-reconciliation-2026-10-10.json",
     "new_business_decisions": [],
     "completed_source_packets": [
-      "CTRL-003-ACTIVATION"
-    ],
-    "remaining_source_packets": [
+      "CTRL-003-ACTIVATION",
       "UI-2026-10-10-CONTEXT"
     ],
+    "remaining_source_packets": [],
     "external_spatial_latest_observation": {
-      "head": "1b29a80534844c4d4b36a9a213b1dd0b3ad0f547",
-      "agent_finished": false,
-      "observation": "Provider source advanced under separate lead; this integration did not inspect or modify its current source."
-    }
+      "head": "c160e74dc192d03605eafc8611e4c2e4917394d7",
+      "agent_finished": true,
+      "operation_id": "main:user#00000000000005#usr:H4KV6UH5",
+      "response_status": "completed",
+      "operation_reported_commit": "1b29a80534844c4d4b36a9a213b1dd0b3ad0f547",
+      "observation": "Separate project/lead source advanced and operation completed. No Spatial files changed by OS lead; project head differs from operation commit so entire current delivery is not accepted from the message summary."
+    },
+    "source_save": {
+      "remote_commit": "28880477f1b40da3bf2adf746bf0d5969f0e440f",
+      "tree": "deb561b1f815b687e9145efd0cbc3498bb7033a3",
+      "local_reviewed_equivalent": "b4366914b8681b774ecaeb102fc039e2af2711a7",
+      "readback": "GitHub branch ref and commit tree; identical tree checked again through git fetch",
+      "scope": "Reconciliation, frozen references, accepted activation-gate repair and candidate fixture registration; excludes ongoing UI working files and this later receipt",
+      "recorded_at": "2026-10-10T04:11:14.673302+00:00"
+    },
+    "candidate_gate": "Source review clear; current integrated GitHub CI, including new workspace-context browser fixture, remains required.",
+    "accepted_contract_changes": [
+      "RuntimeContext adds authUserId from existing verified getUser, retaining profile and current generation.",
+      "RuntimeProvider owns memory-only identity-scoped draft recovery, replaces it on identity/access loss and revalidates every retained directory and planning action scope before ready.",
+      "Root account/facility search is a hint only; one generation-scoped paginated directory supplies permitted context.",
+      "Uncertain planning saves retain exact immutable request and original scope; protected mutation requires current verified generation."
+    ],
+    "ui_review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json"
   }
 }

@@ -1,28 +1,29 @@
 {
   "version": 1,
-  "created_at": "2026-10-09T19:23:24.643Z",
+  "created_at": "2026-10-10T04:17:09.566Z",
   "source": {
     "repository": "https://github.com/AuxiliumEnvironmental/auxiliumos.git",
     "archive_commit": "1729a525a7a60b86d1498c1300b579eb6775b02c",
     "archive_sha256": "a91c00c3b8e0311d690e07c1ff582b1c8cafcdca280faab0c578699c05f870fb",
-    "review_basis": "Verified live canonical main, clean local clone and reviewed package with matching baseline; separate Lovable source inspected read-only.",
-    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1"
+    "review_basis": "Fresh isolated clone at 148d74d with current GitHub refs, CI67 and actual provider source/operation readback; maps adopted as reference only.",
+    "continuation_package_sha256": "a8c44bdff6bf113e8dce4dc828723a9d5559540cbe6865dd68df12ce5706f8a1",
+    "current_verified_feature_commit": "148d74d9720f0799e5d845bb789cd3fc3f43feb8"
   },
-  "first_unfinished_action": "Finish bounded document mobile/readability and intake-name polish, verify exact Lovable source parity, publish the reviewed UI and run one integrated CI gate. Owner account/login and request/triage are already verified. Configure missing development-only GitHub Actions service secret, then run the focused real connected workflow; current cloud-browser credential-state restriction prevents further manual verification. Next backend slice is released-byte access, distinct from completed metadata release.",
+  "first_unfinished_action": "Finish independent review and candidate CI for UI-2026-10-10-CONTEXT, then serialize exact reviewed UI/context and existing document-release source delivery to the current OS Lovable host. Authentic hosted private-document acceptance remains open; preserve the separate active Spatial transfer.",
   "git": {
     "is_repository_root": true,
-    "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
-    "branch": "wip/recovery-2026-10-08",
-    "upstream": null,
-    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M OWNER_DECISIONS.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M docs/00-control/evidence/development-migrations.json\n M docs/00-control/evidence/owner-domain-preparation.json\n M docs/00-control/reviews/DOCUMENT-RELEASE-2026-10-09.json\n?? docs/00-control/evidence/document-release-final-test.log\n?? docs/00-control/evidence/document-release-first-test.log\n?? docs/00-control/evidence/document-release-second-test.log",
+    "head": "28880477f1b40da3bf2adf746bf0d5969f0e440f",
+    "branch": "work/integration-2026-10-10",
+    "upstream": "origin/work/integration-2026-10-10",
+    "working_tree": "M BUILD_QUEUE.json\n M BUILD_STATE.json\n M docs/00-control/evidence/controls.json\n M docs/00-control/evidence/controls.log\n M playwright.runtime.config.ts\n M web/src/components/module-draft-screen.tsx\n M web/src/components/plan-context.tsx\n M web/src/lib/directory-api.ts\n M web/src/lib/runtime.tsx\n M web/src/lib/use-directory.ts\n M web/src/lib/use-workspace-plans.ts\n M web/src/pages/directory.tsx\n M web/src/pages/module-workspace.tsx\n M web/src/router.tsx\n?? docs/00-control/reviews/UI-CONTEXT-2026-10-10.json\n?? tests/e2e/workspace-context.spec.ts\n?? web/src/lib/use-draft-transition.ts\n?? web/src/lib/use-planning-context.ts",
     "remote": {
       "status": "head_matches_remote",
-      "branch": "wip/recovery-2026-10-08",
-      "head": "5802e2e6e06f14d11343a9ae4a6279884741cef5",
-      "checked_at": "2026-10-09T19:23:24.641Z"
+      "branch": "work/integration-2026-10-10",
+      "head": "28880477f1b40da3bf2adf746bf0d5969f0e440f",
+      "checked_at": "2026-10-10T04:17:09.552Z"
     }
   },
-  "controls_digest": "a134d334ea6394464ee44dcd792616114656803d7fe6920847ca4444bc0a565d",
+  "controls_digest": "a424dc05c4bb672fe9b53122634592a719f8d4aafb071187175ba01ad19f5396",
   "next_ready_task": "UI-2026-10-09",
   "blocked_tasks": [
     {
@@ -32,13 +33,16 @@
       "verified": false,
       "historical_completion": false,
       "next_action": "Use the focused connected-browser profile with provisioned synthetic document8f161092-30f1-4e67-83c6-000000000501 and freshly read document revision (initial0); preserve owner identity separately. Broader API checks only if changed risk requires them.",
-      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed."
+      "blocker": "Authentic automated connected acceptance remains unexecuted. Historical Oct9 settings inspection reported no service secret; current protected secret availability was not reverified in this session. Read back secure workflow configuration before dispatch; do not infer availability from skipped CI jobs. Owner password and initial Auth session remain evidenced."
     }
   ],
   "evidence": {
     "controls": {
-      "status": "stale",
-      "profile": "controls"
+      "status": "passed",
+      "profile": "controls",
+      "evidence": "docs/00-control/evidence/controls.json",
+      "level": "control_unit",
+      "recorded_at": "2026-10-10T04:16:56.932Z"
     },
     "foundation-contract": {
       "status": "stale",
@@ -204,6 +208,26 @@
     "document-releases-database": {
       "status": "not_run",
       "profile": "document-releases-database"
+    },
+    "document-release-content-database": {
+      "status": "not_run",
+      "profile": "document-release-content-database"
+    },
+    "document-release-content-gateway-unit": {
+      "status": "not_run",
+      "profile": "document-release-content-gateway-unit"
+    },
+    "document-releases-client-unit": {
+      "status": "not_run",
+      "profile": "document-releases-client-unit"
+    },
+    "document-releases-browser-fixture": {
+      "status": "not_run",
+      "profile": "document-releases-browser-fixture"
+    },
+    "workspace-context-browser-fixture": {
+      "status": "not_run",
+      "profile": "workspace-context-browser-fixture"
     }
   },
   "pending_owner_decisions": [
@@ -225,31 +249,5 @@
     "OD-016",
     "OD-017"
   ],
-  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file.",
-  "cloud_recovery": {
-    "recorded_at": "2026-10-09T20:40:15.839Z",
-    "base_remote_commit": "4cd547c892158069e3ee82ef6a6c58b69a95bfa9",
-    "reason": "Workspace unavailable; current facts preserved through GitHub connector from exact remote files.",
-    "not_claimed": [
-      "Local checkpoint regeneration",
-      "Local source parity after outage",
-      "Uncollected tests",
-      "Completed released-byte backend"
-    ],
-    "next_action": "Run the existing CI release gate with four newly registered focused release profiles on the integrated source candidate. Inspect any concrete failure using bounded synthetic job diagnostics. After passing review/runtime checks, apply exact migration14 to auxiliumos-dev with existing guarded history reconciliation and verify ACL/RLS/source. Lovable UI transfer waits for owner resolution of its report-only plan card; actual private-file workflow still waits for protected development-only service configuration.",
-    "ui_source": "57f637a9461ca1180df77bea487aa9fd12ac9c7b",
-    "exact_source_parity": true,
-    "ci64_diagnosis": "Exact sanitized artifact excerpt verified within GitHub; duplicate warning locator caused sole version failure. Corrected fixture and original workflow restoration saved together; next CI pending.",
-    "ci66": {
-      "run_id": 37986270507,
-      "commit": "4cf0815879ee31c5374880c28747ef6429a5ef93",
-      "controls": "passed",
-      "application_foundation": "passed",
-      "actual_privileged_profiles": "not_run"
-    },
-    "release_content_source": "e250336d4f14a53472d260e052ba5de0e101ab48",
-    "release_ui_wip": "06f54fd4a269b6dfaf32dfd5c8eec055d8a1a238",
-    "release_ui_source": "43d1ea48989f753445510f030584a91a4211fb6c",
-    "release_runtime_status": "Pending integrated CI, not executed in unavailable workspace."
-  }
+  "note": "Observed before writing this checkpoint. A matching remote HEAD does not include uncommitted changes or this newly written checkpoint. Commit, push, then read back Git status and remote HEAD. Never claim Cursor synchronization from this file."
 }

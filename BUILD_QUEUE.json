@@ -117,7 +117,7 @@
         "document-content-browser-fixture",
         "document-reviews-browser-fixture"
       ],
-      "next_action": "Mobile candidate57f637a passed corrected CI66 and publication accepted0cf4e56e; provider anonymous public asset check supports new mobile delivery. Resolve report-only Lovable pause, then integrate reviewed metadata-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
+      "next_action": "Current host 8d59d222 completed its later Spatial refresh; old report-only pause is superseded. Complete reviewed child UI-2026-10-10-CONTEXT and candidate CI, then serialize exact transfer with already integrated document-release UI. Actual private-file/planning and full20-module operational acceptance remain open.",
       "blocker": null,
       "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
       "requested_copy_changes": [
@@ -213,7 +213,7 @@
       "verification_profiles": [
         "source-reconciliation"
       ],
-      "next_action": "S00 current readback in integration-reconciliation-2026-10-10.json. New packets have exclusive paths; preserve active external Spatial transfer. Verify remote candidate after save.",
+      "next_action": "S00 actual GitHub/Lovable/Supabase readback is recorded. Reconciliation/reference/control source saved and remote tree verified at28880477. Preserve external Spatial transfer and verify the next reviewed candidate after save.",
       "blocker": null,
       "issue": null,
       "completion_mode": "historical_source"
@@ -303,7 +303,7 @@
         "development-ui",
         "document-connected-ui"
       ],
-      "blocker": "Signed-in GitHub Actions settings confirm no repository/environment secrets. Actual automated connected workflow needs the development-only repository service secret; dispatch UI is available. Owner password and initial Auth session are confirmed.",
+      "blocker": "Authentic automated connected acceptance remains unexecuted. Historical Oct9 settings inspection reported no service secret; current protected secret availability was not reverified in this session. Read back secure workflow configuration before dispatch; do not infer availability from skipped CI jobs. Owner password and initial Auth session remain evidenced.",
       "issue": null,
       "id": "SEC-001B",
       "title": "Supabase login and account/facility interface",
@@ -1813,7 +1813,7 @@
     {
       "id": "UI-2026-10-10-CONTEXT",
       "title": "Planning draft and authorized context repair",
-      "status": "in_progress",
+      "status": "implemented",
       "dependencies": [
         "SYNC-001"
       ],
@@ -1839,7 +1839,7 @@
         "playwright.runtime.config.ts",
         "web/src/lib/directory-api.ts"
       ],
-      "assigned_to": "ui_repair",
+      "assigned_to": null,
       "branch": "work/integration-2026-10-10",
       "owner_decisions": [],
       "verification_profiles": [
@@ -1851,9 +1851,10 @@
         "build",
         "browser_fixture"
       ],
-      "next_action": "Execute bounded packet docs/00-control/task-packets/UI-2026-10-10-CONTEXT.json; independent review before integration.",
+      "next_action": "Source independently reviewed after current planning-action authorization correction. Run integrated candidate CI including nine new fixture scenarios; then serialize exact OS host source transfer and retain authentic hosted acceptance as open.",
       "blocker": null,
-      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84"
+      "issue": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "review": "docs/00-control/reviews/UI-CONTEXT-2026-10-10.json"
     },
     {
       "id": "CTRL-003-ACTIVATION",

@@ -9,6 +9,7 @@ import { PrivateFilesPage } from "./pages/private-files";
 import { ModulesPage, NotFoundPage, ProfilePage } from "./pages/workspace";
 
 import { ModuleWorkspace } from "./pages/module-workspace";
+import { useDraftTransition } from "./lib/use-draft-transition";
 
 // The complete Spatial authoring workspace loads only when opened.
 const SpatialPage = lazy(() => import("./pages/spatial").then((module) => ({ default: module.SpatialPage })));
@@ -19,7 +20,8 @@ const SpatialScreen = () => <Suspense fallback={<SpatialLoading />}><SpatialPage
 function RootLayout() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const standalone = pathname === "/spatial/standalone";
-  return <><ScreenAccessCheck /><AuthGate>{standalone ? <main className="spatial-standalone"><Outlet /></main> : <AppShell><Outlet /></AppShell>}</AuthGate></>;
+  const transition = useDraftTransition();
+  return <><ScreenAccessCheck />{transition.status === 'blocked' && <div className="status-card" role="alert"><p>Finish or retry the current planning save before changing context or leaving this screen.</p><button className="button primary" autoFocus onClick={transition.reset}>Return to draft</button></div>}<AuthGate>{standalone ? <main className="spatial-standalone"><Outlet /></main> : <AppShell><Outlet /></AppShell>}</AuthGate></>;
 }
 
 function ScreenAccessCheck() {
@@ -35,6 +37,14 @@ function ScreenAccessCheck() {
 }
 
 const rootRoute = createRootRoute({
+  validateSearch: (search: Record<string, unknown>): { account?: string; facility?: string } => ({ account: typeof search.account === 'string' ? search.account : undefined, facility: typeof search.facility === 'string' ? search.facility : undefined }),
+  // Context is only a hint: each destination resolves permitted rows again.
+  search: { middlewares: [({ search, next }) => {
+    const result = next(search);
+    const account = 'account' in result ? result.account : search.account;
+    const facility = 'facility' in result ? result.facility : account === search.account ? search.facility : undefined;
+    return { ...result, account, facility };
+  }] },
   component: RootLayout,
   notFoundComponent: NotFoundPage,
   errorComponent: () => <div className="status-card" role="alert"><h1>This page could not be opened</h1><p>Reload the workspace to try again.</p><a className="button primary" href="/">Reload workspace</a></div>,
@@ -54,7 +64,7 @@ const facilitiesRoute = createRoute({
 function FacilitiesRoute() {
   const { account } = facilitiesRoute.useSearch();
   const navigate = facilitiesRoute.useNavigate();
-  return <FacilitiesPage accountId={account} onAccountChange={(accountId) => { void navigate({ search: accountId ? { account: accountId } : {} }); }} />;
+  return <FacilitiesPage accountId={account} onAccountChange={(accountId) => { void navigate({ search: { account: accountId || undefined, facility: undefined } }); }} />;
 }
 
 const profileRoute = createRoute({ getParentRoute: () => rootRoute, path: "/account", head: pageHead("My account", "Your AuxiliumOS workspace identity and assigned directory access."), component: ProfilePage });
@@ -68,7 +78,7 @@ const intakeRoute = createRoute({
 function IntakeRoute() {
   const { account } = intakeRoute.useSearch();
   const navigate = intakeRoute.useNavigate();
-  return <IntakePage accountId={account} onAccountChange={(id) => { void navigate({ search: id ? { account: id } : {} }); }} />;
+  return <IntakePage accountId={account} onAccountChange={(id) => { void navigate({ search: { account: id || undefined, facility: undefined } }); }} />;
 }
 const modulesRoute = createRoute({ getParentRoute: () => rootRoute, path: "/modules", head: pageHead("All modules", "The complete AuxiliumOS workspace module directory."), component: ModulesPage });
 const privateFilesRoute = createRoute({
@@ -81,11 +91,11 @@ const privateFilesRoute = createRoute({
 function PrivateFilesRoute() {
   const { account } = privateFilesRoute.useSearch();
   const navigate = privateFilesRoute.useNavigate();
-  return <PrivateFilesPage accountId={account} onAccountChange={(id) => { void navigate({ search: id ? { account: id } : {} }); }} />;
+  return <PrivateFilesPage accountId={account} onAccountChange={(id) => { void navigate({ search: { account: id || undefined, facility: undefined } }); }} />;
 }
 const spatialRoute = createRoute({ getParentRoute: () => rootRoute, path: "/spatial", head: pageHead("Spatial", "Personal synthetic Spatial layouts with full 2D and 3D authoring."), component: SpatialScreen });
 const spatialStandaloneRoute = createRoute({ getParentRoute: () => rootRoute, path: "/spatial/standalone", head: pageHead("Spatial workspace", "Full-screen personal Spatial authoring workspace."), component: SpatialScreen });
-const moduleRoute = createRoute({ getParentRoute: () => rootRoute, path: "/$module", validateSearch: (search: Record<string, unknown>): { account?: string } => ({ account: typeof search.account === "string" ? search.account : undefined }), head: ({ params }) => pageHead(params.module === "core" ? "Home" : params.module.charAt(0).toUpperCase() + params.module.slice(1), `AuxiliumOS ${params.module} workspace and connection status.`)(), component: () => <ModuleWorkspace path={moduleRoute.useParams().module} accountId={moduleRoute.useSearch().account} /> });
+const moduleRoute = createRoute({ getParentRoute: () => rootRoute, path: "/$module", head: ({ params }) => pageHead(params.module === "core" ? "Home" : params.module.charAt(0).toUpperCase() + params.module.slice(1), `AuxiliumOS ${params.module} workspace and connection status.`)(), component: () => <ModuleWorkspace path={moduleRoute.useParams().module} accountId={moduleRoute.useSearch().account} facilityId={moduleRoute.useSearch().facility} /> });
 
 const routeTree = rootRoute.addChildren([accountsRoute, facilitiesRoute, profileRoute, intakeRoute, privateFilesRoute, modulesRoute, spatialRoute, spatialStandaloneRoute, moduleRoute]);
 export const router = createRouter({ routeTree, defaultPreload: false, scrollRestoration: true });
