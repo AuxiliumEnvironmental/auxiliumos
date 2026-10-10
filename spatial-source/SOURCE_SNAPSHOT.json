@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+  "sourceCommit": "fc3a9b212e2a43b8a4fb41dbc6790ad3710279ba",
   "purpose": "Generated native build snapshot with complete C/Swift/React dependencies and synthetic fixtures. Canonical source remains the Auxilium Spatial repository.",
   "files": {
     "capacitor/.gitignore": "9d6dc8e3ddb1ae8fdaffbf1da89ac885d8649c33b1d94d5d11f1bba85184e4ef",
@@ -178,10 +178,10 @@
     "web/src/types.ts": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
     "web/src/ui/FloorplanCanvas.tsx": "e98cad26825469f036983c4fc4467c9a9bff18901eb9eed36716486e3efa74d1",
     "web/src/ui/Inspector.tsx": "0327925f8652f299bc05a4bbe8405ee4804004c98996a7b04f6334eaab0134b9",
-    "web/src/ui/ModelViewport.tsx": "56a00d051b1cbde43a6100f70fa11ade04faaca6ca4de737ff21b18d3d17cce2",
-    "web/src/ui/SpatialWorkspace.tsx": "4b8a3b234d49e1ff67ac5d397736ca11896c9b77a2df180a1c5fca0435b574f8",
+    "web/src/ui/ModelViewport.tsx": "46ac0122a8b1c4297133d3c068f127a67428b81b71916d44ec87212d7b731130",
+    "web/src/ui/SpatialWorkspace.tsx": "7f3b10647806c0743a7958b6d7660f120dd8ddab8056ba5a7b613b1e2246a6be",
     "web/src/ui/geometry.ts": "e315cff4c0147f6bdfbe3b649865f1d032087de988017bd24e02693b7c78450d",
-    "web/src/ui/rendererDiagnostics.ts": "aa073d65fecad12750d2c3cee316876c2193529dde966a4d9d93504905bef711",
+    "web/src/ui/rendererDiagnostics.ts": "63d25207db7a6c467d84f87e7966fb0cb906f954b6baab30dcc151f25f0a8e74",
     "web/src/ui/review.ts": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
     "web/src/ui/sceneBatches.ts": "3b198a8ad4533fe5d1554f7117a61ea9ea0f862e8af6b990a2e539e9f4098f7a",
     "web/src/ui/useTextScale.ts": "7c288b20d539092c4f822b13931af5aebcad21c550d87f2b4e32b816aa079915",

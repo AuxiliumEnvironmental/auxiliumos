@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useId, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { buildScene, displayCeilings, roomBoundary, wallPath, WalkNavigation } from '../core';
@@ -7,10 +7,14 @@ import { trackRenderer } from './rendererDiagnostics';
 import type { Floor, Point2, Selection, SpatialDocument, WalkPosition } from '../types';
 
 export type ModelViewState = { camera: [number,number,number]; target: [number,number,number]; cutaway: boolean; cut: number; fills: boolean; ceilings: boolean };
-type Props = { rememberedView?: ModelViewState; rememberView?: (view: ModelViewState) => void; document: SpatialDocument; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void };
-type Runtime = { camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; showCeilings: (visible: boolean) => void; dispose: () => void };
-export function ModelViewport({ rememberedView, rememberView, document, floor, selection, onSelect }: Props) {
+type Props = { active?: boolean; rememberedView?: ModelViewState; rememberView?: (view: ModelViewState) => void; document: SpatialDocument; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void };
+type Runtime = { camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; showCeilings: (visible: boolean) => void; setActive: (active: boolean) => void; dispose: () => void };
+export function ModelViewport({ active = true, rememberedView, rememberView, document, floor, selection, onSelect }: Props) {
   const host = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(active); activeRef.current = active;
+  const contextLost = useRef(false);
+  const previouslyActive = useRef(active);
+  const [contextAttempt, setContextAttempt] = useState(0);
   const lastFraming=useRef<ModelViewState|undefined>(rememberedView);
   const runtime = useRef<Runtime | null>(null);
   const navigation = useRef<WalkNavigation | null>(null);
@@ -50,9 +54,11 @@ export function ModelViewport({ rememberedView, rememberView, document, floor, s
   };
   moveRef.current = (forward, side) => { const p=position.current;if(!p)return;const angle=heading.current;moveTargetRef.current({x:p.point.x+Math.sin(angle)*forward+Math.cos(angle)*side,z:p.point.z-Math.cos(angle)*forward+Math.sin(angle)*side}); };
   lookRef.current = (turn, tilt = 0) => { heading.current += turn; pitch.current = Math.max(-1, Math.min(1, pitch.current + tilt)); updateCamera(); };
-  useEffect(() => {
+  // Swap revision-derived geometry before paint. React may reveal the retained
+  // canvas during reactivation, so a passive effect could expose the old revision.
+  useLayoutEffect(() => {
     const el = host.current; if (!el) return;
-    setError(''); walking.current = false; setMode('orbit'); position.current = null; stopRepeat(); setMessage('Drag to orbit. Scroll or pinch to zoom.');
+    contextLost.current = false; setError(''); walking.current = false; setMode('orbit'); position.current = null; stopRepeat(); setMessage('Drag to orbit. Scroll or pinch to zoom.');
     let renderer: THREE.WebGLRenderer;
     try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'low-power' }); } catch { setError('3D graphics are unavailable in this browser. The 2D editor and saved layout remain available.'); return; }
     const releaseTracker=trackRenderer(renderer);
@@ -89,10 +95,10 @@ export function ModelViewport({ rememberedView, rememberView, document, floor, s
     let queuedFrame = 0, disposed = false;
     const cancelFrame = () => { if (queuedFrame) cancelAnimationFrame(queuedFrame); queuedFrame = 0; };
     const render = () => {
-      if (disposed || window.document.hidden || queuedFrame) return;
+      if (disposed || !activeRef.current || contextLost.current || window.document.hidden || queuedFrame) return;
       queuedFrame = requestAnimationFrame(() => {
         queuedFrame = 0;
-        if (disposed || window.document.hidden) return;
+        if (disposed || !activeRef.current || contextLost.current || window.document.hidden) return;
         renderer.render(scene, camera);
         renderer.domElement.dataset.rendered = 'true';
       });
@@ -139,20 +145,32 @@ export function ModelViewport({ rememberedView, rememberView, document, floor, s
       const kind = floor.walls.some(w=>w.id===id) ? 'wall' : floor.openings.some(o=>o.id===id) ? 'opening' : floor.rooms.some(r=>r.id===id) ? 'room' : 'area'; selectRef.current({ floorID:floor.id,kind,objectID:id });
     };
     const keyDown = (event: KeyboardEvent) => { if (!walking.current) return; const key = event.key.toLowerCase(); if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','escape'].includes(key)) event.preventDefault(); if (key==='w'||key==='arrowup') moveRef.current(0.2,0); if(key==='s'||key==='arrowdown') moveRef.current(-0.2,0);if(key==='a')moveRef.current(0,-0.2);if(key==='d')moveRef.current(0,0.2);if(key==='arrowleft')lookRef.current(-0.12);if(key==='arrowright')lookRef.current(0.12);if(key==='escape')leaveWalk(); };
-    const lost = (event: Event) => { event.preventDefault(); setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
+    const lost = (event: Event) => { event.preventDefault(); contextLost.current = true; cancelFrame(); renderer.domElement.dataset.rendered = 'false'; setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
     renderer.domElement.addEventListener('pointerdown', pointerDown);renderer.domElement.addEventListener('pointermove',pointerMove);renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('keydown',keyDown);renderer.domElement.addEventListener('webglcontextlost',lost);
     const dispose = () => { disposed = true; cancelFrame(); window.document.removeEventListener('visibilitychange', visibility); stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
-    runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, showCeilings:visible=>{ceilingBatches.forEach(batch=>{batch.mesh.visible=visible;});render();}, dispose };
+    runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, showCeilings:visible=>{ceilingBatches.forEach(batch=>{batch.mesh.visible=visible;});render();}, setActive:visible=>{controls.enabled=visible&&!walking.current;if(visible)render();else{cancelFrame();renderer.domElement.dataset.rendered='false';}}, dispose };
     try { navigation.current = new WalkNavigation(document, floor.id); setPortalCount(navigation.current.portals.length); if (!navigation.current.roomIDs.includes(roomID)) setRoomID(navigation.current.roomIDs[0] ?? ''); } catch (cause) { navigation.current = null; setMessage(cause instanceof Error ? cause.message : String(cause)); }
     updateSection(cutaway ? cutHeight : null); select(selectedRef.current); render();
     return () => { const orbit=walking.current?initial:camera.position;const saved={camera:orbit.toArray() as [number,number,number],target:controls.target.toArray() as [number,number,number],...viewRef.current};lastFraming.current=saved;rememberRef.current?.(saved);runtime.current = null; navigation.current = null; walking.current = false; dispose(); };
-  }, [document.documentID, document.revision, floor.id]);
+  }, [document.documentID, document.revision, floor.id, contextAttempt]);
+  useEffect(() => {
+    const reactivated = active && !previouslyActive.current; previouslyActive.current = active;
+    if (!active) {
+      // A view switch suspends this document's renderer, but never keeps a walk
+      // gesture or hidden animation running. Unmount still releases all resources.
+      stopRepeat(); if (walking.current) leaveWalk();
+      runtime.current?.setActive(false);
+    } else if (reactivated && (contextLost.current || !runtime.current)) {
+      // Reopening retries a lost context or failed creation without an error loop.
+      setContextAttempt(attempt => attempt + 1);
+    } else runtime.current?.setActive(true);
+  }, [active]);
   useEffect(() => { runtime.current?.updateSection(cutaway ? cutHeight : null); }, [cutaway, cutHeight]);
-  useEffect(() => { runtime.current?.select(selection);if(!walking.current&&selection?.kind==='room')setRoomID(selection.objectID); }, [selection, fills]);
+  useEffect(() => { if(!active)return;runtime.current?.select(selection);if(!walking.current&&selection?.kind==='room')setRoomID(selection.objectID); }, [selection, fills, active]);
   useEffect(()=>{runtime.current?.showCeilings(ceilings);},[ceilings]);
   useEffect(() => { const stop = () => stopRepeat(); window.addEventListener('pointerup',stop);window.addEventListener('blur',stop);window.document.addEventListener('visibilitychange',stop);return()=>{stopRepeat();window.removeEventListener('pointerup',stop);window.removeEventListener('blur',stop);window.document.removeEventListener('visibilitychange',stop);}; },[]);
   function hold(action: () => void) { stopRepeat(); action(); repeat.current = setInterval(action, 110); }
-  return <div className="spatial-model"><div ref={host} className="spatial-model-canvas" />
+  return <div className="spatial-model" hidden={!active} inert={!active} style={active?undefined:{display:'none'}}><div ref={host} className="spatial-model-canvas" />
     <div className="spatial-model-bar"><div className="spatial-segmented"><button aria-pressed={mode==='orbit'} onClick={leaveWalk}>Orbit</button><button aria-pressed={mode==='walk'} disabled={!roomID || !!error} onClick={()=>beginWalk()}>Walk through</button></div><button onClick={()=>mode==='walk'?beginWalk():leaveWalk()}>Reset view</button></div>
     <div className="spatial-model-options" data-mode={mode}>{mode==='orbit'&&<button className="spatial-model-settings-toggle" aria-expanded={settingsOpen} aria-controls={settingsID} onClick={()=>setSettingsOpen(!settingsOpen)}>{settingsOpen?'Hide controls':'View controls'}</button>}<div id={settingsID} className="spatial-model-settings" data-open={settingsOpen}>{mode==='orbit' ? <><label className="spatial-check"><input type="checkbox" checked={fills} onChange={event=>setFills(event.target.checked)} />Light blue fills</label><label className="spatial-check"><input type="checkbox" checked={ceilings} onChange={event=>setCeilings(event.target.checked)} />Display ceilings</label><label className="spatial-check"><input type="checkbox" checked={cutaway} onChange={event=>setCutaway(event.target.checked)} />Cutaway</label>{cutaway && <label className="spatial-cut-control">Cut height<input type="range" aria-label="Cutaway height" min="0.1" max="0.95" step="0.01" value={cut} onChange={event=>setCut(Number(event.target.value))} /></label>}</> : <><span className="spatial-walk-badge">● WALKING</span><button onClick={leaveWalk}>Exit walking</button></>}{!!floor.rooms.length && <label className="spatial-room-select"><span>Start in</span><select value={roomID} onChange={event=>{setRoomID(event.target.value);if(mode==='walk')beginWalk(event.target.value);}}>{floor.rooms.map(room=><option key={room.id} value={room.id}>{room.label}</option>)}</select></label>}</div></div>
     {mode==='walk' && <div className="spatial-walk-controls" aria-label="Walking controls"><div><button aria-label="Turn left" onPointerDown={()=>hold(()=>lookRef.current(-0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(-0.1);}}>↶</button><button aria-label="Walk forward" onPointerDown={()=>hold(()=>moveRef.current(0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0.2,0);}}>↑</button><button aria-label="Turn right" onPointerDown={()=>hold(()=>lookRef.current(0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(0.1);}}>↷</button></div><div><button aria-label="Step left" onPointerDown={()=>hold(()=>moveRef.current(0,-0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,-0.2);}}>←</button><button aria-label="Walk backward" onPointerDown={()=>hold(()=>moveRef.current(-0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(-0.2,0);}}>↓</button><button aria-label="Step right" onPointerDown={()=>hold(()=>moveRef.current(0,0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,0.2);}}>→</button></div></div>}
