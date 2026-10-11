@@ -261,10 +261,10 @@
     }
   },
   "feature_program_2026_10_11": {
-    "status": "F01_code_accepted_F02_next",
+    "status": "parallel_F02_F05_activated_awaiting_chats",
     "master_reference": "docs/11-launch/spatial-feature-program/CURRENT_STATE.md",
     "parent_issue": 88,
-    "one_feature_at_a_time": true,
+    "one_feature_at_a_time": false,
     "current_source_checkpoint": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
     "runtime_checkpoint": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
     "host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
@@ -272,28 +272,50 @@
     "new_source_snapshot": "GitHub isolated program branch/spatial-source",
     "active_task": null,
     "platform_gaps_retained": true,
-    "contract_revision": 2,
+    "contract_revision": 3,
     "accepted_decisions": [
-      "D01",
-      "D02",
-      "D03",
-      "D04",
-      "D05",
-      "D06",
-      "D07",
-      "D08",
-      "D09",
-      "D10"
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "D8",
+      "D9",
+      "D10",
+      "D11",
+      "D12",
+      "D13",
+      "D14",
+      "D15",
+      "D16",
+      "D17"
     ],
     "F00_acceptance": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json",
     "worker_started": false,
-    "activation_id": null,
+    "activation_id": "SPATIAL-PARALLEL-2026-10-11-P1",
     "accepted_F00_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
-    "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
+    "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
     "F01_acceptance": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json",
     "F01_source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
     "F01_handoff_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
     "host_contains_F01": false,
-    "updated_at_utc": "2026-10-11T15:49:39.114655+00:00"
+    "updated_at_utc": "2026-10-11T16:15:13.367807+00:00",
+    "execution_mode": "parallel_isolated_development_sequential_integration",
+    "active_tasks": [
+      "F02",
+      "F03",
+      "F04",
+      "F05"
+    ],
+    "accepted_F01_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+    "integration_order": [
+      "F02",
+      "F03",
+      "F04",
+      "F05",
+      "F06"
+    ]
   }
 }

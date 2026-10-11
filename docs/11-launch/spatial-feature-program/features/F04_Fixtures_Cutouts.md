@@ -1,5 +1,7 @@
 # F04 | Fixtures, objects and cutouts
 
+**October 11 owner override:** Development is authorized concurrently on the exact isolated branch in ACTIVE_TASKS.json. Earlier statements below requiring predecessor completion apply to integration acceptance, not starting this branch. Read PARALLEL_DEVELOPMENT.md and preserve all predecessor behavior when the master composes the result.
+
 Work only on F04 when activated by the master, after F00-F03 are accepted. Use the latest accepted source commit and the master's approved catalog/surface contracts. `source:` means the reconciled Spatial source root. Follow the common gesture, ownership, evidence and delivery protocols; do not create a second native authoring implementation.
 
 ## Outcome and exact requirements

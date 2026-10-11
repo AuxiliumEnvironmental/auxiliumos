@@ -20,28 +20,48 @@
       "packet": "F02_Openings.md",
       "issue_number": 91,
       "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91",
-      "status": "planned"
+      "status": "in_progress",
+      "execution_status": "activated_awaiting_feature_chat_start",
+      "branch": "spatial/f02-openings-2026-10-11",
+      "integration_dependencies": [
+        "F01"
+      ]
     },
     {
       "task": "F03",
       "packet": "F03_Ceiling_Height.md",
       "issue_number": 92,
       "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92",
-      "status": "planned"
+      "status": "in_progress",
+      "execution_status": "activated_awaiting_feature_chat_start",
+      "branch": "spatial/f03-ceilings-2026-10-11",
+      "integration_dependencies": [
+        "F02"
+      ]
     },
     {
       "task": "F04",
       "packet": "F04_Fixtures_Cutouts.md",
       "issue_number": 93,
       "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93",
-      "status": "planned"
+      "status": "in_progress",
+      "execution_status": "activated_awaiting_feature_chat_start",
+      "branch": "spatial/f04-fixtures-2026-10-11",
+      "integration_dependencies": [
+        "F03"
+      ]
     },
     {
       "task": "F05",
       "packet": "F05_Affected_Areas.md",
       "issue_number": 94,
       "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94",
-      "status": "planned"
+      "status": "in_progress",
+      "execution_status": "activated_awaiting_feature_chat_start",
+      "branch": "spatial/f05-affected-areas-2026-10-11",
+      "integration_dependencies": [
+        "F04"
+      ]
     },
     {
       "task": "F06",
@@ -51,11 +71,19 @@
       "status": "planned"
     }
   ],
-  "status": "F01_code_accepted_F02_next",
+  "status": "parallel_F02_F05_activated",
   "new_features_implemented": true,
   "queue": "source:BUILD_QUEUE.json",
-  "active_lease": "coordination/ACTIVE_TASK.json",
+  "active_lease": "coordination/ACTIVE_TASKS.json",
   "new_features_implemented_scope": [
     "F01 source only; platform delivery pending"
+  ],
+  "execution_mode": "parallel_isolated_development_sequential_integration",
+  "integration_order": [
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06"
   ]
 }

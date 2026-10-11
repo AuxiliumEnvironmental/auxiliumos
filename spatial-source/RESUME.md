@@ -1,6 +1,6 @@
-# October 11, 2026 feature-program entry point
+# October 11, 2026 parallel feature-program entry point
 
-F01 surface contrast source is accepted with platform gaps at implementation `33cc3527f239726d2a4503242da9b0a7531ed4b9`, handoff `d553a3dbb25470abd5e0b157f708f7dda8383769`. See `../docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json`. The next task is F02 openings, only after master activation in `coordination/ACTIVE_TASK.json`. F00 shared engineering contract revision 2 remains accepted. Reuse matching F01 evidence; do not repeat palette-only suites without a changed risk. Host transfer, Apple assets/build/device and OS delivery remain open under master/F06 coordination. The older delivery history below is preserved.
+F01 source acceptance is saved at `3240880195cd6653d0816da5cb4412bda2516e52`. Contract revision 3 applies. The owner now authorizes F02 openings, F03 ceilings, F04 fixtures and F05 affected areas concurrently on separate branches, assigned in `../docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json`. Read PARALLEL_DEVELOPMENT.md and SURFACE_INTERFACE.md. Never push a worker directly to the program branch. The master integrates F02->F03->F04->F05 and owns F06 platform delivery. Q01 blocks actual cutout work only; named fixtures proceed. No new feature worker or deployed/installed parity is claimed by this activation. Original historical delivery evidence below remains preserved.
 
 # Continue Auxilium Spatial
 

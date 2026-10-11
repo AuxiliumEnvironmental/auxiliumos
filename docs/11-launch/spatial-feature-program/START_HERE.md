@@ -4,13 +4,17 @@ Prepared October 11, 2026 for Christian Duarte. This is a source preservation an
 
 This conversation is the master coordination thread. Keep the master in Astra as the owner requested. This packet cannot change a chat's model, create future chats, see their hidden reasoning, or keep workers running after a turn. Separate chats coordinate through the committed assignment and returned handoff. No chat may assume it can read another chat.
 
-## Use the package
+## Start the parallel feature chats
 
-1. Put this ZIP in the shared project references. Keep the paired original source ZIP available as well. This package includes it under `recovery/` when distributed as the complete recovery ZIP.
-2. Use `prompts/00_MASTER.txt` for the master. F00 preparation and F01 source are accepted; F01 platform delivery remains open and the next task is F02 openings. The current worker assignment is recorded only in `coordination/ACTIVE_TASK.json`.
-3. For the next authorized task, give its chat the corresponding `prompts/Fxx_*.txt`, this reference package, and the exact current assignment from `coordination/ACTIVE_TASK.json`. A feature prompt alone does not authorize a second concurrent writer.
-4. Run one feature chat at a time. Return its completed `coordination/HANDOFF_TEMPLATE.json` and commit link to the master. The master accepts the result and updates the next assignment. Later chats start from that accepted commit, never the original ZIP.
-5. If an Apple device or OS authority gate is unavailable, record that specific open gate. Continue source work under a master-recorded `code_accepted_with_platform_gaps` disposition when appropriate. Do not label the feature delivered everywhere.
+F01 source is accepted. The owner now authorizes F02, F03, F04 and F05 to develop concurrently, each on its own named branch. Use the four prompts in `prompts/` and the live `coordination/ACTIVE_TASKS.json` on the program branch. No ZIP is required for a chat with current GitHub access. The ZIP remains an immutable recovery reference.
+
+1. Master prepares exact branch leases and fixed shared contracts, then creates each branch at the activation commit.
+2. Start one separate chat per feature using its prompt. Every chat reads the live ledger from the program branch and writes only its assigned feature branch.
+3. Return each handoff to this master when ready. Chats do not share hidden state or automatically notify one another.
+4. Master integrates in order F02, F03, F04, F05, then handles F06 combined acceptance and platform delivery. Development does not wait for earlier feature implementation; dependency-sensitive integration does.
+5. Missing physical-device or authority gates remain explicit. Branch completion, integrated source acceptance and delivered platforms are distinct.
+
+`ACTIVE_TASK.json` is retired and nonauthorizing. `PARALLEL_DEVELOPMENT.md` defines the current workflow. F04 cutout scope is still open; fixture work can proceed now.
 
 ## Reading order and aliases
 
@@ -24,7 +28,7 @@ Read `CURRENT_STATE.md`, `MASTER_CONTROL.md`, `SHARED_CONTRACT.md`, then only th
 | `companion:` | Read-only project `27ca8fae-ee6e-46c8-b8da-416c01f91629`; selected catalog evidence in `references/companion/` |
 | `os:` | Actual latest AuxiliumOS integration branch and host, rechecked at activation; never the old generated editor by default |
 
-## Sequence
+## Integration sequence
 
 | Task | Purpose | Predecessor |
 |---|---|---|
@@ -36,7 +40,7 @@ Read `CURRENT_STATE.md`, `MASTER_CONTROL.md`, `SHARED_CONTRACT.md`, then only th
 | F05 | Surface-attached moisture/fire affected areas | F04 |
 | F06 | One combined cross-feature review and remaining platform delivery | F05 |
 
-F00 prevents incompatible models. F01 gives a small visible improvement. Openings establish the 3D manipulation rules before heights and objects reuse them. Damage is last because host geometry, holes and attachment behavior must be stable first. F06 reuses accepted checks and focuses on interactions, not a repeat of every feature suite.
+F00/F01 are accepted. The four feature implementations overlap on isolated branches, using the frozen contract. This table defines integration order only. F06 reuses accepted checks and focuses on combined interactions and delivery.
 
 GitHub parent issue: https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88
 Branch: `spatial/feature-program-2026-10-11`. It is an isolated preservation/development branch, not an OS release. Final recorded commit and child issues are in `GITHUB_RECEIPT.json`.

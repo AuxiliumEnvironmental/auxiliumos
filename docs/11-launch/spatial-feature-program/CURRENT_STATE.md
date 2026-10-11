@@ -2,9 +2,11 @@
 
 ## Master review update: October 11, 2026
 
-F01 surface contrast is **code accepted with platform gaps**. The implementation is `33cc3527f239726d2a4503242da9b0a7531ed4b9` and its handoff/evidence is `d553a3dbb25470abd5e0b157f708f7dda8383769`. The master reviewed the exact assigned diff, matching evidence hashes and both mobile screenshots. Walls, floors and display ceilings now use distinct gray categories; selection contrast, Surface fills, picking/cutaway and supported GLB materials are covered by focused local evidence. See `coordination/F01_ACCEPTANCE.json`.
+F01 surface contrast is **code accepted with platform gaps**, recorded at `3240880195cd6653d0816da5cb4412bda2516e52`. Implementation: `33cc3527f239726d2a4503242da9b0a7531ed4b9`; evidence: `d553a3dbb25470abd5e0b157f708f7dda8383769`. Matching source/evidence and both mobile screenshots passed master review. See `coordination/F01_ACCEPTANCE.json`.
 
-F00 contract revision 2 remains accepted at `9ace24ce614dcd2bd12480887e5cdc78f2c47a03`. F02 openings is the next candidate and has not started; `coordination/ACTIVE_TASK.json` alone records its activation. The source review made no host, Apple or OS change. Live web/host transfer, current Apple assets/build/device and OS integration remain open for master delivery. Q01/Q02 remain open for F04.
+The owner approved concurrent feature development. F02 openings, F03 ceiling heights, F04 fixtures and F05 affected areas are assigned isolated branches in `coordination/ACTIVE_TASKS.json`. Contract revision 3 and `SURFACE_INTERFACE.md` freeze their shared semantics. No feature worker is claimed to be running merely because an assignment exists. Integration remains F02 then F03 then F04 then F05. The old single-task file is retired.
+
+F04 fixtures can proceed; Q01 still gates actual cutout implementation and Q02 tracks unnamed catalog variants. Source acceptance has not transferred F01 to the host, packaged Apple assets or updated the OS embed. Those delivery gates remain master-owned under F06.
 
 ## What is verified in this preparation pass
 

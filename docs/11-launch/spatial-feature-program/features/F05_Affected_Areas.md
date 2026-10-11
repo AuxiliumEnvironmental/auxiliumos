@@ -1,5 +1,7 @@
 # F05 | Moisture and fire affected areas
 
+**October 11 owner override:** Development is authorized concurrently on the exact isolated branch in ACTIVE_TASKS.json. Earlier statements below requiring predecessor completion apply to integration acceptance, not starting this branch. Read PARALLEL_DEVELOPMENT.md and preserve all predecessor behavior when the master composes the result.
+
 Work only on F05 after the master accepts F00-F04. Start from its current source commit. `source:` resolves to the reconciled Spatial source root. Follow shared gesture, storage, ownership and delivery rules; do not reimplement them.
 
 ## Exact outcome

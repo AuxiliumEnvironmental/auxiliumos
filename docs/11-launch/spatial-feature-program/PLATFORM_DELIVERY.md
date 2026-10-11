@@ -2,7 +2,7 @@
 
 | Target | Maintained input | Required receipt | Current boundary |
 |---|---|---|---|
-| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | Shared implementation is real; five upgrades not yet implemented |
+| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | F01 source accepted; F02-F05 concurrent branch development awaits their chats |
 | Dedicated Lovable/web | `host:spatial-source/` plus protected host scaffold | Input/host hashes, host build, served version and affected interaction | Current host 467221a; a source commit alone does not update it |
 | Installed iPhone | web build packaged through `source:capacitor/prepare.py`; Swift bridges | Asset manifest, actual Apple build, simulator/device evidence as applicable | Old unsigned compile exists; current-device acceptance open |
 | AuxiliumOS tool | `source:integration/package_os.py` and authorized adapter | Generated manifest, preserved host diff, authorized project-context journey | Older embed; recoverable cutover and authority binding required |
@@ -23,7 +23,7 @@ Minimal final combined journey: create adjoining rooms; resize and flip a door; 
 
 Preparation inspected program head `141a4cd756751c437e4ecdde07a1db9703588687`. Dedicated Spatial provider metadata still reports `467221a836c10ac2730bfa2375adde0ec447165c`, agentFinished=true. Reviewed OS integration remains `a2b31bff3e88ab3a1a86285ab935552796c4d3cd`; OS provider metadata reports `4adbb330c0b4e7832bcae938a6507ee4b27ae0c3`, agentFinished=true. These are fresh identity/writer observations, not new served-asset, source-transfer or interaction acceptance. No application source, host, Apple assets, OS generated files or deployment was changed by F00.
 
-For F01, implementation permission is limited to the exact source/test paths in the current `coordination/ACTIVE_TASK.json`. `coordination/F01_ACTIVATION_PROPOSED.json` is retained as the original nonauthorizing proposal; it is superseded by the master-recorded activation. A source worker returns hashes and results; the master owns subsequent host transfer, packaging and release receipts. The existing program branch is not verified as a Lovable sync branch. Reuse the prior matching host-source audit until a changed-file transfer needs readback; do not recopy all unchanged files.
+For F01, implementation permission is limited to the exact source/test paths in its recorded historical activation. `coordination/F01_ACTIVATION_PROPOSED.json` is retained as the original nonauthorizing proposal; it is superseded by the master-recorded activation. A source worker returns hashes and results; the master owns subsequent host transfer, packaging and release receipts. The existing program branch is not verified as a Lovable sync branch. Reuse the prior matching host-source audit until a changed-file transfer needs readback; do not recopy all unchanged files.
 
 Read packaging tools before running them. In particular, `source:integration/package_os.py` replaces generated module files **before** it checks whether the existing Spatial route differs. It is not an all-or-nothing dry run. Future OS delivery must first reconcile route/adapter/current writer state and generate into a disposable checkout/staging target, then review the permitted diff. Never invoke it as a probe against a live/dirty OS checkout. Keep source `build:library` and standalone `build` outputs distinct.
 
@@ -36,3 +36,7 @@ F00 uses source/document checks only. F01 uses one relevant build, focused palet
 F01 implementation `33cc3527f239726d2a4503242da9b0a7531ed4b9` and handoff `d553a3dbb25470abd5e0b157f708f7dda8383769` are accepted for shared source and their recorded local evidence. Dedicated host metadata still reports `467221a836c10ac2730bfa2375adde0ec447165c`, agent finished. No F01 bytes have been transferred or published; no new Capacitor package, Apple build/install/device verification or OS embed is claimed. `coordination/F01_ACCEPTANCE.json` records the review and retained gates.
 
 F02 may proceed from this accepted source when activated. The master retains these delivery rows and the combined delivery task F06; intermediate code acceptance cannot close the outstanding platform rows. Reconcile writers and exact changed files before a later transfer. F01's role helper rejects unknown emitters deliberately, so F02's new styled opening roles must receive explicit rendering and export handling instead of reusing a structural fallback.
+
+## Parallel feature delivery boundary
+
+ACTIVE_TASKS.json permits isolated source development only. Four feature chats must not each deploy/overwrite the live host or regenerate the same installed/OS target. The master integrates accepted changes once in dependency order and transfers the composed source with target-specific receipts. The original single-chat restriction is superseded; platform evidence requirements are unchanged.

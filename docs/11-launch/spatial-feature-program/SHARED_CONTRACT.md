@@ -1,6 +1,6 @@
-# Shared implementation contract: accepted revision 2
+# Shared implementation contract: accepted revision 3
 
-The Spatial master accepted D01-D10 as engineering decisions on October 11, 2026 after reviewing the F00 handoff, actual source and resolved independent-review findings. `DECISIONS.json` records acceptance. This contract describes future implementation; it is not an implemented geometry schema or platform acceptance. `coordination/ACTIVE_TASK.json` alone grants the current feature assignment. Q01/Q02 remain open.
+Revision 3 records D11-D13 for F02 and D14-D17 for concurrent isolated development, cumulative versions, ceiling migration and surface/attachment interfaces. The owner approved the GitHub update and concurrent feature chats on October 11, 2026. The Spatial master accepted D01-D10 as engineering decisions on October 11, 2026 after reviewing the F00 handoff, actual source and resolved independent-review findings. `DECISIONS.json` records acceptance. This contract describes future implementation; it is not an implemented geometry schema or platform acceptance. `coordination/ACTIVE_TASKS.json` grants the active isolated feature assignments; the old single-task file is nonauthorizing. Q01/Q02 remain open.
 
 ## Verified invariants to retain
 
@@ -176,4 +176,36 @@ The installed shared workspace receives these web changes through actual regener
 
 ### Open product questions and master gate
 
-Q01 remains unresolved: wall through-openings, recesses, boundary notches, floor/ceiling voids, or more than one? The wall-through-opening recommendation is not accepted scope. Resolve it before F04's cutout implementation; no blocker for F01-F03. F04 also finalizes a bounded variant checklist for unnamed appliance/built-in examples without dropping named families. No product clarification is needed to begin F01 after master contract acceptance and activation. Contract acceptance alone grants no implementation lease; use the actual recorded `coordination/ACTIVE_TASK.json` assignment.
+Q01 remains unresolved: wall through-openings, recesses, boundary notches, floor/ceiling voids, or more than one? The wall-through-opening recommendation is not accepted scope. Resolve it before F04's cutout implementation; no blocker for F01-F03. F04 also finalizes a bounded variant checklist for unnamed appliance/built-in examples without dropping named families. No product clarification is needed to begin F01 after master contract acceptance and activation. Contract acceptance alone grants no implementation lease; use the actual recorded `coordination/ACTIVE_TASKS.json` assignment for the correct branch.
+
+## F02 activation supplement: D11-D13
+
+These source-reviewed engineering decisions refine accepted D02/D09. The old F02 proposal is preserved as history; the live parallel assignment ledger freezes exact paths, inputs and checks.
+
+### D11: Opening style authorship and provenance
+
+Optional Opening.style is {id,end?,side?,provenance}; style IDs are the seven verified presets, kind and required orientation capabilities are validated. Legacy style remains absent. Style/flip-only commands author nested style provenance and preserve base aperture provenance. Only actual geometry correction follows the existing aperture provenance transition. Cosmetic style must not unlock inferred portals.
+
+### D12: F02 format and backward admission
+
+Reserve geometry 1.2.0 and scene 1.2.0 after collision check. Add explicit opening face role owned by opening ID. Keep immutable old schemas. Retain local-document 1.0/1.1 and drawing profiles while member/vocabulary contracts stay unchanged; complete geometry/scene remain separately versioned. Reject 1.2 from constrained legacy v1 exchange/outbox with an actionable complete-local-document alternative. Styled drawing recovery uses formatVersion 2 alongside legacy 1. No database version migration solely for this payload.
+
+### D13: Version preservation and drawing compatibility
+
+setArea and scene area branches must never downgrade a higher admitted version. Room/wall/placement preflights preserve the source document version instead of synthesizing only 1.0/1.1. Drawings/export extents include style symbols. New opening emitters explicitly dispatch material roles without changing accepted structural palette.
+
+### D14: Parallel development and ordered integration
+
+F02-F05 may implement concurrently on their exact isolated branches. The master alone integrates F02, then F03, F04 and F05. Dependency-sensitive code is verified against real accepted predecessors before combined acceptance. See PARALLEL_DEVELOPMENT.md.
+
+### D15: Shared surface and fixture-consumer contract
+
+SURFACE_INTERFACE.md revision 1 fixes SurfaceRef, physical domains, transforms, resolver entry points, additive remap receipts and minimal fixture mounts. F03 owns first core/surfaces.ts implementation; F04/F05 consume the same vocabulary. No duplicate surface frameworks or inferred successful integration.
+
+### D16: Cumulative schema reservations
+
+Reserve geometry/scene 1.2.0 for F02, 1.3.0 for F03, 1.4.0 for F04 and 1.5.0 for F05. These names are unoccupied in the inspected maintained source. Later schemas must incorporate accepted predecessor fields/roles/admission. Preserve old files and source snapshots; feature branches cannot overwrite newer schema consumers.
+
+### D17: Ceiling migration boundary
+
+If a uniform legacy wall-top plane cannot represent positive floor-relative clearance, migrate its ceiling intent to null while preserving the original snapshot. Do not invent a positive height or reject otherwise valid legacy input solely to infer a ceiling. New rooms in the ceiling schema have explicit established/null state.

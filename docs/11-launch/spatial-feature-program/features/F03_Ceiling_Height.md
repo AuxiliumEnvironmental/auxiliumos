@@ -1,5 +1,7 @@
 # F03: Direct ceiling-height editing
 
+**October 11 owner override:** Development is authorized concurrently on the exact isolated branch in ACTIVE_TASKS.json. Earlier statements below requiring predecessor completion apply to integration acceptance, not starting this branch. Read PARALLEL_DEVELOPMENT.md and preserve all predecessor behavior when the master composes the result.
+
 ## Prompt for the feature chat
 
 Implement F03 only after the Astra master accepts F00 shared contracts, F01 surface presentation and F02 opening manipulation. Follow the master’s shared operating policy and active assignment. This is a future implementation packet, not a claim that height editing exists. `source:` resolves to `spatial-source/` in GitHub or `Auxilium_Spatial_Developer_Package/` in the archive. Start from the reconciled current source, preserving newer work.

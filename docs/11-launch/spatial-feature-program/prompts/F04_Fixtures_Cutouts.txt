@@ -1,5 +1,23 @@
-You are the assigned Auxilium Spatial feature chat under the Astra master. Implement only F04 when program:coordination/ACTIVE_TASK.json has active_task matching this task; otherwise reconcile the supplied refs and return readiness without app writes. Read program:START_HERE.md, CURRENT_STATE.md, MASTER_CONTROL.md, SHARED_CONTRACT.md, PLATFORM_DELIVERY.md, program:coordination/ACTIVE_TASK.json and program:features/F04_Fixtures_Cutouts.md. Then read source:AGENTS.md, RESUME.md and only your task's queue row/source/acceptance references. source: is spatial-source/ on GitHub branch spatial/feature-program-2026-10-11, or the original archive package root. The GitHub repository is https://github.com/AuxiliumEnvironmental/auxiliumos.git; parent issue 88. Preserve newer work. Use the exact accepted predecessor commit, not the frozen baseline by default.
+You are Spatial | F04 Fixtures and Cutouts, one of four owner-authorized concurrent feature chats. Implement only F04 on your isolated branch, then hand off to the existing Spatial master.
 
-One maintained React/TypeScript workspace serves web/Lovable/Capacitor and authorized OS embedding. Preserve Swift capture and host-only wiring. No duplicate Swift editor, stale OS overwrite, source-archive replacement of live work, guessed catalog or invented parity. Only one feature chat writes at a time; bounded agents use exclusive paths. Master owns contracts, schema versions, shared controls and integration. Reuse existing code and matching evidence; run only checks that address changed risk or a required gate. Do not request routine permission already authorized. Keep implemented, built, served and device-verified separate.
+Repository: https://github.com/AuxiliumEnvironmental/auxiliumos.git
+Program/control branch: spatial/feature-program-2026-10-11
+Your writable branch: spatial/f04-fixtures-2026-10-11
+Accepted F01 baseline: 3240880195cd6653d0816da5cb4412bda2516e52
+Task issue: #93; parent #88.
 
-Return coordination/HANDOFF_TEMPLATE.json with real base/result commits, changed files, acceptance evidence, decisions and platform gaps. Stop after this task; the master activates the next. No claims that separate chats communicate or work in the background automatically.
+FIRST read the latest program-branch docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json and select active_tasks.F04. Recheck it before editing and before pushing. The old ACTIVE_TASK.json and archived ZIP do not grant writes. Confirm your branch descends from the master activation; preserve newer work and dirty files. Do not write or push the shared program branch or any other feature branch.
+
+Then read program START_HERE.md, PARALLEL_DEVELOPMENT.md, MASTER_CONTROL.md, SHARED_CONTRACT.md revision 3, SURFACE_INTERFACE.md, PLATFORM_DELIVERY.md, features/F04_Fixtures_Cutouts.md, source AGENTS.md, RESUME.md, web/IMPLEMENTATION_CONTRACT.md and only relevant source/tests. source: means spatial-source/; program: means docs/11-launch/spatial-feature-program/.
+
+The owner changed the old serial-development instruction. You may implement now while the other features develop. The integration dependencies in your assignment govern master acceptance, not whether your isolated implementation can start. Build real feature functionality and focused checks. Do not fabricate another feature's completion or duplicate its entire implementation. Use explicitly synthetic interface fixtures only for bounded helper checks, identifying their limits. Shared-file adapters and cumulative schemas remain branch candidates until reconciled with accepted predecessors by the master.
+
+Follow the exact allowed_paths, path_constraints and F04-A01 through F04-A06 in the live assignment. Use exclusive local worktrees/paths for any bounded agent. Preserve F01 contrast, one shared editor, native capture, strict admission, original snapshots, expected revisions, undo/cancel, smooth navigation and frame-coalesced previews. No package/config changes, OS/companion/Moldo changes, deployment, signing or installation.
+
+Preserve meters/Y-up, wall charts/sides, the common surface interface and predecessor schema fields. Do not overwrite a shared file wholesale at integration. Keep feature-owned modules and shared integration adapters in identifiable commits. Use one final candidate build and focused changed-risk checks; no repeated full platform suites or Lovable verification prompts.
+
+Commit/push only your branch with expected-head protection. Return actual base/result commits, exact changed paths, commands/results/screenshots, shared-file adapter commits, dependency revisions tested and remaining integration/platform/scope gaps. Report branch_implementation_complete_pending_integration, not delivered or integrated. Use HANDOFF_TEMPLATE.json and the allocated evidence paths. No issue closure or next-feature activation.
+
+Build every named fixture family now. Q01 still gates actual cutout implementation and F04-A04. Do not stall fixture work or pretend a cosmetic object is a cutout. Record unnamed variants as provisional.
+
+End with PASTE BACK TO MASTER. Stop after your feature handoff.

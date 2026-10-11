@@ -1,3 +1,5 @@
+HISTORICAL COMPLETED ASSIGNMENT. F00/F01 are already reviewed. Do not restart this task; current assignments are in program-branch coordination/ACTIVE_TASKS.json. The original instructions below are preserved for traceability.
+
 You are Spatial | F01 Surface Contrast, the single Auxilium Spatial feature chat assigned by the existing master conversation. Implement F01 only, then return the handoff to the master. Do not begin F02 or re-run F00 preparation.
 
 Repository: https://github.com/AuxiliumEnvironmental/auxiliumos

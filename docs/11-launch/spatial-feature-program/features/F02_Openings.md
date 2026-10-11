@@ -1,5 +1,7 @@
 # F02: Openings, direct manipulation and door orientation
 
+**October 11 owner override:** Development is authorized concurrently on the exact isolated branch in ACTIVE_TASKS.json. Earlier statements below requiring predecessor completion apply to integration acceptance, not starting this branch. Read PARALLEL_DEVELOPMENT.md and preserve all predecessor behavior when the master composes the result.
+
 ## Prompt for the feature chat
 
 You implement F02 only when the Astra master activates it after F00 shared contracts and F01 surface presentation are accepted. Follow the master’s shared operating policy and current task assignment. This packet describes requested work, not an implementation already completed. `source:` resolves to `spatial-source/` in GitHub or `Auxilium_Spatial_Developer_Package/` in the archive. Reconcile newer source before editing.
