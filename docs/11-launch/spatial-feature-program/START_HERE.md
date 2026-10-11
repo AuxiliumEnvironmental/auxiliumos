@@ -7,7 +7,7 @@ This conversation is the master coordination thread. Keep the master in Astra as
 ## Use the package
 
 1. Put this ZIP in the shared project references. Keep the paired original source ZIP available as well. This package includes it under `recovery/` when distributed as the complete recovery ZIP.
-2. Use `prompts/00_MASTER.txt` for the master. Its first job is F00, a bounded source/contract prerequisite. No feature worker is currently activated.
+2. Use `prompts/00_MASTER.txt` for the master. F00 preparation is accepted; the next task is F01 surface contrast. The current worker assignment is recorded only in `coordination/ACTIVE_TASK.json`.
 3. For the next authorized task, give its chat the corresponding `prompts/Fxx_*.txt`, this reference package, and the exact current assignment from `coordination/ACTIVE_TASK.json`. A feature prompt alone does not authorize a second concurrent writer.
 4. Run one feature chat at a time. Return its completed `coordination/HANDOFF_TEMPLATE.json` and commit link to the master. The master accepts the result and updates the next assignment. Later chats start from that accepted commit, never the original ZIP.
 5. If an Apple device or OS authority gate is unavailable, record that specific open gate. Continue source work under a master-recorded `code_accepted_with_platform_gaps` disposition when appropriate. Do not label the feature delivered everywhere.

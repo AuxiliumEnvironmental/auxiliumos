@@ -1,0 +1,17 @@
+{
+  "review_receipt": "INDEPENDENT_REVIEW.json",
+  "disposition": "Both bounded findings incorporated into proposed documents; no runtime change.",
+  "changes": [
+    {
+      "finding": "R01",
+      "resolution": "D01 and F01 path_constraints/F01-A02 now explicitly rename Light blue fills to Surface fills.",
+      "source_checked": "ModelViewport.tsx: current Light blue fills label"
+    },
+    {
+      "finding": "R02",
+      "resolution": "D03 now specifies stable/new IDs and equal-height/null inheritance for split; compatible merge remaps, otherwise atomic rejection or explicit resulting height.",
+      "source_checked": "editor.ts splitRoom and mergeRooms field-copy behavior"
+    }
+  ],
+  "verification": "Lead checked these exact document changes against the cited source; no second independent review of unchanged material was run."
+}

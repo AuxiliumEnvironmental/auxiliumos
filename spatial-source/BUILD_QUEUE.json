@@ -6,9 +6,9 @@
     {
       "id": "F00",
       "title": "F00 Shared Foundation",
-      "owner": "Astra master until activated",
+      "owner": "Spatial master control",
       "depends_on": [],
-      "status": "planned",
+      "status": "delivered",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
       "packet": "docs/11-launch/spatial-feature-program/features/F00_Shared_Foundation.md",
       "allowed_paths": "Master freezes exact paths in ACTIVE_TASK before implementation",
@@ -18,7 +18,10 @@
         "F00-A03",
         "F00-A04",
         "F00-A05"
-      ]
+      ],
+      "completion_scope": "F00 documentation and shared engineering decisions only; no feature runtime or platform delivery",
+      "accepted_at": "2026-10-11T14:57:56.854871+00:00",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F01",
@@ -591,7 +594,7 @@
       "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
     }
   ],
-  "next_action": "Current owner precision-drawing request is finished and live. Keep future checks focused on changed behavior and preserve newer source.",
+  "next_action": "Activate F01 surface contrast at the accepted F00 commit; no feature implementation has started.",
   "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
   "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
 }

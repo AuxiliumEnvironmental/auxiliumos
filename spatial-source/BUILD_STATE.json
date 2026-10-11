@@ -27,7 +27,7 @@
   "autonomous_agents_started": true,
   "independent_review_performed": true,
   "verification_record": "evidence/shared-workspace/REQUIREMENTS.json; individual hash-bound reports",
-  "next_ready_task": "F00: reconcile current refs and ratify shared feature contracts; no new feature implemented in the preservation pass.",
+  "next_ready_task": "F01: master activates the single surface-contrast feature worker after accepted F00 documentation commit.",
   "protected_context": "Preserve existing OS/Moldo/companion work; no migration/deployment from this ZIP.",
   "verified_foundation": {
     "swift_tests": 44,
@@ -261,7 +261,7 @@
     }
   },
   "feature_program_2026_10_11": {
-    "status": "planned_not_implemented",
+    "status": "F00_accepted_F01_pending_activation",
     "master_reference": "docs/11-launch/spatial-feature-program/CURRENT_STATE.md",
     "parent_issue": 88,
     "one_feature_at_a_time": true,
@@ -271,6 +271,21 @@
     "original_history_location": "paired recovery ZIP/recovery/repository.bundle",
     "new_source_snapshot": "GitHub isolated program branch/spatial-source",
     "active_task": null,
-    "platform_gaps_retained": true
+    "platform_gaps_retained": true,
+    "contract_revision": 2,
+    "accepted_decisions": [
+      "D01",
+      "D02",
+      "D03",
+      "D04",
+      "D05",
+      "D06",
+      "D07",
+      "D08",
+      "D09",
+      "D10"
+    ],
+    "F00_acceptance": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json",
+    "worker_started": false
   }
 }

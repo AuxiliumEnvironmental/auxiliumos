@@ -1,5 +1,9 @@
 # Current state and provenance
 
+## Master review update: October 11, 2026
+
+F00 shared engineering contract revision 2 is accepted. See `coordination/F00_ACCEPTANCE.json` and the live `coordination/ACTIVE_TASK.json` for the next assignment. No runtime source, host deployment, Apple package or OS embed changed during this review. The source/delivery facts below remain the runtime baseline; Q01/Q02 remain open for F04.
+
 ## What is verified in this preparation pass
 
 The original latest source ZIP is Library item `libfile_4ea6ba7599f0819187b238dd9c7e1106`, version 10, modified October 10, 2026. Its SHA256 is `52cd76535230296fc3fe16fee75c952c637bd113a67a422953bb462819eec60d`. All 1,179 source-file hashes and its Git bundle checksum were independently matched. The tree was clean. No new product feature or app acceptance test was run in this pass.

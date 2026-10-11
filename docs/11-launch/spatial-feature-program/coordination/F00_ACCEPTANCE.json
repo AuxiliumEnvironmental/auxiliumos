@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "F00",
+  "status": "accepted",
+  "accepted_at_utc": "2026-10-11T14:57:56.854871+00:00",
+  "accepted_by": "Spatial master control, owner-authorized review",
+  "inspected_base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "branch": "spatial/feature-program-2026-10-11",
+  "contract_revision": 2,
+  "decision_ids": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10"
+  ],
+  "scope": "Shared engineering design and F00 preparation only; no requested runtime feature implemented.",
+  "handoff": "coordination/handoffs/F00/F00_HANDOFF.json",
+  "original_patch_sha256": "187163e0cfe08dacddedd07effcad672d25677b54f48b9ddb9ea93d63ff4f200",
+  "preserved_handoff_manifest": "coordination/handoffs/F00/MANIFEST.json",
+  "independent_review": "coordination/handoffs/F00/evidence/INDEPENDENT_REVIEW.json",
+  "review_resolution": "coordination/handoffs/F00/evidence/REVIEW_RESOLUTION.json",
+  "master_checks": [
+    "All 13 handoff manifest entries matched exact byte size and SHA256.",
+    "Patch dry-check and application passed against exact unchanged program HEAD in an isolated clean worktree.",
+    "Master inspected the actual palette batching, viewport fill/selection and GLB material paths; F01 needs no geometry, persistence or native prerequisite.",
+    "R01 Surface fills label and R02 deterministic room ceiling split/merge outcomes are present in the proposed contract.",
+    "Actual Spatial/OS host metadata reports unchanged commits and finished agents; current program and OS branch refs match the F00 observations.",
+    "Inherited OS status inspected for ownership only; no OS implementation task or broad suite was activated.",
+    "Whitespace check passes for adopted documents. Preserved F00_PROPOSAL.patch has five space-prefixed blank context lines required by its unified-diff format; keep the original bytes/hash rather than trimming historical evidence."
+  ],
+  "acceptance_rows": {
+    "F00-A01": "accepted_for_preparation_scope",
+    "F00-A02": "accepted_for_preparation_scope",
+    "F00-A03": "accepted_for_preparation_scope",
+    "F00-A04": "accepted_for_preparation_scope",
+    "F00-A05": "accepted_for_preparation_scope"
+  },
+  "coordination": "Existing Spatial BUILD_QUEUE remains the only implementation queue. F01 is the only next candidate; activation follows the accepted documentation commit.",
+  "observed_refs": {
+    "program": "141a4cd756751c437e4ecdde07a1db9703588687",
+    "spatial_host": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "os_integration": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+    "os_host": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3"
+  },
+  "unchanged_runtime_checkpoint": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+  "remaining_questions": [
+    "Q01 cutout meaning before F04 cutout implementation",
+    "Q02 bounded unnamed fixture variants before a catalog-completeness claim"
+  ],
+  "remaining_platform_gates": [
+    "Current bundled Apple assets/build and physical iPhone acceptance",
+    "Authorized OS maintained-editor cutover and project binding",
+    "Future changed-byte host transfer/build/served evidence"
+  ],
+  "application_tests_run": false,
+  "host_writes": false,
+  "deployments": false,
+  "runtime_changes": false,
+  "next_task": "F01",
+  "git_record_semantics": "This acceptance is carried by its containing commit. F01 activation pins that exact accepted commit; no self-containing hash is fabricated."
+}

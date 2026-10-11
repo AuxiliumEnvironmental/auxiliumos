@@ -1,0 +1,164 @@
+{
+  "base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "worktree_status": "",
+  "source_inputs": [
+    {
+      "path": "spatial-source/AGENTS.md",
+      "sha256": "edacf9db6df8883fc382cfc101535a00d9c66860b589164c1878d91510c91326",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/IMPLEMENTATION_CONTRACT.md",
+      "sha256": "ca13f2815688a510b3af2ccd39a73c0ba90e89181e2d55a2fcf562ffbae33a0b",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "sha256": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "sha256": "144c037599f37f61c039df994f2f22b607d3285398a43469b88b23fe3c0f76a9",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "sha256": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/core/geometry.ts",
+      "sha256": "796585a4fac23c077c308d978f52febd951349bce3c6a396add7a6f2eaad78f0",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "sha256": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/core/navigation.ts",
+      "sha256": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "sha256": "d0231d642973d9f0f0bfcc38f2e20db4fd75462c52d91f8798abead23404ca24",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "sha256": "5a7f588240381b9c3e4dad461379dcd9ea694e959bf59f7fe5475495e91a74af",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "sha256": "d280ee91ad4353f23dd9e6c92f3663d0e77f69abe626795bc50a2c4c8c925527",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "sha256": "a8bd52dfed7edefc6b384d2c34b149ecefca1957e77d18d6912c63bfff169fc0",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingManipulation.ts",
+      "sha256": "4e0195bcdeede54bf6bad930b1ae3edb17f68d5410ee600c1961ba7a37c0ffb9",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingPlacement.ts",
+      "sha256": "512529f4f64506c1f0c84d4c3175e5482d6578243c50bef77d8dbd57a3116afa",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/rendererDiagnostics.ts",
+      "sha256": "63d25207db7a6c467d84f87e7966fb0cb906f954b6baab30dcc151f25f0a8e74",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "sha256": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/data/drawing.ts",
+      "sha256": "d508c4d2c83513c9d4a8c1edd6da8f2a611d500aafc9286eca60e0576aed1d01",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/data/imports.ts",
+      "sha256": "fd66857d90aaa63af0ffb6a6a405a4ad9cc7a5006b53c09c9ade47b89de48066",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/data/exports.ts",
+      "sha256": "4a341b92af57697445011329579d44385d4205137955257fb22b394e0c776dc6",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/src/data/store.ts",
+      "sha256": "baa1747d5ad9571aace0bf3d32aaed5ae0289b5ba82ab0f1bd75d57591bd569e",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/helpers.test.ts",
+      "sha256": "f63415b451d92fc271491344d20d33af94a99cd56e674d6da2f480639344db2f",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/workflow.spec.ts",
+      "sha256": "11079d0955917b1563b19ee6ad9f491fd2b1f8762af72a02b49ae9ed3724280d",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/warm-switch.spec.ts",
+      "sha256": "4ad96287139988c775e0208bda3c7272dc7d66dfcf9f410edad926ecd8301abe",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/tests/data/data.test.ts",
+      "sha256": "bba5b9b9be6f30acd0d76bbdc892a2fc2a971d3e0bee15d0e2fdda983dd1aa44",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/playwright.config.ts",
+      "sha256": "a785bb2ddde1ce54af2f4c262d6bffc4a66ab944d630f3c10a21849044f59886",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/package.json",
+      "sha256": "e7f58426639402a1d40f94995f97c6d6d41bdb04f67eb56387db0004778bf890",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/web/package-lock.json",
+      "sha256": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/capacitor/README.md",
+      "sha256": "bf2bd9966ab7f4a8db2959b1dbe3cef13a734da0365bbd6243e4a4a415bd43f8",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/capacitor/prepare.py",
+      "sha256": "6d69fcce7649b58c326db3f15f2794c656c66005cc6cda0c42dcd61e7266c555",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/integration/package_os.py",
+      "sha256": "0ace041715f29e124c5acd955bf09e6dea397108bed437c9d1726082d8b4d730",
+      "matches_original_runtime": true
+    },
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "sha256": "444ae09729fc007bf8302be47f45868d4a204892db39720cb44be5e6c8bb119f",
+      "matches_original_runtime": true
+    }
+  ],
+  "inner_recovery_zip_sha256": "52cd76535230296fc3fe16fee75c952c637bd113a67a422953bb462819eec60d",
+  "audit_reused": "PREPARATION_VERIFICATION.json; references/source_audit.md; GITHUB_RECEIPT.json",
+  "full_audit_repeated": false
+}

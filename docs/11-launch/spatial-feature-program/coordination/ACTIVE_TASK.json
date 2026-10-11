@@ -2,15 +2,15 @@
   "schema_version": 1,
   "master": "This Astra master thread",
   "active_task": null,
-  "status": "planning_complete_no_feature_worker_activated",
-  "next_candidate": "F00",
+  "status": "F00_accepted_no_feature_worker_activated",
+  "next_candidate": "F01",
   "base_commit": null,
   "source_root": "spatial-source/",
   "branch": "spatial/feature-program-2026-10-11",
-  "contract_revision": null,
+  "contract_revision": 2,
   "owner": null,
   "allowed_paths": [],
   "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
   "required_acceptance": [],
-  "activation_note": "Master fills this from actual current refs before launching a feature chat; no inferred lease expiry or automatic takeover."
+  "activation_note": "F00 engineering contract accepted. F01 requires the subsequent master-recorded activation at the exact accepted commit. No worker is running."
 }

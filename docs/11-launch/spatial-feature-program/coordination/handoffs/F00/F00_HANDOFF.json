@@ -1,0 +1,373 @@
+{
+  "task_id": "F00",
+  "base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "result_commit": null,
+  "branch": "spatial/feature-program-2026-10-11",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
+  "pr_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/96",
+  "disposition": "preparation_complete_awaiting_master_review",
+  "changed_paths": [
+    "docs/11-launch/spatial-feature-program/DECISIONS.json",
+    "docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md",
+    "docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md",
+    "docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json"
+  ],
+  "requirements_addressed": [
+    "F00-A01",
+    "F00-A02",
+    "F00-A03",
+    "F00-A04",
+    "F00-A05"
+  ],
+  "contract_versions": {
+    "program_decisions_current": 1,
+    "program_decisions_proposed": 2,
+    "accepted_proposal": false,
+    "geometry_implemented": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "scene_implemented": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "local_document_profiles_implemented": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "native_capture_bridge": "1.0.0",
+    "native_file_bridge": "1.0.0",
+    "new_implemented_versions": []
+  },
+  "decisions": [
+    {
+      "id": "D01",
+      "status": "proposed",
+      "detail": "Explicit wall/floor/ceiling roles in web/src/surfacePalette.ts; category-preserving selected fills; opaque linear-RGB GLB structural materials. F01 has no schema change."
+    },
+    {
+      "id": "D02",
+      "status": "proposed",
+      "detail": "Opposite-corner wall-chart resize; edge u-only translation; explicit threshold; optional style/end/side capabilities; full reversal and bent-host policy."
+    },
+    {
+      "id": "D03",
+      "status": "proposed",
+      "detail": "Freeze uniform legacy planes as inferred ceiling intent, unequal tops as null; explicit room height; extend necessary wall spans without shrinking them; preserve neighbor ceilings; explicit structure set/common delta."
+    },
+    {
+      "id": "D04",
+      "status": "proposed",
+      "detail": "Versioned parametric dimensions and explicit floor/wall mount; white faces/blue edges; diagrammatic nonblocking fixtures initially."
+    },
+    {
+      "id": "D05",
+      "status": "proposed",
+      "detail": "Independent moisture/fire records, explicit wall vertical range, physical footprint and recorded support mask; no new totals."
+    },
+    {
+      "id": "D06",
+      "status": "proposed",
+      "detail": "Role-qualified floor/room/ceiling references; wall ID plus positive/negative side; meters along wall and above base; fixed floor X/Z chart."
+    },
+    {
+      "id": "D07",
+      "status": "proposed",
+      "detail": "Snapshot/context/revision fence; frame-coalesced preview; exact final sample; one command/undo item; pre-submit cancel saves nothing; existing pending-save semantics after submit."
+    },
+    {
+      "id": "D08",
+      "status": "proposed",
+      "detail": "Compose source/result surface transforms and exact source domains; retain clipped/unresolved observations, reject unresolved rigid-fixture moves."
+    },
+    {
+      "id": "D09",
+      "status": "proposed",
+      "detail": "Strict feature-local versions, proposed geometry 1.2/1.3/1.4/1.5 in task order; coordinated scene/profile changes only when vocabulary changes; no writable lossy downgrade."
+    },
+    {
+      "id": "D10",
+      "status": "proposed",
+      "detail": "One shared workspace; exact host transfer/readback, actual Capacitor assets and Apple evidence, staged OS generation with separate authority; no assumed deployment."
+    }
+  ],
+  "evidence": [
+    {
+      "acceptance_id": "F00-A01",
+      "check": "Exact current program/source, dedicated host and current reviewed OS identities; visible writers; clean checkout and 31 focused runtime comparisons.",
+      "result": "verified_for_preparation",
+      "source_inputs": [
+        "141a4cd756751c437e4ecdde07a1db9703588687",
+        "467221a836c10ac2730bfa2375adde0ec447165c",
+        "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+        "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3"
+      ],
+      "environment": "Linux; exact GitHub clone plus connected read-only GitHub/Lovable metadata",
+      "artifact": "evidence/REMOTE_OBSERVATIONS.json; evidence/SOURCE_CHECKS.json",
+      "reused_from": "Package source_audit.md, PREPARATION_VERIFICATION.json, GITHUB_RECEIPT.json",
+      "why_sufficient": "Refs did not advance; current relevant runtime files match the audited recovery source. No reason to repeat 1179-file audit or restore history again."
+    },
+    {
+      "acceptance_id": "F00-A02",
+      "check": "Shared rules grounded in actual types, commands, gestures, scene, admission and packaging; bounded independent diff review.",
+      "result": "proposed_ready_for_master_review",
+      "source_inputs": [
+        "proposed/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md",
+        "proposed/docs/11-launch/spatial-feature-program/DECISIONS.json"
+      ],
+      "environment": "Linux; exact GitHub clone plus connected read-only GitHub/Lovable metadata",
+      "artifact": "evidence/INDEPENDENT_REVIEW.json",
+      "reused_from": null,
+      "why_sufficient": "Concrete extension points and decisions support F01/F02 while deferring each later schema delta to its consumer. No master approval is inferred."
+    },
+    {
+      "acceptance_id": "F00-A03",
+      "check": "One canonical queue; live ACTIVE_TASK stays null; F01 assignment is explicitly a proposal.",
+      "result": "verified_preserved",
+      "source_inputs": [
+        "spatial-source/BUILD_QUEUE.json",
+        "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json"
+      ],
+      "environment": "Linux; exact GitHub clone plus connected read-only GitHub/Lovable metadata",
+      "artifact": "evidence/DOCUMENT_CHECKS.json",
+      "reused_from": null,
+      "why_sufficient": "No queue, active lease, worker owner or implementation state was fabricated."
+    },
+    {
+      "acceptance_id": "F00-A04",
+      "check": "Separate shared source, host transfer, Apple asset/build/device, OS authority and export boundaries.",
+      "result": "documented_with_open_platform_gates",
+      "source_inputs": [
+        "spatial-source/capacitor/prepare.py",
+        "spatial-source/integration/package_os.py",
+        "proposed/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md"
+      ],
+      "environment": "Linux; exact GitHub clone plus connected read-only GitHub/Lovable metadata",
+      "artifact": "F00_HANDOFF.json",
+      "reused_from": "Prior Apple/source/host receipts listed in CURRENT_STATE.md",
+      "why_sufficient": "Documentation-only F00 does not invalidate unchanged runtime evidence or establish new platform acceptance."
+    },
+    {
+      "acceptance_id": "F00-A05",
+      "check": "Patch application dry check, JSON/decision/acceptance/path consistency and original inner recovery archive hash.",
+      "result": "verified_for_preparation",
+      "source_inputs": [
+        "F00_PROPOSAL.patch",
+        "proposed/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json"
+      ],
+      "environment": "Linux; exact GitHub clone plus connected read-only GitHub/Lovable metadata",
+      "artifact": "evidence/DOCUMENT_CHECKS.json; evidence/SOURCE_CHECKS.json",
+      "reused_from": "Original audited recovery ZIP SHA256 52cd76535230296fc3fe16fee75c952c637bd113a67a422953bb462819eec60d",
+      "why_sufficient": "All proposed paths resolve or are explicitly new. Original code/archive stays untouched; no duplicate full backup or unchanged app suite."
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "inspected_unchanged",
+      "source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+      "host_or_asset_ref": null,
+      "evidence": "evidence/SOURCE_CHECKS.json",
+      "remaining": [
+        "Master review/acceptance of documentation; F01 not started."
+      ]
+    },
+    "standalone_web": {
+      "status": "historical_delivery_reused_no_new_journey",
+      "source_commit": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+      "host_or_asset_ref": "467221a836c10ac2730bfa2375adde0ec447165c",
+      "evidence": "Package CURRENT_STATE.md and retained precision-drawing PUBLIC_DELIVERY.json",
+      "remaining": [
+        "No fresh HTTP/interaction verification in F00."
+      ]
+    },
+    "lovable": {
+      "status": "fresh_metadata_identity_only",
+      "source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+      "host_or_asset_ref": "467221a836c10ac2730bfa2375adde0ec447165c",
+      "evidence": "evidence/REMOTE_OBSERVATIONS.json",
+      "remaining": [
+        "No transfer/build/deployment in F00; future changed bytes need actual readback."
+      ]
+    },
+    "capacitor_assets": {
+      "status": "not_prepared_for_new_features",
+      "source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+      "host_or_asset_ref": null,
+      "evidence": "capacitor/prepare.py source inspection",
+      "remaining": [
+        "No new build or asset manifest in F00; older assets do not establish current installed source."
+      ]
+    },
+    "apple_build": {
+      "status": "historical_success_not_current_candidate",
+      "source_commit": "f04253966ac57e4dc8780d16efb5ebc172e183e2",
+      "host_or_asset_ref": "37969726280",
+      "evidence": "Reused original APPLE_COMPILE.json/log scope",
+      "remaining": [
+        "Current shared-web candidate build remains unverified."
+      ]
+    },
+    "simulator": {
+      "status": "historical_synthetic_only",
+      "source_commit": "f04253966ac57e4dc8780d16efb5ebc172e183e2",
+      "host_or_asset_ref": "37969726280",
+      "evidence": "Reused 14 simulator tests from prior Apple run",
+      "remaining": [
+        "No current feature or physical-capture acceptance."
+      ]
+    },
+    "physical_iphone": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": "Package CURRENT_STATE.md",
+      "remaining": [
+        "Signed install/current assets",
+        "Physical LiDAR/connected capture and interruptions",
+        "Touch, VoiceOver, Dynamic Type",
+        "Lock/kill/low-disk/thermal, WebKit storage protection",
+        "Native share completion and real frame/memory acceptance"
+      ]
+    },
+    "os_embed": {
+      "status": "observed_older_embed_preserved",
+      "source_commit": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+      "host_or_asset_ref": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+      "evidence": "evidence/REMOTE_OBSERVATIONS.json; program source audit",
+      "remaining": [
+        "Old generated manifest source b286cdf49997a5a90af043ba542cd5c1ae41a705 remains preserved",
+        "Reviewed staging cutover, draft recovery and authorized project-context binding not done"
+      ]
+    },
+    "exports": {
+      "status": "inspected_unchanged",
+      "source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+      "host_or_asset_ref": null,
+      "evidence": "Inspected data exports/imports/glb/drawing source",
+      "remaining": [
+        "No runtime output regenerated; F01 GLB palette and F02+ profiles await their own features."
+      ]
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [
+    {
+      "id": "Q01",
+      "topic": "cutout scope",
+      "needed_before": "F04",
+      "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
+      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved.",
+      "blocks": [
+        "F04_cutout_implementation"
+      ],
+      "does_not_block": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "id": "Q02",
+      "topic": "unnamed catalog variants",
+      "needed_before": "F04",
+      "question": "Which bounded variants of appliances and built-ins beyond the named families belong in the first catalog?",
+      "recommendation": "Master records a proposed checklist at F04; all named families remain required. Do not treat etc. as an exhaustive source inventory.",
+      "blocks": [
+        "F04_catalog_completeness_claim"
+      ],
+      "does_not_block": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    }
+  ],
+  "known_limits": [
+    "All engineering decisions remain proposed; master acceptance and named activation are not recorded.",
+    "No F01 implementation, build, visual palette acceptance or performance claim was made.",
+    "Provider metadata is a current identity/writer observation, not a new served-byte or interaction test.",
+    "Uncommitted work in other computers/chats is not visible; no external work was overwritten.",
+    "Source identity and archived tests do not prove installation/current web assets on an iPhone.",
+    "Cutout scope and unnamed catalog variants remain future F04 decisions.",
+    "OS receiver/project authority and cutover remain separately gated."
+  ],
+  "source_preserved": true,
+  "next_dependency_handoff": [
+    {
+      "task_id": "F01",
+      "proposal": "proposed/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json",
+      "exact_source_base": "141a4cd756751c437e4ecdde07a1db9703588687",
+      "activation_recorded": false,
+      "owner_assigned": false,
+      "master_must_refresh_base_after_document_acceptance": true,
+      "allowed_paths": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/data/data.test.ts",
+        "spatial-source/web/tests/ui/workflow.spec.ts"
+      ],
+      "required_acceptance": [
+        "F01-A01",
+        "F01-A02",
+        "F01-A03",
+        "F01-A04",
+        "F01-A05"
+      ],
+      "dependencies": [
+        "F00 master acceptance of revision 2 proposals, at minimum D01 and D10",
+        "No other active feature lease or conflicting writer",
+        "Fresh exact program HEAD and clean/preserved worktree; dedicated host metadata checked before any later transfer"
+      ],
+      "material_blocker": "No unresolved product question blocks F01. Master contract acceptance/activation and fresh conflict check are still required."
+    }
+  ],
+  "active_writers_remaining": [],
+  "preparation_only": true,
+  "master_accepted": false,
+  "feature_implementation_started": false,
+  "observed_at_utc": "2026-10-11T14:47:48.774930+00:00",
+  "changed_paths_semantics": "Proposed files in the attached patch only; actual repository and remote have no F00 changes.",
+  "first_incomplete_action": "Master reviews and records the F00 contract disposition, then records an exact F01 activation. There is no active feature lease.",
+  "actual_source_revision": {
+    "program_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+    "original_complete_checkpoint": "eebd27f8fd3c5b2d4e21c7c6957f9dcd017c0a59",
+    "runtime_checkpoint": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+    "program_source_root": "spatial-source/",
+    "relevant_original_runtime_files_compared": 31,
+    "relevant_runtime_differences": [],
+    "newer_program_work_found": false,
+    "newer_host_work_found": false,
+    "newer_reviewed_os_branch_work_found": false,
+    "newer_work_note": "Historical Spatial branch 42b7754 and OS default main 1729a52 are not new standalone sources. The package audit already records 42b7754; main is 45 commits behind the reviewed OS integration branch."
+  },
+  "github_changes": {
+    "made": false,
+    "writes_attempted": false,
+    "issue_88_changed": false,
+    "issue_89_changed_or_closed": false,
+    "branch_or_pr_changed": false,
+    "note": "No external update is claimed. The live ACTIVE_TASK is null, so this owner-authorized preparation returns reviewable proposals only."
+  },
+  "writer_observation": {
+    "local_runtime_writers": [],
+    "live_active_task": null,
+    "spatial_lovable_agent_finished": true,
+    "os_lovable_agent_finished": true,
+    "other_uncommitted_writers": "not independently visible",
+    "note": "One bounded read-only review of the proposal; no feature writer was launched."
+  },
+  "artifacts": {
+    "patch": "F00_PROPOSAL.patch",
+    "review_first": "REVIEW_FIRST.md",
+    "source_checks": "evidence/SOURCE_CHECKS.json",
+    "remote_observations": "evidence/REMOTE_OBSERVATIONS.json",
+    "focused_checks": "evidence/DOCUMENT_CHECKS.json",
+    "independent_review": "evidence/INDEPENDENT_REVIEW.json",
+    "review_resolution": "evidence/REVIEW_RESOLUTION.json",
+    "final_ref_check": "evidence/FINAL_REF_CHECK.json"
+  }
+}

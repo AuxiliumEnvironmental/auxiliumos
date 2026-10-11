@@ -1,6 +1,6 @@
 # October 11, 2026 feature-program entry point
 
-Current owner-authorized feature planning and fresh state are in `../docs/11-launch/spatial-feature-program/START_HERE.md` and `CURRENT_STATE.md`. The queue now includes F00-F06. No feature is implemented by this preservation snapshot. The original checkpoint and its unmodified history remain in the paired recovery ZIP. Read the new current-state reconciliation before interpreting older status prose below.
+F00 preparation and shared engineering contract revision 2 are accepted. See `../docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json`. F01 surface contrast is next; follow the live `coordination/ACTIVE_TASK.json` before implementation. No F01-F05 runtime feature has been implemented. One maintained editor, existing runtime source and platform gaps remain unchanged. The older delivery history below is preserved.
 
 # Continue Auxilium Spatial
 
