@@ -1,0 +1,545 @@
+{
+  "task_id": "F01",
+  "activation_id": "F01-2026-10-11-01",
+  "generated_at_utc": "2026-10-11T15:27:24.612865+00:00",
+  "accepted_f00_baseline": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+  "implementation_parent": "a81e5ac65413b1ef47ae03c8b03ab602650a3550",
+  "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+  "source_tree": "16977a339de8cf42063e36367de6c0f7847a2453",
+  "web_tree": "a1cc95d4130687c7f7eea7cdeddcb89e2b0b66a3",
+  "scope": {
+    "source_test_paths": [
+      "spatial-source/web/src/surfacePalette.ts",
+      "spatial-source/web/src/ui/sceneBatches.ts",
+      "spatial-source/web/src/ui/ModelViewport.tsx",
+      "spatial-source/web/src/data/glb.ts",
+      "spatial-source/web/tests/ui/helpers.test.ts",
+      "spatial-source/web/tests/data/data.test.ts",
+      "spatial-source/web/tests/ui/workflow.spec.ts"
+    ],
+    "artifact_paths": [
+      "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+      "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+      "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+    ],
+    "source_input_hashes_match_activation": true,
+    "activation_and_baseline_preserved": true,
+    "master_controls_edited": false,
+    "subagents_used": false,
+    "deployment_performed": false
+  },
+  "environment": {
+    "os": "Linux x86_64",
+    "node": "v24.19.0",
+    "dependencies": {
+      "three": "0.186.1",
+      "@playwright/test": "1.61.1",
+      "typescript": "5.8.3",
+      "tsx": "4.23.15",
+      "vite": "8.0.16"
+    },
+    "browser": "Chromium 153.0.8010.0",
+    "browser_path": "/workspace/scratch/d1f187137fd2/audit-work/ui/tools/unpacked/chromium",
+    "browser_sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "webgl": "software rendering via existing config --enable-unsafe-swiftshader --use-gl=angle --use-angle=swiftshader",
+    "dependencies_setup": "npm ci --ignore-scripts --no-audit --no-fund; no package/lock/config changes",
+    "browser_setup": "Playwright Chromium download returned invalid/truncated archive; reused the available local Chromium via the existing SPATIAL_BROWSER_EXECUTABLE option."
+  },
+  "source_sha256": {
+    "spatial-source/web/src/surfacePalette.ts": "b1c4dd76500719fd520da1a8b7ab154613578c7b2f8cfff84e815ad38a8a560f",
+    "spatial-source/web/src/ui/sceneBatches.ts": "6dc89b464835c2e9a7af3f064d69579cfb5901624ffcee759cc5bd11a7c04f9b",
+    "spatial-source/web/src/ui/ModelViewport.tsx": "42aa2f36f002bd5d15ce9ca583675bc3c05ae7d365af3b51f48e19c64f853d72",
+    "spatial-source/web/src/data/glb.ts": "0f9a8e88355c6e2b1f5f424f25d357ea8bc2c880b557245d2162275d5f927839",
+    "spatial-source/web/tests/ui/helpers.test.ts": "99d645827f5931f461cfddc8fdcb4171dfa48b3b8036936d2d8d751a5687d4a0",
+    "spatial-source/web/tests/data/data.test.ts": "06a498d74917174e7f8b926ed9c81453ce735506b70bb96045cf30884ee36149",
+    "spatial-source/web/tests/ui/workflow.spec.ts": "59fc6a3a4cf490140aba868a8b8e005e39fd2aa3c8ac12275768e7d0138e631e"
+  },
+  "unchanged_verification_input_sha256": {
+    "spatial-source/web/package.json": "e7f58426639402a1d40f94995f97c6d6d41bdb04f67eb56387db0004778bf890",
+    "spatial-source/web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "spatial-source/web/tsconfig.json": "dbb469bc59cb12f311ed036c27dfba5ea175d3f4d1200fdb81df7f8dbf2595ad",
+    "spatial-source/web/tests/ui/playwright.config.ts": "a785bb2ddde1ce54af2f4c262d6bffc4a66ab944d630f3c10a21849044f59886",
+    "spatial-source/web/tests/ui/warm-switch.config.ts": "e50aea28db8f65a381d4d87b665e53b08ca0c27d7794ef6e5c08e8bba838ab37",
+    "spatial-source/web/tests/ui/server.ts": "eff70a1ebc7d6e6036d665d757b83e89da861aa7a6b2abbbf64c822da082d7c8",
+    "spatial-source/web/tests/ui/warm-switch.spec.ts": "4ad96287139988c775e0208bda3c7272dc7d66dfcf9f410edad926ecd8301abe",
+    "spatial-source/web/src/ui/rendererDiagnostics.ts": "63d25207db7a6c467d84f87e7966fb0cb906f954b6baab30dcc151f25f0a8e74",
+    "spatial-source/web/src/core/scene.ts": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+    "spatial-source/web/src/ui/geometry.ts": "e315cff4c0147f6bdfbe3b649865f1d032087de988017bd24e02693b7c78450d",
+    "spatial-source/web/src/types.ts": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57"
+  },
+  "commands": [
+    {
+      "command": "node --import tsx --test tests/ui/helpers.test.ts",
+      "result": "passed",
+      "passes": 6,
+      "log": "\u2714 blank and synthetic UI entry paths create valid canonical documents with honest provenance (4.072589ms)\n\u2714 surface palette matches pinned Three sRGB conversion and preserves selected category contrast (2.19098ms)\n\u2714 three structural batches retain exact triangle ownership, selection and geometry without idle uploads (12.512701ms)\n\u2714 consequence review points to incomplete boundaries without merging coincident corners (1.848753ms)\n\u2714 boundary selection orders walls through shared IDs and refuses disconnected guesses (2.362811ms)\n\u2714 opening ink and hit paths preserve bends instead of drawing a chord through the room (0.31028ms)\n\u2139 tests 6\n\u2139 suites 0\n\u2139 pass 6\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 1086.869903\n"
+    },
+    {
+      "command": "node --import tsx --test --test-name-pattern=\"GLB\" tests/data/data.test.ts",
+      "result": "passed",
+      "passes": 1,
+      "log": "\u2714 GLB contains canonical cutout triangles, semantic lines, no resources and exact identity (44.527941ms)\n\u2139 tests 1\n\u2139 suites 0\n\u2139 pass 1\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 986.18555\n"
+    },
+    {
+      "command": "SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/d1f187137fd2/audit-work/ui/tools/unpacked/chromium SPATIAL_ARTIFACT_DIR=/workspace/scratch/2b25b67a3126/f01-checks/screenshots node node_modules/@playwright/test/cli.js test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"surface contrast\" --output=/workspace/scratch/2b25b67a3126/f01-checks/browser-final-results --reporter=json",
+      "result": "passed",
+      "passes": 1,
+      "tests": [
+        {
+          "title": "surface contrast keeps mobile orbit, picking, controls and walkthrough consistent",
+          "status": "passed",
+          "start_utc": "2026-10-11T15:22:36.730Z",
+          "duration_ms": 7742,
+          "retry": 0,
+          "errors": []
+        }
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:22:35.471Z",
+        "duration": 9190.204,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "command": "SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/d1f187137fd2/audit-work/ui/tools/unpacked/chromium node node_modules/@playwright/test/cli.js test --config tests/ui/warm-switch.config.ts warm-switch.spec.ts --grep \"warm renderer stays idle\" --output=/workspace/scratch/2b25b67a3126/f01-checks/idle-results --reporter=json",
+      "result": "passed",
+      "passes": 1,
+      "tests": [
+        {
+          "title": "warm renderer stays idle and applies the current edited geometry and shared selection on reactivation",
+          "status": "passed",
+          "start_utc": "2026-10-11T15:23:01.394Z",
+          "duration_ms": 3134,
+          "retry": 0,
+          "errors": []
+        }
+      ],
+      "stats": {
+        "startTime": "2026-10-11T15:23:00.505Z",
+        "duration": 4464.805,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "typecheck": "tsc --noEmit, strict and noImplicitReturns retained",
+      "build": "Vite production build",
+      "build_count_final_candidate": 1,
+      "log": "npm warn Unknown env config \"http-proxy\". This will stop working in the next major version of npm.\n\n> @auxilium/spatial-workspace@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v8.0.16 building client environment for production...\n\ntransforming...\u2713 260 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                          0.54 kB \u2502 gzip:   0.34 kB\ndist/sw.js                               1.29 kB\ndist/assets/index-UopdatNq.css          49.87 kB \u2502 gzip:   7.71 kB\ndist/assets/purify.es-B8BSsnM1.js       28.12 kB \u2502 gzip:  11.12 kB \u2502 map:   120.92 kB\ndist/assets/index.es-D-XaKpsP.js       151.56 kB \u2502 gzip:  48.95 kB \u2502 map:   561.61 kB\ndist/assets/html2canvas-DjyZhKG8.js    199.61 kB \u2502 gzip:  46.82 kB \u2502 map:   597.26 kB\ndist/assets/index-B74bDLWd.js        1,392.41 kB \u2502 gzip: 405.21 kB \u2502 map: 5,581.35 kB\n\n[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n\u2713 built in 1.78s\n",
+      "warning": "Vite reports a minified bundle larger than 500 kB; no dependency/config/chunking work belongs to F01."
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptance_id": "F01-A01",
+      "check": "Small-screen category luminance, selected and unselected, orbit and walkthrough",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/ui/workflow.spec.ts"
+      ],
+      "environment": "Linux Chromium 153.0.8010.0, software WebGL, 390x844 CSS viewport, syntheticDocument",
+      "artifact": [
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json"
+      ],
+      "reused_from": null,
+      "why_sufficient": "Pinned Three conversion and independent displayed pixel checks establish the gray categories. Helpers cover all-selected and mixed states; real wall, floor and ceiling selections exercise their colors. Mobile navigation uses actual existing controls. No physical frame-pacing claim."
+    },
+    {
+      "acceptance_id": "F01-A02",
+      "check": "Ceiling toggle, Surface fills label, white fill-disabled mode, cutaway and semantic ownership",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/workflow.spec.ts"
+      ],
+      "environment": "Same focused mobile browser scenario",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Actual ray picks return room-b for floor and ceiling, w3 for wall and window-a for the opening. Ceiling clipping/visibility and existing selection affordance pass. Saved synthetic document is unchanged after the entire scenario."
+    },
+    {
+      "acceptance_id": "F01-A03",
+      "check": "Explicit structural roles, bounded ownership and opaque linear GLB factors with unchanged geometry identity",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/data/data.test.ts"
+      ],
+      "environment": "Node 24.19.0, Three 0.186.1, pinned dependencies",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Table checks reject unknown roles and match pinned Three colors; GLB compares every emitted face/semantic-edge position, identities, source hash and revision to buildScene. Wall/floor factors are linear, alpha 1, OPAQUE, metallic 0 and roughness 1. No exported ceilings are invented."
+    },
+    {
+      "acceptance_id": "F01-A04",
+      "check": "At most three structural batches, no unchanged color upload, preserved warm idle renderer",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/ui/warm-switch.spec.ts",
+        "spatial-source/web/src/ui/rendererDiagnostics.ts"
+      ],
+      "environment": "Node helpers and existing Chromium software-WebGL warm-idle case",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Combined structural fixture allocates exactly three role batches; identical selection/fill updates do not dirty the color buffer. Existing test verifies hidden renderer frames stay unchanged and reactivation uses current geometry/selection with disposed old resources. No new loop, lighting, textures or per-object materials."
+    },
+    {
+      "acceptance_id": "F01-A05",
+      "check": "Independent source/local/host/Apple/OS/export delivery receipts",
+      "result": "passed_receipt_with_open_platform_gaps",
+      "source_inputs": [
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json"
+      ],
+      "environment": "Source GitHub commit verified; local checks as above; platform delivery excluded by activation",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+      "reused_from": "Accepted F00 and activation metadata for historical platform references only",
+      "why_sufficient": "Each delivery target is recorded independently. Source equality is not used to pass host transfer/build/served state, Apple assets/build/device, or OS integration."
+    }
+  ],
+  "visual": {
+    "tokens": {
+      "wall": "#F2F3F5",
+      "floor": "#B8BDC4",
+      "ceiling": "#D5D9DE",
+      "structural_edge": "#68717C"
+    },
+    "selected_factor_linear_rgb": 0.92,
+    "tokens_tuned_from_accepted_defaults": false,
+    "screenshots": {
+      "surface-contrast-orbit-mobile.png": {
+        "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+        "sha256": "d97c4e90223d144529ea986909424195453a4abd9d6ebf339d51385a35abd0ee",
+        "bytes": 34474,
+        "kind": "actual local browser screenshot",
+        "viewport_css_px": [
+          390,
+          844
+        ],
+        "capture": "full page, CSS pixel scale",
+        "review": "Visually inspected. Extremely light gray walls, middle-gray ceilings and darker floors remain distinct. Orbit floor is visible through the real window; walk is framed with ordinary movement/look controls.",
+        "not_evidence_for": [
+          "physical iPhone",
+          "Safari/WKWebView",
+          "host deployment"
+        ]
+      },
+      "surface-contrast-walk-mobile.png": {
+        "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png",
+        "sha256": "308fa48b72285a69639d61fdaa9c36d4865b72b4e8b95d9187f935c78aa02090",
+        "bytes": 39502,
+        "kind": "actual local browser screenshot",
+        "viewport_css_px": [
+          390,
+          844
+        ],
+        "capture": "full page, CSS pixel scale",
+        "review": "Visually inspected. Extremely light gray walls, middle-gray ceilings and darker floors remain distinct. Orbit floor is visible through the real window; walk is framed with ordinary movement/look controls.",
+        "not_evidence_for": [
+          "physical iPhone",
+          "Safari/WKWebView",
+          "host deployment"
+        ]
+      }
+    },
+    "actual_pixel_evidence": {
+      "palette": {
+        "wall": "#F2F3F5",
+        "floor": "#B8BDC4",
+        "ceiling": "#D5D9DE",
+        "plain": "#ffffff",
+        "plainSelected": "#a5cee4",
+        "wallSelected": "#e9eaec",
+        "floorSelected": "#b1b6bd",
+        "ceilingSelected": "#cdd1d6"
+      },
+      "pixelEvidence": {
+        "orbitUnselected": {
+          "wall": {
+            "count": 40304
+          },
+          "floor": {
+            "count": 1601
+          },
+          "ceiling": {
+            "count": 49151
+          },
+          "plain": {
+            "count": 7819
+          },
+          "plainSelected": {
+            "count": 0
+          },
+          "wallSelected": {
+            "count": 0
+          },
+          "floorSelected": {
+            "count": 0
+          },
+          "ceilingSelected": {
+            "count": 0
+          }
+        },
+        "walkUnselected": {
+          "wall": {
+            "count": 111454
+          },
+          "floor": {
+            "count": 18760
+          },
+          "ceiling": {
+            "count": 8480
+          },
+          "plain": {
+            "count": 35185
+          },
+          "plainSelected": {
+            "count": 0
+          },
+          "wallSelected": {
+            "count": 0
+          },
+          "floorSelected": {
+            "count": 0
+          },
+          "ceilingSelected": {
+            "count": 0
+          }
+        },
+        "orbitSelected": {
+          "wall": {
+            "count": 40304
+          },
+          "floor": {
+            "count": 1601
+          },
+          "ceiling": {
+            "count": 19168
+          },
+          "plain": {
+            "count": 10052
+          },
+          "plainSelected": {
+            "count": 0
+          },
+          "wallSelected": {
+            "count": 0
+          },
+          "floorSelected": {
+            "count": 0
+          },
+          "ceilingSelected": {
+            "count": 29983
+          }
+        },
+        "walkSelected": {
+          "wall": {
+            "count": 111454
+          },
+          "floor": {
+            "count": 17681
+          },
+          "ceiling": {
+            "count": 0
+          },
+          "plain": {
+            "count": 35185
+          },
+          "plainSelected": {
+            "count": 0
+          },
+          "wallSelected": {
+            "count": 0
+          },
+          "floorSelected": {
+            "count": 1079
+          },
+          "ceilingSelected": {
+            "count": 8468
+          }
+        }
+      }
+    },
+    "pixel_method": "Canvas screenshot decoded into 2D image data in browser. Counts only solid patches with matching center and four neighboring samples, tolerance 1 byte; this excludes anti-aliased edge coincidences."
+  },
+  "local_build_outputs": {
+    "dist/assets/html2canvas-DjyZhKG8.js": "807b71bb92bdd6614e5f3df67f1f80aedeb8f48f26dc0e50724d3344f558f1bf",
+    "dist/assets/html2canvas-DjyZhKG8.js.map": "6a9521b20d082fb1a21b337b3de22e15f77dda677101db563d1d327bbb85a85e",
+    "dist/assets/index-B74bDLWd.js": "75c37f00db56114d34bbb7a04894f2700f1e1b3d645d62ae3e4e0d0ad077d579",
+    "dist/assets/index-B74bDLWd.js.map": "54698d7fff0ad6bb8be7c76769780a3bec523a21b9e634d7b7efa864ccb608de",
+    "dist/assets/index-UopdatNq.css": "dd77f736cdfae673c0f6c29a0197d6b8460f4bb90cbf662736c92e2b328575c7",
+    "dist/assets/index.es-D-XaKpsP.js": "6b29e7e7b2362b1fa3f491b98786fde6b2e951b06bde1755747ddb1e3b7b88a1",
+    "dist/assets/index.es-D-XaKpsP.js.map": "c1db39133a7efb6a91d53379f1185c73de9119843cae5e192577fd712ecafffb",
+    "dist/assets/purify.es-B8BSsnM1.js": "ffd61250776dc49dd4c7dd733b82be0c1f8bb60775fdd40b4323e7aa456c0f1e",
+    "dist/assets/purify.es-B8BSsnM1.js.map": "0fa0c5de756dbc3771620041e49bf45b54fa6dcd5a3a0c9d0e1d45afed8411e5",
+    "dist/index.html": "215c333e97041e65ba98ad6c1fad42b13dfbebd36fd9e651ecd99b479f932fe3",
+    "dist/sw.js": "70ecb4f98369c202778b8460965298817676b6a0288ba6222f980b82620fc7d6"
+  },
+  "earlier_attempts": [
+    {
+      "check": "GLB assertion",
+      "result": "test_assertion_fixed",
+      "reason": "strictJSON returns null-prototype objects; compare individual material fields instead of requiring Object.prototype. Material values were already correct."
+    },
+    {
+      "check": "Mobile scenario calibration",
+      "result": "test_assumptions_fixed",
+      "reason": "Excluded isolated antialias pixels, aimed canonical unobstructed picks instead of floor pixels behind semantic opening targets, targeted actual empty background, retained floors visible through openings with ceilings on, and used normal movement/look to bring ceilings into the downward default walking frame. Runtime/navigation code was not changed to satisfy tests."
+    },
+    {
+      "check": "One redirected browser attempt",
+      "result": "incomplete_output",
+      "reason": "Exited 1 after runner start without an assertion/error report. No pass claimed; final explicit CLI JSON run passed with no retries."
+    }
+  ],
+  "review": {
+    "kind": "worker self-review of actual diff and focused results",
+    "independent_review": false,
+    "findings_open": [],
+    "note": "No reviewer quota for this bounded palette slice. Master acceptance remains required."
+  },
+  "platforms": {
+    "shared_source": {
+      "status": "committed_and_locally_verified",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Master review and acceptance"
+      ]
+    },
+    "standalone_web": {
+      "status": "local_ui_and_production_build_passed_not_published",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Accepted-source host transfer",
+        "Host build",
+        "Served-version verification",
+        "Affected hosted interaction"
+      ]
+    },
+    "lovable": {
+      "status": "not_transferred",
+      "source_commit": null,
+      "candidate_source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": "467221a836c10ac2730bfa2375adde0ec447165c",
+      "evidence": "Fresh read-only provider metadata during preflight: agentFinished=true; same reference as activation. This is not F01 delivery.",
+      "transferred_host_hashes": null,
+      "host_build_status": "not_run_for_F01",
+      "served_version_status": "not_checked_for_F01",
+      "remaining": [
+        "Master transfers accepted changed canonical files preserving host scaffold",
+        "Read back exact transferred hashes",
+        "Build and verify served target"
+      ]
+    },
+    "capacitor_assets": {
+      "status": "not_prepared_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master prepares assets from accepted web build and records manifest/source mapping"
+      ]
+    },
+    "apple_build": {
+      "status": "not_run_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": "Historical unsigned Apple successes are retained in F00; not reused as F01 application acceptance.",
+      "remaining": [
+        "Combined accepted-source Apple build",
+        "Signing/installation when authorized"
+      ]
+    },
+    "simulator": {
+      "status": "not_run_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Current packaged candidate simulator verification"
+      ]
+    },
+    "physical_iphone": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Actual installed-asset identity",
+        "Touch/navigation and visible contrast",
+        "Device frame/memory/thermal checks",
+        "Existing capture/storage/lifecycle gates remain separate"
+      ]
+    },
+    "os_embed": {
+      "status": "not_integrated",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": "No OS files or hosts changed or packaged. Activation references are historical input only, not a fresh OS acceptance.",
+      "remaining": [
+        "Master reconciles current OS work",
+        "Reviewed generated source/adapter transfer",
+        "Authorized context/selector journey"
+      ]
+    },
+    "exports": {
+      "status": "supported_GLB_materials_verified_locally",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Display-only ceilings remain outside GLB until F03"
+      ],
+      "supported_structural_roles": [
+        "wall",
+        "floor"
+      ],
+      "geometry_and_scene_versions": "unchanged",
+      "plan_svg_pdf_png": "unchanged, not rerun"
+    }
+  },
+  "remaining_platform_gaps": [
+    "Display ceilings remain derived room-owned faces for uniform wall tops. They are not authoritative buildScene or GLB geometry. F03 owns ceiling intent, independent surface identity and export changes.",
+    "Floor and ceiling share the existing room selection ID; F01 deliberately preserves this compatibility boundary.",
+    "GLB base factors match intended UI colors; a PBR viewer can shade them differently. No new unlit extension or dynamic lighting was added.",
+    "Linux software-WebGL and a 390x844 viewport do not establish Safari, installed WKWebView, physical touch latency, frame pacing, memory/thermal performance or LiDAR acceptance.",
+    "F01 source has not been transferred to Lovable, published, bundled into Capacitor, compiled/signed/installed for Apple or integrated into AuxiliumOS.",
+    "No broad topology, persistence, capture, offline, Apple, OS or stress suite was run. Their previous platform gaps stay open."
+  ],
+  "external_commit_reporting": "This receipt identifies the existing source commit. The later commit containing this receipt is reported by the worker outside its own contents.",
+  "color_space_references": [
+    {
+      "url": "https://threejs.org/docs/pages/Color.html",
+      "checked": "Three Color working linear RGB and automatic CSS/hex sRGB input conversion; pinned implementation also asserted locally."
+    },
+    {
+      "url": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#materials",
+      "checked": "glTF material baseColorFactor and opaque PBR material semantics; no unlit extension introduced."
+    }
+  ]
+}
