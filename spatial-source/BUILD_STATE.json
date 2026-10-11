@@ -261,16 +261,16 @@
     }
   },
   "feature_program_2026_10_11": {
-    "status": "F01_activated_awaiting_worker_start",
+    "status": "F01_code_accepted_F02_next",
     "master_reference": "docs/11-launch/spatial-feature-program/CURRENT_STATE.md",
     "parent_issue": 88,
     "one_feature_at_a_time": true,
-    "current_source_checkpoint": "eebd27f8fd3c5b2d4e21c7c6957f9dcd017c0a59",
-    "runtime_checkpoint": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+    "current_source_checkpoint": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+    "runtime_checkpoint": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
     "host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
     "original_history_location": "paired recovery ZIP/recovery/repository.bundle",
     "new_source_snapshot": "GitHub isolated program branch/spatial-source",
-    "active_task": "F01",
+    "active_task": null,
     "platform_gaps_retained": true,
     "contract_revision": 2,
     "accepted_decisions": [
@@ -287,8 +287,13 @@
     ],
     "F00_acceptance": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json",
     "worker_started": false,
-    "activation_id": "F01-2026-10-11-01",
+    "activation_id": null,
     "accepted_F00_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
-    "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json"
+    "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
+    "F01_acceptance": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json",
+    "F01_source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+    "F01_handoff_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
+    "host_contains_F01": false,
+    "updated_at_utc": "2026-10-11T15:49:39.114655+00:00"
   }
 }

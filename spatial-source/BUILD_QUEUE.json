@@ -30,7 +30,7 @@
       "depends_on": [
         "F00"
       ],
-      "status": "in_progress",
+      "status": "code_accepted_with_platform_gaps",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
       "packet": "docs/11-launch/spatial-feature-program/features/F01_Surface_Contrast.md",
       "allowed_paths": [
@@ -55,9 +55,15 @@
       ],
       "base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
       "activation_id": "F01-2026-10-11-01",
-      "execution_status": "activated_awaiting_feature_chat_start",
+      "execution_status": "source_accepted_worker_finished",
       "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
-      "implementation_started": false
+      "implementation_started": true,
+      "implementation_complete": true,
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "handoff_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
+      "accepted_at": "2026-10-11T15:49:39.114655+00:00",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json",
+      "platform_delivery": "open; tracked by master/F06; not deployed or installed"
     },
     {
       "id": "F02",
@@ -611,7 +617,7 @@
       "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
     }
   ],
-  "next_action": "F01 is activated for the single Spatial | F01 Surface Contrast feature chat. Start from the branch commit containing the recorded activation, implement only the allocated palette/export slice, then return to master; F02 remains planned.",
+  "next_action": "F01 source is accepted with platform gaps. Master activates F02 openings from this accepted branch before the next single feature chat writes. Keep F01 host/Apple/OS delivery open under F06.",
   "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
   "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
 }

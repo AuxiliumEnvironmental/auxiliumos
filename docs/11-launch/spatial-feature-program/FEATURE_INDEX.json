@@ -5,47 +5,57 @@
       "task": "F00",
       "packet": "F00_Shared_Foundation.md",
       "issue_number": 89,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
+      "status": "delivered_preparation_only"
     },
     {
       "task": "F01",
       "packet": "F01_Surface_Contrast.md",
       "issue_number": 90,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
+      "status": "code_accepted_with_platform_gaps"
     },
     {
       "task": "F02",
       "packet": "F02_Openings.md",
       "issue_number": 91,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91",
+      "status": "planned"
     },
     {
       "task": "F03",
       "packet": "F03_Ceiling_Height.md",
       "issue_number": 92,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92",
+      "status": "planned"
     },
     {
       "task": "F04",
       "packet": "F04_Fixtures_Cutouts.md",
       "issue_number": 93,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93",
+      "status": "planned"
     },
     {
       "task": "F05",
       "packet": "F05_Affected_Areas.md",
       "issue_number": 94,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94",
+      "status": "planned"
     },
     {
       "task": "F06",
       "packet": "F06_Integration_Acceptance.md",
       "issue_number": 95,
-      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/95"
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/95",
+      "status": "planned"
     }
   ],
-  "status": "specified_only",
-  "new_features_implemented": false,
+  "status": "F01_code_accepted_F02_next",
+  "new_features_implemented": true,
   "queue": "source:BUILD_QUEUE.json",
-  "active_lease": "coordination/ACTIVE_TASK.json"
+  "active_lease": "coordination/ACTIVE_TASK.json",
+  "new_features_implemented_scope": [
+    "F01 source only; platform delivery pending"
+  ]
 }

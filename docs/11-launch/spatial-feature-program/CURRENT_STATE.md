@@ -2,7 +2,9 @@
 
 ## Master review update: October 11, 2026
 
-F00 shared engineering contract revision 2 is accepted at `9ace24ce614dcd2bd12480887e5cdc78f2c47a03`. F01 is activated for one separate feature chat; implementation has not started. See `coordination/F00_ACCEPTANCE.json` and the live `coordination/ACTIVE_TASK.json` for the next assignment. No runtime source, host deployment, Apple package or OS embed changed during this review. The source/delivery facts below remain the runtime baseline; Q01/Q02 remain open for F04.
+F01 surface contrast is **code accepted with platform gaps**. The implementation is `33cc3527f239726d2a4503242da9b0a7531ed4b9` and its handoff/evidence is `d553a3dbb25470abd5e0b157f708f7dda8383769`. The master reviewed the exact assigned diff, matching evidence hashes and both mobile screenshots. Walls, floors and display ceilings now use distinct gray categories; selection contrast, Surface fills, picking/cutaway and supported GLB materials are covered by focused local evidence. See `coordination/F01_ACCEPTANCE.json`.
+
+F00 contract revision 2 remains accepted at `9ace24ce614dcd2bd12480887e5cdc78f2c47a03`. F02 openings is the next candidate and has not started; `coordination/ACTIVE_TASK.json` alone records its activation. The source review made no host, Apple or OS change. Live web/host transfer, current Apple assets/build/device and OS integration remain open for master delivery. Q01/Q02 remain open for F04.
 
 ## What is verified in this preparation pass
 
@@ -26,7 +28,7 @@ One maintained React/TypeScript workspace in `source:web/` provides browser, hos
 
 The current source has manual connected-room drawing, press-drag/two-tap room sizing, magnetic corner/wall connections, wall strokes, direct plan opening placement/manipulation, group selection/movement, draft recovery, geometric 3D/cutaway/walkthrough, local revision storage and frozen exports. Treat recorded checks as evidence for their specific inputs, not proof of physical device acceptance.
 
-Concrete gaps for this program: no direct 3D opening editing callback; no door subtype/orientation fields; room ceilings are derived display faces, not authored heights; floor/ceiling picking conflates room identity; no fixture or affected-area records; strict old-version admission rejects new fields; GLB/drawing materials need coordinated updates. The feature packets identify actual file paths.
+Concrete gaps for this program: no direct 3D opening editing callback; no door subtype/orientation fields; room ceilings are derived display faces, not authored heights; floor/ceiling picking conflates room identity; no fixture or affected-area records; strict old-version admission rejects new fields; F01 has aligned the supported GLB structural materials, while future styled openings need coordinated drawing/scene/export updates. The feature packets identify actual file paths.
 
 ## Platform acceptance remains separate
 
