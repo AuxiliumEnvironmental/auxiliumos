@@ -3,6 +3,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises';
 import { stressFixture } from './stressFixture';
 import { freshDocument, syntheticDocument } from '../../src/ui/geometry';
 import type { StoredWorkspace } from '../../src/types';
+import { Color, PerspectiveCamera, Vector3 } from 'three';
 
 // A new run can retain its own screenshots without replacing earlier evidence.
 const artifactDirectory = process.env.SPATIAL_ARTIFACT_DIR ?? 'tests/ui/artifacts/warm-switch';
@@ -68,6 +69,86 @@ test('graphic 3D renders, clips wall geometry, walks with collision and exits', 
   await page.getByRole('button', { name: 'Exit walking' }).click();
   await expect(page.getByRole('button', { name: 'Orbit', exact: true })).toHaveAttribute('aria-pressed', 'true');
   expect(errors).toEqual([]);
+});
+
+test('surface contrast keeps mobile orbit, picking, controls and walkthrough consistent', async ({ page }) => {
+  const errors: string[] = []; page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/'); await page.getByRole('button', { name: 'Open example' }).click();
+  const saved = (await readLocalLayouts(page))[0].document;
+  await page.getByRole('button', { name: '3D model', exact: true }).click();
+  const canvas = page.locator('.spatial-model-canvas canvas[data-rendered=true]'); await expect(canvas).toBeVisible();
+  const palette: Record<string, string> = { wall: '#F2F3F5', floor: '#B8BDC4', ceiling: '#D5D9DE', plain: '#ffffff', plainSelected: '#a5cee4' };
+  for (const role of ['wall', 'floor', 'ceiling']) palette[`${role}Selected`] = `#${new Color(palette[role]).multiplyScalar(0.92).getHexString()}`;
+  // Sample actual screenshot pixels, independent of renderer data attributes or palette exports.
+  const pixels = async () => {
+    const png = (await canvas.screenshot({ scale: 'css' })).toString('base64');
+    return page.evaluate(async ({ png, palette }) => {
+      const bitmap = await createImageBitmap(await (await fetch(`data:image/png;base64,${png}`)).blob());
+      const surface = document.createElement('canvas'); surface.width = bitmap.width; surface.height = bitmap.height;
+      const context = surface.getContext('2d')!; context.drawImage(bitmap, 0, 0); bitmap.close();
+      const { width, height } = surface, data = context.getImageData(0, 0, width, height).data;
+      const result: Record<string, { count: number }> = {};
+      for (const [role, hex] of Object.entries(palette)) {
+        const rgb = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16)); let count = 0;
+        const matches = (x: number, y: number) => rgb.every((channel, i) => Math.abs(data[(y * width + x) * 4 + i] - channel) <= 1);
+        for (let y = 4; y < height - 4; y++) for (let x = 4; x < width - 4; x++) if (matches(x, y) && [[-3, 0], [3, 0], [0, -3], [0, 3]].every(([dx, dy]) => matches(x + dx, y + dy))) {
+          count++;
+        }
+        result[role] = { count };
+      }
+      return result;
+    }, { png, palette });
+  };
+  const selectedIDs = async (): Promise<string[]> => JSON.parse((await canvas.getAttribute('data-selected-ids'))!);
+  // Known synthetic fixture and default orbit: target unobstructed surfaces, not a
+  // floor pixel seen through an opening's intentionally pickable semantic target.
+  const pickOrbitPoint = async (x: number, y: number, z: number) => {
+    const box = (await canvas.boundingBox())!, camera = new PerspectiveCamera(46, box.width / box.height, 0.03, 50000);
+    camera.position.set(10.4, 8.5, 10.4); camera.lookAt(4, 1.3, 2); camera.updateMatrixWorld();
+    const point = new Vector3(x, y, z).project(camera); await canvas.click({ position: { x: (point.x + 1) * box.width / 2, y: (1 - point.y) * box.height / 2 } });
+  };
+  const controls = (open: boolean) => page.getByRole('button', { name: open ? 'View controls' : 'Hide controls', exact: true }).click();
+  const frameWalk = async () => {
+    await page.getByRole('button', { name: 'Walk through', exact: true }).click(); await expect(page.getByText('● WALKING')).toBeVisible();
+    // Step back and look up through normal controls to include the ceiling in
+    // the frame. The default downward view intentionally favors floor movement.
+    for (let i = 0; i < 7; i++) await canvas.press('s');
+    const box = (await canvas.boundingBox())!;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down();
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2 - 58, { steps: 5 }); await page.mouse.up();
+  };
+  const pixelEvidence: Record<string, Awaited<ReturnType<typeof pixels>>> = {};
+  let sample = await pixels(); expect(sample.wall.count).toBeGreaterThan(40); expect(sample.floor.count).toBeGreaterThan(40); expect(sample.ceiling.count).toBe(0);
+  await pickOrbitPoint(6, 0, 0.5); expect(await selectedIDs()).toEqual(['room-b']); expect((await pixels()).floorSelected.count).toBeGreaterThan(40);
+  await pickOrbitPoint(6, 1.3, 4); expect(await selectedIDs()).toEqual(['w3']); expect((await pixels()).wallSelected.count).toBeGreaterThan(40);
+  await pickOrbitPoint(2.3, 1.45, 4); expect(await selectedIDs()).toEqual(['window-a']);
+  await pickOrbitPoint(4, 4.5, 2); expect(await selectedIDs()).toEqual([]);
+  await controls(true); await expect(page.getByLabel('Surface fills', { exact: true })).toBeChecked(); await expect(page.getByText('Light blue fills', { exact: true })).toHaveCount(0);
+  await page.getByLabel('Display ceilings', { exact: true }).check(); await controls(false);
+  sample = await pixels(); expect(sample.ceiling.count).toBeGreaterThan(40); expect(sample.floor.count).toBeGreaterThan(40); expect(sample.wall.count).toBeGreaterThan(40);
+  pixelEvidence.orbitUnselected = sample;
+  await frameWalk(); sample = await pixels(); expect(sample.wall.count).toBeGreaterThan(40); expect(sample.floor.count).toBeGreaterThan(40); expect(sample.ceiling.count).toBeGreaterThan(40);
+  pixelEvidence.walkUnselected = sample; await canvas.press('Escape');
+  await pickOrbitPoint(6, 2.6, 2); const roomID = (await selectedIDs())[0]; expect(roomID).toBe('room-b'); expect((await pixels()).ceilingSelected.count).toBeGreaterThan(40);
+  pixelEvidence.orbitSelected = await pixels();
+  await mkdir(artifactDirectory, { recursive: true }); await page.screenshot({ path: `${artifactDirectory}/surface-contrast-orbit-mobile.png`, fullPage: true });
+  await controls(true); await page.getByLabel('Surface fills', { exact: true }).uncheck(); await controls(false);
+  sample = await pixels(); expect(sample.plain.count).toBeGreaterThan(40); expect(sample.plainSelected.count).toBeGreaterThan(40); expect(sample.wall.count + sample.ceiling.count + sample.floor.count).toBe(0);
+  await controls(true); await page.getByLabel('Surface fills', { exact: true }).check(); await page.getByLabel('Cutaway', { exact: true }).check(); await page.getByLabel('Cutaway height', { exact: true }).fill('0.4'); await controls(false);
+  sample = await pixels(); expect(sample.ceiling.count + sample.ceilingSelected.count).toBe(0); expect(sample.floorSelected.count).toBeGreaterThan(40); expect(sample.wall.count).toBeGreaterThan(40);
+  // The existing room owner selects its floor and display ceiling together, pending F03.
+  await frameWalk();
+  sample = await pixels(); expect(sample.wall.count).toBeGreaterThan(40); expect(sample.floorSelected.count).toBeGreaterThan(40); expect(sample.ceilingSelected.count).toBeGreaterThan(40);
+  pixelEvidence.walkSelected = sample;
+  await page.screenshot({ path: `${artifactDirectory}/surface-contrast-walk-mobile.png`, fullPage: true });
+  await canvas.press('w'); await expect(page.locator('.spatial-model-message')).toContainText('Walking inside');
+  await canvas.press('ArrowRight'); await expect(page.getByRole('combobox', { name: 'Start in', exact: true })).toHaveValue(roomID);
+  await canvas.press('Escape'); await expect(page.getByRole('button', { name: 'Orbit', exact: true })).toHaveAttribute('aria-pressed', 'true');
+  await controls(true); await expect(page.getByLabel('Cutaway', { exact: true })).not.toBeChecked(); await page.getByLabel('Display ceilings', { exact: true }).uncheck(); await controls(false);
+  sample = await pixels(); expect(sample.ceiling.count + sample.ceilingSelected.count).toBe(0); expect(sample.floorSelected.count).toBeGreaterThan(40);
+  expect((await readLocalLayouts(page))[0].document).toEqual(saved); expect(errors).toEqual([]);
+  await test.info().attach('surface-contrast-pixels', { body: JSON.stringify({ palette, pixelEvidence }, null, 2), contentType: 'application/json' });
 });
 
 test('narrow viewport exposes the same correction controls with safe targets', async ({ page }) => {

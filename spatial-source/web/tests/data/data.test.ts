@@ -8,6 +8,8 @@ import { exportRevision, importDocument, SpatialWebStore } from '../../src/data'
 import { jsonBytes, sha256, strictJSON, utf8 } from '../../src/data/bytes';
 import { validatePDF, validateSVG } from '../../src/data/imports';
 import { readZIP, writeZIP } from '../../src/data/zip';
+import { buildScene } from '../../src/core';
+import { surfaceLinearRGB } from '../../src/surfacePalette';
 
 async function document(): Promise<SpatialDocument> { return JSON.parse(await readFile(new URL('../../../fixtures/geometry.json', import.meta.url), 'utf8')); }
 async function setup() { const store = new SpatialWebStore(crypto.randomUUID()), doc = await document(); await store.create(doc); return { store, doc }; }
@@ -140,6 +142,23 @@ test('GLB contains canonical cutout triangles, semantic lines, no resources and 
   assert.equal(view.getUint32(0, true), 0x46546c67); assert.equal(view.getUint32(8, true), artifact.bytes.length);
   const gltf = strictJSON(artifact.bytes.subarray(20, 20 + view.getUint32(12, true))) as any;
   assert.equal(gltf.asset.extras.sourceSHA256, f.hash); assert.equal(gltf.asset.extras.revision, 1); assert.ok(gltf.meshes.some((m: any) => m.primitives[0].mode === 1)); assert.ok(gltf.meshes.some((m: any) => m.primitives[0].mode === 4)); assert.equal(gltf.images, undefined);
+  const scene=buildScene(f.document,'floor-1'),original=JSON.stringify(f.document),binaryStart=28+view.getUint32(12,true);
+  const faces=gltf.meshes.filter((mesh:any)=>mesh.extras.representation==='faces');
+  assert.deepEqual([...new Set(faces.map((mesh:any)=>mesh.extras.role))].sort(),['floor','wall']);
+  assert.equal(gltf.materials.length,4);assert.equal(gltf.extensionsUsed,undefined);
+  for(const mesh of gltf.meshes){
+    const {objectID,role,representation}=mesh.extras,primitive=mesh.primitives[0],accessor=gltf.accessors[primitive.attributes.POSITION],bufferView=gltf.bufferViews[accessor.bufferView];
+    const actual=Array.from({length:accessor.count*3},(_,i)=>view.getFloat32(binaryStart+bufferView.byteOffset+i*4,true));
+    const expected=representation==='faces'?scene.faces.filter(face=>face.objectID===objectID&&face.role===role).flatMap(face=>face.triangles.flatMap(triangle=>triangle.flatMap(i=>{const p=face.vertices[i];return[p.x,p.y,p.z];}))):scene.edges.filter(edge=>edge.objectID===objectID&&edge.role===role).flatMap(edge=>[edge.a.x,edge.a.y,edge.a.z,edge.b.x,edge.b.y,edge.b.z]);
+    assert.deepEqual(actual,expected.map(Math.fround));
+    if(representation==='faces'){
+      assert(role==='wall'||role==='floor');const material=gltf.materials[primitive.material];
+      assert.equal(material.alphaMode,'OPAQUE');assert.equal(material.doubleSided,true);
+      assert.deepEqual(material.pbrMetallicRoughness.baseColorFactor,[...surfaceLinearRGB(role),1]);
+      assert.equal(material.pbrMetallicRoughness.metallicFactor,0);assert.equal(material.pbrMetallicRoughness.roughnessFactor,1);
+    }
+  }
+  assert.equal(gltf.buffers[0].uri,undefined);assert.equal(JSON.stringify(f.document),original);
 });
 test('multi-floor exports do not silently drop a floor and PDF includes every floor', async () => {
   const doc = await document(), upper = structuredClone(doc.floors[0]); upper.id = 'upper'; upper.elevation = 3; upper.label = 'Upper floor'; doc.floors.push(upper);
