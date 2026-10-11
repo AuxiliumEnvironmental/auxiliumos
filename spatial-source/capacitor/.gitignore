@@ -1,0 +1,5 @@
+ios/App/public/
+.build-device/
+.build-simulator/
+**/xcuserdata/
+**/.DS_Store

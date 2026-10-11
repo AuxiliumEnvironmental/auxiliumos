@@ -1,0 +1,56 @@
+{
+  "baseline_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "status": "39 affected portable cases passed on the indexed implementation; Apple and device acceptance remain pending",
+  "environment": "Linux x86_64, Swift6.2.1 RELEASE, debug, legacy compiler driver; no Apple SDK or physical device",
+  "build_and_wrapper_attempt": {
+    "command": "swift test --jobs 1 --filter 'NavigationTests|NavigationIndexTests|CutawayTests|OperatingEnvelopeTests'",
+    "environment_prefix": "LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no",
+    "build": "Compiled and linked successfully in8.68s",
+    "wrapper_exit_code": 1,
+    "wrapper_result": "Exited with unexpected signal4 at the first test, preserved as a failure rather than counted as a pass",
+    "log": "tests/rendering/continuation/navigation-indexed.log",
+    "log_sha256": "3d10c938367a9b20caa76211097736d6da1d0f630c8684276b54f5ee8fd49de1"
+  },
+  "successful_direct_run": {
+    "working_directory": "packages/SpatialCore",
+    "executable": ".build/x86_64-unknown-linux-gnu/debug/SpatialCorePackageTests.xctest",
+    "executable_sha256": "3fe8d2411103c4261c3964513e06fd34427f35855df9e37784ba7ca74c98b8ab",
+    "environment_prefix": "LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_BACKTRACE=enable=no",
+    "arguments_one_per_process": ["SpatialCoreTests.CutawayTests", "SpatialCoreTests.NavigationTests", "SpatialCoreTests.NavigationIndexTests", "SpatialCoreTests.OperatingEnvelopeTests"],
+    "run_started_utc": "2026-10-09T09:26:57.985Z",
+    "run_finished_utc": "2026-10-09T09:27:03.520Z",
+    "exit_code": 0,
+    "cases": 39,
+    "failures": 0,
+    "suite_counts": {"CutawayTests": 11, "NavigationTests": 20, "NavigationIndexTests": 6, "OperatingEnvelopeTests": 2},
+    "log": "tests/rendering/continuation/navigation-indexed-direct.log",
+    "log_sha256": "788e7349fc22a9c35ed381207a657e5e0d620e5ca1e7ed7060ba02492f92d534",
+    "scope": "Same compiled binary and unchanged source after the failed wrapper. No sandbox/security settings were changed."
+  },
+  "input_sha256": {
+    "packages/SpatialCore/Sources/SpatialCore/FloorGeometryIndex.swift": "fce23f73712fcb349560251686f6a28622e76c0517f3202ba601631e0432b94d",
+    "packages/SpatialCore/Sources/SpatialCore/Geometry.swift": "5b25b20063e9c60a4f5bb2f510f4f0f3b67add293a970023021a0ece3085a676",
+    "packages/SpatialCore/Sources/SpatialCore/Scene.swift": "4f67e1ddaac81a298c162b2f8dbf71ccc5d9a6568973b7b4fea1489187263334",
+    "packages/SpatialCore/Sources/SpatialCore/Validation.swift": "9e9998326511c301486a28bf9a2f9735117311496d3575cb8e5340ff2406480a",
+    "packages/SpatialCore/Sources/SpatialCore/Navigation.swift": "40788c2bc589cefa19313e1bcd509aad2d3cee2baecc6931e52b54823a36b0b2",
+    "packages/SpatialCore/Sources/SpatialCore/Cutaway.swift": "d5adcdcb209d0c4d966a9ad76c2d99749722125bd8316d2c69d0fcc23bf8614d",
+    "packages/SpatialCore/Sources/SpatialCore/Model.swift": "0de648af4ae79ddfc753ec293efe459e62e7702ac961fe72679f5ce5b6618c99",
+    "packages/SpatialCore/Sources/SpatialCore/SVG.swift": "cf35a5b8ca4cb26a8315abe421b4e2146a02de06beba845cdb00463e3c349c85",
+    "packages/SpatialCore/Tests/SpatialCoreTests/NavigationIndexTests.swift": "4a92cf4d36340a028033b694fa953375587b20767d26478d442b88c5079f033c",
+    "packages/SpatialCore/Tests/SpatialCoreTests/NavigationTests.swift": "c758e6c30a10f140cc0a18b6d6f6b4f9151abcd73b3314e497228aa40468cd53",
+    "packages/SpatialCore/Tests/SpatialCoreTests/CutawayTests.swift": "f3e0e116a1616719cc21f11795c4a8dd89b4f85fab73c9be500d5dad2039f91b",
+    "packages/SpatialCore/Tests/SpatialCoreTests/OperatingEnvelopeTests.swift": "6ff7861eb85db0354855c83ddc9e442566ab53d278755aff425ac2ad41c0fb79"
+  },
+  "changes_from_preserved_baseline": [
+    "Lead-owned per-operation immutable FloorGeometryIndex eliminates repeated whole-floor dictionary reconstruction without changing graph authority, revisions, identity or duplicate-ID diagnostics.",
+    "SceneBuilder groups openings once and shares the index; Navigation and display ceilings consume the same indexed graph.",
+    "Navigation's exact bounding-box broad phase rejects only definitely unrelated room polygons; canonical polygon containment still decides walkability. Concave/overlap tests prove boxes are not substituted for room geometry."
+  ],
+  "single_run_elapsed_observations": {
+    "proposed": {"rooms": 100, "walls": 1000, "openings": 500, "scene_faces": 2267, "scene_edges": 7667, "permitted_portals": 273, "validation_seconds": 0.020164366999779304, "scene_seconds": 0.048843561000012414, "navigation_seconds": 0.06734719399992173, "placement_seconds": 0.0008623789999546716, "portal_move_seconds": 0.000748538000152621, "cutaway_seconds": 0.008734429000014643},
+    "extended": {"rooms": 1000, "walls": 10000, "openings": 5000, "scene_faces": 22667, "scene_edges": 76667, "permitted_portals": 3121, "validation_seconds": 0.18948716800014154, "scene_seconds": 0.600723902000027, "navigation_seconds": 3.3348509439997542, "placement_seconds": 0.0063689309999972465, "portal_move_seconds": 0.008105974000045535, "cutaway_seconds": 0.08289563700009239}
+  },
+  "prior_evidence": "ENVELOPE_BASELINE.json and operating-envelope.log retained separately; same fixture source, assertions, counts and permitted portals, different implementation inputs",
+  "not_accepted": ["Apple SDK compilation", "simulator rendering", "physical capture/navigation", "native touch/accessibility/p95/frame/memory budgets", "2000/20000 overlay markers", "live integration", "release"],
+  "remaining_native_risk": "Native graphics creation is still main-actor work and is not measured here. Cancellation takes effect between bounded geometry phases, not within each core loop."
+}

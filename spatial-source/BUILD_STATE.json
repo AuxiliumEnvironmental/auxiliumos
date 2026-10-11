@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "product": "Auxilium Spatial (working label)",
+  "scope": "Apple native capture with shared React/TypeScript browser, OS and Capacitor authoring",
+  "package_status": "active_approved_architecture_adaptation",
+  "product_status": "manual_browser_authoring_live_current; physical_native_and_full_release_acceptance_remain_separate",
+  "implemented_portable": [
+    "Canonical1.0/1.1 geometry, normalization evidence, full structural/room/floor/semantic editing and lineage",
+    "Revision-bound swept navigation, true cutaway visibility and canonical ray picking",
+    "SQLitev6 durable drafts, undo/redo, frozen versions, capture and orphan-copy recovery, scoped access, explicit confirmed history cleanup",
+    "Exact-version exchange/GLB/drawing-page/all-floor profiles and strict geometry-only import",
+    "Durable outbox/default-disabled publisher and synthetic scoped receiver threats",
+    "Current integrated edit/save/reopen/undo/navigation/export/disconnected delivery workflows"
+  ],
+  "native_reference_status": "Apple_iOS_SDK_compiled_and_linked;14native_simulator_tests_passed;147nonwebinputs_match",
+  "remaining_product_work": [
+    "Owner hands-on acceptance of connected-room drawing, direct placement, group manipulation and interrupted drawing recovery; current implementation has focused browser evidence",
+    "Preserve OS Spatial selection UI; retire older generated editor through a reviewed recoverable cutover, then integrate the same workspace with authorized project context",
+    "Implement authorized OS project context when the actual project-access contract and permitted development project are available; current scope is personal synthetic only",
+    "Complete the2000-overlay-marker workload coverage and memory acceptance; native font coverage remains unverified",
+    "Physical iPhone connected capture, retained rooms, StructureBuilder, lost tracking and relocalization",
+    "Physical kill/lock/low-disk/thermal/sharing and WebKit IndexedDB file-protection verification",
+    "Native touch/VoiceOver/Dynamic Type and declared p95/frame/memory acceptance; current software-WebGL warm stress sample p95 is421ms, cold1117.4ms, neither establishes device acceptance",
+    "Signing/installation only with authorized Mac/device signing; TestFlight/livepublication/release disabled"
+  ],
+  "cloud_status": "dedicated_Spatial_live_at_spatialauxilium.io; OS_unchanged; live_publisher_disabled",
+  "autonomous_agents_started": true,
+  "independent_review_performed": true,
+  "verification_record": "evidence/shared-workspace/REQUIREMENTS.json; individual hash-bound reports",
+  "next_ready_task": "F00: reconcile current refs and ratify shared feature contracts; no new feature implemented in the preservation pass.",
+  "protected_context": "Preserve existing OS/Moldo/companion work; no migration/deployment from this ZIP.",
+  "verified_foundation": {
+    "swift_tests": 44,
+    "python_tests": 21,
+    "failures": 0,
+    "platform": "Linux Swift 6.2.1; no Apple SDK"
+  },
+  "current_execution": {
+    "baseline_commit": "1fede19ded45b3ce2b2919d47759a43134533a69",
+    "workers": [
+      "precision_drawing_tests"
+    ],
+    "workers_running": false,
+    "runtime": "Linux Node24.19.0; prior native Apple evidence reused within unchanged inputs",
+    "remote_changes": true,
+    "remote_scope": "Exact dedicated Spatial UI/source transfer and existing live site update. Layout/schema/backend/OS/native unchanged."
+  },
+  "current_verified_portable": {
+    "core_typescript_tests": 98,
+    "data_typescript_tests": 65,
+    "ui_helper_tests": 5,
+    "distinct_ui_browser_workflows": 27,
+    "browser_export_workflows": 4,
+    "browser_process_termination_scenarios": 2,
+    "os_adapter_race_cases": 3,
+    "apple_simulator_cases": 14,
+    "note": "Current46 existing browser workflows pass on unchanged final inputs. Direct openings have9 passing current-source cases plus1 corrected targeted follow-up, not a later full10-case run. Earlier runs/failures are retained."
+  },
+  "implementation_head": "Archive top-level RECOVERY.json records the exact full committed tree; optional uncommitted/ preserves dirty changes separately.",
+  "handoff": "RESUME.md, evidence/shared-workspace/REQUIREMENTS.json and archive RECOVERY.json/recovery/",
+  "prior_checkpoint": {
+    "implementation_head": "d80d5938123af67d34145560a1da6c382e2f55ae",
+    "current_verified_portable": {
+      "swift_xctest": 151,
+      "python_unittest": 21,
+      "failures_in_completed_suites": 0,
+      "evidence": "evidence/execution/DIRECT_TESTS.json",
+      "gltf_validator": "2.0.0-dev.3.10: 0 errors, 0 warnings",
+      "process_death_gate": "incomplete; final batch interrupted by container libdispatch runtime SIGILL, failure retained"
+    },
+    "evidence": "evidence/execution/ and original Git history preserved"
+  },
+  "architecture_correction": {
+    "date": "2026-10-09",
+    "baseline": "41f000be361f0cf0c96963ffa1904b2295258769",
+    "status": "shared_source_implemented_manual_usability_and_independent_host_incomplete_Apple_compiled_not_device_accepted",
+    "source_recovery_zip_sha256": "d4340f089c653ca4bbd52eca7a5558876e6158231a0c8a3fc292c6d5314e7cc9",
+    "browser_acceptance": false,
+    "apple_compilation": true,
+    "device_acceptance": false,
+    "live_publication": false,
+    "browser_functional_journeys_tested": true
+  },
+  "historical_execution_before_shared_workspace": {
+    "current_execution": {
+      "baseline_commit": "ea1a4566e68c99a01881c406b4438adf5abba885",
+      "workers": [
+        "capture_v2",
+        "navigation_v2",
+        "exports_v2",
+        "delivery_v2",
+        "qa_v2",
+        "apple_review_v2"
+      ],
+      "runtime": "Linux Swift6.2.1 with task-local dependencies; no Apple runner",
+      "workers_running": false,
+      "remote_changes": false,
+      "execution_scope": "Integrated source, portable testing, independent review, recovery archive; no live effects"
+    },
+    "current_verified_portable": {
+      "swift_xctest": 302,
+      "python_unittest": 21,
+      "process_death_scenarios": 20,
+      "failures_in_current_accepted_runs": 0,
+      "earlier_failures_retained": true,
+      "evidence": "evidence/continuation/; tests/persistence/continuation/run-20261009T073840100850Z/verification.json",
+      "gltf_validator": "Khronos2.0.0-dev.3.10: zero errors/warnings/info/hints",
+      "native_source_only": "14 app Swift files,2 native test files (6 authored tests), syntax-only; no Apple execution"
+    },
+    "implementation_head": "ba478160abaffd5508b8830e8b8e1a62454225ea",
+    "native_reference_status": "actual_native_application_source_syntax_checked_independently_reviewed_not_Apple_SDK_compiled",
+    "cloud_status": "not_connected_no_remote_writes"
+  },
+  "current_shared_workspace_evidence": {
+    "apple_compile": "evidence/shared-workspace/APPLE_COMPILE.json",
+    "web_core": "web/tests/core/evidence-unicode-and-provenance.json",
+    "web_data": "web/tests/data/generated/PORTABLE_EVIDENCE.json",
+    "web_browser": "web/tests/ui/WARM_SWITCH_EVIDENCE.json",
+    "browser_exports": "web/tests/data/generated/BROWSER_EVIDENCE.json",
+    "browser_process_recovery": "web/tests/data/generated/BROWSER_RECOVERY_EVIDENCE.json",
+    "adapter_races": "web/tests/integration/artifacts/os-adapter.json",
+    "note": "Exact per-run source hashes control reuse; older failures are retained separately.",
+    "functional_counts": {
+      "core_tests": 98,
+      "data_tests": 65,
+      "ui_helper_tests": 5,
+      "distinct_ui_browser_workflows": 27,
+      "browser_export_workflows": 4,
+      "browser_process_termination_scenarios": 2,
+      "independent_data_probe_groups": 17
+    },
+    "native_simulator_cases": 14,
+    "production_build": "evidence/shared-workspace/WEB_BUILD.json",
+    "evidence_reuse": "evidence/shared-workspace/EVIDENCE_REUSE.json",
+    "renderer": "Bounded current-document warm renderer;15 affected checks passed;12 unchanged2D workflows reuse matching relevant inputs.27 distinct workflows, not a single27/27 run. Physical and full-stress gates remain pending.",
+    "host_refresh": "evidence/shared-workspace/HOST_REFRESH_2026_10_10.json",
+    "runtime_source_commit": "157333976060c087f20f18348b73438d6e48e70c",
+    "host_commit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "manual_authoring_review": "evidence/shared-workspace/MANUAL_AUTHORING_REVIEW_2026_10_10.json",
+    "evidence_invalidation": "Current canvas/SpatialWorkspace changes invalidate relevant earlier UI/offline behavior evidence; focused rerun records govern this slice. Unchanged core/data/native evidence requires exact relevant hash match.",
+    "manual_drawing": "web/tests/ui/MANUAL_DRAWING_EVIDENCE.json",
+    "manual_build": "evidence/shared-workspace/MANUAL_AUTHORING_BUILD_2026_10_10.json",
+    "current_manual_browser_cases": 16,
+    "preceding_affected_existing_cases": 19,
+    "manual_counts_note": "Current regression is46/46:16 manual,11 quick-room and19 other workflows on final source. Direct opening review9+targeted1 remains separately scoped.",
+    "manual_host_refresh": "evidence/shared-workspace/MANUAL_HOST_REFRESH_2026_10_10.json",
+    "host_contains_current_manual_source": false,
+    "quick_room": "web/tests/ui/artifacts/quick-room/QUICK_ROOM_REVIEW_FIXES_EVIDENCE.json",
+    "direct_openings": "web/tests/ui/artifacts/direct-openings/DIRECT_OPENING_EVIDENCE.json",
+    "direct_opening_independent_review": "evidence/reviews/direct-openings-2026-10-10/INDEPENDENT_REVIEW.json",
+    "current_regression": "evidence/shared-workspace/openings-integration-2026-10-10/REGRESSION.json",
+    "current_builds": "evidence/shared-workspace/openings-integration-2026-10-10/BUILDS.json",
+    "standalone_transfer": "evidence/shared-workspace/openings-integration-2026-10-10/built-browser/RESULT.json",
+    "os_separation": "evidence/os-separation-2026-10-10/SEPARATION.json"
+  },
+  "active_jobs": [],
+  "standalone_delivery": {
+    "intendedHostname": "spatialauxilium.io",
+    "sourceCommit": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+    "workspaceInputSHA256": null,
+    "status": "current_precision_drawing_source_verified_live",
+    "dedicatedProject": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+    "osSelection": "preserved; no OS change",
+    "nativeWorkflow": ".github/workflows/apple-unsigned.yml, source-checked manual trigger only",
+    "authAndDNS": "Existing owner domain serves the current source; no auth/backend/DNS changes were made in this slice.",
+    "hostCommitBeforeRefresh": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+    "previewURL": "https://id-preview--addeb89f-cdf1-4688-9157-b208793ffb8e.lovable.app",
+    "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "sourceReadback": "evidence/precision-drawing-2026-10-10/FINAL_HOST_COMPARISON.json",
+    "publicationObservedBeforeMobileRefresh": true,
+    "publishedURL": "https://spatial-compass-core.lovable.app",
+    "liveCustomDomain": "https://spatialauxilium.io",
+    "publicDelivery": "evidence/precision-drawing-2026-10-10/PUBLIC_DELIVERY.json"
+  },
+  "current_manual_verification": {
+    "portableTests": 251,
+    "combinedGroupRecoveryBrowser": 20,
+    "buildInputsMatch": 48,
+    "combinedBrowserInputsMatch": 52,
+    "gestureScope": "Five original cases plus two corrected focused retries, not one same-input seven-case run",
+    "reuse": "No full-suite/browser/offline rerun for unchanged inputs",
+    "transferHostOverlay": "Two host-only accessibility changes; build/source review separate",
+    "strictHostCorrection": "Current source 5def609 adds only an explicit undefined return and enables noImplicitReturns. Local and host strict checks pass. Earlier browser evidence remains scoped behavioral evidence, not a new same-hash run.",
+    "hostReadback": "65 transferred files match source exactly; root workspace route and two offline implementation files remain unchanged.",
+    "hostBuild": "Production Vite build passed for initial exact refresh 80dd658; final two-line compiler correction b81e824 passes strict tsgo and normal preview reports ready."
+  },
+  "current_mobile_drawing_work": {
+    "date": "2026-10-10",
+    "status": "completed_tested_transferred_live",
+    "scope": "Finger drawing responsiveness and map-first mobile UI",
+    "changes": [
+      "Frame-limited previews, exact release and cancellation fences",
+      "Memoized saved SVG geometry and cached geometry index",
+      "Touch/stylus wall endpoint drags with explicit Finish and canonical editable commands",
+      "Compact top actions, movable left palette, persistent map and portrait bottom / landscape right panels",
+      "Stable save status, non-shifting routine toasts and compact model settings"
+    ],
+    "evidence": "evidence/reviews/mobile-drawing-2026-10-10/final-review.json",
+    "checks": {
+      "focusedBrowserCases": 11,
+      "roomSnapTests": 6
+    },
+    "unchanged": "Canonical schema, admission/history/recovery APIs, native capture, backend, OS, offline cache worker",
+    "limits": "Synthetic Linux Chromium checks; physical iPhone/Safari finger latency unmeasured.",
+    "sourceCommit": "2fd22b67c81eb290d00ed22a30a650c562c57712",
+    "hostCommit": "9c1cc31f303411c7302b4157290f9d3068cd4e77",
+    "exactTransferredFiles": 11,
+    "hostBuild": "0 strict errors and one successful production build",
+    "sourceReadback": "evidence/mobile-upgrade-2026-10-10/FINAL_HOST_COMPARISON.json",
+    "deployment": {
+      "status": "verified_live_assets",
+      "deployment_id": "75772bca-63d1-4955-bf5c-0ff3fbe12e28",
+      "url": "https://spatial-compass-core.lovable.app",
+      "preview_url": "https://id-preview--addeb89f-cdf1-4688-9157-b208793ffb8e.lovable.app",
+      "apiResponseStatus": "pending",
+      "verifiedAtUTC": "2026-10-10T09:36:40.990333+00:00",
+      "liveCustomDomain": "https://spatialauxilium.io",
+      "observation": "Both existing hostnames return200 and serve identical new drawing JS and mobile CSS assets.",
+      "publicEvidence": "PUBLIC_DELIVERY.json"
+    },
+    "independentReview": "evidence/reviews/mobile-drawing-2026-10-10/final-review.json"
+  },
+  "current_precision_drawing_work": {
+    "date": "2026-10-10",
+    "status": "completed_tested_transferred_live",
+    "scope": "Press-drag room sizing, either-corner draft resizing, precise room/wall magnetic snapping and canonical wall junctions without changing layout",
+    "changes": [
+      "Mouse, touch and pen wall strokes with exact release and preserved tap entry",
+      "Either opposite room draft corner resizes with finger grab offset",
+      "Zoom-independent corner/boundary/axis magnets with small release bands and closer-target preference",
+      "Continuous unsnapped coordinates, half-size drawing threshold and minimum wall segment, mobile snap override",
+      "Wall endpoints reuse saved corners or split contacted host wall in one validated undoable transaction"
+    ],
+    "unchanged": "App layout, canonical schema, storage/recovery contract, native capture, dependencies, backend, OS, offline cache",
+    "baseSourceCommit": "c952575d99d013a1c152893a20ec6b9c316d988b",
+    "baseHostCommit": "9c1cc31f303411c7302b4157290f9d3068cd4e77",
+    "verification": "evidence/reviews/precision-drawing-2026-10-10/",
+    "limits": "Synthetic Linux Chromium interaction evidence; physical iPhone/Safari latency not measured.",
+    "sourceCommit": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+    "checks": {
+      "distinctFocusedBehaviors": 11,
+      "runBreakdown": "8 unchanged-scope prior passes plus3 targeted final passes",
+      "existingRoomSnapHelpers": 6,
+      "newWallTopologyHelpers": 5,
+      "areaAndShortSegmentHelpers": "passed"
+    },
+    "independentReview": "evidence/reviews/precision-drawing-2026-10-10/final-review.json",
+    "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "exactTransferredFiles": 9,
+    "hostBuild": "0 strict errors and one successful production build",
+    "sourceReadback": "evidence/precision-drawing-2026-10-10/FINAL_HOST_COMPARISON.json",
+    "deployment": {
+      "status": "verified_live_assets",
+      "deployment_id": "6ecdbc79-56a7-471a-93a3-447796442c20",
+      "url": "https://spatial-compass-core.lovable.app",
+      "preview_url": "https://id-preview--addeb89f-cdf1-4688-9157-b208793ffb8e.lovable.app",
+      "apiResponseStatus": "pending",
+      "liveCustomDomain": "https://spatialauxilium.io",
+      "verifiedAtUTC": "2026-10-10T17:07:54.922487+00:00",
+      "publicEvidence": "PUBLIC_DELIVERY.json"
+    }
+  },
+  "feature_program_2026_10_11": {
+    "status": "planned_not_implemented",
+    "master_reference": "docs/11-launch/spatial-feature-program/CURRENT_STATE.md",
+    "parent_issue": 88,
+    "one_feature_at_a_time": true,
+    "current_source_checkpoint": "eebd27f8fd3c5b2d4e21c7c6957f9dcd017c0a59",
+    "runtime_checkpoint": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+    "host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "original_history_location": "paired recovery ZIP/recovery/repository.bundle",
+    "new_source_snapshot": "GitHub isolated program branch/spatial-source",
+    "active_task": null,
+    "platform_gaps_retained": true
+  }
+}

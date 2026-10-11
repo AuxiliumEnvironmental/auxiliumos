@@ -1,0 +1,66 @@
+{
+  "recordedAt": "2026-10-09T16:44:45.824496+00:00",
+  "inputRevision": "41f000be361f0cf0c96963ffa1904b2295258769",
+  "sourceStatus": "Implemented new Capacitor host and scoped native capture/export bridges; original engine source is referenced unchanged.",
+  "portableChecks": [
+    {
+      "command": "python3 -m unittest discover -s tests/capacitor -p 'test_*.py' -v",
+      "exitCode": 0,
+      "cases": 5,
+      "scope": "Asset copying/hash manifest, failed-copy preservation, symlink/font rejection, deterministic project, configuration/signing boundaries."
+    },
+    {
+      "command": "python3 -m py_compile capacitor/generate_project.py capacitor/prepare.py",
+      "exitCode": 0
+    },
+    {
+      "command": "bash -n capacitor/build_unsigned.sh",
+      "exitCode": 0
+    }
+  ],
+  "appleProbe": {
+    "command": "bash capacitor/build_unsigned.sh",
+    "exitCode": 2,
+    "result": "Apple SDK compilation requires an authorized Mac with Xcode 26 or newer. No Apple compilation occurred."
+  },
+  "authoredAppleHostedTests": {
+    "newBridgePolicyCases": 6,
+    "retainedConnectedCaptureCases": 3,
+    "executed": false
+  },
+  "accepted": {
+    "appleSDKCompilation": false,
+    "simulatorBehavior": false,
+    "physicalCapture": false,
+    "physicalRecovery": false,
+    "nativeWebPersistence": false,
+    "deviceTouchAccessibilityPerformance": false,
+    "liveIntegration": false,
+    "release": false
+  },
+  "review": "Implementer checks only; no independent review claimed.",
+  "hashes": {
+    "capacitor/.gitignore": "9d6dc8e3ddb1ae8fdaffbf1da89ac885d8649c33b1d94d5d11f1bba85184e4ef",
+    "capacitor/README.md": "53ea1af01b3338257435833ed520349cf8f4fb68a7cc79732c167609727a29a9",
+    "capacitor/build_unsigned.sh": "7a41fc68c50447163b6ffefda05620b831ff4681812697945b16a9fc157d15f0",
+    "capacitor/generate_project.py": "6b7f57978a960f45f074b38008dc18e69fdd6739f60ddf785cf454156437c089",
+    "capacitor/ios/App/AppDelegate.swift": "b1fd3b1975b22f33dd33337403b976b62517a55da37e4ff1149fcdfbeaf32742",
+    "capacitor/ios/App/AuxiliumCapturePlugin.swift": "977c926d6fc8174f95482e967507cfc3fa897b7c504dfe8a162f5b47f69b01e6",
+    "capacitor/ios/App/AuxiliumFilesPlugin.swift": "a1df108f24a3bfe39c20e149dd772168b9ef7c4e9b46c32ecb786386abe01d47",
+    "capacitor/ios/App/BridgePolicy.swift": "cc1073dc80f771c0634758e877c10a811a176b10ebd80a7a7dc06a2fc81e6882",
+    "capacitor/ios/App/ExportBridgePolicy.swift": "f15315def0e114ca4a0321264c24ce0507c6a63e3efe1af9fde04e0e7e1e955c",
+    "capacitor/ios/App/Info.plist": "4431f180a10abbf62d9247b7da69fc57d9c4d8f38cf3534aeebaa89c0d4b1f5d",
+    "capacitor/ios/App/NativeCaptureWorkspace.swift": "b993933f49ba807881df0c50f86a31e4680ac9375300a60ae49dea4e6b9dca66",
+    "capacitor/ios/App/SpatialBridgeViewController.swift": "a6e638ad74d286251fcb5349cc495e962748f5cdf90c23592eece41c3ce7578d",
+    "capacitor/ios/App/capacitor.config.json": "a541ba5815896e253a0a145311added21701eb609cc38a4bfe22b39b566ae891",
+    "capacitor/ios/AuxiliumSpatial.xcodeproj/project.pbxproj": "7c4aaec2ce5674dc3bf1ada58270639b88b8da833aba3f636a29025146d88e82",
+    "capacitor/ios/AuxiliumSpatial.xcodeproj/xcshareddata/xcschemes/AuxiliumSpatial.xcscheme": "ed29c65b6950cb5168130aa3e13a29b6d980ff8e6dd366c0b4f5f6fb9348ff16",
+    "capacitor/prepare.py": "6d69fcce7649b58c326db3f15f2794c656c66005cc6cda0c42dcd61e7266c555",
+    "ios/SpatialApp/AppleSurfaceAdapter.swift": "59d6d48e1271953e7094233fab575f7241a4f91022c53f1da3100c54e82ff027",
+    "ios/SpatialApp/CaptureController.swift": "69f146fb2181da6215078a1c8a7a5d737f7ee2eed380878e8e949f931e3d66b3",
+    "ios/SpatialApp/CapturePipeline.swift": "09253c70afa1f403210029a7e5c1ef28c48bc7383ab2e3a65ba56f7053ca51ae",
+    "ios/SpatialApp/DeviceAccessGate.swift": "4af2023cdf182e199553d1dccbd1ecf5be3b6493546a78ef13cd5c458bae948c",
+    "tests/capacitor/BridgePolicyTests.swift": "7b991aba60be68170d8675b34ae9498970adf0ec7ee5de9a0dc39989352f137a",
+    "tests/capacitor/test_packaging.py": "77df5669b4162fdfab7625f3870395becf6f35b68f13fd1290c0878d1efed12a"
+  }
+}

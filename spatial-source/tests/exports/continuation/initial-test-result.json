@@ -1,0 +1,13 @@
+{
+  "timestamp_utc": "2026-10-09T09:09:50.500Z",
+  "source_base_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "command": "env LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_BACKTRACE=enable=no SPATIAL_DRAWING_FIXTURE_DIR=/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/tests/exports/continuation/fixtures packages/SpatialInterop/.build/x86_64-unknown-linux-gnu/debug/SpatialInteropPackageTests.xctest",
+  "exit_code": 1,
+  "tests": 61,
+  "failures": 1,
+  "failed_test": "LocalDocumentExportTests.testManifestOnlySemanticAreaRoundtripUsesVersionedGeometryWithoutChangingLegacyProfile",
+  "failure": "XCTAssertThrowsError failed: did not throw error",
+  "cause": "Test incorrectly expected lead-approved geometry/scene 1.1 to be disallowed by four-file exchange. Lead preserved strict four-file membership and introduced explicit 1.1 version schema validation. Corrected the test to assert successful exact version roundtrip and unchanged four-file membership.",
+  "native_pdf_png_executed": false,
+  "physical_device_executed": false
+}

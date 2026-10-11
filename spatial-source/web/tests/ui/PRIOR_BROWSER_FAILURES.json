@@ -1,0 +1,27 @@
+{
+  "earlierEvidenceFiles": [
+    "BROWSER_BEFORE_BATCHING_EVIDENCE.json",
+    "BROWSER_BATCHING_EVIDENCE.json"
+  ],
+  "runs": [
+    {
+      "result": "7 passed, 1 failed",
+      "test": "documented geometric stress workload releases renderer resources across20cycles",
+      "observation": "Wait for canvas[data-rendered=true] timed out after Vite HMR updated SpatialWorkspace.tsx during the running stress test.",
+      "classification": "Input-mutated run; unsuitable for unchanged-source evidence. Full combined run required on stable hashes."
+    },
+    {
+      "result": "2 passed, 1 failed",
+      "test": "colliding source imports offer explicit separate retention and reopen exact copies without replacing corrections",
+      "observation": "The conflict dialog was present, but did not have an accessible name.",
+      "classification": "Accessibility defect in the product, fixed by linking every workspace dialog to its heading with aria-labelledby. The strict named-dialog test was retained.",
+      "targetedRerun": "1 passed in3.3s"
+    },
+    {
+      "result": "Two targeted framing-test attempts failed screenshot equality",
+      "test": "plan framing and orbit framing survive view switches and display ceilings do not alter geometry",
+      "observation": "Only 290 pixels within the Display ceilings checkbox hover box differed (bounds 29,143 to 47,161). Camera and geometry images were otherwise identical.",
+      "classification": "Test hover-state mismatch. Pointer moved off controls before both captures; exact screenshot comparison retained and passed. No camera behavior weakened."
+    }
+  ]
+}

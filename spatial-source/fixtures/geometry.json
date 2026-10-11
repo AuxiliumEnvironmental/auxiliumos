@@ -1,0 +1,277 @@
+{
+  "coordinateSystem" : "meters_y_up_right_handed",
+  "documentID" : "synthetic-two-rooms",
+  "floors" : [
+    {
+      "elevation" : 0,
+      "id" : "floor-1",
+      "label" : "Level 1",
+      "nodes" : [
+        {
+          "id" : "n0",
+          "point" : {
+            "x" : 0,
+            "z" : 0
+          }
+        },
+        {
+          "id" : "n1",
+          "point" : {
+            "x" : 4,
+            "z" : 0
+          }
+        },
+        {
+          "id" : "n2",
+          "point" : {
+            "x" : 8,
+            "z" : 0
+          }
+        },
+        {
+          "id" : "n3",
+          "point" : {
+            "x" : 8,
+            "z" : 4
+          }
+        },
+        {
+          "id" : "n4",
+          "point" : {
+            "x" : 4,
+            "z" : 4
+          }
+        },
+        {
+          "id" : "n5",
+          "point" : {
+            "x" : 0,
+            "z" : 4
+          }
+        }
+      ],
+      "openings" : [
+        {
+          "bottom" : 0,
+          "height" : 2.05,
+          "id" : "door-a",
+          "kind" : "door",
+          "offset" : 1,
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          },
+          "wallID" : "w6",
+          "width" : 0.9
+        },
+        {
+          "bottom" : 0.9,
+          "height" : 1.1,
+          "id" : "window-a",
+          "kind" : "window",
+          "offset" : 1,
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          },
+          "wallID" : "w4",
+          "width" : 1.4
+        },
+        {
+          "bottom" : 0,
+          "height" : 2.05,
+          "id" : "entry",
+          "kind" : "passage",
+          "offset" : 1.5,
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          },
+          "wallID" : "w1",
+          "width" : 0.9
+        }
+      ],
+      "rooms" : [
+        {
+          "boundary" : [
+            {
+              "reversed" : false,
+              "wallID" : "w0"
+            },
+            {
+              "reversed" : false,
+              "wallID" : "w6"
+            },
+            {
+              "reversed" : false,
+              "wallID" : "w4"
+            },
+            {
+              "reversed" : false,
+              "wallID" : "w5"
+            }
+          ],
+          "id" : "room-a",
+          "label" : "Assessment area"
+        },
+        {
+          "boundary" : [
+            {
+              "reversed" : false,
+              "wallID" : "w1"
+            },
+            {
+              "reversed" : false,
+              "wallID" : "w2"
+            },
+            {
+              "reversed" : false,
+              "wallID" : "w3"
+            },
+            {
+              "reversed" : true,
+              "wallID" : "w6"
+            }
+          ],
+          "id" : "room-b",
+          "label" : "Office"
+        }
+      ],
+      "walls" : [
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w0",
+          "nodeIDs" : [
+            "n0",
+            "n1"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w1",
+          "nodeIDs" : [
+            "n1",
+            "n2"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w2",
+          "nodeIDs" : [
+            "n2",
+            "n3"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w3",
+          "nodeIDs" : [
+            "n3",
+            "n4"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w4",
+          "nodeIDs" : [
+            "n4",
+            "n5"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w5",
+          "nodeIDs" : [
+            "n5",
+            "n0"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        },
+        {
+          "baseY" : 0,
+          "height" : 2.6,
+          "heightBasis" : "synthetic",
+          "id" : "w6",
+          "nodeIDs" : [
+            "n1",
+            "n4"
+          ],
+          "provenance" : {
+            "classificationConfidence" : "unknown",
+            "origin" : "synthetic",
+            "sourceIDs" : [
+
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "measurementStatus" : "unverified",
+  "reviewState" : "needsReview",
+  "revision" : 1,
+  "schemaVersion" : "1.0.0",
+  "title" : "Synthetic two-room test"
+}

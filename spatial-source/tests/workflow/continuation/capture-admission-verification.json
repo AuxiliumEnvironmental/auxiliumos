@@ -1,0 +1,18 @@
+{
+  "base_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "environment": "Ubuntu 24.04 x86_64, Swift 6.2.1 Linux",
+  "reason": "Independent QA identified that unsupported-device or camera-denial failure exposed a separate-segment restart without capability/authorization readmission.",
+  "fix": "One CaptureStartAdmission policy checks capability, authorized camera, active app, protected data, thermal safety and 512 MB reserve. Native controller applies it before first/next/separate sensor starts, RoomCaptureView/RoomPlan preparation and both sides of asynchronous relocalization. Separate/next/relocalize controls also require current capability and camera authorization. Foreground generation cancellation remains in force.",
+  "command": "LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swift test --jobs 1 --filter CaptureAdmissionTests",
+  "working_directory": "packages/CaptureKit",
+  "result": {"exit_code": 0, "cases": 3, "failures": 0, "finished_utc": "2026-10-09T09:25:39.391Z"},
+  "native_check": "swiftc -frontend -parse ios/SpatialApp/CaptureController.swift exited 0; this is syntax-only, not an Apple SDK build.",
+  "sha256": {
+    "packages/CaptureKit/Sources/CaptureKit/CaptureAdmission.swift": "7a68e88af3223801eb737964cf342ebf79c800342a45ba2326606d4979e8637f",
+    "packages/CaptureKit/Tests/CaptureKitTests/CaptureAdmissionTests.swift": "48d52abb52f86c34a13bf09e69c6314cd3cdc85d7b46de6366dd7408cb2051d8",
+    "ios/SpatialApp/CaptureController.swift": "69f146fb2181da6215078a1c8a7a5d737f7ee2eed380878e8e949f931e3d66b3"
+  },
+  "physical_permission_and_restart_behavior": "not tested",
+  "apple_sdk_compilation": "not available",
+  "evidence_reuse": "The previous 24 CaptureKit lifecycle/compatibility/plane test inputs are unchanged. This targeted run covers the new independent admission policy; it does not substitute for physical capture permission testing."
+}

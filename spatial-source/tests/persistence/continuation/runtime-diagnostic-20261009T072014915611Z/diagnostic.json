@@ -1,0 +1,116 @@
+{
+  "purpose": "Capture the first runtime crash with backtracing enabled; no failure is retried or relabeled passed.",
+  "binarySHA256": "c784f621ca78e27a450d79ab7d7463f69ffc1bb89760c688e326bf6701a7e7f0",
+  "commands": [
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-au5pmi0y/store"
+      ],
+      "exit": 0,
+      "log": "seed-0.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-4qabc0_a/store"
+      ],
+      "exit": 0,
+      "log": "seed-1.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-tyb13hv2/store"
+      ],
+      "exit": 0,
+      "log": "seed-2.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-n953d28u/store"
+      ],
+      "exit": 0,
+      "log": "seed-3.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-rwbgs07u/store"
+      ],
+      "exit": 0,
+      "log": "seed-4.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-yydci5gw/store"
+      ],
+      "exit": 0,
+      "log": "seed-5.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-mwtvkerg/store"
+      ],
+      "exit": 0,
+      "log": "seed-6.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-78bf1kr2/store"
+      ],
+      "exit": 0,
+      "log": "seed-7.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-fim5dodr/store"
+      ],
+      "exit": 0,
+      "log": "seed-8.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-a96o0634/store"
+      ],
+      "exit": 0,
+      "log": "seed-9.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-lqe4cgir/store"
+      ],
+      "exit": 0,
+      "log": "seed-10.log"
+    },
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/x86_64-unknown-linux-gnu/debug/spatialstorecheck",
+        "seed",
+        "/tmp/spatial-runtime-diagnostic-t20ocfmp/store"
+      ],
+      "exit": 0,
+      "log": "seed-11.log"
+    }
+  ],
+  "SWIFT_BACKTRACE": "enable=yes,interactive=no,timeout=3,threads=all,registers=none,images=mentioned,sanitize=no",
+  "LIBDISPATCH_LOG": "stderr"
+}

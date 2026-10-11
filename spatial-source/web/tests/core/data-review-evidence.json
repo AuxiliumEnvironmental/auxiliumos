@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-09",
+  "reviewer": "web_core; independent of data implementation",
+  "command": "node --import tsx tests/core/data-review-probes.mjs",
+  "cwd": "web",
+  "exitCode": 0,
+  "passedProbeGroups": 8,
+  "resolvedFindings": 7,
+  "environment": {
+    "node": "24.19.0",
+    "platform": "Linux x86_64",
+    "database": "fake-indexeddb synthetic namespaces"
+  },
+  "limitations": [
+    "Portable independent review only",
+    "No live transport or account data",
+    "No browser process-death or physical-device evidence"
+  ],
+  "inputs": {
+    "web/src/data/bytes.ts": "1320ddcfe8d3647f88509c2d0593fa9f5d1b549e567555191c5a0488357057d4",
+    "web/src/data/drawing.ts": "19cd9eca598297801f00426700986337230d1a8597e60c564b6476066ebf8ecd",
+    "web/src/data/exports.ts": "fc42746bf23f1362864805dcdcf3baa0f3a04a6e1b73972c57f133d04b9c83fa",
+    "web/src/data/glb.ts": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+    "web/src/data/imports.ts": "ed03914c87d90359e08e92a945234c52d9e0a925ce55c0bd0acdd4ed9baad96d",
+    "web/src/data/index.ts": "e8726f9147f4ccaf74c116b61db6e69bfc0708922b262e19a0c43b3b4ea4cd23",
+    "web/src/data/outbox.ts": "54b203599565b1b7ea86b002264747480a338739b73fdc73a54e5aa23d5bff8b",
+    "web/src/data/store.ts": "ebed1028c78584739ee03f955baee97a7676c9dc63b78f5f9628b8a768f97d82",
+    "web/src/data/zip.ts": "4f16759998a914c0a53dd3eab0152cb15dd448491a3815350b374c9e5e5756a2",
+    "web/src/core/editor.ts": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+    "web/src/core/geometry.ts": "796585a4fac23c077c308d978f52febd951349bce3c6a396add7a6f2eaad78f0",
+    "web/src/core/index.ts": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+    "web/src/core/navigation.ts": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+    "web/src/core/scene.ts": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+    "web/src/core/validation.ts": "a14c6491a33015ec2d9b0da1efc7d70ea6bfe0a069617c586e8277436f22a057",
+    "web/tests/core/data-review-probes.mjs": "ba3d777a00ffa2e1c36995ee1a01d865d1c27e62d8ad00504daaa9a3b2906ce0",
+    "web/package.json": "34c208de8cf62aba7170de54a3409d396c33e49bc2f01e36ec07f7df252bf234",
+    "web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "web/src/types.ts": "d726772bb4004e3479ccc15aeb22e4cf29bd7a72323b66660177a03cfac3746a",
+    "fixtures/geometry.json": "d3f86053231eb5a96750a1dfdbf78d9c658ed08e0682b21d57403a139560ceec",
+    "tests/exports/continuation/fixtures/floorplan-0.svg": "9d128f07203ee683be886a41da2817634d4839bc7438d543f735e93750d5f8f5",
+    "tests/exports/continuation/fixtures/floorplan-1.svg": "485d8909090dbaff6e60ebf874c3636717aa0443f4a0901169cf8168dc5d5da5",
+    "packages/SpatialInterop/Sources/SpatialInterop/DrawingArtifactValidation.swift": "e7385f48916098db137f4a7d695d1d35fe5d70d5ab7e3752033a6aa494ec9fb8",
+    "packages/SpatialInterop/Sources/CSpatialCompression/Compression.c": "9210b8a7e1346178644805fc7bbda6979a1b27868d87fab15205ee19a697981a"
+  }
+}

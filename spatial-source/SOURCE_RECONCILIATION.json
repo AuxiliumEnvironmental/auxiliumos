@@ -1,0 +1,142 @@
+{
+  "prepared_at_utc": "2026-10-09T00:03:26.948881+00:00",
+  "scope": "read-only context verification; no import or remote mutation",
+  "os": {
+    "repository": "AuxiliumEnvironmental/auxiliumos",
+    "draft_pr": 84,
+    "observed_head": "a749b7d67d177c02f557b02e305598dfd2fee78c",
+    "observed_base_from_pr": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "observed_open": true,
+    "read_file": "docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+    "canonical_application_context": "web/",
+    "rule": "Re-read current source before any later integration; preserve all newer work. PR body may lag its head."
+  },
+  "companion": {
+    "repository_identified": false,
+    "search_performed": "GitHub owner-scoped mapping search returned no matches; personal-context retrieval failed. Neither proves absence of a repository.",
+    "instruction": "Inspect actual accessible companion source before reuse/replacement; do not infer its URL."
+  },
+  "moldo": {
+    "live_source_read_in_this_task": false,
+    "mutations": false,
+    "rule": "Independent engagement ownership and user authorization remain intact."
+  },
+  "supabase": {
+    "project_mutated": false,
+    "live_schema_claimed": false,
+    "default": "no live integration configured"
+  },
+  "user_reference": "design/user_visual_reference.jpeg",
+  "runtime": {
+    "platform": "Linux",
+    "native_xcode_available": false,
+    "physical_iphone_test_performed": false
+  },
+  "execution_2026_10_09": {
+    "baseline_commit": "d6c4ae21b81d4265bd50d39b4c444c67c0d502c6",
+    "archive_sha256": "7cae5c2ecc29d4324f52e83570cdbf53c5a1a628ab9f20dbaeb7b64836dacf40",
+    "starting_worktree": "No pre-existing repository or files except original uploaded ZIP; extracted without overwriting",
+    "source_precedence": "Latest owner instructions > actual reviewed newer source > requirements/contracts > docs > prior chat",
+    "local_repository": "Standalone local git on build/apple-spatial, no remote configured",
+    "remote_access": "GitHub connector returned AuxiliumEnvironmental/auxiliumos pull/push/admin permissions; PR84 head unchanged a749b7d67d177c02f557b02e305598dfd2fee78c; actual ADR-001 content re-read. No remote write tested or performed.",
+    "companion_reuse": "Owner-scoped accessible repository list returned only auxiliumos. Companion not identified; no claim of absence. Native engine retained rather than copied business/editor source.",
+    "environment": {
+      "os": "Ubuntu 24.04 Linux x86_64",
+      "swift_initially_available": false,
+      "xcode_available": false,
+      "physical_device_available": false,
+      "agent_facility": "collaboration.spawn_agent verified by native, geometry and persistence workers started",
+      "swift_final": "Official Swift 6.2.1 Ubuntu24.04 toolchain; Linux libraries extracted task-locally, legacy driver for compilation, direct XCTest execution",
+      "agents_at_checkpoint": "No executing agents; queued followups stopped without claiming completion"
+    },
+    "mutations": "Local spatial workspace only; no OS/Moldo/backend changes"
+  },
+  "continuation_2026_10_09": {
+    "baseline_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+    "implementation_archive_sha256": "de411413d5304677ca1bc467b683206700f61ed4ea7d5b50aa5b01820dc1f533",
+    "supplement_archive_sha256": "1c68102e43bfc901a82a2348cdd6a162c2e24c10ea2460be75369231f217248f",
+    "source_precedence": "Latest execution directive > actual newer repository/worktree > reviewed implementation/Git bundle > unchanged original requirements/contracts > verification supplement as evidence only. No newer source was overwritten.",
+    "starting_worktree": "Only the two uploaded archives existed. Safe extraction to received/, bundle clone to a new canonical directory. Archive tree and Git checkout matched; no existing dirty work or newer commit was displaced.",
+    "git": "build/apple-spatial; origin is the supplied local recovery bundle, not a hosted repository; no push",
+    "supplement_verification": {
+      "baseline_source_hashes_matched": 176,
+      "supplement_files_hashes_matched": 13,
+      "old_failure_evidence_retained": true,
+      "new_baseline_successes_retained_separately": true,
+      "reuse": "Baseline evidence valid only for matching inputs; changed portable code has fresh input-hashed evidence."
+    },
+    "capabilities": {
+      "host": "Ubuntu 24.04 Linux x86_64",
+      "swift": "Official Swift 6.2.1 Ubuntu2404 toolchain, task-local ncurses/SQLite dependencies",
+      "agents": "Six real specialist/review workers used through collaboration; at most four implementation workers wrote on disjoint paths.",
+      "apple_sdk": false,
+      "simulator": false,
+      "physical_device": false,
+      "authorized_mac_runner": false
+    },
+    "remote_read_only": "Connected GitHub repository inventory returned only AuxiliumEnvironmental/auxiliumos with reported permissions. No Spatial Mac CI or configured authorized SSH runner was found. Its remote, permissions, resources and CI were not changed or repurposed.",
+    "companion": "Not identified by the package or accessible repository inventory; absence is not asserted. Existing supplied native graph/editor retained. No second companion/web editor or guessed repository import.",
+    "apple_blocker": "An already authorized Mac with Xcode or Spatial macOS runner is required for no-sign Apple build. A supported physical LiDAR iPhone plus authorized installation is separately required for capture, lock/recovery, interaction and performance. No new service/account/provisioning was created.",
+    "scope": "Only local Spatial source/tests and synthetic data; no OS/Moldo/backend writes, production deployment, real-data upload, permission expansion or distribution."
+  },
+  "architecture_correction_execution": {
+    "date": "2026-10-09",
+    "source_repository": "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package",
+    "recovered_head": "41f000be361f0cf0c96963ffa1904b2295258769",
+    "archive_sha256": "d4340f089c653ca4bbd52eca7a5558876e6158231a0c8a3fc292c6d5314e7cc9",
+    "initial_working_tree": "clean;371 tracked files matched recovered archive;370 manifest input hashes matched",
+    "source_precedence": "Newest explicit owner architecture correction, actual newer source, retained contracts/requirements, earlier docs. No reset to older baseline.",
+    "os_git_input": "80711b8e9c047b338f5bfd19cf23a51608a8e2a0",
+    "os_lovable_input": "797c9c99c339e5e7bec18efe814b5e57127b074a",
+    "os_preservation": "Newer Lovable source is authoritative for host. Scoped generated module only; do not replace host from older Git branch.",
+    "mac_access": "Existing authorized public AuxiliumEnvironmental/auxiliumos standard macos-15 GitHub Actions runner executes unsigned Xcode builds. No paid service provisioned.",
+    "physical_device": "No connected supported physical iPhone verified.",
+    "companion_readonly": {
+      "project_id": "27ca8fae-ee6e-46c8-b8da-416c01f91629",
+      "files": [
+        "docs/mapping/02_ENGINE_REFERENCE.md",
+        "docs/mapping/integration-discovery.md",
+        "src/modules/mapping/core/geometry.ts",
+        "src/modules/mapping/data/serviceWorker.ts"
+      ],
+      "retained": "Existing Spatial canonical Swift geometry/provenance with fresh TypeScript behavioral adaptation. Companion affine/project helpers use different x/y and map_* domain shapes; copying them would not replace canonical graph safely.",
+      "adapted": "Offline shell pattern: separate app assets from field data; do not register worker in embedded/OS host.",
+      "not_imported": "Companion records, DB rights, mapping editor and Moldo integration. No companion changes."
+    },
+    "scope": "Development source/unsigned CI/authorized OS full-workspace embedding only. Publisher disabled; no live client data, new backend, permissions or distribution.",
+    "observed_progress": {
+      "unsigned_compilation": "Both targets succeeded at9d675f2d andf0425396",
+      "mac_ci_run_current": 37969726280,
+      "os_first_full_embed_commit": "efe023f7e4231acd0f0d53a27bf267e851560aaa",
+      "os_latest_preserved_observed": "74cb2628f398dfce12a14c1435d316011f423b31",
+      "signed_in_verification": "Automatic approval review rejected account-selection request because specific identity was not explicitly authorized; no bypass attempted",
+      "download": "Native authenticated Library file download replaces unavailable sandbox link; source artifact remains versioned and privately saved",
+      "mac_ci_run_status": "passed: both apps compile/link;14native simulator tests",
+      "os_latest_full_embed_commit": "7f3027cbbd0fcd700cff7a3aac8d30cd25487735",
+      "os_latest_full_embed_source": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+      "os_readback": "36 source hashes and adapter bytes match; see evidence/shared-workspace/OS_INTEGRATION.json"
+    }
+  },
+  "manual_authoring_followup": {
+    "baseline": "b3a85dac8f31a289468267f0ab67826a5f489ebe",
+    "starting_worktree": "clean; all prior commits preserved",
+    "companion_audit": "evidence/shared-workspace/MANUAL_AUTHORING_REVIEW_2026_10_10.json",
+    "companion_mutated": false,
+    "host_observed": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "independent_host_delivered": false,
+    "note": "Earlier bounded helper audit retained separately. Current audit examines actual editor capabilities; browser test passes do not override owner usability rejection."
+  },
+  "standalone_separation_followup": {
+    "baseline": "54474f583a2c8bc8b2b23c8963b265c9f8cc20c1",
+    "runtimeCommit": "157333976060c087f20f18348b73438d6e48e70c",
+    "allNewerWorkPreserved": true,
+    "canonicalPath": "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package",
+    "origin": "local recovered Git bundle; no standalone remote created",
+    "hostReadOnlyCommit": "8d59d22271287d7e1185fc3a65b1cfd548c4e82a",
+    "ownerDomain": "spatialauxilium.io",
+    "ownerOSScope": "Retain current selection UI; independent tool first, same full workspace integrated later",
+    "evidence": "evidence/os-separation-2026-10-10/SEPARATION.json",
+    "newAppleWorkflow": "manual-only source port of existing isolated workflow; not run",
+    "remoteWrites": false
+  }
+}

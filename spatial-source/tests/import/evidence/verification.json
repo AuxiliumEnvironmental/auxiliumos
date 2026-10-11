@@ -1,0 +1,91 @@
+{
+  "baselineHEAD": "d6c4ae21b81d4265bd50d39b4c444c67c0d502c6",
+  "changedInputsDuringChecks": [],
+  "checks": [
+    {
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/toolchains/bin/swift",
+        "test",
+        "--package-path",
+        "packages/SpatialInterop",
+        "--jobs",
+        "1"
+      ],
+      "exitCode": -4,
+      "log": "tests/import/evidence/swift-tests.log",
+      "outputSHA256": "a32bdf161e77a5ed995bc7f075e03c64b52d816223e2fed706f1aa17de2b05b8",
+      "testSummary": null
+    }
+  ],
+  "corruptionCorpus": {
+    "compressedPayloadBitMutations": 71,
+    "truncatedArchivePrefixes": 2934
+  },
+  "environment": {
+    "legacyDriver": true,
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "swift": "Swift version 6.2.1 (swift-6.2.1-RELEASE)\nTarget: x86_64-unknown-linux-gnu"
+  },
+  "finishedAtRuntimeUTC": "2026-10-09T00:56:54.788445+00:00",
+  "generatedArtifacts": {
+    "tests/import/generated/native_exchange.zip": {
+      "bytes": 12708,
+      "sha256": "b37ecf1ff3d73fa84d110388e30e171b9efbb027206ffc95941602f1a0c898d2"
+    },
+    "tests/import/generated/native_model.glb": {
+      "bytes": 15872,
+      "sha256": "252afacfc5f48c8ed053031ff1f4e4b811b3ccf1fda1ff8405ba33bebafa97fe"
+    }
+  },
+  "passed": false,
+  "review": "Author tests. Independent QA is recorded separately by the integration lead.",
+  "schemaVersion": 1,
+  "scope": "Portable Swift + synthetic format validation only; no native SDK/device/sensor/UI/live integration acceptance.",
+  "sourceInputsSHA256": {
+    "contracts/geometry.schema.json": "abaad2f8090393eda3310549eeb4295f01e4b7bb111f3f33cbdc3218414e2b04",
+    "contracts/manifest.schema.json": "60838e516100e4f543045669a4e4875950ea4740f66f3abfab875e9ea9cda65a",
+    "contracts/publication.openapi.json": "db70bb4f1866c4da71dace57fc3fa438b1415f55d950145f4c5817c60c9056ac",
+    "contracts/scene.schema.json": "f6b6d8420aef30a91c934f0f8368b1c0eae2e7e5d970933d1b8b7b7de977c1ca",
+    "fixtures/synthetic_exchange.zip": "7311a27c4e31e73005b0955eb1b09567932643b7ac2d9d4ecf4bdbcf1bf3aca1",
+    "packages/SpatialCore/Package.swift": "b26a5d57a8e705931caa226f5b771d25c6de6175554de510278e72a3418a79cc",
+    "packages/SpatialCore/Sources/SpatialCore/Delivery.swift": "3debf1e022248a8ccba79a96e4075a4dae9584ee4f0c433ba55b8c7d3cc43a06",
+    "packages/SpatialCore/Sources/SpatialCore/Editor.swift": "3a6cc0b0ae41fabbc428095b921fb3bf2e81553444dbd639a3add66dbf7a9c7a",
+    "packages/SpatialCore/Sources/SpatialCore/Fixtures.swift": "7f2bcb5c4e921911122c1be55714bb587adba9ccfbce02dea44ac34391465570",
+    "packages/SpatialCore/Sources/SpatialCore/Geometry.swift": "4f12488f8f6f2866dffe90b3354a15f10af48019a9ae3cdfe4e84ba8bbe44389",
+    "packages/SpatialCore/Sources/SpatialCore/Model.swift": "c8dc42120552123fd816e6073efbb8dcd6893ce1b07e3b6d1b7b4b8202bdd412",
+    "packages/SpatialCore/Sources/SpatialCore/Normalization.swift": "4bec7441f1deee68453a918cba3b4469efd0a7774f55276d21513dd199a2f7b1",
+    "packages/SpatialCore/Sources/SpatialCore/SVG.swift": "c40c86bb5bc5a030a9c4f20d685c38d4dbef6be202aa3e176ba67910260ab846",
+    "packages/SpatialCore/Sources/SpatialCore/Scene.swift": "f1a73799f414aa60cf569bf579227026e36dab1f05aa339bff6bc72b331ddd57",
+    "packages/SpatialCore/Sources/SpatialCore/Validation.swift": "9ef598640886fa799cdbd77a3c1e64948ebca3021b52a5b5a647007c80e2b023",
+    "packages/SpatialCore/Sources/spatialcheck/main.swift": "ea561d514ba83279b86b61321bfcd91e42bdcd6b63b3ba56287f7f548cfe6af2",
+    "packages/SpatialCore/Tests/SpatialCoreTests/EditingTests.swift": "08a63655ca7a8093fbf40fa31b6d309204bcab01e4ccbccfb22b7b73c83c289b",
+    "packages/SpatialCore/Tests/SpatialCoreTests/NormalizationTests.swift": "2d95bf6e4e395c4aaaf8dd85b636b0630dc4c036c0590be0990048ae2e0ed85b",
+    "packages/SpatialCore/Tests/SpatialCoreTests/SpatialCoreTests.swift": "9b7d8872fe36025310f9e7e98bbc81a91221012c5ef3e75eef164c583bbeb4c3",
+    "packages/SpatialCore/Tests/SpatialCoreTests/WorldBoundsTests.swift": "c0ccc82081d9b8688cd829dd1f98fe67d0e0466751cfc84d0bb91e913eae44d3",
+    "packages/SpatialInterop/Package.swift": "e0698f9e30dbd84b02db70ce3130659fd62bcdfea4caf50b782f07e68d52c780",
+    "packages/SpatialInterop/README.md": "f9c4b9b6024d10dc92b0045c8f7c5c777acac62423d410c2b300811f1e6cdd09",
+    "packages/SpatialInterop/Sources/CSpatialCompression/Compression.c": "9210b8a7e1346178644805fc7bbda6979a1b27868d87fab15205ee19a697981a",
+    "packages/SpatialInterop/Sources/CSpatialCompression/include/CSpatialCompression.h": "cba07a57c02469a10425a9cb8eda508085c7620559c8b19b2f31c3718a307eab",
+    "packages/SpatialInterop/Sources/SpatialInterop/ByteDigest.swift": "10bcf25c216df39202120fff7b7c44906672a4725f923fd0ec9361aa4afc8a35",
+    "packages/SpatialInterop/Sources/SpatialInterop/ContractValidator.swift": "7ebea573c679a2c6c383544907a9dd0d4377511a395bc9c1b0bbf8a0ef639d8c",
+    "packages/SpatialInterop/Sources/SpatialInterop/ExchangeExporter.swift": "642f530a9d45920a271a66f1e1d9dcec54bebabf7afc15846244feb292e6410a",
+    "packages/SpatialInterop/Sources/SpatialInterop/ExchangeImporter.swift": "9de6e23b5f934c0a1e71e88c06d53c583b03ba42a004e231ea8a5c5f50f66440",
+    "packages/SpatialInterop/Sources/SpatialInterop/GLBExporter.swift": "01b31b7f67807cdfcf7626baa78532b3370118ab2dc5583c6476c891ea15cabe",
+    "packages/SpatialInterop/Sources/SpatialInterop/GeometryJSONReader.swift": "2ecc00f8ff6e134cf496df2a001473560b5ad3e6b170ce87dee0a43dc47b4754",
+    "packages/SpatialInterop/Sources/SpatialInterop/ImportError.swift": "dff62d02c0131107e3d7571f6bd7dc91b918f71e85412a86556d3e5422b08b6c",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/geometry.schema.json": "abaad2f8090393eda3310549eeb4295f01e4b7bb111f3f33cbdc3218414e2b04",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/manifest.schema.json": "60838e516100e4f543045669a4e4875950ea4740f66f3abfab875e9ea9cda65a",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/scene.schema.json": "f6b6d8420aef30a91c934f0f8368b1c0eae2e7e5d970933d1b8b7b7de977c1ca",
+    "packages/SpatialInterop/Sources/SpatialInterop/SafeSVG.swift": "fe3c7568a72a5d3525ffae15d718275365d9a75029620010e64672e01f8cb6bb",
+    "packages/SpatialInterop/Sources/SpatialInterop/StrictJSON.swift": "d61f56e3fa8e0476975222da29521614deacc9dd94a271cb3e4c395f3a50bd72",
+    "packages/SpatialInterop/Sources/SpatialInterop/ZIPReader.swift": "45b1c35e87bf1bb02f87931463570dd6f7cb23babe63a0628d95679901d97fc6",
+    "packages/SpatialInterop/Tests/SpatialInteropTests/ExportTests.swift": "a53b313255b19f0296adc022fd4336a76f62683499d1a6750ae3c253dfdf9afe",
+    "packages/SpatialInterop/Tests/SpatialInteropTests/ImportTests.swift": "87383c96230384df315bdccbaff19950608627010891d8b40f3630e3490cf991",
+    "tests/import/.validator-toolchain/package-lock.json": "627ce7a0460003c99cac9431e2e2b5c0be1cd033ccb12f1fa58c6d16a6e21d94",
+    "tests/import/.validator-toolchain/package.json": "305561156ebddbe79ffddf43dcbc73ca436b129eda25b563d31ab08b157f5843",
+    "tests/import/run_verification.py": "4af7a1c998ed1f47d373d296a046badbb7a54d43a6adf4a439d702804d830272",
+    "tests/import/validate_glb.cjs": "bac20a8b7dd76f52a03e533910d2686870eca7d1019829ac16c919b7aa6ea028",
+    "tools/validate_package.py": "6b719e1e55632e72c8a2f3e44316998a7a8afa9c20decf8f8961c9f1c556f727"
+  },
+  "startedAtRuntimeUTC": "2026-10-09T00:56:54.695846+00:00"
+}

@@ -1,0 +1,30 @@
+{
+  "input_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "status": "Portable synthetic workload correctness passed; native performance acceptance remains pending",
+  "environment": "Linux x86_64, Swift6.2.1, debug, legacy compiler driver, shared execution host",
+  "command": "env LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swift test --jobs 1 --filter OperatingEnvelopeTests",
+  "working_directory": "packages/SpatialCore",
+  "run_utc": "2026-10-09T09:20:56.498Z",
+  "exit_code": 0,
+  "test_cases": 2,
+  "failures": 0,
+  "test_elapsed_seconds": 82.667,
+  "log": "tests/rendering/continuation/operating-envelope.log",
+  "log_sha256": "07b659c7b9a5dac7036394684ffc158b75d5da8c08b091097dde75d3b4ee0562",
+  "input_sha256": {
+    "packages/SpatialCore/Tests/SpatialCoreTests/OperatingEnvelopeTests.swift": "6ff7861eb85db0354855c83ddc9e442566ab53d278755aff425ac2ad41c0fb79",
+    "packages/SpatialCore/Sources/SpatialCore/Model.swift": "0de648af4ae79ddfc753ec293efe459e62e7702ac961fe72679f5ce5b6618c99",
+    "packages/SpatialCore/Sources/SpatialCore/Geometry.swift": "4f12488f8f6f2866dffe90b3354a15f10af48019a9ae3cdfe4e84ba8bbe44389",
+    "packages/SpatialCore/Sources/SpatialCore/Validation.swift": "95215e56d2943d5f80da93c721eae7d9dbfa6951c8ef32bf2cd0625b088c9ed8",
+    "packages/SpatialCore/Sources/SpatialCore/Scene.swift": "ab1fcc441b3eed13a641ea80bf7eb9dc05209dcfcda035c92105b3434b3e6169",
+    "packages/SpatialCore/Sources/SpatialCore/Navigation.swift": "092d30568f9a5e91a53d159349df35b4c8cc65a839de9737ac680bf384a6bf11",
+    "packages/SpatialCore/Sources/SpatialCore/Cutaway.swift": "1524aa2c931d3068e0d3b673178f53637efc737a12c6afd81fdfd9630a7a43c7"
+  },
+  "observations": {
+    "proposed": {"rooms": 100, "walls": 1000, "openings": 500, "scene_faces": 2267, "scene_edges": 7667, "permitted_portals": 273, "validation_seconds": 0.0587921119999919, "scene_seconds": 0.33242860699965604, "navigation_seconds": 0.4262327869996625, "placement_seconds": 0.0013406099997155252, "portal_move_seconds": 0.001009340999644337, "cutaway_seconds": 0.00855325999964407},
+    "extended": {"rooms": 1000, "walls": 10000, "openings": 5000, "scene_faces": 22667, "scene_edges": 76667, "permitted_portals": 3121, "validation_seconds": 4.011632274000021, "scene_seconds": 26.395431187999748, "navigation_seconds": 43.03826349300016, "placement_seconds": 0.00994915299997956, "portal_move_seconds": 0.009858136000275408, "cutaway_seconds": 0.07857637300003262}
+  },
+  "interpretation": "Single observations, not p95 or a mobile benchmark. Extended build times expose a quadratic dictionary-reconstruction hot path for investigation; no acceptance target was changed.",
+  "unproved": ["2000/20000 overlay marker workload", "Apple compilation", "GPU frame time", "physical touch latency", "20-cycle native retained memory", "LiDAR workload capacity"],
+  "native_resource_admission": "The 10x scene plus optional display ceilings has 100334 entities, above the factory's100000 safety ceiling; native rendering therefore rejects this request explicitly. This is controlled degradation evidence from source arithmetic, not a running-app observation."
+}

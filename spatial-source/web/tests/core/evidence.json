@@ -1,0 +1,72 @@
+{
+  "referenceRevision": "41f000be361f0cf0c96963ffa1904b2295258769",
+  "environment": {
+    "platform": "Linux",
+    "machine": "x86_64",
+    "node": "24.19.0",
+    "typescript": "5.8.3"
+  },
+  "runs": [
+    {
+      "command": "node --import tsx --test tests/core/*.test.ts",
+      "cwd": "web",
+      "exitCode": 0,
+      "passed": 92,
+      "failed": 0
+    },
+    {
+      "command": "node_modules/.bin/tsc --noEmit --target ES2022 --module ESNext --moduleResolution Bundler --strict --skipLibCheck src/core/index.ts tests/core/*.test.ts",
+      "cwd": "web",
+      "exitCode": 0
+    },
+    {
+      "command": "npx tsx --test tests/core/validation.test.ts tests/core/scene.test.ts",
+      "cwd": "web",
+      "exitCode": 1,
+      "stage": "runner startup",
+      "reason": "EPERM opening /tmp/tsx-0/17.pipe; no cases executed"
+    },
+    {
+      "command": "npx tsc --noEmit --target ES2022 --module ESNext --moduleResolution Bundler --strict --skipLibCheck web/src/core/index.ts web/tests/core/*.test.ts",
+      "cwd": ".",
+      "exitCode": 1,
+      "stage": "wrong runner selection",
+      "reason": "Root had no compiler; npm selected unrelated tsc@2.0.4 wrapper; no compilation occurred"
+    }
+  ],
+  "inputs": {
+    "web/src/core/editor.ts": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+    "web/src/core/geometry.ts": "796585a4fac23c077c308d978f52febd951349bce3c6a396add7a6f2eaad78f0",
+    "web/src/core/index.ts": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+    "web/src/core/navigation.ts": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+    "web/src/core/scene.ts": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+    "web/src/core/validation.ts": "a14c6491a33015ec2d9b0da1efc7d70ea6bfe0a069617c586e8277436f22a057",
+    "web/tests/core/editor.test.ts": "4adb829a3f0ca016da67e067fed0c2a42b489739904cdb40f1645b1e3b90aa0c",
+    "web/tests/core/fixtures.ts": "8b8ce2f8251e8ddc2f7589791177f99f8fc7cff2cd5a03eb5ce4826f5b2fc69e",
+    "web/tests/core/navigation.test.ts": "a1f8779a7e9ca0aa43a9414d8a71c54928584b4acb2bf517dcfa5e5746120ae0",
+    "web/tests/core/scene.test.ts": "06d21150052462be053f48e12fe784fb2f5beebfc545c627ade452fad76e0b6a",
+    "web/tests/core/validation.test.ts": "ef3c55e86b4a7f255d1e7848dcab332e3e3a8cac37ea61273719884ffbdf3cad",
+    "web/src/types.ts": "d726772bb4004e3479ccc15aeb22e4cf29bd7a72323b66660177a03cfac3746a",
+    "web/package.json": "34c208de8cf62aba7170de54a3409d396c33e49bc2f01e36ec07f7df252bf234",
+    "web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "fixtures/geometry.json": "d3f86053231eb5a96750a1dfdbf78d9c658ed08e0682b21d57403a139560ceec",
+    "fixtures/scene.json": "824709be0824dd60e4aec8b5b70eefe8c56bd8de280ba95099a35fba3d68d452",
+    "contracts/scene.schema.json": "f6b6d8420aef30a91c934f0f8368b1c0eae2e7e5d970933d1b8b7b7de977c1ca",
+    "contracts/scene-v1.1.schema.json": "eabbf9422fe5143577fa0a5b0617333309fd86e2afb799dec7da79506204233a"
+  },
+  "acceptance": {
+    "portableCoreTests": true,
+    "appleSDKCompilation": false,
+    "browserInteraction": false,
+    "physicalDevice": false,
+    "liveIntegration": false,
+    "release": false
+  },
+  "previousInputSnapshot": "web/tests/core/evidence-initial-core.json",
+  "sceneAdmissionLimits": {
+    "faces": 200000,
+    "edges": 400000,
+    "verticesPerFace": 1000,
+    "trianglesPerFace": 1000
+  }
+}

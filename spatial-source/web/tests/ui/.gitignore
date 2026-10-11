@@ -1,0 +1,3 @@
+# Downloaded test-only Chromium/runtime binaries are never product source.
+/.browser-runtime/
+/artifacts/test-results/

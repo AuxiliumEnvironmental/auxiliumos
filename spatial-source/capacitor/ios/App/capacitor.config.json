@@ -1,0 +1,18 @@
+{
+  "appId": "com.auxiliumenvironmental.spatial",
+  "appName": "Auxilium Spatial",
+  "webDir": "public",
+  "server": {
+    "hostname": "localhost",
+    "iosScheme": "capacitor"
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": false
+    },
+    "CapacitorCookies": {
+      "enabled": false
+    }
+  },
+  "loggingBehavior": "none"
+}
