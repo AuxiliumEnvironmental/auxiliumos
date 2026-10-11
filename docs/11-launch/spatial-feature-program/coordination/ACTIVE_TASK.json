@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "master": "This Astra master thread",
+  "active_task": null,
+  "status": "planning_complete_no_feature_worker_activated",
+  "next_candidate": "F00",
+  "base_commit": null,
+  "source_root": "spatial-source/",
+  "branch": "spatial/feature-program-2026-10-11",
+  "contract_revision": null,
+  "owner": null,
+  "allowed_paths": [],
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+  "required_acceptance": [],
+  "activation_note": "Master fills this from actual current refs before launching a feature chat; no inferred lease expiry or automatic takeover."
+}

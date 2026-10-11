@@ -1,0 +1,52 @@
+{
+  "revision": 1,
+  "status": "proposed_for_F00_ratification",
+  "verified_invariants": [
+    "one_shared_editor",
+    "meters_y_up_right_handed",
+    "strict_old_schema_admission",
+    "expected_revision_commands",
+    "native_capture_originals_preserved"
+  ],
+  "proposals": [
+    {
+      "id": "D01",
+      "topic": "surface palette",
+      "value": "Wall F2F3F5; floor B8BDC4; ceiling D5D9DE",
+      "status": "proposed"
+    },
+    {
+      "id": "D02",
+      "topic": "opening manipulation",
+      "value": "Opposite-corner anchor and wall-local semantic flips; explicit type capability table",
+      "status": "proposed"
+    },
+    {
+      "id": "D03",
+      "topic": "structure heights",
+      "value": "Explicit room set; drag common delta, separate absolute assignment",
+      "status": "proposed"
+    },
+    {
+      "id": "D04",
+      "topic": "fixture navigation",
+      "value": "Diagrammatic nonblocking fixtures initially; no obstacle-avoidance claim",
+      "status": "proposed"
+    },
+    {
+      "id": "D05",
+      "topic": "damage geometry",
+      "value": "Physical authored footprint and separate kind/side; clipping plus host-change review",
+      "status": "proposed"
+    }
+  ],
+  "open": [
+    {
+      "id": "Q01",
+      "topic": "cutout scope",
+      "needed_before": "F04",
+      "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
+      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved."
+    }
+  ]
+}

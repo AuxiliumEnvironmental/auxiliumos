@@ -1,0 +1,20 @@
+{
+  "checks": [
+    "all 1179 original source hashes and bundle checksum",
+    "source-specific specialist review",
+    "all five feature families mapped",
+    "7 feature prompts resolve one activation file",
+    "40 future acceptance rows map to packets",
+    "48 freshly read host source files match canonical input",
+    "5 hosted control documents retained as older variants",
+    "app code unchanged in snapshot",
+    "no literal secret candidates in selected source/scaffold"
+  ],
+  "errors": [],
+  "app_feature_tests_run": false,
+  "reason": "Planning and unchanged-code preservation do not justify app regression runs",
+  "remaining": [
+    "GitHub final readback",
+    "final package integrity"
+  ]
+}

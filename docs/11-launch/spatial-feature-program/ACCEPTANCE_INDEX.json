@@ -1,0 +1,285 @@
+{
+  "rows": [
+    {
+      "id": "F00-A01",
+      "packet": "features/F00_Shared_Foundation.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F00-A02",
+      "packet": "features/F00_Shared_Foundation.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F00-A03",
+      "packet": "features/F00_Shared_Foundation.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F00-A04",
+      "packet": "features/F00_Shared_Foundation.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F00-A05",
+      "packet": "features/F00_Shared_Foundation.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F01-A01",
+      "packet": "features/F01_Surface_Contrast.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F01-A02",
+      "packet": "features/F01_Surface_Contrast.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F01-A03",
+      "packet": "features/F01_Surface_Contrast.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F01-A04",
+      "packet": "features/F01_Surface_Contrast.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F01-A05",
+      "packet": "features/F01_Surface_Contrast.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A01",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A02",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A03",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A04",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A05",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F02-A06",
+      "packet": "features/F02_Openings.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A01",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A02",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A03",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A04",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A05",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F03-A06",
+      "packet": "features/F03_Ceiling_Height.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A01",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A02",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A03",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A04",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A05",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F04-A06",
+      "packet": "features/F04_Fixtures_Cutouts.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A01",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A02",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A03",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A04",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A05",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F05-A06",
+      "packet": "features/F05_Affected_Areas.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A01",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A02",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A03",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A04",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A05",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    },
+    {
+      "id": "F06-A06",
+      "packet": "features/F06_Integration_Acceptance.md",
+      "status": "not_run",
+      "implementation": "not_started",
+      "evidence": null
+    }
+  ],
+  "note": "Feature acceptance is future work. Preparation checks do not pass these rows."
+}

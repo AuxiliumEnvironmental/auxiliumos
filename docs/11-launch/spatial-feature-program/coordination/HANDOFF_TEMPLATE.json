@@ -1,0 +1,97 @@
+{
+  "task_id": null,
+  "base_commit": null,
+  "result_commit": null,
+  "branch": null,
+  "issue_url": null,
+  "pr_url": null,
+  "disposition": "not_started",
+  "changed_paths": [],
+  "requirements_addressed": [],
+  "contract_versions": {},
+  "decisions": [],
+  "evidence": [
+    {
+      "acceptance_id": null,
+      "check": null,
+      "result": "not_run",
+      "source_inputs": [],
+      "environment": null,
+      "artifact": null,
+      "reused_from": null,
+      "why_sufficient": null
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "standalone_web": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "lovable": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "capacitor_assets": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "apple_build": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "simulator": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "physical_iphone": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "os_embed": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    },
+    "exports": {
+      "status": "not_run",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": []
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [],
+  "known_limits": [],
+  "source_preserved": null,
+  "next_dependency_handoff": [],
+  "active_writers_remaining": []
+}

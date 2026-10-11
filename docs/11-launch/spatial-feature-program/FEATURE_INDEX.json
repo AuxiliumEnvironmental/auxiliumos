@@ -1,0 +1,51 @@
+{
+  "parent_issue": 88,
+  "sequence": [
+    {
+      "task": "F00",
+      "packet": "F00_Shared_Foundation.md",
+      "issue_number": 89,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89"
+    },
+    {
+      "task": "F01",
+      "packet": "F01_Surface_Contrast.md",
+      "issue_number": 90,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90"
+    },
+    {
+      "task": "F02",
+      "packet": "F02_Openings.md",
+      "issue_number": 91,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91"
+    },
+    {
+      "task": "F03",
+      "packet": "F03_Ceiling_Height.md",
+      "issue_number": 92,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92"
+    },
+    {
+      "task": "F04",
+      "packet": "F04_Fixtures_Cutouts.md",
+      "issue_number": 93,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93"
+    },
+    {
+      "task": "F05",
+      "packet": "F05_Affected_Areas.md",
+      "issue_number": 94,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94"
+    },
+    {
+      "task": "F06",
+      "packet": "F06_Integration_Acceptance.md",
+      "issue_number": 95,
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/95"
+    }
+  ],
+  "status": "specified_only",
+  "new_features_implemented": false,
+  "queue": "source:BUILD_QUEUE.json",
+  "active_lease": "coordination/ACTIVE_TASK.json"
+}
