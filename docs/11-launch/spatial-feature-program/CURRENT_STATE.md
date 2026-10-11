@@ -2,7 +2,7 @@
 
 ## Master review update: October 11, 2026
 
-F00 shared engineering contract revision 2 is accepted. See `coordination/F00_ACCEPTANCE.json` and the live `coordination/ACTIVE_TASK.json` for the next assignment. No runtime source, host deployment, Apple package or OS embed changed during this review. The source/delivery facts below remain the runtime baseline; Q01/Q02 remain open for F04.
+F00 shared engineering contract revision 2 is accepted at `9ace24ce614dcd2bd12480887e5cdc78f2c47a03`. F01 is activated for one separate feature chat; implementation has not started. See `coordination/F00_ACCEPTANCE.json` and the live `coordination/ACTIVE_TASK.json` for the next assignment. No runtime source, host deployment, Apple package or OS embed changed during this review. The source/delivery facts below remain the runtime baseline; Q01/Q02 remain open for F04.
 
 ## What is verified in this preparation pass
 

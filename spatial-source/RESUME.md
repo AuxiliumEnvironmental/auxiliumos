@@ -1,6 +1,6 @@
 # October 11, 2026 feature-program entry point
 
-F00 preparation and shared engineering contract revision 2 are accepted. See `../docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json`. F01 surface contrast is next; follow the live `coordination/ACTIVE_TASK.json` before implementation. No F01-F05 runtime feature has been implemented. One maintained editor, existing runtime source and platform gaps remain unchanged. The older delivery history below is preserved.
+F00 preparation and shared engineering contract revision 2 are accepted. See `../docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json`. F01 surface contrast is activated for the single `Spatial | F01 Surface Contrast` feature chat, which has not started. Its accepted F00 baseline is `9ace24ce614dcd2bd12480887e5cdc78f2c47a03`; start from the branch commit containing the activation and follow `coordination/ACTIVE_TASK.json`. No F01-F05 runtime feature has been implemented. One maintained editor, existing runtime source and platform gaps remain unchanged. The older delivery history below is preserved.
 
 # Continue Auxilium Spatial
 

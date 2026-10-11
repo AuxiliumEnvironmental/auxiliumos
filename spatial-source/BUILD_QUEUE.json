@@ -26,21 +26,38 @@
     {
       "id": "F01",
       "title": "F01 Surface Contrast",
-      "owner": "Astra master until activated",
+      "owner": "Spatial | F01 Surface Contrast",
       "depends_on": [
         "F00"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
       "packet": "docs/11-launch/spatial-feature-program/features/F01_Surface_Contrast.md",
-      "allowed_paths": "Master freezes exact paths in ACTIVE_TASK before implementation",
+      "allowed_paths": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/data/data.test.ts",
+        "spatial-source/web/tests/ui/workflow.spec.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+      ],
       "acceptance_ids": [
         "F01-A01",
         "F01-A02",
         "F01-A03",
         "F01-A04",
         "F01-A05"
-      ]
+      ],
+      "base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+      "activation_id": "F01-2026-10-11-01",
+      "execution_status": "activated_awaiting_feature_chat_start",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
+      "implementation_started": false
     },
     {
       "id": "F02",
@@ -594,7 +611,7 @@
       "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
     }
   ],
-  "next_action": "Activate F01 surface contrast at the accepted F00 commit; no feature implementation has started.",
+  "next_action": "F01 is activated for the single Spatial | F01 Surface Contrast feature chat. Start from the branch commit containing the recorded activation, implement only the allocated palette/export slice, then return to master; F02 remains planned.",
   "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
   "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
 }

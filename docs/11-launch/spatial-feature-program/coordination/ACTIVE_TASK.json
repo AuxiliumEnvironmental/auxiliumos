@@ -1,16 +1,137 @@
 {
   "schema_version": 1,
-  "master": "This Astra master thread",
-  "active_task": null,
-  "status": "F00_accepted_no_feature_worker_activated",
-  "next_candidate": "F01",
-  "base_commit": null,
-  "source_root": "spatial-source/",
+  "status": "activated_awaiting_worker_start",
+  "active_task": "F01",
+  "master": "Existing Spatial master conversation",
   "branch": "spatial/feature-program-2026-10-11",
+  "base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+  "base_commit_semantics": "Accepted F00 source baseline. The activation is a later documentation-only commit. Start implementation from the branch commit containing this activation and preserve it; cite both this baseline and the actual implementation parent. Do not rewind to the baseline where the activation was still null.",
+  "source_root": "spatial-source/",
   "contract_revision": 2,
-  "owner": null,
-  "allowed_paths": [],
-  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
-  "required_acceptance": [],
-  "activation_note": "F00 engineering contract accepted. F01 requires the subsequent master-recorded activation at the exact accepted commit. No worker is running."
+  "contract_status": "accepted_engineering_contract",
+  "owner": "Spatial | F01 Surface Contrast",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
+  "parent_issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+  "dependencies": [
+    "F00 accepted at 9ace24ce614dcd2bd12480887e5cdc78f2c47a03; engineering contract revision 2 D01-D10 recorded",
+    "No other active feature lease; Spatial host latest agent finished at observed ref",
+    "Worker rechecks current branch, local changes and this activation before its first edit; preserve newer work and reconcile only relevant differences"
+  ],
+  "known_host_refs": {
+    "spatial_project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+    "spatial_host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "os_integration_branch": "work/integration-2026-10-10",
+    "os_source_commit": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+    "os_host_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3"
+  },
+  "allowed_paths": [
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/tests/ui/helpers.test.ts",
+    "spatial-source/web/tests/data/data.test.ts",
+    "spatial-source/web/tests/ui/workflow.spec.ts",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+  ],
+  "path_constraints": {
+    "spatial-source/web/src/ui/ModelViewport.tsx": "Material/selection presentation and role handling, including renaming Light blue fills to Surface fills; preserve gesture, navigation and renderer lifecycle.",
+    "spatial-source/web/tests/ui/workflow.spec.ts": "One focused surface-contrast scenario or bounded extension of the existing graphic 3D scenario; no broad suite expansion.",
+    "tests": "Changed-risk assertions only. Unallocated generated test outputs stay scratch. Persist useful final evidence in the four allocated artifact paths; do not expand the suite or commit unrelated generated files.",
+    "artifacts": "Only the four exact handoff/evidence output paths are additionally authorized. They do not authorize edits to shared controls or arbitrary evidence/config/runtime paths."
+  },
+  "forbidden_without_master_amendment": [
+    "Document types/schema/admission/store",
+    "Core geometry/scene/navigation behavior",
+    "Package/lock/config changes",
+    "Swift/native bridges and Apple source",
+    "OS source/routes/generated editor/authorization",
+    "Host scaffold/offline/auth wiring",
+    "Master controls, BUILD_STATE/BUILD_QUEUE, live ACTIVE_TASK.json",
+    "Publishing, signing, installation, or business-record binding"
+  ],
+  "required_acceptance": [
+    "F01-A01",
+    "F01-A02",
+    "F01-A03",
+    "F01-A04",
+    "F01-A05"
+  ],
+  "focused_acceptance": [
+    {
+      "id": "F01-A01",
+      "check": "One small-screen room: wall > ceiling > floor luminance, both unselected and selected; representative orbit and walk. Use existing syntheticDocument fixture and preserve geometry."
+    },
+    {
+      "id": "F01-A02",
+      "check": "Same scenario covers ceiling toggle, the Surface fills label and fill-disabled mode, cutaway and semantic picking. Legacy floor/ceiling room ownership remains intact until F03."
+    },
+    {
+      "id": "F01-A03",
+      "check": "Table-driven helper proves explicit roles/triangle ownership and sRGB-to-linear intended colors; existing GLB test checks opaque wall/floor factors and unchanged geometry identity. State that display ceilings are not exported."
+    },
+    {
+      "id": "F01-A04",
+      "check": "Bounded role batches (at most three structural roles), existing idle/warm-renderer instrumentation, no new animation loop or per-object materials. Run only the existing relevant warm-idle case, not stress/timing suites."
+    },
+    {
+      "id": "F01-A05",
+      "check": "Receipt separates source commit/build/UI evidence, host transfer/hash/build/served status, Apple asset/build/device status and OS status. Missing target verification stays open, not passed by source equality."
+    }
+  ],
+  "suggested_commands_from_source_web": [
+    "node --import tsx --test tests/ui/helpers.test.ts",
+    "node --import tsx --test --test-name-pattern=\"GLB\" tests/data/data.test.ts",
+    "npx playwright test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"surface contrast\"",
+    "npx playwright test --config tests/ui/warm-switch.config.ts warm-switch.spec.ts --grep \"warm renderer stays idle\"",
+    "npm run build"
+  ],
+  "command_notes": "surface contrast is the proposed focused scenario title, not an existing passing test. Install/reuse pinned dependencies and the current browser setup as needed; these commands were not run in F00. If extending the existing 3D test instead, select its actual title. Build once per relevant accepted candidate.",
+  "stop_after": "F01 handoff to master; do not begin F02",
+  "activation_id": "F01-2026-10-11-01",
+  "activated_at_utc": "2026-10-11T15:02:27.688270+00:00",
+  "worker_started": false,
+  "source_test_paths": [
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/tests/ui/helpers.test.ts",
+    "spatial-source/web/tests/data/data.test.ts",
+    "spatial-source/web/tests/ui/workflow.spec.ts"
+  ],
+  "artifact_paths": [
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+  ],
+  "new_paths": [
+    "spatial-source/web/src/surfacePalette.ts",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+  ],
+  "next_candidate": "F02",
+  "next_candidate_gate": "F01 handoff accepted by master before any F02 activation",
+  "activation_note": "The owner requested F00 review and F01 activation. This is an exclusive assignment to one separate feature chat, not a claim that a chat is already running. No inferred expiry or automatic takeover.",
+  "master_scope_amendment": "Adopts all seven proposed source/test paths and adds four exact handoff/evidence destinations so the worker can return durable evidence. No runtime or shared-control scope expansion.",
+  "writeback": "Commit only assigned paths on the program branch after checking the live activation and current remote parent. Preserve other changes; use normal fast-forward/expected-head protection. No force rewrite. If connector Git writes are unavailable, return an exact reviewable patch and handoff without claiming external persistence.",
+  "delivery_boundary": "Source implementation and local affected verification only in this chat. Master performs subsequent accepted-source host transfer/packaging and records platform receipts. No production deployment, Apple signing/install, OS cutover or business-data binding in this activation.",
+  "preflight_observed_at_utc": "2026-10-11T15:02:27.688270+00:00",
+  "preflight_scope": "Current GitHub program and OS branch refs and provider host metadata checked; original 48-file audit and F00 focused 31-file comparisons reused. No new public-web journey claimed.",
+  "source_input_sha256": {
+    "spatial-source/web/src/surfacePalette.ts": null,
+    "spatial-source/web/src/ui/sceneBatches.ts": "d0231d642973d9f0f0bfcc38f2e20db4fd75462c52d91f8798abead23404ca24",
+    "spatial-source/web/src/ui/ModelViewport.tsx": "5a7f588240381b9c3e4dad461379dcd9ea694e959bf59f7fe5475495e91a74af",
+    "spatial-source/web/src/data/glb.ts": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+    "spatial-source/web/tests/ui/helpers.test.ts": "f63415b451d92fc271491344d20d33af94a99cd56e674d6da2f480639344db2f",
+    "spatial-source/web/tests/data/data.test.ts": "bba5b9b9be6f30acd0d76bbdc892a2fc2a971d3e0bee15d0e2fdda983dd1aa44",
+    "spatial-source/web/tests/ui/workflow.spec.ts": "11079d0955917b1563b19ee6ad9f491fd2b1f8762af72a02b49ae9ed3724280d"
+  },
+  "accepted_web_tree_sha": "7899b90ec07c886e9c65e6469c08f6f44d2c3f3c"
 }
