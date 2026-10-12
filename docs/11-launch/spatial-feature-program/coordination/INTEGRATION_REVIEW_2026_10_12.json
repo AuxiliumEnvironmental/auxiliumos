@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-12",
+  "master": "Existing Spatial master conversation",
+  "status": "F02_accepted_F03_source_transfer_blocked",
+  "program_parent": "3819a4bb6919d7384f6321b2745ac4314a5495ae",
+  "source_acceptance_scope": [
+    "F01 retained",
+    "F02 integrated from reviewed source; platform gaps retained"
+  ],
+  "reviewed_candidates": {
+    "F02": {
+      "commit": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
+      "tree": "6a47284210059a7daaca32aff862fb33cfc49905",
+      "branch": "spatial/f02-openings-2026-10-11",
+      "local": "6e454380fa52977d84aebc20c619ca8ee154d4d7",
+      "original_manifest_matches": 30,
+      "build": "passed full TypeScript and Vite production build",
+      "browser": "catalog/numeric/elevation; real IndexedDB; positive mobile 3D resize/edge move and undo/redo; second-touch cancellation; walkthrough; complete local archive roundtrip",
+      "source_equivalence": "git diff reviewed F02 HEAD versus integrated source is empty for spatial-source/web and spatial-source/contracts",
+      "limits": [
+        "Physical iPhone and platform delivery pending",
+        "Some cancellation paths reviewed in code, not separately exercised in browser"
+      ]
+    },
+    "F04": {
+      "commit": "44315237caccb4fb2511ebf54867f504f7a4d859",
+      "tree": "547f103f22a2f495c51434423e9451745e6a3923",
+      "branch": "spatial/f04-fixtures-2026-10-11",
+      "local": "2ed83fa1f68e8ab7df30db4d597949f68cdc0fe2",
+      "original_manifest_matches": 46,
+      "review_fixes": [
+        "Hidden ceiling cutouts no longer intercept floor picks",
+        "Marquee includes fixture and cutout footprints",
+        "Wall cutout group movement rejects a change to a different straight run across a bend"
+      ],
+      "verification": "Two regressions fail before fixes and pass after; focused hidden-ceiling browser case and TypeScript pass; reuse matching original build/journeys with only targeted invalidation",
+      "catalog_entries": 20,
+      "integrated": false
+    },
+    "F05": {
+      "commit": "dc53c7a1bce141706764a8da3af82c1c69fb1333",
+      "tree": "9e1123706dfca515f115cd66b1b6218c0f6e6453",
+      "branch": "spatial/f05-affected-areas-2026-10-11",
+      "local": "da6528f3bc6570315a4a80bc9f989e2567e04737",
+      "original_manifest_matches": 33,
+      "review_fix": "A changed stable ceiling ID preserves the observation unresolved instead of linking it to a replacement",
+      "verification": "Final TypeScript/Vite build, 10 remap checks, four real store/export checks and desktop/mobile browser journeys pass",
+      "integrated": false
+    }
+  },
+  "F03": {
+    "status": "source_missing_not_reviewed",
+    "required_source": {
+      "filename": "F03_LOCAL_CANDIDATE.patch",
+      "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
+      "source_files": 27,
+      "alternative": "F03 handoff ZIP containing this patch",
+      "remote_branch": "spatial/f03-ceilings-2026-10-11",
+      "remote_head": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+    },
+    "receipts": [
+      "handoffs/F03/F03_HANDOFF.json",
+      "handoffs/F03/F03_VERIFICATION.json"
+    ],
+    "candidate_local_commit_reported": "7666d24906762a38bc1704fc803eb742e6e602e6",
+    "search_scope": "Received attachments, accessible scratch and targeted Library lookups; no patch or source archive found",
+    "remaining": [
+      "Recover exact source patch",
+      "Full typecheck/build/browser verification",
+      "Wire store history/restore surface remaps under master scope",
+      "Compose actual accepted F02"
+    ]
+  },
+  "parallel_review": {
+    "bounded_isolated_worktrees": 3,
+    "completed": true,
+    "active_writers_remaining": []
+  },
+  "browser_environment": {
+    "version": "Chromium 153.0.8010.0",
+    "sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "software_webgl": true,
+    "physical_device": false,
+    "prior_truncated_browser_executable": "Environment failure, not an application defect; recovered complete executable used for current checks"
+  },
+  "evidence_paths": [
+    "handoffs/F02/F02_HANDOFF.json",
+    "handoffs/F02/F02_VERIFICATION.json",
+    "handoffs/F03/F03_HANDOFF.json",
+    "handoffs/F03/F03_VERIFICATION.json",
+    "handoffs/F04/F04_HANDOFF.json",
+    "handoffs/F04/F04_VERIFICATION.json",
+    "handoffs/F05/F05_HANDOFF.json",
+    "handoffs/F05/F05_VERIFICATION.json"
+  ],
+  "integration_seams": [
+    "Keep schema upgrades monotonic and compose geometry/scene admission cumulatively from 1.2 through 1.5; old schemas remain immutable",
+    "Reconcile real F03 ceiling identity and surface mappings, then F04 subtraction and F05 recorded-support intersection in one resolver",
+    "Preserve canonical ceiling emission once; F04 already filters ordinary ceiling batches before separate rendering",
+    "Keep F02 style/provenance/orientation and explicit opening render/export roles",
+    "Use actual F03 editor/store history and restoration receipts; verify mounted fixture bounds and area clipping against current cutout domains",
+    "F05 branch-local surfaces.ts lacks actual cutouts and must not replace the authoritative integrated resolver"
+  ],
+  "first_incomplete_action": "Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.",
+  "platform_delivery": {
+    "host": "not transferred",
+    "capacitor": "not packaged",
+    "apple_build": "not run for these features",
+    "physical_iphone": "not verified",
+    "os_embed": "not generated or cut over",
+    "F06": "pending real integrated F01-F05 acceptance"
+  },
+  "publication": "Feature branches verified by fetch and exact remote tree match. The containing master commit records F02 integration plus controls and evidence; no self-referential commit hash is embedded."
+}

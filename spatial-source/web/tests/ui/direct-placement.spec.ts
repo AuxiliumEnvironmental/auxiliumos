@@ -39,7 +39,7 @@ async function imported(page: Page, document = fixture()) {
 }
 async function tool(page: Page, kind: OpeningKind = 'door') {
   await page.getByRole('button', { name: 'Place opening', exact: true }).click();
-  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption(kind);
+  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption(`generic_${kind}`);
 }
 async function start(page: Page, from: Point2, to: Point2) {
   const a = await screen(page, from), b = await screen(page, to);
@@ -54,9 +54,9 @@ test('direct door placement creates one saved cutout with undo, redo, reopen, ex
   expect((await saved(page)).document).toEqual(source);
   await page.mouse.up(); await expect(page.getByRole('button', { name: 'Finish opening', exact: true })).toBeEnabled();
   const draftID = await page.locator('[data-opening-placement]').getAttribute('data-placement-id');
-  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption('passage');
+  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption('generic_passage');
   await click(page, { x: 4, z: 1.8 }); await click(page, { x: 4, z: 2 });
-  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption('door');
+  await page.getByRole('combobox', { name: 'New opening type', exact: true }).selectOption('generic_door');
   await expect(page.locator('[data-opening-placement]')).toHaveAttribute('data-placement-id', draftID!); expect((await saved(page)).document).toEqual(source);
   await page.screenshot({ path: info.outputPath('desktop-door-placement.png'), fullPage: true });
   await page.getByRole('button', { name: 'Finish opening', exact: true }).click(); await revision(page, 2);

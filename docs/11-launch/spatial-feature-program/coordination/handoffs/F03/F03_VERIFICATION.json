@@ -1,0 +1,409 @@
+{
+  "task_id": "F03",
+  "task_date": "2026-10-11",
+  "recorded_at_utc": "2026-10-12T04:49:25.808017+00:00",
+  "status": "partial_local_verification_not_branch_acceptance",
+  "remote_activation_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "remote_result_commit": null,
+  "local_source_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+  "local_reconstructed_base": "182fc215124e8810e8392733d69b6a1a6c10f499",
+  "toolchain": {
+    "node": "v22.16.0",
+    "typescript": "5.8.3",
+    "project_dependencies_installed": false,
+    "frontend_semantic_typecheck": false,
+    "browser_exercised": false
+  },
+  "checks": [
+    {
+      "id": "F03-V01",
+      "command": "tsc --outDir /mnt/data/F03-compiled --rootDir . --target ES2022 --module CommonJS --moduleResolution Node --lib ES2022,DOM --strict --noImplicitReturns --skipLibCheck --esModuleInterop --typeRoots /opt/nvm/versions/node/v22.16.0/lib/node_modules/ts-node/node_modules/@types tests/core/ceilings.test.ts tests/core/surfaces.test.ts",
+      "working_directory": "spatial-source/web",
+      "result": "passed",
+      "exit_code": 0,
+      "artifact": "evidence/focused-compile.txt",
+      "scope": "Real strict TypeScript compilation of the two focused tests and their actual imported core/GLB/preflight/drag-helper dependencies. No frontend dependency typecheck claim."
+    },
+    {
+      "id": "F03-V02",
+      "command": "node --test /mnt/data/F03-compiled/tests/core/ceilings.test.js /mnt/data/F03-compiled/tests/core/surfaces.test.js",
+      "result": "passed",
+      "exit_code": 0,
+      "passed": 32,
+      "failed": 0,
+      "skipped": 0,
+      "artifact": "evidence/core-tests-final.txt",
+      "scope": "Actual Node tests on compiled candidate modules; no synthetic replacement of upstream F02."
+    },
+    {
+      "id": "F03-V03",
+      "command": "node /mnt/data/F03-tools/syntax_check.cjs",
+      "result": "passed_syntax_only",
+      "files": 23,
+      "failures": 0,
+      "artifact": "evidence/syntax-check.txt",
+      "scope": "transpileModule parse/emit diagnostics only. React/Three/Playwright semantic typecheck is NOT established."
+    },
+    {
+      "id": "F03-V04",
+      "command": "Python jsonschema.Draft202012Validator.check_schema and generated geometry/scene fixture validation",
+      "result": "passed",
+      "artifact": "evidence/schema-checks.json",
+      "scope": "Both new 1.3 schema identities and generated actual repository fixture data validate. Not cumulative F02 compatibility."
+    },
+    {
+      "id": "F03-V05",
+      "command": "npm run build",
+      "working_directory": "spatial-source/web",
+      "result": "failed_environment_dependencies",
+      "exit_code": 2,
+      "artifact": "evidence/production-build.txt",
+      "scope": "TS2688: node and vite/client type definition files absent. Vite did not build. Project dependencies were unavailable; package/config files were not changed."
+    },
+    {
+      "id": "F03-V06",
+      "command": "Focused Playwright ceiling-height.spec.ts through a temporary config override",
+      "result": "not_run",
+      "artifact": null,
+      "scope": "Spec authored. Project Playwright/React/Three/Vite dependencies and executable browser environment not established. No screenshots or actual mobile/desktop interaction evidence."
+    },
+    {
+      "id": "F03-V07",
+      "command": "git baseline SHA256 comparison with live ACTIVE_TASKS.json input hashes; exact changed-path grant check",
+      "result": "passed",
+      "existing_input_matches": 18,
+      "new_paths": 9,
+      "source_paths": 27,
+      "artifact": "evidence/scope-and-baseline.json",
+      "scope": "Every modified old file matches the live assigned input bytes. No claims about full reconstructed repository ancestry or untouched historical tests."
+    },
+    {
+      "id": "F03-V08",
+      "command": "git diff 182fc215124e8810e8392733d69b6a1a6c10f499..7666d24906762a38bc1704fc803eb742e6e602e6 --check",
+      "result": "passed",
+      "exit_code": 0,
+      "artifact": null,
+      "scope": "Whitespace/patch integrity only."
+    },
+    {
+      "id": "F03-V09",
+      "command": "git apply --check F03_LOCAL_CANDIDATE.patch; git apply F03_LOCAL_CANDIDATE.patch; SHA256 comparison of all 27 results",
+      "result": "passed",
+      "matching_files": 27,
+      "artifact": "evidence/patch-application-check.json",
+      "scope": "Disposable directory with only the 18 verified original files. Does not prove a push or integration into a current remote branch."
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptance_id": "F03-A01",
+      "result": "partial_pass",
+      "established": [
+        "Actual commands preserve unequal neighbor intent, footprints, floor elevation and wall baseY.",
+        "Prepared drag math and numeric command agree on nonzero floor/base fixtures."
+      ],
+      "remaining": [
+        "Actual mobile pointer journey, renderer geometry and UI interaction verification."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A02",
+      "result": "partial_pass",
+      "established": [
+        "Explicit room lists, common delta across independent floors, null-member rejection, separately labeled absolute initialization, one command revision."
+      ],
+      "remaining": [
+        "Actual IndexedDB undo/redo journey and shared-surface restoration receipts."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A03",
+      "result": "passed_bounded_core_scope",
+      "established": [
+        "Opening conflicts reject atomically.",
+        "Unequal, nonpositive and invalid inferred legacy ceilings remain explicit null; no invented measured height."
+      ],
+      "remaining": [
+        "F04 fixture extent conflict integration belongs to composed candidate."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V04"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A04",
+      "result": "partial_pass",
+      "established": [
+        "Split/merge IDs and lineage, actual source-domain remaps, canonical scene and frozen GLB ceiling identity/height/material.",
+        "Old schema files untouched; strict new schema fixtures pass."
+      ],
+      "remaining": [
+        "Actual complete-local-document ZIP round trip, durable undo/reopen/restore and receipt wiring in out-of-scope data/store.ts.",
+        "Actual accepted F02 cumulative schema/scene fields."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V04"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A05",
+      "result": "partial_pass",
+      "established": [
+        "Pure drag helper tests cover grab offset, singular rays, camera-basis hold, explicit cancellation, stale revision/generation/context and invalid terminal sample.",
+        "Viewport and numeric controls are written with hidden-ceiling discovery and navigation-only walk boundary."
+      ],
+      "remaining": [
+        "Entire real mobile journey, cancellation event table, cutaway/orbit picking, accessibility and screenshots remain unrun."
+      ],
+      "checks": [
+        "F03-V02",
+        "F03-V03"
+      ],
+      "browser_check": "F03-V06"
+    },
+    {
+      "acceptance_id": "F03-A06",
+      "result": "partial_pass",
+      "established": [
+        "120 sample helper burst requests one frame and exact terminal release flushes once.",
+        "1.3 room/wall/area preflights and monotonic version behavior are tested.",
+        "Viewport source updates affected ceiling buffers and extension bands, not full topology or storage per pointer move."
+      ],
+      "remaining": [
+        "Real renderer-construction/write instrumentation in browser.",
+        "Full build.",
+        "Actual F02 styles, fences, scene roles and cumulative schema integration."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V03"
+      ],
+      "browser_check": "F03-V06"
+    }
+  ],
+  "required_acceptance_complete": false,
+  "source_inputs": [
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "sha256": "cfe0181a711b3cf2f02a9af40fc24a0a0f67713863593afa90bf0d6f9dd06f71"
+    },
+    {
+      "path": "spatial-source/contracts/geometry-v1.3.schema.json",
+      "sha256": "5c8556b69093654739ed7e30807f2207d82fe79648b7077bb39d81f177ea5e99"
+    },
+    {
+      "path": "spatial-source/contracts/scene-v1.3.schema.json",
+      "sha256": "f7e374792d7e2e23c2fcbc1c6e681a8f22d898659b4114f42e3bcd9ec98aa4eb"
+    },
+    {
+      "path": "spatial-source/web/src/core/ceilings.ts",
+      "sha256": "4058c9e1b825c43a637c77d5dd54578312f2330b02e32f51ec34597830fd0477"
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "sha256": "207db4ff9e9755e84473b3b70524d3f0fd54389f1267fc67d6d4e9b213b3e784"
+    },
+    {
+      "path": "spatial-source/web/src/core/index.ts",
+      "sha256": "0f53e08725183216993980dd690a72664713ed87c62988bc25431150a7735806"
+    },
+    {
+      "path": "spatial-source/web/src/core/navigation.ts",
+      "sha256": "c87d8469f35a590d12affb676587d4e1a40c6428dbca8e0aec98a2f189ca21c4"
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "sha256": "51e621644f49b9acdeba9135c5dbf673351aecc9d9bdb04b37b7f54d5ff1c324"
+    },
+    {
+      "path": "spatial-source/web/src/core/surfaces.ts",
+      "sha256": "5a3655ce2e56360c6b8b722f17cb8ae2f16fd0f57103658f77282577ace5fea7"
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "sha256": "c06163d86e211efaf3ede603a09d940ed8759da690d59c4d2d2c278eaca91948"
+    },
+    {
+      "path": "spatial-source/web/src/data/exports.ts",
+      "sha256": "6bc2b716309a15db691b15fee951ea216eafdccafff18bfbcc03c1d2a6b87922"
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "sha256": "fcabf93fcde2bb7466bf16ff39f2bd0c17909a6099e1ea40758f8b8d1fa52b92"
+    },
+    {
+      "path": "spatial-source/web/src/data/imports.ts",
+      "sha256": "20ae8f0948f31c55ac174cfe4ce5948c635c08522b402cc05e7bb4d1e196457c"
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "sha256": "a31c720279af43390e76d97226d78a5e9154602c31f4655601ecc2f41d24ba3a"
+    },
+    {
+      "path": "spatial-source/web/src/ui/CeilingHeightControls.tsx",
+      "sha256": "4c0c870cd19657fc4df7e713d9b29bfdba6290ef87eb6e954745141169f07e46"
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "sha256": "dc034cc236e8923799b5a2bfa594a8980d0aa785debb7a33ea30286807896f39"
+    },
+    {
+      "path": "spatial-source/web/src/ui/Inspector.tsx",
+      "sha256": "de77e59608fd85748dffe054d08529f0414a511a0867c204de841838cd6c337b"
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "sha256": "2ea3a04e4a33c29f903fe513c11a3e1b80ded670aaa21c7dc565ddfb59ec1eb5"
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "sha256": "79fa80d9a333d8153fc617357adc05e13fefce93db1f7b0518c8536c6eb0a6e5"
+    },
+    {
+      "path": "spatial-source/web/src/ui/ceilingManipulation.ts",
+      "sha256": "43c27734aa4481901d85368717df23ad4efc447521046e5dea46e4257248e67b"
+    },
+    {
+      "path": "spatial-source/web/src/ui/roomDrawing.ts",
+      "sha256": "9360e9183c3f0529fde31b2fd84fbcc7fcc2fcf3646806be799cb08e7c34ef7f"
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "sha256": "7656885941bba9f1c8799f631784b6f1c5c60efcfb5f020705d4b31f93a81b50"
+    },
+    {
+      "path": "spatial-source/web/src/ui/wallDrawing.ts",
+      "sha256": "a843658cf09308a0400108560c28a3ec3f94deb2474c8687b707d64d5a157a75"
+    },
+    {
+      "path": "spatial-source/web/src/ui/workspace.css",
+      "sha256": "0b9f3df49e4e7f73b521a99e7424205d1be146fbfe45dac199f80f379300f8d6"
+    },
+    {
+      "path": "spatial-source/web/tests/core/ceilings.test.ts",
+      "sha256": "5f72fefac3dfd506deb7a0f176e5727ce0f127c838755fe92b4c95e19e45d8f7"
+    },
+    {
+      "path": "spatial-source/web/tests/core/surfaces.test.ts",
+      "sha256": "75cb9d90a75513550ba84167a15a0c797b0191855619f286e027b331c32268d4"
+    },
+    {
+      "path": "spatial-source/web/tests/ui/ceiling-height.spec.ts",
+      "sha256": "267ae0086238be45a7f6cb7eb0d2ee9e602bec9595186ec34d17e581523d1a9c"
+    }
+  ],
+  "test_cases": [
+    "room-only height preserves unequal neighbor, footprint, openings and floor/base datum",
+    "lowering clearance never shrinks structural partitions",
+    "opening conflict rejects atomically with original state intact",
+    "structure is an explicit room set and preserves differences with one revision",
+    "unknown member blocks the whole delta; separate absolute assignment initializes it",
+    "invalid, empty, duplicate and missing scopes never partially commit",
+    "multiple floors retain independent frames and datums",
+    "legacy migration happens only in an explicit edit, preserving inferred basis and original source",
+    "unequal legacy tops and nonpositive clearances become sticky null, never measured defaults",
+    "strict 1.3 admission requires explicit ceiling and rejects unknown or unsupported fields/versions",
+    "area and room commands preserve 1.3 admission, and a new room has explicit null state",
+    "split and merge retain stable ceiling IDs, source lineage and exact domain remaps",
+    "unequal and unknown merges require explicit resulting height in the atomic transaction",
+    "canonical scene and GLB retain ceiling identity, height, frozen revision and neutral material",
+    "navigation respects known low ceilings and preserves explicit unknown behavior",
+    "prepared preview matches exact command results at nonzero elevation/baseY",
+    "drag retains grab offset and commits exact terminal delta through the numeric command",
+    "singular rays and changed camera basis hold last valid preview, never jump",
+    "stale revision, authority scope, generation, explicit cancellation and no-op submit nothing",
+    "invalid terminal geometry does not commit a previous valid sample",
+    "120 pointer samples use one frame, release discards queued sample and processes exact end once",
+    "new room and wall drawing preflights preserve 1.3 and null ceiling initialization",
+    "null ceilings split and merge without silently becoming inferred planes",
+    "legacy F01 GLB material table and display-only ceiling behavior remain unchanged",
+    "bent wall chart uses arclength and floor plus base elevation",
+    "both physical wall sides resolve the same real aperture, separate references",
+    "missing or display-only ceiling is not a persisted attachment host",
+    "split wall receipts preserve exact physical chart and aperture offsets on both sides",
+    "wall reversal swaps physical side and chart coordinates without changing world anchor",
+    "wall extension and hole removal mark prior support for review; nonrigid change stays unresolved",
+    "bounded intersection respects holes and source geometry, not bounding boxes",
+    "composed transforms and receipts retain physical units and exact source intervals"
+  ],
+  "artifacts": [
+    {
+      "path": "evidence/core-tests-final.txt",
+      "sha256": "0ce74a9ab1b30cf325c2e823fa755e24bb52e179bfaeed0357a96dbe723467db"
+    },
+    {
+      "path": "evidence/focused-compile.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/syntax-check.txt",
+      "sha256": "64fb6c1e77871fec84000f18f5417642b37a37b37c9928087df416c2b8cff514"
+    },
+    {
+      "path": "evidence/schema-checks.json",
+      "sha256": "44d8aa01090dd0d17f0d52fdef4244e964be0cd9cc4a8f298d18afba5c4ef5fe"
+    },
+    {
+      "path": "evidence/schema-fixture.geometry.json",
+      "sha256": "3428ced42aedfcd7f015448b1fa140f310f1044f95f7aca22d6871b1a00a889b"
+    },
+    {
+      "path": "evidence/schema-fixture.scene.json",
+      "sha256": "df3df68b3783371d665ac0cf4536b96028cec3feb1697934c0357492e7dec36e"
+    },
+    {
+      "path": "evidence/production-build.txt",
+      "sha256": "70a06d32c10605f60318bc059469e7242fc8e0aeba88ccebe578c14be63cc520"
+    },
+    {
+      "path": "evidence/scope-and-baseline.json",
+      "sha256": "58a71657f1d2a03a3b38d706d82ab1ec5a0c83a4c75a269f5a5bbee94364e9ca"
+    },
+    {
+      "path": "evidence/patch-application-check.json",
+      "sha256": "f1f6a4a975110be8c60b0c57cfb751ed8a0dbf25a93ac57d5577658dfbd058ec"
+    }
+  ],
+  "screenshots": {
+    "ceiling-height-mobile.png": "not_created_not_run",
+    "ceiling-structure-desktop.png": "not_created_not_run"
+  },
+  "baseline_protection": {
+    "matches": 18,
+    "expected": 18,
+    "ledger_blob_sha": "9c5dfa8b5d30c3692fbe98d01db497da59d1e147",
+    "source_paths": 27,
+    "exact_allowed_scope": true
+  },
+  "remote_observation": {
+    "branch": "spatial/f03-ceilings-2026-10-11",
+    "head": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "connector_read": "GitHub git/ref/heads/spatial/f03-ceilings-2026-10-11",
+    "live_assignment_status": "activated_awaiting_worker_start",
+    "worker_started_field": false,
+    "worker_did_not_modify_master_ledger": true
+  },
+  "publication": {
+    "pushed": false,
+    "integrated": false,
+    "deployed": false,
+    "reason": "Exposed GitHub connector actions are read-only. Direct git transport failed DNS; gh unavailable. No credentials fabricated or program-branch write attempted."
+  },
+  "independent_review": {
+    "performed": false,
+    "scope": "Implementer review and actual automated checks only; no separate reviewer agent available or claimed."
+  }
+}

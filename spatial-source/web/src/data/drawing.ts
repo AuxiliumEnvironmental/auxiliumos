@@ -1,3 +1,4 @@
+import { openingPlanLines } from '../core/openings';
 import { jsPDF } from 'jspdf';
 import { roomBoundary, wallPath } from '../core';
 import type { Floor, FrozenRevision, Point2 } from '../types';
@@ -32,7 +33,9 @@ function pageHeader(frozen: FrozenRevision, floor: Floor): { page: Drawing; top:
 }
 export function drawings(frozen: FrozenRevision, floor: Floor): Drawing[] {
   const header = pageHeader(frozen, floor), output = header.page, contentHeight = 785 - header.top;
-  const points = [...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
+  const symbols = floor.openings.flatMap(opening => openingPlanLines(floor, opening));
+  if (symbols.length > 400_000) fail('opening-drawing-work-limit');
+  const points = [...symbols.flatMap(line => [line.a, line.b]), ...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
   const extent = points.reduce((e, p) => ({ minX: Math.min(e.minX, p.x), maxX: Math.max(e.maxX, p.x), minZ: Math.min(e.minZ, p.z), maxZ: Math.max(e.maxZ, p.z) }), { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity });
   const { minX, maxX, minZ, maxZ } = points.length ? extent : { minX: 0, maxX: 1, minZ: 0, maxZ: 1 };
   const scale = Math.min(1040 / Math.max(maxX - minX, 1), contentHeight / Math.max(maxZ - minZ, 1));
@@ -72,6 +75,7 @@ export function drawings(frozen: FrozenRevision, floor: Floor): Drawing[] {
       distance += length;
     }
   }
+  for (const line of symbols) output.lines.push({ a: map(line.a), b: map(line.b), color: '#3982a3', width: 1.5 });
   for (let index = 0; index < (floor.areas ?? []).length; index++) {
     const area = floor.areas![index];
     for (let i = 0; i < area.polygon.length; i++) output.lines.push({ a: map(area.polygon[i]), b: map(area.polygon[(i + 1) % area.polygon.length]), color: '#8f6b91', width: 1.5, dashed: true });

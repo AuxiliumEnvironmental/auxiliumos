@@ -1,0 +1,742 @@
+{
+  "task_id": "F05",
+  "status": "reviewed_branch_candidate_pending_dependency_integration",
+  "source_commit": "4a5d4a868067297990aa73c04c95440101584991",
+  "review_scope": "Independent master delegate review of recovered F05 candidate; no remote writes by reviewer",
+  "recovery": {
+    "real_base_commit": "9022f3ad503116318089647c0abf546967762339",
+    "patch_sha256": "7482f7467d5c0b26acc0f671b32a05cb366b182bcbfc1d69fa94839c8de6a715",
+    "patch_check_and_apply": "passed",
+    "manifest_files_compared": 33,
+    "mismatches": [],
+    "original_preservation_commit": "8910ee5f54c86564d30876190aa3fcb5a0ead083",
+    "master_reported_remote_preservation_commit": "5d2abedfca13f90ff8e4bd4bf776f29d174940c1"
+  },
+  "fixes": [
+    {
+      "kind": "runtime",
+      "path": "spatial-source/web/src/core/affectedAreas.ts",
+      "problem": "A replacement ceiling with a different stable ID was automatically treated as the original observation host.",
+      "change": "Retain original support with unresolved attachment when ceiling identity changes. Require authoritative dependency remap or explicit user reattachment.",
+      "regression": "New ceiling replacement identity regression passed in the 10-case remap slice."
+    },
+    {
+      "kind": "verification",
+      "path": "spatial-source/web/tests/data/affected-areas.test.ts",
+      "problem": "Dynamic fake-indexeddb import failed full type checking; SVG test treated multi-page ZIP bytes as UTF-8 SVG.",
+      "change": "Load the side-effect fixture with existing createRequire; inspect every SVG page and declared hash when the export is a page archive."
+    },
+    {
+      "kind": "verification",
+      "path": "spatial-source/web/tests/ui/affected-areas.spec.ts",
+      "problem": "Desktop selector counted hidden warmed 3D handles; numeric mouse target was below viewport.",
+      "change": "Count plan handles only and scroll the plan handle into view before screen-coordinate dragging. No speculative production UI change retained."
+    }
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "typescript": "5.8.3",
+    "package_lock_sha256": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "dependencies": "Reused exact-lock node_modules from existing F04 checkout without package/lock changes",
+    "browser": "Chromium 153.0.8010.0",
+    "browser_sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "browser_recovery": "Original shared executable was truncated. Decompressed complete existing Brotli executable and SwiftShader into scratch; verified launch.",
+    "browser_arguments": [
+      "--enable-unsafe-swiftshader",
+      "--use-gl=angle",
+      "--use-angle=swiftshader"
+    ],
+    "server_port": 4195
+  },
+  "checks": [
+    {
+      "id": "recovered-focus",
+      "command": "node --import tsx --test tests/core/affected-areas.test.ts tests/core/affected-area-remaps.test.ts tests/data/affected-areas.test.ts tests/ui/affected-area-manipulation.test.ts",
+      "source": "recovered candidate before fixes",
+      "result": "25 passed; one previously skipped real store/export case failed due to the SVG-page archive test assumption. No dependency skips."
+    },
+    {
+      "id": "real-data-corrected",
+      "command": "node --import tsx --test tests/data/affected-areas.test.ts",
+      "result": "4 passed, 0 failed, 0 skipped",
+      "source": "candidate with verification fixes, before ceiling replacement guard",
+      "coverage": [
+        "strict geometry identity and frozen revision",
+        "sided GLB alpha/material roles",
+        "shared plan fill/grid/wall-line primitives",
+        "real IndexedDB undo/redo/reopen",
+        "SVG page members and hashes",
+        "PDF admission",
+        "unsupported case-bundle rejection"
+      ]
+    },
+    {
+      "id": "remaps-final",
+      "command": "node --import tsx --test tests/core/affected-area-remaps.test.ts",
+      "result": "10 passed, 0 failed, 0 skipped",
+      "source_commit": "4a5d4a868067297990aa73c04c95440101584991",
+      "coverage": [
+        "opening move/removal retained support",
+        "height clipping/restoration helper",
+        "split/join/reversal",
+        "group translation once",
+        "deleted/nonrigid host unresolved retention",
+        "batch receipt lineage",
+        "replacement ceiling identity"
+      ]
+    },
+    {
+      "id": "mobile-browser",
+      "command": "SPATIAL_TEST_URL=http://127.0.0.1:4195 SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium playwright test --config /workspace/scratch/9062ebaf2df3/f05-review.playwright.config.mjs",
+      "result": "Mobile journey passed; desktop test then required selector correction.",
+      "coverage": [
+        "390x844",
+        "explicit entered wall vertical range",
+        "separate floor/established synthetic ceiling records",
+        "3D walk stays navigation-only",
+        "no repeated idle render frames"
+      ],
+      "artifact": "affected-areas-mobile.png"
+    },
+    {
+      "id": "desktop-browser-final",
+      "command": "SPATIAL_TEST_URL=http://127.0.0.1:4195 SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium playwright test --config /workspace/scratch/9062ebaf2df3/f05-review.playwright.config.mjs --grep golden",
+      "result": "1 passed",
+      "source_commit": "4a5d4a868067297990aa73c04c95440101584991",
+      "coverage": [
+        "real 3D wall-side record",
+        "plan endpoint drag preserves vertical extent",
+        "Escape cancellation without edit",
+        "undo/redo",
+        "reopen",
+        "complete local archive including PNG/SVG/PDF/scene/GLB",
+        "exact archive re-import document/hash"
+      ],
+      "artifact": "affected-areas-plan.png"
+    },
+    {
+      "id": "final-build",
+      "command": "npm run build",
+      "source_commit": "4a5d4a868067297990aa73c04c95440101584991",
+      "result": "passed: full TypeScript noEmit and Vite production build",
+      "warnings": [
+        "large output chunk; no dependency change"
+      ]
+    },
+    {
+      "id": "visual-review",
+      "result": "Both generated screenshots inspected; mobile walking overlay and desktop plan side indication readable. No physical-device claim."
+    },
+    {
+      "id": "scope",
+      "result": "Only 4 allowed source/test paths changed after exact original recovery; no package, lockfile, configuration, other feature, program, host or permission changes."
+    }
+  ],
+  "source_manifest": [
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "sha256": "b4243c8d9c2f039ba0a2c359627619f0e24ebe4b986c9cc92ff07774177413ee"
+    },
+    {
+      "path": "spatial-source/contracts/geometry-v1.5.schema.json",
+      "sha256": "b489b4f70eb7f9c59ac31102bded6c89ea5fb56c6a46bdc01a17a21506dc8adb"
+    },
+    {
+      "path": "spatial-source/contracts/scene-v1.5.schema.json",
+      "sha256": "7c525466bbac48145eb1bbb52d33d066b3539726dbc30c9038e81e7264342899"
+    },
+    {
+      "path": "spatial-source/web/src/affectedAreaPalette.ts",
+      "sha256": "bbf735280362e4cfb9fa93109b63d68a5cbb0d8869ae848baf536abb0805bc99"
+    },
+    {
+      "path": "spatial-source/web/src/core/affectedAreaGeometry.ts",
+      "sha256": "1d27d0b99c17a2261f32f08706c05d3efd8709d1c4a7aa6a8bb92929a88d27c3"
+    },
+    {
+      "path": "spatial-source/web/src/core/affectedAreas.ts",
+      "sha256": "c0f11af1e8c1cc12e3b0be6b3432ced809a0aa63614c862338198f426a75a667"
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "sha256": "353ac5a16eb47a45e34bbb5faf85c18e05804d09e75a2bf2a3d059a46b926d4e"
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "sha256": "d859e34606ade30220dc27c08a96f85a23b4589186ac04af41d6ed416e41d06d"
+    },
+    {
+      "path": "spatial-source/web/src/core/surfaces.ts",
+      "sha256": "1221877d00fd6d8323a9338aca755f358354e8b1b7e582c5f9a3dd47d57a4fca"
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "sha256": "546a183dc0afde6786ad3fc17fd215de4a0b2f63d5a84fe0c741442e43eb39ee"
+    },
+    {
+      "path": "spatial-source/web/src/data/drawing.ts",
+      "sha256": "49e7c16ef6626a6237f00321be9a7aecef30564fb73425e29c94bbbdd2127f14"
+    },
+    {
+      "path": "spatial-source/web/src/data/exports.ts",
+      "sha256": "ad749d5f13b9ea5c352342bcfb9343da2ccc16fd4eaac178781aabe61c3aceaf"
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "sha256": "1ef5c4aff05bb478a2e429a62eba5a4beb47ca4a237ec769a85b92e50bf828ac"
+    },
+    {
+      "path": "spatial-source/web/src/data/imports.ts",
+      "sha256": "ed3b451c108cb556c35848c0ed32c3d22bd2bee02d7541f0c90a37e95144f5ed"
+    },
+    {
+      "path": "spatial-source/web/src/data/store.ts",
+      "sha256": "b468559e4fb4ea9a0b3fb8f15159503993e288eca57f6959a1b61c13f7e78ca9"
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "sha256": "a9cfa5f2eb0107949d02e72f1f47a955eb7ad29656d0ca594503e02c43f7de8f"
+    },
+    {
+      "path": "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+      "sha256": "0c78f5750382492bbf126882acc489128cee427d6ce01c4d0c2765f2c0da26b5"
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "sha256": "b3bfe6a6a59e92f58ad94f7e7b1b0d6249eafc843b54dd59f11fc9d5b0d62e08"
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "sha256": "3165ddc5c3fb8c67c8fe4f8be6e5dd0640ea6a48a537595a246bcf5b73bc99d0"
+    },
+    {
+      "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+      "sha256": "ff3a4f5fb1c2ce224c2e54bcdbb9a64715ff0226e061523e6f2f345d44060bee"
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "sha256": "0ec9a20d23fd4fd71d5589baa0d8093c213fed2375e286bbf85ce37c766dbe7a"
+    },
+    {
+      "path": "spatial-source/web/src/ui/affectedAreaBatches.ts",
+      "sha256": "44f7dca072800bef28a2b8b5c1d4008859768703f4ee7488a1508efff8dcf2d5"
+    },
+    {
+      "path": "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+      "sha256": "07ddcbeae7abdcc8ebe367c172121e676fc64cd56e8e0956607232f86b2121f3"
+    },
+    {
+      "path": "spatial-source/web/src/ui/geometry.ts",
+      "sha256": "a4d508e7b0d922d9166e85dfa1bb2dc0074c99362e86e31ebd2fc969e33e70ee"
+    },
+    {
+      "path": "spatial-source/web/src/ui/groupSelection.ts",
+      "sha256": "6c569d35c105fb8e48942475d2d41f45542fe79cdd40e10efd98ea17eff570e2"
+    },
+    {
+      "path": "spatial-source/web/src/ui/review.ts",
+      "sha256": "8726927025827b084b8855bc8ea1920f31a4ba12c4f96f98993f12b8113916c9"
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "sha256": "e4b27cea2e67bf24098d52918bd4164d935b749aabdcdfc7836fe2ff9fea09a2"
+    },
+    {
+      "path": "spatial-source/web/src/ui/workspace.css",
+      "sha256": "5c55cd4d2dee4c088a97fb7382a63ef0d462d14b997f6fb9efb81f404503ce69"
+    },
+    {
+      "path": "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+      "sha256": "2d4bebdfedc5a4305c791e113518389162da103a95a560b47bd063634a20af6e"
+    },
+    {
+      "path": "spatial-source/web/tests/core/affected-areas.test.ts",
+      "sha256": "b3dedcfc9979ab4894ac43468b331280eb1163c9b15267be59650143e8b76972"
+    },
+    {
+      "path": "spatial-source/web/tests/data/affected-areas.test.ts",
+      "sha256": "5a6d1070cccd6874dc146d02e20d9cba11ad86b8296cdf2ac1ea41d32104888f"
+    },
+    {
+      "path": "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+      "sha256": "7ff8597d827a2f141746e2c101c10206b5732b8a6ff074e05e53a430cfb809ac"
+    },
+    {
+      "path": "spatial-source/web/tests/ui/affected-areas.spec.ts",
+      "sha256": "c9090556c611b31fc370c548104caa2cdbe1bf4ed94c7cbc4dda5bf8c8e620f4"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/affected-areas-plan.png",
+      "sha256": "8f02c575979ddff768ce987f6cd064c92253a198f77d22d400a6974ebbac9225",
+      "bytes": 106284
+    },
+    {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/affected-areas-mobile.png",
+      "sha256": "340087cb1c900b66865689c0b3d1956145d979891c90e3b69699b86121ff22df",
+      "bytes": 41709
+    }
+  ],
+  "integration_seams": [
+    "F05 is a reviewed isolated branch candidate. It is not integrated or accepted on the program branch.",
+    "Actual F02/F03/F04 dependencies were not present in this candidate. F03 source recovery is a master dependency.",
+    "Candidate core/surfaces.ts is a baseline resolver with wall openings only. Master must preserve the canonical F03 resolver and F04 cutout material domains, adding only needed F05 helpers.",
+    "Candidate geometry/scene 1.5 schemas omit predecessor fields/roles; master must compose cumulative 1.2 through 1.5 schemas/admission and preserve predecessor editor/export/UI behavior.",
+    "affectedHostReceipt is a candidate before/after adapter. Master must compose authoritative F03/F04 remaps exactly once, including ceiling topology, cutouts, wall sides, floor movement and undo/redo. Ambiguous replacement ceiling identity remains unresolved until explicit reattachment.",
+    "Browser uses synthetic fixtures and Linux Chromium software WebGL. No iPhone, Apple build, simulator, installed assets, Lovable, OS embed or native export parity claim.",
+    "Package, lockfile and source configuration remain unchanged. Build reports the existing large-chunk warning."
+  ],
+  "worker_verification_historical": {
+    "task_id": "F05",
+    "status": "local_candidate_implemented_remote_upload_incomplete",
+    "activation_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "confirmed_remote_source_commit": "9022f3ad503116318089647c0abf546967762339",
+    "local_candidate_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+    "local_comparison_base": "5c7856ad37d998de659a8617217ddc51e361e869",
+    "local_history_is_remote_ancestry": false,
+    "environment": {
+      "node": "v22.16.0",
+      "typescript": "5.8.3",
+      "typescript_location": "/usr/local/slides_js/node_modules/typescript",
+      "runner": "Node test runner with a TypeScript transpile-only loader; type checking ran separately",
+      "locked_dependencies_available": false,
+      "browser_execution_available": false,
+      "network_and_apple_device_validation": "not performed"
+    },
+    "checks": [
+      {
+        "id": "F05-focused",
+        "status": "passed_with_explicit_dependency_skip",
+        "command": "node --loader /mnt/data/ts-loader.mjs --test spatial-source/web/tests/core/affected-areas.test.ts spatial-source/web/tests/core/affected-area-remaps.test.ts spatial-source/web/tests/data/affected-areas.test.ts spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+        "total": 26,
+        "passed": 25,
+        "failed": 0,
+        "skipped": 1,
+        "skip": "Real IndexedDB/store undo/redo/reopen and SVG/PDF export admission require locked fake-indexeddb, jspdf and fflate. No mock result was substituted.",
+        "log": "verification/F05_focused_tests.log"
+      },
+      {
+        "id": "F05-risk-regression",
+        "status": "passed",
+        "command": "node --loader /mnt/data/ts-loader.mjs --test spatial-source/web/tests/core/editor.test.ts spatial-source/web/tests/core/validation.test.ts spatial-source/web/tests/core/scene.test.ts",
+        "total": 69,
+        "passed": 69,
+        "failed": 0,
+        "skipped": 0,
+        "log": "verification/F05_legacy_risk_tests.log"
+      },
+      {
+        "id": "F05-core-types",
+        "status": "passed",
+        "command": "node /usr/local/slides_js/node_modules/typescript/bin/tsc --noEmit --target ES2022 --module ESNext --moduleResolution Bundler --lib ES2023,DOM --strict --noImplicitReturns --skipLibCheck spatial-source/web/src/core/editor.ts spatial-source/web/src/core/scene.ts spatial-source/web/src/ui/affectedAreaManipulation.ts spatial-source/web/src/data/glb.ts",
+        "exit_code": 0,
+        "scope": "Core geometry, editor, admission, scene, gesture math and GLB dependencies. Not a full React/Three build.",
+        "log": "verification/F05_core_typecheck.log"
+      },
+      {
+        "id": "F05-syntax",
+        "status": "passed_syntax_only",
+        "result": {
+          "compiler": "5.8.3",
+          "files": 55,
+          "errors": []
+        },
+        "log": "verification/F05_syntax_check.json"
+      },
+      {
+        "id": "F05-schema",
+        "status": "passed",
+        "checks": [
+          {
+            "schema": "geometry-v1.5.schema.json",
+            "valid_fixture": true,
+            "errors": []
+          },
+          {
+            "schema": "geometry-v1.5.schema.json",
+            "rejection": "unknown_root",
+            "passed": true
+          },
+          {
+            "schema": "geometry-v1.5.schema.json",
+            "rejection": "wrong_version",
+            "passed": true
+          },
+          {
+            "schema": "scene-v1.5.schema.json",
+            "valid_fixture": true,
+            "errors": []
+          },
+          {
+            "schema": "scene-v1.5.schema.json",
+            "rejection": "unknown_root",
+            "passed": true
+          },
+          {
+            "schema": "scene-v1.5.schema.json",
+            "rejection": "wrong_version",
+            "passed": true
+          }
+        ],
+        "scope": "Actual synthetic candidate geometry and scene fixtures; schemas reject unknown root fields and wrong versions. Not actual F02-F04 migration acceptance.",
+        "log": "verification/F05_schema_check.json"
+      },
+      {
+        "id": "F05-complete-build",
+        "status": "blocked",
+        "command": "npm --prefix spatial-source/web run build",
+        "exit_code": 2,
+        "error": "TS2688: Cannot find type definition file for 'vite/client'.",
+        "log": "verification/F05_candidate_build.log"
+      },
+      {
+        "id": "F05-golden-browser",
+        "status": "authored_not_executed",
+        "path": "spatial-source/web/tests/ui/affected-areas.spec.ts",
+        "journeys": 2,
+        "run_when_dependencies_available": "Start the existing Vite server on 4175; from spatial-source/web run npx playwright test tests/ui/affected-areas.spec.ts --config .",
+        "screenshots_generated": false
+      },
+      {
+        "id": "F05-patch-reproduction",
+        "status": "passed",
+        "base": "reconciled activation comparison tree plus byte-matched confirmed core files",
+        "check": "git apply --check; git apply; compare every candidate source SHA-256",
+        "files_compared": 33,
+        "differences": [],
+        "remote_commit_base": "9022f3ad503116318089647c0abf546967762339",
+        "remaining_patch_sha256": "7482f7467d5c0b26acc0f671b32a05cb366b182bcbfc1d69fa94839c8de6a715"
+      },
+      {
+        "id": "F05-scope",
+        "status": "passed",
+        "source_files": 33,
+        "program_branch_modified": false,
+        "package_or_lockfile_modified": false,
+        "native_or_host_delivery_files_modified": false
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "F05-A01",
+        "status": "implemented_locally_browser_pending",
+        "evidence": "Separate moisture/fire commands and controls; ray-owned 3D context, plan controls, review/reattach paths. Pure helper tests pass; runtime browser behavior unverified."
+      },
+      {
+        "id": "F05-A02",
+        "status": "baseline_geometry_passed_dependency_integration_pending",
+        "evidence": "Sided walls, bends, floor/established synthetic ceiling, polygon holes, clipping and distinct observation kinds tested. Actual F04 cutout material domains must be integrated."
+      },
+      {
+        "id": "F05-A03",
+        "status": "baseline_remaps_passed_actual_height_cutout_and_store_checks_pending",
+        "evidence": "Original support retention, opening move/remove, wall split/join/reversal, coherent group transform, deletion and nonrigid unresolved retention tested. Synthetic height changes are not F03 command acceptance."
+      },
+      {
+        "id": "F05-A04",
+        "status": "authored_not_executed",
+        "evidence": "Browser golden journey covers 3D record to plan height-preserving handle edit, cancellation, undo/redo, reopen and full local-document archive."
+      },
+      {
+        "id": "F05-A05",
+        "status": "pure_queue_math_passed_browser_and_device_pending",
+        "evidence": "120 move samples coalesce, exact terminal sample and cancellation tests pass. No real frame-time, rendered idle-frame, touch occlusion or iPhone performance claim."
+      },
+      {
+        "id": "F05-A06",
+        "status": "json_glb_schemas_passed_full_export_roundtrip_pending",
+        "evidence": "Strict JSON/source identity and GLB material/surface/frozen hash checks pass. Store and SVG/PDF checks skipped; PNG/full local archive need browser. Native parity belongs to F06."
+      }
+    ],
+    "source_manifest": [
+      {
+        "path": "spatial-source/contracts/COMPATIBILITY.md",
+        "bytes": 5949,
+        "sha256": "b4243c8d9c2f039ba0a2c359627619f0e24ebe4b986c9cc92ff07774177413ee",
+        "git_blob": "17dab07f7d56048e36866a814b1ca9ab64a472ab",
+        "baseline_sha256": "444ae09729fc007bf8302be47f45868d4a204892db39720cb44be5e6c8bb119f",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/contracts/geometry-v1.5.schema.json",
+        "bytes": 10330,
+        "sha256": "b489b4f70eb7f9c59ac31102bded6c89ea5fb56c6a46bdc01a17a21506dc8adb",
+        "git_blob": "bff511d6f3cbd231dfbd8195c271df1255e16b67",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/contracts/scene-v1.5.schema.json",
+        "bytes": 3365,
+        "sha256": "7c525466bbac48145eb1bbb52d33d066b3539726dbc30c9038e81e7264342899",
+        "git_blob": "c8e832181976433997e25ea2eca89dfd5f8e4ddb",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/affectedAreaPalette.ts",
+        "bytes": 543,
+        "sha256": "bbf735280362e4cfb9fa93109b63d68a5cbb0d8869ae848baf536abb0805bc99",
+        "git_blob": "296b3a6bc4524aff1ec85578c4f5d27c072fe28f",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/core/affectedAreaGeometry.ts",
+        "bytes": 9048,
+        "sha256": "1d27d0b99c17a2261f32f08706c05d3efd8709d1c4a7aa6a8bb92929a88d27c3",
+        "git_blob": "21f74999870359beda39d0ccf2e9b771f150b922",
+        "baseline_sha256": null,
+        "remote_core_present": true
+      },
+      {
+        "path": "spatial-source/web/src/core/affectedAreas.ts",
+        "bytes": 23474,
+        "sha256": "860f59ebd8182645685f9608e6d0b13bc5f3e9c1f06d28877e7d6f1fe0335c78",
+        "git_blob": "d85aec111b31d2459bddbac3c9ce391ec734c44c",
+        "baseline_sha256": null,
+        "remote_core_present": true
+      },
+      {
+        "path": "spatial-source/web/src/core/editor.ts",
+        "bytes": 19603,
+        "sha256": "353ac5a16eb47a45e34bbb5faf85c18e05804d09e75a2bf2a3d059a46b926d4e",
+        "git_blob": "16ccd42f64cb3f56d95ad021800bab07af26ac0f",
+        "baseline_sha256": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/core/scene.ts",
+        "bytes": 11300,
+        "sha256": "d859e34606ade30220dc27c08a96f85a23b4589186ac04af41d6ed416e41d06d",
+        "git_blob": "9f7e705b8fe341ca0038fb51f65baf99df71709f",
+        "baseline_sha256": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/core/surfaces.ts",
+        "bytes": 3641,
+        "sha256": "1221877d00fd6d8323a9338aca755f358354e8b1b7e582c5f9a3dd47d57a4fca",
+        "git_blob": "12c71d77bfbb33a5be0061f79aa48af41147b717",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/core/validation.ts",
+        "bytes": 12280,
+        "sha256": "546a183dc0afde6786ad3fc17fd215de4a0b2f63d5a84fe0c741442e43eb39ee",
+        "git_blob": "41afa754c55b1e9c3bebe3b4cc97306e111dba52",
+        "baseline_sha256": "144c037599f37f61c039df994f2f22b607d3285398a43469b88b23fe3c0f76a9",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/data/drawing.ts",
+        "bytes": 16414,
+        "sha256": "49e7c16ef6626a6237f00321be9a7aecef30564fb73425e29c94bbbdd2127f14",
+        "git_blob": "4dfbe6d5640099d45dcac849da99a44469efa836",
+        "baseline_sha256": "d508c4d2c83513c9d4a8c1edd6da8f2a611d500aafc9286eca60e0576aed1d01",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/data/exports.ts",
+        "bytes": 7305,
+        "sha256": "ad749d5f13b9ea5c352342bcfb9343da2ccc16fd4eaac178781aabe61c3aceaf",
+        "git_blob": "a89f5e226f4e260608cd731f8aaca342dec00ba6",
+        "baseline_sha256": "4a341b92af57697445011329579d44385d4205137955257fb22b394e0c776dc6",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/data/glb.ts",
+        "bytes": 6679,
+        "sha256": "1ef5c4aff05bb478a2e429a62eba5a4beb47ca4a237ec769a85b92e50bf828ac",
+        "git_blob": "bb3f7766c2a2b045032d43698310ff3db1ec9bb7",
+        "baseline_sha256": "0f9a8e88355c6e2b1f5f424f25d357ea8bc2c880b557245d2162275d5f927839",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/data/imports.ts",
+        "bytes": 16742,
+        "sha256": "ed3b451c108cb556c35848c0ed32c3d22bd2bee02d7541f0c90a37e95144f5ed",
+        "git_blob": "5c4f53b6c64bda5d0409f4acdc9d950b9eb5ef05",
+        "baseline_sha256": "fd66857d90aaa63af0ffb6a6a405a4ad9cc7a5006b53c09c9ade47b89de48066",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/data/store.ts",
+        "bytes": 18664,
+        "sha256": "b468559e4fb4ea9a0b3fb8f15159503993e288eca57f6959a1b61c13f7e78ca9",
+        "git_blob": "d37dff3a3d7f59ec8e05925a58e8f18cf85559bb",
+        "baseline_sha256": "baa1747d5ad9571aace0bf3d32aaed5ae0289b5ba82ab0f1bd75d57591bd569e",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/types.ts",
+        "bytes": 8653,
+        "sha256": "a9cfa5f2eb0107949d02e72f1f47a955eb7ad29656d0ca594503e02c43f7de8f",
+        "git_blob": "9346aab60b429abbbb35001ccccfcdd830e445a5",
+        "baseline_sha256": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+        "bytes": 18396,
+        "sha256": "0c78f5750382492bbf126882acc489128cee427d6ce01c4d0c2765f2c0da26b5",
+        "git_blob": "e1db0d6067f5a68cd9a7df33db98474a3a8b10bd",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "bytes": 63745,
+        "sha256": "b3bfe6a6a59e92f58ad94f7e7b1b0d6249eafc843b54dd59f11fc9d5b0d62e08",
+        "git_blob": "1f7b953d9299576c8a7b9ceed8e1de13a26a1608",
+        "baseline_sha256": "d280ee91ad4353f23dd9e6c92f3663d0e77f69abe626795bc50a2c4c8c925527",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+        "bytes": 41336,
+        "sha256": "3165ddc5c3fb8c67c8fe4f8be6e5dd0640ea6a48a537595a246bcf5b73bc99d0",
+        "git_blob": "72a4ac811ee2b1e1d23cbfc6d982443c9882be64",
+        "baseline_sha256": "42aa2f36f002bd5d15ce9ca583675bc3c05ae7d365af3b51f48e19c64f853d72",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+        "bytes": 6157,
+        "sha256": "ff3a4f5fb1c2ce224c2e54bcdbb9a64715ff0226e061523e6f2f345d44060bee",
+        "git_blob": "312970c07ec5569130fe48b8abed256bda590317",
+        "baseline_sha256": "6577866f352385c141fde845e4c30f0e0be7fa5db631828ca532b97d7eabb35c",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "bytes": 56732,
+        "sha256": "0ec9a20d23fd4fd71d5589baa0d8093c213fed2375e286bbf85ce37c766dbe7a",
+        "git_blob": "b7b380d99d715723068e1d949f1571745558080b",
+        "baseline_sha256": "a8bd52dfed7edefc6b384d2c34b149ecefca1957e77d18d6912c63bfff169fc0",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/affectedAreaBatches.ts",
+        "bytes": 2522,
+        "sha256": "44f7dca072800bef28a2b8b5c1d4008859768703f4ee7488a1508efff8dcf2d5",
+        "git_blob": "52c50cb3aecff9771c172b2ccdbd4745b38cccee",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+        "bytes": 7999,
+        "sha256": "07ddcbeae7abdcc8ebe367c172121e676fc64cd56e8e0956607232f86b2121f3",
+        "git_blob": "f73bf0634873e4f9035a3d8120879095f02623b1",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/geometry.ts",
+        "bytes": 5119,
+        "sha256": "a4d508e7b0d922d9166e85dfa1bb2dc0074c99362e86e31ebd2fc969e33e70ee",
+        "git_blob": "25000f5f587ee73691c8e81134df0b010674ab08",
+        "baseline_sha256": "e315cff4c0147f6bdfbe3b649865f1d032087de988017bd24e02693b7c78450d",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/groupSelection.ts",
+        "bytes": 12447,
+        "sha256": "6c569d35c105fb8e48942475d2d41f45542fe79cdd40e10efd98ea17eff570e2",
+        "git_blob": "af97e00d44be31f9ab3aa9bc16d69dbf3be14c2b",
+        "baseline_sha256": "ddbed23da85d7ed2199a17d6cea6bbc4ec4df46bb112837d01b3ee25fbd40df3",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/review.ts",
+        "bytes": 3522,
+        "sha256": "8726927025827b084b8855bc8ea1920f31a4ba12c4f96f98993f12b8113916c9",
+        "git_blob": "68d0bfb624db6023cc0792fa9390c0c1a4b735e7",
+        "baseline_sha256": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/sceneBatches.ts",
+        "bytes": 3186,
+        "sha256": "e4b27cea2e67bf24098d52918bd4164d935b749aabdcdfc7836fe2ff9fea09a2",
+        "git_blob": "acb866a7e528bb03caf98cd0d74f9a557f336c35",
+        "baseline_sha256": "6dc89b464835c2e9a7af3f064d69579cfb5901624ffcee759cc5bd11a7c04f9b",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/src/ui/workspace.css",
+        "bytes": 52543,
+        "sha256": "5c55cd4d2dee4c088a97fb7382a63ef0d462d14b997f6fb9efb81f404503ce69",
+        "git_blob": "9f5aa23f30155adf5f47ad130ee481a2f6b3642d",
+        "baseline_sha256": "8de059a65611311ebb1f1725e1ced7df64bba9d254aa617e9602e332b7443926",
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+        "bytes": 6338,
+        "sha256": "b6c8cd68dc365ec9e7ab1222377ed98c5e05c40c4446f929cae5a5b56ca1a2a5",
+        "git_blob": "c412e2901808073392f241f396beccb09bbac2eb",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/tests/core/affected-areas.test.ts",
+        "bytes": 5958,
+        "sha256": "b3dedcfc9979ab4894ac43468b331280eb1163c9b15267be59650143e8b76972",
+        "git_blob": "99040103ad31e8735529c1f30f117aca4368c46d",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/tests/data/affected-areas.test.ts",
+        "bytes": 6603,
+        "sha256": "6c8fd0360ed10a44592f3449bc7ffa5b68336707994f48b57df27d7cdcafcd28",
+        "git_blob": "28ee6334db8be256507230dfaeaaef7519060041",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+        "bytes": 2595,
+        "sha256": "7ff8597d827a2f141746e2c101c10206b5732b8a6ff074e05e53a430cfb809ac",
+        "git_blob": "3cafbd0eda98d712c7ea2b23f59aa117d9f0e4c3",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      },
+      {
+        "path": "spatial-source/web/tests/ui/affected-areas.spec.ts",
+        "bytes": 9942,
+        "sha256": "bae73a078cbfae9b40edc6382f91dd95f0707eb50b053605c488e9997275f19f",
+        "git_blob": "ca719d04458860d0796584e4f957ea05134f3f70",
+        "baseline_sha256": null,
+        "remote_core_present": false
+      }
+    ],
+    "patches": {
+      "activation_relative": {
+        "file": "F05_Candidate_From_Activation.patch",
+        "sha256": "b89feaf0b99f2e877bff1319ff32d929d45ed2e69a0fbc90d5a7a05e6303f40e"
+      },
+      "confirmed_remote_core_relative": {
+        "file": "F05_Remaining_From_9022f3ad.patch",
+        "sha256": "7482f7467d5c0b26acc0f671b32a05cb366b182bcbfc1d69fa94839c8de6a715",
+        "apply_base": "9022f3ad503116318089647c0abf546967762339",
+        "paths": 31
+      }
+    },
+    "remote_write_status": {
+      "confirmed_commit": "9022f3ad503116318089647c0abf546967762339",
+      "confirmed_files": [
+        "spatial-source/web/src/core/affectedAreaGeometry.ts",
+        "spatial-source/web/src/core/affectedAreas.ts"
+      ],
+      "unconfirmed_git_tree_attempts_are_not_commits": true,
+      "integration_commit_error": "GitHub returned 422: tree does not point to a valid tree object. Subsequent tree lookup also returned 404. No force push or program-branch update was performed.",
+      "full_candidate_on_remote_branch": false
+    },
+    "independent_review": "No independent reviewer was available; self-review and the enumerated checks only."
+  }
+}

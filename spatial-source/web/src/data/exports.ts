@@ -36,6 +36,7 @@ export async function exportRevision(frozen: FrozenRevision, format: ExportForma
     case 'pdf': bytes = await pdfDrawing(frozen, selected); mimeType = 'application/pdf'; filename = `${stem}${floorID ? `-${floorID}` : '-all-floors'}.pdf`; break;
     case 'glb': { const floor = single(); bytes = glbDrawing(frozen, floor.id); mimeType = 'model/gltf-binary'; filename = `${stem}-${floor.id}.glb`; break; }
     case 'bundle': {
+      if (document.schemaVersion === '1.2.0') fail('opening-schema-not-supported-by-legacy-exchange-use-complete-local-document');
       const floor = single();
       // The v1 wire profile is single-floor. Never discard other floors inside its geometry.
       if (document.floors.length !== 1) fail('single-floor-exchange-only-use-local-document');

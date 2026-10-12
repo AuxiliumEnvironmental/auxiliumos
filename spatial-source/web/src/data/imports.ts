@@ -133,6 +133,7 @@ export async function importWorkspace(bytes: Uint8Array, filename: string): Prom
     });
   } else {
     shape(manifest, ['formatVersion', 'documentID', 'revision', 'measurementStatus', 'contentClass', 'files']);
+    if (document.schemaVersion === '1.2.0') fail('opening-schema-not-supported-by-legacy-exchange-use-complete-local-document');
     if (manifest.formatVersion !== '1.0.0' || manifest.contentClass !== 'spatial-draft' || document.floors.length !== 1 || Object.keys(files).length !== 4) fail('unsupported-exchange-profile');
   }
   const records = array(manifest.files, copied ? 7 : local ? 5 : 3, local ? 4095 : 3), seen = new Set<string>();

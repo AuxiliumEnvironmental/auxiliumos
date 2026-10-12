@@ -1,0 +1,374 @@
+{
+  "task_id": "F03",
+  "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "accepted_F01_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+  "result_commit": null,
+  "branch": "spatial/f03-ceilings-2026-10-11",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92",
+  "pr_url": null,
+  "disposition": "in_progress",
+  "delivery_status": "local_candidate_not_pushed",
+  "stop_after": "F03 handoff; no next feature activated",
+  "summary": "27 scoped source/test/schema files implemented locally. 32 focused Node tests pass. Frontend build/browser, durable archive/history receipts, actual F02 integration and remote publication remain open. This is not branch_implementation_complete_pending_integration or delivered.",
+  "changed_paths": [
+    "spatial-source/contracts/COMPATIBILITY.md",
+    "spatial-source/contracts/geometry-v1.3.schema.json",
+    "spatial-source/contracts/scene-v1.3.schema.json",
+    "spatial-source/web/src/core/ceilings.ts",
+    "spatial-source/web/src/core/editor.ts",
+    "spatial-source/web/src/core/index.ts",
+    "spatial-source/web/src/core/navigation.ts",
+    "spatial-source/web/src/core/scene.ts",
+    "spatial-source/web/src/core/surfaces.ts",
+    "spatial-source/web/src/core/validation.ts",
+    "spatial-source/web/src/data/exports.ts",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/src/data/imports.ts",
+    "spatial-source/web/src/types.ts",
+    "spatial-source/web/src/ui/CeilingHeightControls.tsx",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+    "spatial-source/web/src/ui/Inspector.tsx",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+    "spatial-source/web/src/ui/ceilingManipulation.ts",
+    "spatial-source/web/src/ui/roomDrawing.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/wallDrawing.ts",
+    "spatial-source/web/src/ui/workspace.css",
+    "spatial-source/web/tests/core/ceilings.test.ts",
+    "spatial-source/web/tests/core/surfaces.test.ts",
+    "spatial-source/web/tests/ui/ceiling-height.spec.ts",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/F03_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/F03_VERIFICATION.json"
+  ],
+  "requirements_addressed": [
+    "Room and explicit multi-floor structure ceiling commands with delta/absolute semantics.",
+    "Stable ceiling intent and conservative legacy migration; extend-only wall envelope; atomic opening conflicts.",
+    "Split/merge identity/provenance and shared physical surface/domain/remap implementation.",
+    "Written numeric and 3D height controls, frozen-plane/coalesced previews and revision/authority fences.",
+    "Candidate strict 1.3 admission, canonical ceilings and GLB materials, version-preserving room/wall/area preflights."
+  ],
+  "contract_versions": {
+    "shared_contract": 4,
+    "surface_interface": 2,
+    "geometry_candidate": "1.3.0",
+    "scene_candidate": "1.3.0",
+    "cumulative_F02_integration": "not_yet_composed",
+    "unchanged_legacy_schemas": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "publisher": "disabled; constrained exchange rejects ceiling-intent documents"
+  },
+  "decisions": [
+    "Unknown ceiling height stays null until explicit numeric initialization; no guessed measured ceiling.",
+    "Structure height uses an explicit room set and common delta; absolute assignment is separately labeled.",
+    "Only necessary boundary walls extend; lowering clearance never silently shrinks walls or openings.",
+    "Surface identity and UV charts follow the accepted shared interface; no F04/F05 duplicate implementation.",
+    "Do not edit data/store.ts, package/config, old schemas or delivery targets outside the grant.",
+    "Publish a scoped patch rather than fabricate remote ancestry or push access."
+  ],
+  "evidence": [
+    {
+      "acceptance_id": "F03-A01",
+      "result": "partial_pass",
+      "established": [
+        "Actual commands preserve unequal neighbor intent, footprints, floor elevation and wall baseY.",
+        "Prepared drag math and numeric command agree on nonzero floor/base fixtures."
+      ],
+      "remaining": [
+        "Actual mobile pointer journey, renderer geometry and UI interaction verification."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A02",
+      "result": "partial_pass",
+      "established": [
+        "Explicit room lists, common delta across independent floors, null-member rejection, separately labeled absolute initialization, one command revision."
+      ],
+      "remaining": [
+        "Actual IndexedDB undo/redo journey and shared-surface restoration receipts."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A03",
+      "result": "passed_bounded_core_scope",
+      "established": [
+        "Opening conflicts reject atomically.",
+        "Unequal, nonpositive and invalid inferred legacy ceilings remain explicit null; no invented measured height."
+      ],
+      "remaining": [
+        "F04 fixture extent conflict integration belongs to composed candidate."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V04"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A04",
+      "result": "partial_pass",
+      "established": [
+        "Split/merge IDs and lineage, actual source-domain remaps, canonical scene and frozen GLB ceiling identity/height/material.",
+        "Old schema files untouched; strict new schema fixtures pass."
+      ],
+      "remaining": [
+        "Actual complete-local-document ZIP round trip, durable undo/reopen/restore and receipt wiring in out-of-scope data/store.ts.",
+        "Actual accepted F02 cumulative schema/scene fields."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V04"
+      ]
+    },
+    {
+      "acceptance_id": "F03-A05",
+      "result": "partial_pass",
+      "established": [
+        "Pure drag helper tests cover grab offset, singular rays, camera-basis hold, explicit cancellation, stale revision/generation/context and invalid terminal sample.",
+        "Viewport and numeric controls are written with hidden-ceiling discovery and navigation-only walk boundary."
+      ],
+      "remaining": [
+        "Entire real mobile journey, cancellation event table, cutaway/orbit picking, accessibility and screenshots remain unrun."
+      ],
+      "checks": [
+        "F03-V02",
+        "F03-V03"
+      ],
+      "browser_check": "F03-V06"
+    },
+    {
+      "acceptance_id": "F03-A06",
+      "result": "partial_pass",
+      "established": [
+        "120 sample helper burst requests one frame and exact terminal release flushes once.",
+        "1.3 room/wall/area preflights and monotonic version behavior are tested.",
+        "Viewport source updates affected ceiling buffers and extension bands, not full topology or storage per pointer move."
+      ],
+      "remaining": [
+        "Real renderer-construction/write instrumentation in browser.",
+        "Full build.",
+        "Actual F02 styles, fences, scene roles and cumulative schema integration."
+      ],
+      "checks": [
+        "F03-V01",
+        "F03-V02",
+        "F03-V03"
+      ],
+      "browser_check": "F03-V06"
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "local_commits_and_scoped_patch_only_not_pushed",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": "F03_VERIFICATION.json",
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "standalone_web": {
+      "status": "build_failed_environment_browser_not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": "F03_VERIFICATION.json",
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "lovable": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "capacitor_assets": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "apple_build": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "simulator": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "physical_iphone": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "os_embed": {
+      "status": "not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    },
+    "exports": {
+      "status": "canonical_scene_and_glb_core_checks_pass_local_archive_not_run",
+      "source_commit": null,
+      "local_candidate_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+      "host_or_asset_ref": null,
+      "evidence": "F03_VERIFICATION.json",
+      "remaining": [
+        "Master integration and target-specific acceptance; not delivered."
+      ]
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [],
+  "known_limits": [
+    "No remote commit or push. Local repository starts from a synthetic reconstructed root, not activation ancestry.",
+    "Full frontend build and browser acceptance are not established.",
+    "data/store.ts is not in F03 allowed_paths. Its history() and restore() receipts omit the new surfaceRemaps.",
+    "Actual F02 implementation was not available as an accepted dependency in this isolated candidate.",
+    "Existing Playwright config uses a closed testMatch list that excludes the new spec; config is outside F03 writable scope.",
+    "Mounted fixture bounds, real cutout subtraction and recorded observation support are downstream consumers, not implemented by F03.",
+    "No host transfer, standalone served build, Capacitor assets, Apple compile/simulator/device or OS embed acceptance.",
+    "Browser spec uses mouse pointer actions at mobile/desktop viewport sizes. Even a future pass will not substitute for physical iPhone touch/WebKit evidence.",
+    "General ambiguous/nonrigid surface remaps remain unresolved conservatively; downstream attachment consumers must reject or require review, not guess.",
+    "SVG/PDF/PNG remain plan projections. No ceiling height annotations were added to out-of-scope drawing.ts. Complete saved intent is carried by geometry/local document and canonical scene/GLB."
+  ],
+  "source_preserved": true,
+  "source_preservation_details": {
+    "modified_old_files_match_live_input_hashes": 18,
+    "new_source_test_schema_files": 9,
+    "unassigned_paths_changed": [],
+    "old_schemas_changed": false,
+    "remote_refs_changed": false,
+    "recovery_used_only_for_local_read_reconstruction": true,
+    "baseline_manifest": "evidence/scope-and-baseline.json",
+    "patch_application_evidence": "evidence/patch-application-check.json"
+  },
+  "next_dependency_handoff": [
+    {
+      "id": "G01",
+      "owner": "master / write-capable authorized worker",
+      "gap": "No remote commit or push. Local repository starts from a synthetic reconstructed root, not activation ancestry.",
+      "next_action": "Review/apply the scoped patches on the actual live assigned branch using current-head protection. Never push the reconstructed local branch or replace the entire repo."
+    },
+    {
+      "id": "G02",
+      "owner": "master / F03 verification",
+      "gap": "Full frontend build and browser acceptance are not established.",
+      "next_action": "Use the existing locked frontend dependencies, run the required build, then the focused browser spec with the supplied temporary config. Capture actual allocated screenshots, fix any observed defects and rerun only affected checks."
+    },
+    {
+      "id": "G03",
+      "owner": "master scope/integration",
+      "gap": "data/store.ts is not in F03 allowed_paths. Its history() and restore() receipts omit the new surfaceRemaps.",
+      "next_action": "Under a master-owned grant, add restorationSurfaceMappings(source,row.document) as surfaceRemaps to both restoration receipts while preserving existing ID mappings; verify real undo/redo/restore source/result revisions and ceiling lineage."
+    },
+    {
+      "id": "G04",
+      "owner": "master / F02 integration",
+      "gap": "Actual F02 implementation was not available as an accepted dependency in this isolated candidate.",
+      "next_action": "Compose 1.3 geometry/scene schemas, style/provenance preservation, material roles and the commit fence against actual accepted F02 diffs; use one shared implementation, not a parallel duplicate."
+    },
+    {
+      "id": "G05",
+      "owner": "master verification config",
+      "gap": "Existing Playwright config uses a closed testMatch list that excludes the new spec; config is outside F03 writable scope.",
+      "next_action": "Use the external temporary test config for this check; master may later add the spec to maintained config under its own scope."
+    },
+    {
+      "id": "G06",
+      "owner": "master / F04 / F05",
+      "gap": "Mounted fixture bounds, real cutout subtraction and recorded observation support are downstream consumers, not implemented by F03.",
+      "next_action": "Integrate their actual records and remap/rejection behavior with the single surface resolver; no synthetic fixture success is claimed."
+    },
+    {
+      "id": "G07",
+      "owner": "master / F06",
+      "gap": "No host transfer, standalone served build, Capacitor assets, Apple compile/simulator/device or OS embed acceptance.",
+      "next_action": "Retain existing platform gates and verify the composed candidate through the documented master delivery path."
+    }
+  ],
+  "active_writers_remaining": [
+    "F03 stopped after this handoff. Other feature branches remain separately assigned; their execution status was not asserted or changed."
+  ],
+  "parallel_integration": {
+    "assignment_ledger": "program-branch docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+    "work_branch": "spatial/f03-ceilings-2026-10-11",
+    "activation_id": "F03-2026-10-11-P1",
+    "branch_base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "accepted_dependencies_tested": {
+      "F01": "Matching relevant runtime inputs at accepted baseline 3240880195cd6653d0816da5cb4412bda2516e52; no new F01 browser rerun.",
+      "F02": null,
+      "F03_helpers": "Actual candidate modules, not a synthetic upstream feature."
+    },
+    "shared_file_adapter_commits": [],
+    "local_only_shared_file_adapter_commits": [
+      "7666d24906762a38bc1704fc803eb742e6e602e6"
+    ],
+    "dependency_sensitive_gaps": [
+      "G03",
+      "G04",
+      "G06"
+    ],
+    "branch_status": "in_progress",
+    "master_integration_commit": null
+  },
+  "local_git": {
+    "reconstructed_base": "182fc215124e8810e8392733d69b6a1a6c10f499",
+    "is_remote_activation_descendant": false,
+    "feature_module_commit": "89b9ef708f5ae811c4589c86cd7359150904a222",
+    "shared_adapter_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+    "source_result_commit": "7666d24906762a38bc1704fc803eb742e6e602e6",
+    "artifact_commit": "Recorded externally in bundle MANIFEST.json to avoid self-referential commit data.",
+    "pushed": false,
+    "safe_transfer": "Use supplied scoped patches only, onto actual current authorized branch. Do not push this synthetic local history."
+  },
+  "patch": {
+    "filename": "F03_LOCAL_CANDIDATE.patch",
+    "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
+    "source_files": 27,
+    "application_check": "passed against all modified baseline inputs; resulting file hashes match local source candidate."
+  }
+}

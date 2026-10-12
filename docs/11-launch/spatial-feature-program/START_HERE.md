@@ -1,10 +1,16 @@
 # Auxilium Spatial: master feature program
 
+## Current handoff checkpoint: October 12, 2026
+
+F02 is integrated and code accepted with platform gaps. F04 and F05 are reviewed and pushed candidates awaiting ordered integration. F03's source patch is missing; its two received JSON files are receipts only. Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.
+
+Current evidence: `coordination/INTEGRATION_REVIEW_2026_10_12.json`. Do not restart completed feature chats or re-run matching verification. The workflow below remains the coordination protocol; no workers are currently running.
+
 Prepared October 11, 2026 for Christian Duarte. This is a source preservation and execution package. The original package specified five features. Current branch progress is recorded below and in CURRENT_STATE.md; the immutable ZIP remains a recovery reference.
 
 This conversation is the master coordination thread. Keep the master in Astra as the owner requested. This packet cannot change a chat's model, create future chats, see their hidden reasoning, or keep workers running after a turn. Separate chats coordinate through the committed assignment and returned handoff. No chat may assume it can read another chat.
 
-## Start the parallel feature chats
+## Feature chat and handoff workflow
 
 F01 source is accepted. The owner now authorizes F02, F03, F04 and F05 to develop concurrently, each on its own named branch. Use the four prompts in `prompts/` and the live `coordination/ACTIVE_TASKS.json` on the program branch. No ZIP is required for a chat with current GitHub access. The ZIP remains an immutable recovery reference.
 
@@ -40,7 +46,7 @@ Read `CURRENT_STATE.md`, `MASTER_CONTROL.md`, `SHARED_CONTRACT.md`, then only th
 | F05 | Surface-attached moisture/fire affected areas | F04 |
 | F06 | One combined cross-feature review and remaining platform delivery | F05 |
 
-F00/F01 are accepted. The four feature implementations overlap on isolated branches, using the frozen contract. This table defines integration order only. F06 reuses accepted checks and focuses on combined interactions and delivery.
+F00/F01/F02 source is accepted. The four feature implementations overlap on isolated branches, using the frozen contract. This table defines integration order only. F06 reuses accepted checks and focuses on combined interactions and delivery.
 
 GitHub parent issue: https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88
 Branch: `spatial/feature-program-2026-10-11`. It is an isolated preservation/development branch, not an OS release. Final recorded commit and child issues are in `GITHUB_RECEIPT.json`.

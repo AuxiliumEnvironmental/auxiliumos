@@ -1,3 +1,9 @@
+# October 12, 2026 master integration checkpoint
+
+F02 source is integrated and accepted with platform gaps at reviewed feature commit `6342e87e27376fb664dfe904d299a2c94ffac1ff`. F04 and F05 are reviewed candidates on their feature branches. Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.
+
+Read `../docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json` and the canonical queue. Existing F03 handoff/verification receipts are preserved; expected patch SHA256 is `dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0`. No active worker or new host/Apple/OS delivery is claimed. Earlier delivery history follows.
+
 # October 11, 2026 parallel feature-program entry point
 
 F01 source acceptance is saved at `3240880195cd6653d0816da5cb4412bda2516e52`. Contract revision 4 and D18/CUTOUT_SCOPE.md apply. The owner now authorizes F02 openings, F03 ceilings, F04 fixtures and F05 affected areas concurrently on separate branches, assigned in `../docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json`. Read PARALLEL_DEVELOPMENT.md and SURFACE_INTERFACE.md. Never push a worker directly to the program branch. The master integrates F02->F03->F04->F05 and owns F06 platform delivery. Q01 is resolved: optional wall/floor/ceiling cutouts and service penetrations are authorized with an additive F04 grant; named fixtures remain required. No new feature worker or deployed/installed parity is claimed by this activation. Original historical delivery evidence below remains preserved.

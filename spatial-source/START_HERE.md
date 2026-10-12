@@ -1,3 +1,9 @@
+# October 12, 2026 current feature checkpoint
+
+F02 source is accepted and integrated; F04/F05 are reviewed on isolated branches. Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.
+
+Read `RESUME.md`, `BUILD_QUEUE.json` and `../docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json`. The following preservation entry points retain historical scope.
+
 # October 11, 2026 feature-program entry point
 
 Current owner-authorized feature planning and fresh state are in `../docs/11-launch/spatial-feature-program/START_HERE.md` and `CURRENT_STATE.md`. The queue now includes F00-F06. No feature is implemented by this preservation snapshot. The original checkpoint and its unmodified history remain in the paired recovery ZIP. Read the new current-state reconciliation before interpreting older status prose below.
