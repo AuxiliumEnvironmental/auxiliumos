@@ -1,0 +1,385 @@
+{
+  "task_id": "F04",
+  "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "result_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+  "branch": "spatial/f04-fixtures-2026-10-11",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93",
+  "pr_url": null,
+  "disposition": "branch_implementation_complete_pending_integration",
+  "changed_paths": [
+    "spatial-source/contracts/COMPATIBILITY.md",
+    "spatial-source/contracts/geometry-v1.4.schema.json",
+    "spatial-source/contracts/scene-v1.4.schema.json",
+    "spatial-source/web/src/core/cutoutGeometry.ts",
+    "spatial-source/web/src/core/cutouts.ts",
+    "spatial-source/web/src/core/editor.ts",
+    "spatial-source/web/src/core/fixtureAttachments.ts",
+    "spatial-source/web/src/core/fixtureCatalog.ts",
+    "spatial-source/web/src/core/fixtures.ts",
+    "spatial-source/web/src/core/index.ts",
+    "spatial-source/web/src/core/navigation.ts",
+    "spatial-source/web/src/core/scene.ts",
+    "spatial-source/web/src/core/surfaces.ts",
+    "spatial-source/web/src/core/validation.ts",
+    "spatial-source/web/src/data/drawing.ts",
+    "spatial-source/web/src/data/exports.ts",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/src/data/imports.ts",
+    "spatial-source/web/src/fixturePalette.ts",
+    "spatial-source/web/src/types.ts",
+    "spatial-source/web/src/ui/CutoutControls.tsx",
+    "spatial-source/web/src/ui/FixturePicker.tsx",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+    "spatial-source/web/src/ui/Inspector.tsx",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/ui/PlanGeometry.tsx",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+    "spatial-source/web/src/ui/cutoutManipulation.ts",
+    "spatial-source/web/src/ui/fixtureManipulation.ts",
+    "spatial-source/web/src/ui/geometry.ts",
+    "spatial-source/web/src/ui/groupSelection.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/workspace.css",
+    "spatial-source/web/tests/core/cutout-geometry.test.ts",
+    "spatial-source/web/tests/core/cutouts.test.ts",
+    "spatial-source/web/tests/core/fixture-attachments.test.ts",
+    "spatial-source/web/tests/core/fixtures.test.ts",
+    "spatial-source/web/tests/data/cutouts.test.ts",
+    "spatial-source/web/tests/data/fixtures.test.ts",
+    "spatial-source/web/tests/ui/cutout-manipulation.test.ts",
+    "spatial-source/web/tests/ui/cutouts.spec.ts",
+    "spatial-source/web/tests/ui/fixture-manipulation.test.ts",
+    "spatial-source/web/tests/ui/fixtures.spec.ts",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_VERIFICATION.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png"
+  ],
+  "requirements_addressed": [
+    "F04-A01",
+    "F04-A02",
+    "F04-A03",
+    "F04-A04",
+    "F04-A05",
+    "F04-A06"
+  ],
+  "contract_versions": {
+    "shared_contract": 4,
+    "surface_interface": 2,
+    "geometry_candidate": "1.4.0",
+    "scene_candidate": "1.4.0",
+    "fixture_catalog": 1,
+    "local_document_profiles": [
+      "1.0.0",
+      "1.1.0"
+    ]
+  },
+  "decisions": [
+    "D04/D08 parametric, nonblocking, sided rigid mounts",
+    "D18 optional real rectangle/circle wall/floor/ceiling cutouts and penetrations",
+    "Q02 appliance/built-in unnamed variants explicitly provisional"
+  ],
+  "evidence": [
+    {
+      "acceptance_id": "F04-A01",
+      "result": "passed_branch_candidate",
+      "check": "20 catalog entries cover all explicitly named families; 10 parametric archetypes, owned fixture faces/feature edges, actual dimensions",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/core/fixtures.test.ts; fixtures-catalog-desktop.png",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    },
+    {
+      "acceptance_id": "F04-A02",
+      "result": "passed_branch_candidate",
+      "check": "Floor and wall fixture placement/numeric edit; plan floor resize and cancel; 3D floor/wall height; undo/redo, view switch and reopen",
+      "remaining": "Full touch cancellation/accessibility matrix and physical iPhone interactions remain unverified.",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/ui/fixtures.spec.ts; fixture-manipulation.test.ts; fixtures-mobile.png",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    },
+    {
+      "acceptance_id": "F04-A03",
+      "result": "passed_branch_candidate",
+      "check": "Translation, floor elevation, rigid rotation, split/join and side-aware remaps; nonrigid or ambiguous changes reject atomically; same-transaction explicit deletion supports either order; host plus attachment group moves once",
+      "remaining": "F03 actual remap receipt composition and integrated ceiling-edit conflict probes.",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/core/fixture-attachments.test.ts",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    },
+    {
+      "acceptance_id": "F04-A04",
+      "result": "passed_branch_geometry_pending_dependency_integration",
+      "check": "Rectangle/circle actual wall/floor/ceiling subtraction, opposite wall sides, analytic bounds/overlap rejection, shared resolver domains, save/history, mobile floor void placement and continuous movement checks, real host-only 3D previews",
+      "remaining": "Established ceiling test input is explicitly synthetic D03-shaped data. Actual F03 authoring/migration/height remaps and F05 recorded support require composed checks.",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/core/cutouts.test.ts; cutout-geometry.test.ts; tests/data/cutouts.test.ts; tests/ui/cutouts.spec.ts; cutouts-mobile.png",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    },
+    {
+      "acceptance_id": "F04-A05",
+      "result": "passed_local_browser_scope",
+      "check": "Fixtures remain nonblocking; cutouts confer no portal permissions. Populated two-room/two-fixture mobile view uses one event-driven renderer; short warm idle shows no frame/geometry growth and released renderers report zero resources",
+      "remaining": "No physical iPhone frame/latency, large-load envelope or exhaustive touch/accessibility acceptance claimed.",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/ui/fixtures.spec.ts; tests/core/cutouts.test.ts",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    },
+    {
+      "acceptance_id": "F04-A06",
+      "result": "passed_branch_exports_pending_cumulative_admission",
+      "check": "Frozen local-document archive, SVG/PNG/PDF/scene/GLB and reopen retain records and geometry. Scene and GLB metadata carry catalog/dimensions/mount/provenance; fixture-only floors export honestly and extents include off-structure objects; 1.4 legacy exchange rejected",
+      "remaining": "F02/F03 actual cumulative schemas/admission and version-aware drawing preflights must be reconciled. Separate platform transfers remain master-only.",
+      "source_inputs": [
+        "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+        "F04_VERIFICATION.json source_sha256"
+      ],
+      "environment": "Node 24.19.0; Chromium 138.0.7204.0 with ANGLE SwiftShader; synthetic desktop/mobile only",
+      "artifact": "tests/data/fixtures.test.ts; tests/data/cutouts.test.ts; both browser journeys",
+      "why_sufficient": "Focused branch-local proof of the named behavior; remaining integration/platform limits are explicit."
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "verified_branch_candidate",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": "F04_VERIFICATION.json",
+      "remaining": [
+        "This branch starts from accepted F01 activation a90d4f9. No F02/F03/F05 implementation was present on their remote branches when inspected; no accepted predecessor integration is claimed.",
+        "F04 1.4 schemas and optional Room.ceiling adapter are branch candidates. Compose actual F02 styled opening fields/roles and F03 required ceiling intent/migration/admission before accepting cumulative 1.4. 1.2/1.3 input currently fails closed.",
+        "F03 owns canonical surfaces.ts. Merge F04 uncut-host lookup, cutout subtraction and chart helpers semantically into actual F03 resolver; preserve its heights/domains and additive remap receipts. F04 internal attachment remaps do not substitute for composed surface receipts/undo restoration.",
+        "F02 owns version-aware room/wall/opening/recovery preflights. Legacy drawing helpers on this F01-based branch still synthesize 1.0/1.1 and reject floors containing 1.4 fields; reconcile at integration rather than dropping fields or adding a competing preflight model.",
+        "Tested ceiling hosts are explicitly synthetic D03-shaped established ceiling data. No F03 ceiling authoring or migration is implemented by F04. Integrate real ceiling edits/conflicts/remaps.",
+        "F05 must consume actual cutout domains and preserve recorded support when holes move/disappear. Fixtures never subtract support. Combined damage/ceiling/cutout acceptance remains open."
+      ]
+    },
+    "standalone_web": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "lovable": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "capacitor_assets": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "apple_build": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "simulator": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "physical_iphone": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "os_embed": {
+      "status": "not_run_master_delivery_boundary",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    },
+    "exports": {
+      "status": "verified_branch_candidate",
+      "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "host_or_asset_ref": null,
+      "evidence": "F04_VERIFICATION.json",
+      "remaining": [
+        "Master-composed acceptance and target-specific delivery receipt required."
+      ]
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [
+    "Q02: no exhaustive unnamed appliance/built-in subtype catalog is asserted. Named families are covered."
+  ],
+  "known_limits": [
+    "Circular geometry is an inscribed 48-gon; radial error <= radius*(1-cos(pi/48)), about 0.214% of radius. Bounds/overlap validation uses analytic circles.",
+    "Surface model remains zero-thickness. No recesses, notches, automated shafts, service networks or new traversal permissions.",
+    "Ambiguous/nonrigid host edits reject unless explicitly resolved. Mixed attached-host motion plus split/join rejects even if an exact rigid result might exist; separate those operations or explicitly rehost/delete within the batch.",
+    "Gesture moves stay on original contiguous straight runs. Exact numeric repositioning can deliberately choose a valid different location on the explicit host.",
+    "No physical iPhone, exhaustive interaction/accessibility, large-scene performance or all interruption-matrix acceptance. Short idle evidence is specifically browser scope.",
+    "First candidate fixture/profile dimensions admit 0.01 to 100 meters. Service penetrations under 10 mm are unsupported; no exhaustive service-size support is asserted."
+  ],
+  "source_preserved": {
+    "activation_ancestor": true,
+    "newer_remote_branch_work": "Remote F04 still at activation before writeback; expected-head lease required",
+    "archive_used_as_overwrite": false,
+    "original_snapshots": "Existing store history and original capture/source provenance preserved"
+  },
+  "next_dependency_handoff": [
+    "This branch starts from accepted F01 activation a90d4f9. No F02/F03/F05 implementation was present on their remote branches when inspected; no accepted predecessor integration is claimed.",
+    "F04 1.4 schemas and optional Room.ceiling adapter are branch candidates. Compose actual F02 styled opening fields/roles and F03 required ceiling intent/migration/admission before accepting cumulative 1.4. 1.2/1.3 input currently fails closed.",
+    "F03 owns canonical surfaces.ts. Merge F04 uncut-host lookup, cutout subtraction and chart helpers semantically into actual F03 resolver; preserve its heights/domains and additive remap receipts. F04 internal attachment remaps do not substitute for composed surface receipts/undo restoration.",
+    "F02 owns version-aware room/wall/opening/recovery preflights. Legacy drawing helpers on this F01-based branch still synthesize 1.0/1.1 and reject floors containing 1.4 fields; reconcile at integration rather than dropping fields or adding a competing preflight model.",
+    "Tested ceiling hosts are explicitly synthetic D03-shaped established ceiling data. No F03 ceiling authoring or migration is implemented by F04. Integrate real ceiling edits/conflicts/remaps.",
+    "F05 must consume actual cutout domains and preserve recorded support when holes move/disappear. Fixtures never subtract support. Combined damage/ceiling/cutout acceptance remains open."
+  ],
+  "active_writers_remaining": [
+    "F02/F03/F05 are separate assigned branches; actual worker processes are not observable from this chat."
+  ],
+  "parallel_integration": {
+    "assignment_ledger": "Latest program-branch coordination/ACTIVE_TASKS.json at 3819a4bb6919d7384f6321b2745ac4314a5495ae",
+    "work_branch": "spatial/f04-fixtures-2026-10-11",
+    "activation_id": "F04-2026-10-11-P1",
+    "scope_amendment_id": "F04-2026-10-11-CUTOUTS-1",
+    "branch_base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "accepted_dependencies_tested": {
+      "F01": "3240880195cd6653d0816da5cb4412bda2516e52",
+      "F02": null,
+      "F03": null,
+      "F05": null
+    },
+    "feature_module_commit": "7225b97483d471813f2cb9694c72802f8046f2b8",
+    "shared_file_adapter_commits": [
+      "24b390e0da7a95a23663579df3a7a4ade5ce5cb2"
+    ],
+    "dependency_sensitive_gaps": [
+      "This branch starts from accepted F01 activation a90d4f9. No F02/F03/F05 implementation was present on their remote branches when inspected; no accepted predecessor integration is claimed.",
+      "F04 1.4 schemas and optional Room.ceiling adapter are branch candidates. Compose actual F02 styled opening fields/roles and F03 required ceiling intent/migration/admission before accepting cumulative 1.4. 1.2/1.3 input currently fails closed.",
+      "F03 owns canonical surfaces.ts. Merge F04 uncut-host lookup, cutout subtraction and chart helpers semantically into actual F03 resolver; preserve its heights/domains and additive remap receipts. F04 internal attachment remaps do not substitute for composed surface receipts/undo restoration.",
+      "F02 owns version-aware room/wall/opening/recovery preflights. Legacy drawing helpers on this F01-based branch still synthesize 1.0/1.1 and reject floors containing 1.4 fields; reconcile at integration rather than dropping fields or adding a competing preflight model.",
+      "Tested ceiling hosts are explicitly synthetic D03-shaped established ceiling data. No F03 ceiling authoring or migration is implemented by F04. Integrate real ceiling edits/conflicts/remaps.",
+      "F05 must consume actual cutout domains and preserve recorded support when holes move/disappear. Fixtures never subtract support. Combined damage/ceiling/cutout acceptance remains open."
+    ],
+    "branch_status": "branch_implementation_complete_pending_integration",
+    "master_integration_commit": null
+  },
+  "catalog_coverage": {
+    "Toilets": [
+      "toilet"
+    ],
+    "Appliances": [
+      "refrigerator",
+      "range",
+      "dishwasher",
+      "washer",
+      "dryer"
+    ],
+    "Walk-in showers": [
+      "walk-in-shower"
+    ],
+    "Tubs with showers": [
+      "tub-shower"
+    ],
+    "Garden tubs": [
+      "garden-tub"
+    ],
+    "Single/double standalone sinks": [
+      "single-sink",
+      "double-sink"
+    ],
+    "Sinks with cabinets/vanities": [
+      "single-vanity",
+      "double-vanity"
+    ],
+    "Built-in furniture": [
+      "built-in-bench",
+      "built-in-shelves"
+    ],
+    "Chimneys/fireplaces": [
+      "chimney",
+      "fireplace"
+    ],
+    "Kitchen islands": [
+      "kitchen-island"
+    ],
+    "Upper cabinets": [
+      "upper-cabinet"
+    ],
+    "Lower cabinets": [
+      "lower-cabinet"
+    ],
+    "Cutouts": [
+      "rectangle and circle; wall/floor/established ceiling; cutout or penetration"
+    ]
+  },
+  "catalog_source_inventory": {
+    "reference": "references/companion/presets.ts SYMBOL_LIBRARY",
+    "verified_generic_fixtures": [
+      "cabinet",
+      "tub",
+      "shower",
+      "toilet",
+      "sink",
+      "appliance"
+    ],
+    "outside_named_F04_scope": [
+      "electrical_panel",
+      "hvac_supply",
+      "hvac_return",
+      "drain",
+      "equipment"
+    ],
+    "provisional_variants": [
+      "refrigerator",
+      "range",
+      "dishwasher",
+      "washer",
+      "dryer",
+      "built-in-bench",
+      "built-in-shelves"
+    ],
+    "starter_dimensions": "Editable diagrammatic engineering choices, not copied field measurements."
+  },
+  "local_result_commit": "286dc855613969f46420fee0dfa3b85fa29da01a"
+}

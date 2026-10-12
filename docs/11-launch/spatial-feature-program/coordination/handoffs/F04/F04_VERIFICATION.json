@@ -1,0 +1,210 @@
+{
+  "task_id": "F04",
+  "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+  "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "recorded_at_utc": "2026-10-12T05:10:18.476374+00:00",
+  "environment": {
+    "node": "24.19.0",
+    "browser": "Chromium 138.0.7204.0 via @sparticuz/chromium 138.0.2 installed outside repository",
+    "gpu": "ANGLE SwiftShader software rendering",
+    "device": "Synthetic desktop + 390x844 touch-enabled mobile viewport; no physical iPhone"
+  },
+  "source_sha256": {
+    "spatial-source/contracts/COMPATIBILITY.md": "d5762eade9ba67b69855103ce767b81197b61412d7061e448f93292e0aca16ad",
+    "spatial-source/contracts/geometry-v1.4.schema.json": "abc59397e8ad668c7666ca16c3d6ee6abd79ef836cd8596a580679581853523d",
+    "spatial-source/contracts/scene-v1.4.schema.json": "d3940cd146ec9221254b1a85c01bd15f2e2761920a2fd5512ffc1dfdab0a51c3",
+    "spatial-source/web/src/core/cutoutGeometry.ts": "284c07322ece2ef234f8d328830d716661a248c08509654963c5ea12b0ba4fd0",
+    "spatial-source/web/src/core/cutouts.ts": "d6e4f041396f857fdbc1bb503c56113d20297872ef3cd8b032ebad6e02386051",
+    "spatial-source/web/src/core/editor.ts": "5b7a582782b81fbc120c491941d8dd18a1329ad3ee5255daf2a5bb0df7ae3275",
+    "spatial-source/web/src/core/fixtureAttachments.ts": "5f5c7df6575c9d9f22c37bcfcdcaeedb4eb532842ac6d9c98d85fe58177d5a2d",
+    "spatial-source/web/src/core/fixtureCatalog.ts": "82f705eb057b018850d042981c4fac0a1dc577aa1abc8b58f69ce83992e5bb58",
+    "spatial-source/web/src/core/fixtures.ts": "aff879cd94b22c8508706e4a0c3177f5cd62b6741cd792c0c677901228c7ec32",
+    "spatial-source/web/src/core/index.ts": "2792a0b64c41750c82c8e12eac0066897f8f5a3b0f6b67221e54bb8670241f24",
+    "spatial-source/web/src/core/navigation.ts": "1fbc04a779c60b7f7156bbaf264f246914399438f4f5ea097157e40946c3427d",
+    "spatial-source/web/src/core/scene.ts": "0fb1897c672ec8f6e80ed0a056aab23fd24566b98c996a1adaccec77e77b5e9e",
+    "spatial-source/web/src/core/surfaces.ts": "3112009445d42d63b2aefd8539b3ae5b34f81204c065c811a14174d2c73841f0",
+    "spatial-source/web/src/core/validation.ts": "d615a87fc6bdc720872a186ec60d5880bfe15def1fb6e81e622afff01ef9a751",
+    "spatial-source/web/src/data/drawing.ts": "5e7efeb5cdc8158fdea29dce633cc8988368a418ae0f0ea219c4c6d03770ba0b",
+    "spatial-source/web/src/data/exports.ts": "179d31f6b7c1dea49f04cf07f2a73789a821df62edbe38d804f47c9af49c741b",
+    "spatial-source/web/src/data/glb.ts": "73ce0a5d7243d12fee65bf0c90f51bc55ef4c5ceee372c71f92ae95c97900322",
+    "spatial-source/web/src/data/imports.ts": "3c5df7088b41a456eb0533efe2a80ce9d1b0b218b1d1defd5a38b429de1110d9",
+    "spatial-source/web/src/fixturePalette.ts": "298de3771862456f34a5857242f1b61b10c0611c5d2fe49f51259f52bd84fa6f",
+    "spatial-source/web/src/types.ts": "c3f8afcdb2b22813aa117feb6e27c5760cfb48094b8f0839e3e5689356a6b641",
+    "spatial-source/web/src/ui/CutoutControls.tsx": "9bf8413f5a89e7aac4959d7a2473d6e142a02387ea691d7fb5adc160a242247e",
+    "spatial-source/web/src/ui/FixturePicker.tsx": "d85c2f3ec9b298888f1de119b28a9a756d708a67bc6ab3459d1f2d9551b374fb",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx": "4a82edc398788bdcc51e7749821868b3d59a7a14d7ea0c09c017f95e87a546ba",
+    "spatial-source/web/src/ui/Inspector.tsx": "3bd2c73d281b502bf13e4911e0aba81f69f2a545839717fe00cba0e0645a56c0",
+    "spatial-source/web/src/ui/ModelViewport.tsx": "7dfdee3ac72a18a1c30d168b362d9f42ad2fe22cea1e41010de4c573eae92e85",
+    "spatial-source/web/src/ui/PlanGeometry.tsx": "4a8a82cbaef0ceedb5907de863e9727a2c513bfc1713c5cbde2ddca08e87c49a",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx": "dfbb7346c5c071ed090eb6006dec51ac2ca8d1191ad7f9570263afa166f6d1ed",
+    "spatial-source/web/src/ui/cutoutManipulation.ts": "51dc4f3efaf29eb58981540354560258b0c20d2e638069eba315965d26ab78e7",
+    "spatial-source/web/src/ui/fixtureManipulation.ts": "0eb19406f8733a250c9d5ee846c4eaa83f9d2e5447bbe1bc0734273b407e6a3f",
+    "spatial-source/web/src/ui/geometry.ts": "3486e3f4df5902d77863b1fc00a8a9bdf3f71d3529d511553f29b2394f4f34a7",
+    "spatial-source/web/src/ui/groupSelection.ts": "5919638318ef80c7b387cfefbc8c9c423038589dec8e710bc0d4db93091da805",
+    "spatial-source/web/src/ui/sceneBatches.ts": "703373821cfa9f61c3bd1f62fd480cba02efd8a5f90aebca9da887a277ab3e47",
+    "spatial-source/web/src/ui/workspace.css": "c75aba9a055a7604449eaac53e8919c0c520117d700591743538ab864f4881bd",
+    "spatial-source/web/tests/core/cutout-geometry.test.ts": "d6e5f49e96b31f83e5eaf5038635c00f902625a9f605ff4f83dedb474a864a58",
+    "spatial-source/web/tests/core/cutouts.test.ts": "40f748f9e427d385ae5bdd0d51ff3177a915807373b5028c44f878ee7a3cf118",
+    "spatial-source/web/tests/core/fixture-attachments.test.ts": "100fcbbd49e14d72a840220d8e678118a3edbdd6fed7ac27e95a80d68eb78bf0",
+    "spatial-source/web/tests/core/fixtures.test.ts": "738b179b7edd3c07ea505b7409902cf313ced504591967b1ee345b5caeb5b9d8",
+    "spatial-source/web/tests/data/cutouts.test.ts": "ecedbdd0281dd8ab0fd8c7869e640a7407b95798d4dc39c0226219c5445cf19b",
+    "spatial-source/web/tests/data/fixtures.test.ts": "3ea363705d2526a9dc823fe6c182985eaa4efc2a30112449a59e524721ff9375",
+    "spatial-source/web/tests/ui/cutout-manipulation.test.ts": "8fa8813f137034778977766f3a7011ec83b8f04ea656204b3001ab323054b2d5",
+    "spatial-source/web/tests/ui/cutouts.spec.ts": "a342685dd4c9e17bda41caa4c8bf0e39caaaaa4e9054db136735cac07effed50",
+    "spatial-source/web/tests/ui/fixture-manipulation.test.ts": "42f5ef94be586ef8852858422979d0f2b011cca35f7d94b7cc284606e1c75582",
+    "spatial-source/web/tests/ui/fixtures.spec.ts": "be83da0036700c247d9738e455840dbe18b1f82b7b990a47b6daa73ad0cac504",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-mobile.png": "94f1dab9fb25a4294e4defb19a1515556c6fd77264740effc237321c91c16943",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png": "ef695704edd5121ee9bfe11ed0bbb2b98e02474a0262730fe60576e22dfb262d",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png": "afb00927503fcfb989d20a0acbec8c56583a0eaf2d1b25261bfb1886f96a504c"
+  },
+  "acceptance": [
+    {
+      "acceptance_id": "F04-A01",
+      "result": "passed_branch_candidate",
+      "check": "20 catalog entries cover all explicitly named families; 10 parametric archetypes, owned fixture faces/feature edges, actual dimensions",
+      "evidence": "tests/core/fixtures.test.ts; fixtures-catalog-desktop.png"
+    },
+    {
+      "acceptance_id": "F04-A02",
+      "result": "passed_branch_candidate",
+      "check": "Floor and wall fixture placement/numeric edit; plan floor resize and cancel; 3D floor/wall height; undo/redo, view switch and reopen",
+      "evidence": "tests/ui/fixtures.spec.ts; fixture-manipulation.test.ts; fixtures-mobile.png",
+      "remaining": "Full touch cancellation/accessibility matrix and physical iPhone interactions remain unverified."
+    },
+    {
+      "acceptance_id": "F04-A03",
+      "result": "passed_branch_candidate",
+      "check": "Translation, floor elevation, rigid rotation, split/join and side-aware remaps; nonrigid or ambiguous changes reject atomically; same-transaction explicit deletion supports either order; host plus attachment group moves once",
+      "evidence": "tests/core/fixture-attachments.test.ts",
+      "remaining": "F03 actual remap receipt composition and integrated ceiling-edit conflict probes."
+    },
+    {
+      "acceptance_id": "F04-A04",
+      "result": "passed_branch_geometry_pending_dependency_integration",
+      "check": "Rectangle/circle actual wall/floor/ceiling subtraction, opposite wall sides, analytic bounds/overlap rejection, shared resolver domains, save/history, mobile floor void placement and continuous movement checks, real host-only 3D previews",
+      "evidence": "tests/core/cutouts.test.ts; cutout-geometry.test.ts; tests/data/cutouts.test.ts; tests/ui/cutouts.spec.ts; cutouts-mobile.png",
+      "remaining": "Established ceiling test input is explicitly synthetic D03-shaped data. Actual F03 authoring/migration/height remaps and F05 recorded support require composed checks."
+    },
+    {
+      "acceptance_id": "F04-A05",
+      "result": "passed_local_browser_scope",
+      "check": "Fixtures remain nonblocking; cutouts confer no portal permissions. Populated two-room/two-fixture mobile view uses one event-driven renderer; short warm idle shows no frame/geometry growth and released renderers report zero resources",
+      "evidence": "tests/ui/fixtures.spec.ts; tests/core/cutouts.test.ts",
+      "remaining": "No physical iPhone frame/latency, large-load envelope or exhaustive touch/accessibility acceptance claimed."
+    },
+    {
+      "acceptance_id": "F04-A06",
+      "result": "passed_branch_exports_pending_cumulative_admission",
+      "check": "Frozen local-document archive, SVG/PNG/PDF/scene/GLB and reopen retain records and geometry. Scene and GLB metadata carry catalog/dimensions/mount/provenance; fixture-only floors export honestly and extents include off-structure objects; 1.4 legacy exchange rejected",
+      "evidence": "tests/data/fixtures.test.ts; tests/data/cutouts.test.ts; both browser journeys",
+      "remaining": "F02/F03 actual cumulative schemas/admission and version-aware drawing preflights must be reconciled. Separate platform transfers remain master-only."
+    }
+  ],
+  "commands": [
+    {
+      "command": "node --import tsx --test tests/core/{fixtures,fixture-attachments,cutouts,cutout-geometry,editor,scene,validation,navigation}.test.ts tests/ui/{fixture-manipulation,cutout-manipulation}.test.ts tests/data/{fixtures,cutouts}.test.ts",
+      "result": "106 passed on initial candidate. Reused only unchanged risks after final focused fixes; not a claim that final whole suite was rerun."
+    },
+    {
+      "command": "node --import tsx --test tests/core/fixture-attachments.test.ts tests/data/fixtures.test.ts tests/data/cutouts.test.ts",
+      "result": "Final changed-risk pass: 7 passed, including rigid rotation, mixed host/topology rejection, scene/GLB metadata and history."
+    },
+    {
+      "command": "node --import tsx --test --test-name-pattern='glTF|GLB' tests/data/data.test.ts",
+      "result": "1 passed; unchanged legacy GLB remains 4 materials with F01 colors and exact identity."
+    },
+    {
+      "command": "npm run build",
+      "result": "Final TypeScript + Vite production build passed; Vite existing large-chunk warning retained. No package, lockfile or configuration changes."
+    },
+    {
+      "command": "npx playwright test --config /tmp/f04-playwright.config.mjs",
+      "result": "Final 2 journeys passed in 14.3 seconds. Fixtures: plan placement/resize/cancel/numeric edit, 3D floor/wall heights, undo/redo, freeze/full archive/import all formats, reopen/mobile/idle. Cutouts: mobile touch floor placement, exact diameter, walk-support checks, 3D wall placement/resize/cancel, ceiling placement, undo/reopen/archive."
+    },
+    {
+      "command": "git diff --check and live assignment path comparison",
+      "result": "Passed. All changed paths are inside live F04 allowed_paths; old schemas/config/native/OS/control files untouched."
+    },
+    {
+      "command": "Candidate schema JSON parse and local $defs reference resolution",
+      "result": "Passed syntax/references only; cumulative F02/F03 semantic schema acceptance pending."
+    }
+  ],
+  "browser_config_source": "import {defineConfig} from '/workspace/scratch/c4606151bd4f/repo/spatial-source/web/node_modules/@playwright/test/index.mjs';\nexport default defineConfig({testDir:'/workspace/scratch/c4606151bd4f/repo/spatial-source/web/tests/ui',testMatch:['fixtures.spec.ts','cutouts.spec.ts'],globalSetup:'/workspace/scratch/c4606151bd4f/repo/spatial-source/web/tests/ui/server.ts',workers:1,timeout:60000,reporter:'line',outputDir:'/tmp/f04-browser-results',use:{actionTimeout:5000,launchOptions:{executablePath:'/tmp/f04-chrome/chromium',args:['--no-sandbox','--disable-dev-shm-usage','--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader']}}});\n",
+  "idle": {
+    "sampling_ms": 250,
+    "desktop": {
+      "renderer_id": 5,
+      "geometries": 11,
+      "textures": 0,
+      "draw_calls": 11,
+      "frames": 2,
+      "growth": 0,
+      "released_renderers": 4,
+      "released_resources": 0
+    },
+    "mobile": {
+      "renderer_id": 2,
+      "geometries": 5,
+      "textures": 0,
+      "draw_calls": 5,
+      "frames": 2,
+      "growth": 0,
+      "released_renderers": 1,
+      "released_resources": 0
+    }
+  },
+  "review": {
+    "kind": "Bounded independent read-only review of actual diff",
+    "resolved": [
+      "Rotated profile resize/handle basis",
+      "Blur/lost-capture contact recovery",
+      "Bend-jump prevention",
+      "Group feature movement",
+      "Real host-only preview subtraction",
+      "Cancellation redraw and stale selection outlines",
+      "Same-transaction split/deletion ordering",
+      "Floor-qualified resolution IDs",
+      "Mixed nonrigid motion/topology guard"
+    ],
+    "no_broad_suite_by_reviewer": true
+  },
+  "initial_failures": [
+    "Offline npm cache missed a package; ordinary npm ci succeeded.",
+    "Playwright CDN returned invalid archives; pinned Chromium package installed in scratch and extracted without repository changes.",
+    "Initial standalone server lifetime caused connection refusal; existing globalSetup then hosted tests correctly.",
+    "Browser fixture placement exposed post-save selection closure; fixed via revision/generation-fenced commitFeatureEdit.",
+    "Test-only Fit/Profile selector and reopen-library expectations were corrected.",
+    "Unavailable Python jsonschema package: no formal meta-schema validation claimed; JSON/reference checks performed."
+  ],
+  "screenshots": [
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png"
+  ],
+  "not_run": [
+    "Live Lovable transfer/build/deployment",
+    "Capacitor bundling",
+    "Apple compile/simulator/install/physical device",
+    "AuxiliumOS integration/business binding",
+    "Actual composed F02/F03/F05 acceptance",
+    "Exhaustive gesture interruption, all touch/stylus modes and accessibility matrix"
+  ],
+  "local_verification_commit": "286dc855613969f46420fee0dfa3b85fa29da01a",
+  "writeback": {
+    "method": "GitHub Git object APIs because terminal Git has no write credentials",
+    "base_expected_sha": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "feature_module_commit": "7225b97483d471813f2cb9694c72802f8046f2b8",
+    "source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+    "source_tree_sha": "c769572d2d5aeca1b2d70c73d41e43cfc83fea62",
+    "source_tree_parity_with_local_verification_commit": true,
+    "blob_parity": "All 43 source/test/schema files and three PNGs verified against local Git blob SHA before creating trees.",
+    "source_ref_update": {
+      "result": "success",
+      "expected_previous_sha": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+      "updated_to_source_commit": "24b390e0da7a95a23663579df3a7a4ade5ce5cb2",
+      "force": false,
+      "receipt": "GitHub update_ref returned success=true. Final evidence commit is a later guarded descendant."
+    }
+  }
+}
