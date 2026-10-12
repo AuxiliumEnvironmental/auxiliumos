@@ -148,3 +148,18 @@
   .spatial-workspace .spatial-editor[data-mobile-panel=objects] .spatial-tools-stage,
   .spatial-workspace .spatial-editor[data-mobile-panel=details] .spatial-tools-stage{bottom:86px;right:calc(min(42%,320px) + 8px)}
 }
+
+/* F05 observation tools reuse the map-first panels and existing safe areas. */
+.spatial-workspace .spatial-affected-controls{padding:18px;border-bottom:1px solid var(--spatial-line);min-width:0}
+.spatial-workspace .spatial-affected-controls p{font-size:12px;overflow-wrap:anywhere}
+.spatial-workspace .spatial-affected-controls fieldset{margin:14px 0;padding:12px;border:1px solid var(--spatial-line);border-radius:8px}
+.spatial-workspace .spatial-affected-controls legend{font-weight:600;font-size:12px}
+.spatial-workspace .spatial-affected-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}
+.spatial-workspace .spatial-affected-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.spatial-workspace .spatial-affected-actions button{flex:1 1 100px}
+.spatial-workspace .spatial-affected-list{max-height:240px;overflow:auto;padding:12px;flex-shrink:0}
+.spatial-workspace .spatial-affected-list button{display:block;text-align:left;width:100%;margin:6px 0;font-size:12px}
+.spatial-workspace .spatial-affected-list small{display:block;overflow-wrap:anywhere;color:var(--spatial-muted)}
+.spatial-workspace .spatial-affected-model-handle{position:absolute;width:44px;height:44px;min-width:44px;min-height:44px;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;touch-action:none;z-index:2}
+.spatial-workspace .spatial-affected-model-handle::after{content:'';display:block;width:12px;height:12px;margin:auto;background:white;border:2px solid currentColor;border-radius:50%}
+@media(max-width:380px){.spatial-workspace .spatial-affected-fields{grid-template-columns:minmax(0,1fr)}}

@@ -8,6 +8,8 @@ import { rectangleCorners, rectangleRoomCommands } from './roomDrawing';
 import { roomSnap, type RoomSnap } from './roomSnap';
 import { SNAP } from './authoringSnap';
 import { wallDrawingCommands } from './wallDrawing';
+import { AffectedPlanInteraction } from './AffectedAreaControls';
+import type { AffectedCommit, AffectedFence, AffectedTool } from './affectedAreaManipulation';
 import { PlanGeometry } from './PlanGeometry';
 import { FloorGeometryIndex } from '../core/geometry';
 import { beginOpeningDrag, openingDragPreview, openingResizeHandles, type OpeningDrag, type OpeningPreview } from './openingManipulation';
@@ -18,7 +20,7 @@ export type PlanViewState = { x: number; z: number; width: number; height: numbe
 export type CanvasTool = 'select' | 'pan' | 'wall' | 'area' | 'room' | 'opening' | 'marquee';
 type MoveSample = { pointerId: number; clientX: number; clientY: number; shiftKey: boolean; altKey: boolean };
 type GroupFilter = 'wallsAndAreas' | 'wall' | 'node' | 'room' | 'area' | 'opening' | 'all';
-type Props = { document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[]) => void | Promise<boolean>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
+type Props = { affectedTool?:AffectedTool|null; onAffectedTool?:(tool:AffectedTool|null)=>void; onAffectedEdit?:AffectedCommit; affectedFence?:AffectedFence; document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[]) => void | Promise<boolean>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
 
 const groupKinds = (filter: GroupFilter): Selection['kind'][] => filter === 'all' ? ['wall', 'node', 'room', 'area', 'opening'] : filter === 'wallsAndAreas' ? ['wall', 'area'] : [filter];
 const boundsBetween = (a: Point2, b: Point2): SelectionBounds => ({ minX: Math.min(a.x, b.x), minZ: Math.min(a.z, b.z), maxX: Math.max(a.x, b.x), maxZ: Math.max(a.z, b.z) });
@@ -50,7 +52,7 @@ function checkedPlacement(floor: Floor, draft: OpeningPlacement): OpeningPlaceme
   return { opening: structuredClone(draft.opening), point: { ...draft.point }, ...(error ? { error } : {}) };
 }
 
-export function FloorplanCanvas({ document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, disabled: parentDisabled, tool, onTool, onError }: Props) {
+export function FloorplanCanvas({ affectedTool=null,onAffectedTool,onAffectedEdit,affectedFence,document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, disabled: parentDisabled, tool, onTool, onError }: Props) {
   const restored = useRef(initialDraft?.tool === tool ? structuredClone(initialDraft) : undefined);
   const draftCallback = useRef(onDraftChange); draftCallback.current = onDraftChange;
   const [submitting, setSubmitting] = useState(false);
@@ -539,7 +541,8 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
       onLostPointerCapture={event => { if (gesture.current?.pointerID === event.pointerId || pinch.current && pointers.current.has(event.pointerId)) { clearGesture(); setCursor(null); } }}
       onPointerCancel={event => { clearGesture(event.pointerId); setCursor(null); }}>
       <title>Drag to size a room or draw a wall, or tap corners. Drag either room draft corner to resize. Enter finishes, Backspace removes the last point, Escape cancels. Shift aligns walls; Alt places freely. Hold Space or middle-drag to pan.</title>
-      <PlanGeometry floor={displayedFloor} selection={selection} groupSelection={groupSelection} units={units} fills={fills} openingPreview={openingPreview} />
+      <PlanGeometry document={geometryDocument} canSelectAffected={tool==='select'&&!affectedTool&&!parentDisabled} onSelect={onSelect} floor={displayedFloor} selection={selection} groupSelection={groupSelection} units={units} fills={fills} openingPreview={openingPreview} />
+      {onAffectedEdit&&onAffectedTool&&affectedFence&&tool==='select'&&<AffectedPlanInteraction document={geometryDocument} floor={floor} selection={selection} tool={affectedTool} onTool={onAffectedTool} onSelect={onSelect} onEdit={onAffectedEdit} onError={onError} fence={affectedFence} disabled={parentDisabled} units={units}/>}
       {placement && (() => {
         const host = floor.walls.find(wall => wall.id === placement.opening.wallID);
         if (!host) return null;

@@ -42,6 +42,8 @@ export function closedBoundary(floor: Floor, wallIDs: string[]): WallReference[]
   catch { throw new Error('These walls do not form one closed boundary with shared corners. Connect the corners or choose a different boundary.'); }
 }
 export function objectLabel(floor: Floor, selection: Selection) {
+  if(selection.kind==='surface')return selection.surface?.kind==='wall'?`Wall ${selection.surface.side} side`:`${selection.surface?.kind??'Surface'}`;
+  if(selection.kind==='affectedArea')return 'Affected observation';
   const index = (ids: { id: string }[]) => ids.findIndex(item => item.id === selection.objectID) + 1;
   if (selection.kind === 'room') return floor.rooms.find(r => r.id === selection.objectID)?.label ?? 'Room';
   if (selection.kind === 'area') return floor.areas?.find(a => a.id === selection.objectID)?.label ?? 'Area';

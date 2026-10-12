@@ -1,4 +1,5 @@
 import { jsPDF } from 'jspdf';
+import { affectedPlanPrimitives } from '../core/affectedAreas';
 import { roomBoundary, wallPath } from '../core';
 import type { Floor, FrozenRevision, Point2 } from '../types';
 import { fail, utf8 } from './bytes';
@@ -7,7 +8,7 @@ const W = 1200, H = 900;
 const xml = (value: string) => value.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]!);
 export interface DrawingLine { a: Point2; b: Point2; color: string; width: number; dashed?: boolean }
 export interface DrawingLabel { point: Point2; text: string; size: number }
-export interface Drawing { width: number; height: number; lines: DrawingLine[]; polygons: Point2[][]; labels: DrawingLabel[] }
+export interface Drawing { width: number; height: number; lines: DrawingLine[]; polygons: Point2[][]; polygonColors?: string[]; labels: DrawingLabel[] }
 const glyphWidth = (character: string, size: number) => size * (/^[\x20-\x7e\u00a0-\u00ff]$/.test(character) ? 0.85 : 1.2);
 function wrap(text: string, width: number, size: number): string[] {
   const result: string[] = []; let line = '', used = 0;
@@ -53,6 +54,11 @@ export function drawings(frozen: FrozenRevision, floor: Floor): Drawing[] {
       chunks.forEach((chunk, i) => { const estimated = [...chunk].reduce((n, c) => n + glyphWidth(c, 14), 0); label(chunk, center.x - estimated / 2, center.z + (i - (chunks.length - 1) / 2) * 18, 14); });
     }
   }
+  const affected=affectedPlanPrimitives(frozen.document,floor.id);
+  output.polygonColors=output.polygons.map(()=>'#eaf5fa');
+  for(const polygon of affected.polygons){output.polygons.push(polygon.points.map(map));output.polygonColors.push(polygon.color);}
+  // Grids are pre-clipped horizontal and vertical lines, with no SVG patterns/resources.
+  for(const line of affected.lines.filter(line=>!line.wall))output.lines.push({a:map(line.a),b:map(line.b),color:line.color,width:1});
   for (const wall of floor.walls) {
     const path = wallPath(floor, wall); let distance = 0;
     const openings = floor.openings.filter(o => o.wallID === wall.id).sort((a, b) => a.offset - b.offset);
@@ -77,6 +83,12 @@ export function drawings(frozen: FrozenRevision, floor: Floor): Drawing[] {
     for (let i = 0; i < area.polygon.length; i++) output.lines.push({ a: map(area.polygon[i]), b: map(area.polygon[(i + 1) % area.polygon.length]), color: '#8f6b91', width: 1.5, dashed: true });
     if (area.polygon.length) { const p = map(area.polygon[0]); const reference = `A${index + 1}`; label(reference, Math.min(p.x + 5, 1080), p.z - 5, 13); directory.push(`${reference} (${area.id}), semantic area: ${area.label}`); }
   }
+  for(const line of affected.lines.filter(line=>line.wall))output.lines.push({a:map(line.a),b:map(line.b),color:line.color,width:4});
+  for(const observation of frozen.document.affectedAreas??[]){
+    const here=observation.attachments.some(a=>a.surface?.floorID===floor.id),unresolved=observation.attachments.some(a=>!a.surface);
+    if(here||unresolved&&floor.id===frozen.document.floors[0]?.id)directory.push(`${observation.id}: ${observation.kind==='fire'?'Fire damage':'Moisture'} sketch, ${observation.surface.kind}, ${observation.reviewState}. Unverified observation, not an instrument reading or scope authorization.`);
+  }
+  if(affected.polygons.length||affected.lines.length)label('Affected sketches: floor fill / ceiling grid / sided wall line. Unverified.',64,floor.rooms.length?793:776,12);
   if (!floor.walls.length) label('No captured or authored geometry on this floor', 320, 430, 18);
   if (!floor.rooms.length && floor.walls.length) label('Incomplete room boundaries: review and correct before use', 64, 793, 14);
   const pages = [output];
@@ -110,9 +122,9 @@ function svgPages(pages: Drawing[]): Uint8Array {
   const parts = [`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H * pages.length}" role="img">`, `<rect width="1200" height="${H * pages.length}" fill="#ffffff"/>`];
   for (let index = 0; index < pages.length; index++) {
   const d = pages[index], offset = index * H;
-  for (const p of d.polygons) {
+  for (const [polygonIndex,p] of d.polygons.entries()) {
     if (p.length > 1000) fail('svg-polygon-capacity');
-    parts.push(`<polygon points="${p.map(v => `${number(v.x)},${number(v.z + offset)}`).join(' ')}" fill="#eaf5fa"/>`);
+    parts.push(`<polygon points="${p.map(v => `${number(v.x)},${number(v.z + offset)}`).join(' ')}" fill="${d.polygonColors?.[polygonIndex]??'#eaf5fa'}"/>`);
   }
   for (const line of d.lines) {
     const length = Math.hypot(line.b.x - line.a.x, line.b.z - line.a.z);
@@ -178,7 +190,8 @@ export async function pdfDrawing(frozen: FrozenRevision, floors: Floor[]): Promi
       pdf.addImage(await pngDrawing(frozen, floor, index, pages), 'PNG', 0, 0, W, H); continue;
     }
     pdf.setFillColor('#eaf5fa');
-    for (const polygon of d.polygons) if (polygon.length > 2) {
+    for (const [polygonIndex,polygon] of d.polygons.entries()) if (polygon.length > 2) {
+      pdf.setFillColor(d.polygonColors?.[polygonIndex]??'#eaf5fa');
       const relative = polygon.slice(1).map((p, n) => [p.x - polygon[n].x, p.z - polygon[n].z]);
       pdf.lines(relative, polygon[0].x, polygon[0].z, [1, 1], 'F', true);
     }

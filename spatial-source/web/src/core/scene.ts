@@ -1,6 +1,7 @@
 import type { Floor, GraphicScene, Opening, Point3, SceneFace, SpatialDocument } from '../types';
 import { distance, EPSILON, FloorGeometryIndex, pathPoint, triangulate } from './geometry';
 import { requireValidDocument } from './validation';
+import { affectedSceneFaces } from './affectedAreas';
 
 // Exact existing graphic-scene 1.0/1.1 transport limits. They are resource
 // admission limits, not a smaller product operating envelope or a performance claim.
@@ -28,7 +29,7 @@ function preflightScene(floor:Floor,index:FloorGeometryIndex,groups:Map<string,O
 /** Exact semantic meshes. Door and window apertures are actual missing triangles. */
 export function buildScene(document:SpatialDocument,floorID:string):GraphicScene{
   const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
-  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
+  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:doc.schemaVersion==='1.5.0'?'1.5.0':'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
   const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
   preflightScene(floor,index,groups);
   for(const wall of floor.walls){const path=index.path(wall);let breaks=[0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));const total=breaks.at(-1)!,openings=groups.get(wall.id)??[],base=floor.elevation+wall.baseY;
@@ -44,7 +45,9 @@ export function buildScene(document:SpatialDocument,floorID:string):GraphicScene
     for(const o of openings){const lo=o.offset,hi=lo+o.width;edge(lo,o.bottom,lo,o.bottom+o.height,o.id,o.kind);edge(hi,o.bottom,hi,o.bottom+o.height,o.id,o.kind);const spans=[lo,...breaks.filter(b=>b>lo&&b<hi),hi];for(let i=1;i<spans.length;i++){edge(spans[i-1],o.bottom,spans[i],o.bottom,o.id,o.kind);edge(spans[i-1],o.bottom+o.height,spans[i],o.bottom+o.height,o.id,o.kind);}}
   }
   for(const room of floor.rooms){const ring=index.boundary(room);scene.faces.push({objectID:room.id,role:'floor',vertices:ring.map(p=>({x:p.x,y:floor.elevation,z:p.z})),triangles:triangulate(ring).map(t=>[...t].reverse())});}
-  if(floor.areas?.length){scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
+  if(floor.areas?.length){if(scene.schemaVersion==='1.0.0')scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
+  for(const room of floor.rooms)if(room.ceiling){const ring=index.boundary(room);scene.faces.push({objectID:room.ceiling.id,role:'ceiling',surface:{floorID,kind:'ceiling',roomID:room.id,ceilingID:room.ceiling.id},vertices:ring.map(p=>({...p,y:floor.elevation+room.ceiling!.height})),triangles:triangulate(ring)});}
+  scene.faces.push(...affectedSceneFaces(doc,floorID));
   // Defense against a future emitter change diverging from the exact preflight.
   if(scene.faces.length>MAX_FACES||scene.edges.length>MAX_EDGES||scene.faces.some(f=>f.vertices.length>MAX_FACE_VERTICES||f.triangles.length>MAX_FACE_TRIANGLES))throw new Error('Generated scene exceeds the transport capacity limits');
   return scene;
@@ -71,7 +74,7 @@ export function evaluateCutaway(scene:GraphicScene,camera:Point3,focus:Point3,pr
 }
 export function displayCeilings(document:SpatialDocument,floorID:string):SceneFace[]{
   const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);const index=new FloorGeometryIndex(floor),faces:SceneFace[]=[];
-  for(const room of floor.rooms){const tops=room.boundary.map(r=>{const w=index.walls.get(r.wallID)!;return floor.elevation+w.baseY+w.height;});if(!tops.every(y=>Math.abs(y-tops[0])<=EPSILON))continue;const ring=index.boundary(room);faces.push({objectID:room.id,role:'ceiling',vertices:ring.map(p=>({...p,y:tops[0]})),triangles:triangulate(ring)});}return faces;
+  for(const room of floor.rooms){if(room.ceiling!==undefined)continue;const tops=room.boundary.map(r=>{const w=index.walls.get(r.wallID)!;return floor.elevation+w.baseY+w.height;});if(!tops.every(y=>Math.abs(y-tops[0])<=EPSILON))continue;const ring=index.boundary(room);faces.push({objectID:room.id,role:'ceiling',vertices:ring.map(p=>({...p,y:tops[0]})),triangles:triangulate(ring)});}return faces;
 }
 export interface SceneRayHit{objectID:string;role:string;distance:number;point:Point3}
 export function nearestSceneHit(scene:GraphicScene,origin:Point3,direction:Point3,maximumDistance=2000,hiddenWalls=new Set<string>()):SceneRayHit|undefined{

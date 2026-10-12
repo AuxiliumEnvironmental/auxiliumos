@@ -1,4 +1,5 @@
 import { applyCommands, requireValidDocument, restorationMappings } from '../core';
+import { affectedHostReceipt } from '../core/affectedAreas';
 import type { EditCommand, FrozenRevision, ImportedWorkspace, SourceProvenance, SpatialDocument, StoredWorkspace, WorkspaceSummary } from '../types';
 import { clone, fail, jsonBytes, MAX_MEMBER, sha256, stableJSON } from './bytes';
 import { validSourceReason, validateSourceProvenance } from './provenance';
@@ -132,7 +133,7 @@ export class SpatialWebStore {
     const opposite = direction === 'undo' ? 'redo' : 'undo'; row[opposite] = [...row[opposite], clone(row.document)].slice(-100);
     const source = row.document;
     row.document = { ...target, parentRevision: expectedRevision, revision: expectedRevision + 1, reviewState: 'needsReview' };
-    requireValidDocument(row.document); row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document) };
+    requireValidDocument(row.document); row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document), ...(row.document.affectedAreas?.length||source.affectedAreas?.length?{surfaces:affectedHostReceipt(source,row.document)}:{}) };
     return this.commit(row, expectedRevision);
   }
   async undo(documentID: string, expectedRevision: number): Promise<StoredWorkspace> { return this.history(documentID, expectedRevision, 'undo'); }
@@ -172,7 +173,7 @@ export class SpatialWebStore {
     const source = row.document;
     row.undo = [...row.undo, clone(source)].slice(-100); row.redo = [];
     row.document = { ...clone(frozen.document), parentRevision: expectedRevision, revision: expectedRevision + 1, reviewState: 'needsReview' };
-    row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document) };
+    row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document), ...(row.document.affectedAreas?.length||source.affectedAreas?.length?{surfaces:affectedHostReceipt(source,row.document)}:{}) };
     return this.commit(row, expectedRevision);
   }
   close(): void { this.closed = true; void this.database.then(db => db.close()).catch(() => {}); }

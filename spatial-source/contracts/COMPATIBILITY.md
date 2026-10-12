@@ -49,3 +49,48 @@ recovered-draft source links and confirmed-history-cleanup journals. Changes do
 not migrate any OS/Moldo database. PublicationAuthorization and managed leases
 are injected scoped contracts, not reusable URL credentials or configured live
 account integrations. The app uses local device-owner access only by default.
+
+
+## F05 branch candidate: affected observations (geometry/scene 1.5.0)
+
+This candidate is based on accepted F01, not a claim that F02-F04 are integrated.
+The master must compose the real predecessor types, commands, schema versions,
+scene roles, migrations and final material-domain resolver before acceptance.
+Do not replace F03/F04 `core/surfaces.ts` with this branch's baseline wall-opening
+adapter. F05 consumes the frozen surface functions and their material domains;
+it has no competing cutout implementation. The optional established ceiling
+field here is a contract fixture, not ceiling initialization. Versions 1.2/1.3/1.4
+remain rejected rather than pretending to migrate unknown predecessor fields.
+Existing 1.0/1.1 inputs remain admitted without fabricated observations.
+
+`affectedAreas` is document-owned, not floor-owned, so deleting a host floor cannot
+delete its observations. Each record retains its original surface reference,
+authored polygon, source document/revision, recorded material support and edited,
+unverified provenance. Attachments hold rigid source-chart-to-current-chart maps
+and retained source-domain pieces. Missing/ambiguous hosts become null unresolved
+attachments visible in review. Host edits never expand recorded support. Explicit
+reshape/reattach confirms new support in a new revision; old snapshots remain in
+existing durable history. No readings, verified totals, diagnoses or restoration
+scope are created.
+
+Same-host material/height changes preserve original support and clip display.
+Wall reversal swaps arclength and side. Splits/joins partition physical charts.
+Multi-node moves resolve once per coherent transaction segment. Ambiguous topology
+or deformation is retained for review, never guessed onto nearby geometry. The
+real F03/F04 typed command receipts remain a dependency-sensitive integration step.
+
+Plan, SVG, PDF and PNG share pre-clipped primitives: light floor fills, two-direction
+ceiling grids and side-offset wall length lines. The 6 cm plan offset is diagrammatic
+only. SVG admission is not widened. 3D/GLB use blue/red translucent front-sided
+observation faces. Overlapping kinds alternate strips instead of blending purple.
+The 1 mm derived surface bias is not a stored measurement. Observations do not
+participate in walking collision or cutaway ownership. Explicit surface editing,
+revision/authority fences, bounded frame-coalesced previews, cancellation and
+terminal-only commands keep navigation and persistence separate.
+
+Complete local-document export retains records and source identity through full
+geometry and regenerated derivatives. Unknown fields still fail admission. Legacy
+case-exchange/bundle export and import explicitly reject 1.5 so the publication
+outbox cannot silently send lossy observations. No case/OS publisher schema,
+database version, historical revision or native decoder is changed. Apple, device,
+installed assets, host delivery and full F02-F04 parity remain separately gated.

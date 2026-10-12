@@ -1,6 +1,7 @@
 import type { EditCommand, EditReceipt, Floor, GeometryIDMapping, Room, SpatialDocument, WallReference } from '../types';
 import { closedRoomBoundary, distance, EPSILON, isSimplePolygon, pathLength, pathPoint, roomBoundary, signedArea, wallPath } from './geometry';
 import { requireValidDocument, validID } from './validation';
+import { affectedHostReceipt, composeAffectedReceipts, isAffectedCommand, mutateAffectedArea, remapAffectedAreas } from './affectedAreas';
 
 function requireID(id:string,ids:string[]):void{if(!validID(id)||ids.includes(id))throw new Error(`Invalid or duplicate identifier: ${id}`);}
 function item<T extends {id:string}>(items:T[],id:string):T{const value=items.find(x=>x.id===id);if(!value)throw new Error(`Missing object ${id}`);return value;}
@@ -89,7 +90,8 @@ function mergeRooms(floor:Floor,firstID:string,secondID:string):{walls:string[];
   const openings=floor.openings.filter(o=>common.has(o.wallID)).map(o=>o.id);floor.rooms=floor.rooms.filter(r=>r.id!==firstID&&r.id!==secondID);floor.rooms.push(merged);floor.walls=floor.walls.filter(w=>!common.has(w.id));floor.openings=floor.openings.filter(o=>!common.has(o.wallID));return {walls:[...common].sort(),openings};
 }
 function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[]{
-  const mappings:GeometryIDMapping[]=[];if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));document.floors.push(structuredClone(command.floor));return mappings;}
+  const mappings:GeometryIDMapping[]=[];if(mutateAffectedArea(document,command))return mappings;if(isAffectedCommand(command))return mappings;if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));document.floors.push(structuredClone(command.floor));return mappings;}
+  if(!('floorID' in command))throw new Error('A structural command needs a floor.');
   const f=item(document.floors,command.floorID),m=(kind:string,id:string,to:string[])=>mappings.push(map(f.id,kind,id,to));
   if(command.type==='deleteFloor'){remove(document.floors,f.id);m('floor',f.id,[]);return mappings;}
   switch(command.type){
@@ -111,7 +113,7 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
     case'deleteRoom':remove(f.rooms,command.roomID);m('room',command.roomID,[]);break;
     case'splitRoom':splitRoom(f,command.roomID,command.dividerWallID,command.newRoomID,command.newLabel);m('room',command.roomID,[command.roomID,command.newRoomID]);break;
     case'mergeRooms':{const removed=mergeRooms(f,command.firstRoomID,command.secondRoomID);m('room',command.secondRoomID,[command.firstRoomID]);m('room',command.firstRoomID,[command.firstRoomID]);for(const id of removed.walls)m('wall',id,[]);for(const id of removed.openings)m('opening',id,[]);break;}
-    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';document.schemaVersion='1.1.0';break;}
+    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';if(document.schemaVersion==='1.0.0')document.schemaVersion='1.1.0';break;}
     case'deleteArea':remove(f.areas??[],command.areaID);m('area',command.areaID,[]);break;
     case'updateFloor':f.label=command.label;f.elevation=command.elevation;break;
     default:throw new Error('Unknown edit command');
@@ -123,9 +125,21 @@ export function applyCommands(document:SpatialDocument,commands:EditCommand[],ex
   if(document.revision!==expectedRevision)throw new Error(`Stale revision: expected ${expectedRevision}, current ${document.revision}`);
   if(!Array.isArray(commands)||commands.length<1||commands.length>1000)throw new Error('Use 1 to 1000 commands per edit');
   if(document.revision>=Number.MAX_SAFE_INTEGER)throw new Error('Revision limit reached');let mappings:GeometryIDMapping[]=[];
-  for(const c of commands)mappings=compose(mappings,mutate(next,c),document);
+  if(commands.some(isAffectedCommand)&&commands.some(c=>!isAffectedCommand(c)))throw new Error('Save host changes before recording or reshaping observations.');
+  let surfaces={sourceRevision:document.revision,resultingRevision:document.revision+1,mappings:[]} as import('../types').SurfaceRemapReceipt;
+  const hasAttachments=!!next.affectedAreas?.length&&!commands.some(isAffectedCommand);
+  let segmentStart=hasAttachments?structuredClone(next):null;
+  const flush=(before:SpatialDocument,command?:EditCommand)=>{const step=affectedHostReceipt(before,next,command);next.affectedAreas=remapAffectedAreas(next.affectedAreas??[],step);surfaces=composeAffectedReceipts(surfaces,step);};
+  for(const c of commands){
+    const topology=['splitWall','joinWalls','splitRoom','mergeRooms'].includes(c.type);
+    if(segmentStart&&topology){flush(segmentStart);segmentStart=structuredClone(next);}
+    mappings=compose(mappings,mutate(next,c),document);
+    if(segmentStart&&topology){flush(segmentStart,c);segmentStart=structuredClone(next);}
+  }
+  // A multi-node group move is one physical transform, never intermediate folds.
+  if(segmentStart)flush(segmentStart);
   next.revision=document.revision+1;next.parentRevision=document.revision;next.reviewState='needsReview';
   const validated=requireValidDocument(next);mappings=mappings.map(m=>({...m,resultingIDs:m.resultingIDs.filter(id=>exists(validated,m.floorID,m.objectKind,id))}));
   for(const mapping of restorationMappings(document,validated))if(!mappings.some(m=>m.floorID===mapping.floorID&&m.objectKind===mapping.objectKind&&m.sourceID===mapping.sourceID))mappings.push(mapping);
-  return {document:validated,receipt:{sourceRevision:document.revision,resultingRevision:validated.revision,mappings}};
+  return {document:validated,receipt:{sourceRevision:document.revision,resultingRevision:validated.revision,mappings,...(surfaces.mappings.length?{surfaces}:{})}};
 }

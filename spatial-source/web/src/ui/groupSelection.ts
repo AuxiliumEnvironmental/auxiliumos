@@ -1,9 +1,10 @@
+import { surfaceKey } from '../core/surfaces';
 import { applyCommands, roomBoundary, wallPath } from '../core';
 import { EPSILON, FloorGeometryIndex, cross, intersects, signedArea, triangulate } from '../core/geometry';
 import type { EditCommand, Floor, Point2, Selection, SpatialDocument } from '../types';
 import { openingPath } from './geometry';
 
-export const selectionKey = (value: Selection): string => JSON.stringify([value.floorID, value.kind, value.objectID]);
+export const selectionKey = (value: Selection): string => JSON.stringify([value.floorID, value.kind, value.objectID,...(value.surface?[surfaceKey(value.surface)]:[])]);
 export type SelectionBounds = { minX: number; minZ: number; maxX: number; maxZ: number };
 export function containedSelections(floor: Floor, bounds: SelectionBounds, kinds: Selection['kind'][] = ['wall', 'area']): Selection[] {
   if (!Object.values(bounds).every(Number.isFinite) || bounds.maxX <= bounds.minX || bounds.maxZ <= bounds.minZ) return [];
@@ -99,6 +100,7 @@ export function prepareGroupTranslation(document: SpatialDocument, floorID: stri
   const nodes = new Set<string>(), areas = new Set<string>(), openings = new Set<string>(), seen = new Set<string>();
   const requireWall = (id: string) => { const wall = floor.walls.find(item => item.id === id); if (!wall) throw new Error('A selected wall is no longer available.'); return wall; };
   for (const item of selected) {
+    if(item.kind==='surface'||item.kind==='affectedArea')throw new Error('Observations follow their hosts automatically. Adjust the region separately rather than adding it to a structure group.');
     if (item.floorID !== floorID) throw new Error('Adjust objects on one floor at a time.');
     const key = selectionKey(item); if (seen.has(key)) continue; seen.add(key);
     if (item.kind === 'node') { if (!floor.nodes.some(node => node.id === item.objectID)) throw new Error('A selected corner is no longer available.'); nodes.add(item.objectID); }
