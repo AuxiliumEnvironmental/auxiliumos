@@ -1,4 +1,5 @@
 import type { Floor, Opening, Point2 } from '../types';
+import { openingGeometryError } from '../core/openings';
 import { distance, EPSILON, finitePoint, pathLength, pathPoint, wallPath } from '../core/geometry';
 
 export type OpeningDragMode = 'move' | 'start' | 'end';
@@ -64,7 +65,7 @@ export function openingDragPreview(floor: Floor, drag: OpeningDrag, point: Point
   const overlapping = floor.openings.some(other => other.id !== opening.id && other.wallID === opening.wallID &&
     Math.min(opening.offset + opening.width, other.offset + other.width) - Math.max(opening.offset, other.offset) > EPSILON &&
     Math.min(opening.bottom + opening.height, other.bottom + other.height) - Math.max(opening.bottom, other.bottom) > EPSILON);
-  return overlapping ? { opening, error: 'This opening overlaps another opening. Drag to a clear span; no correction will be saved here.' } : { opening };
+  return overlapping ? { opening, error: 'This opening overlaps another opening. Drag to a clear span; no correction will be saved here.' } : { opening, error: openingGeometryError(floor, opening) };
 }
 
 /** Separate 44px hit targets from the opening body, even when the opening is small on screen. */

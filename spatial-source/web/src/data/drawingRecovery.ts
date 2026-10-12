@@ -1,3 +1,4 @@
+import { openingStyleError } from '../core/openings';
 import type { SpatialWebStore } from './store';
 import type { Opening, Point2, SpatialDocument } from '../types';
 import { EPSILON, distance, pathLength, wallPath } from '../core/geometry';
@@ -9,7 +10,7 @@ export type DrawingRecoveryPayload =
   | { tool: 'wall' | 'area' | 'room'; points: DrawingRecoveryPoint[] }
   | { tool: 'opening'; opening: Opening; point: Point2 };
 export interface DrawingRecoveryRecord {
-  formatVersion: 1;
+  formatVersion: 1 | 2;
   namespace: string;
   documentID: string;
   floorID: string;
@@ -48,7 +49,7 @@ function provenance(value: unknown): boolean {
   return Array.from({ length: ids.length }, (_, i) => Object.hasOwn(ids, i) && validID(ids[i])).every(Boolean);
 }
 function opening(value: unknown): value is Opening {
-  return object(value, ['id', 'wallID', 'kind', 'offset', 'width', 'bottom', 'height', 'provenance']) && validID(value.id) && validID(value.wallID) && ['door', 'window', 'passage'].includes(value.kind as string) && finite(value.offset, -10000, MAX_RECOVERY_OFFSET) && finite(value.width, 0, 10000) && (value.width as number) > 0 && finite(value.bottom, 0, 100) && finite(value.height, 0, 100) && (value.height as number) > 0 && provenance(value.provenance);
+  return object(value, ['id', 'wallID', 'kind', 'offset', 'width', 'bottom', 'height', 'provenance'], ['style']) && validID(value.id) && validID(value.wallID) && ['door', 'window', 'passage'].includes(value.kind as string) && finite(value.offset, -10000, MAX_RECOVERY_OFFSET) && finite(value.width, 0, 10000) && (value.width as number) > 0 && finite(value.bottom, 0, 100) && finite(value.height, 0, 100) && (value.height as number) > 0 && provenance(value.provenance) && (value.style === undefined || object(value.style, ['id', 'provenance'], ['end', 'side']) && provenance(value.style.provenance) && (value.style.end === undefined || ['start', 'end'].includes(value.style.end as string)) && (value.style.side === undefined || ['positive', 'negative'].includes(value.style.side as string)) && !openingStyleError(value as unknown as Opening));
 }
 /** Recovery admits unfinished shapes; final geometry still goes through commands. */
 export function validateDrawingRecoveryPayload(value: unknown): DrawingRecoveryPayload {
@@ -66,7 +67,8 @@ export function validateDrawingRecoveryPayload(value: unknown): DrawingRecoveryP
 function validateRecordShape(value: unknown, namespace: string, documentID: string): DrawingRecoveryRecord {
   if (!object(value, ['formatVersion', 'namespace', 'documentID', 'floorID', 'baseRevision', 'baseSHA256', 'token', 'writerID', 'updatedAt', 'payload', 'recordSHA256'])) recordError();
   const row = value as unknown as DrawingRecoveryRecord;
-  if (row.formatVersion !== 1 || row.namespace !== namespace || row.documentID !== documentID || !validID(row.documentID) || !validID(row.floorID) || !validID(row.token) || !validID(row.writerID) || !Number.isSafeInteger(row.baseRevision) || row.baseRevision < 1 || !digest(row.baseSHA256) || !digest(row.recordSHA256) || typeof row.updatedAt !== 'string' || !Number.isFinite(Date.parse(row.updatedAt)) || new Date(row.updatedAt).toISOString() !== row.updatedAt) recordError();
+  if (![1, 2].includes(row.formatVersion) || row.namespace !== namespace || row.documentID !== documentID || !validID(row.documentID) || !validID(row.floorID) || !validID(row.token) || !validID(row.writerID) || !Number.isSafeInteger(row.baseRevision) || row.baseRevision < 1 || !digest(row.baseSHA256) || !digest(row.recordSHA256) || typeof row.updatedAt !== 'string' || !Number.isFinite(Date.parse(row.updatedAt)) || new Date(row.updatedAt).toISOString() !== row.updatedAt) recordError();
+  if (row.formatVersion === 1 && row.payload?.tool === 'opening' && row.payload.opening?.style !== undefined) recordError();
   try { validateDrawingRecoveryPayload(row.payload); } catch { recordError(); }
   if (jsonBytes(row).length > MAX_DRAWING_RECOVERY_BYTES) recordError();
   return row;
@@ -145,7 +147,7 @@ export class DrawingRecoveryStore {
     if (saved.hash !== hash || saved.document.revision !== document.revision) fail('drawing-recovery-stale-base');
     if ((record?.token ?? null) !== options.expectedToken) fail('drawing-recovery-conflict');
     if (record && (record.baseRevision !== document.revision || record.baseSHA256 !== hash || record.floorID !== floorID)) fail('drawing-recovery-stale-base');
-    const body = { formatVersion: 1 as const, namespace: this.namespace, documentID: document.documentID, floorID, baseRevision: document.revision, baseSHA256: hash, token: crypto.randomUUID(), writerID: options.writerID, updatedAt: new Date().toISOString(), payload };
+    const body = { formatVersion: (payload.tool === 'opening' && payload.opening.style ? 2 : 1) as 1 | 2, namespace: this.namespace, documentID: document.documentID, floorID, baseRevision: document.revision, baseSHA256: hash, token: crypto.randomUUID(), writerID: options.writerID, updatedAt: new Date().toISOString(), payload };
     const next: DrawingRecoveryRecord = { ...body, recordSHA256: await sha256(jsonBytes(body)) };
     if (jsonBytes(next).length > MAX_DRAWING_RECOVERY_BYTES) fail('drawing-recovery-size-limit');
     await this.access();

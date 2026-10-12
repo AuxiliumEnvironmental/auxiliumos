@@ -1,6 +1,7 @@
+import { OPENING_CATALOG, openingPlanLines, openingPreset, openingGeometryError } from '../core/openings';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { roomBoundary, validateDocument, wallPath } from '../core';
-import type { EditCommand, Floor, OpeningKind, Point2, Selection, SpatialDocument } from '../types';
+import type { EditCommand, Floor, OpeningKind, OpeningStyleID, OpeningEditFence, Point2, Selection, SpatialDocument } from '../types';
 import type { DrawingRecoveryPayload } from '../data/drawingRecovery';
 import { distanceToPath, editedProvenance, freshDocument, objectLabel, openingPath, pointInPolygon, uid } from './geometry';
 import { drawingSnap, overlappingSpan, zoomAt, type DrawPoint, type DrawingSnap } from './planInteraction';
@@ -10,7 +11,7 @@ import { SNAP } from './authoringSnap';
 import { wallDrawingCommands } from './wallDrawing';
 import { PlanGeometry } from './PlanGeometry';
 import { FloorGeometryIndex } from '../core/geometry';
-import { beginOpeningDrag, openingDragPreview, openingResizeHandles, type OpeningDrag, type OpeningPreview } from './openingManipulation';
+import { projectToWall, beginOpeningDrag, openingDragPreview, openingResizeHandles, type OpeningDrag, type OpeningPreview } from './openingManipulation';
 import { previewOpeningPlacement, type OpeningPlacement } from './openingPlacement';
 import { containedSelections, groupTranslation, prepareGroupTranslation, selectionKey, type SelectionBounds } from './groupSelection';
 
@@ -18,7 +19,7 @@ export type PlanViewState = { x: number; z: number; width: number; height: numbe
 export type CanvasTool = 'select' | 'pan' | 'wall' | 'area' | 'room' | 'opening' | 'marquee';
 type MoveSample = { pointerId: number; clientX: number; clientY: number; shiftKey: boolean; altKey: boolean };
 type GroupFilter = 'wallsAndAreas' | 'wall' | 'node' | 'room' | 'area' | 'opening' | 'all';
-type Props = { document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[]) => void | Promise<boolean>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
+type Props = { document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[], fence?: OpeningEditFence) => void | Promise<boolean>; editContext?: Omit<OpeningEditFence, 'openingID'>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
 
 const groupKinds = (filter: GroupFilter): Selection['kind'][] => filter === 'all' ? ['wall', 'node', 'room', 'area', 'opening'] : filter === 'wallsAndAreas' ? ['wall', 'area'] : [filter];
 const boundsBetween = (a: Point2, b: Point2): SelectionBounds => ({ minX: Math.min(a.x, b.x), minZ: Math.min(a.z, b.z), maxX: Math.max(a.x, b.x), maxZ: Math.max(a.z, b.z) });
@@ -42,15 +43,15 @@ function boundsForSelection(floor: Floor, items: Selection[]): SelectionBounds |
 
 /** Recovery keeps the exact shape and provenance, including an invalid draft.
  * Re-evaluate admission without generating a fresh starter shape or revision. */
-function checkedPlacement(floor: Floor, draft: OpeningPlacement): OpeningPlacement {
-  const issues = validateDocument({ ...freshDocument('Opening draft validation'), floors: [{ ...floor, openings: [...floor.openings, draft.opening] }] });
+function checkedPlacement(floor: Floor, draft: OpeningPlacement, schemaVersion: SpatialDocument['schemaVersion']): OpeningPlacement {
+  const issues = validateDocument({ ...freshDocument('Opening draft validation'), schemaVersion: draft.opening.style ? '1.2.0' : schemaVersion, floors: [{ ...floor, openings: [...floor.openings, draft.opening] }] });
   const error = !issues.length ? undefined : issues.some(issue => issue.code === 'opening_overlap')
     ? 'This opening overlaps another opening. Choose a clear span of the wall.'
     : 'This opening does not fit its saved wall. Reposition it inside the wall or cancel this draft.';
   return { opening: structuredClone(draft.opening), point: { ...draft.point }, ...(error ? { error } : {}) };
 }
 
-export function FloorplanCanvas({ document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, disabled: parentDisabled, tool, onTool, onError }: Props) {
+export function FloorplanCanvas({ document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, editContext, disabled: parentDisabled, tool, onTool, onError }: Props) {
   const restored = useRef(initialDraft?.tool === tool ? structuredClone(initialDraft) : undefined);
   const draftCallback = useRef(onDraftChange); draftCallback.current = onDraftChange;
   const [submitting, setSubmitting] = useState(false);
@@ -84,8 +85,9 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const previousGroupKey = useRef(groupKey);
   const [openingActive, setOpeningActive] = useState(false);
   const [openingPreview, setOpeningPreview] = useState<OpeningPreview | null>(null);
+  const [openingStyle, setOpeningStyle] = useState<OpeningStyleID | undefined>(() => restored.current?.tool === 'opening' ? restored.current.opening.style?.id : 'door_single');
   const [openingKind, setOpeningKind] = useState<OpeningKind>(() => restored.current?.tool === 'opening' ? restored.current.opening.kind : 'door');
-  const [placement, setPlacement] = useState<OpeningPlacement | null>(() => restored.current?.tool === 'opening' ? checkedPlacement(floor, restored.current) : null);
+  const [placement, setPlacement] = useState<OpeningPlacement | null>(() => restored.current?.tool === 'opening' ? checkedPlacement(floor, restored.current, geometryDocument.schemaVersion) : null);
   const placementRef = useRef(placement);
   const completedPlacement = useRef(placement);
   const placementIdentity = useRef<string | null>(placement?.opening.id ?? null);
@@ -105,7 +107,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const submittedIDs = useRef<string[]>([]);
   const submittedRoom = useRef<string | null>(null);
   const submittedOpening = useRef<string | null>(null);
-  const gesture = useRef<{ pointerID: number; start: Point2; clientX: number; clientY: number; view: PlanViewState; hits: Selection[]; pan: boolean; drag?: Selection; opening?: OpeningDrag; placementWallID?: string; roomAnchor?: Point2 & { nodeID?: string }; roomHandle?: 0 | 1; roomOffset?: Point2; roomBlocked?: boolean; wallStroke?: Point2 & { nodeID?: string }; marquee?: { additive: boolean; base: Selection[]; kinds: Selection['kind'][] }; group?: { document: SpatialDocument; selected: Selection[]; bounds: SelectionBounds }; moved: boolean } | null>(null);
+  const gesture = useRef<{ pointerID: number; start: Point2; clientX: number; clientY: number; view: PlanViewState; hits: Selection[]; pan: boolean; drag?: Selection; opening?: OpeningDrag; fence?: OpeningEditFence; placementWallID?: string; roomAnchor?: Point2 & { nodeID?: string }; roomHandle?: 0 | 1; roomOffset?: Point2; roomBlocked?: boolean; wallStroke?: Point2 & { nodeID?: string }; marquee?: { additive: boolean; base: Selection[]; kinds: Selection['kind'][] }; group?: { document: SpatialDocument; selected: Selection[]; bounds: SelectionBounds }; moved: boolean } | null>(null);
   const moveFrame = useRef<number | null>(null);
   const queuedMove = useRef<{ latest: MoveSample; openingSamples: MoveSample[] } | null>(null);
   useEffect(() => () => cancelMoveFrame(), []);
@@ -160,9 +162,9 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const fit = () => {
     cancelMoveFrame(); setCursor(null);
     if (gesture.current || pinch.current) clearGesture();
-    const all = [...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
+    const all = [...floor.openings.flatMap(o => openingPlanLines(floor, o).flatMap(line => [line.a, line.b])), ...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
     if (!all.length) { setView({ x: -1.5, z: -1.5, width: 11, height: 11 * size.height / size.width }); return; }
-    const minX = Math.min(...all.map(p => p.x)), maxX = Math.max(...all.map(p => p.x)), minZ = Math.min(...all.map(p => p.z)), maxZ = Math.max(...all.map(p => p.z));
+    const { minX, maxX, minZ, maxZ } = all.reduce((b, p) => ({ minX: Math.min(b.minX, p.x), maxX: Math.max(b.maxX, p.x), minZ: Math.min(b.minZ, p.z), maxZ: Math.max(b.maxZ, p.z) }), { minX: Infinity, maxX: -Infinity, minZ: Infinity, maxZ: -Infinity });
     const aspect = size.width / size.height, width = Math.max(maxX - minX + 3, (maxZ - minZ + 3) * aspect, 4);
     setView({ x: (minX + maxX - width) / 2, z: (minZ + maxZ - width / aspect) / 2, width, height: width / aspect });
   };
@@ -183,6 +185,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   }, [floor]);
   useLayoutEffect(() => { if (previousTool.current === tool) return; previousTool.current = tool; clearDrawing(); clearGesture(undefined, true); clearSubmission(); }, [tool]);
   useLayoutEffect(() => { if (previousGroupKey.current === groupKey) return; previousGroupKey.current = groupKey; if (gesture.current?.group || gesture.current?.marquee || choosingGroup.current) clearGesture(); }, [groupKey]);
+  useLayoutEffect(() => { if (gesture.current?.opening) clearGesture(); }, [editContext?.documentID, editContext?.floorID, editContext?.revision, editContext?.generation, editContext?.scope, editContext?.view]);
   useEffect(() => { if (gesture.current?.opening && (selection?.kind !== 'opening' || selection.objectID !== gesture.current.opening.original.id)) clearGesture(); }, [selection?.kind, selection?.objectID]);
   useLayoutEffect(() => { if (disabled) { clearGesture(); setCursor(null); } }, [disabled]);
   useEffect(() => {
@@ -257,11 +260,17 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   function placementCandidates(point: Point2): Selection[] {
     return floor.walls.filter(wall => distanceToPath(point, geometryIndex.path(wall)) <= units * 22).map(wall => ({ floorID: floor.id, kind: 'wall', objectID: wall.id }));
   }
-  function place(wallID: string, point: Point2, kind = openingKind, completed = false) {
+  function place(wallID: string, point: Point2, kind = openingKind, completed = false, styleID: OpeningStyleID | null = openingStyle ?? null) {
     if (disabled) return;
     try {
       const id = placementIdentity.current ?? uid(); placementIdentity.current = id;
-      const next = previewOpeningPlacement(floor, wallID, kind, point, id);
+      let next = previewOpeningPlacement(floor, wallID, kind, point, id, styleID ?? undefined);
+      const previous = completedPlacement.current?.opening;
+      if (previous && previous.kind === kind && previous.style?.id === (styleID ?? undefined)) {
+        const host = floor.walls.find(wall => wall.id === wallID)!;
+        const opening = { ...structuredClone(previous), id, wallID, offset: projectToWall(wallPath(floor, host), point) - previous.width / 2 };
+        next = { opening, point: { ...point }, error: openingGeometryError(floor, opening) };
+      }
       placementRef.current = next; setPlacement(next); submittedIDs.current = []; submittedOpening.current = null; onError('');
       if (completed) { completedPlacement.current = next; draftCallback.current?.({ tool: 'opening', opening: structuredClone(next.opening), point: { ...next.point } }); }
     } catch (cause) { restorePlacement(); onError(cause instanceof Error ? cause.message : String(cause)); }
@@ -271,7 +280,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     if (disabled || pointers.current.size || !draft || draft.error || placementChoiceRef.current || submittedIDs.current.length) return;
     // Recheck against the current canonical floor. A preview never bypasses the
     // core command validator or the parent's durable transaction/save state.
-    const checked = checkedPlacement(floor, draft);
+    const checked = checkedPlacement(floor, draft, geometryDocument.schemaVersion);
     if (checked.error) { placementRef.current = checked; setPlacement(checked); return; }
     submittedIDs.current = [checked.opening.id]; submittedOpening.current = checked.opening.id;
     submit([{ type: 'addOpening', floorID: floor.id, opening: checked.opening }]);
@@ -302,7 +311,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     if (tool === 'room') {
       if (draft.length !== 2) return;
       try {
-        const result = rectangleRoomCommands(floor, draft[0], draft[1]);
+        const result = rectangleRoomCommands(floor, draft[0], draft[1], geometryDocument.schemaVersion);
         submittedIDs.current = result.submittedIDs; submittedRoom.current = result.roomID;
         submit(result.commands);
       } catch (cause) { onError(cause instanceof Error ? cause.message : String(cause)); }
@@ -311,7 +320,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
       const id = uid(); submittedIDs.current = [id];
       submit([{ type: 'setArea', floorID: floor.id, area: { id, label: 'New area', polygon: draft.map(p => ({ x: p.x, z: p.z })), provenance: editedProvenance() } }]);
     } else if (tool === 'wall' && draft.length > 1) {
-      try { const result = wallDrawingCommands(floor, draft); submittedIDs.current = result.submittedIDs; submit(result.commands); }
+      try { const result = wallDrawingCommands(floor, draft, geometryDocument.schemaVersion); submittedIDs.current = result.submittedIDs; submit(result.commands); }
       catch (cause) { onError(cause instanceof Error ? cause.message : String(cause)); }
     }
   }
@@ -389,7 +398,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     const movingRoomPoint = roomHandle === undefined ? undefined : pointsRef.current[roomHandle];
     const roomOffset = movingRoomPoint ? { x: movingRoomPoint.x - p.x, z: movingRoomPoint.z - p.z } : undefined;
     const roomAnchor = tool === 'room' && !temporaryPan ? roomHandle === 0 ? pointsRef.current[1] : pointsRef.current[0] ?? initialRoomSnap!.point : undefined;
-    gesture.current = { pointerID: event.pointerId, start: p, clientX: event.clientX, clientY: event.clientY, view, hits, pan: temporaryPan || tool === 'pan', moved: false, drag: opening ? undefined : direct, opening, roomAnchor, roomHandle, roomOffset, wallStroke };
+    gesture.current = { pointerID: event.pointerId, start: p, clientX: event.clientX, clientY: event.clientY, view, hits, pan: temporaryPan || tool === 'pan', moved: false, drag: opening ? undefined : direct, opening, fence: opening && editContext ? { ...editContext, openingID: opening.original.id } : undefined, roomAnchor, roomHandle, roomOffset, wallStroke };
     roomSnapMemory.current = null; wallSnapMemory.current = null;
     if (opening) { setOpeningActive(true); setOpeningPreview({ opening: opening.original }); }
     if (roomAnchor) { setRoomDragStart(roomAnchor); setCursor({ point: movingRoomPoint ?? p, shift: event.shiftKey, alt: event.altKey }); onError(''); }
@@ -510,7 +519,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
       if (result.error) { onError(result.error); return; }
       const original = g.opening.original, changed = result.opening;
       if (Math.abs(original.offset - changed.offset) < 1e-6 && Math.abs(original.width - changed.width) < 1e-6) return;
-      onEdit(g.opening.mode === 'move' ? [{ type: 'moveOpening', floorID: floor.id, openingID: original.id, offset: changed.offset }] : [{ type: 'updateOpening', floorID: floor.id, opening: changed }]);
+      onEdit(g.opening.mode === 'move' ? [{ type: 'moveOpening', floorID: floor.id, openingID: original.id, offset: changed.offset }] : [{ type: 'updateOpening', floorID: floor.id, opening: changed }], g.fence);
       return;
     }
     if (g.drag && g.moved) {
@@ -586,9 +595,11 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     </div>}
     {openingActive && <div className="spatial-drawing-actions" style={{ bottom: 74 }}><button onClick={() => { clearGesture(); svg.current?.focus(); }}>Cancel opening edit</button></div>}
     {tool === 'opening' && <div className="spatial-opening-placement-actions">
-      <select aria-label="New opening type" value={openingKind} disabled={disabled || placementActive || choosingPlacement !== null} onChange={event => { const kind = event.target.value as OpeningKind; setOpeningKind(kind); const current = placementRef.current; if (current) place(current.opening.wallID, current.point, kind, true); }}>
-        <option value="door">Door</option><option value="window">Window</option><option value="passage">Passage</option>
-      </select>
+      <select aria-label="New opening type" value={openingStyle ?? `generic_${openingKind}`} disabled={disabled || placementActive || choosingPlacement !== null} onChange={event => {
+        const preset = openingPreset(event.target.value), kind = preset?.kind ?? event.target.value.replace('generic_', '') as OpeningKind;
+        setOpeningKind(kind); setOpeningStyle(preset?.id);
+        const current = placementRef.current; if (current) place(current.opening.wallID, current.point, kind, true, preset?.id ?? null);
+      }}><optgroup label="Opening catalog">{OPENING_CATALOG.map(preset => <option key={preset.id} value={preset.id}>{preset.label}</option>)}</optgroup><optgroup label="Unspecified style"><option value="generic_door">Generic door</option><option value="generic_window">Generic window</option><option value="generic_passage">Generic passage</option></optgroup></select>
       <button disabled={disabled || placementActive || !placement || !!placement.error || choosingPlacement !== null} onClick={finishPlacement}>Finish opening</button>
       <button disabled={disabled} onClick={() => { discardDrawing(); onTool('select'); onError(''); svg.current?.focus(); }}>Cancel opening</button>
     </div>}

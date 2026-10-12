@@ -28,3 +28,11 @@ export function surfaceLinearRGB(role: StructuralSurfaceRole, selected = false):
   const color = linear[role];
   return selected ? [color[0] * SELECTED_SURFACE_FACTOR, color[1] * SELECTED_SURFACE_FACTOR, color[2] * SELECTED_SURFACE_FACTOR] : color;
 }
+
+/** Styled opening emitters are explicit; unknown feature roles still fail closed. */
+export type SpatialFaceRole = StructuralSurfaceRole | 'opening';
+export function spatialFaceRole(role: string): SpatialFaceRole { return role === 'opening' ? role : structuralSurfaceRole(role); }
+export function spatialFaceLinearRGB(role: SpatialFaceRole, selected = false): LinearRGB {
+  if (role !== 'opening') return surfaceLinearRGB(role, selected);
+  return selected ? hexToLinearRGB('#A5CEE4') : hexToLinearRGB('#FFFFFF');
+}

@@ -1,6 +1,6 @@
 import { buildScene } from '../core';
 import type { FrozenRevision, Point3 } from '../types';
-import { hexToLinearRGB, STRUCTURAL_EDGE_COLOR, structuralSurfaceRole, surfaceLinearRGB } from '../surfacePalette';
+import { hexToLinearRGB, STRUCTURAL_EDGE_COLOR, spatialFaceRole, surfaceLinearRGB, spatialFaceLinearRGB } from '../surfacePalette';
 import { concatenate, fail, jsonBytes, MAX_MEMBER } from './bytes';
 
 /** glTF 2.0 binary derivative. Canonical cutout triangles and semantic lines remain distinct. */
@@ -40,10 +40,10 @@ export function glbDrawing(frozen: FrozenRevision, floorID: string): Uint8Array 
       if (!(length > 0) || !Number.isFinite(length)) fail('glb-float32-precision-loss');
       for (const point of p) { positions.push(...point); normals.push(...cross.map(n => n / length)); }
     }
-    const role = structuralSurfaceRole(faces[0].role);
+    const role = spatialFaceRole(faces[0].role);
     // Display-only ceilings are not authoritative buildScene/export geometry in F01.
     if (role === 'ceiling') fail('unsupported-glb-display-ceiling');
-    primitive(faces[0].objectID, role, 'faces', { attributes: { POSITION: vector(positions, true), NORMAL: vector(normals) }, mode: 4, material: { wall: 0, floor: 1 }[role] });
+    primitive(faces[0].objectID, role, 'faces', { attributes: { POSITION: vector(positions, true), NORMAL: vector(normals) }, mode: 4, material: { wall: 0, floor: 1, opening: 4 }[role] });
   }
   const groups = new Map<string, typeof scene.edges>();
   for (const edge of scene.edges) { const key = `${edge.role}:${edge.objectID}`; const group = groups.get(key); if (group) group.push(edge); else groups.set(key, [edge]); }
@@ -57,7 +57,7 @@ export function glbDrawing(frozen: FrozenRevision, floorID: string): Uint8Array 
   }
   const extras = { documentID: frozen.document.documentID, revision: frozen.document.revision, floorID, geometrySchemaVersion: frozen.document.schemaVersion, coordinateSystem: frozen.document.coordinateSystem, measurementStatus: 'unverified', sourceSHA256: frozen.hash };
   const material = (color: number[]) => ({ doubleSided: true, alphaMode: 'OPAQUE', pbrMetallicRoughness: { baseColorFactor: color, metallicFactor: 0, roughnessFactor: 1 } });
-  const json = jsonBytes({ asset: { version: '2.0', generator: 'Auxilium Spatial shared workspace', extras }, scene: 0, scenes: [{ nodes: nodes.map((_, i) => i), extras }], nodes, meshes, accessors, bufferViews, buffers: [{ byteLength: binaryLength }], materials: [material([...surfaceLinearRGB('wall'), 1]), material([...surfaceLinearRGB('floor'), 1]), material([...hexToLinearRGB(STRUCTURAL_EDGE_COLOR), 1]), material([0.14, 0.48, 0.75, 1])] });
+  const json = jsonBytes({ asset: { version: '2.0', generator: 'Auxilium Spatial shared workspace', extras }, scene: 0, scenes: [{ nodes: nodes.map((_, i) => i), extras }], nodes, meshes, accessors, bufferViews, buffers: [{ byteLength: binaryLength }], materials: [material([...surfaceLinearRGB('wall'), 1]), material([...surfaceLinearRGB('floor'), 1]), material([...hexToLinearRGB(STRUCTURAL_EDGE_COLOR), 1]), material([0.14, 0.48, 0.75, 1]), ...(scene.faces.some(f=>f.role==='opening') ? [material([...spatialFaceLinearRGB('opening'), 1])] : [])] });
   const jsonPad = new Uint8Array((4 - json.length % 4) % 4).fill(32), binary = concatenate(parts), header = new Uint8Array(20), footer = new Uint8Array(8);
   const h = new DataView(header.buffer); h.setUint32(0, 0x46546c67, true); h.setUint32(4, 2, true); h.setUint32(8, 28 + json.length + jsonPad.length + binary.length, true); h.setUint32(12, json.length + jsonPad.length, true); h.setUint32(16, 0x4e4f534a, true);
   const f = new DataView(footer.buffer); f.setUint32(0, binary.length, true); f.setUint32(4, 0x004e4942, true);

@@ -1,4 +1,5 @@
 import type { SpatialDocument, ValidationIssue } from '../types';
+import { OPENING_CATALOG, openingStyleError, openingHasRigidHost, openingPlanLines } from './openings';
 import { EPSILON, FloorGeometryIndex, isSimplePath, isSimplePolygon, pathLength } from './geometry';
 
 export class GeometryValidationError extends Error {
@@ -16,6 +17,8 @@ const provenance=object({origin:choice('captured','edited','inferred','synthetic
 const node=object({id,point});
 const wall=object({id,nodeIDs:array(id,2,1000),baseY:number(-100,100),height:number(0,100,true),heightBasis:choice('captured','assumed','edited','synthetic'),provenance});
 const opening=object({id,wallID:id,kind:choice('door','window','passage'),offset:number(0,10000),width:number(0,10000,true),bottom:number(0,100),height:number(0,100,true),provenance});
+const style=object({id:choice(...OPENING_CATALOG.map(p=>p.id)),end:choice('start','end'),side:choice('positive','negative'),provenance},['end','side']);
+const styledOpening=object({...(opening.kind==='object'?opening.fields:{}),style},['style']);
 const room=object({id,label:text,boundary:array(object({wallID:id,reversed:choice(true,false)}),3,1000)});
 const area=object({id,label:text,polygon:array(point,3,1000),provenance});
 const floor=object({id,label:text,elevation:number(-10000,10000),nodes:array(node,0,100000),walls:array(wall,0,50000),openings:array(opening,0,10000),rooms:array(room,0,10000),areas:array(area,0,1000)},['areas']);
@@ -44,7 +47,9 @@ export function validateDocument(value:unknown):ValidationIssue[]{
       }
     }
   };
-  visit(value,documentShape,'');if(issues.length)return issues;
+  const version=(value as {schemaVersion?:unknown}|null)?.schemaVersion;
+  const shape=version==='1.2.0' && floor.kind==='object' && documentShape.kind==='object' ? object({...documentShape.fields,schemaVersion:choice('1.2.0'),floors:array(object({...floor.fields,openings:array(styledOpening,0,10000)},['areas']),1,100)},['parentRevision']) : documentShape;
+  visit(value,shape,'');if(issues.length)return issues;
   const doc=value as SpatialDocument;
   if(doc.parentRevision!=null&&doc.parentRevision>=doc.revision)add('revision','parentRevision','Parent must precede the current revision');
   const unique=(values:string[],path:string)=>{if(new Set(values).size!==values.length)add('duplicate_id',path,'Identifiers must be unique in this collection');};
@@ -62,6 +67,8 @@ export function validateDocument(value:unknown):ValidationIssue[]{
     }
     const groups=new Map<string,typeof f.openings>();
     for(const o of f.openings){const p=`${root}.openings.${o.id}`,w=index.walls.get(o.wallID),length=lengths.get(o.wallID);if(!w||length===undefined){add('missing_wall',p,'Opening must have a valid existing host wall');continue;}
+      if(o.style){const error=openingStyleError(o);if(error)add('opening_style',p,error);if(!openingHasRigidHost(f,o))add('opening_style_host',p,'Rigid opening style requires one straight wall run');}
+      if(o.style&&openingPlanLines(f,o).some(l=>[l.a.x,l.a.z,l.b.x,l.b.z].some(n=>!Number.isFinite(n)||Math.abs(n)>10000)))add('opening_symbol_bounds',p,'Opening diagram exceeds world coordinate bounds');
       if(o.offset+o.width>length+EPSILON||o.bottom+o.height>w.height+EPSILON)add('opening_bounds',p,'Opening must fit inside its host wall');groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
     }
     for(const group of groups.values()){const sorted=[...group].sort((a,b)=>a.offset-b.offset);for(let i=0;i<sorted.length;i++)for(let j=i+1;j<sorted.length;j++){const a=sorted[i],b=sorted[j];if(b.offset>=a.offset+a.width-EPSILON)break;if(Math.min(a.bottom+a.height,b.bottom+b.height)-Math.max(a.bottom,b.bottom)>EPSILON)add('opening_overlap',`${root}.openings`,`${a.id} overlaps ${b.id}`);}}

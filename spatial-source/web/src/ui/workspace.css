@@ -148,3 +148,19 @@
   .spatial-workspace .spatial-editor[data-mobile-panel=objects] .spatial-tools-stage,
   .spatial-workspace .spatial-editor[data-mobile-panel=details] .spatial-tools-stage{bottom:86px;right:calc(min(42%,320px) + 8px)}
 }
+
+/* F02: compact opening controls and visible 44px manipulation targets. */
+.spatial-opening-elevation { min-width: 0; }
+.spatial-opening-elevation svg { display: block; width: 100%; height: 210px; overflow: hidden; touch-action: none; user-select: none; }
+.spatial-opening-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.spatial-opening-fields label { min-width: 0; }
+.spatial-opening-fields input { width: 100%; min-width: 0; box-sizing: border-box; }
+.spatial-opening-catalog select { width: 100%; min-width: 0; }
+.spatial-opening-model-handles { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
+.spatial-opening-model-handles button { position: absolute; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 0; background: transparent; pointer-events: auto; touch-action: none; cursor: move; display: grid; place-items: center; }
+.spatial-opening-model-handles button[hidden] { display: none; }
+.spatial-opening-model-handles button span { display: block; width: 12px; height: 12px; background: white; border: 2px solid #087aae; border-radius: 3px; box-shadow: 0 0 0 1px white; }
+.spatial-opening-model-handles button:focus-visible { outline: 2px solid #087aae; outline-offset: -3px; }
+.spatial-opening-leaders { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.spatial-opening-leaders line { stroke: #087aae; stroke-width: 1; }
+@media (max-width: 360px) { .spatial-opening-fields { grid-template-columns: minmax(0, 1fr); } }

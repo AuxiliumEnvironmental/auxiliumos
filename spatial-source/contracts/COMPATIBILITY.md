@@ -49,3 +49,27 @@ recovered-draft source links and confirmed-history-cleanup journals. Changes do
 not migrate any OS/Moldo database. PublicationAuthorization and managed leases
 are injected scoped contracts, not reusable URL credentials or configured live
 account integrations. The app uses local device-owner access only by default.
+
+## F02 opening authoring (geometry / scene 1.2.0)
+
+The shared web editor admits immutable 1.0.0 and 1.1.0 documents and adds strict
+1.2.0 admission. An explicit catalog edit upgrades a mutable revision; opening
+a document never rewrites its original snapshot. Legacy generic apertures retain
+unspecified subtype/orientation. Style provenance is authored independently of
+aperture provenance and cannot grant inferred openings navigation authority.
+
+Scene 1.2.0 adds opening-owned `opening` faces for diagrammatic frames/panels.
+Complete local-document 1.0/1.1 profiles retain their existing member contract,
+including separately versioned geometry/scene, drawings and GLB. Unsupported
+versions reject intact. The constrained legacy exchange/outbox rejects 1.2.0
+with a complete-local-document alternative; the v1 publisher remains disabled.
+Drawing recovery writes formatVersion 2 for styled opening drafts and continues
+reading/writing legacy formatVersion 1 for other drafts. A v1 record with style
+fields is rejected rather than silently stripped. No database version changes.
+
+Styles persist in meters with wall-local end/side orientation. Wall reversal
+swaps both applicable orientation dimensions; split/join translates arclength.
+Rigid styles cannot cross a noncollinear bend. Generic legacy apertures may.
+Companion symbol extents are not physical opening heights. SVG/PDF/PNG use the
+same plan primitives and include their extents. GLB opening material handling
+is explicit and preserves the accepted structural surface palette.

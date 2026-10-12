@@ -1,5 +1,6 @@
 import type { EditCommand, EditReceipt, Floor, GeometryIDMapping, Room, SpatialDocument, WallReference } from '../types';
 import { closedRoomBoundary, distance, EPSILON, isSimplePolygon, pathLength, pathPoint, roomBoundary, signedArea, wallPath } from './geometry';
+import { authoredOpeningStyle, openingPreset, reversedOpeningStyle, sameOpeningGeometry } from './openings';
 import { requireValidDocument, validID } from './validation';
 
 function requireID(id:string,ids:string[]):void{if(!validID(id)||ids.includes(id))throw new Error(`Invalid or duplicate identifier: ${id}`);}
@@ -65,7 +66,7 @@ function joinWalls(floor:Floor,firstID:string,secondID:string):void{
     for(let i=0;i<boundary.length;i++){const pair=[boundary[i],boundary[(i+1)%boundary.length]];if(equal(pair,forward)||equal(pair,reverse)){const rotated=[...boundary.slice(i),...boundary.slice(0,i)];replacement=[{wallID:firstID,reversed:equal(pair,reverse)},...rotated.slice(2)];break;}}
     if(!replacement)throw new Error('Walls must be consecutive in each affected room');room.boundary=replacement;
   }
-  for(const o of floor.openings){if(o.wallID===firstID){if(first)o.offset+=bl;}else if(o.wallID===secondID){if(reversed)o.offset=bl-o.offset-o.width;if(!first)o.offset+=al;o.wallID=firstID;}}
+  for(const o of floor.openings){if(o.wallID===firstID){if(first)o.offset+=bl;}else if(o.wallID===secondID){if(reversed){o.offset=bl-o.offset-o.width;if(o.style)o.style=reversedOpeningStyle(o.style);}if(!first)o.offset+=al;o.wallID=firstID;}}
   floor.walls[floor.walls.indexOf(a)]=joined;remove(floor.walls,secondID);
 }
 function splitRoom(floor:Floor,roomID:string,dividerID:string,newID:string,label:string):void{
@@ -89,7 +90,7 @@ function mergeRooms(floor:Floor,firstID:string,secondID:string):{walls:string[];
   const openings=floor.openings.filter(o=>common.has(o.wallID)).map(o=>o.id);floor.rooms=floor.rooms.filter(r=>r.id!==firstID&&r.id!==secondID);floor.rooms.push(merged);floor.walls=floor.walls.filter(w=>!common.has(w.id));floor.openings=floor.openings.filter(o=>!common.has(o.wallID));return {walls:[...common].sort(),openings};
 }
 function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[]{
-  const mappings:GeometryIDMapping[]=[];if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));document.floors.push(structuredClone(command.floor));return mappings;}
+  const mappings:GeometryIDMapping[]=[];if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));if(command.floor.openings.some(o=>o.style))document.schemaVersion='1.2.0';else if(command.floor.areas!==undefined&&document.schemaVersion==='1.0.0')document.schemaVersion='1.1.0';document.floors.push(structuredClone(command.floor));return mappings;}
   const f=item(document.floors,command.floorID),m=(kind:string,id:string,to:string[])=>mappings.push(map(f.id,kind,id,to));
   if(command.type==='deleteFloor'){remove(document.floors,f.id);m('floor',f.id,[]);return mappings;}
   switch(command.type){
@@ -101,9 +102,19 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
     case'joinWalls':joinWalls(f,command.firstWallID,command.secondWallID);m('wall',command.firstWallID,[command.firstWallID]);m('wall',command.secondWallID,[command.firstWallID]);break;
     case'mergeNodes':{const source=item(f.nodes,command.sourceNodeID),target=item(f.nodes,command.targetNodeID);if(source.id===target.id)throw new Error('Choose two different nodes');for(const w of f.walls)if(w.nodeIDs.includes(source.id)){w.nodeIDs=w.nodeIDs.map(id=>id===source.id?target.id:id);w.provenance.origin='edited';}remove(f.nodes,source.id);m('node',source.id,[target.id]);break;}
     case'disconnectNode':{const w=item(f.walls,command.wallID),n=item(f.nodes,command.nodeID);if(!w.nodeIDs.includes(n.id))throw new Error('Node does not belong to the selected wall');requireID(command.newNodeID,f.nodes.map(n=>n.id));f.nodes.push({id:command.newNodeID,point:structuredClone(n.point)});w.nodeIDs=w.nodeIDs.map(id=>id===n.id?command.newNodeID:id);w.provenance.origin='edited';m('node',n.id,[n.id,command.newNodeID]);break;}
-    case'addOpening':{const o=structuredClone(command.opening);requireID(o.id,f.openings.map(x=>x.id));o.provenance.origin='edited';f.openings.push(o);break;}
-    case'moveOpening':{const o=item(f.openings,command.openingID);o.offset=command.offset;o.provenance.origin='edited';m('opening',o.id,[o.id]);break;}
-    case'updateOpening':{const previous=item(f.openings,command.opening.id),o=structuredClone(command.opening);o.provenance.sourceIDs=[...new Set([...o.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();o.provenance.origin='edited';f.openings[f.openings.indexOf(previous)]=o;m('opening',o.id,[o.id]);break;}
+    case'addOpening':{const o=structuredClone(command.opening);requireID(o.id,f.openings.map(x=>x.id));o.provenance.origin='edited';if(o.style){o.style.provenance.origin='edited';document.schemaVersion='1.2.0';}f.openings.push(o);break;}
+    case'moveOpening':{const o=item(f.openings,command.openingID);if(o.offset!==command.offset){o.offset=command.offset;o.provenance.origin='edited';}m('opening',o.id,[o.id]);break;}
+    case'updateOpening':{const previous=item(f.openings,command.opening.id),o=structuredClone(command.opening);
+      if(!equal(o.style,previous.style))throw new Error('Use the catalog or flip command to change opening style');
+      o.provenance=structuredClone(previous.provenance);if(!sameOpeningGeometry(previous,o)){o.provenance.sourceIDs=[...new Set([...command.opening.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();o.provenance.origin='edited';}
+      f.openings[f.openings.indexOf(previous)]=o;m('opening',o.id,[o.id]);break;}
+    case'setOpeningStyle':{const o=item(f.openings,command.openingID);if(command.styleID===null)delete o.style;else{o.style=authoredOpeningStyle(command.styleID,o);document.schemaVersion='1.2.0';}m('opening',o.id,[o.id]);break;}
+    case'flipOpening':{const o=item(f.openings,command.openingID),style=o.style,preset=style&&openingPreset(style.id);
+      if(!style||!preset)throw new Error('Choose a catalog style before flipping a generic aperture');
+      if(command.axis==='horizontal'&&preset.horizontal)style.end=style.end==='start'?'end':'start';
+      else if(command.axis==='vertical'&&preset.vertical)style.side=style.side==='positive'?'negative':'positive';
+      else throw new Error('This flip does not apply to the selected opening style');
+      style.provenance.origin='edited';m('opening',o.id,[o.id]);break;}
     case'deleteOpening':remove(f.openings,command.openingID);m('opening',command.openingID,[]);break;
     case'renameRoom':item(f.rooms,command.roomID).label=command.label;break;
     case'addRoom':requireID(command.room.id,f.rooms.map(r=>r.id));f.rooms.push(structuredClone(command.room));break;
@@ -111,7 +122,7 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
     case'deleteRoom':remove(f.rooms,command.roomID);m('room',command.roomID,[]);break;
     case'splitRoom':splitRoom(f,command.roomID,command.dividerWallID,command.newRoomID,command.newLabel);m('room',command.roomID,[command.roomID,command.newRoomID]);break;
     case'mergeRooms':{const removed=mergeRooms(f,command.firstRoomID,command.secondRoomID);m('room',command.secondRoomID,[command.firstRoomID]);m('room',command.firstRoomID,[command.firstRoomID]);for(const id of removed.walls)m('wall',id,[]);for(const id of removed.openings)m('opening',id,[]);break;}
-    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';document.schemaVersion='1.1.0';break;}
+    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';if(document.schemaVersion==='1.0.0')document.schemaVersion='1.1.0';break;}
     case'deleteArea':remove(f.areas??[],command.areaID);m('area',command.areaID,[]);break;
     case'updateFloor':f.label=command.label;f.elevation=command.elevation;break;
     default:throw new Error('Unknown edit command');

@@ -225,3 +225,139 @@ test('directly moved and resized windows keep their identity and cannot become w
   for (let i = 0; i < 18; i++) await canvas.press('w');
   await expect(page.getByRole('combobox', { name: 'Start in', exact: true })).toHaveValue('room-a'); await expect(page.locator('.spatial-model-message')).toContainText('Movement stopped');
 });
+
+/** Also runnable in an isolated Chromium module harness without a React mount. */
+async function f02StorageExercise(source: SpatialDocument) {
+  const storePath = '/src/data/store.ts', recoveryPath = '/src/data/drawingRecovery.ts', bytesPath = '/src/data/bytes.ts';
+  const { SpatialWebStore } = await import(storePath), { DrawingRecoveryStore, DRAWING_RECOVERY_STORE } = await import(recoveryPath), { jsonBytes, sha256, stableJSON } = await import(bytesPath);
+  const namespace = `f02-verification-${crypto.randomUUID()}`, checks: string[] = [];
+  let store = new SpatialWebStore(namespace);
+  const same = (a: unknown, b: unknown) => stableJSON(a) === stableJSON(b);
+  const check = (ok: boolean, message: string) => { if (!ok) throw new Error(message); checks.push(message); };
+  const fails = async (action: () => Promise<unknown>, text: string) => { let error: unknown; try { await action(); } catch (cause) { error = cause; } check(error instanceof Error && error.message.includes(text), `reject ${text}`); };
+  const request = <T>(req: IDBRequest<T>) => new Promise<T>((resolve, reject) => { req.onsuccess = () => resolve(req.result); req.onerror = () => reject(req.error); });
+  const authority = { assertAccess: async () => {}, isCurrent: () => true };
+  try {
+    await store.create(source);
+    const styled = await store.apply(source.documentID, 1, [{ type: 'setOpeningStyle', floorID: 'floor-1', openingID: 'door-a', styleID: 'door_single' }]);
+    check(styled.document.schemaVersion === '1.2.0', 'style upgrades committed geometry');
+    check(same(styled.document.floors[0].openings[0].provenance, source.floors[0].openings[0].provenance), 'styling retains aperture provenance');
+    const flipped = await store.apply(source.documentID, 2, [{ type: 'flipOpening', floorID: 'floor-1', openingID: 'door-a', axis: 'horizontal' }, { type: 'flipOpening', floorID: 'floor-1', openingID: 'door-a', axis: 'vertical' }]);
+    const movedOpening = { ...flipped.document.floors[0].openings[0], offset: 1.25, width: 1.1, height: 2.2 };
+    const moved = await store.apply(source.documentID, 3, [{ type: 'updateOpening', floorID: 'floor-1', opening: movedOpening }]);
+    check(moved.document.revision === 4, 'one canonical opening transaction makes one revision');
+    const undo = await store.undo(source.documentID, 4); check(same(undo.document.floors, flipped.document.floors), 'one undo restores whole opening transaction');
+    const redo = await store.redo(source.documentID, 5); check(same(redo.document.floors, moved.document.floors), 'redo restores dimensions and both orientation fields');
+    const frozen = await store.freeze(source.documentID, 6);
+    check(same(JSON.parse(new TextDecoder().decode(frozen.bytes)), frozen.document), 'frozen bytes contain exact styled document');
+    check(await sha256(frozen.bytes) === frozen.hash, 'frozen document hash matches bytes');
+    const later = await store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID: 'floor-1', openingID: 'door-a', offset: 1.4 }]);
+    check(frozen.document.revision === 6 && frozen.document.floors[0].openings[0].offset === 1.25, 'later edit cannot mutate frozen revision');
+    await fails(() => store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID: 'floor-1', openingID: 'door-a', offset: 1.5 }]), 'revision');
+    store.close(); store = new SpatialWebStore(namespace);
+    check(same((await store.open(source.documentID)).document, later.document), 'reopen retains full style and dimensions');
+    let recovery = new DrawingRecoveryStore(store, authority);
+    const generic = structuredClone(later.document.floors[0].openings[0]); generic.id = 'draft-aperture'; delete generic.style;
+    const genericPayload = { tool: 'opening', opening: generic, point: { x: 4, z: 1.9 } };
+    const first = await recovery.save(later.document, 'floor-1', genericPayload, { expectedToken: null, writerID: 'f02-writer' });
+    check(first.formatVersion === 1, 'generic recovery keeps original v1 format');
+    check(same((await recovery.read(later.document)).record.payload, genericPayload), 'v1 recovery reads unchanged');
+    await recovery.discard(source.documentID, first.token);
+    const draft = structuredClone(later.document.floors[0].openings[0]); draft.id = 'draft-styled'; draft.offset = 3.5;
+    const payload = { tool: 'opening', opening: draft, point: { x: 4, z: 1.9 } };
+    const record = await recovery.save(later.document, 'floor-1', payload, { expectedToken: null, writerID: 'f02-writer' });
+    check(record.formatVersion === 2, 'styled unfinished recovery uses v2 without regenerating defaults');
+    store.close(); store = new SpatialWebStore(namespace); recovery = new DrawingRecoveryStore(store, authority);
+    check(same((await recovery.read(later.document)).record.payload, payload), 'v2 reopen retains blocked offset, dimensions and orientations');
+    const mutateVersion = async (version: number) => {
+      const row = structuredClone(record); row.formatVersion = version;
+      const { recordSHA256: _hash, ...body } = row;
+      row.recordSHA256 = await sha256(jsonBytes(body));
+      await store.transaction([DRAWING_RECOVERY_STORE], 'readwrite', async (tx: IDBTransaction) => { await request(tx.objectStore(DRAWING_RECOVERY_STORE).put(row)); });
+    };
+    await mutateVersion(1); await fails(() => recovery.read(later.document), 'corrupt-drawing-recovery');
+    await mutateVersion(3); await fails(() => recovery.read(later.document), 'corrupt-drawing-recovery');
+    await store.transaction([DRAWING_RECOVERY_STORE], 'readwrite', async (tx: IDBTransaction) => { await request(tx.objectStore(DRAWING_RECOVERY_STORE).put(record)); });
+    const changed = await store.apply(source.documentID, later.document.revision, [{ type: 'renameRoom', floorID: 'floor-1', roomID: 'room-a', label: 'Later room edit' }]);
+    check((await recovery.read(changed.document)).state === 'stale', 'new saved revision fences old recovery');
+    await fails(() => recovery.save(changed.document, 'floor-1', payload, { expectedToken: record.token, writerID: 'f02-writer' }), 'stale');
+    await recovery.discard(source.documentID, record.token);
+    check((await recovery.read(changed.document)).state === 'none', 'explicit discard does not alter saved document');
+    const savedOpening = changed.document.floors[0].openings[0];
+    return { checks, revision: changed.document.revision, style: savedOpening.style, databaseVersion: 2, namespace, sourceUnchanged: same(source.floors[0].openings[0].style, undefined) };
+  } finally { store.close(); }
+}
+
+test('F02 real IndexedDB style, one-gesture undo, redo, freeze, reopen and recovery version fences', async ({ page }) => {
+  await page.goto('/'); const result = await page.evaluate(f02StorageExercise, syntheticDocument());
+  expect(result.checks.length).toBeGreaterThanOrEqual(18); expect(result.style).toMatchObject({ id: 'door_single', end: 'end', side: 'negative' }); expect(result.sourceUnchanged).toBe(true);
+});
+
+test('F02 catalog controls, exact dimensions and elevation cancel preserve saved state', async ({ page }, info) => {
+  const source = await importFixture(page);
+  await page.locator('.spatial-object-list button').filter({ hasText: 'Door 1' }).click();
+  await expect(page.getByRole('button', { name: 'Flip horizontally', exact: true })).toBeDisabled();
+  await page.getByLabel('Catalog style', { exact: true }).selectOption('door_single'); await revision(page, 2);
+  await page.getByRole('button', { name: 'Flip horizontally', exact: true }).click(); await revision(page, 3);
+  await page.getByRole('button', { name: 'Flip vertically', exact: true }).click(); await revision(page, 4);
+  await page.getByLabel('Opening width in meters', { exact: true }).fill('1.8');
+  await page.getByLabel('Opening height in meters', { exact: true }).fill('2.25');
+  await page.getByRole('button', { name: 'Apply dimensions', exact: true }).click(); await revision(page, 5);
+  const changed = (await saved(page)).document;
+  expect(changed.floors[0].openings[0]).toMatchObject({ width: 1.8, height: 2.25, style: { id: 'door_single', end: 'end', side: 'negative' } });
+  expect(changed.floors[0].walls).toEqual(source.floors[0].walls);
+  const corner = page.locator('[data-elevation-corner="end-top"]'), box = (await corner.boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.mouse.move(box.x + box.width / 2 + 8, box.y + box.height / 2 - 4);
+  expect((await saved(page)).document).toEqual(changed); await page.keyboard.press('Escape'); await page.mouse.up();
+  expect((await saved(page)).document).toEqual(changed);
+  await page.screenshot({ path: info.outputPath('openings-catalog-desktop.png'), fullPage: true });
+  await page.getByLabel('Catalog style', { exact: true }).selectOption('door_double'); await revision(page, 6);
+  await expect(page.getByRole('button', { name: 'Flip horizontally', exact: true })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Flip vertically', exact: true })).toBeEnabled();
+  await page.getByLabel('Catalog style', { exact: true }).selectOption('door_sliding'); await revision(page, 7);
+  await expect(page.getByRole('button', { name: 'Flip horizontally', exact: true })).toBeEnabled();
+  await expect(page.getByRole('button', { name: 'Flip vertically', exact: true })).toBeDisabled();
+});
+
+test('F02 mobile 3D corner targets cancel on second touch and disappear in walk mode', async ({ page, context }, info) => {
+  await page.setViewportSize({ width: 390, height: 844 }); await importFixture(page);
+  await page.getByRole('button', { name: 'Objects', exact: true }).click();
+  await page.locator('.spatial-object-list button').filter({ hasText: 'Door 1' }).click();
+  await page.getByLabel('Catalog style', { exact: true }).selectOption('door_single'); await revision(page, 2);
+  await page.screenshot({ path: info.outputPath('openings-elevation-mobile.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Back to map', exact: true }).click();
+  await page.getByRole('button', { name: '3D model', exact: true }).click();
+  const canvas = page.locator('.spatial-model-canvas canvas'); await expect(canvas).toHaveAttribute('data-rendered', 'true');
+  const corners = page.locator('.spatial-opening-model-handles button:visible'); await expect(corners.first()).toBeVisible();
+  const box = (await corners.first().boundingBox())!; expect(box.width).toBeGreaterThanOrEqual(44); expect(box.height).toBeGreaterThanOrEqual(44);
+  const baseline = (await saved(page)).document;
+  const cdp = await context.newCDPSession(page); await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 2 });
+  const point = { x: box.x + box.width / 2, y: box.y + box.height / 2, id: 1 };
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [point] });
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ ...point, x: point.x + 8, y: point.y - 4 }] });
+  expect((await saved(page)).document).toEqual(baseline);
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...point, x: point.x + 8, y: point.y - 4 }, { x: point.x + 45, y: point.y + 30, id: 2 }] });
+  await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  expect((await saved(page)).document).toEqual(baseline); await cdp.detach();
+  await page.screenshot({ path: info.outputPath('openings-3d-mobile.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Walk through', exact: true }).click(); await expect(corners).toHaveCount(0);
+  expect((await saved(page)).document).toEqual(baseline);
+});
+
+test('F02 browser complete-local-document roundtrip includes 1.2 members and rejects legacy exchange/outbox', async ({ page }) => {
+  await importFixture(page); const result = await page.evaluate(async () => {
+    const dataPath = '/src/data/index.ts', { SpatialWebStore, exportRevision, importWorkspace, SpatialOutbox } = await import(dataPath);
+    const store = new SpatialWebStore('auxilium-spatial-local-v1');
+    try {
+      const [entry] = await store.list(), original = await store.open(entry.documentID), floorID = original.document.floors[0].id, openingID = original.document.floors[0].openings[0].id;
+      const changed = await store.apply(entry.documentID, original.document.revision, [{ type: 'setOpeningStyle', floorID, openingID, styleID: 'door_bifold' }, { type: 'flipOpening', floorID, openingID, axis: 'horizontal' }, { type: 'flipOpening', floorID, openingID, axis: 'vertical' }]);
+      const frozen = await store.freeze(entry.documentID, changed.document.revision), archive = await exportRevision(frozen, 'local-document'), restored = await importWorkspace(archive.bytes, archive.filename);
+      let exchange = '', outbox = '';
+      try { await exportRevision(frozen, 'bundle'); } catch (error) { exchange = String(error); }
+      try { await new SpatialOutbox(store).enqueue(frozen, { system: 'auxiliumos', contextID: 'synthetic-f02' }, 'f02-unsupported-profile'); } catch (error) { outbox = String(error); }
+      return { restored: restored.document, original: frozen.document, exchange, outbox, rows: await new SpatialOutbox(store).list() };
+    } finally { store.close(); }
+  });
+  expect(result.restored).toEqual(result.original); expect(result.restored.schemaVersion).toBe('1.2.0');
+  expect(result.exchange).toContain('use-complete-local-document'); expect(result.outbox).toContain('use-complete-local-document'); expect(result.rows).toEqual([]);
+});

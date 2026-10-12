@@ -9,12 +9,14 @@ export type OpeningKind = 'door' | 'window' | 'passage';
 export interface Node { id: string; point: Point2 }
 export interface Provenance { origin: Origin; sourceIDs: string[]; classificationConfidence: Confidence }
 export interface Wall { id: string; nodeIDs: string[]; baseY: number; height: number; heightBasis: HeightBasis; provenance: Provenance }
-export interface Opening { id: string; wallID: string; kind: OpeningKind; offset: number; width: number; bottom: number; height: number; provenance: Provenance }
+export type OpeningStyleID = 'door_single' | 'door_double' | 'door_sliding' | 'door_pocket' | 'door_bifold' | 'doorway_open' | 'window';
+export interface OpeningStyle { id: OpeningStyleID; end?: 'start' | 'end'; side?: 'positive' | 'negative'; provenance: Provenance }
+export interface Opening { id: string; wallID: string; kind: OpeningKind; offset: number; width: number; bottom: number; height: number; provenance: Provenance; style?: OpeningStyle }
 export interface WallReference { wallID: string; reversed: boolean }
 export interface Room { id: string; label: string; boundary: WallReference[] }
 export interface SemanticArea { id: string; label: string; polygon: Point2[]; provenance: Provenance }
 export interface Floor { id: string; label: string; elevation: number; nodes: Node[]; walls: Wall[]; openings: Opening[]; rooms: Room[]; areas?: SemanticArea[] }
-export interface SpatialDocument { schemaVersion: '1.0.0' | '1.1.0'; documentID: string; revision: number; parentRevision?: number; title: string; coordinateSystem: 'meters_y_up_right_handed'; measurementStatus: 'unverified'; reviewState: ReviewState; floors: Floor[] }
+export interface SpatialDocument { schemaVersion: '1.0.0' | '1.1.0' | '1.2.0'; documentID: string; revision: number; parentRevision?: number; title: string; coordinateSystem: 'meters_y_up_right_handed'; measurementStatus: 'unverified'; reviewState: ReviewState; floors: Floor[] }
 export interface ValidationIssue { code: string; path: string; message: string }
 export interface SceneFace { objectID: string; role: string; vertices: Point3[]; triangles: number[][] }
 export interface SceneEdge { objectID: string; role: string; a: Point3; b: Point3 }
@@ -34,6 +36,8 @@ export type EditCommand =
   | ({ type: 'addOpening'; opening: Opening } & OnFloor)
   | ({ type: 'moveOpening'; openingID: string; offset: number } & OnFloor)
   | ({ type: 'updateOpening'; opening: Opening } & OnFloor)
+  | ({ type: 'setOpeningStyle'; openingID: string; styleID: OpeningStyleID | null } & OnFloor)
+  | ({ type: 'flipOpening'; openingID: string; axis: 'horizontal' | 'vertical' } & OnFloor)
   | ({ type: 'deleteOpening'; openingID: string } & OnFloor)
   | ({ type: 'renameRoom'; roomID: string; label: string } & OnFloor)
   | ({ type: 'addRoom'; room: Room } & OnFloor)
@@ -65,3 +69,6 @@ export interface StoredWorkspace { document: SpatialDocument; canUndo: boolean; 
 export interface WorkspaceSummary { documentID: string; title: string; revision: number; updatedAt: string }
 export type ExportFormat = 'geometry' | 'scene' | 'svg' | 'pdf' | 'png' | 'glb' | 'bundle' | 'local-document';
 export interface ExportArtifact { filename: string; mimeType: string; bytes: Uint8Array; revision: number; hash: string }
+
+/** A gesture may commit only against the immutable authority/view/revision it began in. */
+export interface OpeningEditFence { documentID: string; floorID: string; revision: number; generation: number; scope: string; view: string; openingID: string }

@@ -1,4 +1,5 @@
-import type { Floor, GraphicScene, Opening, Point3, SceneFace, SpatialDocument } from '../types';
+import { openingScenePrimitives } from './openings';
+import type { Point2, Floor, GraphicScene, Wall, Opening, Point3, SceneFace, SpatialDocument } from '../types';
 import { distance, EPSILON, FloorGeometryIndex, pathPoint, triangulate } from './geometry';
 import { requireValidDocument } from './validation';
 
@@ -21,17 +22,14 @@ function preflightScene(floor:Floor,index:FloorGeometryIndex,groups:Map<string,O
     for(const end of [0,total])for(const [bottom,top]of remainingWallSpans(openings.filter(o=>end>=o.offset-EPSILON&&end<=o.offset+o.width+EPSILON),wall.height))edge(end,bottom,end,top);
     for(const o of openings){const lo=o.offset,hi=lo+o.width;edge(lo,o.bottom,lo,o.bottom+o.height);edge(hi,o.bottom,hi,o.bottom+o.height);const spans=[lo,...breaks.filter(b=>b>lo&&b<hi),hi];for(let i=1;i<spans.length;i++){edge(spans[i-1],o.bottom,spans[i],o.bottom);edge(spans[i-1],o.bottom+o.height,spans[i],o.bottom+o.height);}}
   }
+  for(const opening of floor.openings){if(opening.style){const diagram=openingScenePrimitives(floor,opening);faces+=diagram.faces.length;edges+=diagram.edges.length;admit();}}
   for(const room of floor.rooms){const ring=index.boundary(room);if(ring.length>MAX_FACE_VERTICES||ring.length-2>MAX_FACE_TRIANGLES)throw new Error('Room exceeds the scene face vertex/triangle transport limit');faces++;admit();}
   for(const area of floor.areas??[]){edges+=area.polygon.length;admit();}
 }
 
-/** Exact semantic meshes. Door and window apertures are actual missing triangles. */
-export function buildScene(document:SpatialDocument,floorID:string):GraphicScene{
-  const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
-  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
-  const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
-  preflightScene(floor,index,groups);
-  for(const wall of floor.walls){const path=index.path(wall);let breaks=[0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));const total=breaks.at(-1)!,openings=groups.get(wall.id)??[],base=floor.elevation+wall.baseY;
+/** Shared canonical wall emitter, reused by an affected-host-only gesture preview. */
+function emitWall(scene: Pick<GraphicScene, 'faces' | 'edges'>, floor: Floor, wall: Wall, path: Point2[], openings: Opening[]): void {
+  let breaks = [0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));const total=breaks.at(-1)!,base=floor.elevation+wall.baseY;
     breaks=[...new Set([...breaks,...openings.flatMap(o=>[o.offset,o.offset+o.width])])].sort((a,b)=>a-b);
     const point=(s:number,y:number):Point3=>{const p=pathPoint(path,s);return{x:p.x,y:base+y,z:p.z};};
     const edge=(a:number,ay:number,b:number,by:number,objectID:string,role:string)=>{if(Math.abs(a-b)+Math.abs(ay-by)>EPSILON)scene.edges.push({objectID,role,a:point(a,ay),b:point(b,by)});};
@@ -42,9 +40,29 @@ export function buildScene(document:SpatialDocument,floorID:string):GraphicScene
     }
     for(const end of [0,total])for(const [bottom,top]of remaining(openings.filter(o=>end>=o.offset-EPSILON&&end<=o.offset+o.width+EPSILON)))edge(end,bottom,end,top,wall.id,'wall');
     for(const o of openings){const lo=o.offset,hi=lo+o.width;edge(lo,o.bottom,lo,o.bottom+o.height,o.id,o.kind);edge(hi,o.bottom,hi,o.bottom+o.height,o.id,o.kind);const spans=[lo,...breaks.filter(b=>b>lo&&b<hi),hi];for(let i=1;i<spans.length;i++){edge(spans[i-1],o.bottom,spans[i],o.bottom,o.id,o.kind);edge(spans[i-1],o.bottom+o.height,spans[i],o.bottom+o.height,o.id,o.kind);}}
-  }
+
+}
+
+/** Input is a frozen one-wall subset; caller validates only the changed aperture. */
+export function openingHostPreview(host: Floor, opening: Opening): Pick<GraphicScene, 'faces' | 'edges'> {
+  if (host.walls.length !== 1 || host.walls[0].id !== opening.wallID) throw new Error('Opening preview requires its exact host');
+  const floor = { ...host, openings: host.openings.map(o => o.id === opening.id ? opening : o) }, index = new FloorGeometryIndex(floor);
+  const result: Pick<GraphicScene, 'faces' | 'edges'> = { faces: [], edges: [] };
+  preflightScene(floor, index, new Map([[opening.wallID, floor.openings]]));
+  emitWall(result, floor, floor.walls[0], index.path(floor.walls[0]), floor.openings);
+  for (const item of floor.openings) { const diagram = openingScenePrimitives(floor, item); result.faces.push(...diagram.faces); result.edges.push(...diagram.edges); }
+  return result;
+}
+/** Exact semantic meshes. Door and window apertures are actual missing triangles. */
+export function buildScene(document:SpatialDocument,floorID:string):GraphicScene{
+  const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
+  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:doc.schemaVersion==='1.2.0'?'1.2.0':'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
+  const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
+  preflightScene(floor,index,groups);
+  for(const wall of floor.walls)emitWall(scene,floor,wall,index.path(wall),groups.get(wall.id)??[]);
+  for(const opening of floor.openings){if(opening.style){const diagram=openingScenePrimitives(floor,opening);scene.faces.push(...diagram.faces);scene.edges.push(...diagram.edges);}}
   for(const room of floor.rooms){const ring=index.boundary(room);scene.faces.push({objectID:room.id,role:'floor',vertices:ring.map(p=>({x:p.x,y:floor.elevation,z:p.z})),triangles:triangulate(ring).map(t=>[...t].reverse())});}
-  if(floor.areas?.length){scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
+  if(floor.areas?.length){if(scene.schemaVersion==='1.0.0')scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
   // Defense against a future emitter change diverging from the exact preflight.
   if(scene.faces.length>MAX_FACES||scene.edges.length>MAX_EDGES||scene.faces.some(f=>f.vertices.length>MAX_FACE_VERTICES||f.triangles.length>MAX_FACE_TRIANGLES))throw new Error('Generated scene exceeds the transport capacity limits');
   return scene;
