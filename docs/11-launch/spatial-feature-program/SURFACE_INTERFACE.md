@@ -1,6 +1,6 @@
 # Shared surface interface for parallel branches
 
-Master-approved interface revision 1, contract revision 3. These are implementation contracts, not a claim that the module already exists. Canonical implementation path: `source:web/src/core/surfaces.ts`, first owned by F03. Shared public types live in `source:web/src/types.ts`. F04/F05 consume or propose compatible extensions to that module on their isolated branches; the master composes the result. Feature-specific fixture/affected-area modules must not create a second surface identity or coordinate convention.
+Master-approved interface revision 2, contract revision 4. These are implementation contracts, not a claim that the module already exists. Canonical implementation path: `source:web/src/core/surfaces.ts`, first owned by F03. Shared public types live in `source:web/src/types.ts`. F04/F05 consume or propose compatible extensions to that module on their isolated branches; the master composes the result. Feature-specific fixture/affected-area modules must not create a second surface identity or coordinate convention.
 
 ## Required types
 
@@ -58,7 +58,7 @@ Rigid mounts cannot span a noncollinear bend. Preserve physical dimensions and t
 
 An F05 observation retains stable ID, moisture/fire kind, explicit SurfaceRef, authored footprint, provenance, recorded source revision/material support and review status. Visible geometry is authored footprint intersected with recorded support and current material domain. Removing/moving a hole or enlarging a wall must never manufacture recorded damage. Remap records physically; do not proportionally stretch them. Clipped/unresolved observations remain recoverable and visible in review. A null ceiling cannot receive a saved record.
 
-Only actual agreed cutouts subtract material; furniture never subtracts observation support. Q01 remains open and is not resolved by this interface. Moisture/fire remain separate records, including overlaps. Do not create verified totals, instrument readings, scientific conclusions or scope authorization from these shapes.
+Only actual agreed cutouts subtract material; furniture never subtracts observation support. D18/CUTOUT_SCOPE.md resolves Q01 for optional wall/floor/ceiling cutouts and service penetrations. F04 adds real subtraction to this same resolver, including both physical sides of a wall through-hole. Existing types, coordinate charts and resolver signatures above are unchanged. Moisture/fire remain separate records, including overlaps. Do not create verified totals, instrument readings, scientific conclusions or scope authorization from these shapes.
 
 ## Integration checks
 

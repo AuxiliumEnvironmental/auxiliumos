@@ -4,9 +4,9 @@
 
 F01 surface contrast is **code accepted with platform gaps**, recorded at `3240880195cd6653d0816da5cb4412bda2516e52`. Implementation: `33cc3527f239726d2a4503242da9b0a7531ed4b9`; evidence: `d553a3dbb25470abd5e0b157f708f7dda8383769`. Matching source/evidence and both mobile screenshots passed master review. See `coordination/F01_ACCEPTANCE.json`.
 
-The owner approved concurrent feature development. F02 openings, F03 ceiling heights, F04 fixtures and F05 affected areas are assigned isolated branches in `coordination/ACTIVE_TASKS.json`. Contract revision 3 and `SURFACE_INTERFACE.md` freeze their shared semantics. No feature worker is claimed to be running merely because an assignment exists. Integration remains F02 then F03 then F04 then F05. The old single-task file is retired.
+The owner approved concurrent feature development. F02 openings, F03 ceiling heights, F04 fixtures and F05 affected areas are assigned isolated branches in `coordination/ACTIVE_TASKS.json`. Contract revision 4 and `SURFACE_INTERFACE.md` freeze their shared semantics. No feature worker is claimed to be running merely because an assignment exists. Integration remains F02 then F03 then F04 then F05. The old single-task file is retired.
 
-F04 fixtures can proceed; Q01 still gates actual cutout implementation and Q02 tracks unnamed catalog variants. Source acceptance has not transferred F01 to the host, packaged Apple assets or updated the OS embed. Those delivery gates remain master-owned under F06.
+The owner resolved Q01 on October 11: optional wall/floor/ceiling cutouts and service penetrations are authorized under D18/CUTOUT_SCOPE.md. F04 has an additive exact-path grant; F03/F05 consume the same real material domains. Q02 still tracks unnamed catalog variants. This is scope authorization, not cutout implementation or worker-start evidence. Source acceptance has not transferred F01 to the host, packaged Apple assets or updated the OS embed. Those delivery gates remain master-owned under F06.
 
 ## What is verified in this preparation pass
 

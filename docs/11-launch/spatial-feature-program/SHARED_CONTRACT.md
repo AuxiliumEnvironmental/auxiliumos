@@ -1,6 +1,6 @@
-# Shared implementation contract: accepted revision 3
+# Shared implementation contract: accepted revision 4
 
-Revision 3 records D11-D13 for F02 and D14-D17 for concurrent isolated development, cumulative versions, ceiling migration and surface/attachment interfaces. The owner approved the GitHub update and concurrent feature chats on October 11, 2026. The Spatial master accepted D01-D10 as engineering decisions on October 11, 2026 after reviewing the F00 handoff, actual source and resolved independent-review findings. `DECISIONS.json` records acceptance. This contract describes future implementation; it is not an implemented geometry schema or platform acceptance. `coordination/ACTIVE_TASKS.json` grants the active isolated feature assignments; the old single-task file is nonauthorizing. Q01/Q02 remain open.
+Revision 4 adds D18, the owner-approved optional cutout/penetration scope in CUTOUT_SCOPE.md. Revision 3 recorded D11-D13 for F02 and D14-D17 for concurrent isolated development, cumulative versions, ceiling migration and surface/attachment interfaces. The owner approved the GitHub update and concurrent feature chats on October 11, 2026. The Spatial master accepted D01-D10 as engineering decisions on October 11, 2026 after reviewing the F00 handoff, actual source and resolved independent-review findings. `DECISIONS.json` records acceptance. This contract describes future implementation; it is not an implemented geometry schema or platform acceptance. `coordination/ACTIVE_TASKS.json` grants the active isolated feature assignments; the old single-task file is nonauthorizing. Q01 is resolved for the first implementation under D18; Q02 remains open.
 
 ## Verified invariants to retain
 
@@ -44,7 +44,7 @@ F03 must create explicit room-ceiling intent with provenance and stable identity
 | 2D new wall damage | show an explicit editable vertical range in a compact elevation control | Never infer a measured height from a plan line |
 | Damage totals | omit new totals unless deliberately accepted; if included, geometric/unverified and overlap-aware | Screenshots are not a mandate for verified quantities |
 
-Open product question before F04: does “cutouts” include wall openings, recesses, room-boundary notches, floor/ceiling voids, or all? Default recommendation is genuine wall through-cutouts first; retain other interpretations as open scope, not silently complete. The master may gather this one targeted clarification while earlier features progress. Do not invent volumetric recess depth in a zero-thickness model.
+D18 resolves Q01: optional wall/floor/ceiling through-cutouts and service penetrations are approved. CUTOUT_SCOPE.md defines the first rectangle/circle profiles, real geometry/export/domain requirements and floor navigation behavior. Recesses, boundary notches and automatic shafts are outside this first scope. Do not invent volumetric depth in a zero-thickness model.
 
 ## Persistence, output and security
 
@@ -164,7 +164,7 @@ Extend the existing edit receipt only as needed by its first attachment consumer
 
 Store independent moisture/fire records with ID, surface reference, physical chart geometry, authoring provenance, source host revision/domain support and review status. Do not infer meter readings, scientific diagnosis, quantities or commercial scope. New plan wall areas require an explicitly visible/confirmed vertical range in the compact elevation control; plan-length changes retain that range. Floor is light fill; ceiling is clipped grid; wall is a side-specific line/face. Separate blue/red marks preserve both kinds in an overlap. No new quantity totals are proposed.
 
-Clip against current true host material AND the recorded support mask. Removed/moved holes or enlarged surfaces never enlarge old observations without an explicit new recording. Ordinary furniture can occlude the view but never subtract the evidence footprint. A missing/null ceiling cannot silently receive a ceiling record. Real cutout geometry and its domains depend on Q01; F01-F03 do not wait for that answer.
+Clip against current true host material AND the recorded support mask. Removed/moved holes or enlarged surfaces never enlarge old observations without an explicit new recording. Ordinary furniture can occlude the view but never subtract the evidence footprint. A missing/null ceiling cannot silently receive a ceiling record. Real cutout geometry and domains follow D18 and CUTOUT_SCOPE.md; F03/F05 consume F04's actual material subtraction at integration.
 
 ### D09: feature-local schema evolution and delivery
 
@@ -176,7 +176,7 @@ The installed shared workspace receives these web changes through actual regener
 
 ### Open product questions and master gate
 
-Q01 remains unresolved: wall through-openings, recesses, boundary notches, floor/ceiling voids, or more than one? The wall-through-opening recommendation is not accepted scope. Resolve it before F04's cutout implementation; no blocker for F01-F03. F04 also finalizes a bounded variant checklist for unnamed appliance/built-in examples without dropping named families. No product clarification is needed to begin F01 after master contract acceptance and activation. Contract acceptance alone grants no implementation lease; use the actual recorded `coordination/ACTIVE_TASKS.json` assignment for the correct branch.
+Q01 is resolved for the first implementation by D18 and CUTOUT_SCOPE.md. Optional wall/floor/ceiling cutouts and service penetrations are authorized; other interpretations are outside this scope. F04 also finalizes a bounded variant checklist for unnamed appliance/built-in examples without dropping named families. No product clarification is needed to begin F01 after master contract acceptance and activation. Contract acceptance alone grants no implementation lease; use the actual recorded `coordination/ACTIVE_TASKS.json` assignment for the correct branch.
 
 ## F02 activation supplement: D11-D13
 
@@ -209,3 +209,7 @@ Reserve geometry/scene 1.2.0 for F02, 1.3.0 for F03, 1.4.0 for F04 and 1.5.0 for
 ### D17: Ceiling migration boundary
 
 If a uniform legacy wall-top plane cannot represent positive floor-relative clearance, migrate its ceiling intent to null while preserving the original snapshot. Do not invent a positive height or reject otherwise valid legacy input solely to infer a ceiling. New rooms in the ceiling schema have explicit established/null state.
+
+### D18: Optional cutouts and penetrations
+
+The owner approved optional floor/ceiling cutouts and service penetrations in addition to wall cutouts. CUTOUT_SCOPE.md is the normative additive scope/record/geometry contract. Surface interface revision 2 preserves existing references, charts and resolver signatures while admitting F04 cutout subtraction. The live assignment adds exact cutout and floor-navigation paths; no new geometry version beyond the cumulative 1.4.0 reservation, worker restart, predecessor reimplementation or platform delivery is implied.

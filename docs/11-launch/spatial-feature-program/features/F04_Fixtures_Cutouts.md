@@ -26,7 +26,7 @@ Candidate writes are master-assigned fixture modules under `web/src/core/` and `
 
 ## Implementation sequence
 
-1. Freeze the explicit catalog coverage table and cutout scope with the master. Record supported variants and unresolved requirements separately.
+1. Freeze the explicit catalog coverage table and follow the accepted cutout scope in CUTOUT_SCOPE.md (D18). Record supported variants and unresolved requirements separately.
 2. Add versioned fixture records with stable IDs, catalog/type versions, canonical dimensions, transform, appropriate host/mount relation and provenance. Parametric archetypes generate recognizable geometry; stretching a picture is not 3D support.
 3. Implement placement and dimension changes through canonical edit commands. Floor objects follow floor elevation; wall-mounted uppers retain explicit mounting height. Use the shared preview/commit interaction so one finished drag makes one revision/undo step.
 4. Expose plan width/depth and 3D width/depth/height adjustments with an exact numeric fallback. Preserve grab offset and orientation. Geometry validation must reject nonfinite or degenerate dimensions without losing the previous valid state.
@@ -35,9 +35,9 @@ Candidate writes are master-assigned fixture modules under `web/src/core/` and `
 
 ## Cutout decision boundary
 
-The owner did not distinguish through-openings, recesses and floor/ceiling voids. The master must make that scope explicit. A proposed first type is a genuine wall through-opening with no automatic traversal permission; this is a proposal, not a claim that all requested cutouts mean wall openings.
+The owner approved optional floor/ceiling cutouts and service penetrations in addition to wall cutouts. Q01 is resolved for the first implementation. CUTOUT_SCOPE.md (D18, contract revision 4) defines explicit host selection, rectangular/circular profiles, true material subtraction, persistence/export and floor-navigation checks. Recesses, boundary notches and automatic shafts are outside this first scope. No cutout gains traversal permission.
 
-For every accepted cutout type, subtract actual host geometry and export the same result. A hole stays empty with a blue edge, not a white rectangle. Floor/ceiling holes and volumetric recesses need their own valid geometry representation. A fireplace object cannot silently create a chimney shaft through other floors. Leave unresolved cutout rows open rather than substitute cosmetic placeholders.
+For every accepted cutout type, subtract actual host geometry and export the same result. A hole stays empty with a blue edge, not a white rectangle. Floor/ceiling holes and penetrations use the versioned SurfaceRef-based cutout records in CUTOUT_SCOPE.md; volumetric recesses are not included. A fireplace object cannot silently create a chimney shaft through other floors. Leave unresolved cutout rows open rather than substitute cosmetic placeholders.
 
 Furniture may visually occlude damage but must not erase or subtract it. Actual cutouts alter the host domain, so publish that behavior to F05's attachment resolver. Host deletion/movement and invalid mounting need explicit canonical handling, not nearest-wall guesses.
 
@@ -46,7 +46,7 @@ Furniture may visually occlude damage but must not erase or subtract it. Actual 
 - **F04-A01:** The bounded catalog checklist covers every named requested family. One geometry case per distinct parametric archetype plus a data-driven type/variant check avoids duplicated tests.
 - **F04-A02:** A floor fixture and a wall-mounted fixture can be placed/resized in both views; dimensions/orientation persist after view switch and reopen. One undo reverses the completed drag; cancel leaves the saved revision unchanged.
 - **F04-A03:** Representative host translation/elevation/height edits retain correct attachment. Invalid dimensions reject atomically.
-- **F04-A04:** Each approved cutout type removes real host geometry in the scene and exports, without inventing portal permissions. Unresolved types remain visibly incomplete in the receipt.
+- **F04-A04:** Optional rectangular/circular wall/floor/ceiling cutouts and penetrations remove real geometry in scene, exports and resolver domains. Verify persistence, undo, exact host remaps, opposite-wall-side consistency, floor walk-support checks and invalid-profile rejection. No portal permissions, fake depth or automatic paired holes. Record actual unsupported cases, not scope-blocked Q01.
 - **F04-A05:** The explicit navigation policy does not trap an existing walk position or steal camera gestures. One populated scene establishes active responsiveness and no new idle work using current instrumentation.
 - **F04-A06:** Frozen exports and migration/import checks retain the same catalog identity and geometry. Complete the common delivery receipt with separate web, OS and installed-app evidence.
 

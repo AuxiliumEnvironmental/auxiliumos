@@ -254,10 +254,22 @@
         "spatial-source/web/tests/data/fixtures.test.ts",
         "spatial-source/web/tests/ui/fixture-manipulation.test.ts",
         "spatial-source/web/tests/ui/fixtures.spec.ts",
+        "spatial-source/web/src/core/navigation.ts",
+        "spatial-source/web/tests/core/navigation.test.ts",
+        "spatial-source/web/src/core/cutouts.ts",
+        "spatial-source/web/src/core/cutoutGeometry.ts",
+        "spatial-source/web/src/ui/CutoutControls.tsx",
+        "spatial-source/web/src/ui/cutoutManipulation.ts",
+        "spatial-source/web/tests/core/cutouts.test.ts",
+        "spatial-source/web/tests/core/cutout-geometry.test.ts",
+        "spatial-source/web/tests/data/cutouts.test.ts",
+        "spatial-source/web/tests/ui/cutout-manipulation.test.ts",
+        "spatial-source/web/tests/ui/cutouts.spec.ts",
         "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_HANDOFF.json",
         "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_VERIFICATION.json",
         "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-mobile.png",
-        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png"
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png"
       ],
       "acceptance_ids": [
         "F04-A01",
@@ -275,7 +287,9 @@
       "activation_id": "F04-2026-10-11-P1",
       "execution_status": "activated_awaiting_feature_chat_start",
       "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
-      "implementation_started": false
+      "implementation_started": false,
+      "scope_amendment_id": "F04-2026-10-11-CUTOUTS-1",
+      "cutout_scope": "D18/CUTOUT_SCOPE.md: optional wall/floor/ceiling cutouts and service penetrations; Q01 resolved, implementation not yet verified."
     },
     {
       "id": "F05",
@@ -817,7 +831,7 @@
       "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
     }
   ],
-  "next_action": "Four isolated feature chats may implement concurrently on their assigned branches. Master integrates F02->F03->F04->F05, then F06 delivery. F04 fixtures proceed while Q01 cutouts stays open.",
+  "next_action": "Four isolated feature chats may implement concurrently on their assigned branches. Existing F04 chat refreshes D18 and the exact added cutout/navigation grant. Master integrates F02->F03->F04->F05, then F06 delivery. No worker start or new implementation is claimed by the scope update.",
   "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
   "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
 }

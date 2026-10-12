@@ -22,7 +22,7 @@ The master integrates actual diffs semantically in a clean staging checkout. Do 
 
 ## Shared interfaces and version ladder
 
-Contract revision 3 and `SURFACE_INTERFACE.md` fix common semantics. F02 owns the first concrete opening gesture/commit fence and catalog implementation. F03 owns first `core/surfaces.ts` implementation plus ceiling identity/domain resolution. F04 consumes it for rigid fixtures and exact attachment outcomes. F05 consumes the same surface/remap vocabulary for observations. A task may propose a necessary change on its isolated branch, but it cannot silently redefine the shared interface for other chats.
+Contract revision 4 and `SURFACE_INTERFACE.md` fix common semantics. F02 owns the first concrete opening gesture/commit fence and catalog implementation. F03 owns first `core/surfaces.ts` implementation plus ceiling identity/domain resolution. F04 consumes it for rigid fixtures and exact attachment outcomes. F05 consumes the same surface/remap vocabulary for observations. A task may propose a necessary change on its isolated branch, but it cannot silently redefine the shared interface for other chats.
 
 Geometry/scene reservations: F02 1.2.0, F03 1.3.0, F04 1.4.0, F05 1.5.0. Keep every old schema immutable. A later branch can create a candidate new schema locally, but its cumulative definition must preserve all accepted predecessor fields, roles, migrations and constraints before integration. No branch's incomplete schema becomes accepted simply because its version number is larger. Local package/profile versions remain unchanged only while their admitted member/vocabulary contract stays unchanged.
 
@@ -34,7 +34,7 @@ Use focused risk checks already listed in the task. One final candidate build. R
 
 Only the master transfers accepted integrated source to the host, packages Apple assets or changes the OS embed. Keep source, local UI/build, host bytes/build/served version, Apple assets/compile/simulator/device and OS context acceptance distinct. No feature branch deployment, installation or business-record binding.
 
-F04 fixtures are authorized now. Q01 still gates actual cutout types and F04-A04; it must not block fixtures or other chats. Named families are required. Unnamed variants remain recorded provisional choices under Q02. F05 consumes only real agreed holes and never invents cutout scope.
+F04 fixtures and optional wall/floor/ceiling cutouts/service penetrations are authorized now. D18/CUTOUT_SCOPE.md resolves Q01 for this first scope and unblocks F04-A04. Named fixture families remain required; Q02 retains provisional unnamed variants. F03/F05 consume the additive shared-domain contract without reimplementing F04. Keep one writer on each existing branch, refresh live assignments, and do not restart completed independent work.
 
 ## Handoff and stopping condition
 

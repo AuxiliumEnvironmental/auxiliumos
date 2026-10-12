@@ -14,7 +14,7 @@ F01 source is accepted. The owner now authorizes F02, F03, F04 and F05 to develo
 4. Master integrates in order F02, F03, F04, F05, then handles F06 combined acceptance and platform delivery. Development does not wait for earlier feature implementation; dependency-sensitive integration does.
 5. Missing physical-device or authority gates remain explicit. Branch completion, integrated source acceptance and delivered platforms are distinct.
 
-`ACTIVE_TASK.json` is retired and nonauthorizing. `PARALLEL_DEVELOPMENT.md` defines the current workflow. F04 cutout scope is still open; fixture work can proceed now.
+`ACTIVE_TASK.json` is retired and nonauthorizing. `PARALLEL_DEVELOPMENT.md` defines the current workflow. F04 optional wall/floor/ceiling cutouts and service penetrations are now authorized by D18/CUTOUT_SCOPE.md. Existing feature chats refresh the live ledger before their next edit/push; this update does not start or duplicate workers.
 
 ## Reading order and aliases
 

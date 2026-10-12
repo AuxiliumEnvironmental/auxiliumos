@@ -49,7 +49,9 @@
       "branch": "spatial/f04-fixtures-2026-10-11",
       "integration_dependencies": [
         "F03"
-      ]
+      ],
+      "scope_amendment": "D18/CUTOUT_SCOPE.md",
+      "cutout_scope_status": "authorized_not_implemented"
     },
     {
       "task": "F05",
