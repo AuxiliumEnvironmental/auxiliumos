@@ -228,6 +228,7 @@ test('directly moved and resized windows keep their identity and cannot become w
 
 /** Also runnable in an isolated Chromium module harness without a React mount. */
 async function f02StorageExercise(source: SpatialDocument) {
+  const floorID = source.floors[0].id, openingID = source.floors[0].openings[0].id, roomID = source.floors[0].rooms[0].id;
   const storePath = '/src/data/store.ts', recoveryPath = '/src/data/drawingRecovery.ts', bytesPath = '/src/data/bytes.ts';
   const { SpatialWebStore } = await import(storePath), { DrawingRecoveryStore, DRAWING_RECOVERY_STORE } = await import(recoveryPath), { jsonBytes, sha256, stableJSON } = await import(bytesPath);
   const namespace = `f02-verification-${crypto.randomUUID()}`, checks: string[] = [];
@@ -239,33 +240,33 @@ async function f02StorageExercise(source: SpatialDocument) {
   const authority = { assertAccess: async () => {}, isCurrent: () => true };
   try {
     await store.create(source);
-    const styled = await store.apply(source.documentID, 1, [{ type: 'setOpeningStyle', floorID: 'floor-1', openingID: 'door-a', styleID: 'door_single' }]);
+    const styled = await store.apply(source.documentID, 1, [{ type: 'setOpeningStyle', floorID, openingID, styleID: 'door_single' }]);
     check(styled.document.schemaVersion === '1.2.0', 'style upgrades committed geometry');
     check(same(styled.document.floors[0].openings[0].provenance, source.floors[0].openings[0].provenance), 'styling retains aperture provenance');
-    const flipped = await store.apply(source.documentID, 2, [{ type: 'flipOpening', floorID: 'floor-1', openingID: 'door-a', axis: 'horizontal' }, { type: 'flipOpening', floorID: 'floor-1', openingID: 'door-a', axis: 'vertical' }]);
+    const flipped = await store.apply(source.documentID, 2, [{ type: 'flipOpening', floorID, openingID, axis: 'horizontal' }, { type: 'flipOpening', floorID, openingID, axis: 'vertical' }]);
     const movedOpening = { ...flipped.document.floors[0].openings[0], offset: 1.25, width: 1.1, height: 2.2 };
-    const moved = await store.apply(source.documentID, 3, [{ type: 'updateOpening', floorID: 'floor-1', opening: movedOpening }]);
+    const moved = await store.apply(source.documentID, 3, [{ type: 'updateOpening', floorID, opening: movedOpening }]);
     check(moved.document.revision === 4, 'one canonical opening transaction makes one revision');
     const undo = await store.undo(source.documentID, 4); check(same(undo.document.floors, flipped.document.floors), 'one undo restores whole opening transaction');
     const redo = await store.redo(source.documentID, 5); check(same(redo.document.floors, moved.document.floors), 'redo restores dimensions and both orientation fields');
     const frozen = await store.freeze(source.documentID, 6);
     check(same(JSON.parse(new TextDecoder().decode(frozen.bytes)), frozen.document), 'frozen bytes contain exact styled document');
     check(await sha256(frozen.bytes) === frozen.hash, 'frozen document hash matches bytes');
-    const later = await store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID: 'floor-1', openingID: 'door-a', offset: 1.4 }]);
+    const later = await store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID, openingID, offset: 1.4 }]);
     check(frozen.document.revision === 6 && frozen.document.floors[0].openings[0].offset === 1.25, 'later edit cannot mutate frozen revision');
-    await fails(() => store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID: 'floor-1', openingID: 'door-a', offset: 1.5 }]), 'revision');
+    await fails(() => store.apply(source.documentID, 6, [{ type: 'moveOpening', floorID, openingID, offset: 1.5 }]), 'revision');
     store.close(); store = new SpatialWebStore(namespace);
     check(same((await store.open(source.documentID)).document, later.document), 'reopen retains full style and dimensions');
     let recovery = new DrawingRecoveryStore(store, authority);
     const generic = structuredClone(later.document.floors[0].openings[0]); generic.id = 'draft-aperture'; delete generic.style;
     const genericPayload = { tool: 'opening', opening: generic, point: { x: 4, z: 1.9 } };
-    const first = await recovery.save(later.document, 'floor-1', genericPayload, { expectedToken: null, writerID: 'f02-writer' });
+    const first = await recovery.save(later.document, floorID, genericPayload, { expectedToken: null, writerID: 'f02-writer' });
     check(first.formatVersion === 1, 'generic recovery keeps original v1 format');
     check(same((await recovery.read(later.document)).record.payload, genericPayload), 'v1 recovery reads unchanged');
     await recovery.discard(source.documentID, first.token);
     const draft = structuredClone(later.document.floors[0].openings[0]); draft.id = 'draft-styled'; draft.offset = 3.5;
     const payload = { tool: 'opening', opening: draft, point: { x: 4, z: 1.9 } };
-    const record = await recovery.save(later.document, 'floor-1', payload, { expectedToken: null, writerID: 'f02-writer' });
+    const record = await recovery.save(later.document, floorID, payload, { expectedToken: null, writerID: 'f02-writer' });
     check(record.formatVersion === 2, 'styled unfinished recovery uses v2 without regenerating defaults');
     store.close(); store = new SpatialWebStore(namespace); recovery = new DrawingRecoveryStore(store, authority);
     check(same((await recovery.read(later.document)).record.payload, payload), 'v2 reopen retains blocked offset, dimensions and orientations');
@@ -278,9 +279,9 @@ async function f02StorageExercise(source: SpatialDocument) {
     await mutateVersion(1); await fails(() => recovery.read(later.document), 'corrupt-drawing-recovery');
     await mutateVersion(3); await fails(() => recovery.read(later.document), 'corrupt-drawing-recovery');
     await store.transaction([DRAWING_RECOVERY_STORE], 'readwrite', async (tx: IDBTransaction) => { await request(tx.objectStore(DRAWING_RECOVERY_STORE).put(record)); });
-    const changed = await store.apply(source.documentID, later.document.revision, [{ type: 'renameRoom', floorID: 'floor-1', roomID: 'room-a', label: 'Later room edit' }]);
+    const changed = await store.apply(source.documentID, later.document.revision, [{ type: 'renameRoom', floorID, roomID, label: 'Later room edit' }]);
     check((await recovery.read(changed.document)).state === 'stale', 'new saved revision fences old recovery');
-    await fails(() => recovery.save(changed.document, 'floor-1', payload, { expectedToken: record.token, writerID: 'f02-writer' }), 'stale');
+    await fails(() => recovery.save(changed.document, floorID, payload, { expectedToken: record.token, writerID: 'f02-writer' }), 'stale');
     await recovery.discard(source.documentID, record.token);
     check((await recovery.read(changed.document)).state === 'none', 'explicit discard does not alter saved document');
     const savedOpening = changed.document.floors[0].openings[0];
@@ -319,7 +320,7 @@ test('F02 catalog controls, exact dimensions and elevation cancel preserve saved
   await expect(page.getByRole('button', { name: 'Flip vertically', exact: true })).toBeDisabled();
 });
 
-test('F02 mobile 3D corner targets cancel on second touch and disappear in walk mode', async ({ page, context }, info) => {
+test('F02 mobile 3D corner resize, edge move, undo and cancellation share saved geometry', async ({ page, context }, info) => {
   await page.setViewportSize({ width: 390, height: 844 }); await importFixture(page);
   await page.getByRole('button', { name: 'Objects', exact: true }).click();
   await page.locator('.spatial-object-list button').filter({ hasText: 'Door 1' }).click();
@@ -329,7 +330,33 @@ test('F02 mobile 3D corner targets cancel on second touch and disappear in walk 
   await page.getByRole('button', { name: '3D model', exact: true }).click();
   const canvas = page.locator('.spatial-model-canvas canvas'); await expect(canvas).toHaveAttribute('data-rendered', 'true');
   const corners = page.locator('.spatial-opening-model-handles button:visible'); await expect(corners.first()).toBeVisible();
-  const box = (await corners.first().boundingBox())!; expect(box.width).toBeGreaterThanOrEqual(44); expect(box.height).toBeGreaterThanOrEqual(44);
+  const initial = (await saved(page)).document;
+  const diagnostics = () => page.evaluate(async () => { const path = '/src/ui/rendererDiagnostics.ts'; return (await import(path)).rendererDiagnostics(); });
+  const rendererBefore = await diagnostics();
+  const endTop = page.locator('[data-opening-corner="end-top"]:visible'), resizeBox = (await endTop.boundingBox())!;
+  expect(resizeBox.width).toBeGreaterThanOrEqual(44); expect(resizeBox.height).toBeGreaterThanOrEqual(44);
+  await page.mouse.move(resizeBox.x + resizeBox.width / 2 + 3, resizeBox.y + resizeBox.height / 2 + 2);
+  await page.mouse.down(); await page.mouse.move(resizeBox.x + resizeBox.width / 2 + 11, resizeBox.y + resizeBox.height / 2 - 4, { steps: 12 });
+  await expect(page.locator('.spatial-model-message')).toContainText('Release to save');
+  expect((await saved(page)).document).toEqual(initial);
+  expect((await diagnostics()).active.map((entry: { id: number }) => entry.id)).toEqual(rendererBefore.active.map((entry: { id: number }) => entry.id));
+  await page.mouse.up(); await revision(page, 3);
+  const resized = (await saved(page)).document, beforeOpening = initial.floors[0].openings[0], resizedOpening = resized.floors[0].openings[0];
+  expect(resizedOpening.width).not.toBe(beforeOpening.width); expect(resizedOpening.height).not.toBe(beforeOpening.height);
+  expect(resizedOpening.offset).toBe(beforeOpening.offset); expect(resizedOpening.bottom).toBe(beforeOpening.bottom);
+  expect(resized.floors[0].walls).toEqual(initial.floors[0].walls);
+  const topBox = (await endTop.boundingBox())!, bottomBox = (await page.locator('[data-opening-corner="end-bottom"]:visible').boundingBox())!;
+  const edge = { x: (topBox.x + topBox.width / 2 + bottomBox.x + bottomBox.width / 2) / 2, y: (topBox.y + topBox.height / 2 + bottomBox.y + bottomBox.height / 2) / 2 };
+  await page.mouse.move(edge.x, edge.y); await page.mouse.down(); await page.mouse.move(edge.x + 8, edge.y + 2, { steps: 8 });
+  await expect(page.locator('.spatial-model-message')).toContainText('Release to save');
+  expect((await saved(page)).document).toEqual(resized);
+  await page.mouse.up(); await revision(page, 4);
+  const moved = (await saved(page)).document, movedOpening = moved.floors[0].openings[0];
+  expect(movedOpening.offset).not.toBe(resizedOpening.offset);
+  expect(movedOpening).toMatchObject({ width: resizedOpening.width, height: resizedOpening.height, bottom: resizedOpening.bottom, wallID: resizedOpening.wallID, style: resizedOpening.style });
+  await page.getByRole('button', { name: /Undo/ }).click(); await revision(page, 5); expect((await saved(page)).document.floors).toEqual(resized.floors);
+  await page.getByRole('button', { name: /Redo/ }).click(); await revision(page, 6); expect((await saved(page)).document.floors).toEqual(moved.floors);
+  const box = (await corners.first().boundingBox())!;
   const baseline = (await saved(page)).document;
   const cdp = await context.newCDPSession(page); await cdp.send('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 2 });
   const point = { x: box.x + box.width / 2, y: box.y + box.height / 2, id: 1 };
@@ -339,6 +366,7 @@ test('F02 mobile 3D corner targets cancel on second touch and disappear in walk 
   await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ ...point, x: point.x + 8, y: point.y - 4 }, { x: point.x + 45, y: point.y + 30, id: 2 }] });
   await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
   expect((await saved(page)).document).toEqual(baseline); await cdp.detach();
+  await expect(page.locator('.spatial-model-message')).toContainText('Opening edit cancelled. Saved geometry is unchanged.');
   await page.screenshot({ path: info.outputPath('openings-3d-mobile.png'), fullPage: true });
   await page.getByRole('button', { name: 'Walk through', exact: true }).click(); await expect(corners).toHaveCount(0);
   expect((await saved(page)).document).toEqual(baseline);

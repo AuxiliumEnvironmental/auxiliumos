@@ -195,6 +195,7 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
         removePreview(); hideOriginal(new Set()); if (selectedEdges) selectedEdges.visible = true; if (section) section.visible = true;
         if (renderer.domElement.hasPointerCapture(current.pointerID)) renderer.domElement.releasePointerCapture(current.pointerID);
         controls.enabled = activeRef.current && !walking.current; pointer = null; render();
+        if (fenceContacts && !disposed) setMessage('Opening edit cancelled. Saved geometry is unchanged.');
       }
     }
     const editingAvailable = () => activeRef.current && !walking.current && !editRef.current.disabled && !!editRef.current.context && !!editRef.current.onEdit && !contextLost.current && !!graphic;

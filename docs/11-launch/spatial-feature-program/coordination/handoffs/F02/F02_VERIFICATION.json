@@ -1,0 +1,519 @@
+{
+  "task_id": "F02",
+  "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "result_commit": null,
+  "source_identity": "Local candidate identified by per-file hashes; not a verified branch commit.",
+  "checks": [
+    {
+      "id": "F02-CORE",
+      "result": "pass",
+      "command": "node --loader loader.mjs --test tests/core/openings.test.ts tests/core/editor.test.ts tests/core/validation.test.ts tests/core/scene.test.ts tests/core/navigation.test.ts tests/core/wall-drawing.test.ts",
+      "tests": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Actual source using the installed global TypeScript transpiler. Includes seven opening styles, geometry, opposite corners, reversal/split/join, legacy admission, navigation, GLB and recovery payload checks. Not a browser UI test."
+    },
+    {
+      "id": "F02-CORE-TYPES",
+      "result": "pass",
+      "command": "tsc -p tsconfig.core.json",
+      "scope": "Dependency-free canonical core, types, palette and geometry helpers. Excludes React/Three integration typechecking."
+    },
+    {
+      "id": "F02-SOURCE-INTEGRITY",
+      "result": "pass",
+      "matched_candidate_files": 30
+    },
+    {
+      "id": "F02-BUILD",
+      "result": "blocked",
+      "detail": "The earlier full build stopped at TS2688: missing node and vite/client type definitions. Pinned dependencies could not be installed in the execution environment. No successful full application build is claimed."
+    },
+    {
+      "id": "F02-BROWSER",
+      "result": "not_run",
+      "detail": "Authored browser tests, including actual IndexedDB/recovery, local-document roundtrip and UI gesture controls, were not executed. No mobile, desktop or 3D acceptance screenshots were produced."
+    },
+    {
+      "id": "F02-PUSH",
+      "result": "not_verified",
+      "detail": "GitHub staging operations did not yield a completely verified source commit and branch update. Do not treat orphan staging objects as an integrated or accepted implementation."
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptance_id": "F02-A01",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    },
+    {
+      "acceptance_id": "F02-A02",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    },
+    {
+      "acceptance_id": "F02-A03",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    },
+    {
+      "acceptance_id": "F02-A04",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    },
+    {
+      "acceptance_id": "F02-A05",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    },
+    {
+      "acceptance_id": "F02-A06",
+      "status": "implementation_present_acceptance_pending",
+      "reason": "Focused core coverage does not establish the required complete browser/device workflow."
+    }
+  ],
+  "current_source_manifest": [
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "byte_count": 4507,
+      "sha256": "4dd2e8a3c87859087786d6401bb6d10fc4760faedf23179766690c7a95dcd1db",
+      "git_blob_sha": "b30b532bb05482a64aa9f78027c75334eb8b70f3",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "byte_count": 19656,
+      "sha256": "6f447bdd49454cda7ec4326a41bcd76c2de12c7d87542f3a2748b9579865fabe",
+      "git_blob_sha": "ac7e3c963b579c5c406defe80930bc7c473c3631",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "byte_count": 12389,
+      "sha256": "8b2e338afa8af52c92a4fbe291feaa0347a6f4a112207a38eee74c4e2ecdf638",
+      "git_blob_sha": "fb4b2432800d047408da61b9a701301630da07db",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "byte_count": 10456,
+      "sha256": "12445d0bbcaefa6b22a618e519a4ec0dbe098ad10be8da9ebd31fe55f02274b6",
+      "git_blob_sha": "3e8c4edcede39ae0f88842ebdf2634c503a91f69",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/data/drawing.ts",
+      "byte_count": 15251,
+      "sha256": "2d3294aa0c3b39af3d41bc141f0e3b7a0798cb89553ca391547e747bec0a978f",
+      "git_blob_sha": "9d725c7328d4a05da02de52cc54116053681cf82",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/data/drawingRecovery.ts",
+      "byte_count": 17379,
+      "sha256": "a84d4b4a231cb4b29b7a00a5d20f075b880a81d3c5e128447337704fb328e0d9",
+      "git_blob_sha": "e8329dba557611be60e04190da8ad7e7d59e0e78",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/data/exports.ts",
+      "byte_count": 7338,
+      "sha256": "bd2d805a16fd784148ec3658063c1a3b4a4b32d66f81a65fc4927836643410bc",
+      "git_blob_sha": "ae215643c36ca6357106a9b05a2cfd99530f709d",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "byte_count": 6246,
+      "sha256": "ca215348e415046288d16b2a2a4166b053721cd11870389ee32a48bf156f13fd",
+      "git_blob_sha": "063019d7e272f2c5e0ef67d8c4df7af8fd78f3fe",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/data/imports.ts",
+      "byte_count": 16771,
+      "sha256": "feef6ba48bb3f72b5c26b459b1e8108ebf07710c71eac6e1f6d97f6d6b7a200c",
+      "git_blob_sha": "b3bd1951cccf350b1910d42f146379e25395c91c",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/surfacePalette.ts",
+      "byte_count": 2238,
+      "sha256": "cc03d06c0e042fde2533f8fffa398e66953dda609ace548ac33824796c191f50",
+      "git_blob_sha": "c7659b7f7d364cf70db8147594c8724254e085b9",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "byte_count": 7100,
+      "sha256": "cf31cd14bb1496bcca0229101dfb3c18812465ec4ad0a3deabf6632d038e0c3a",
+      "git_blob_sha": "bc4ccd4f69eb52d59d73b789453605c93e0c217a",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "byte_count": 65078,
+      "sha256": "7ccaf29b22269533c8b18ba5b9681e5671ea21c983415e93f77a41ab17406d3a",
+      "git_blob_sha": "f83383a891eedd296936c1e20c972fbf90fb4730",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/Inspector.tsx",
+      "byte_count": 18868,
+      "sha256": "1df1399887328398f5738b9521624a0550b23f6254ab2195352a6f48c3e6d43b",
+      "git_blob_sha": "06427170d249c02a5c2ac6d1063a48c65990afc3",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "byte_count": 46005,
+      "sha256": "9a3d46113073928ee69eda26a0d72a308bed6b3af657a8fe309825da53a349d3",
+      "git_blob_sha": "f4d5bcc9005fce9b659c93356a3e7797d8801316",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+      "byte_count": 4369,
+      "sha256": "8d094776266ac6fd390953a93b6ff5c3d0aac969c7c41c51af7cb3c8643a12a9",
+      "git_blob_sha": "f774ab39ab648520277718d01c3d7c7007b5ba4d",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "byte_count": 55213,
+      "sha256": "cb885ccdf2938e7ee16d741169ec6f7f20a7a2c5e3baedbd9a52263ddbb76ee1",
+      "git_blob_sha": "21fcb2720d678355400689b0ec96effc4558089d",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingManipulation.ts",
+      "byte_count": 6700,
+      "sha256": "057ff162e1039e8791a44cf38b164a175baa246a9eb4bfc9b30988e859f5642d",
+      "git_blob_sha": "a626051df1502294f825190adb64d5126c649fe1",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingPlacement.ts",
+      "byte_count": 2699,
+      "sha256": "bc7ef2b8c46e45b69556f4302d992f376179a537a76905912e8d7238cae92131",
+      "git_blob_sha": "0fe8153f500161571f12d59182c28768703fe345",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/roomDrawing.ts",
+      "byte_count": 14962,
+      "sha256": "de7af90091d679cf90291ebecf7b6cad7f868ee4195bdb8cec7aa22124b92a06",
+      "git_blob_sha": "b3ade79a071efa1ee0a2fcfe3bc06f0f7e808005",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "byte_count": 3518,
+      "sha256": "cc170a8ca6b3627bb55a0d6d5bc400bb8c7de5708ad47e265fb37cd46ea87748",
+      "git_blob_sha": "c88e2c137c75a20d53815c7d64690555b1c1f901",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/wallDrawing.ts",
+      "byte_count": 4830,
+      "sha256": "3f8541e1603f5aba9405e484e2509d86ed75938f43c1cd8d3b73193082626b03",
+      "git_blob_sha": "8e1c6c0b42122690a9443899a0d231486e1ead56",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/workspace.css",
+      "byte_count": 52519,
+      "sha256": "cce5bb0126460204330901d0a8ffcb30adceed29bbca85ff58a3b1a6d84ab329",
+      "git_blob_sha": "761fa399ddffe2552d01d7fa29bddf3c21544aef",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/direct-openings.spec.ts",
+      "byte_count": 35382,
+      "sha256": "ac685a4d6ec5542212048deb613fc4a908842ad0d2203dd1140ad3b007d86c78",
+      "git_blob_sha": "1a91068d01d3afbc07b59adc4200324f24d92cfa",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/direct-placement.spec.ts",
+      "byte_count": 22353,
+      "sha256": "aae39246d46792ddb5c4a5220cc88f99affddd461952e699aed26719b68dc37a",
+      "git_blob_sha": "05f8a7628f580b316e6e88d1410d4437cabd7ad0",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/core/openings.ts",
+      "byte_count": 12669,
+      "sha256": "3dc86cfecd056b35499cd7b8decbd73517302172d03d786834fba91e1dbe25c0",
+      "git_blob_sha": "ab5f9bb9a4bccd6c2d872784ba9f48b7011bc476",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingModelManipulation.ts",
+      "byte_count": 5666,
+      "sha256": "f3ec00f8a3d6509598a0d7267969804aadd3642027709fed263b551ca2ed55e0",
+      "git_blob_sha": "bcd0fd50a5c92ac4bec3f29ef3aa989a9b44085d",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/OpeningElevation.tsx",
+      "byte_count": 8667,
+      "sha256": "a2bb1741a1c70e3bac27277291218d8c7c01d9ed78086f4342bd234b1235212a",
+      "git_blob_sha": "0286cdfe5ea6b9e81cbefa4cd66cec4d2afdc793",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/contracts/geometry-v1.2.schema.json",
+      "byte_count": 17658,
+      "sha256": "896685c5d62f323e764e1c9668b46ae451c091f8e431942badfcc639ae0b4173",
+      "git_blob_sha": "eddb4592e3c0eeb6f248c472d9a1927be6fe0841",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/contracts/scene-v1.2.schema.json",
+      "byte_count": 4357,
+      "sha256": "fbd9e71d59f8345918331098cc253dcc0a0aca8332d69056d492ea993c3c88e4",
+      "git_blob_sha": "3afc1f55b4c5391040aef9b7256133f12971e14a",
+      "matches_recorded_candidate": true
+    },
+    {
+      "path": "spatial-source/web/tests/core/openings.test.ts",
+      "byte_count": 17486,
+      "sha256": "2f3ec5911c8ea565c07f1a397dabf937b2829df2fd73f36dabc52b287cbc504f",
+      "git_blob_sha": "566aab6c60ad019c20ee2f0122d30151dc2355bf",
+      "matches_recorded_candidate": true
+    }
+  ],
+  "core_test_log": "TAP version 13\n# (node:784) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: shared corner move updates incident wall provenance, scene, and dependent lineage once\nok 1 - shared corner move updates incident wall provenance, scene, and dependent lineage once\n  ---\n  duration_ms: 22.27846\n  type: 'test'\n  ...\n# Subtest: move wall keeps shared corner connections and does not move unrelated corners\nok 2 - move wall keeps shared corner connections and does not move unrelated corners\n  ---\n  duration_ms: 1.010632\n  type: 'test'\n  ...\n# Subtest: shortening host never silently clamps opening and whole batch rolls back\nok 3 - shortening host never silently clamps opening and whole batch rolls back\n  ---\n  duration_ms: 5.533766\n  type: 'test'\n  ...\n# Subtest: split shared wall rehosts opening and preserves both room directions\nok 4 - split shared wall rehosts opening and preserves both room directions\n  ---\n  duration_ms: 1.569244\n  type: 'test'\n  ...\n# Subtest: split through an opening rejects with original graph and revision intact\nok 5 - split through an opening rejects with original graph and revision intact\n  ---\n  duration_ms: 0.835268\n  type: 'test'\n  ...\n# Subtest: split then join keeps opening positions and receipt references only original/final identities\nok 6 - split then join keeps opening positions and receipt references only original/final identities\n  ---\n  duration_ms: 6.083574\n  type: 'test'\n  ...\n# Subtest: compound split twice composes descendants\nok 7 - compound split twice composes descendants\n  ---\n  duration_ms: 3.244137\n  type: 'test'\n  ...\n# Subtest: join preserves world opening positions for endpoint orientations false/false\nok 8 - join preserves world opening positions for endpoint orientations false/false\n  ---\n  duration_ms: 0.901087\n  type: 'test'\n  ...\n# Subtest: join preserves world opening positions for endpoint orientations false/true\nok 9 - join preserves world opening positions for endpoint orientations false/true\n  ---\n  duration_ms: 0.748107\n  type: 'test'\n  ...\n# Subtest: join preserves world opening positions for endpoint orientations true/false\nok 10 - join preserves world opening positions for endpoint orientations true/false\n  ---\n  duration_ms: 0.781758\n  type: 'test'\n  ...\n# Subtest: join preserves world opening positions for endpoint orientations true/true\nok 11 - join preserves world opening positions for endpoint orientations true/true\n  ---\n  duration_ms: 4.70024\n  type: 'test'\n  ...\n# Subtest: joining part of another room boundary fails without losing references\nok 12 - joining part of another room boundary fails without losing references\n  ---\n  duration_ms: 0.586133\n  type: 'test'\n  ...\n# Subtest: join incompatible profiles rejects\nok 13 - join incompatible profiles rejects\n  ---\n  duration_ms: 0.407003\n  type: 'test'\n  ...\n# Subtest: delete wall requires explicit dependency deletion in a coherent batch\nok 14 - delete wall requires explicit dependency deletion in a coherent batch\n  ---\n  duration_ms: 0.930842\n  type: 'test'\n  ...\n# Subtest: opening correction retains lineage and rejects overflow\nok 15 - opening correction retains lineage and rejects overflow\n  ---\n  duration_ms: 11.673976\n  type: 'test'\n  ...\n# Subtest: draw, disconnect, and explicitly reconnect one wall without guessed coordinates\nok 16 - draw, disconnect, and explicitly reconnect one wall without guessed coordinates\n  ---\n  duration_ms: 1.531617\n  type: 'test'\n  ...\n# Subtest: merging adjacent corners cannot collapse a wall\nok 17 - merging adjacent corners cannot collapse a wall\n  ---\n  duration_ms: 4.697396\n  type: 'test'\n  ...\n# Subtest: room creation uses explicit connected ring and rename/boundary changes retain room ID\nok 18 - room creation uses explicit connected ring and rename/boundary changes retain room ID\n  ---\n  duration_ms: 1.736746\n  type: 'test'\n  ...\n# Subtest: room merge removes only shared partition/openings; split restores physically distinct spaces\nok 19 - room merge removes only shared partition/openings; split restores physically distinct spaces\n  ---\n  duration_ms: 6.678601\n  type: 'test'\n  ...\n# Subtest: semantic area creation upgrades schema, correction preserves lineage and deletion leaves physical walls intact\nok 20 - semantic area creation upgrades schema, correction preserves lineage and deletion leaves physical walls intact\n  ---\n  duration_ms: 1.715044\n  type: 'test'\n  ...\n# Subtest: floor updates alter dependent lineage and deleting final floor rejects atomically\nok 21 - floor updates alter dependent lineage and deleting final floor rejects atomically\n  ---\n  duration_ms: 11.342597\n  type: 'test'\n  ...\n# Subtest: revision conflict, empty/excessive batch, and exhausted revision reject without mutation\nok 22 - revision conflict, empty/excessive batch, and exhausted revision reject without mutation\n  ---\n  duration_ms: 1.544707\n  type: 'test'\n  ...\n# (node:785) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: only a shared floor-level door is admitted as a portal\nok 23 - only a shared floor-level door is admitted as a portal\n  ---\n  duration_ms: 4.807983\n  type: 'test'\n  ...\n# Subtest: actual movement crosses doorway forward without changing graph or revision\nok 24 - actual movement crosses doorway forward without changing graph or revision\n  ---\n  duration_ms: 1.823827\n  type: 'test'\n  ...\n# Subtest: actual movement crosses doorway backward without changing graph or revision\nok 25 - actual movement crosses doorway backward without changing graph or revision\n  ---\n  duration_ms: 1.268511\n  type: 'test'\n  ...\n# Subtest: window opening is a physical navigation barrier\nok 26 - window opening is a physical navigation barrier\n  ---\n  duration_ms: 0.621677\n  type: 'test'\n  ...\n# Subtest: inferred opening is a physical navigation barrier\nok 27 - inferred opening is a physical navigation barrier\n  ---\n  duration_ms: 0.509597\n  type: 'test'\n  ...\n# Subtest: narrow opening is a physical navigation barrier\nok 28 - narrow opening is a physical navigation barrier\n  ---\n  duration_ms: 0.411179\n  type: 'test'\n  ...\n# Subtest: raised opening is a physical navigation barrier\nok 29 - raised opening is a physical navigation barrier\n  ---\n  duration_ms: 0.981088\n  type: 'test'\n  ...\n# Subtest: low opening is a physical navigation barrier\nok 30 - low opening is a physical navigation barrier\n  ---\n  duration_ms: 0.424209\n  type: 'test'\n  ...\n# Subtest: passage can be a shared portal while outside passage cannot exit known space\nok 31 - passage can be a shared portal while outside passage cannot exit known space\n  ---\n  duration_ms: 0.567034\n  type: 'test'\n  ...\n# Subtest: long move cannot tunnel through thin wall\nok 32 - long move cannot tunnel through thin wall\n  ---\n  duration_ms: 0.601155\n  type: 'test'\n  ...\n# Subtest: display radius cannot clip door jamb or solid corner\nok 33 - display radius cannot clip door jamb or solid corner\n  ---\n  duration_ms: 0.43129\n  type: 'test'\n  ...\n# Subtest: repeated blocked moves never cross wall and reverse motion remains possible\nok 34 - repeated blocked moves never cross wall and reverse motion remains possible\n  ---\n  duration_ms: 1.448452\n  type: 'test'\n  ...\n# Subtest: portal boundary is a valid intermediate camera position\nok 35 - portal boundary is a valid intermediate camera position\n  ---\n  duration_ms: 0.675387\n  type: 'test'\n  ...\n# Subtest: room starts and explicit placements stay inside named modeled rooms\nok 36 - room starts and explicit placements stay inside named modeled rooms\n  ---\n  duration_ms: 1.723216\n  type: 'test'\n  ...\n# Subtest: stale revision, floor, eye elevation, and forged outside position cannot resume\nok 37 - stale revision, floor, eye elevation, and forged outside position cannot resume\n  ---\n  duration_ms: 2.206113\n  type: 'test'\n  ...\n# Subtest: nonfinite/unbounded requests do not move camera and bad settings fail explicitly\nok 38 - nonfinite/unbounded requests do not move camera and bad settings fail explicitly\n  ---\n  duration_ms: 0.984343\n  type: 'test'\n  ...\n# Subtest: coincident unshared walls never become a portal\nok 39 - coincident unshared walls never become a portal\n  ---\n  duration_ms: 0.738252\n  type: 'test'\n  ...\n# Subtest: no explicitly bounded rooms means no walkable area\nok 40 - no explicitly bounded rooms means no walkable area\n  ---\n  duration_ms: 0.463237\n  type: 'test'\n  ...\n# Subtest: immutable navigation summaries cannot grant portals after validation\nok 41 - immutable navigation summaries cannot grant portals after validation\n  ---\n  duration_ms: 0.7101\n  type: 'test'\n  ...\n# Subtest: navigation remains compatible under deterministic rotation, translation, and floor elevation\nok 42 - navigation remains compatible under deterministic rotation, translation, and floor elevation\n  ---\n  duration_ms: 4.775494\n  type: 'test'\n  ...\n# Subtest: a door spanning a bent shared wall stays blocked until explicitly reviewed\nok 43 - a door spanning a bent shared wall stays blocked until explicitly reviewed\n  ---\n  duration_ms: 0.668827\n  type: 'test'\n  ...\n# Subtest: 360 deterministic rays remain inside modeled floor with collision radius\nok 44 - 360 deterministic rays remain inside modeled floor with collision radius\n  ---\n  duration_ms: 16.072013\n  type: 'test'\n  ...\n# Subtest: overlapping independent rooms reject ambiguous placement and motion\nok 45 - overlapping independent rooms reject ambiguous placement and motion\n  ---\n  duration_ms: 0.804472\n  type: 'test'\n  ...\n# (node:786) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: F02 catalog door_single: capability, physical geometry and provenance\nok 46 - F02 catalog door_single: capability, physical geometry and provenance\n  ---\n  duration_ms: 18.962475\n  type: 'test'\n  ...\n# Subtest: F02 catalog door_double: capability, physical geometry and provenance\nok 47 - F02 catalog door_double: capability, physical geometry and provenance\n  ---\n  duration_ms: 3.720996\n  type: 'test'\n  ...\n# Subtest: F02 catalog door_sliding: capability, physical geometry and provenance\nok 48 - F02 catalog door_sliding: capability, physical geometry and provenance\n  ---\n  duration_ms: 2.183369\n  type: 'test'\n  ...\n# Subtest: F02 catalog door_pocket: capability, physical geometry and provenance\nok 49 - F02 catalog door_pocket: capability, physical geometry and provenance\n  ---\n  duration_ms: 2.16395\n  type: 'test'\n  ...\n# Subtest: F02 catalog door_bifold: capability, physical geometry and provenance\nok 50 - F02 catalog door_bifold: capability, physical geometry and provenance\n  ---\n  duration_ms: 1.836887\n  type: 'test'\n  ...\n# Subtest: F02 catalog doorway_open: capability, physical geometry and provenance\nok 51 - F02 catalog doorway_open: capability, physical geometry and provenance\n  ---\n  duration_ms: 1.29445\n  type: 'test'\n  ...\n# Subtest: F02 catalog window: capability, physical geometry and provenance\nok 52 - F02 catalog window: capability, physical geometry and provenance\n  ---\n  duration_ms: 1.351716\n  type: 'test'\n  ...\n# Subtest: F02 strict admission preserves old documents and rejects unsupported versions/orientation without mutation\nok 53 - F02 strict admission preserves old documents and rejects unsupported versions/orientation without mutation\n  ---\n  duration_ms: 4.453399\n  type: 'test'\n  ...\n# Subtest: F02 start-bottom retains finger offset, opposite corner and wall-relative dimensions\nok 54 - F02 start-bottom retains finger offset, opposite corner and wall-relative dimensions\n  ---\n  duration_ms: 7.6343\n  type: 'test'\n  ...\n# Subtest: F02 start-top retains finger offset, opposite corner and wall-relative dimensions\nok 55 - F02 start-top retains finger offset, opposite corner and wall-relative dimensions\n  ---\n  duration_ms: 1.012165\n  type: 'test'\n  ...\n# Subtest: F02 end-bottom retains finger offset, opposite corner and wall-relative dimensions\nok 56 - F02 end-bottom retains finger offset, opposite corner and wall-relative dimensions\n  ---\n  duration_ms: 4.279176\n  type: 'test'\n  ...\n# Subtest: F02 end-top retains finger offset, opposite corner and wall-relative dimensions\nok 57 - F02 end-top retains finger offset, opposite corner and wall-relative dimensions\n  ---\n  duration_ms: 0.827437\n  type: 'test'\n  ...\n# Subtest: F02 move retains finger offset, opposite corner and wall-relative dimensions\nok 58 - F02 move retains finger offset, opposite corner and wall-relative dimensions\n  ---\n  duration_ms: 0.571851\n  type: 'test'\n  ...\n# Subtest: F02 invalid resize, overlap and stale release reject atomically\nok 59 - F02 invalid resize, overlap and stale release reject atomically\n  ---\n  duration_ms: 1.825339\n  type: 'test'\n  ...\n# Subtest: F02 door_single split/join world preservation false/false\nok 60 - F02 door_single split/join world preservation false/false\n  ---\n  duration_ms: 2.917365\n  type: 'test'\n  ...\n# Subtest: F02 door_single split/join world preservation false/true\nok 61 - F02 door_single split/join world preservation false/true\n  ---\n  duration_ms: 1.172346\n  type: 'test'\n  ...\n# Subtest: F02 door_single split/join world preservation true/false\nok 62 - F02 door_single split/join world preservation true/false\n  ---\n  duration_ms: 1.292807\n  type: 'test'\n  ...\n# Subtest: F02 door_single split/join world preservation true/true\nok 63 - F02 door_single split/join world preservation true/true\n  ---\n  duration_ms: 1.295552\n  type: 'test'\n  ...\n# Subtest: F02 door_double split/join world preservation false/false\nok 64 - F02 door_double split/join world preservation false/false\n  ---\n  duration_ms: 1.311376\n  type: 'test'\n  ...\n# Subtest: F02 door_double split/join world preservation false/true\nok 65 - F02 door_double split/join world preservation false/true\n  ---\n  duration_ms: 1.58646\n  type: 'test'\n  ...\n# Subtest: F02 door_double split/join world preservation true/false\nok 66 - F02 door_double split/join world preservation true/false\n  ---\n  duration_ms: 6.145397\n  type: 'test'\n  ...\n# Subtest: F02 door_double split/join world preservation true/true\nok 67 - F02 door_double split/join world preservation true/true\n  ---\n  duration_ms: 1.754453\n  type: 'test'\n  ...\n# Subtest: F02 door_sliding split/join world preservation false/false\nok 68 - F02 door_sliding split/join world preservation false/false\n  ---\n  duration_ms: 1.364236\n  type: 'test'\n  ...\n# Subtest: F02 door_sliding split/join world preservation false/true\nok 69 - F02 door_sliding split/join world preservation false/true\n  ---\n  duration_ms: 0.933296\n  type: 'test'\n  ...\n# Subtest: F02 door_sliding split/join world preservation true/false\nok 70 - F02 door_sliding split/join world preservation true/false\n  ---\n  duration_ms: 0.832534\n  type: 'test'\n  ...\n# Subtest: F02 door_sliding split/join world preservation true/true\nok 71 - F02 door_sliding split/join world preservation true/true\n  ---\n  duration_ms: 1.100688\n  type: 'test'\n  ...\n# Subtest: F02 door_pocket split/join world preservation false/false\nok 72 - F02 door_pocket split/join world preservation false/false\n  ---\n  duration_ms: 0.705994\n  type: 'test'\n  ...\n# Subtest: F02 door_pocket split/join world preservation false/true\nok 73 - F02 door_pocket split/join world preservation false/true\n  ---\n  duration_ms: 1.225566\n  type: 'test'\n  ...\n# Subtest: F02 door_pocket split/join world preservation true/false\nok 74 - F02 door_pocket split/join world preservation true/false\n  ---\n  duration_ms: 2.78113\n  type: 'test'\n  ...\n# Subtest: F02 door_pocket split/join world preservation true/true\nok 75 - F02 door_pocket split/join world preservation true/true\n  ---\n  duration_ms: 0.734807\n  type: 'test'\n  ...\n# Subtest: F02 door_bifold split/join world preservation false/false\nok 76 - F02 door_bifold split/join world preservation false/false\n  ---\n  duration_ms: 0.843872\n  type: 'test'\n  ...\n# Subtest: F02 door_bifold split/join world preservation false/true\nok 77 - F02 door_bifold split/join world preservation false/true\n  ---\n  duration_ms: 0.848018\n  type: 'test'\n  ...\n# Subtest: F02 door_bifold split/join world preservation true/false\nok 78 - F02 door_bifold split/join world preservation true/false\n  ---\n  duration_ms: 1.212517\n  type: 'test'\n  ...\n# Subtest: F02 door_bifold split/join world preservation true/true\nok 79 - F02 door_bifold split/join world preservation true/true\n  ---\n  duration_ms: 1.051014\n  type: 'test'\n  ...\n# Subtest: F02 doorway_open split/join world preservation false/false\nok 80 - F02 doorway_open split/join world preservation false/false\n  ---\n  duration_ms: 0.860736\n  type: 'test'\n  ...\n# Subtest: F02 doorway_open split/join world preservation false/true\nok 81 - F02 doorway_open split/join world preservation false/true\n  ---\n  duration_ms: 1.017473\n  type: 'test'\n  ...\n# Subtest: F02 doorway_open split/join world preservation true/false\nok 82 - F02 doorway_open split/join world preservation true/false\n  ---\n  duration_ms: 0.84948\n  type: 'test'\n  ...\n# Subtest: F02 doorway_open split/join world preservation true/true\nok 83 - F02 doorway_open split/join world preservation true/true\n  ---\n  duration_ms: 1.438016\n  type: 'test'\n  ...\n# Subtest: F02 window split/join world preservation false/false\nok 84 - F02 window split/join world preservation false/false\n  ---\n  duration_ms: 0.8832\n  type: 'test'\n  ...\n# Subtest: F02 window split/join world preservation false/true\nok 85 - F02 window split/join world preservation false/true\n  ---\n  duration_ms: 1.192807\n  type: 'test'\n  ...\n# Subtest: F02 window split/join world preservation true/false\nok 86 - F02 window split/join world preservation true/false\n  ---\n  duration_ms: 1.129391\n  type: 'test'\n  ...\n# Subtest: F02 window split/join world preservation true/true\nok 87 - F02 window split/join world preservation true/true\n  ---\n  duration_ms: 4.652384\n  type: 'test'\n  ...\n# Subtest: F02 legacy generic bend is preserved; rigid styles reject without flattening it\nok 88 - F02 legacy generic bend is preserved; rigid styles reject without flattening it\n  ---\n  duration_ms: 1.09586\n  type: 'test'\n  ...\n# Subtest: F02 frozen 3D plane agrees with elevation, retains off-corner grab and holds near-parallel rays\nok 89 - F02 frozen 3D plane agrees with elevation, retains off-corner grab and holds near-parallel rays\n  ---\n  duration_ms: 1.02852\n  type: 'test'\n  ...\n# Subtest: F02 focused host preview equals committed wall/opening scene and leaves source immutable\nok 90 - F02 focused host preview equals committed wall/opening scene and leaves source immutable\n  ---\n  duration_ms: 1.645519\n  type: 'test'\n  ...\n# Subtest: F02 area/room/wall edits retain geometry and scene 1.2 and styled fields\nok 91 - F02 area/room/wall edits retain geometry and scene 1.2 and styled fields\n  ---\n  duration_ms: 2.291261\n  type: 'test'\n  ...\n# Subtest: F02 door styling/flip never grants inferred or raised navigation\nok 92 - F02 door styling/flip never grants inferred or raised navigation\n  ---\n  duration_ms: 5.042295\n  type: 'test'\n  ...\n# Subtest: F02 passage styling/flip never grants inferred or raised navigation\nok 93 - F02 passage styling/flip never grants inferred or raised navigation\n  ---\n  duration_ms: 2.484393\n  type: 'test'\n  ...\n# Subtest: F02 window styling/flip never grants inferred or raised navigation\nok 94 - F02 window styling/flip never grants inferred or raised navigation\n  ---\n  duration_ms: 2.243229\n  type: 'test'\n  ...\n# Subtest: F02 GLB explicit opening material/ownership preserves F01 palette and frozen source\nok 95 - F02 GLB explicit opening material/ownership preserves F01 palette and frozen source\n  ---\n  duration_ms: 2.134185\n  type: 'test'\n  ...\n# Subtest: F02 physical starters honor base elevation and retain catalog dimensions independent of symbol depth\nok 96 - F02 physical starters honor base elevation and retain catalog dimensions independent of symbol depth\n  ---\n  duration_ms: 98.522602\n  type: 'test'\n  ...\n# Subtest: F02 rectangle/wall preflight and addFloor retain the new schema and styles\nok 97 - F02 rectangle/wall preflight and addFloor retain the new schema and styles\n  ---\n  duration_ms: 67.246396\n  type: 'test'\n  ...\n# Subtest: F02 strict recovery payload retains style, physical dimensions and orientation without default regeneration\nok 98 - F02 strict recovery payload retains style, physical dimensions and orientation without default regeneration\n  ---\n  duration_ms: 36.369543\n  type: 'test'\n  ...\n# (node:820) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: TypeScript scene equals existing Swift-generated canonical scene fixture\nok 99 - TypeScript scene equals existing Swift-generated canonical scene fixture\n  ---\n  duration_ms: 11.705714\n  type: 'test'\n  ...\n# Subtest: door/window void rays miss hosts while solid walls remain selectable\nok 100 - door/window void rays miss hosts while solid walls remain selectable\n  ---\n  duration_ms: 2.079082\n  type: 'test'\n  ...\n# Subtest: actual cutaway responds to viewpoint and does not edit canonical geometry\nok 101 - actual cutaway responds to viewpoint and does not edit canonical geometry\n  ---\n  duration_ms: 2.607799\n  type: 'test'\n  ...\n# Subtest: cutaway intersects real door and window holes instead of wall rectangles\nok 102 - cutaway intersects real door and window holes instead of wall rectangles\n  ---\n  duration_ms: 2.436951\n  type: 'test'\n  ...\n# Subtest: top view retains walls and invalid viewpoints hide nothing\nok 103 - top view retains walls and invalid viewpoints hide nothing\n  ---\n  duration_ms: 0.855339\n  type: 'test'\n  ...\n# Subtest: ceiling uses actual polygon and rejects inconsistent wall tops\nok 104 - ceiling uses actual polygon and rejects inconsistent wall tops\n  ---\n  duration_ms: 1.050212\n  type: 'test'\n  ...\n# Subtest: semantic areas create only semantic edges and explicit scene 1.1\nok 105 - semantic areas create only semantic edges and explicit scene 1.1\n  ---\n  duration_ms: 1.357505\n  type: 'test'\n  ...\n# Subtest: concave triangulation preserves area in both orientations and omits missing corner\nok 106 - concave triangulation preserves area in both orientations and omits missing corner\n  ---\n  duration_ms: 0.189195\n  type: 'test'\n  ...\n# Subtest: unsafe triangle indices cannot crash presentation\nok 107 - unsafe triangle indices cannot crash presentation\n  ---\n  duration_ms: 2.105703\n  type: 'test'\n  ...\n# Subtest: legal canonical geometry that would exceed scene total capacity rejects before mesh generation\nok 108 - legal canonical geometry that would exceed scene total capacity rejects before mesh generation\n  ---\n  duration_ms: 401.40973\n  type: 'test'\n  ...\n# Subtest: edge-only output is preflighted independently of face count\nok 109 - edge-only output is preflighted independently of face count\n  ---\n  duration_ms: 598.133125\n  type: 'test'\n  ...\n# Subtest: existing 400,000 edge limit is preserved rather than silently lowered to 200,000\nok 110 - existing 400,000 edge limit is preserved rather than silently lowered to 200,000\n  ---\n  duration_ms: 1902.544826\n  type: 'test'\n  ...\n# Subtest: the maximum room ring produces an admissible face and one extra vertex rejects\nok 111 - the maximum room ring produces an admissible face and one extra vertex rejects\n  ---\n  duration_ms: 405.827055\n  type: 'test'\n  ...\n# (node:828) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: canonical legacy geometry is accepted and admission owns its snapshot\nok 112 - canonical legacy geometry is accepted and admission owns its snapshot\n  ---\n  duration_ms: 4.224624\n  type: 'test'\n  ...\n# Subtest: strict structure rejects null\nok 113 - strict structure rejects null\n  ---\n  duration_ms: 0.235825\n  type: 'test'\n  ...\n# Subtest: strict structure rejects array\nok 114 - strict structure rejects array\n  ---\n  duration_ms: 0.075954\n  type: 'test'\n  ...\n# Subtest: strict structure rejects wrong type\nok 115 - strict structure rejects wrong type\n  ---\n  duration_ms: 0.105038\n  type: 'test'\n  ...\n# Subtest: strict structure rejects primitive\nok 116 - strict structure rejects primitive\n  ---\n  duration_ms: 0.072659\n  type: 'test'\n  ...\n# Subtest: strict structure rejects nonplain\nok 117 - strict structure rejects nonplain\n  ---\n  duration_ms: 0.063225\n  type: 'test'\n  ...\n# Subtest: invalid input: unknown field\nok 118 - invalid input: unknown field\n  ---\n  duration_ms: 1.058264\n  type: 'test'\n  ...\n# Subtest: invalid input: NaN\nok 119 - invalid input: NaN\n  ---\n  duration_ms: 0.304379\n  type: 'test'\n  ...\n# Subtest: invalid input: infinite\nok 120 - invalid input: infinite\n  ---\n  duration_ms: 0.533294\n  type: 'test'\n  ...\n# Subtest: invalid input: fractional revision\nok 121 - invalid input: fractional revision\n  ---\n  duration_ms: 0.540674\n  type: 'test'\n  ...\n# Subtest: invalid input: unsafe revision\nok 122 - invalid input: unsafe revision\n  ---\n  duration_ms: 0.769179\n  type: 'test'\n  ...\n# Subtest: invalid input: future parent\nok 123 - invalid input: future parent\n  ---\n  duration_ms: 0.457088\n  type: 'test'\n  ...\n# Subtest: invalid input: duplicate floor\nok 124 - invalid input: duplicate floor\n  ---\n  duration_ms: 0.834316\n  type: 'test'\n  ...\n# Subtest: invalid input: duplicate node\nok 125 - invalid input: duplicate node\n  ---\n  duration_ms: 0.626043\n  type: 'test'\n  ...\n# Subtest: invalid input: missing node\nok 126 - invalid input: missing node\n  ---\n  duration_ms: 0.989971\n  type: 'test'\n  ...\n# Subtest: invalid input: wall loop\nok 127 - invalid input: wall loop\n  ---\n  duration_ms: 0.768267\n  type: 'test'\n  ...\n# Subtest: invalid input: missing host\nok 128 - invalid input: missing host\n  ---\n  duration_ms: 0.437318\n  type: 'test'\n  ...\n# Subtest: invalid input: opening outside host\nok 129 - invalid input: opening outside host\n  ---\n  duration_ms: 0.65689\n  type: 'test'\n  ...\n# Subtest: invalid input: opening vertical overlap\nok 130 - invalid input: opening vertical overlap\n  ---\n  duration_ms: 0.445571\n  type: 'test'\n  ...\n# Subtest: invalid input: broken room node graph\nok 131 - invalid input: broken room node graph\n  ---\n  duration_ms: 0.417769\n  type: 'test'\n  ...\n# Subtest: invalid input: cross-kind rendering ID\nok 132 - invalid input: cross-kind rendering ID\n  ---\n  duration_ms: 0.48418\n  type: 'test'\n  ...\n# Subtest: invalid input: combined world height\nok 133 - invalid input: combined world height\n  ---\n  duration_ms: 0.366191\n  type: 'test'\n  ...\n# Subtest: invalid input: incompatible shared direction\nok 134 - invalid input: incompatible shared direction\n  ---\n  duration_ms: 0.417889\n  type: 'test'\n  ...\n# Subtest: invalid input: three room wall\nok 135 - invalid input: three room wall\n  ---\n  duration_ms: 0.558051\n  type: 'test'\n  ...\n# Subtest: invalid input: control characters\nok 136 - invalid input: control characters\n  ---\n  duration_ms: 0.497259\n  type: 'test'\n  ...\n# Subtest: invalid input: ID path traversal\nok 137 - invalid input: ID path traversal\n  ---\n  duration_ms: 0.317488\n  type: 'test'\n  ...\n# Subtest: invalid input: unrecognized origin\nok 138 - invalid input: unrecognized origin\n  ---\n  duration_ms: 0.299712\n  type: 'test'\n  ...\n# Subtest: invalid input: legacy areas field\nok 139 - invalid input: legacy areas field\n  ---\n  duration_ms: 0.353763\n  type: 'test'\n  ...\n# Subtest: strict admission does not mutate optional null parent accepted by old schema\nok 140 - strict admission does not mutate optional null parent accepted by old schema\n  ---\n  duration_ms: 0.303106\n  type: 'test'\n  ...\n# Subtest: bounded semantic areas require 1.1, preserve source IDs, and reject self crossing\nok 141 - bounded semantic areas require 1.1, preserve source IDs, and reject self crossing\n  ---\n  duration_ms: 0.443498\n  type: 'test'\n  ...\n# Subtest: UTF-16 does not undercount Unicode scalar text limits\nok 142 - UTF-16 does not undercount Unicode scalar text limits\n  ---\n  duration_ms: 0.431079\n  type: 'test'\n  ...\n# Subtest: unbounded arrays stop at admission instead of executing geometric work\nok 143 - unbounded arrays stop at admission instead of executing geometric work\n  ---\n  duration_ms: 0.21266\n  type: 'test'\n  ...\n# Subtest: sparse arrays return structured rejection instead of throwing inside graph validation\nok 144 - sparse arrays return structured rejection instead of throwing inside graph validation\n  ---\n  duration_ms: 0.41111\n  type: 'test'\n  ...\n# Subtest: standalone bowtie and adjacent backtracking wall paths are invalid even without rooms\nok 145 - standalone bowtie and adjacent backtracking wall paths are invalid even without rooms\n  ---\n  duration_ms: 0.376407\n  type: 'test'\n  ...\n# (node:844) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:\n# --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"/mnt/data/f02-work/loader.mjs\", pathToFileURL(\"./\"));'\n# (Use `node --trace-warnings ...` to show where the warning was created)\n# Subtest: both ends on one bent host split in one batch and preserve exact window geometry and source lineage\nok 146 - both ends on one bent host split in one batch and preserve exact window geometry and source lineage\n  ---\n  duration_ms: 7.326502\n  type: 'test'\n  ...\n# Subtest: contact with an internal saved path corner reuses its identity and creates a proper junction\nok 147 - contact with an internal saved path corner reuses its identity and creates a proper junction\n  ---\n  duration_ms: 7.818809\n  type: 'test'\n  ...\n# Subtest: a snapped endpoint inside an opening rejects the whole transaction without altering the source\nok 148 - a snapped endpoint inside an opening rejects the whole transaction without altering the source\n  ---\n  duration_ms: 0.744672\n  type: 'test'\n  ...\n# Subtest: corner acquisition favors clear proximity, preserves ambiguous identities, and releases without grid rounding\nok 149 - corner acquisition favors clear proximity, preserves ambiguous identities, and releases without grid rounding\n  ---\n  duration_ms: 0.567615\n  type: 'test'\n  ...\n# Subtest: a short new segment can leave its own anchor and free mode bypasses all magnets\nok 150 - a short new segment can leave its own anchor and free mode bypasses all magnets\n  ---\n  duration_ms: 0.646334\n  type: 'test'\n  ...\n1..150\n# tests 150\n# suites 0\n# pass 150\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 5733.205367\n",
+  "unverified": [
+    "Full React/Three TypeScript build",
+    "Successful interactive desktop and mobile 3D resizing and edge movement",
+    "Browser cancellation and asynchronous authorization paths",
+    "Real IndexedDB undo/redo/reopen and draft recovery",
+    "SVG/PDF/PNG and complete archive browser roundtrip",
+    "Renderer idle and pointer-stream performance",
+    "Capacitor packaging",
+    "Apple build and physical iPhone",
+    "AuxiliumOS embed"
+  ],
+  "screenshots": [],
+  "deployment_performed": false,
+  "master_review": {
+    "task": "F02 master bounded recovery/review",
+    "base": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "recovered_commit": "aec79e62bc2c36d8422009f5f3ccfb5648f4ceb2",
+    "recovered_source_sha256_matches": 30,
+    "fix_commits": [
+      "c809b7327b9576efaa4f6856fbfa7707215cfc6f",
+      "b89b89a0d81eb240abed0fdcc7dbf475c84a80c6"
+    ],
+    "fixes": [
+      "Browser storage test now derives floor/opening/room IDs from generated source fixture.",
+      "Mobile browser case verifies successful 3D resize, edge-only movement, save atomicity, renderer stability, undo/redo, second-touch cancellation and navigation-only walkthrough.",
+      "Cancelled 3D opening gesture now clears stale unsaved preview dimensions and release instruction."
+    ],
+    "browser": {
+      "executable": "/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium",
+      "version": "Chromium 153.0.8010.0",
+      "sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+      "software_webgl": true,
+      "scenarios_passed": [
+        "real IndexedDB style, undo/redo, freeze, reopen and recovery version fences",
+        "catalog style/flip controls, exact dimensions, elevation Escape cancellation",
+        "mobile viewport 3D resize/edge move/undo/redo/no per-move saves/no renderer recreation/second-touch cancellation/walk navigation-only",
+        "complete-local-document 1.2 roundtrip and legacy exchange/outbox rejection"
+      ],
+      "not_physical_iphone": true
+    },
+    "build": {
+      "command": "npm run build",
+      "result": "passed",
+      "includes": [
+        "full React/Three TypeScript check",
+        "Vite production bundle"
+      ],
+      "log": "Final npm run build passed; implementation source is identified by source_manifest."
+    },
+    "core_evidence": "Reused supplied 150 passing core checks; actual original 30-source hashes matched and only later runtime modification is cancellation status text. No repeated core suite.",
+    "source_manifest": [
+      {
+        "path": "spatial-source/contracts/COMPATIBILITY.md",
+        "sha256": "4dd2e8a3c87859087786d6401bb6d10fc4760faedf23179766690c7a95dcd1db",
+        "bytes": 4507
+      },
+      {
+        "path": "spatial-source/web/src/core/editor.ts",
+        "sha256": "6f447bdd49454cda7ec4326a41bcd76c2de12c7d87542f3a2748b9579865fabe",
+        "bytes": 19656
+      },
+      {
+        "path": "spatial-source/web/src/core/scene.ts",
+        "sha256": "8b2e338afa8af52c92a4fbe291feaa0347a6f4a112207a38eee74c4e2ecdf638",
+        "bytes": 12389
+      },
+      {
+        "path": "spatial-source/web/src/core/validation.ts",
+        "sha256": "12445d0bbcaefa6b22a618e519a4ec0dbe098ad10be8da9ebd31fe55f02274b6",
+        "bytes": 10456
+      },
+      {
+        "path": "spatial-source/web/src/data/drawing.ts",
+        "sha256": "2d3294aa0c3b39af3d41bc141f0e3b7a0798cb89553ca391547e747bec0a978f",
+        "bytes": 15251
+      },
+      {
+        "path": "spatial-source/web/src/data/drawingRecovery.ts",
+        "sha256": "a84d4b4a231cb4b29b7a00a5d20f075b880a81d3c5e128447337704fb328e0d9",
+        "bytes": 17379
+      },
+      {
+        "path": "spatial-source/web/src/data/exports.ts",
+        "sha256": "bd2d805a16fd784148ec3658063c1a3b4a4b32d66f81a65fc4927836643410bc",
+        "bytes": 7338
+      },
+      {
+        "path": "spatial-source/web/src/data/glb.ts",
+        "sha256": "ca215348e415046288d16b2a2a4166b053721cd11870389ee32a48bf156f13fd",
+        "bytes": 6246
+      },
+      {
+        "path": "spatial-source/web/src/data/imports.ts",
+        "sha256": "feef6ba48bb3f72b5c26b459b1e8108ebf07710c71eac6e1f6d97f6d6b7a200c",
+        "bytes": 16771
+      },
+      {
+        "path": "spatial-source/web/src/surfacePalette.ts",
+        "sha256": "cc03d06c0e042fde2533f8fffa398e66953dda609ace548ac33824796c191f50",
+        "bytes": 2238
+      },
+      {
+        "path": "spatial-source/web/src/types.ts",
+        "sha256": "cf31cd14bb1496bcca0229101dfb3c18812465ec4ad0a3deabf6632d038e0c3a",
+        "bytes": 7100
+      },
+      {
+        "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "sha256": "7ccaf29b22269533c8b18ba5b9681e5671ea21c983415e93f77a41ab17406d3a",
+        "bytes": 65078
+      },
+      {
+        "path": "spatial-source/web/src/ui/Inspector.tsx",
+        "sha256": "1df1399887328398f5738b9521624a0550b23f6254ab2195352a6f48c3e6d43b",
+        "bytes": 18868
+      },
+      {
+        "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+        "sha256": "7fd29ac6704f5b56c696898c8d7de2d4d1639ce4293309a3b4505a198e950f1a",
+        "bytes": 46113
+      },
+      {
+        "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+        "sha256": "8d094776266ac6fd390953a93b6ff5c3d0aac969c7c41c51af7cb3c8643a12a9",
+        "bytes": 4369
+      },
+      {
+        "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "sha256": "cb885ccdf2938e7ee16d741169ec6f7f20a7a2c5e3baedbd9a52263ddbb76ee1",
+        "bytes": 55213
+      },
+      {
+        "path": "spatial-source/web/src/ui/openingManipulation.ts",
+        "sha256": "057ff162e1039e8791a44cf38b164a175baa246a9eb4bfc9b30988e859f5642d",
+        "bytes": 6700
+      },
+      {
+        "path": "spatial-source/web/src/ui/openingPlacement.ts",
+        "sha256": "bc7ef2b8c46e45b69556f4302d992f376179a537a76905912e8d7238cae92131",
+        "bytes": 2699
+      },
+      {
+        "path": "spatial-source/web/src/ui/roomDrawing.ts",
+        "sha256": "de7af90091d679cf90291ebecf7b6cad7f868ee4195bdb8cec7aa22124b92a06",
+        "bytes": 14962
+      },
+      {
+        "path": "spatial-source/web/src/ui/sceneBatches.ts",
+        "sha256": "cc170a8ca6b3627bb55a0d6d5bc400bb8c7de5708ad47e265fb37cd46ea87748",
+        "bytes": 3518
+      },
+      {
+        "path": "spatial-source/web/src/ui/wallDrawing.ts",
+        "sha256": "3f8541e1603f5aba9405e484e2509d86ed75938f43c1cd8d3b73193082626b03",
+        "bytes": 4830
+      },
+      {
+        "path": "spatial-source/web/src/ui/workspace.css",
+        "sha256": "cce5bb0126460204330901d0a8ffcb30adceed29bbca85ff58a3b1a6d84ab329",
+        "bytes": 52519
+      },
+      {
+        "path": "spatial-source/web/tests/ui/direct-openings.spec.ts",
+        "sha256": "4607b391ab340666313d5251f5f1f06fe098ca1522a82f7f6a760aa4e40da4bd",
+        "bytes": 38213
+      },
+      {
+        "path": "spatial-source/web/tests/ui/direct-placement.spec.ts",
+        "sha256": "aae39246d46792ddb5c4a5220cc88f99affddd461952e699aed26719b68dc37a",
+        "bytes": 22353
+      },
+      {
+        "path": "spatial-source/web/src/core/openings.ts",
+        "sha256": "3dc86cfecd056b35499cd7b8decbd73517302172d03d786834fba91e1dbe25c0",
+        "bytes": 12669
+      },
+      {
+        "path": "spatial-source/web/src/ui/openingModelManipulation.ts",
+        "sha256": "f3ec00f8a3d6509598a0d7267969804aadd3642027709fed263b551ca2ed55e0",
+        "bytes": 5666
+      },
+      {
+        "path": "spatial-source/web/src/ui/OpeningElevation.tsx",
+        "sha256": "a2bb1741a1c70e3bac27277291218d8c7c01d9ed78086f4342bd234b1235212a",
+        "bytes": 8667
+      },
+      {
+        "path": "spatial-source/contracts/geometry-v1.2.schema.json",
+        "sha256": "896685c5d62f323e764e1c9668b46ae451c091f8e431942badfcc639ae0b4173",
+        "bytes": 17658
+      },
+      {
+        "path": "spatial-source/contracts/scene-v1.2.schema.json",
+        "sha256": "fbd9e71d59f8345918331098cc253dcc0a0aca8332d69056d492ea993c3c88e4",
+        "bytes": 4357
+      },
+      {
+        "path": "spatial-source/web/tests/core/openings.test.ts",
+        "sha256": "2f3ec5911c8ea565c07f1a397dabf937b2829df2fd73f36dabc52b287cbc504f",
+        "bytes": 17486
+      }
+    ],
+    "screenshots": [
+      {
+        "path": "openings-catalog-desktop.png",
+        "sha256": "f3c07f2556666c28283825eaafeda9c28952c0f6389d2ff1bc158c9619385bbd"
+      },
+      {
+        "path": "openings-elevation-mobile.png",
+        "sha256": "1f3bfe26e9173b687a95c824b015e28cfd29e5e99b493df4998e8a46a06d1e09"
+      },
+      {
+        "path": "openings-3d-mobile.png",
+        "sha256": "6d85e46a176f1430c124e3bf5700d76c56fa2f788c2cfcce77c52f450a71cf94"
+      }
+    ],
+    "integration_notes": [
+      "Use monotonic schema upgrades in addFloor/addOpening/setOpeningStyle/checkedPlacement when merging F03-F05.",
+      "Compose scene/import/export admission cumulatively for later schema versions.",
+      "Preserve style-only aperture provenance, orientation transforms through reversed joins, and explicit opening role when composing other feature adapters."
+    ],
+    "remaining_limits": [
+      "No physical iPhone/Capacitor/Apple/OS delivery",
+      "3D stale-view/authority/blur/lost-capture paths inspected in code but not all independently exercised in browser",
+      "No integrated F03-F05 predecessor verification"
+    ],
+    "date": "2026-10-12",
+    "status": "branch_implementation_complete_pending_integration",
+    "recovered_remote_commit": "67bcf61b7e3985a90bfa2ffad2a0a26ad8c96dad"
+  }
+}
