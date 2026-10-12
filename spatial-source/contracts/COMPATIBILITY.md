@@ -49,3 +49,37 @@ recovered-draft source links and confirmed-history-cleanup journals. Changes do
 not migrate any OS/Moldo database. PublicationAuthorization and managed leases
 are injected scoped contracts, not reusable URL credentials or configured live
 account integrations. The app uses local device-owner access only by default.
+
+## F04 branch candidate: fixtures and optional through-holes
+
+Geometry/scene 1.4.0 adds fixtures with catalog version 1, physical dimensions,
+floor transforms or explicit sided wall charts; cutouts/penetrations use the
+master-frozen SurfaceRef and rectangle/circle profiles. Existing 1.0/1.1 admission
+is immutable. The first fixture/hole edit upgrades the mutable draft and preserves
+the old undo snapshot. Native capture still produces legacy input.
+
+This isolated F01-based branch is not the cumulative F02/F03 implementation. Its
+optional Room.ceiling lookup consumes the exact D03 ceiling shape but does not
+create, infer, migrate or edit ceilings. Ceiling holes require an established
+matching ceiling ID. 1.2/1.3 input and styled apertures remain unsupported until
+master composition; do not use this branch to overwrite accepted predecessor
+schemas or readers. The schema files are candidates with that explicit limitation.
+
+The complete local-document profile retains its existing safe drawing vocabulary,
+member names and provenance contract. Geometry/scene inside it are separately
+versioned. SVG/PDF/PNG derive the same planar material decomposition and fixture
+edges. Scene/GLB include authoritative holes and authored ceiling planes only.
+Fixture-only floors are geometry in manifests and receive GLB; drawing extents
+include off-structure fixtures. Old single-floor exchange/outbox is not widened;
+1.4 exports/imports through that profile reject with the complete local-document
+alternative. No legacy writable downgrade is offered.
+
+Circular geometry is a deterministic inscribed 48-gon shared by scene, resolver,
+plan and exports. The maximum radial approximation error is
+`radius * (1 - cos(pi / 48))`, approximately 0.214% of radius. Profile validation
+uses the analytic circle to reject touching/overlap; subtraction uses that shared
+approximation. No surface thickness, recess, boundary notch, shaft or portal is
+inferred. Rigid chart profiles cannot span a bend. Ambiguous host changes reject
+unless explicitly rehosted/deleted in the same transaction. Furniture remains
+nonblocking and never subtracts observation support. F05's recorded-support and
+F03's actual remap receipts still need composed integration checks.

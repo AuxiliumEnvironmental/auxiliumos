@@ -148,3 +148,11 @@
   .spatial-workspace .spatial-editor[data-mobile-panel=objects] .spatial-tools-stage,
   .spatial-workspace .spatial-editor[data-mobile-panel=details] .spatial-tools-stage{bottom:86px;right:calc(min(42%,320px) + 8px)}
 }
+
+/* F04 feature controls retain the current map-first layout. */
+.spatial-feature-controls { display:grid; gap:12px; border:1px solid #cad8e1; border-radius:12px; padding:16px; min-width:0; }
+.spatial-feature-controls legend { padding:0 6px; font-weight:600; }
+.spatial-feature-controls label { display:grid; gap:6px; }
+.spatial-feature-controls select { width:100%; min-height:44px; }
+.spatial-feature-controls button { min-height:44px; }
+.spatial-symbol-fixture,.spatial-symbol-cutout { color:#167bab; }

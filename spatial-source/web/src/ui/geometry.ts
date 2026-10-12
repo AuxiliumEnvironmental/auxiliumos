@@ -43,6 +43,8 @@ export function closedBoundary(floor: Floor, wallIDs: string[]): WallReference[]
 }
 export function objectLabel(floor: Floor, selection: Selection) {
   const index = (ids: { id: string }[]) => ids.findIndex(item => item.id === selection.objectID) + 1;
+  if(selection.kind==='fixture')return floor.fixtures?.find(f=>f.id===selection.objectID)?.catalog.id.replaceAll('-',' ')??'Fixture';
+  if(selection.kind==='cutout')return floor.cutouts?.find(c=>c.id===selection.objectID)?.kind??'Cutout';
   if (selection.kind === 'room') return floor.rooms.find(r => r.id === selection.objectID)?.label ?? 'Room';
   if (selection.kind === 'area') return floor.areas?.find(a => a.id === selection.objectID)?.label ?? 'Area';
   if (selection.kind === 'opening') { const opening = floor.openings.find(o => o.id === selection.objectID); return opening ? `${opening.kind[0].toUpperCase()}${opening.kind.slice(1)} ${index(floor.openings)}` : 'Opening'; }

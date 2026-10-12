@@ -38,6 +38,7 @@ export async function exportRevision(frozen: FrozenRevision, format: ExportForma
     case 'bundle': {
       const floor = single();
       // The v1 wire profile is single-floor. Never discard other floors inside its geometry.
+      if (document.schemaVersion==='1.4.0')fail('unsupported-legacy-exchange-use-local-document');
       if (document.floors.length !== 1) fail('single-floor-exchange-only-use-local-document');
       const files: Record<string, Uint8Array> = { 'geometry.json': frozen.bytes.slice(), 'scene.json': jsonBytes(buildScene(document, floor.id)), 'floorplan.svg': svgFloorOverview(frozen, floor) };
       files['manifest.json'] = jsonBytes({ formatVersion: '1.0.0', documentID: document.documentID, revision: document.revision, measurementStatus: 'unverified', contentClass: 'spatial-draft', files: await Promise.all(Object.keys(files).sort().map(async path => ({ path, sha256: await sha256(files[path]), bytes: files[path].length }))) });
@@ -64,9 +65,9 @@ export async function exportRevision(frozen: FrozenRevision, format: ExportForma
           await add(`${base}floorplan-${page}.png`, await pngDrawing(frozen, floor, pageIndex, floorPages[index]), 'image/png', floor.id, pageIndex);
         }
         await add(`${base}floorplan.pdf`, await pdfDrawing(frozen, [floor]), 'application/pdf', floor.id);
-        if (floor.walls.length || floor.rooms.length) await add(`${base}model.glb`, glbDrawing(frozen, floor.id), 'model/gltf-binary', floor.id);
+        if (floor.walls.length || floor.rooms.length || floor.fixtures?.length) await add(`${base}model.glb`, glbDrawing(frozen, floor.id), 'model/gltf-binary', floor.id);
       }
-      files['manifest.json'] = jsonBytes({ profileVersion: frozen.sourceIdentity ? 'auxilium-spatial-local-document/1.1.0' : 'auxilium-spatial-local-document/1.0.0', documentID: document.documentID, revision: document.revision, measurementStatus: 'unverified', coordinateSystem: document.coordinateSystem, floors: document.floors.map((floor, index) => ({ floorID: floor.id, label: floor.label, elevation: floor.elevation, index, pageCount: floorPages[index].length, representationStatus: floor.walls.length || floor.rooms.length ? 'geometry' : 'empty' })), files: records });
+      files['manifest.json'] = jsonBytes({ profileVersion: frozen.sourceIdentity ? 'auxilium-spatial-local-document/1.1.0' : 'auxilium-spatial-local-document/1.0.0', documentID: document.documentID, revision: document.revision, measurementStatus: 'unverified', coordinateSystem: document.coordinateSystem, floors: document.floors.map((floor, index) => ({ floorID: floor.id, label: floor.label, elevation: floor.elevation, index, pageCount: floorPages[index].length, representationStatus: floor.walls.length || floor.rooms.length || floor.fixtures?.length ? 'geometry' : 'empty' })), files: records });
       bytes = writeZIP(files); mimeType = 'application/zip'; filename = `${stem}.spatial.zip`; break;
     }
     default: return fail('unsupported-export-format');

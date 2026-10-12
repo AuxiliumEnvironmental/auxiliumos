@@ -1,3 +1,4 @@
+import { remapAttachmentsForCommand, assertAttachmentHostChanges } from './fixtureAttachments';
 import type { EditCommand, EditReceipt, Floor, GeometryIDMapping, Room, SpatialDocument, WallReference } from '../types';
 import { closedRoomBoundary, distance, EPSILON, isSimplePolygon, pathLength, pathPoint, roomBoundary, signedArea, wallPath } from './geometry';
 import { requireValidDocument, validID } from './validation';
@@ -13,7 +14,7 @@ function equal(a:unknown,b:unknown):boolean{
 }
 function exists(document:SpatialDocument,floorID:string,kind:string,id:string):boolean{
   const floor=document.floors.find(f=>f.id===floorID);if(!floor)return false;
-  switch(kind){case'floor':return floor.id===id;case'node':return floor.nodes.some(x=>x.id===id);case'wall':return floor.walls.some(x=>x.id===id);case'opening':return floor.openings.some(x=>x.id===id);case'room':return floor.rooms.some(x=>x.id===id);case'area':return floor.areas?.some(x=>x.id===id)??false;default:return false;}
+  switch(kind){case'floor':return floor.id===id;case'node':return floor.nodes.some(x=>x.id===id);case'wall':return floor.walls.some(x=>x.id===id);case'opening':return floor.openings.some(x=>x.id===id);case'room':return floor.rooms.some(x=>x.id===id);case'fixture':return floor.fixtures?.some(x=>x.id===id)??false;case'cutout':return floor.cutouts?.some(x=>x.id===id)??false;case'area':return floor.areas?.some(x=>x.id===id)??false;default:return false;}
 }
 /** Conservative durable-history lineage. It grants no permission to relink an overlay automatically. */
 export function restorationMappings(source:SpatialDocument,next:SpatialDocument):GeometryIDMapping[]{
@@ -27,6 +28,8 @@ export function restorationMappings(source:SpatialDocument,next:SpatialDocument)
       ['wall',f.walls,(x:{id:string})=>walls.has(x.id)],
       ['opening',f.openings,(x:typeof f.openings[number])=>!equal(n.openings.find(y=>y.id===x.id),x)||walls.has(x.wallID)],
       ['room',f.rooms,(x:Room)=>!equal(n.rooms.find(y=>y.id===x.id),x)||x.boundary.some(r=>walls.has(r.wallID))],
+      ['fixture',f.fixtures??[],(x:NonNullable<Floor['fixtures']>[number])=>moved||!equal(n.fixtures?.find(y=>y.id===x.id),x)],
+      ['cutout',f.cutouts??[],(x:NonNullable<Floor['cutouts']>[number])=>moved||!equal(n.cutouts?.find(y=>y.id===x.id),x)],
       ['area',f.areas??[],(x:NonNullable<Floor['areas']>[number])=>moved||!equal(n.areas?.find(y=>y.id===x.id),x)],
     ] as const){
       // Each predicate belongs to its parallel collection; expand below without an unsafe public cast.
@@ -93,6 +96,10 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
   const f=item(document.floors,command.floorID),m=(kind:string,id:string,to:string[])=>mappings.push(map(f.id,kind,id,to));
   if(command.type==='deleteFloor'){remove(document.floors,f.id);m('floor',f.id,[]);return mappings;}
   switch(command.type){
+    case'setFixture':{f.fixtures??=[];const value=structuredClone(command.fixture),previous=f.fixtures.find(x=>x.id===value.id);value.provenance.origin='edited';if(previous){value.provenance.sourceIDs=[...new Set([...previous.provenance.sourceIDs,...value.provenance.sourceIDs])].sort();f.fixtures[f.fixtures.indexOf(previous)]=value;m('fixture',value.id,[value.id]);}else f.fixtures.push(value);document.schemaVersion='1.4.0';break;}
+    case'deleteFixture':remove(f.fixtures??[],command.fixtureID);m('fixture',command.fixtureID,[]);break;
+    case'setCutout':{f.cutouts??=[];const value=structuredClone(command.cutout),previous=f.cutouts.find(x=>x.id===value.id);value.provenance.origin='edited';if(previous){value.provenance.sourceIDs=[...new Set([...previous.provenance.sourceIDs,...value.provenance.sourceIDs])].sort();f.cutouts[f.cutouts.indexOf(previous)]=value;m('cutout',value.id,[value.id]);}else f.cutouts.push(value);document.schemaVersion='1.4.0';break;}
+    case'deleteCutout':remove(f.cutouts??[],command.cutoutID);m('cutout',command.cutoutID,[]);break;
     case'moveNode':item(f.nodes,command.nodeID).point=structuredClone(command.point);markEdited(f,[command.nodeID]);m('node',command.nodeID,[command.nodeID]);break;
     case'moveWall':{const w=item(f.walls,command.wallID);for(const id of new Set(w.nodeIDs)){const n=item(f.nodes,id);n.point.x+=command.translation.x;n.point.z+=command.translation.z;}markEdited(f,w.nodeIDs);m('wall',w.id,[w.id]);break;}
     case'addWall':{const w=structuredClone(command.wall);requireID(w.id,f.walls.map(x=>x.id));for(const n of command.newNodes){requireID(n.id,f.nodes.map(x=>x.id));f.nodes.push(structuredClone(n));}w.provenance.origin='edited';f.walls.push(w);break;}
@@ -111,7 +118,7 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
     case'deleteRoom':remove(f.rooms,command.roomID);m('room',command.roomID,[]);break;
     case'splitRoom':splitRoom(f,command.roomID,command.dividerWallID,command.newRoomID,command.newLabel);m('room',command.roomID,[command.roomID,command.newRoomID]);break;
     case'mergeRooms':{const removed=mergeRooms(f,command.firstRoomID,command.secondRoomID);m('room',command.secondRoomID,[command.firstRoomID]);m('room',command.firstRoomID,[command.firstRoomID]);for(const id of removed.walls)m('wall',id,[]);for(const id of removed.openings)m('opening',id,[]);break;}
-    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';document.schemaVersion='1.1.0';break;}
+    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';if(document.schemaVersion==='1.0.0')document.schemaVersion='1.1.0';break;}
     case'deleteArea':remove(f.areas??[],command.areaID);m('area',command.areaID,[]);break;
     case'updateFloor':f.label=command.label;f.elevation=command.elevation;break;
     default:throw new Error('Unknown edit command');
@@ -123,7 +130,9 @@ export function applyCommands(document:SpatialDocument,commands:EditCommand[],ex
   if(document.revision!==expectedRevision)throw new Error(`Stale revision: expected ${expectedRevision}, current ${document.revision}`);
   if(!Array.isArray(commands)||commands.length<1||commands.length>1000)throw new Error('Use 1 to 1000 commands per edit');
   if(document.revision>=Number.MAX_SAFE_INTEGER)throw new Error('Revision limit reached');let mappings:GeometryIDMapping[]=[];
-  for(const c of commands)mappings=compose(mappings,mutate(next,c),document);
+  const resolvedFixtureIDs=new Set(commands.flatMap(c=>c.type==='setFixture'?[JSON.stringify([c.floorID,c.fixture.id])]:c.type==='deleteFixture'?[JSON.stringify([c.floorID,c.fixtureID])]:[])),resolvedCutoutIDs=new Set(commands.flatMap(c=>c.type==='setCutout'?[JSON.stringify([c.floorID,c.cutout.id])]:c.type==='deleteCutout'?[JSON.stringify([c.floorID,c.cutoutID])]:[]));
+  for(const c of commands){const before=c.type==='splitWall'||c.type==='joinWalls'?structuredClone(next.floors.find(f=>f.id===c.floorID)):undefined;mappings=compose(mappings,mutate(next,c),document);if(before&&c.type!=='addFloor')remapAttachmentsForCommand(before,next.floors.find(f=>f.id===c.floorID)!,c,resolvedFixtureIDs,resolvedCutoutIDs);}
+  assertAttachmentHostChanges(document,next,commands);
   next.revision=document.revision+1;next.parentRevision=document.revision;next.reviewState='needsReview';
   const validated=requireValidDocument(next);mappings=mappings.map(m=>({...m,resultingIDs:m.resultingIDs.filter(id=>exists(validated,m.floorID,m.objectKind,id))}));
   for(const mapping of restorationMappings(document,validated))if(!mappings.some(m=>m.floorID===mapping.floorID&&m.objectKind===mapping.objectKind&&m.sourceID===mapping.sourceID))mappings.push(mapping);

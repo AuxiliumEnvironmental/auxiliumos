@@ -1,3 +1,8 @@
+import { wallRunBounds } from '../core/surfaces';
+import { fixtureFootprint } from '../core/fixtures';
+import { worldToSurfaceChart } from './cutoutManipulation';
+import { surfacePointToWorld } from '../core/surfaces';
+import { profileRing } from '../core/cutoutGeometry';
 import { applyCommands, roomBoundary, wallPath } from '../core';
 import { EPSILON, FloorGeometryIndex, cross, intersects, signedArea, triangulate } from '../core/geometry';
 import type { EditCommand, Floor, Point2, Selection, SpatialDocument } from '../types';
@@ -16,6 +21,7 @@ export function containedSelections(floor: Floor, bounds: SelectionBounds, kinds
   for (const opening of floor.openings) { const host = floor.walls.find(wall => wall.id === opening.wallID); if (host) add('opening', opening.id, openingPath(wallPath(floor, host), opening.offset, opening.width)); }
   for (const room of floor.rooms) add('room', room.id, roomBoundary(floor, room));
   for (const area of floor.areas ?? []) add('area', area.id, area.polygon);
+  // Feature containment is exposed through workspace selection; charts need document input.
   return result;
 }
 
@@ -96,7 +102,7 @@ export function prepareGroupTranslation(document: SpatialDocument, floorID: stri
   if (!Number.isFinite(delta.x) || !Number.isFinite(delta.z) || Math.abs(delta.x) > 10000 || Math.abs(delta.z) > 10000 || (delta.x === 0 && delta.z === 0)) throw new Error('Choose a finite, nonzero group adjustment.');
   const floor = document.floors.find(item => item.id === floorID); if (!floor) throw new Error('The selected floor is no longer available.');
   if (!selected.length || selected.length > 10000) throw new Error('Choose a smaller group to adjust.');
-  const nodes = new Set<string>(), areas = new Set<string>(), openings = new Set<string>(), seen = new Set<string>();
+  const nodes = new Set<string>(), areas = new Set<string>(), openings = new Set<string>(), fixtures=new Set<string>(),cutouts=new Set<string>(), seen = new Set<string>();
   const requireWall = (id: string) => { const wall = floor.walls.find(item => item.id === id); if (!wall) throw new Error('A selected wall is no longer available.'); return wall; };
   for (const item of selected) {
     if (item.floorID !== floorID) throw new Error('Adjust objects on one floor at a time.');
@@ -106,6 +112,8 @@ export function prepareGroupTranslation(document: SpatialDocument, floorID: stri
     else if (item.kind === 'room') { const room = floor.rooms.find(room => room.id === item.objectID); if (!room) throw new Error('A selected room is no longer available.'); for (const ref of room.boundary) for (const id of requireWall(ref.wallID).nodeIDs) nodes.add(id); }
     else if (item.kind === 'area') { if (!floor.areas?.some(area => area.id === item.objectID)) throw new Error('A selected area is no longer available.'); areas.add(item.objectID); }
     else if (item.kind === 'opening') { if (!floor.openings.some(opening => opening.id === item.objectID)) throw new Error('A selected opening is no longer available.'); openings.add(item.objectID); }
+    else if(item.kind==='fixture'){if(!floor.fixtures?.some(f=>f.id===item.objectID))throw new Error('Selected fixture is unavailable');fixtures.add(item.objectID);}
+    else if(item.kind==='cutout'){if(!floor.cutouts?.some(c=>c.id===item.objectID))throw new Error('Selected cutout is unavailable');cutouts.add(item.objectID);}
     else throw new Error('Unsupported group selection.');
   }
   for (const id of openings) {
@@ -115,11 +123,16 @@ export function prepareGroupTranslation(document: SpatialDocument, floorID: stri
   const commands: EditCommand[] = [];
   for (const node of floor.nodes) if (nodes.has(node.id)) commands.push({ type: 'moveNode', floorID, nodeID: node.id, point: { x: node.point.x + delta.x, z: node.point.z + delta.z } });
   for (const area of floor.areas ?? []) if (areas.has(area.id)) commands.push({ type: 'setArea', floorID, area: { ...area, polygon: area.polygon.map(point => ({ x: point.x + delta.x, z: point.z + delta.z })) } });
+  const hostMoved=(ref:import('../types').SurfaceRef)=>ref.kind==='wall'?requireWall(ref.wallID).nodeIDs.every(id=>nodes.has(id)):floor.rooms.find(r=>r.id===ref.roomID)?.boundary.every(b=>requireWall(b.wallID).nodeIDs.every(id=>nodes.has(id)));
+  for(const original of floor.fixtures??[])if(fixtures.has(original.id)){const fixture=structuredClone(original);if(fixture.mount.kind==='floor'){fixture.mount.position.x+=delta.x;fixture.mount.position.z+=delta.z;}else{if(hostMoved(fixture.mount.surface))continue;const frame=importFrame(document,fixture,floorID),normal=delta.x*frame.z.x+delta.z*frame.z.z;if(Math.abs(normal)>1e-6)throw new Error('Wall fixture group movement must follow its host tangent or include the whole host');fixture.mount.u+=delta.x*frame.x.x+delta.z*frame.x.z;const originalMount=original.mount;if(originalMount.kind==='wall'){const run=wallRunBounds(document,originalMount.surface,originalMount.u);if(!run||fixture.mount.u-fixture.dimensions.width/2<run.lo-1e-6||fixture.mount.u+fixture.dimensions.width/2>run.hi+1e-6)throw new Error('Rigid group movement must stay on the original straight host run');}}commands.push({type:'setFixture',floorID,fixture});}
+  for(const original of floor.cutouts??[])if(cutouts.has(original.id)){if(hostMoved(original.surface))continue;const cutout=structuredClone(original);if(cutout.surface.kind==='wall'){const center=surfacePointToWorld(document,cutout.surface,cutout.profile.center)!,next=worldToSurfaceChart(document,cutout.surface,{x:center.x+delta.x,y:center.y,z:center.z+delta.z}),point=surfacePointToWorld(document,cutout.surface,next)!;if(Math.hypot(point.x-center.x-delta.x,point.z-center.z-delta.z)>1e-6)throw new Error('Wall cutout group movement must follow its host or include the whole host');cutout.profile.center=next;}else{cutout.profile.center.u+=delta.x;cutout.profile.center.v+=delta.z;}commands.push({type:'setCutout',floorID,cutout});}
   if (!commands.length || commands.length > 1000) throw new Error('Choose a smaller group to adjust in one correction.');
   const affectedWallIDs = floor.walls.filter(wall => wall.nodeIDs.some(id => nodes.has(id))).map(wall => wall.id);
   const affected = new Set(affectedWallIDs);
   const affectedRoomIDs = floor.rooms.filter(room => room.boundary.some(ref => affected.has(ref.wallID))).map(room => room.id);
   const uncheckedFloor: Floor = { ...floor, nodes: floor.nodes.map(node => nodes.has(node.id) ? { ...node, point: { x: node.point.x + delta.x, z: node.point.z + delta.z } } : node), ...(floor.areas ? { areas: floor.areas.map(area => areas.has(area.id) ? { ...area, polygon: area.polygon.map(point => ({ x: point.x + delta.x, z: point.z + delta.z })) } : area) } : {}) };
+  if(floor.fixtures)uncheckedFloor.fixtures=floor.fixtures.map(f=>commands.find((c):c is Extract<EditCommand,{type:'setFixture'}>=>c.type==='setFixture'&&c.fixture.id===f.id)?.fixture??f);
+  if(floor.cutouts)uncheckedFloor.cutouts=floor.cutouts.map(c=>{const explicit=commands.find((x):x is Extract<EditCommand,{type:'setCutout'}>=>x.type==='setCutout'&&x.cutout.id===c.id)?.cutout;if(explicit)return explicit;if(c.surface.kind!=='wall'&&hostMoved(c.surface)){const value=structuredClone(c);value.profile.center.u+=delta.x;value.profile.center.v+=delta.z;return value;}return c;});
   return { commands, uncheckedFloor, nodeIDs: [...nodes], affectedWallIDs, affectedRoomIDs };
 }
 
@@ -133,3 +146,5 @@ export function groupTranslation(document: SpatialDocument, floorID: string, sel
   assertGroupTopology(floor, preview.floors.find(value => value.id === floorID)!, affected, new Set(affectedRoomIDs));
   return { commands, preview, nodeIDs, affectedWallIDs, affectedRoomIDs };
 }
+
+import { fixtureFrame as importFrame } from "../core/fixtures";

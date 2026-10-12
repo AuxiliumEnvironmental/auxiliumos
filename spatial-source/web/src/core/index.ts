@@ -4,3 +4,8 @@ export { EPSILON, wallPath, roomBoundary, pathLength, pathPoint, closedRoomBound
 export { buildScene, evaluateCutaway, displayCeilings, nearestSceneHit } from './scene';
 export type { CutawayResult, SceneRayHit } from './scene';
 export { WalkNavigation } from './navigation';
+
+export * from "./fixtureCatalog";
+export * from "./fixtures";
+export * from "./cutouts";
+export * from "./surfaces";

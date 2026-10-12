@@ -129,9 +129,10 @@ export async function importWorkspace(bytes: Uint8Array, filename: string): Prom
     floors.forEach((value, index) => {
       const item = object(value), floor = document.floors[index];
       shape(item, ['floorID', 'label', 'elevation', 'index', 'pageCount', 'representationStatus']);
-      if (item.floorID !== floor.id || item.index !== index || item.label !== floor.label || item.elevation !== floor.elevation || !Number.isInteger(item.pageCount) || Number(item.pageCount) < 1 || Number(item.pageCount) > 500 || item.representationStatus !== (floor.walls.length || floor.rooms.length ? 'geometry' : 'empty')) fail('manifest-floor-mismatch');
+      if (item.floorID !== floor.id || item.index !== index || item.label !== floor.label || item.elevation !== floor.elevation || !Number.isInteger(item.pageCount) || Number(item.pageCount) < 1 || Number(item.pageCount) > 500 || item.representationStatus !== (floor.walls.length || floor.rooms.length || floor.fixtures?.length ? 'geometry' : 'empty')) fail('manifest-floor-mismatch');
     });
   } else {
+    if(document.schemaVersion==='1.4.0')fail('unsupported-legacy-exchange-use-local-document');
     shape(manifest, ['formatVersion', 'documentID', 'revision', 'measurementStatus', 'contentClass', 'files']);
     if (manifest.formatVersion !== '1.0.0' || manifest.contentClass !== 'spatial-draft' || document.floors.length !== 1 || Object.keys(files).length !== 4) fail('unsupported-exchange-profile');
   }

@@ -1,3 +1,9 @@
+import type { Fixture, Cutout, Point3 } from '../types';
+import { fixtureFootprint, fixtureFrame } from '../core/fixtures';
+import { beginFixtureDrag, fixtureDragPreview, fixtureHandlePoints, type FixtureDrag } from './fixtureManipulation';
+import { profileRing } from '../core/cutoutGeometry';
+import { surfacePointToWorld } from '../core/surfaces';
+import { assertCutoutDragRun, cutoutDragChart, moveCutout, resizeCutout, worldToSurfaceChart } from './cutoutManipulation';
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
 import { roomBoundary, validateDocument, wallPath } from '../core';
 import type { EditCommand, Floor, OpeningKind, Point2, Selection, SpatialDocument } from '../types';
@@ -18,12 +24,14 @@ export type PlanViewState = { x: number; z: number; width: number; height: numbe
 export type CanvasTool = 'select' | 'pan' | 'wall' | 'area' | 'room' | 'opening' | 'marquee';
 type MoveSample = { pointerId: number; clientX: number; clientY: number; shiftKey: boolean; altKey: boolean };
 type GroupFilter = 'wallsAndAreas' | 'wall' | 'node' | 'room' | 'area' | 'opening' | 'all';
-type Props = { document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[]) => void | Promise<boolean>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
+type Props = { featurePlacement?:Fixture|Cutout|null; onFeaturePlaced?:()=>void; onFeatureEdit?:(commands:EditCommand[],revision:number)=>Promise<boolean>; document: SpatialDocument; groupSelection?: Selection[]; onGroupSelection?: (selection: Selection[]) => void; initialDraft?: DrawingRecoveryPayload; onDraftChange?: (payload: DrawingRecoveryPayload | null) => void; rememberedView?: PlanViewState; rememberView?: (view: PlanViewState) => void; onDrawingChange?: (active: boolean) => void; floor: Floor; selection: Selection | null; onSelect: (selection: Selection | null) => void; onEdit: (commands: EditCommand[]) => void | Promise<boolean>; disabled: boolean; tool: CanvasTool; onTool: (tool: CanvasTool) => void; onError: (message: string) => void };
 
-const groupKinds = (filter: GroupFilter): Selection['kind'][] => filter === 'all' ? ['wall', 'node', 'room', 'area', 'opening'] : filter === 'wallsAndAreas' ? ['wall', 'area'] : [filter];
+const groupKinds = (filter: GroupFilter): Selection['kind'][] => filter === 'all' ? ['wall', 'node', 'room', 'area', 'opening','fixture','cutout'] : filter === 'wallsAndAreas' ? ['wall', 'area'] : [filter];
 const boundsBetween = (a: Point2, b: Point2): SelectionBounds => ({ minX: Math.min(a.x, b.x), minZ: Math.min(a.z, b.z), maxX: Math.max(a.x, b.x), maxZ: Math.max(a.z, b.z) });
 function pointsForSelection(floor: Floor, item: Selection): Point2[] {
   if (item.floorID !== floor.id) return [];
+  const doc:SpatialDocument={schemaVersion:'1.4.0',documentID:'selection',revision:1,title:'Selection',coordinateSystem:'meters_y_up_right_handed',measurementStatus:'unverified',reviewState:'needsReview',floors:[floor]};
+  if(item.kind==='fixture'){const value=floor.fixtures?.find(f=>f.id===item.objectID);return value?fixtureFootprint(doc,value,floor.id):[];}if(item.kind==='cutout'){const value=floor.cutouts?.find(c=>c.id===item.objectID);return value?profileRing(value.profile).map(p=>surfacePointToWorld(doc,value.surface,p)!).map(p=>({x:p.x,z:p.z})):[];}
   if (item.kind === 'node') { const node = floor.nodes.find(value => value.id === item.objectID); return node ? [node.point] : []; }
   if (item.kind === 'wall') { const wall = floor.walls.find(value => value.id === item.objectID); return wall ? wallPath(floor, wall) : []; }
   if (item.kind === 'room') { const room = floor.rooms.find(value => value.id === item.objectID); return room ? roomBoundary(floor, room) : []; }
@@ -50,7 +58,7 @@ function checkedPlacement(floor: Floor, draft: OpeningPlacement): OpeningPlaceme
   return { opening: structuredClone(draft.opening), point: { ...draft.point }, ...(error ? { error } : {}) };
 }
 
-export function FloorplanCanvas({ document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, disabled: parentDisabled, tool, onTool, onError }: Props) {
+export function FloorplanCanvas({ featurePlacement,onFeaturePlaced,onFeatureEdit, document: geometryDocument, groupSelection = [], onGroupSelection, initialDraft, onDraftChange, rememberedView, rememberView, onDrawingChange, floor, selection, onSelect, onEdit, disabled: parentDisabled, tool, onTool, onError }: Props) {
   const restored = useRef(initialDraft?.tool === tool ? structuredClone(initialDraft) : undefined);
   const draftCallback = useRef(onDraftChange); draftCallback.current = onDraftChange;
   const [submitting, setSubmitting] = useState(false);
@@ -93,10 +101,12 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const [choosingPlacement, setChoosingPlacement] = useState<Point2 | null>(null);
   const placementChoiceRef = useRef<Point2 | null>(null);
   const drawingCallback = useRef(onDrawingChange); drawingCallback.current = onDrawingChange;
-  const hasDrawing = points.length > 0 || strokeStart !== null || roomDragStart !== null || openingActive || placementActive || placement !== null || choosingPlacement !== null || groupActive;
+  const [featureActive,setFeatureActive]=useState(false);
+  const hasDrawing = featureActive || points.length > 0 || strokeStart !== null || roomDragStart !== null || openingActive || placementActive || placement !== null || choosingPlacement !== null || groupActive;
   useLayoutEffect(() => { drawingCallback.current?.(hasDrawing); return () => drawingCallback.current?.(false); }, [hasDrawing]);
   const [cursor, setCursor] = useState<{ point: Point2; shift: boolean; alt: boolean } | null>(null);
   const [choosingDrawCorner, setChoosingDrawCorner] = useState(false);
+  const [featurePreview,setFeaturePreview]=useState<Fixture|Cutout|null>(null);
   const [preview, setPreview] = useState<{ kind: 'node' | 'wall'; id: string; delta: Point2 } | null>(null);
   const [choices, setChoices] = useState<Selection[]>([]);
   const [fills, setFills] = useState(true);
@@ -105,7 +115,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const submittedIDs = useRef<string[]>([]);
   const submittedRoom = useRef<string | null>(null);
   const submittedOpening = useRef<string | null>(null);
-  const gesture = useRef<{ pointerID: number; start: Point2; clientX: number; clientY: number; view: PlanViewState; hits: Selection[]; pan: boolean; drag?: Selection; opening?: OpeningDrag; placementWallID?: string; roomAnchor?: Point2 & { nodeID?: string }; roomHandle?: 0 | 1; roomOffset?: Point2; roomBlocked?: boolean; wallStroke?: Point2 & { nodeID?: string }; marquee?: { additive: boolean; base: Selection[]; kinds: Selection['kind'][] }; group?: { document: SpatialDocument; selected: Selection[]; bounds: SelectionBounds }; moved: boolean } | null>(null);
+  const gesture = useRef<{ pointerID: number; start: Point2; clientX: number; clientY: number; view: PlanViewState; hits: Selection[]; pan: boolean; drag?: Selection; opening?: OpeningDrag; feature?:FixtureDrag; cutout?:{original:Cutout;start:Point3;resize:boolean;revision:number}; placementWallID?: string; roomAnchor?: Point2 & { nodeID?: string }; roomHandle?: 0 | 1; roomOffset?: Point2; roomBlocked?: boolean; wallStroke?: Point2 & { nodeID?: string }; marquee?: { additive: boolean; base: Selection[]; kinds: Selection['kind'][] }; group?: { document: SpatialDocument; selected: Selection[]; bounds: SelectionBounds }; moved: boolean } | null>(null);
   const moveFrame = useRef<number | null>(null);
   const queuedMove = useRef<{ latest: MoveSample; openingSamples: MoveSample[] } | null>(null);
   useEffect(() => () => cancelMoveFrame(), []);
@@ -137,7 +147,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     roomSnapMemory.current = null; wallSnapMemory.current = null;
     const captured = [...pointers.current.keys()];
     for (const id of captured) if (id !== finishedPointerID) fencedContacts.current.add(id);
-    pointers.current.clear(); pinch.current = null; gesture.current = null; setPreview(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false);
+    setFeaturePreview(null);setFeatureActive(false);pointers.current.clear(); pinch.current = null; gesture.current = null; setPreview(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false);
     if (choosingGroup.current) { choosingGroup.current = null; setChoices([]); }
     if (discardPlacement) completedPlacement.current = null;
     restorePlacement();
@@ -160,7 +170,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   const fit = () => {
     cancelMoveFrame(); setCursor(null);
     if (gesture.current || pinch.current) clearGesture();
-    const all = [...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
+    const all = [...(floor.fixtures??[]).flatMap(f=>fixtureFootprint(geometryDocument,f,floor.id)),...floor.nodes.map(n => n.point), ...(floor.areas ?? []).flatMap(a => a.polygon)];
     if (!all.length) { setView({ x: -1.5, z: -1.5, width: 11, height: 11 * size.height / size.width }); return; }
     const minX = Math.min(...all.map(p => p.x)), maxX = Math.max(...all.map(p => p.x)), minZ = Math.min(...all.map(p => p.z)), maxZ = Math.max(...all.map(p => p.z));
     const aspect = size.width / size.height, width = Math.max(maxX - minX + 3, (maxZ - minZ + 3) * aspect, 4);
@@ -183,7 +193,8 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   }, [floor]);
   useLayoutEffect(() => { if (previousTool.current === tool) return; previousTool.current = tool; clearDrawing(); clearGesture(undefined, true); clearSubmission(); }, [tool]);
   useLayoutEffect(() => { if (previousGroupKey.current === groupKey) return; previousGroupKey.current = groupKey; if (gesture.current?.group || gesture.current?.marquee || choosingGroup.current) clearGesture(); }, [groupKey]);
-  useEffect(() => { if (gesture.current?.opening && (selection?.kind !== 'opening' || selection.objectID !== gesture.current.opening.original.id)) clearGesture(); }, [selection?.kind, selection?.objectID]);
+  useEffect(() => { if ((gesture.current?.feature||gesture.current?.cutout)&&(!selection||selection.objectID!==(gesture.current.feature?.original.id??gesture.current.cutout?.original.id)))clearGesture();
+    if (gesture.current?.opening && (selection?.kind !== 'opening' || selection.objectID !== gesture.current.opening.original.id)) clearGesture(); }, [selection?.kind, selection?.objectID]);
   useLayoutEffect(() => { if (disabled) { clearGesture(); setCursor(null); } }, [disabled]);
   useEffect(() => {
     const cancel = () => { clearGesture(); setCursor(null); };
@@ -213,11 +224,18 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   }, []);
   const world = (x: number, y: number): Point2 => { const rect = svg.current!.getBoundingClientRect(), current = viewRef.current; return { x: current.x + (x - rect.left) / rect.width * current.width, z: current.z + (y - rect.top) / rect.height * current.height }; };
   const geometryIndex = useMemo(() => new FloorGeometryIndex(floor), [floor]);
-  const displayedFloor: Floor = groupPreview?.floor ?? (openingPreview ? { ...floor, openings: floor.openings.map(opening => opening.id === openingPreview.opening.id ? openingPreview.opening : opening) } : preview ? { ...floor, nodes: floor.nodes.map(n => (preview.kind === 'node' ? n.id === preview.id : floor.walls.find(w => w.id === preview.id)?.nodeIDs.includes(n.id)) ? { ...n, point: { x: n.point.x + preview.delta.x, z: n.point.z + preview.delta.z } } : n) } : floor);
+  const displayedFloor: Floor = featurePreview?{...floor,...("catalog" in featurePreview?{fixtures:(floor.fixtures??[]).map(f=>f.id===featurePreview.id?featurePreview:f)}:{cutouts:(floor.cutouts??[]).map(c=>c.id===featurePreview.id?featurePreview:c)})}:groupPreview?.floor ?? (openingPreview ? { ...floor, openings: floor.openings.map(opening => opening.id === openingPreview.opening.id ? openingPreview.opening : opening) } : preview ? { ...floor, nodes: floor.nodes.map(n => (preview.kind === 'node' ? n.id === preview.id : floor.walls.find(w => w.id === preview.id)?.nodeIDs.includes(n.id)) ? { ...n, point: { x: n.point.x + preview.delta.x, z: n.point.z + preview.delta.z } } : n) } : floor);
+  const displayedDocument=useMemo(()=>displayedFloor===floor?geometryDocument:{...geometryDocument,floors:geometryDocument.floors.map(f=>f.id===floor.id?displayedFloor:f)},[geometryDocument,displayedFloor,floor]);
+  const selectedFixture=selection?.kind==='fixture'?displayedFloor.fixtures?.find(f=>f.id===selection.objectID):undefined;
+  const fixtureHandles=selectedFixture?fixtureHandlePoints({...geometryDocument,floors:geometryDocument.floors.map(f=>f.id===floor.id?displayedFloor:f)},floor.id,selectedFixture).filter(h=>h.mode!=='height'):[];
+  const selectedCutout=selection?.kind==='cutout'?displayedFloor.cutouts?.find(c=>c.id===selection.objectID):undefined;
+  const cutoutHandle=selectedCutout?surfacePointToWorld(geometryDocument,selectedCutout.surface,profileRing(selectedCutout.profile)[selectedCutout.profile.shape==='circle'?0:2]):null;
   const selectedOpening = selection?.kind === 'opening' ? displayedFloor.openings.find(opening => opening.id === selection.objectID) : undefined;
   const openingHandles = tool === 'select' && selectedOpening ? openingResizeHandles(displayedFloor, selectedOpening, units) : [];
   function candidates(p: Point2): Selection[] {
     const select = (kind: Selection['kind'], id: string): Selection => ({ floorID: floor.id, kind, objectID: id });
+    const fixtures=(floor.fixtures??[]).filter(f=>pointInPolygon(p,fixtureFootprint(geometryDocument,f,floor.id)));if(fixtures.length)return fixtures.map(f=>select('fixture',f.id));
+    const cutouts=(floor.cutouts??[]).filter(c=>{const ring=profileRing(c.profile).map(p=>surfacePointToWorld(geometryDocument,c.surface,p)!).map(p=>({x:p.x,z:p.z}));return c.surface.kind==='wall'?distanceToPath(p,[...ring,ring[0]])<=units*22:pointInPolygon(p,ring)||distanceToPath(p,[...ring,ring[0]])<=units*12;});if(cutouts.length)return cutouts.map(c=>select('cutout',c.id));
     const nearNodes = floor.nodes.filter(n => Math.hypot(n.point.x - p.x, n.point.z - p.z) <= units * 22);
     if (nearNodes.length) return nearNodes.map(n => select('node', n.id));
     const nearOpenings = floor.openings.filter(o => { const wall = floor.walls.find(w => w.id === o.wallID)!; const path = geometryIndex.path(wall); return distanceToPath(p, openingPath(path, o.offset, o.width)) <= units * 22; });
@@ -231,11 +249,12 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     const shape = pointsForSelection(floor, item);
     if (!shape.length) return false;
     if (item.kind === 'node') return Math.hypot(shape[0].x - point.x, shape[0].z - point.z) <= units * 22;
-    if (item.kind === 'area' || item.kind === 'room') return pointInPolygon(point, shape);
+    if(item.kind==='cutout')return pointInPolygon(point,shape)||distanceToPath(point,[...shape,shape[0]])<=units*22;
+    if (item.kind === 'area' || item.kind === 'room'||item.kind==='fixture') return pointInPolygon(point, shape);
     return distanceToPath(point, shape) <= units * 22;
   }
   function groupCandidates(point: Point2, kinds: Selection['kind'][]): Selection[] {
-    const all: Selection[] = ([['node', floor.nodes], ['wall', floor.walls], ['opening', floor.openings], ['room', floor.rooms], ['area', floor.areas ?? []]] as const).flatMap(([kind, items]) => kinds.includes(kind) ? items.map(item => ({ floorID: floor.id, kind, objectID: item.id })) : []);
+    const all: Selection[] = ([['node', floor.nodes], ['wall', floor.walls], ['opening', floor.openings], ['room', floor.rooms], ['area', floor.areas ?? []],['fixture',floor.fixtures??[]],['cutout',floor.cutouts??[]]] as const).flatMap(([kind, items]) => kinds.includes(kind) ? items.map(item => ({ floorID: floor.id, kind, objectID: item.id })) : []);
     return all.filter(item => hitsSelection(point, item));
   }
   function publishGroup(items: Selection[]) {
@@ -317,7 +336,7 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
   }
   function onKey(event: KeyboardEvent<SVGSVGElement>) {
     if (disabled) { if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Backspace') event.preventDefault(); return; }
-    if (event.key === 'Escape') { event.preventDefault(); if (tool === 'marquee' || groupSelection.length || gesture.current?.group || gesture.current?.marquee) { clearGesture(); setCursor(null); onError(''); return; } discardDrawing(); onTool('select'); }
+    if (event.key === 'Escape') { event.preventDefault();if(gesture.current?.feature||gesture.current?.cutout){clearGesture();return;} if (tool === 'marquee' || groupSelection.length || gesture.current?.group || gesture.current?.marquee) { clearGesture(); setCursor(null); onError(''); return; } discardDrawing(); onTool('select'); }
     if (disabled) return;
     if (event.code === 'Space') { event.preventDefault(); spaceHeld.current = true; setSpacePan(true); setCursor(null); return; }
     if (event.key === 'Backspace' && placementRef.current) { event.preventDefault(); discardDrawing(); }
@@ -335,18 +354,27 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     if (disabled || fencedContacts.current.size) { fencedContacts.current.add(event.pointerId); return; }
     event.currentTarget.focus({ preventScroll: true });
     pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY }); event.currentTarget.setPointerCapture(event.pointerId);
-    if (pointers.current.size === 2) { roomSnapMemory.current = null; wallSnapMemory.current = null; const [a, b] = [...pointers.current.values()]; pinch.current = { distance: Math.hypot(a.x - b.x, a.y - b.y), center: world((a.x + b.x) / 2, (a.y + b.y) / 2), view }; gesture.current = null; cancelMoveFrame(); setPreview(null); setCursor(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false); restorePlacement(); return; }
+    if (pointers.current.size === 2) { roomSnapMemory.current = null; wallSnapMemory.current = null; const [a, b] = [...pointers.current.values()]; pinch.current = { distance: Math.hypot(a.x - b.x, a.y - b.y), center: world((a.x + b.x) / 2, (a.y + b.y) / 2), view }; gesture.current = null; cancelMoveFrame(); setPreview(null); setCursor(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false);setFeatureActive(false);setFeaturePreview(null); restorePlacement(); return; }
     if (pointers.current.size !== 1) return;
     const temporaryPan = event.pointerType === 'mouse' && (middleMouse || spaceHeld.current);
     if (temporaryPan) event.preventDefault();
     const p = world(event.clientX, event.clientY);
+    if(!temporaryPan&&tool==='select'){
+      if(featurePlacement){gesture.current={pointerID:event.pointerId,start:p,clientX:event.clientX,clientY:event.clientY,view,hits:[],pan:false,moved:false};return;}
+      const handle=fixtureHandles.find(h=>Math.hypot(h.point.x-p.x,h.point.z-p.z)<=units*22);
+      const body=selectedFixture&&pointInPolygon(p,fixtureFootprint(geometryDocument,selectedFixture,floor.id));
+      if(selectedFixture&&(handle||body)){const frame=fixtureFrame(geometryDocument,selectedFixture,floor.id),grab={...p,y:frame.origin.y};gesture.current={pointerID:event.pointerId,start:p,clientX:event.clientX,clientY:event.clientY,view,hits:[],pan:false,moved:false,feature:beginFixtureDrag(geometryDocument,floor.id,selectedFixture,handle?.mode??'move',grab)};setFeatureActive(true);return;}
+      if(selectedCutout){const ring=profileRing(selectedCutout.profile).map(p=>surfacePointToWorld(geometryDocument,selectedCutout.surface,p)!);const handle=cutoutHandle&&Math.hypot(cutoutHandle.x-p.x,cutoutHandle.z-p.z)<=units*22,body=selectedCutout.surface.kind==='wall'?distanceToPath(p,[...ring,ring[0]])<=units*22:pointInPolygon(p,ring);
+       if(handle||body){const y=selectedCutout.surface.kind==='wall'?surfacePointToWorld(geometryDocument,selectedCutout.surface,selectedCutout.profile.center)!.y:floor.elevation;gesture.current={pointerID:event.pointerId,start:p,clientX:event.clientX,clientY:event.clientY,view,hits:[],pan:false,moved:false,cutout:{original:structuredClone(selectedCutout),start:{...p,y},resize:!!handle,revision:geometryDocument.revision}};setFeatureActive(true);return;}
+      }
+    }
     const touchedGroup = groupSelection.length > 0 && groupSelection.some(item => hitsSelection(p, item));
     if (!temporaryPan && (tool === 'marquee' || tool === 'select' && (event.shiftKey || touchedGroup))) {
       const additive = event.shiftKey || tool === 'marquee' && addToGroup;
       const base = groupSelection.length ? groupSelection : selection ? [selection] : [];
       const bounds = boundsForSelection(floor, groupSelection);
       const dragGroup = !additive && bounds && touchedGroup;
-      const kinds = tool === 'marquee' ? groupKinds(groupFilter) : ['wall', 'node', 'room', 'area', 'opening'] as Selection['kind'][];
+      const kinds = tool === 'marquee' ? groupKinds(groupFilter) : ['wall', 'node', 'room', 'area', 'opening','fixture','cutout'] as Selection['kind'][];
       gesture.current = { pointerID: event.pointerId, start: p, clientX: event.clientX, clientY: event.clientY, view, hits: [], pan: false, moved: false, ...(dragGroup ? { group: { document: geometryDocument, selected: structuredClone(groupSelection), bounds } } : { marquee: { additive, base: structuredClone(base), kinds } }) };
       setGroupActive(true); setMarquee(null); setGroupPreview(null); onError(''); return;
     }
@@ -435,6 +463,8 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     g.moved = true;
     if (g.wallStroke && !pointsRef.current.length) setStrokeStart(g.wallStroke);
     const dx = (event.clientX - g.clientX) * g.view.width / size.width, dz = (event.clientY - g.clientY) * g.view.height / size.height;
+    if(g.feature){try{const candidate=fixtureDragPreview(g.feature,{...rawPoint,y:g.feature.grab.y});fixtureFrame(geometryDocument,candidate,floor.id);setFeaturePreview(candidate);onError('');}catch(e){onError((e as Error).message);}return;}
+    if(g.cutout){try{const gcut=g.cutout,{start,end}=cutoutDragChart(geometryDocument,gcut.original,gcut.start,{...rawPoint,y:gcut.start.y}),value=gcut.resize?resizeCutout(gcut.original,end.u-start.u,end.v-start.v):moveCutout(gcut.original,start,end);assertCutoutDragRun(geometryDocument,gcut.original,value);setFeaturePreview(value);onError('');}catch(e){onError((e as Error).message);}return;}
     if (g.group) previewGroup(g, { x: g.start.x + dx, z: g.start.z + dz });
     else if (g.marquee) setMarquee(boundsBetween(g.start, { x: g.start.x + dx, z: g.start.z + dz }));
     else if (g.placementWallID) place(g.placementWallID, world(event.clientX, event.clientY));
@@ -454,7 +484,16 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId);
     if (pinch.current) { if (!pointers.current.size) pinch.current = null; gesture.current = null; return; }
     const g = gesture.current; if (!g || g.pointerID !== event.pointerId) return; gesture.current = null;
-    if (disabled) { setPreview(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false); restorePlacement(); return; }
+    if (disabled) { setPreview(null); setStrokeStart(null); setRoomDragStart(null); setOpeningPreview(null); setOpeningActive(false); setMarquee(null); setGroupPreview(null); setGroupActive(false);setFeatureActive(false);setFeaturePreview(null); restorePlacement(); return; }
+    if(featurePlacement){const template=structuredClone(featurePlacement),p=world(event.clientX,event.clientY);if(g.moved){onError('Tap once to place the selected fixture or cutout');return;}try{
+      if('catalog' in template){if(template.mount.kind==='floor')template.mount.position=p;else{const m=template.mount;m.u=worldToSurfaceChart(geometryDocument,m.surface,{...p,y:floor.elevation}).u;}}
+      else{const w=template.surface.kind==='wall'?floor.walls.find(w=>w.id===(template.surface as Extract<typeof template.surface,{kind:'wall'}>).wallID):undefined;template.profile.center=worldToSurfaceChart(geometryDocument,template.surface,{...p,y:floor.elevation+(w?w.baseY+w.height/2:0)});}
+      const commands:EditCommand[]='catalog' in template?[{type:'setFixture',floorID:floor.id,fixture:template}]:[{type:'setCutout',floorID:floor.id,cutout:template}];void onFeatureEdit?.(commands,geometryDocument.revision).then(ok=>{if(ok){onFeaturePlaced?.();onSelect({floorID:floor.id,kind:'catalog' in template?'fixture':'cutout',objectID:template.id});}});
+     }catch(e){onError((e as Error).message);}return;}
+    if(g.feature||g.cutout){setFeaturePreview(null);setFeatureActive(false);if(!g.moved)return;try{let candidate:Fixture|Cutout;
+      if(g.feature)candidate=fixtureDragPreview(g.feature,{...world(event.clientX,event.clientY),y:g.feature.grab.y});else{const drag=g.cutout!,{start,end}=cutoutDragChart(geometryDocument,drag.original,drag.start,{...world(event.clientX,event.clientY),y:drag.start.y});candidate=drag.resize?resizeCutout(drag.original,end.u-start.u,end.v-start.v):moveCutout(drag.original,start,end);assertCutoutDragRun(geometryDocument,drag.original,candidate);}
+      const commands:EditCommand[]='catalog' in candidate?[{type:'setFixture',floorID:floor.id,fixture:candidate}]:[{type:'setCutout',floorID:floor.id,cutout:candidate}];void onFeatureEdit?.(commands,g.feature?.revision??g.cutout!.revision);
+     }catch(e){onError((e as Error).message);}return;}
     if (g.pan) { setCursor(null); return; }
     if (g.group || g.marquee) {
       cancelMoveFrame();
@@ -539,7 +578,9 @@ export function FloorplanCanvas({ document: geometryDocument, groupSelection = [
       onLostPointerCapture={event => { if (gesture.current?.pointerID === event.pointerId || pinch.current && pointers.current.has(event.pointerId)) { clearGesture(); setCursor(null); } }}
       onPointerCancel={event => { clearGesture(event.pointerId); setCursor(null); }}>
       <title>Drag to size a room or draw a wall, or tap corners. Drag either room draft corner to resize. Enter finishes, Backspace removes the last point, Escape cancels. Shift aligns walls; Alt places freely. Hold Space or middle-drag to pan.</title>
-      <PlanGeometry floor={displayedFloor} selection={selection} groupSelection={groupSelection} units={units} fills={fills} openingPreview={openingPreview} />
+      <PlanGeometry document={displayedDocument} floor={displayedFloor} selection={selection} groupSelection={groupSelection} units={units} fills={fills} openingPreview={openingPreview} />
+      {fixtureHandles.map(handle=><circle key={handle.mode} data-fixture-handle={handle.mode} cx={handle.point.x} cy={handle.point.z} r={units*8} fill="white" stroke="#167bab" strokeWidth={units*2}/>)}
+      {cutoutHandle&&<circle data-cutout-handle="resize" cx={cutoutHandle.x} cy={cutoutHandle.z} r={units*8} fill="white" stroke="#167bab" strokeWidth={units*2}/>}
       {placement && (() => {
         const host = floor.walls.find(wall => wall.id === placement.opening.wallID);
         if (!host) return null;
