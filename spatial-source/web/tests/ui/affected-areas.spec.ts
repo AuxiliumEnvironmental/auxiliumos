@@ -34,8 +34,9 @@ test('golden 3D record, plan-height retention, cancellation, undo/reopen and com
   const first=await modelPoint(page,5.5,.4,6),last=await modelPoint(page,3.5,1.5,6);await page.mouse.click(first.x,first.y);
   await page.getByRole('button',{name:'Affected area',exact:true}).click();await expect(page.getByRole('button',{name:'Record moisture',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'Record fire damage',exact:true})).toBeVisible();await page.getByRole('button',{name:'Record moisture',exact:true}).click();
   await drag(page,first,last);await revision(page,2);const recorded=(await saved(page)).document.affectedAreas![0];expect(recorded.surface).toMatchObject({kind:'wall',wallID:'w2',side:'negative'});
-  await page.getByRole('button',{name:'2D plan',exact:true}).click();await expect(page.locator('[data-affected-handle]')).toHaveCount(2);
-  const handle=page.locator('[data-affected-handle="end"]'),box=(await handle.boundingBox())!,from={x:box.x+box.width/2,y:box.y+box.height/2},a=await planPoint(page,3.5,6),b=await planPoint(page,3,6);
+  await page.getByRole('button',{name:'2D plan',exact:true}).click();await expect(page.locator('.spatial-plan [data-affected-handle]')).toHaveCount(2);
+  const handle=page.locator('[data-affected-handle="end"]');await handle.scrollIntoViewIfNeeded();
+  const box=(await handle.boundingBox())!,from={x:box.x+box.width/2,y:box.y+box.height/2},a=await planPoint(page,3.5,6),b=await planPoint(page,3,6);
   await drag(page,from,{x:from.x+b.x-a.x,y:from.y+b.y-a.y});await revision(page,3);
   const adjusted=(await saved(page)).document,old=domainBounds(asDomain(recorded.footprint)),now=domainBounds(asDomain(adjusted.affectedAreas![0].footprint));expect(now.minV).toBe(old.minV);expect(now.maxV).toBe(old.maxV);expect(now.maxU).toBeGreaterThan(old.maxU);
   const held=(await handle.boundingBox())!,startHandle={x:held.x+held.width/2,y:held.y+held.height/2};await drag(page,startHandle,{x:startHandle.x+40,y:startHandle.y},false);await expect(page.locator('[data-affected-preview]')).toHaveCount(1);await page.keyboard.press('Escape');await page.mouse.up();expect((await saved(page)).document).toEqual(adjusted);

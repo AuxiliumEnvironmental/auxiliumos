@@ -1,0 +1,258 @@
+{
+  "task_id": "F05",
+  "status": "reviewed_branch_candidate_pending_dependency_integration",
+  "source_commit": "4a5d4a868067297990aa73c04c95440101584991",
+  "original_recovery_commit": "8910ee5f54c86564d30876190aa3fcb5a0ead083",
+  "review_fixes_commit": "4a5d4a868067297990aa73c04c95440101584991",
+  "master_remote_preservation_commit": "5d2abedfca13f90ff8e4bd4bf776f29d174940c1",
+  "verification": "F05_VERIFICATION.json",
+  "platform_delivery": "not performed",
+  "master_integration": "pending actual F02/F03/F04 source and cumulative shared contracts",
+  "integration_seams": [
+    "F05 is a reviewed isolated branch candidate. It is not integrated or accepted on the program branch.",
+    "Actual F02/F03/F04 dependencies were not present in this candidate. F03 source recovery is a master dependency.",
+    "Candidate core/surfaces.ts is a baseline resolver with wall openings only. Master must preserve the canonical F03 resolver and F04 cutout material domains, adding only needed F05 helpers.",
+    "Candidate geometry/scene 1.5 schemas omit predecessor fields/roles; master must compose cumulative 1.2 through 1.5 schemas/admission and preserve predecessor editor/export/UI behavior.",
+    "affectedHostReceipt is a candidate before/after adapter. Master must compose authoritative F03/F04 remaps exactly once, including ceiling topology, cutouts, wall sides, floor movement and undo/redo. Ambiguous replacement ceiling identity remains unresolved until explicit reattachment.",
+    "Browser uses synthetic fixtures and Linux Chromium software WebGL. No iPhone, Apple build, simulator, installed assets, Lovable, OS embed or native export parity claim.",
+    "Package, lockfile and source configuration remain unchanged. Build reports the existing large-chunk warning."
+  ],
+  "worker_handoff_historical": {
+    "task_id": "F05",
+    "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "result_commit": "9022f3ad503116318089647c0abf546967762339",
+    "branch": "spatial/f05-affected-areas-2026-10-11",
+    "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94",
+    "pr_url": null,
+    "disposition": "local_candidate_implemented_remote_upload_incomplete",
+    "local_candidate_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+    "local_commit_is_remote_commit": false,
+    "delivery_bundle": "F05_Affected_Areas_Handoff.zip attached to the F05 conversation",
+    "changed_paths": [
+      "spatial-source/contracts/COMPATIBILITY.md",
+      "spatial-source/contracts/geometry-v1.5.schema.json",
+      "spatial-source/contracts/scene-v1.5.schema.json",
+      "spatial-source/web/src/affectedAreaPalette.ts",
+      "spatial-source/web/src/core/affectedAreaGeometry.ts",
+      "spatial-source/web/src/core/affectedAreas.ts",
+      "spatial-source/web/src/core/editor.ts",
+      "spatial-source/web/src/core/scene.ts",
+      "spatial-source/web/src/core/surfaces.ts",
+      "spatial-source/web/src/core/validation.ts",
+      "spatial-source/web/src/data/drawing.ts",
+      "spatial-source/web/src/data/exports.ts",
+      "spatial-source/web/src/data/glb.ts",
+      "spatial-source/web/src/data/imports.ts",
+      "spatial-source/web/src/data/store.ts",
+      "spatial-source/web/src/types.ts",
+      "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+      "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "spatial-source/web/src/ui/ModelViewport.tsx",
+      "spatial-source/web/src/ui/PlanGeometry.tsx",
+      "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "spatial-source/web/src/ui/affectedAreaBatches.ts",
+      "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+      "spatial-source/web/src/ui/geometry.ts",
+      "spatial-source/web/src/ui/groupSelection.ts",
+      "spatial-source/web/src/ui/review.ts",
+      "spatial-source/web/src/ui/sceneBatches.ts",
+      "spatial-source/web/src/ui/workspace.css",
+      "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+      "spatial-source/web/tests/core/affected-areas.test.ts",
+      "spatial-source/web/tests/data/affected-areas.test.ts",
+      "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+      "spatial-source/web/tests/ui/affected-areas.spec.ts"
+    ],
+    "requirements_addressed": [
+      "Dedicated surface-attached moisture and fire observations, with edited provenance, unverified measurement status and explicit review/reattach state.",
+      "Original authored footprint and recorded material support retained independently of current material domains, height changes, opening changes, host deletion and remapping.",
+      "One clipped derivation path for floor fills, two-direction ceiling grids, sided plan-wall indicators and transparent front-sided 3D/GLB overlays.",
+      "Separate records and alternating overlap marks, not a blended new observation or duplicate readings.",
+      "Explicit surface-edit context, anchored resize/move gestures, manual plan-wall vertical range, exact-height retention, transient coalesced previews and cancellation fences.",
+      "Strict versioned JSON admission and source identity; frozen derivative helpers updated; unsupported legacy case-bundle publication rejects rather than discarding observations."
+    ],
+    "contract_versions": {
+      "shared_contract": 4,
+      "surface_interface": 2,
+      "geometry_candidate": "1.5.0",
+      "scene_candidate": "1.5.0",
+      "accepted_runtime_baseline": "F01 only; actual F02-F04 not integrated"
+    },
+    "decisions": [
+      "Observations are document-owned so deleting a floor retains unresolved records.",
+      "No display-only ceiling is promoted to an observed host or a verified height.",
+      "Ambiguous/nonrigid remaps retain unresolved source support rather than guessing a nearest host.",
+      "Legacy case exchange/publication fails closed for candidate version 1.5.0; no publisher/backend permission schema changes.",
+      "Candidate resolver is a baseline adapter; the master must retain F04 final material-domain behavior at integration."
+    ],
+    "evidence": [
+      {
+        "acceptance_id": "F05-A02/A03/A05/A06",
+        "check": "Focused local candidate checks",
+        "result": "25 passed, 0 failed, 1 dependency skip",
+        "source_inputs": [
+          "Source manifest in F05_VERIFICATION.json"
+        ],
+        "environment": "Node with TypeScript 5.8.3 transpile loader; no installed browser stack",
+        "artifact": "verification/F05_focused_tests.log",
+        "reused_from": null,
+        "why_sufficient": "Supports tested pure geometry, lineage, queue math, strict JSON and GLB claims only."
+      },
+      {
+        "acceptance_id": "regression",
+        "check": "Changed-consumer editor/admission/scene risk slice",
+        "result": "69 passed, 0 failed",
+        "source_inputs": [
+          "Accepted F01 source comparison baseline"
+        ],
+        "environment": "Same Node environment",
+        "artifact": "verification/F05_legacy_risk_tests.log",
+        "reused_from": null,
+        "why_sufficient": "Checks relevant existing baseline behavior without rerunning unrelated platform suites."
+      },
+      {
+        "acceptance_id": "packaging",
+        "check": "Apply remaining patch onto comparison baseline plus confirmed core files, then hash all 33 paths",
+        "result": "Passed; every candidate source byte reproduced",
+        "source_inputs": [
+          "F05_Remaining_From_9022f3ad.patch"
+        ],
+        "environment": "Disposable local checkout",
+        "artifact": "F05_VERIFICATION.json",
+        "reused_from": null,
+        "why_sufficient": "Shows deterministic recovery of the full candidate; it is not remote integration acceptance."
+      }
+    ],
+    "platforms": {
+      "shared_source": {
+        "status": "local_candidate_complete_remote_core_only",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Apply the supplied 31-path remainder to the assigned branch after checking its current head.",
+          "Full locked-dependency typecheck/build.",
+          "Actual F02/F03/F04 shared-file integration."
+        ]
+      },
+      "standalone_web": {
+        "status": "not_built_or_browser_verified",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Run authored golden journeys; inspect actual output and mobile screenshots."
+        ]
+      },
+      "lovable": {
+        "status": "unchanged_not_delivered",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "F06 deployment and matching-source verification."
+        ]
+      },
+      "capacitor_assets": {
+        "status": "unchanged_not_delivered",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "F06 rebuild/sync and source identity verification."
+        ]
+      },
+      "apple_build": {
+        "status": "not_run",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Xcode/Apple build with integrated source."
+        ]
+      },
+      "simulator": {
+        "status": "not_run",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Integrated interaction and lifecycle verification."
+        ]
+      },
+      "physical_iphone": {
+        "status": "not_run",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Finger responsiveness, occlusion, cancellation and frame budgets on supported device."
+        ]
+      },
+      "os_embed": {
+        "status": "unchanged_not_verified",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Master/F06 host integration and authorization lifecycle check."
+        ]
+      },
+      "exports": {
+        "status": "candidate_json_glb_passed_other_roundtrips_pending",
+        "source_commit": "8007c5b86c3262f3873adf8d8b189d2dd24a1698",
+        "host_or_asset_ref": null,
+        "evidence": [],
+        "remaining": [
+          "Locked store/export dependencies.",
+          "SVG/PDF/PNG and full local-document roundtrip.",
+          "Actual cumulative schemas and F06 native parity."
+        ]
+      }
+    },
+    "database_changes": [],
+    "rls_changes": [],
+    "unresolved_product_decisions": [],
+    "known_limits": [
+      "Only the two core modules at 9022f3ad are confirmed pushed. The complete local candidate and scoped patches are in the handoff ZIP; the branch alone is incomplete.",
+      "GitHub returned a tree-object validation failure when creating the integration commit. Unreferenced/unconfirmed object responses are not reported as pushed work.",
+      "Full build blocked by missing vite/client and locked UI/export dependencies. Syntax-only checks are not a full React/Three build.",
+      "No browser screenshots, actual touch/frame measurements, Apple build, simulator, installed assets or physical iPhone checks.",
+      "Ceiling/height fixtures are synthetic contract probes. F03/F04 actual commands, cutouts and cumulative schemas must be composed by the master.",
+      "Complex and ambiguous topology retains unresolved observations; it does not silently relink or stretch them.",
+      "A workspace reset required recovery; executed evidence in the ZIP was rerun on the recovered candidate. No lost logs are being substituted."
+    ],
+    "source_preserved": true,
+    "next_dependency_handoff": [
+      "Confirm the active F05 assignment and latest feature-branch head; the last confirmed head is 9022f3ad503116318089647c0abf546967762339.",
+      "On that exact head, check and apply F05_Remaining_From_9022f3ad.patch. It contains the other 31 scoped files. Stop and reconcile on any mismatch; do not force an archive over newer source.",
+      "The local comparison commit is not GitHub ancestry. Do not push the local reconstructed Git history. Use the supplied patches or scoped source bytes.",
+      "Separate the new feature files from shared adapters when committing. Do not cherry-pick the two core modules alone as an accepted runnable feature.",
+      "Integrate accepted F02 then F03 then F04 then F05. Retain F04 resolveSurface material domains and compose typed host-remap receipts, schemas and migrations; preserve newer UI/export work.",
+      "Install the already locked dependencies in the proper development environment, run the build and authored focused browser/store/export journeys, then send remaining platform work to F06.",
+      "Do not mark F05 accepted/delivered or alter the queue on the basis of pure helper tests. No next feature was activated here."
+    ],
+    "active_writers_remaining": [
+      "F02, F03 and F04 remain controlled by their own assignments; not modified or finalized by this chat."
+    ],
+    "parallel_integration": {
+      "assignment_ledger": "program-branch coordination/ACTIVE_TASKS.json",
+      "work_branch": "spatial/f05-affected-areas-2026-10-11",
+      "activation_id": "F05-2026-10-11-P1",
+      "branch_base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+      "accepted_dependencies_tested": {
+        "F01": "3240880195cd6653d0816da5cb4412bda2516e52"
+      },
+      "shared_file_adapter_commits": [],
+      "shared_file_adapter_delivery": "Complete candidate and activation/core-relative patches in the ZIP. No shared-adapter remote commit was confirmed.",
+      "dependency_sensitive_gaps": [
+        "Actual F03 ceiling/height operations",
+        "Actual F04 cutout/penetration domain subtraction and remaps",
+        "Cumulative 1.2-1.5 schemas and roundtrips",
+        "Shared UI/export integration and full build"
+      ],
+      "branch_status": "core_commit_pushed_full_candidate_patch_pending",
+      "master_integration_commit": null
+    }
+  }
+}

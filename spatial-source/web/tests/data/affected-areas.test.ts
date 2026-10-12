@@ -7,6 +7,7 @@ import { rectangle } from '../../src/core/affectedAreaGeometry';
 import { affectedPlanPrimitives } from '../../src/core/affectedAreas';
 import { glbDrawing } from '../../src/data/glb';
 import { jsonBytes, sha256, strictJSON } from '../../src/data/bytes';
+import { readZIP } from '../../src/data/zip';
 import { AFFECTED_COLORS } from '../../src/affectedAreaPalette';
 import type { FrozenRevision, SpatialDocument } from '../../src/types';
 function observed(): SpatialDocument {
@@ -40,13 +41,19 @@ test('one canonical plan generator emits floor fills, two-direction ceiling grid
 const require=createRequire(import.meta.url);let dependencyReason:string|false=false;
 try{for(const name of ['fake-indexeddb/auto','jspdf','fflate'])require.resolve(name);}catch{dependencyReason='Requires the locked fake-indexeddb, jspdf and fflate packages. Not executed without them.';}
 test('real store undo/redo/reopen and export admission retain F05 records',{skip:dependencyReason},async()=>{
-  await import('fake-indexeddb/auto');const {SpatialWebStore}=await import('../../src/data/store');const {exportRevision}=await import('../../src/data/exports');const {importDocument,validateSVG,validatePDF}=await import('../../src/data/imports');
+  require('fake-indexeddb/auto');const {SpatialWebStore}=await import('../../src/data/store');const {exportRevision}=await import('../../src/data/exports');const {importDocument,validateSVG,validatePDF}=await import('../../src/data/imports');
   const namespace=`f05-${crypto.randomUUID()}`,store=new SpatialWebStore(namespace),d=observed();
   try{
     await store.create(d);const next=await store.apply(d.documentID,d.revision,[{type:'deleteOpening',floorID:'floor-1',openingID:'window-a'}]);
     const undone=await store.undo(d.documentID,next.document.revision);assert.deepEqual(undone.document.affectedAreas,d.affectedAreas);assert.deepEqual(undone.document.floors,d.floors);
     const redone=await store.redo(d.documentID,undone.document.revision);assert.deepEqual(redone.document.affectedAreas,next.document.affectedAreas);
-    const f=await store.freeze(d.documentID,redone.document.revision),svg=await exportRevision(f,'svg','floor-1'),pdf=await exportRevision(f,'pdf','floor-1');validateSVG(svg.bytes);validatePDF(pdf.bytes);
+    const f=await store.freeze(d.documentID,redone.document.revision),svg=await exportRevision(f,'svg','floor-1'),pdf=await exportRevision(f,'pdf','floor-1');
+    if(svg.mimeType==='application/zip'){
+      const files=readZIP(svg.bytes),manifest=strictJSON(files['manifest.json']) as {files:{path:string;sha256:string}[]};
+      assert.ok(manifest.files.length>1);
+      for(const member of manifest.files){validateSVG(files[member.path]);assert.equal(await sha256(files[member.path]),member.sha256);}
+    }else validateSVG(svg.bytes);
+    validatePDF(pdf.bytes);
     await assert.rejects(exportRevision(f,'bundle','floor-1'),/complete-local-document/);
     const json=await exportRevision(f,'geometry');assert.deepEqual(await importDocument(json.bytes,json.filename),redone.document);
     store.close();const reopened=new SpatialWebStore(namespace);try{assert.deepEqual((await reopened.open(d.documentID)).document,redone.document);assert.equal((await reopened.loadFrozen(d.documentID,redone.document.revision)).hash,f.hash);}finally{reopened.close();}

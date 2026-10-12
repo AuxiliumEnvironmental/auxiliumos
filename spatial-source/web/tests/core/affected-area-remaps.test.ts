@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { fixture, emptyFloor } from './fixtures';
+import { fixture, emptyFloor, provenance } from './fixtures';
 import { applyCommands } from '../../src/core/editor';
 import { affectedHostReceipt, remapAffectedAreas, visibleAffectedAreas } from '../../src/core/affectedAreas';
 import { domainArea, rectangle } from '../../src/core/affectedAreaGeometry';
@@ -48,4 +48,13 @@ test('nonrigid host deformation retains the original observation for explicit re
 test('a split/join command batch does not expose intermediate-only source hosts',()=>{
   const d=saved('w0'),next=edit(d,[{type:'splitWall',floorID,wallID:'w0',offset:1.6,newWallID:'transient-wall',newNodeID:'transient-node'},{type:'joinWalls',floorID,firstWallID:'w0',secondWallID:'transient-wall'}]);
   assert.ok(next.receipt.surfaces?.mappings.every(m=>{const ref=m.from;return ref.kind!=='wall'||d.floors[0].walls.some(w=>w.id===ref.wallID);}));assert.ok(Math.abs(coverage(next.document)-coverage(d))<1e-7);
+});
+test('replacing a ceiling identity retains its observation unresolved instead of guessing a new host',()=>{
+  const source=fixture();source.schemaVersion='1.5.0';source.floors[0].rooms[0].ceiling={id:'original-ceiling',height:2.6,heightBasis:'synthetic',provenance:provenance()};
+  // Contract-level resolver probe only; F03 commands are an integration dependency.
+  const recorded=edit(source,[{type:'recordAffectedArea',areaID:'ceiling-obs',kind:'fire',surface:{floorID,kind:'ceiling',roomID:'room-a',ceilingID:'original-ceiling'},footprint:rectangle(.2,.2,2,2)}]).document;
+  const changed=structuredClone(recorded);changed.floors[0].rooms[0].ceiling!.id='replacement-ceiling';
+  changed.affectedAreas=remapAffectedAreas(recorded.affectedAreas!,affectedHostReceipt(recorded,changed));
+  assert.equal(changed.affectedAreas[0].reviewState,'unresolved');assert.equal(changed.affectedAreas[0].attachments[0].surface,null);
+  assert.deepEqual(changed.affectedAreas[0].recordedSupport,recorded.affectedAreas![0].recordedSupport);assert.equal(coverage(changed),0);assert.deepEqual(validateDocument(changed),[]);
 });

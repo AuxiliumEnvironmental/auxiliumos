@@ -152,7 +152,7 @@ export function affectedHostReceipt(before:SpatialDocument,after:SpatialDocument
       const room=floor.rooms.find(r=>r.id===ref.roomID)!;let oldBoundary:Point2[];try{oldBoundary=roomBoundary(floor,room);}catch{push(null,old,null,'unresolved');continue;}
       const isSplit=command?.type==='splitRoom'&&command.floorID===ref.floorID&&command.roomID===ref.roomID;
       const targetIDs=isSplit?[ref.roomID,command.newRoomID]:command?.type==='mergeRooms'&&command.floorID===ref.floorID&&command.secondRoomID===ref.roomID?[command.firstRoomID]:[ref.roomID];
-      for(const id of targetIDs){const target=targetFloor.rooms.find(r=>r.id===id);if(!target||ref.kind==='ceiling'&&!target.ceiling){push(null,old,null,'unresolved');continue;}
+      for(const id of targetIDs){const target=targetFloor.rooms.find(r=>r.id===id);if(!target||ref.kind==='ceiling'&&(!target.ceiling||target.ceiling.id!==ref.ceilingID)){push(null,old,null,'unresolved');continue;}
         const to:SurfaceRef=ref.kind==='floor'?{...ref,roomID:id}:{...ref,roomID:id,ceilingID:target.ceiling!.id},current=refDomain(after,to);let boundary:Point2[];try{boundary=roomBoundary(targetFloor,target);}catch{push(null,old,null,'unresolved');continue;}
         const structuralTopology=isSplit||command?.type==='mergeRooms';
         const domainUnchanged=Math.abs(domainArea(old)-domainArea(current))<1e-7&&domainArea(intersectDomains([old],areaWorkBudget(),[current]))<1e-7;
