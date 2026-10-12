@@ -504,7 +504,7 @@ export function FloorplanCanvas({ featurePlacement,onFeaturePlaced,onFeatureEdit
         try { const result = groupTranslation(g.group.document, floor.id, g.group.selected, { x: point.x - g.start.x, z: point.z - g.start.z }); submit(result.commands); }
         catch (cause) { onError(cause instanceof Error ? cause.message : String(cause)); }
       } else if (g.marquee) {
-        if (g.moved) { const contained = containedSelections(floor, boundsBetween(g.start, point), g.marquee.kinds); publishGroup(g.marquee.additive ? [...g.marquee.base, ...contained] : contained); }
+        if (g.moved) { const contained = containedSelections(floor, boundsBetween(g.start, point), g.marquee.kinds, geometryDocument); publishGroup(g.marquee.additive ? [...g.marquee.base, ...contained] : contained); }
         else {
           const hits = tool === 'select' ? candidates(point) : groupCandidates(point, g.marquee.kinds);
           if (hits.length === 1) chooseGroup(hits[0], g.marquee);

@@ -381,5 +381,25 @@
     ],
     "starter_dimensions": "Editable diagrammatic engineering choices, not copied field measurements."
   },
-  "local_result_commit": "286dc855613969f46420fee0dfa3b85fa29da01a"
+  "local_result_commit": "286dc855613969f46420fee0dfa3b85fa29da01a",
+  "master_review": {
+    "reviewed_branch_head": "44804f745d51db47f424fe2eaccd51a56c4a3944",
+    "source_fix_commit": "7f6919336750af17ff21dd187f12f31e08cf7f5e",
+    "status": "branch_candidate_reviewed_with_focused_fixes_pending_integration",
+    "evidence": "F04_VERIFICATION.json master_review",
+    "remote_writes": "none",
+    "fixes": [
+      "Ceiling cutout pick targets, feature edges, selection outlines and handles follow Display ceilings visibility; hidden ceilings cannot intercept visible model picks.",
+      "All-objects marquee includes fully contained fixture and cutout projections, respecting requested kinds and partial containment.",
+      "Group movement of a wall cutout rejects a jump to a later straight run across a bend, while same-run movement remains supported."
+    ],
+    "remaining": [
+      "Preserve monotonic geometry/scene versions. F04 setFixture/setCutout currently assign 1.4; broaden equality-based 1.4 dispatch only when actual cumulative admission is integrated.",
+      "Compose F02 opening styles/roles/preflights/recovery and F03 ceiling migration, canonical IDs/scene ownership, editor receipts and surfaces. Do not replace either predecessor adapter with F04 candidate files.",
+      "F04 viewport already filters canonical ceilings from ordinary batches and separately renders displayCeilings, so there is no duplicate face render in this branch alone. Reconcile with F03 canonical-once architecture at integration.",
+      "F03 resolver must retain uncut-host lookup, chart functions, material subtraction and physical two-side wall-hole equivalence from this candidate.",
+      "F05 records must intersect actual cutout domains and retain recorded support across hole changes; fixtures must only occlude. Actual composed host/remap, undo/reopen and ceiling conflict checks remain open.",
+      "No platform transfer, Apple/device acceptance or OS delivery was performed."
+    ]
+  }
 }

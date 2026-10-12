@@ -1,6 +1,6 @@
 import { wallRunBounds } from '../core/surfaces';
 import { fixtureFootprint } from '../core/fixtures';
-import { worldToSurfaceChart } from './cutoutManipulation';
+import { assertCutoutDragRun, worldToSurfaceChart } from './cutoutManipulation';
 import { surfacePointToWorld } from '../core/surfaces';
 import { profileRing } from '../core/cutoutGeometry';
 import { applyCommands, roomBoundary, wallPath } from '../core';
@@ -10,7 +10,7 @@ import { openingPath } from './geometry';
 
 export const selectionKey = (value: Selection): string => JSON.stringify([value.floorID, value.kind, value.objectID]);
 export type SelectionBounds = { minX: number; minZ: number; maxX: number; maxZ: number };
-export function containedSelections(floor: Floor, bounds: SelectionBounds, kinds: Selection['kind'][] = ['wall', 'area']): Selection[] {
+export function containedSelections(floor: Floor, bounds: SelectionBounds, kinds: Selection['kind'][] = ['wall', 'area'], document?: SpatialDocument): Selection[] {
   if (!Object.values(bounds).every(Number.isFinite) || bounds.maxX <= bounds.minX || bounds.maxZ <= bounds.minZ) return [];
   const inside = (point: Point2) => point.x >= bounds.minX && point.x <= bounds.maxX && point.z >= bounds.minZ && point.z <= bounds.maxZ;
   const contained = (points: Point2[]) => points.length > 0 && points.every(inside);
@@ -21,7 +21,10 @@ export function containedSelections(floor: Floor, bounds: SelectionBounds, kinds
   for (const opening of floor.openings) { const host = floor.walls.find(wall => wall.id === opening.wallID); if (host) add('opening', opening.id, openingPath(wallPath(floor, host), opening.offset, opening.width)); }
   for (const room of floor.rooms) add('room', room.id, roomBoundary(floor, room));
   for (const area of floor.areas ?? []) add('area', area.id, area.polygon);
-  // Feature containment is exposed through workspace selection; charts need document input.
+  if(document){
+    if(kinds.includes('fixture'))for(const fixture of floor.fixtures??[])add('fixture',fixture.id,fixtureFootprint(document,fixture,floor.id));
+    if(kinds.includes('cutout'))for(const cutout of floor.cutouts??[]){const points=profileRing(cutout.profile).map(p=>surfacePointToWorld(document,cutout.surface,p));if(points.every(p=>p!==null))add('cutout',cutout.id,points);}
+  }
   return result;
 }
 
@@ -125,7 +128,7 @@ export function prepareGroupTranslation(document: SpatialDocument, floorID: stri
   for (const area of floor.areas ?? []) if (areas.has(area.id)) commands.push({ type: 'setArea', floorID, area: { ...area, polygon: area.polygon.map(point => ({ x: point.x + delta.x, z: point.z + delta.z })) } });
   const hostMoved=(ref:import('../types').SurfaceRef)=>ref.kind==='wall'?requireWall(ref.wallID).nodeIDs.every(id=>nodes.has(id)):floor.rooms.find(r=>r.id===ref.roomID)?.boundary.every(b=>requireWall(b.wallID).nodeIDs.every(id=>nodes.has(id)));
   for(const original of floor.fixtures??[])if(fixtures.has(original.id)){const fixture=structuredClone(original);if(fixture.mount.kind==='floor'){fixture.mount.position.x+=delta.x;fixture.mount.position.z+=delta.z;}else{if(hostMoved(fixture.mount.surface))continue;const frame=importFrame(document,fixture,floorID),normal=delta.x*frame.z.x+delta.z*frame.z.z;if(Math.abs(normal)>1e-6)throw new Error('Wall fixture group movement must follow its host tangent or include the whole host');fixture.mount.u+=delta.x*frame.x.x+delta.z*frame.x.z;const originalMount=original.mount;if(originalMount.kind==='wall'){const run=wallRunBounds(document,originalMount.surface,originalMount.u);if(!run||fixture.mount.u-fixture.dimensions.width/2<run.lo-1e-6||fixture.mount.u+fixture.dimensions.width/2>run.hi+1e-6)throw new Error('Rigid group movement must stay on the original straight host run');}}commands.push({type:'setFixture',floorID,fixture});}
-  for(const original of floor.cutouts??[])if(cutouts.has(original.id)){if(hostMoved(original.surface))continue;const cutout=structuredClone(original);if(cutout.surface.kind==='wall'){const center=surfacePointToWorld(document,cutout.surface,cutout.profile.center)!,next=worldToSurfaceChart(document,cutout.surface,{x:center.x+delta.x,y:center.y,z:center.z+delta.z}),point=surfacePointToWorld(document,cutout.surface,next)!;if(Math.hypot(point.x-center.x-delta.x,point.z-center.z-delta.z)>1e-6)throw new Error('Wall cutout group movement must follow its host or include the whole host');cutout.profile.center=next;}else{cutout.profile.center.u+=delta.x;cutout.profile.center.v+=delta.z;}commands.push({type:'setCutout',floorID,cutout});}
+  for(const original of floor.cutouts??[])if(cutouts.has(original.id)){if(hostMoved(original.surface))continue;const cutout=structuredClone(original);if(cutout.surface.kind==='wall'){const center=surfacePointToWorld(document,cutout.surface,cutout.profile.center)!,next=worldToSurfaceChart(document,cutout.surface,{x:center.x+delta.x,y:center.y,z:center.z+delta.z}),point=surfacePointToWorld(document,cutout.surface,next)!;if(Math.hypot(point.x-center.x-delta.x,point.z-center.z-delta.z)>1e-6)throw new Error('Wall cutout group movement must follow its host or include the whole host');cutout.profile.center=next;assertCutoutDragRun(document,original,cutout);}else{cutout.profile.center.u+=delta.x;cutout.profile.center.v+=delta.z;}commands.push({type:'setCutout',floorID,cutout});}
   if (!commands.length || commands.length > 1000) throw new Error('Choose a smaller group to adjust in one correction.');
   const affectedWallIDs = floor.walls.filter(wall => wall.nodeIDs.some(id => nodes.has(id))).map(wall => wall.id);
   const affected = new Set(affectedWallIDs);
