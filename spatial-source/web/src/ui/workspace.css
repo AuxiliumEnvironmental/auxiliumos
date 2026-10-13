@@ -29,3 +29,173 @@
   padding-left:var(--spatial-safe-area-left,env(safe-area-inset-left,0px));
   padding-right:var(--spatial-safe-area-right,env(safe-area-inset-right,0px));
 }
+
+.spatial-workspace .spatial-opening-placement-actions{position:absolute;left:15px;right:15px;bottom:74px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;max-height:45%;overflow:auto;padding:7px;border:1px solid #dce6ed;border-radius:8px;background:#ffffffed;box-shadow:0 3px 12px #16324610}.spatial-workspace .spatial-opening-placement-actions select{width:auto;min-width:95px;min-height:44px;margin:0;font-size:calc(11px * var(--spatial-text-scale,1))}.spatial-workspace .spatial-opening-placement-actions button{font-size:calc(11px * var(--spatial-text-scale,1));min-height:44px;min-width:44px}
+.spatial-workspace .spatial-group-count{font-size:calc(11px * var(--spatial-text-scale,1));color:#38566d;white-space:normal}
+/* Enlarged editor content scrolls with its panel tabs so the tabs cannot cover
+   controls and intercept touches near the bottom of a narrow viewport. */
+@media(max-width:820px){.spatial-workspace[data-large-text=true] .spatial-mobile-tabs{position:static}}
+
+/* Map-first editor. The same map stays mounted when a correction panel opens.
+   Mobile overrides live together here so later tools can reuse the layout. */
+.spatial-workspace .spatial-tools-stage,.spatial-workspace .spatial-palette{display:contents}
+.spatial-workspace .spatial-palette-handle,.spatial-workspace .spatial-mobile-panel-heading,
+.spatial-workspace .spatial-mobile-back,.spatial-workspace .spatial-capture-short{display:none}
+.spatial-workspace .spatial-details-panel{min-height:0;min-width:0;display:flex;flex-direction:column}
+.spatial-workspace .spatial-details-panel>.spatial-inspector{flex:1;min-height:0}
+.spatial-workspace .spatial-action-icon{display:inline-block;margin-right:5px}
+.spatial-workspace .spatial-canvas-column{position:relative}
+
+@media(max-width:900px){
+  .spatial-workspace,.spatial-workspace[data-large-text=true]{height:auto;min-height:100dvh;overflow:visible;display:flex;flex-direction:column}
+  .spatial-workspace .spatial-header{min-height:48px;padding:2px 10px;gap:6px;flex-shrink:0}
+  .spatial-workspace .spatial-brand{font-size:16px;gap:6px}
+  .spatial-workspace .spatial-brand-divider{margin:0 7px}
+  .spatial-workspace .spatial-environment{display:none}
+  .spatial-workspace .spatial-text-size{padding:4px;min-height:44px}
+  .spatial-workspace .spatial-capture-button{padding:4px 9px;font-size:calc(11px * var(--spatial-text-scale,1));margin-left:auto}
+  .spatial-workspace .spatial-capture-label{display:none}
+  .spatial-workspace .spatial-capture-short{display:inline}
+  .spatial-workspace[data-document-open=true] .spatial-brand>span:not(.spatial-mobile-back),
+  .spatial-workspace[data-document-open=true] .spatial-brand>svg{display:none}
+  .spatial-workspace[data-document-open=true] .spatial-mobile-back{display:block;font-size:24px;line-height:1}
+  .spatial-workspace .spatial-document-heading{padding:3px 8px 6px;gap:3px;display:flex;flex-direction:column;align-items:stretch;flex-shrink:0}
+  .spatial-workspace .spatial-document-heading>div:first-child{max-width:100%;gap:0;padding:4px 4px 0;min-height:28px}
+  .spatial-workspace .spatial-document-heading .spatial-back{display:none}
+  .spatial-workspace .spatial-document-heading>div:first-child>div{display:flex;align-items:center;gap:9px;min-width:0;width:100%;flex-wrap:nowrap;min-height:28px}
+  .spatial-workspace .spatial-document-heading h1,.spatial-workspace[data-large-text=true] .spatial-document-heading h1{font-size:calc(12px * var(--spatial-text-scale,1));max-width:100%;min-width:0}
+  .spatial-workspace .spatial-document-heading h1{max-width:35%!important;flex-shrink:0}
+  .spatial-workspace .spatial-save-state,.spatial-workspace[data-large-text=true] .spatial-save-state{font-size:calc(9px * var(--spatial-text-scale,1));gap:5px;margin:0;flex:1;min-width:0;flex-wrap:nowrap;white-space:nowrap;overflow:hidden}
+  .spatial-workspace .spatial-status-label{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .spatial-workspace .spatial-revision-label{flex-shrink:0}
+  .spatial-workspace .spatial-synthetic-badge{display:none}
+  .spatial-workspace .spatial-document-actions,.spatial-workspace[data-large-text=true] .spatial-document-actions{order:-1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin:0;width:100%}
+  .spatial-workspace .spatial-document-actions button{min-width:44px;min-height:44px;padding:3px 2px;font-size:calc(10px * var(--spatial-text-scale,1));line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;overflow-wrap:anywhere;border-radius:9px}
+  .spatial-workspace .spatial-action-icon{font-size:19px;line-height:1;margin:0}
+  .spatial-workspace .spatial-editor,.spatial-workspace[data-large-text=true] .spatial-editor{--mobile-sheet-height:min(38dvh,320px);display:block;position:relative;height:calc(100dvh - 112px);min-height:370px;flex:none;width:100%;isolation:isolate}
+  .spatial-workspace .spatial-editor>.spatial-canvas-column,
+  .spatial-workspace .spatial-editor[data-mobile-panel]>.spatial-canvas-column{display:flex;height:calc(100% - 48px);min-height:0}
+  .spatial-workspace .spatial-canvas-toolbar,.spatial-workspace[data-large-text=true] .spatial-canvas-toolbar{min-height:48px;padding:2px 9px;gap:5px;justify-content:space-between;flex-wrap:nowrap;flex-shrink:0}
+  .spatial-workspace .spatial-canvas-toolbar .spatial-segmented{padding:1px;gap:1px;flex-wrap:nowrap;flex-shrink:0}
+  .spatial-workspace .spatial-canvas-toolbar .spatial-segmented button{padding:4px 10px;min-height:44px;font-size:calc(11px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-view-label{display:none}
+  .spatial-workspace .spatial-group-count{font-size:calc(10px * var(--spatial-text-scale,1));line-height:1.2}
+  .spatial-workspace .spatial-canvas-toolbar>button{padding:4px;font-size:calc(10px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-plan,.spatial-workspace .spatial-model{min-height:0;flex:1}
+  .spatial-workspace .spatial-canvas-footer{min-height:22px;padding:3px 10px;font-size:calc(9px * var(--spatial-text-scale,1));flex-shrink:0}
+  .spatial-workspace .spatial-canvas-footer>span:first-child{display:none}
+  .spatial-workspace .spatial-canvas-note{top:10px;left:86px;right:12px;font-size:calc(10px * var(--spatial-text-scale,1));line-height:1.4;text-align:right;max-height:25%;overflow:auto}
+  .spatial-workspace .spatial-tools-stage{display:block;position:absolute;inset:58px 9px 86px;z-index:3;pointer-events:none;min-height:0}
+  .spatial-workspace .spatial-palette{display:flex;flex-direction:column;position:absolute;top:0;left:0;width:calc(60px * var(--spatial-text-scale,1));max-width:calc(100% - 4px);max-height:100%;overflow:auto;overscroll-behavior:contain;pointer-events:auto;transform:translate3d(var(--palette-x,0),var(--palette-y,24px),0);background:#ffffffed;border:1px solid #dbe5eb;border-radius:16px;box-shadow:0 6px 24px #23384618;padding:3px;scrollbar-width:thin}
+  .spatial-workspace .spatial-palette-handle{display:flex;align-items:center;justify-content:center;min-height:44px;width:100%;flex-shrink:0;touch-action:none;cursor:grab;padding:0;border:0;border-radius:12px;background:#fff;color:#839aa7;font-size:22px;position:sticky;top:0;z-index:1}
+  .spatial-workspace .spatial-palette-handle:active{cursor:grabbing}
+  .spatial-workspace .spatial-tools{display:flex;flex-direction:column;gap:2px;flex-wrap:nowrap;flex:none;justify-content:flex-start}
+  .spatial-workspace .spatial-tools button,.spatial-workspace[data-large-text=true] .spatial-tools button{min-height:44px;min-width:44px;width:100%;padding:3px 2px;gap:0;flex-direction:column;font-size:18px;border-radius:10px;flex-shrink:0;line-height:1.2}
+  .spatial-workspace .spatial-tools button span{display:block;font-size:calc(9px * var(--spatial-text-scale,1));line-height:1.3}
+  .spatial-workspace .spatial-editor>.spatial-object-panel,.spatial-workspace .spatial-editor>.spatial-details-panel{display:none;position:absolute;inset:auto 0 48px;height:var(--mobile-sheet-height);max-height:calc(100% - 140px);background:#fff;border:1px solid #d9e4eb;border-bottom:0;border-radius:18px 18px 0 0;box-shadow:0 -5px 24px #23384612;z-index:5;min-height:0;overflow:hidden}
+  .spatial-workspace .spatial-editor[data-mobile-panel=objects]>.spatial-object-panel{display:flex}
+  .spatial-workspace .spatial-editor[data-mobile-panel=details]>.spatial-details-panel{display:flex}
+  .spatial-workspace .spatial-mobile-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 8px 0 16px;min-height:44px;flex-shrink:0;border-bottom:1px solid var(--spatial-line);font-size:calc(11px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-panel-close{border:0;min-width:44px;min-height:44px;padding:0;font-size:22px;background:transparent}
+  .spatial-workspace .spatial-details-panel>.spatial-inspector{display:block;height:auto;border:0;padding:12px 16px;max-width:none;margin:0;overflow:auto;overscroll-behavior:contain}
+  .spatial-workspace .spatial-inspector h2{font-size:calc(16px * var(--spatial-text-scale,1));margin:4px 0 8px}
+  .spatial-workspace .spatial-inspector p{margin:5px 0 12px;line-height:1.5}
+  .spatial-workspace .spatial-inspector-tip{margin:12px 0;padding:12px}
+  .spatial-workspace .spatial-tip-symbol{display:none}
+  .spatial-workspace .spatial-inspector section{padding:12px 0}
+  .spatial-workspace .spatial-inspector hr{margin:12px 0}
+  .spatial-workspace .spatial-floor-picker{padding:7px 12px;flex-shrink:0}
+  .spatial-workspace .spatial-object-heading{padding:0 12px;flex-shrink:0}
+  .spatial-workspace .spatial-object-list{padding:4px 10px;min-height:44px;overscroll-behavior:contain}
+  .spatial-workspace .spatial-review-note{display:none}
+  .spatial-workspace .spatial-mobile-tabs,.spatial-workspace[data-large-text=true] .spatial-mobile-tabs{display:flex;position:absolute;inset:auto 0 0;height:48px;min-height:48px;background:#fff;border-top:1px solid #d9e4eb;padding:2px 8px;gap:4px;z-index:6}
+  .spatial-workspace .spatial-mobile-tabs button{flex:1;max-width:none;min-width:44px;min-height:44px;padding:4px 6px;font-size:calc(11px * var(--spatial-text-scale,1));border:0;border-radius:10px}
+  .spatial-workspace .spatial-editor[data-mobile-panel=objects] .spatial-tools-stage,
+  .spatial-workspace .spatial-editor[data-mobile-panel=details] .spatial-tools-stage{bottom:calc(var(--mobile-sheet-height) + 68px)}
+  .spatial-workspace .spatial-view-controls{right:10px;bottom:10px}
+  .spatial-workspace .spatial-view-controls button{min-width:44px;min-height:44px;padding:4px}
+  .spatial-workspace .spatial-drawing-actions{left:10px;right:10px;justify-content:flex-end}
+  .spatial-workspace .spatial-opening-placement-actions{left:10px;right:10px;justify-content:flex-end}
+  .spatial-workspace .spatial-message{padding:2px 8px 2px 12px;gap:5px;flex-wrap:nowrap;font-size:calc(10px * var(--spatial-text-scale,1));flex-shrink:0}
+  .spatial-workspace .spatial-message>div:first-child{flex:1;min-width:0;overflow-wrap:anywhere}
+  .spatial-workspace .spatial-message>div:last-child{flex-shrink:0}
+  .spatial-workspace .spatial-message:has(button+button){flex-wrap:wrap}
+  .spatial-workspace .spatial-message button{padding:4px 8px}
+  .spatial-workspace[data-document-open=true] .spatial-message[data-message-kind=notice]{position:fixed;bottom:max(70px,env(safe-area-inset-bottom,0px));left:80px;right:10px;max-width:460px;margin-left:auto;z-index:8;border:1px solid #d2e2da;border-radius:10px;box-shadow:0 4px 16px #23384612;max-height:24dvh;overflow:auto}
+  .spatial-workspace .spatial-model-bar{top:10px;left:10px;right:10px;gap:5px;flex-wrap:nowrap}
+  .spatial-workspace .spatial-model-bar .spatial-segmented{padding:1px;gap:1px}
+  .spatial-workspace .spatial-model-bar .spatial-segmented button{padding:4px 8px;font-size:calc(10px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-model-bar>button{padding:4px 8px;font-size:calc(10px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-model-options{top:65px;left:10px;max-width:min(230px,65%);max-height:calc(100% - 130px);overflow:auto;gap:4px}
+  .spatial-workspace .spatial-model-settings-toggle{display:block;position:sticky;top:0;font-size:calc(10px * var(--spatial-text-scale,1));padding:4px 10px;min-height:44px}
+  .spatial-workspace .spatial-model-options[data-mode=orbit] .spatial-model-settings[data-open=false]{display:none}
+  .spatial-workspace .spatial-model-settings{padding:8px;border:1px solid #d9e4eb;border-radius:12px;background:#fffffff5;gap:4px;max-width:100%}
+  .spatial-workspace .spatial-model-settings .spatial-check{background:transparent;border:0;padding:3px 6px;min-height:44px;align-items:center;font-size:calc(11px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-model-message{left:10px;right:10px;bottom:10px;font-size:calc(10px * var(--spatial-text-scale,1));padding:5px 9px;max-height:22%;overflow:auto}
+  .spatial-workspace[data-document-open=true] .spatial-dialog,.spatial-workspace dialog.spatial-pick-dialog{position:fixed;inset:auto 0 var(--spatial-safe-area-bottom,env(safe-area-inset-bottom,0px));transform:none;max-width:100%;width:100%;max-height:50dvh;margin:0;padding:16px;border-radius:18px 18px 0 0;overflow:auto;overscroll-behavior:contain}
+  .spatial-workspace[data-document-open=true] .spatial-dialog::backdrop{background:#172f461a}
+  .spatial-workspace .spatial-dialog-title{position:sticky;top:-16px;background:#fff;z-index:1;padding:8px 0;gap:8px}
+  .spatial-workspace .spatial-review-list{max-height:none}
+  .spatial-workspace[data-large-text=true] .spatial-canvas-toolbar{flex-wrap:wrap}
+  .spatial-workspace[data-large-text=true] .spatial-model-bar{flex-wrap:wrap}
+  .spatial-workspace .spatial-library{height:auto;overflow:visible}
+}
+@media(max-width:900px) and (max-height:500px){
+  .spatial-workspace .spatial-editor,.spatial-workspace[data-large-text=true] .spatial-editor{min-height:340px;--mobile-sheet-height:min(44dvh,210px)}
+  .spatial-workspace .spatial-palette{width:calc(108px * var(--spatial-text-scale,1))}
+  .spatial-workspace .spatial-tools{display:grid;grid-template-columns:repeat(2,minmax(44px,1fr))}
+  .spatial-workspace .spatial-editor>.spatial-object-panel,.spatial-workspace .spatial-editor>.spatial-details-panel{inset:48px 0 48px auto;width:min(42%,320px);height:auto;max-height:none;border-radius:14px 0 0 14px}
+  .spatial-workspace .spatial-editor[data-mobile-panel=objects] .spatial-tools-stage,
+  .spatial-workspace .spatial-editor[data-mobile-panel=details] .spatial-tools-stage{bottom:86px;right:calc(min(42%,320px) + 8px)}
+}
+
+/* F02: compact opening controls and visible 44px manipulation targets. */
+.spatial-opening-elevation { min-width: 0; }
+.spatial-opening-elevation svg { display: block; width: 100%; height: 210px; overflow: hidden; touch-action: none; user-select: none; }
+.spatial-opening-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.spatial-opening-fields label { min-width: 0; }
+.spatial-opening-fields input { width: 100%; min-width: 0; box-sizing: border-box; }
+.spatial-opening-catalog select { width: 100%; min-width: 0; }
+.spatial-opening-model-handles { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
+.spatial-opening-model-handles button { position: absolute; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; transform: translate(-50%, -50%); border: 0; border-radius: 0; background: transparent; pointer-events: auto; touch-action: none; cursor: move; display: grid; place-items: center; }
+.spatial-opening-model-handles button[hidden] { display: none; }
+.spatial-opening-model-handles button span { display: block; width: 12px; height: 12px; background: white; border: 2px solid #087aae; border-radius: 3px; box-shadow: 0 0 0 1px white; }
+.spatial-opening-model-handles button:focus-visible { outline: 2px solid #087aae; outline-offset: -3px; }
+.spatial-opening-leaders { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.spatial-opening-leaders line { stroke: #087aae; stroke-width: 1; }
+@media (max-width: 360px) { .spatial-opening-fields { grid-template-columns: minmax(0, 1fr); } }
+/* F05 observation tools reuse the map-first panels and existing safe areas. */
+.spatial-workspace .spatial-affected-controls{padding:18px;border-bottom:1px solid var(--spatial-line);min-width:0}
+.spatial-workspace .spatial-affected-controls p{font-size:12px;overflow-wrap:anywhere}
+.spatial-workspace .spatial-affected-controls fieldset{margin:14px 0;padding:12px;border:1px solid var(--spatial-line);border-radius:8px}
+.spatial-workspace .spatial-affected-controls legend{font-weight:600;font-size:12px}
+.spatial-workspace .spatial-affected-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}
+.spatial-workspace .spatial-affected-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.spatial-workspace .spatial-affected-actions button{flex:1 1 100px}
+.spatial-workspace .spatial-affected-list{max-height:240px;overflow:auto;padding:12px;flex-shrink:0}
+.spatial-workspace .spatial-affected-list button{display:block;text-align:left;width:100%;margin:6px 0;font-size:12px}
+.spatial-workspace .spatial-affected-list small{display:block;overflow-wrap:anywhere;color:var(--spatial-muted)}
+.spatial-workspace .spatial-affected-model-handle{position:absolute;width:44px;height:44px;min-width:44px;min-height:44px;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;touch-action:none;z-index:2}
+.spatial-workspace .spatial-affected-model-handle::after{content:'';display:block;width:12px;height:12px;margin:auto;background:white;border:2px solid currentColor;border-radius:50%}
+@media(max-width:380px){.spatial-workspace .spatial-affected-fields{grid-template-columns:minmax(0,1fr)}}
+
+
+/* F04 feature controls retain the current map-first layout. */
+.spatial-feature-controls { display:grid; gap:12px; border:1px solid #cad8e1; border-radius:12px; padding:16px; min-width:0; }
+.spatial-feature-controls legend { padding:0 6px; font-weight:600; }
+.spatial-feature-controls label { display:grid; gap:6px; }
+.spatial-feature-controls select { width:100%; min-height:44px; }
+.spatial-feature-controls button { min-height:44px; }
+.spatial-symbol-fixture,.spatial-symbol-cutout { color:#167bab; }
+/* Ceiling editing remains available while ceiling faces are hidden. */
+.spatial-workspace .spatial-ceiling-drag-handle { position: absolute; z-index: 4; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; transform: translate(-50%, -50%); border: 2px solid #087aae; border-radius: 50%; background: white; color: #087aae; font-size: 25px; box-shadow: 0 1px 5px #163a4b30; touch-action: none; cursor: ns-resize; }
+.spatial-ceiling-drag-handle[hidden] { display: none; }
+.spatial-ceiling-model-panel { position: absolute; right: 12px; bottom: 48px; z-index: 5; width: min(310px, calc(100% - 24px)); border: 1px solid var(--spatial-line, #d8e3ea); border-radius: 8px; background: white; box-shadow: 0 2px 8px #163a4b15; }
+.spatial-ceiling-model-panel > summary { min-height: 44px; padding: 12px; box-sizing: border-box; cursor: pointer; font-weight: 600; }
+.spatial-ceiling-model-panel .spatial-ceiling-controls { max-height: min(48vh, 440px); overflow-y: auto; padding: 0 12px 12px; margin: 0; }
+.spatial-ceiling-controls fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.spatial-ceiling-controls input:not([type=checkbox]), .spatial-ceiling-controls select { width: 100%; min-height: 44px; box-sizing: border-box; margin: 4px 0 10px; }
+.spatial-ceiling-controls button { min-height: 44px; }
+.spatial-ceiling-controls h3 { margin: 8px 0; }
+.spatial-ceiling-room-set { max-height: 160px; overflow: auto; border: 1px solid #d8e3ea; border-radius: 4px; padding: 8px; }
+.spatial-ceiling-room-set .spatial-check { display: flex; align-items: center; min-height: 44px; gap: 8px; }

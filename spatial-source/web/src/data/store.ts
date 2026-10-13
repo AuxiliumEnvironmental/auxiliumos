@@ -1,7 +1,9 @@
 import { applyCommands, requireValidDocument, restorationMappings } from '../core';
+import { surfaceRemapReceipt } from '../core/surfaces';
 import type { EditCommand, FrozenRevision, ImportedWorkspace, SourceProvenance, SpatialDocument, StoredWorkspace, WorkspaceSummary } from '../types';
 import { clone, fail, jsonBytes, MAX_MEMBER, sha256, stableJSON } from './bytes';
 import { validSourceReason, validateSourceProvenance } from './provenance';
+import { clearDrawingRecoveryInTransaction, prepareDrawingRecoveryClear } from './drawingRecovery';
 
 interface DraftRecord { documentID: string; document: SpatialDocument; hash: string; historyHash: string; undo: SpatialDocument[]; redo: SpatialDocument[]; updatedAt: string; receipt?: StoredWorkspace['receipt']; sourceIdentity?: StoredWorkspace['sourceIdentity']; sourceBytes?: Uint8Array; copyInputHash?: string }
 export interface SavedRevision { key: string; documentID: string; revision: number; frozen: FrozenRevision; provenanceHash?: string }
@@ -14,9 +16,11 @@ export class SpatialWebStore {
     if (!namespace || namespace.length > 256 || /[\u0000-\u001f]/.test(namespace)) fail('invalid-storage-namespace');
     this.database = new Promise((resolve, reject) => {
       if (!globalThis.indexedDB) { reject(new Error('durable-storage-unavailable')); return; }
-      const opening = indexedDB.open(`auxilium-spatial-v1:${namespace}`, 1);
+      const opening = indexedDB.open(`auxilium-spatial-v1:${namespace}`, 2);
       opening.onupgradeneeded = () => {
-        for (const [name, keyPath] of [['drafts', 'documentID'], ['revisions', 'key'], ['outbox', 'requestID']] as const) opening.result.createObjectStore(name, { keyPath });
+        for (const [name, keyPath] of [['drafts', 'documentID'], ['revisions', 'key'], ['outbox', 'requestID'], ['drawingRecovery', 'documentID']] as const) {
+          if (!opening.result.objectStoreNames.contains(name)) opening.result.createObjectStore(name, { keyPath });
+        }
       };
       opening.onerror = () => reject(opening.error ?? new Error('storage-open-failed'));
       opening.onblocked = () => { this.closed = true; reject(new Error('storage-upgrade-blocked-close-other-tabs')); };
@@ -95,25 +99,31 @@ export class SpatialWebStore {
     return this.workspace(retained);
   }
   async open(documentID: string): Promise<StoredWorkspace> { return this.workspace(await this.record(documentID)); }
-  private async commit(row: DraftRecord, expectedRevision: number): Promise<StoredWorkspace> {
+  private async commit(row: DraftRecord, expectedRevision: number, recovery?: { token: string }): Promise<StoredWorkspace> {
     const expectedHash = row.hash, expectedHistoryHash = row.historyHash;
+    // Verify checkpoint integrity outside the mutation transaction, then compare
+    // its exact body again inside it. A token alone cannot certify stored bytes.
+    const preparedRecovery = recovery ? await prepareDrawingRecoveryClear(this, this.namespace, row.documentID, recovery.token) : undefined;
     const bytes = jsonBytes(row.document); if (bytes.length > MAX_MEMBER) fail('document-size-limit');
     // History is recoverable editing convenience, bounded separately from immutable saved versions.
     for (const key of ['undo', 'redo'] as const) while (row[key].length > 1 && jsonBytes(row[key]).length > 16 * 1024 * 1024) row[key].shift();
     row.hash = await sha256(bytes); row.historyHash = await sha256(jsonBytes({ undo: row.undo, redo: row.redo, receipt: row.receipt, sourceIdentity: row.sourceIdentity, copyInputHash: row.copyInputHash })); row.updatedAt = new Date().toISOString();
-    await this.transaction(['drafts'], 'readwrite', async tx => {
+    await this.transaction(recovery ? ['drafts', 'drawingRecovery'] : ['drafts'], 'readwrite', async tx => {
       const drafts = tx.objectStore('drafts'), current = await request(drafts.get(row.documentID)) as DraftRecord | undefined;
-      if (!current || current.document.revision !== expectedRevision || current.hash !== expectedHash || current.historyHash !== expectedHistoryHash) fail('revision-conflict'); await request(drafts.put(row));
+      if (!current || current.document.revision !== expectedRevision || current.hash !== expectedHash || current.historyHash !== expectedHistoryHash) fail('revision-conflict');
+      if (recovery && preparedRecovery) await clearDrawingRecoveryInTransaction(tx, this.namespace, row.documentID, recovery.token, preparedRecovery);
+      await request(drafts.put(row));
     });
     return this.workspace(row);
   }
-  async apply(documentID: string, expectedRevision: number, commands: EditCommand[]): Promise<StoredWorkspace> {
+  async apply(documentID: string, expectedRevision: number, commands: EditCommand[], recovery?: { token: string }): Promise<StoredWorkspace> {
     commands = clone(commands);
+    recovery = recovery ? clone(recovery) : undefined;
     const row = await this.record(documentID);
     if (row.document.revision !== expectedRevision) fail('revision-conflict');
     const result = applyCommands(row.document, commands, expectedRevision);
     row.undo = [...row.undo, clone(row.document)].slice(-100); row.redo = []; row.document = result.document; row.receipt = result.receipt;
-    return this.commit(row, expectedRevision);
+    return this.commit(row, expectedRevision, recovery);
   }
   private async history(documentID: string, expectedRevision: number, direction: 'undo' | 'redo'): Promise<StoredWorkspace> {
     const row = await this.record(documentID); if (row.document.revision !== expectedRevision) fail('revision-conflict');
@@ -123,7 +133,7 @@ export class SpatialWebStore {
     const opposite = direction === 'undo' ? 'redo' : 'undo'; row[opposite] = [...row[opposite], clone(row.document)].slice(-100);
     const source = row.document;
     row.document = { ...target, parentRevision: expectedRevision, revision: expectedRevision + 1, reviewState: 'needsReview' };
-    requireValidDocument(row.document); row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document) };
+    requireValidDocument(row.document); const mappings=restorationMappings(source,row.document);row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings, surfaceRemaps:surfaceRemapReceipt(source,row.document,mappings) };
     return this.commit(row, expectedRevision);
   }
   async undo(documentID: string, expectedRevision: number): Promise<StoredWorkspace> { return this.history(documentID, expectedRevision, 'undo'); }
@@ -163,7 +173,7 @@ export class SpatialWebStore {
     const source = row.document;
     row.undo = [...row.undo, clone(source)].slice(-100); row.redo = [];
     row.document = { ...clone(frozen.document), parentRevision: expectedRevision, revision: expectedRevision + 1, reviewState: 'needsReview' };
-    row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings: restorationMappings(source, row.document) };
+    const mappings=restorationMappings(source,row.document);row.receipt = { sourceRevision: expectedRevision, resultingRevision: row.document.revision, mappings, surfaceRemaps:surfaceRemapReceipt(source,row.document,mappings) };
     return this.commit(row, expectedRevision);
   }
   close(): void { this.closed = true; void this.database.then(db => db.close()).catch(() => {}); }

@@ -1,6 +1,12 @@
+import { remapAttachmentsForCommand, assertAttachmentHostChanges } from './fixtureAttachments';
 import type { EditCommand, EditReceipt, Floor, GeometryIDMapping, Room, SpatialDocument, WallReference } from '../types';
 import { closedRoomBoundary, distance, EPSILON, isSimplePolygon, pathLength, pathPoint, roomBoundary, signedArea, wallPath } from './geometry';
+import { authoredOpeningStyle, openingPreset, reversedOpeningStyle, sameOpeningGeometry } from './openings';
+import { applyCeilingHeightEdit, establishCeilingSchema, extendCeilingEnvelopes, splitCeilingIntent, mergedCeilingIntent } from './ceilings';
+import { surfaceRemapReceipt } from './surfaces';
+import { maxSchemaVersion, isAtLeastSchemaVersion } from './versions';
 import { requireValidDocument, validID } from './validation';
+import { affectedMaterialRemaps, composeAffectedReceipts, isAffectedCommand, mutateAffectedArea, remapAffectedAreas } from './affectedAreas';
 
 function requireID(id:string,ids:string[]):void{if(!validID(id)||ids.includes(id))throw new Error(`Invalid or duplicate identifier: ${id}`);}
 function item<T extends {id:string}>(items:T[],id:string):T{const value=items.find(x=>x.id===id);if(!value)throw new Error(`Missing object ${id}`);return value;}
@@ -13,7 +19,7 @@ function equal(a:unknown,b:unknown):boolean{
 }
 function exists(document:SpatialDocument,floorID:string,kind:string,id:string):boolean{
   const floor=document.floors.find(f=>f.id===floorID);if(!floor)return false;
-  switch(kind){case'floor':return floor.id===id;case'node':return floor.nodes.some(x=>x.id===id);case'wall':return floor.walls.some(x=>x.id===id);case'opening':return floor.openings.some(x=>x.id===id);case'room':return floor.rooms.some(x=>x.id===id);case'area':return floor.areas?.some(x=>x.id===id)??false;default:return false;}
+  switch(kind){case'floor':return floor.id===id;case'node':return floor.nodes.some(x=>x.id===id);case'wall':return floor.walls.some(x=>x.id===id);case'opening':return floor.openings.some(x=>x.id===id);case'room':return floor.rooms.some(x=>x.id===id);case'fixture':return floor.fixtures?.some(x=>x.id===id)??false;case'cutout':return floor.cutouts?.some(x=>x.id===id)??false;case'area':return floor.areas?.some(x=>x.id===id)??false;default:return false;}
 }
 /** Conservative durable-history lineage. It grants no permission to relink an overlay automatically. */
 export function restorationMappings(source:SpatialDocument,next:SpatialDocument):GeometryIDMapping[]{
@@ -27,6 +33,8 @@ export function restorationMappings(source:SpatialDocument,next:SpatialDocument)
       ['wall',f.walls,(x:{id:string})=>walls.has(x.id)],
       ['opening',f.openings,(x:typeof f.openings[number])=>!equal(n.openings.find(y=>y.id===x.id),x)||walls.has(x.wallID)],
       ['room',f.rooms,(x:Room)=>!equal(n.rooms.find(y=>y.id===x.id),x)||x.boundary.some(r=>walls.has(r.wallID))],
+      ['fixture',f.fixtures??[],(x:NonNullable<Floor['fixtures']>[number])=>moved||!equal(n.fixtures?.find(y=>y.id===x.id),x)],
+      ['cutout',f.cutouts??[],(x:NonNullable<Floor['cutouts']>[number])=>moved||!equal(n.cutouts?.find(y=>y.id===x.id),x)],
       ['area',f.areas??[],(x:NonNullable<Floor['areas']>[number])=>moved||!equal(n.areas?.find(y=>y.id===x.id),x)],
     ] as const){
       // Each predicate belongs to its parallel collection; expand below without an unsafe public cast.
@@ -65,7 +73,7 @@ function joinWalls(floor:Floor,firstID:string,secondID:string):void{
     for(let i=0;i<boundary.length;i++){const pair=[boundary[i],boundary[(i+1)%boundary.length]];if(equal(pair,forward)||equal(pair,reverse)){const rotated=[...boundary.slice(i),...boundary.slice(0,i)];replacement=[{wallID:firstID,reversed:equal(pair,reverse)},...rotated.slice(2)];break;}}
     if(!replacement)throw new Error('Walls must be consecutive in each affected room');room.boundary=replacement;
   }
-  for(const o of floor.openings){if(o.wallID===firstID){if(first)o.offset+=bl;}else if(o.wallID===secondID){if(reversed)o.offset=bl-o.offset-o.width;if(!first)o.offset+=al;o.wallID=firstID;}}
+  for(const o of floor.openings){if(o.wallID===firstID){if(first)o.offset+=bl;}else if(o.wallID===secondID){if(reversed){o.offset=bl-o.offset-o.width;if(o.style)o.style=reversedOpeningStyle(o.style);}if(!first)o.offset+=al;o.wallID=firstID;}}
   floor.walls[floor.walls.indexOf(a)]=joined;remove(floor.walls,secondID);
 }
 function splitRoom(floor:Floor,roomID:string,dividerID:string,newID:string,label:string):void{
@@ -77,22 +85,34 @@ function splitRoom(floor:Floor,roomID:string,dividerID:string,newID:string,label
   const left={...original,boundary:[...arc(a,b),{wallID:dividerID,reversed:true}]},right:Room={id:newID,label,boundary:[...arc(b,a),{wallID:dividerID,reversed:false}]};
   const before=roomBoundary(floor,original),lp=roomBoundary(floor,left),rp=roomBoundary(floor,right);if(left.boundary.length<3||right.boundary.length<3||!isSimplePolygon(lp)||!isSimplePolygon(rp))throw new Error('Divider must produce two simple closed rooms');
   const area=signedArea(before),la=signedArea(lp),ra=signedArea(rp);if(area*la<=0||area*ra<=0||Math.abs(Math.abs(la)+Math.abs(ra)-Math.abs(area))>Math.max(EPSILON,Math.abs(area)*1e-9))throw new Error('Divider must remain inside the original room without overlaps');
-  floor.rooms[floor.rooms.indexOf(original)]=left;floor.rooms.push(right);
+  splitCeilingIntent(floor,original,right);floor.rooms[floor.rooms.indexOf(original)]=left;floor.rooms.push(right);
 }
-function mergeRooms(floor:Floor,firstID:string,secondID:string):{walls:string[];openings:string[]}{
+function mergeRooms(floor:Floor,firstID:string,secondID:string,ceilingHeight?:number):{walls:string[];openings:string[]}{
   if(firstID===secondID)throw new Error('Choose two distinct rooms');const first=item(floor.rooms,firstID),second=item(floor.rooms,secondID),common=new Set(first.boundary.filter(r=>second.boundary.some(s=>s.wallID===r.wallID)).map(r=>r.wallID));
   if(!common.size)throw new Error('Rooms must have an explicitly shared partition');
   if(floor.rooms.some(r=>r.id!==firstID&&r.id!==secondID&&r.boundary.some(w=>common.has(w.wallID))))throw new Error('Shared partition belongs to another room');
   const outer=[...first.boundary,...second.boundary].filter(r=>!common.has(r.wallID));if(new Set(outer.map(r=>r.wallID)).size!==outer.length)throw new Error('Outside boundary is ambiguous');
   const boundary=closedRoomBoundary(floor,outer.map(r=>r.wallID)),merged={...first,boundary};const expected=Math.abs(signedArea(roomBoundary(floor,first)))+Math.abs(signedArea(roomBoundary(floor,second))),polygon=roomBoundary(floor,merged);
+  const ceiling=mergedCeilingIntent(floor,first,second,ceilingHeight);if(ceiling!==undefined)merged.ceiling=ceiling;
   if(!isSimplePolygon(polygon)||Math.abs(Math.abs(signedArea(polygon))-expected)>Math.max(EPSILON,expected*1e-9))throw new Error('Merge would overlap rooms, create a hole, or change the outside boundary');
   const openings=floor.openings.filter(o=>common.has(o.wallID)).map(o=>o.id);floor.rooms=floor.rooms.filter(r=>r.id!==firstID&&r.id!==secondID);floor.rooms.push(merged);floor.walls=floor.walls.filter(w=>!common.has(w.id));floor.openings=floor.openings.filter(o=>!common.has(o.wallID));return {walls:[...common].sort(),openings};
 }
 function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[]{
-  const mappings:GeometryIDMapping[]=[];if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));document.floors.push(structuredClone(command.floor));return mappings;}
+  const mappings:GeometryIDMapping[]=[];if(mutateAffectedArea(document,command))return mappings;
+  if(command.type==='setCeilingHeights'){applyCeilingHeightEdit(document,command);return mappings;}
+  if(command.type==='addFloor'){requireID(command.floor.id,document.floors.map(f=>f.id));const floor=structuredClone(command.floor);
+    if(floor.rooms.some(room=>room.ceiling!==undefined)||floor.fixtures!==undefined||floor.cutouts!==undefined)establishCeilingSchema(document);
+    if(floor.fixtures!==undefined||floor.cutouts!==undefined)document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.4.0');
+    if(isAtLeastSchemaVersion(document.schemaVersion,'1.3.0'))for(const room of floor.rooms)room.ceiling??=null;
+    if(floor.openings.some(o=>o.style))document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.2.0');else if(floor.areas!==undefined)document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.1.0');document.floors.push(floor);return mappings;}
+  if(!('floorID' in command))throw new Error('A structural command needs a floor.');
   const f=item(document.floors,command.floorID),m=(kind:string,id:string,to:string[])=>mappings.push(map(f.id,kind,id,to));
   if(command.type==='deleteFloor'){remove(document.floors,f.id);m('floor',f.id,[]);return mappings;}
   switch(command.type){
+    case'setFixture':{f.fixtures??=[];const value=structuredClone(command.fixture),previous=f.fixtures.find(x=>x.id===value.id);value.provenance.origin='edited';if(previous){value.provenance.sourceIDs=[...new Set([...previous.provenance.sourceIDs,...value.provenance.sourceIDs])].sort();f.fixtures[f.fixtures.indexOf(previous)]=value;m('fixture',value.id,[value.id]);}else f.fixtures.push(value);establishCeilingSchema(document);document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.4.0');break;}
+    case'deleteFixture':remove(f.fixtures??[],command.fixtureID);m('fixture',command.fixtureID,[]);break;
+    case'setCutout':{const ref=command.cutout.surface;if(ref.kind==='ceiling'&&!f.rooms.some(room=>room.id===ref.roomID&&room.ceiling?.id===ref.ceilingID))throw new Error('Choose an existing surface; a ceiling must have established ceiling intent');f.cutouts??=[];const value=structuredClone(command.cutout),previous=f.cutouts.find(x=>x.id===value.id);value.provenance.origin='edited';if(previous){value.provenance.sourceIDs=[...new Set([...previous.provenance.sourceIDs,...value.provenance.sourceIDs])].sort();f.cutouts[f.cutouts.indexOf(previous)]=value;m('cutout',value.id,[value.id]);}else f.cutouts.push(value);establishCeilingSchema(document);document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.4.0');break;}
+    case'deleteCutout':remove(f.cutouts??[],command.cutoutID);m('cutout',command.cutoutID,[]);break;
     case'moveNode':item(f.nodes,command.nodeID).point=structuredClone(command.point);markEdited(f,[command.nodeID]);m('node',command.nodeID,[command.nodeID]);break;
     case'moveWall':{const w=item(f.walls,command.wallID);for(const id of new Set(w.nodeIDs)){const n=item(f.nodes,id);n.point.x+=command.translation.x;n.point.z+=command.translation.z;}markEdited(f,w.nodeIDs);m('wall',w.id,[w.id]);break;}
     case'addWall':{const w=structuredClone(command.wall);requireID(w.id,f.walls.map(x=>x.id));for(const n of command.newNodes){requireID(n.id,f.nodes.map(x=>x.id));f.nodes.push(structuredClone(n));}w.provenance.origin='edited';f.walls.push(w);break;}
@@ -101,17 +121,27 @@ function mutate(document:SpatialDocument,command:EditCommand):GeometryIDMapping[
     case'joinWalls':joinWalls(f,command.firstWallID,command.secondWallID);m('wall',command.firstWallID,[command.firstWallID]);m('wall',command.secondWallID,[command.firstWallID]);break;
     case'mergeNodes':{const source=item(f.nodes,command.sourceNodeID),target=item(f.nodes,command.targetNodeID);if(source.id===target.id)throw new Error('Choose two different nodes');for(const w of f.walls)if(w.nodeIDs.includes(source.id)){w.nodeIDs=w.nodeIDs.map(id=>id===source.id?target.id:id);w.provenance.origin='edited';}remove(f.nodes,source.id);m('node',source.id,[target.id]);break;}
     case'disconnectNode':{const w=item(f.walls,command.wallID),n=item(f.nodes,command.nodeID);if(!w.nodeIDs.includes(n.id))throw new Error('Node does not belong to the selected wall');requireID(command.newNodeID,f.nodes.map(n=>n.id));f.nodes.push({id:command.newNodeID,point:structuredClone(n.point)});w.nodeIDs=w.nodeIDs.map(id=>id===n.id?command.newNodeID:id);w.provenance.origin='edited';m('node',n.id,[n.id,command.newNodeID]);break;}
-    case'addOpening':{const o=structuredClone(command.opening);requireID(o.id,f.openings.map(x=>x.id));o.provenance.origin='edited';f.openings.push(o);break;}
-    case'moveOpening':{const o=item(f.openings,command.openingID);o.offset=command.offset;o.provenance.origin='edited';m('opening',o.id,[o.id]);break;}
-    case'updateOpening':{const previous=item(f.openings,command.opening.id),o=structuredClone(command.opening);o.provenance.sourceIDs=[...new Set([...o.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();o.provenance.origin='edited';f.openings[f.openings.indexOf(previous)]=o;m('opening',o.id,[o.id]);break;}
+    case'addOpening':{const o=structuredClone(command.opening);requireID(o.id,f.openings.map(x=>x.id));o.provenance.origin='edited';if(o.style){o.style.provenance.origin='edited';document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.2.0');}f.openings.push(o);break;}
+    case'moveOpening':{const o=item(f.openings,command.openingID);if(o.offset!==command.offset){o.offset=command.offset;o.provenance.origin='edited';}m('opening',o.id,[o.id]);break;}
+    case'updateOpening':{const previous=item(f.openings,command.opening.id),o=structuredClone(command.opening);
+      if(!equal(o.style,previous.style))throw new Error('Use the catalog or flip command to change opening style');
+      o.provenance=structuredClone(previous.provenance);if(!sameOpeningGeometry(previous,o)){o.provenance.sourceIDs=[...new Set([...command.opening.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();o.provenance.origin='edited';}
+      f.openings[f.openings.indexOf(previous)]=o;m('opening',o.id,[o.id]);break;}
+    case'setOpeningStyle':{const o=item(f.openings,command.openingID);if(command.styleID===null)delete o.style;else{o.style=authoredOpeningStyle(command.styleID,o);document.schemaVersion=maxSchemaVersion(document.schemaVersion,'1.2.0');}m('opening',o.id,[o.id]);break;}
+    case'flipOpening':{const o=item(f.openings,command.openingID),style=o.style,preset=style&&openingPreset(style.id);
+      if(!style||!preset)throw new Error('Choose a catalog style before flipping a generic aperture');
+      if(command.axis==='horizontal'&&preset.horizontal)style.end=style.end==='start'?'end':'start';
+      else if(command.axis==='vertical'&&preset.vertical)style.side=style.side==='positive'?'negative':'positive';
+      else throw new Error('This flip does not apply to the selected opening style');
+      style.provenance.origin='edited';m('opening',o.id,[o.id]);break;}
     case'deleteOpening':remove(f.openings,command.openingID);m('opening',command.openingID,[]);break;
     case'renameRoom':item(f.rooms,command.roomID).label=command.label;break;
-    case'addRoom':requireID(command.room.id,f.rooms.map(r=>r.id));f.rooms.push(structuredClone(command.room));break;
+    case'addRoom':{requireID(command.room.id,f.rooms.map(r=>r.id));const room=structuredClone(command.room);if(room.ceiling!==undefined)establishCeilingSchema(document);if(isAtLeastSchemaVersion(document.schemaVersion,'1.3.0')&&room.ceiling===undefined)room.ceiling=null;f.rooms.push(room);break;}
     case'setRoomBoundary':item(f.rooms,command.roomID).boundary=structuredClone(command.boundary);m('room',command.roomID,[command.roomID]);break;
     case'deleteRoom':remove(f.rooms,command.roomID);m('room',command.roomID,[]);break;
     case'splitRoom':splitRoom(f,command.roomID,command.dividerWallID,command.newRoomID,command.newLabel);m('room',command.roomID,[command.roomID,command.newRoomID]);break;
-    case'mergeRooms':{const removed=mergeRooms(f,command.firstRoomID,command.secondRoomID);m('room',command.secondRoomID,[command.firstRoomID]);m('room',command.firstRoomID,[command.firstRoomID]);for(const id of removed.walls)m('wall',id,[]);for(const id of removed.openings)m('opening',id,[]);break;}
-    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';document.schemaVersion='1.1.0';break;}
+    case'mergeRooms':{if(command.ceilingHeight!==undefined)establishCeilingSchema(document);const removed=mergeRooms(f,command.firstRoomID,command.secondRoomID,command.ceilingHeight);m('room',command.secondRoomID,[command.firstRoomID]);m('room',command.firstRoomID,[command.firstRoomID]);for(const id of removed.walls)m('wall',id,[]);for(const id of removed.openings)m('opening',id,[]);break;}
+    case'setArea':{const a=structuredClone(command.area);f.areas??=[];const previous=f.areas.find(x=>x.id===a.id);if(previous){a.provenance.sourceIDs=[...new Set([...a.provenance.sourceIDs,...previous.provenance.sourceIDs])].sort();f.areas[f.areas.indexOf(previous)]=a;m('area',a.id,[a.id]);}else f.areas.push(a);a.provenance.origin='edited';if(document.schemaVersion==='1.0.0')document.schemaVersion='1.1.0';break;}
     case'deleteArea':remove(f.areas??[],command.areaID);m('area',command.areaID,[]);break;
     case'updateFloor':f.label=command.label;f.elevation=command.elevation;break;
     default:throw new Error('Unknown edit command');
@@ -123,9 +153,34 @@ export function applyCommands(document:SpatialDocument,commands:EditCommand[],ex
   if(document.revision!==expectedRevision)throw new Error(`Stale revision: expected ${expectedRevision}, current ${document.revision}`);
   if(!Array.isArray(commands)||commands.length<1||commands.length>1000)throw new Error('Use 1 to 1000 commands per edit');
   if(document.revision>=Number.MAX_SAFE_INTEGER)throw new Error('Revision limit reached');let mappings:GeometryIDMapping[]=[];
-  for(const c of commands)mappings=compose(mappings,mutate(next,c),document);
+  const resolvedFixtureIDs=new Set(commands.flatMap(c=>c.type==='setFixture'?[JSON.stringify([c.floorID,c.fixture.id])]:c.type==='deleteFixture'?[JSON.stringify([c.floorID,c.fixtureID])]:[])),resolvedCutoutIDs=new Set(commands.flatMap(c=>c.type==='setCutout'?[JSON.stringify([c.floorID,c.cutout.id])]:c.type==='deleteCutout'?[JSON.stringify([c.floorID,c.cutoutID])]:[]));
+  if(commands.some(isAffectedCommand)&&commands.some(c=>!isAffectedCommand(c)))throw new Error('Save host changes before recording or reshaping observations.');
+  let surfaces={sourceRevision:document.revision,resultingRevision:document.revision+1,mappings:[]} as import('../types').SurfaceRemapReceipt;
+  const hasAttachments=!!next.affectedAreas?.length&&!commands.some(isAffectedCommand);
+  let segmentStart=hasAttachments?structuredClone(next):null,segmentMappings:GeometryIDMapping[]=[];
+  const flush=(before:SpatialDocument)=>{
+    extendCeilingEnvelopes(next);
+    const local=[...segmentMappings];
+    for(const mapping of restorationMappings(before,next))if(!local.some(m=>m.floorID===mapping.floorID&&m.objectKind===mapping.objectKind&&m.sourceID===mapping.sourceID))local.push(mapping);
+    const step=surfaceRemapReceipt(before,next,local);step.resultingRevision=document.revision+1;
+    next.affectedAreas=remapAffectedAreas(next.affectedAreas??[],affectedMaterialRemaps(before,next,step));
+    surfaces=composeAffectedReceipts(surfaces,step);segmentMappings=[];
+  };
+  for(const c of commands){
+    const topology=['splitWall','joinWalls','splitRoom','mergeRooms'].includes(c.type);
+    if(segmentStart&&topology){flush(segmentStart);segmentStart=structuredClone(next);}
+    const attachmentBefore=c.type==='splitWall'||c.type==='joinWalls'?structuredClone(next.floors.find(f=>f.id===c.floorID)):undefined;
+    const changes=mutate(next,c);mappings=compose(mappings,changes,document);
+    if(attachmentBefore&&'floorID' in c)remapAttachmentsForCommand(attachmentBefore,next.floors.find(f=>f.id===c.floorID)!,c,resolvedFixtureIDs,resolvedCutoutIDs);
+    if(segmentStart)segmentMappings=compose(segmentMappings,changes,segmentStart);
+    if(segmentStart&&topology){flush(segmentStart);segmentStart=structuredClone(next);}
+  }
+  // A multi-node group move is one physical transform, never intermediate folds.
+  assertAttachmentHostChanges(document,next,commands);
+  extendCeilingEnvelopes(next);
+  if(segmentStart)flush(segmentStart);
   next.revision=document.revision+1;next.parentRevision=document.revision;next.reviewState='needsReview';
   const validated=requireValidDocument(next);mappings=mappings.map(m=>({...m,resultingIDs:m.resultingIDs.filter(id=>exists(validated,m.floorID,m.objectKind,id))}));
   for(const mapping of restorationMappings(document,validated))if(!mappings.some(m=>m.floorID===mapping.floorID&&m.objectKind===mapping.objectKind&&m.sourceID===mapping.sourceID))mappings.push(mapping);
-  return {document:validated,receipt:{sourceRevision:document.revision,resultingRevision:validated.revision,mappings}};
+  return {document:validated,receipt:{sourceRevision:document.revision,resultingRevision:validated.revision,mappings,surfaceRemaps:hasAttachments?surfaces:surfaceRemapReceipt(document,validated,mappings)}};
 }

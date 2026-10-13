@@ -42,8 +42,13 @@ export function closedBoundary(floor: Floor, wallIDs: string[]): WallReference[]
   catch { throw new Error('These walls do not form one closed boundary with shared corners. Connect the corners or choose a different boundary.'); }
 }
 export function objectLabel(floor: Floor, selection: Selection) {
+  if(selection.kind==='surface')return selection.surface?.kind==='wall'?`Wall ${selection.surface.side} side`:`${selection.surface?.kind??'Surface'}`;
+  if(selection.kind==='affectedArea')return 'Affected observation';
   const index = (ids: { id: string }[]) => ids.findIndex(item => item.id === selection.objectID) + 1;
+  if(selection.kind==='fixture')return floor.fixtures?.find(f=>f.id===selection.objectID)?.catalog.id.replaceAll('-',' ')??'Fixture';
+  if(selection.kind==='cutout')return floor.cutouts?.find(c=>c.id===selection.objectID)?.kind??'Cutout';
   if (selection.kind === 'room') return floor.rooms.find(r => r.id === selection.objectID)?.label ?? 'Room';
+  if (selection.kind === 'ceiling') return `${floor.rooms.find(r=>r.ceiling?.id===selection.objectID)?.label??'Room'} ceiling`;
   if (selection.kind === 'area') return floor.areas?.find(a => a.id === selection.objectID)?.label ?? 'Area';
   if (selection.kind === 'opening') { const opening = floor.openings.find(o => o.id === selection.objectID); return opening ? `${opening.kind[0].toUpperCase()}${opening.kind.slice(1)} ${index(floor.openings)}` : 'Opening'; }
   return `${selection.kind === 'node' ? 'Corner' : 'Wall'} ${index(selection.kind === 'node' ? floor.nodes : floor.walls)}`;

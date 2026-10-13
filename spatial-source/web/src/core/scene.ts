@@ -1,6 +1,15 @@
-import type { Floor, GraphicScene, Opening, Point3, SceneFace, SpatialDocument } from '../types';
+import { fixtureGeometry } from './fixtures';
+import { materialPolygons, profileRing } from './cutoutGeometry';
+import { resolveSurface, surfacePointToWorld } from './surfaces';
+import type { SurfaceRef } from '../types';
+import type { Point2, Wall, Floor, GraphicScene, Opening, Point3, SceneFace, SpatialDocument } from '../types';
+
+import { openingScenePrimitives } from './openings';
+import { validateCutout } from './cutouts';
 import { distance, EPSILON, FloorGeometryIndex, pathPoint, triangulate } from './geometry';
 import { requireValidDocument } from './validation';
+import { affectedSceneFaces } from './affectedAreas';
+import { isAtLeastSchemaVersion } from './versions';
 
 // Exact existing graphic-scene 1.0/1.1 transport limits. They are resource
 // admission limits, not a smaller product operating envelope or a performance claim.
@@ -21,17 +30,14 @@ function preflightScene(floor:Floor,index:FloorGeometryIndex,groups:Map<string,O
     for(const end of [0,total])for(const [bottom,top]of remainingWallSpans(openings.filter(o=>end>=o.offset-EPSILON&&end<=o.offset+o.width+EPSILON),wall.height))edge(end,bottom,end,top);
     for(const o of openings){const lo=o.offset,hi=lo+o.width;edge(lo,o.bottom,lo,o.bottom+o.height);edge(hi,o.bottom,hi,o.bottom+o.height);const spans=[lo,...breaks.filter(b=>b>lo&&b<hi),hi];for(let i=1;i<spans.length;i++){edge(spans[i-1],o.bottom,spans[i],o.bottom);edge(spans[i-1],o.bottom+o.height,spans[i],o.bottom+o.height);}}
   }
-  for(const room of floor.rooms){const ring=index.boundary(room);if(ring.length>MAX_FACE_VERTICES||ring.length-2>MAX_FACE_TRIANGLES)throw new Error('Room exceeds the scene face vertex/triangle transport limit');faces++;admit();}
+  for(const opening of floor.openings){if(opening.style){const diagram=openingScenePrimitives(floor,opening);faces+=diagram.faces.length;edges+=diagram.edges.length;admit();}}
+  for(const room of floor.rooms){const ring=index.boundary(room);if(ring.length>MAX_FACE_VERTICES||ring.length-2>MAX_FACE_TRIANGLES)throw new Error('Room exceeds the scene face vertex/triangle transport limit');faces+=room.ceiling?2:1;admit();}
   for(const area of floor.areas??[]){edges+=area.polygon.length;admit();}
 }
 
-/** Exact semantic meshes. Door and window apertures are actual missing triangles. */
-export function buildScene(document:SpatialDocument,floorID:string):GraphicScene{
-  const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
-  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
-  const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
-  preflightScene(floor,index,groups);
-  for(const wall of floor.walls){const path=index.path(wall);let breaks=[0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));const total=breaks.at(-1)!,openings=groups.get(wall.id)??[],base=floor.elevation+wall.baseY;
+/** Shared canonical wall emitter, reused by an affected-host-only gesture preview. */
+function emitWall(scene: Pick<GraphicScene, 'faces' | 'edges'>, floor: Floor, wall: Wall, path: Point2[], openings: Opening[]): void {
+  let breaks = [0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));const total=breaks.at(-1)!,base=floor.elevation+wall.baseY;
     breaks=[...new Set([...breaks,...openings.flatMap(o=>[o.offset,o.offset+o.width])])].sort((a,b)=>a-b);
     const point=(s:number,y:number):Point3=>{const p=pathPoint(path,s);return{x:p.x,y:base+y,z:p.z};};
     const edge=(a:number,ay:number,b:number,by:number,objectID:string,role:string)=>{if(Math.abs(a-b)+Math.abs(ay-by)>EPSILON)scene.edges.push({objectID,role,a:point(a,ay),b:point(b,by)});};
@@ -42,9 +48,53 @@ export function buildScene(document:SpatialDocument,floorID:string):GraphicScene
     }
     for(const end of [0,total])for(const [bottom,top]of remaining(openings.filter(o=>end>=o.offset-EPSILON&&end<=o.offset+o.width+EPSILON)))edge(end,bottom,end,top,wall.id,'wall');
     for(const o of openings){const lo=o.offset,hi=lo+o.width;edge(lo,o.bottom,lo,o.bottom+o.height,o.id,o.kind);edge(hi,o.bottom,hi,o.bottom+o.height,o.id,o.kind);const spans=[lo,...breaks.filter(b=>b>lo&&b<hi),hi];for(let i=1;i<spans.length;i++){edge(spans[i-1],o.bottom,spans[i],o.bottom,o.id,o.kind);edge(spans[i-1],o.bottom+o.height,spans[i],o.bottom+o.height,o.id,o.kind);}}
+
+}
+
+/** Input is a frozen one-wall subset; caller validates only the changed aperture. */
+export function openingHostPreview(host: Floor, opening: Opening, source?: SpatialDocument): Pick<GraphicScene, 'faces' | 'edges'> {
+  if (host.walls.length !== 1 || host.walls[0].id !== opening.wallID) throw new Error('Opening preview requires its exact host');
+  const floor = { ...host, openings: host.openings.map(o => o.id === opening.id ? opening : o) }, index = new FloorGeometryIndex(floor);
+  const result: Pick<GraphicScene, 'faces' | 'edges'> = { faces: [], edges: [] };
+  preflightScene(floor, index, new Map([[opening.wallID, floor.openings]]));
+  emitWall(result, floor, floor.walls[0], index.path(floor.walls[0]), floor.openings);
+  if(floor.cutouts?.length){
+    if(!source)throw new Error('Cutout-aware opening preview requires its source revision');
+    const preview={...source,floors:[floor]},ref:SurfaceRef={floorID:floor.id,kind:'wall',wallID:opening.wallID,side:'positive'};
+    for(const cutout of floor.cutouts)validateCutout(preview,cutout);
+    const domain=resolveSurface(preview,ref);if(!domain)throw new Error('Missing opening preview surface');
+    const path=index.path(floor.walls[0]),breaks=[0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));
+    result.faces=[];
+    for(const ring of materialPolygons(domain.domain,breaks)){const vertices=ring.map(p=>surfacePointToWorld(preview,ref,p)!);result.faces.push({objectID:opening.wallID,role:'wall',vertices,triangles:Array.from({length:vertices.length-2},(_,i)=>[0,i+1,i+2])});}
+    for(const cutout of floor.cutouts){const ring=profileRing(cutout.profile).map(p=>surfacePointToWorld(preview,cutout.surface,p)!);for(let i=0;i<ring.length;i++)result.edges.push({objectID:cutout.id,role:'cutout',a:ring[i],b:ring[(i+1)%ring.length]});}
   }
-  for(const room of floor.rooms){const ring=index.boundary(room);scene.faces.push({objectID:room.id,role:'floor',vertices:ring.map(p=>({x:p.x,y:floor.elevation,z:p.z})),triangles:triangulate(ring).map(t=>[...t].reverse())});}
-  if(floor.areas?.length){scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
+  for (const item of floor.openings) { const diagram = openingScenePrimitives(floor, item); result.faces.push(...diagram.faces); result.edges.push(...diagram.edges); }
+  return result;
+}
+/** Exact semantic meshes. Door and window apertures are actual missing triangles. */
+export function buildScene(document:SpatialDocument,floorID:string):GraphicScene{
+  const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
+  const index=new FloorGeometryIndex(floor),scene:GraphicScene={schemaVersion:isAtLeastSchemaVersion(doc.schemaVersion,'1.2.0')?doc.schemaVersion:'1.0.0',documentID:doc.documentID,revision:doc.revision,floorID,faces:[],edges:[]};
+  const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
+  preflightScene(floor,index,groups);
+  for(const wall of floor.walls)emitWall(scene,floor,wall,index.path(wall),groups.get(wall.id)??[]);
+  for(const opening of floor.openings){if(opening.style){const diagram=openingScenePrimitives(floor,opening);scene.faces.push(...diagram.faces);scene.edges.push(...diagram.edges);}}
+  for(const room of floor.rooms){const ring=index.boundary(room);scene.faces.push({objectID:room.id,role:'floor',vertices:ring.map(p=>({x:p.x,y:floor.elevation,z:p.z})),triangles:triangulate(ring).map(t=>[...t].reverse())});if(room.ceiling)scene.faces.push({objectID:room.ceiling.id,role:'ceiling',vertices:ring.map(p=>({x:p.x,y:floor.elevation+room.ceiling!.height,z:p.z})),triangles:triangulate(ring)});}
+  if(floor.areas?.length){if(scene.schemaVersion==='1.0.0')scene.schemaVersion='1.1.0';for(const area of floor.areas)for(let i=0;i<area.polygon.length;i++){const a=area.polygon[i],b=area.polygon[(i+1)%area.polygon.length];scene.edges.push({objectID:area.id,role:'area',a:{...a,y:floor.elevation},b:{...b,y:floor.elevation}});}}
+  // F04 adapters: fixture solids occlude, never subtract recorded surface support.
+  if(isAtLeastSchemaVersion(doc.schemaVersion,'1.4.0')){scene.fixtures=structuredClone(floor.fixtures??[]);scene.cutouts=structuredClone(floor.cutouts??[]);}
+  const rebuild=(ref:SurfaceRef,objectID:string,role:string)=>{
+    const resolved=resolveSurface(doc,ref);if(!resolved)throw new Error('Missing cutout host');
+    scene.faces=scene.faces.filter(f=>!(f.objectID===objectID&&f.role===role));
+    const wall=ref.kind==='wall'?floor.walls.find(w=>w.id===ref.wallID):undefined,path=wall?index.path(wall):[],breaks:number[]=[0];for(let i=1;i<path.length;i++)breaks.push(breaks.at(-1)!+distance(path[i-1],path[i]));
+    for(const polygon of materialPolygons(resolved.domain,wall?breaks:[])){const vertices=polygon.map(p=>surfacePointToWorld(doc,ref,p)!);const triangles:number[][]=[];for(let i=1;i<vertices.length-1;i++)triangles.push(role==='floor'?[0,i+1,i]:[0,i,i+1]);scene.faces.push({objectID,role,vertices,triangles});}
+  };
+  const rebuilt=new Set<string>();
+  for(const cutout of floor.cutouts??[]){const ref=cutout.surface,key=ref.kind==='wall'?'wall:'+ref.wallID:ref.kind+':'+ref.roomID;if(!rebuilt.has(key)){rebuilt.add(key);rebuild(ref,ref.kind==='wall'?ref.wallID:ref.kind==='ceiling'?ref.ceilingID:ref.roomID,ref.kind);}
+    const ring=profileRing(cutout.profile);for(let i=0;i<ring.length;i++){const a=surfacePointToWorld(doc,ref,ring[i])!,b=surfacePointToWorld(doc,ref,ring[(i+1)%ring.length])!;scene.edges.push({objectID:cutout.id,role:'cutout',a,b});}
+  }
+  for(const fixture of floor.fixtures??[]){const geometry=fixtureGeometry(doc,fixture,floor.id);scene.faces.push(...geometry.faces);scene.edges.push(...geometry.edges);}
+  scene.faces.push(...affectedSceneFaces(doc,floorID));
   // Defense against a future emitter change diverging from the exact preflight.
   if(scene.faces.length>MAX_FACES||scene.edges.length>MAX_EDGES||scene.faces.some(f=>f.vertices.length>MAX_FACE_VERTICES||f.triangles.length>MAX_FACE_TRIANGLES))throw new Error('Generated scene exceeds the transport capacity limits');
   return scene;
@@ -71,7 +121,7 @@ export function evaluateCutaway(scene:GraphicScene,camera:Point3,focus:Point3,pr
 }
 export function displayCeilings(document:SpatialDocument,floorID:string):SceneFace[]{
   const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);const index=new FloorGeometryIndex(floor),faces:SceneFace[]=[];
-  for(const room of floor.rooms){const tops=room.boundary.map(r=>{const w=index.walls.get(r.wallID)!;return floor.elevation+w.baseY+w.height;});if(!tops.every(y=>Math.abs(y-tops[0])<=EPSILON))continue;const ring=index.boundary(room);faces.push({objectID:room.id,role:'ceiling',vertices:ring.map(p=>({...p,y:tops[0]})),triangles:triangulate(ring)});}return faces;
+  for(const room of floor.rooms){if(room.ceiling!==undefined)continue;const tops=room.boundary.map(r=>{const w=index.walls.get(r.wallID)!;return floor.elevation+w.baseY+w.height;});if(!tops.every(y=>Math.abs(y-tops[0])<=EPSILON)||tops[0]<=floor.elevation)continue;const ring=index.boundary(room);faces.push({objectID:room.id,role:'ceiling',vertices:ring.map(p=>({...p,y:tops[0]})),triangles:triangulate(ring)});}return faces;
 }
 export interface SceneRayHit{objectID:string;role:string;distance:number;point:Point3}
 export function nearestSceneHit(scene:GraphicScene,origin:Point3,direction:Point3,maximumDistance=2000,hiddenWalls=new Set<string>()):SceneRayHit|undefined{

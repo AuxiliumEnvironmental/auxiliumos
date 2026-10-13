@@ -24,5 +24,6 @@ export function reviewItems(document: SpatialDocument, floor: Floor): ReviewItem
   } catch {
     result.push({ id: 'navigation', severity: 'boundary', title: 'Walking needs a valid room layout', detail: 'Correct the room geometry before using movement through the model.' });
   }
+  for(const a of document.affectedAreas??[])if(a.reviewState!=='reviewed'&&(a.attachments.some(p=>p.surface?.floorID===floor.id)||a.reviewState==='unresolved'))result.push({id:`affected-${a.id}`,severity:'source',title:a.reviewState==='unresolved'?'Retained observation needs reattachment':'Affected observation needs review',detail:`${a.kind==='moisture'?'Moisture':'Fire damage'} sketch ${a.id}. Original footprint and material support are retained; no measurement or restoration scope is implied.`,selection:select('affectedArea',a.id)});
   return result.sort((a, b) => ['connection', 'boundary', 'source'].indexOf(a.severity) - ['connection', 'boundary', 'source'].indexOf(b.severity));
 }
