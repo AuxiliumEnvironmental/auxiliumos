@@ -1,5 +1,5 @@
 {
-  "revision": 3,
+  "revision": 4,
   "status": "accepted_engineering_contract",
   "verified_invariants": [
     "one_shared_editor",
@@ -229,24 +229,22 @@
         "F05"
       ],
       "specification": "SHARED_CONTRACT.md"
+    },
+    {
+      "id": "D18",
+      "topic": "Optional host cutouts and service penetrations",
+      "value": "Owner approved optional floor/ceiling cutouts and penetrations, extending wall cutouts. CUTOUT_SCOPE.md fixes explicit host selection, rectangle/circle profiles, real subtraction, strict cumulative admission, exact attachments, floor walk-support checks and retained observation support. No recess depth, automatic shafts or portal permissions.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
+      "specification": "CUTOUT_SCOPE.md"
     }
   ],
   "open": [
-    {
-      "id": "Q01",
-      "topic": "cutout scope",
-      "needed_before": "F04",
-      "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
-      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved.",
-      "blocks": [
-        "F04_cutout_implementation"
-      ],
-      "does_not_block": [
-        "F01",
-        "F02",
-        "F03"
-      ]
-    },
     {
       "id": "Q02",
       "topic": "unnamed catalog variants",
@@ -274,5 +272,25 @@
     "runtime_changes": false,
     "external_write_completed": true,
     "status": "adopted_in_parallel_activation"
-  }
+  },
+  "resolved": [
+    {
+      "id": "Q01",
+      "topic": "cutout scope",
+      "needed_before": "F04",
+      "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
+      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved.",
+      "blocks": [],
+      "does_not_block": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "status": "resolved_for_first_implementation",
+      "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
+      "resolved_at_owner_local": "2026-10-11",
+      "decision": "D18",
+      "resolution": "Optional wall/floor/ceiling through-cutouts and service penetrations. Recesses, notches and automatic multi-level shafts are outside this first scope."
+    }
+  ]
 }

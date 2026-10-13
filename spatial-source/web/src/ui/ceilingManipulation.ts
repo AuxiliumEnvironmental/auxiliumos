@@ -104,7 +104,9 @@ export function installCeilingManipulator(options: CeilingViewportOptions): { re
   let outline: import('three').LineSegments | null = null;
   let outlineBase: number[] = [], vertexRooms: { id: string; start: number; count: number; height: number }[] = [];
   let extension: import('three').LineSegments | null = null, extensionRanges: { id: string; start: number; count: number; baseY: number; height: number }[] = [];
-  const signature = (state: CeilingViewportState) => JSON.stringify([state.fence, state.floorID, state.targets, state.enabled, state.viewKey]);
+  // ResizeObserver is asynchronous. A terminal event can arrive before it has
+  // invalidated the drag, so compare the live projection surface as well.
+  const signature = (state: CeilingViewportState) => { const rect = canvas.getBoundingClientRect(); return JSON.stringify([state.fence, state.floorID, state.targets, state.enabled, state.viewKey, window.innerWidth, window.innerHeight, rect.x, rect.y, rect.width, rect.height]); };
   const basis = () => [...camera.position.toArray(), ...camera.quaternion.toArray(), ...camera.projectionMatrix.elements];
   const ray = (x: number, y: number): CeilingRay => { const rect = canvas.getBoundingClientRect(); camera.updateMatrixWorld(); raycaster.setFromCamera(new T.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), camera); return { origin: { ...raycaster.ray.origin }, direction: { ...raycaster.ray.direction } }; };
   const disposeLine = (line: import('three').LineSegments | null) => { if (line) { scene.remove(line); line.geometry.dispose(); (line.material as import('three').Material).dispose(); } };
@@ -145,7 +147,7 @@ export function installCeilingManipulator(options: CeilingViewportOptions): { re
   },options.requestPreview,options.cancelPreview);
   function cancel(): void {
     frames.clear(); const previous = drag; drag = null;
-    if (previous) { previous.cancel(); abandoned.add(previous.pointerID); if (handle.hasPointerCapture(previous.pointerID)) handle.releasePointerCapture(previous.pointerID); controls.enabled = options.state().navigationEnabled; resetPreview(); stamp = ''; options.render(); }
+    if (previous) { previous.cancel(); abandoned.add(previous.pointerID); if (handle.hasPointerCapture(previous.pointerID)) handle.releasePointerCapture(previous.pointerID); controls.enabled = options.state().navigationEnabled; resetPreview(); stamp = ''; options.notify('Ceiling height edit canceled.'); options.render(); }
   }
   const refresh = () => {
     if (disposed) return;

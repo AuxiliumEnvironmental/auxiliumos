@@ -2,7 +2,7 @@
 
 | Target | Maintained input | Required receipt | Current boundary |
 |---|---|---|---|
-| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | F01 source accepted; F02-F05 concurrent branch development awaits their chats |
+| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | F01/F02 source accepted; F04/F05 reviewed branch candidates; F03 source patch missing |
 | Dedicated Lovable/web | `host:spatial-source/` plus protected host scaffold | Input/host hashes, host build, served version and affected interaction | Current host 467221a; a source commit alone does not update it |
 | Installed iPhone | web build packaged through `source:capacitor/prepare.py`; Swift bridges | Asset manifest, actual Apple build, simulator/device evidence as applicable | Old unsigned compile exists; current-device acceptance open |
 | AuxiliumOS tool | `source:integration/package_os.py` and authorized adapter | Generated manifest, preserved host diff, authorized project-context journey | Older embed; recoverable cutover and authority binding required |
@@ -40,3 +40,7 @@ F02 may proceed from this accepted source when activated. The master retains the
 ## Parallel feature delivery boundary
 
 ACTIVE_TASKS.json permits isolated source development only. Four feature chats must not each deploy/overwrite the live host or regenerate the same installed/OS target. The master integrates accepted changes once in dependency order and transfers the composed source with target-specific receipts. The original single-chat restriction is superseded; platform evidence requirements are unchanged.
+
+## October 12 master review boundary
+
+F02 is integrated with matching reviewed source and successful production build/browser evidence. F04 and F05 reviewed branches are preserved, including optional cutouts and penetrations, but require actual F03 composition before combined acceptance. See `coordination/INTEGRATION_REVIEW_2026_10_12.json`. Linux Chromium 153 software-WebGL evidence is separate from earlier Chromium 138 and physical iPhone evidence. No host source transfer, packaged Apple assets, Apple build/install or OS cutover was performed in this review. The last observed host identity above was not freshly rechecked because no host operation occurred.

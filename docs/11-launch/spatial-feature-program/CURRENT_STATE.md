@@ -1,12 +1,24 @@
 # Current state and provenance
 
+## Master integration update: October 12, 2026
+
+F02 openings is **code accepted with platform gaps** and integrated into this program source. Reviewed branch commit: `6342e87e27376fb664dfe904d299a2c94ffac1ff`. Its full production build and focused catalog, numeric/elevation, mobile 3D, IndexedDB and archive browser checks pass. The integrated application and contracts match the reviewed candidate byte for byte. A cancellation-feedback defect and browser fixture assumptions were corrected. Some cancellation paths retain code-review/core evidence rather than separate browser runs.
+
+F04 fixtures and optional wall/floor/ceiling cutouts/penetrations are reviewed and saved at `44315237caccb4fb2511ebf54867f504f7a4d859`. The 20-entry catalog and real cutouts remain on that feature branch. Review fixes cover hidden-ceiling picks, group selection and movement across wall bends. F05 affected areas is reviewed and saved at `dc53c7a1bce141706764a8da3af82c1c69fb1333`; replacement ceiling identities now preserve observations unresolved. F05's final build, store/export checks and desktop/mobile browser journeys pass. Neither branch is accepted as composed source yet.
+
+**First incomplete action:** Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.
+
+The supplied F03 handoff and verification JSON are receipts, not its implementation. Its branch remains at `a90d4f9f132153498d7567758a14132cbafa5c0f`. The missing 27-file patch has SHA256 `dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0`; attached files, accessible scratch and targeted Library lookup did not recover it. Preserve the existing candidate rather than rebuilding it from prose.
+
+See `coordination/INTEGRATION_REVIEW_2026_10_12.json` and `coordination/handoffs/`. No worker is claimed to keep running after handoff. Host, Apple and OS delivery remain under F06. The following sections retain the earlier preparation and F01 evidence in their original scope.
+
 ## Master review update: October 11, 2026
 
 F01 surface contrast is **code accepted with platform gaps**, recorded at `3240880195cd6653d0816da5cb4412bda2516e52`. Implementation: `33cc3527f239726d2a4503242da9b0a7531ed4b9`; evidence: `d553a3dbb25470abd5e0b157f708f7dda8383769`. Matching source/evidence and both mobile screenshots passed master review. See `coordination/F01_ACCEPTANCE.json`.
 
-The owner approved concurrent feature development. F02 openings, F03 ceiling heights, F04 fixtures and F05 affected areas are assigned isolated branches in `coordination/ACTIVE_TASKS.json`. Contract revision 3 and `SURFACE_INTERFACE.md` freeze their shared semantics. No feature worker is claimed to be running merely because an assignment exists. Integration remains F02 then F03 then F04 then F05. The old single-task file is retired.
+The owner approved concurrent feature development. F02 openings, F03 ceiling heights, F04 fixtures and F05 affected areas are assigned isolated branches in `coordination/ACTIVE_TASKS.json`. Contract revision 4 and `SURFACE_INTERFACE.md` freeze their shared semantics. No feature worker is claimed to be running merely because an assignment exists. Integration remains F02 then F03 then F04 then F05. The old single-task file is retired.
 
-F04 fixtures can proceed; Q01 still gates actual cutout implementation and Q02 tracks unnamed catalog variants. Source acceptance has not transferred F01 to the host, packaged Apple assets or updated the OS embed. Those delivery gates remain master-owned under F06.
+The owner resolved Q01 on October 11: optional wall/floor/ceiling cutouts and service penetrations are authorized under D18/CUTOUT_SCOPE.md. F04 has an additive exact-path grant; F03/F05 consume the same real material domains. Q02 still tracks unnamed catalog variants. This is scope authorization, not cutout implementation or worker-start evidence. Source acceptance has not transferred F01 to the host, packaged Apple assets or updated the OS embed. Those delivery gates remain master-owned under F06.
 
 ## What is verified in this preparation pass
 
@@ -30,7 +42,7 @@ One maintained React/TypeScript workspace in `source:web/` provides browser, hos
 
 The current source has manual connected-room drawing, press-drag/two-tap room sizing, magnetic corner/wall connections, wall strokes, direct plan opening placement/manipulation, group selection/movement, draft recovery, geometric 3D/cutaway/walkthrough, local revision storage and frozen exports. Treat recorded checks as evidence for their specific inputs, not proof of physical device acceptance.
 
-Concrete gaps for this program: no direct 3D opening editing callback; no door subtype/orientation fields; room ceilings are derived display faces, not authored heights; floor/ceiling picking conflates room identity; no fixture or affected-area records; strict old-version admission rejects new fields; F01 has aligned the supported GLB structural materials, while future styled openings need coordinated drawing/scene/export updates. The feature packets identify actual file paths.
+Gaps at the original preparation baseline: no direct 3D opening editing callback; no door subtype/orientation fields; room ceilings are derived display faces, not authored heights; floor/ceiling picking conflates room identity; no fixture or affected-area records; strict old-version admission rejects new fields; F01 has aligned the supported GLB structural materials, while future styled openings need coordinated drawing/scene/export updates. The feature packets identify actual file paths.
 
 ## Platform acceptance remains separate
 

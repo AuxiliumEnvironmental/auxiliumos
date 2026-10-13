@@ -37,6 +37,14 @@ test('F03-A03 ceiling/opening and numeric bounds reject atomically with actionab
   const d=asymmetric(),before=structuredClone(d);assert.throws(()=>edit(d,1.9),/opening door-a/);for(const value of [NaN,Infinity,0,-1,101])assert.throws(()=>edit(d,value));assert.deepEqual(d,before);
   const tooLow=structuredClone(d);tooLow.floors[0].rooms[0].ceiling!.height=1;assert(validateDocument(tooLow).some(i=>i.code==='ceiling_opening_conflict'));
 });
+test('F03 migration retains accepted F02 styles and later style edits retain ceilings',()=>{
+  const styled=applyCommands(fixture(),[{type:'setOpeningStyle',floorID:'floor-1',openingID:'door-a',styleID:'door_single'}],1).document;
+  const migrated=edit(styled,3.5).document;
+  assert.equal(migrated.schemaVersion,'1.3.0');assert.deepEqual(migrated.floors[0].openings,styled.floors[0].openings);
+  const changed=applyCommands(migrated,[{type:'flipOpening',floorID:'floor-1',openingID:'door-a',axis:'horizontal'}],migrated.revision).document;
+  assert.equal(changed.schemaVersion,'1.3.0');assert.deepEqual(changed.floors[0].rooms,migrated.floors[0].rooms);
+  assert(buildScene(changed,'floor-1').faces.some(face=>face.role==='opening'));
+});
 test('F03-A04 stable identities split, merge, serialize and reject incompatible merge unless resolved',()=>{
   const source=fixture();let d=edit(source,3,'absolute',[roomTarget(),roomTarget('room-b')]).document;const ids=d.floors[0].rooms.map(r=>r.ceiling!.id);
   const merged=applyCommands(d,[{type:'mergeRooms',floorID:'floor-1',firstRoomID:'room-a',secondRoomID:'room-b'}],d.revision);assert.equal(merged.document.floors[0].rooms[0].ceiling!.id,ids[0]);assert(merged.document.floors[0].rooms[0].ceiling!.provenance.sourceIDs.includes(ids[1]));
@@ -49,7 +57,8 @@ test('F03-A04 strict old and new admission rejects fields, missing state, duplic
   const old=fixture();old.floors[0].rooms[0].ceiling=null;assert(validateDocument(old).some(i=>i.code==='unknown_field'));
   const d=edit(fixture(),3).document;delete d.floors[0].rooms[0].ceiling;assert(validateDocument(d).some(i=>i.code==='required'));
   const valid=edit(fixture(),3).document;valid.floors[0].rooms[0].ceiling!.id=valid.floors[0].rooms[1].ceiling!.id;assert(validateDocument(valid).some(i=>i.code==='duplicate_id'));
-  for(const schemaVersion of ['1.2.0','1.4.0','2.0.0'])assert(validateDocument({...fixture(),schemaVersion}).length>0);
+  assert.equal(validateDocument({...fixture(),schemaVersion:'1.2.0'}).length,0);
+  for(const schemaVersion of ['1.4.0','2.0.0'])assert(validateDocument({...fixture(),schemaVersion}).length>0);
 });
 test('F03-A06 area editing cannot downgrade ceiling geometry or scene, and new rooms have explicit null intent',()=>{
   let d=edit(fixture(),3).document;const floor=d.floors[0],saved=structuredClone(floor.rooms[1]);d=applyCommands(d,[{type:'setArea',floorID:floor.id,area:{id:'area',label:'Area',polygon:[{x:1,z:1},{x:2,z:1},{x:1,z:2}],provenance:{origin:'edited',sourceIDs:[],classificationConfidence:'unknown'}}}],d.revision).document;assert.equal(d.schemaVersion,'1.3.0');assert.equal(buildScene(d,floor.id).schemaVersion,'1.3.0');

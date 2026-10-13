@@ -11,12 +11,14 @@ export class WalkNavigation {
   readonly documentID:string;readonly revision:number;readonly floorID:string;readonly elevation:number;
   readonly settings:WalkSettings;readonly portals:WalkPortal[];readonly restrictions:WalkRestriction[];readonly roomIDs:string[];
   private readonly regions:Region[];private readonly barriers:Barrier[];
+  private readonly lowRooms:Set<string>;
   constructor(document:SpatialDocument,floorID:string,settings:Partial<WalkSettings>={}){
     this.settings=Object.freeze({...defaults,...settings});const s=this.settings;
     if(![s.radius,s.eyeHeight,s.headClearance,s.maximumMove].every(Number.isFinite)||s.radius<0.05||s.radius>0.5||s.eyeHeight<0.5||s.eyeHeight>2.5||s.headClearance<0||s.headClearance>0.5||s.maximumMove<0.1||s.maximumMove>100)throw new Error('Invalid display navigation settings');
     const doc=requireValidDocument(document),floor=doc.floors.find(f=>f.id===floorID);if(!floor)throw new Error(`Missing floor ${floorID}`);
     if(floor.rooms.length>1000||floor.walls.length>10000||floor.walls.reduce((n,w)=>n+w.nodeIDs.length-1,0)>20000||floor.rooms.reduce((n,r)=>n+r.boundary.length,0)>20000)throw new Error('Layout exceeds the bounded navigation work limit');
     this.documentID=doc.documentID;this.revision=doc.revision;this.floorID=floorID;this.elevation=floor.elevation;
+    this.lowRooms=new Set(floor.rooms.filter(room=>room.ceiling&&room.ceiling.height<s.eyeHeight+s.headClearance).map(room=>room.id));
     const index=new FloorGeometryIndex(floor);this.regions=floor.rooms.map(room=>{const p=index.boundary(room);return{id:room.id,polygon:p,minX:Math.min(...p.map(p=>p.x)),maxX:Math.max(...p.map(p=>p.x)),minZ:Math.min(...p.map(p=>p.z)),maxZ:Math.max(...p.map(p=>p.z))};});
     this.roomIDs=this.regions.map(r=>r.id);const byID=new Map(this.regions.map(r=>[r.id,r]));const refs=new Map<string,string[]>();for(const r of floor.rooms)for(const w of r.boundary)refs.set(w.wallID,[...(refs.get(w.wallID)??[]),r.id]);
     const groups=new Map<string,Opening[]>();for(const o of floor.openings)groups.set(o.wallID,[...(groups.get(o.wallID)??[]),o]);
@@ -26,6 +28,7 @@ export class WalkNavigation {
         if(o.kind==='window')reason='Windows are not walk portals.';
         else if(adjacent.length!==2)reason='The opening does not connect two explicitly modeled rooms.';
         else if(o.provenance.origin==='inferred')reason='Inferred openings require explicit correction before navigation.';
+        else if(adjacent.some(id=>this.lowRooms.has(id)))reason='The established ceiling does not provide display head clearance.';
         else if(Math.abs(wall.baseY+o.bottom)>EPSILON||wall.baseY+o.bottom+o.height<s.eyeHeight+s.headClearance)reason='The display body does not fit a floor-level opening.';
         else if(o.width<=s.radius*2+EPSILON)reason='The opening is too narrow for the display collision radius.';
         else if(segment<0)reason='An opening across a wall bend needs explicit review.';
@@ -43,6 +46,7 @@ export class WalkNavigation {
     for(const p of this.portals){Object.freeze(p.a);Object.freeze(p.b);Object.freeze(p.roomIDs);Object.freeze(p);}for(const r of this.restrictions)Object.freeze(r);Object.freeze(this.portals);Object.freeze(this.restrictions);Object.freeze(this.roomIDs);
   }
   start(roomID:string):WalkPosition{
+    if(this.lowRooms.has(roomID))throw new Error('The established ceiling does not provide display head clearance.');
     const region=this.regions.find(r=>r.id===roomID);if(!region)throw new Error(`No modeled room ${roomID}`);const p=region.polygon,triangles=triangulate(p),area=signedArea(p);let cx=0,cz=0;
     for(let i=0;i<p.length;i++){const a=p[i],b=p[(i+1)%p.length],cross=a.x*b.z-b.x*a.z;cx+=(a.x+b.x)*cross;cz+=(a.z+b.z)*cross;}
     const candidates:Point2[]=[{x:cx/(6*area),z:cz/(6*area)}];for(const t of triangles){const[a,b,c]=t.map(i=>p[i]),la=distance(b,c),lb=distance(a,c),lc=distance(a,b),sum=la+lb+lc;candidates.push({x:(la*a.x+lb*b.x+lc*c.x)/sum,z:(la*a.z+lb*b.z+lc*c.z)/sum},{x:(a.x+b.x+c.x)/3,z:(a.z+b.z+c.z)/3});}
@@ -63,7 +67,7 @@ export class WalkNavigation {
     const crossedPortalIDs=this.portals.filter(p=>intersectionTimes(start.point,end,p.a,p.b).some(t=>t>=0&&t<=1)).map(p=>p.openingID);
     return{position:this.position(end,room),requested:{...target},reachedTarget,stop,blockingObjectID,crossedPortalIDs};
   }
-  private position(point:Point2,roomID:string):WalkPosition{return{documentID:this.documentID,revision:this.revision,floorID:this.floorID,roomID,point:{...point},eyeY:this.elevation+this.settings.eyeHeight};}
+  private position(point:Point2,roomID:string):WalkPosition{if(this.lowRooms.has(roomID))throw new Error('The established ceiling does not provide display head clearance.');return{documentID:this.documentID,revision:this.revision,floorID:this.floorID,roomID,point:{...point},eyeY:this.elevation+this.settings.eyeHeight};}
   private uniqueRoom(point:Point2):string|undefined{const matches=this.regions.filter(r=>regionContains(r,point));return matches.length===1?matches[0].id:undefined;}
   private room(point:Point2,preferred:string):string|undefined{return this.uniqueRoom(point)??(this.portals.some(p=>p.roomIDs.includes(preferred)&&onSegment(point,p.a,p.b))?preferred:undefined);}
   private clearance(point:Point2):number{let minimum=Infinity;for(const b of this.barriers)minimum=Math.min(minimum,segmentDistance(point,b.a,b.b));return minimum;}

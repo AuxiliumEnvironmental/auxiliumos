@@ -57,7 +57,7 @@ async function center(page: Page) {
   return { x: box.x + box.width / 2, y: box.y + box.height / 2 };
 }
 async function shot(page: Page, filename: 'ceiling-height-mobile.png' | 'ceiling-structure-desktop.png') {
-  const dir = new URL('../../../../docs/11-launch/spatial-feature-program/coordination/handoffs/F03/', import.meta.url);
+  const dir = new URL('../../test-results/f03/', import.meta.url);
   await mkdir(fileURLToPath(dir), { recursive: true }); await page.screenshot({ path: fileURLToPath(new URL(filename, dir)), fullPage: true });
 }
 
@@ -133,13 +133,19 @@ test('F03 coalesced preview and interrupted/stale release cannot overwrite durab
   expect(result.after.id).toBe(result.before.id); expect(result.after.renderFrames - result.before.renderFrames).toBeLessThanOrEqual(2);
   expect((await saved(page)).document).toEqual(source);
   await page.keyboard.press('Escape'); await page.mouse.up(); await revision(page, 1);
-  for (const interruption of ['blur', 'cutaway', 'resize']) {
+  for (const interruption of ['blur', 'cutaway', 'resize', 'immediate canvas resize']) {
     await settings(page); await page.getByLabel('Cutaway', { exact: true }).uncheck(); const p = await center(page);
     await page.mouse.move(p.x, p.y); await page.mouse.down(); await page.mouse.move(p.x, p.y - 20);
     if (interruption === 'blur') await page.evaluate(() => window.dispatchEvent(new Event('blur')));
     if (interruption === 'cutaway') await page.getByLabel('Cutaway', { exact: true }).evaluate((input: HTMLInputElement) => input.click());
     if (interruption === 'resize') await page.setViewportSize({ width: 1420, height: 980 });
-    await page.mouse.up(); expect((await saved(page)).document).toEqual(source);
+    if (interruption === 'immediate canvas resize') await page.getByRole('button', { name: 'Drag ceiling height', exact: true }).evaluate((handle, point) => {
+      const canvas = handle.parentElement!.querySelector('canvas')!;
+      canvas.style.width = `${canvas.getBoundingClientRect().width - 20}px`;
+      // Dispatch in this same task, before ResizeObserver can notify the editor.
+      handle.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, pointerId: 1, pointerType: 'mouse', button: 0, clientX: point.x, clientY: point.y - 20 }));
+    }, p);
+    await page.mouse.up(); expect((await saved(page)).document, `Canceled by ${interruption}`).toEqual(source);
   }
   await page.getByLabel('Cutaway', { exact: true }).uncheck(); const stale = await center(page);
   await page.mouse.move(stale.x, stale.y); await page.mouse.down(); await page.mouse.move(stale.x, stale.y - 20);

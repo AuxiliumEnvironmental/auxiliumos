@@ -1,5 +1,6 @@
 import type { Ceiling, CeilingHeightEdit, CeilingTarget, Floor, HeightBasis, Provenance, Room, SpatialDocument } from '../types';
 import { EPSILON } from './geometry';
+import { isAtLeastSchemaVersion } from './versions';
 
 export const CEILING_SCHEMA_VERSION = '1.3.0' as const;
 export const MAX_CEILING_HEIGHT = 100;
@@ -44,8 +45,8 @@ function allocateFromUsed(used: ReadonlySet<string>, roomID: string): string {
 
 /** Only call on the transaction's owned clone, never during open, display or export. */
 export function establishCeilingSchema(document: SpatialDocument): void {
-  if (document.schemaVersion === CEILING_SCHEMA_VERSION) return;
-  if (document.schemaVersion !== '1.0.0' && document.schemaVersion !== '1.1.0') throw new Error('This ceiling adapter needs the accepted predecessor schema before migration.');
+  if (isAtLeastSchemaVersion(document.schemaVersion, CEILING_SCHEMA_VERSION)) return;
+  if (!['1.0.0', '1.1.0', '1.2.0'].includes(document.schemaVersion)) throw new Error('This ceiling adapter needs the accepted predecessor schema before migration.');
   for (const floor of document.floors) {
     const walls = new Map(floor.walls.map(wall => [wall.id, wall]));
     const used = new Set([...floor.walls, ...floor.openings, ...floor.rooms, ...(floor.areas ?? [])].map(item => item.id));
@@ -196,7 +197,7 @@ export function mergedCeilingIntent(floor: Floor, first: Room, second: Room, exp
 
 /** Final envelope check also covers a newly assigned boundary or explicit merge height. */
 export function extendCeilingEnvelopes(document: SpatialDocument): void {
-  if (document.schemaVersion !== CEILING_SCHEMA_VERSION) return;
+  if (!isAtLeastSchemaVersion(document.schemaVersion, CEILING_SCHEMA_VERSION)) return;
   for (const floor of document.floors) {
     const required = new Map<string, number>();
     for (const room of floor.rooms) if (room.ceiling) for (const ref of room.boundary) required.set(ref.wallID, Math.max(required.get(ref.wallID) ?? -Infinity, room.ceiling.height));

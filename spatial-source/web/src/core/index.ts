@@ -4,3 +4,6 @@ export { EPSILON, wallPath, roomBoundary, pathLength, pathPoint, closedRoomBound
 export { buildScene, evaluateCutaway, displayCeilings, nearestSceneHit } from './scene';
 export type { CutawayResult, SceneRayHit } from './scene';
 export { WalkNavigation } from './navigation';
+export { establishCeilingSchema, resolvedCeilingHeight, prepareCeilingEdit, previewCeilingHeights } from './ceilings';
+export { resolveSurface, resolveUncutSurface, surfacePointToWorld, surfaceRemapReceipt } from './surfaces';
+export { isAtLeastSchemaVersion, maxSchemaVersion } from './versions';

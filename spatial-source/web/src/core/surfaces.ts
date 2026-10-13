@@ -183,7 +183,7 @@ function chartInterval(source: Point2[], next: Point2[]): { lo: number; hi: numb
 export function surfaceRemapReceipt(source: SpatialDocument, next: SpatialDocument, mappings?: readonly GeometryIDMapping[]): SurfaceRemapReceipt {
   const result: SurfaceRemap[] = [];
   const destinations = (floorID: string, kind: string, sourceID: string): string[] | undefined => mappings?.find(mapping => mapping.floorID === floorID && mapping.objectKind === kind && mapping.sourceID === sourceID)?.resultingIDs;
-  const unresolved = (from: SurfaceRef, domain: SurfaceDomain, to: SurfaceRef | null = null) => result.push({ from, to, sourceDomain: domain, transform: null, outcome: 'unresolved' });
+  const unresolved = (from: SurfaceRef, domain: SurfaceDomain, _candidate: SurfaceRef | null = null) => result.push({ from, to: null, sourceDomain: domain, transform: null, outcome: 'unresolved' });
   for (const floor of source.floors) {
     const targetFloor = next.floors.find(item => item.id === floor.id), floorChanged = !targetFloor || floor.elevation !== targetFloor.elevation || destinations(floor.id, 'floor', floor.id) !== undefined;
     for (const room of floor.rooms) {
@@ -200,6 +200,7 @@ export function surfaceRemapReceipt(source: SpatialDocument, next: SpatialDocume
         for (const target of targets) {
           const to: SurfaceRef | null = ref.kind === 'floor' ? { floorID: floor.id, kind: 'floor', roomID: target.id } : target.ceiling ? { floorID: floor.id, kind: 'ceiling', roomID: target.id, ceilingID: target.ceiling.id } : null;
           if (!to) { unresolved(ref, resolved.domain); emitted = true; continue; }
+          if (ref.kind === 'ceiling' && to.kind === 'ceiling' && ref.ceilingID !== to.ceilingID && target.id === room.id && (!ids || ids.length === 1 && !mappings?.some(mapping => mapping.objectKind === 'room' && mapping.sourceID !== room.id && mapping.resultingIDs.includes(target.id)))) { unresolved(ref, resolved.domain); emitted = true; continue; }
           const before = roomBoundary(floor, room), after = roomBoundary(targetFloor!, target).map(p => planPoint(transformSurfacePoint(point(p), inv)));
           if (sameRing(before, after)) { result.push({ from: ref, to, sourceDomain: resolved.domain, transform: frame, outcome: 'exact' }); emitted = true; }
           else if (ids && (ids.length > 1 || target.id !== room.id || mappings?.some(mapping => mapping.objectKind === 'room' && mapping.sourceID !== room.id && mapping.resultingIDs.includes(target.id)))) {

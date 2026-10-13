@@ -49,3 +49,45 @@ recovered-draft source links and confirmed-history-cleanup journals. Changes do
 not migrate any OS/Moldo database. PublicationAuthorization and managed leases
 are injected scoped contracts, not reusable URL credentials or configured live
 account integrations. The app uses local device-owner access only by default.
+
+## F02 opening authoring (geometry / scene 1.2.0)
+
+The shared web editor admits immutable 1.0.0 and 1.1.0 documents and adds strict
+1.2.0 admission. An explicit catalog edit upgrades a mutable revision; opening
+a document never rewrites its original snapshot. Legacy generic apertures retain
+unspecified subtype/orientation. Style provenance is authored independently of
+aperture provenance and cannot grant inferred openings navigation authority.
+
+Scene 1.2.0 adds opening-owned `opening` faces for diagrammatic frames/panels.
+Complete local-document 1.0/1.1 profiles retain their existing member contract,
+including separately versioned geometry/scene, drawings and GLB. Unsupported
+versions reject intact. The constrained legacy exchange/outbox rejects 1.2.0
+with a complete-local-document alternative; the v1 publisher remains disabled.
+Drawing recovery writes formatVersion 2 for styled opening drafts and continues
+reading/writing legacy formatVersion 1 for other drafts. A v1 record with style
+fields is rejected rather than silently stripped. No database version changes.
+
+Styles persist in meters with wall-local end/side orientation. Wall reversal
+swaps both applicable orientation dimensions; split/join translates arclength.
+Rigid styles cannot cross a noncollinear bend. Generic legacy apertures may.
+Companion symbol extents are not physical opening heights. SVG/PDF/PNG use the
+same plan primitives and include their extents. GLB opening material handling
+is explicit and preserves the accepted structural surface palette.
+
+## F03 ceiling heights (geometry / scene 1.3.0)
+
+Geometry 1.3.0 retains the complete 1.2.0 opening contract and requires each
+room to record either a stable planar ceiling or explicit null intent. The first
+ceiling edit establishes legacy uniform positive wall tops as inferred ceilings;
+unknown and uneven tops remain null. Opening or exporting older documents does
+not migrate their frozen geometry. Authored ceiling edits preserve floor datums,
+neighboring room intent and aperture geometry, extend necessary wall envelopes,
+and reject conflicts atomically. Later feature upgrades retain these fields.
+
+Scene 1.3.0 emits each canonical ceiling once using its own stable identity.
+Display-only legacy ceiling previews do not duplicate canonical scene faces.
+Complete local documents retain the geometry and canonical scene; GLB retains
+ceiling identities and materials; drawing directories include established
+heights and their unverified basis. The legacy exchange remains constrained to
+1.0/1.1. Undo, redo and restore issue surface mappings bound to the actual source
+and newly saved revision, including unresolved outcomes for replaced hosts.

@@ -56,7 +56,7 @@ function offsetAt(points: Point2[], p: Point2): number | undefined {
  * and adjacent room winding. Contact never creates a door or a guessed passage.
  * The complete batch is one validated, undoable editor transaction.
  */
-export function rectangleRoomCommands(floor: Floor, a: Point2, b: Point2): { commands: EditCommand[]; roomID: string; submittedIDs: string[] } {
+export function rectangleRoomCommands(floor: Floor, a: Point2, b: Point2, schemaVersion: SpatialDocument['schemaVersion'] = floor.rooms.some(room=>room.ceiling!==undefined) ? '1.3.0' : floor.openings.some(o => o.style) ? '1.2.0' : floor.areas === undefined ? '1.0.0' : '1.1.0'): { commands: EditCommand[]; roomID: string; submittedIDs: string[] } {
   const corners = rectangleCorners(a, b);
   if (!finitePoint(a) || !finitePoint(b) || Math.abs(a.x - b.x) <= EPSILON || Math.abs(a.z - b.z) <= EPSILON || !isSimplePolygon(corners)) {
     throw new Error('Choose opposite corners with space between them in both directions. The room draft is still editable.');
@@ -204,7 +204,7 @@ export function rectangleRoomCommands(floor: Floor, a: Point2, b: Point2): { com
   commands.push({ type: 'addRoom', floorID: floor.id, room: { id: roomID, label: `Room ${number}`, boundary: ordered } });
   // The actual editor remains the sole mutation authority. This dry run also
   // checks opening-safe splits and complete room rings before discarding a draft.
-  const preview: SpatialDocument = { schemaVersion: floor.areas === undefined ? '1.0.0' : '1.1.0', documentID: 'rectangle-preflight', revision: 1, title: 'Rectangle preflight', coordinateSystem: 'meters_y_up_right_handed', measurementStatus: 'unverified', reviewState: 'needsReview', floors: [floor] };
+  const preview: SpatialDocument = { schemaVersion, documentID: 'rectangle-preflight', revision: 1, title: 'Rectangle preflight', coordinateSystem: 'meters_y_up_right_handed', measurementStatus: 'unverified', reviewState: 'needsReview', floors: [floor] };
   applyCommands(preview, commands, preview.revision);
   return { commands, roomID, submittedIDs: [...new Set([...boundary.map(reference => reference.wallID), ...commands.flatMap(command => command.type === 'splitWall' ? [command.newWallID] : []), roomID])] };
 }

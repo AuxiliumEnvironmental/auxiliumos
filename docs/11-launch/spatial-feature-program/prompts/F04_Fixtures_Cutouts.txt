@@ -8,7 +8,7 @@ Task issue: #93; parent #88.
 
 FIRST read the latest program-branch docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json and select active_tasks.F04. Recheck it before editing and before pushing. The old ACTIVE_TASK.json and archived ZIP do not grant writes. Confirm your branch descends from the master activation; preserve newer work and dirty files. Do not write or push the shared program branch or any other feature branch.
 
-Then read program START_HERE.md, PARALLEL_DEVELOPMENT.md, MASTER_CONTROL.md, SHARED_CONTRACT.md revision 3, SURFACE_INTERFACE.md, PLATFORM_DELIVERY.md, features/F04_Fixtures_Cutouts.md, source AGENTS.md, RESUME.md, web/IMPLEMENTATION_CONTRACT.md and only relevant source/tests. source: means spatial-source/; program: means docs/11-launch/spatial-feature-program/.
+Then read program START_HERE.md, PARALLEL_DEVELOPMENT.md, MASTER_CONTROL.md, SHARED_CONTRACT.md revision 4, SURFACE_INTERFACE.md, CUTOUT_SCOPE.md, PLATFORM_DELIVERY.md, features/F04_Fixtures_Cutouts.md, source AGENTS.md, RESUME.md, web/IMPLEMENTATION_CONTRACT.md and only relevant source/tests. source: means spatial-source/; program: means docs/11-launch/spatial-feature-program/.
 
 The owner changed the old serial-development instruction. You may implement now while the other features develop. The integration dependencies in your assignment govern master acceptance, not whether your isolated implementation can start. Build real feature functionality and focused checks. Do not fabricate another feature's completion or duplicate its entire implementation. Use explicitly synthetic interface fixtures only for bounded helper checks, identifying their limits. Shared-file adapters and cumulative schemas remain branch candidates until reconciled with accepted predecessors by the master.
 
@@ -18,6 +18,6 @@ Preserve meters/Y-up, wall charts/sides, the common surface interface and predec
 
 Commit/push only your branch with expected-head protection. Return actual base/result commits, exact changed paths, commands/results/screenshots, shared-file adapter commits, dependency revisions tested and remaining integration/platform/scope gaps. Report branch_implementation_complete_pending_integration, not delivered or integrated. Use HANDOFF_TEMPLATE.json and the allocated evidence paths. No issue closure or next-feature activation.
 
-Build every named fixture family now. Q01 still gates actual cutout implementation and F04-A04. Do not stall fixture work or pretend a cosmetic object is a cutout. Record unnamed variants as provisional.
+Build every named fixture family and the optional cutouts/penetrations defined in D18/CUTOUT_SCOPE.md. Q01 is resolved and the live ledger grants exact cutout/navigation paths. Preserve your branch work; do not restart fixtures. Use real wall/floor/ceiling subtraction, shared surface domains, floor walk-support checks and explicit placement. No recesses, automatic shafts or portal permissions. Record concrete engineering limitations honestly and unnamed catalog variants as provisional.
 
 End with PASTE BACK TO MASTER. Stop after your feature handoff.

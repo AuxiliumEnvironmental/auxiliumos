@@ -1,3 +1,8 @@
+import { beginOpeningModelDrag, openingModelDragPreview, openingModelCorners, openingModelEdges, type OpeningModelDrag } from './openingModelManipulation';
+import { openingHostPreview } from '../core/scene';
+import { sameOpeningGeometry, type OpeningCorner } from '../core/openings';
+import { installCeilingManipulator } from './ceilingManipulation';
+import { CeilingHeightControls } from './CeilingHeightControls';
 import { useEffect, useLayoutEffect, useId, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -5,12 +10,18 @@ import { buildScene, displayCeilings, roomBoundary, wallPath, WalkNavigation } f
 import { batchSceneFaces } from './sceneBatches';
 import { STRUCTURAL_EDGE_COLOR } from '../surfacePalette';
 import { trackRenderer } from './rendererDiagnostics';
-import type { Floor, Point2, Selection, SpatialDocument, WalkPosition } from '../types';
+import type { CeilingTarget, EditFence, Floor, Opening, Point3, OpeningEditFence, EditCommand, Point2, Selection, SpatialDocument, WalkPosition } from '../types';
 
 export type ModelViewState = { camera: [number,number,number]; target: [number,number,number]; cutaway: boolean; cut: number; fills: boolean; ceilings: boolean };
-type Props = { active?: boolean; rememberedView?: ModelViewState; rememberView?: (view: ModelViewState) => void; document: SpatialDocument; floor: Floor; selection: Selection | null; groupSelection?: Selection[]; onSelect: (selection: Selection | null) => void };
-type Runtime = { camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; showCeilings: (visible: boolean) => void; setActive: (active: boolean) => void; dispose: () => void };
-export function ModelViewport({ active = true, rememberedView, rememberView, document, floor, selection, groupSelection, onSelect }: Props) {
+type Props = { active?: boolean; disabled?: boolean; editContext?: Omit<OpeningEditFence, 'openingID'>; onEdit?: (commands: EditCommand[], fence?: OpeningEditFence) => void | Promise<boolean>; ceilingFence?: EditFence; onCeilingEdit?: (commands: EditCommand[],fence:EditFence)=>void; onWalkingChange?:(walking:boolean)=>void; rememberedView?: ModelViewState; rememberView?: (view: ModelViewState) => void; document: SpatialDocument; floor: Floor; selection: Selection | null; groupSelection?: Selection[]; onSelect: (selection: Selection | null) => void };
+type Runtime = { cancelCeilingEdit: () => void; refreshCeilingEdit: () => void; cancelOpeningEdit: () => void; camera: THREE.PerspectiveCamera; controls: OrbitControls; render: () => void; focus: THREE.Vector3; initial: THREE.Vector3; clipping: THREE.Plane; updateSection: (height: number | null) => void; select: (selection: Selection | null) => void; showCeilings: (visible: boolean) => void; setActive: (active: boolean) => void; dispose: () => void };
+export function ModelViewport({ active = true, rememberedView, rememberView, document, floor, selection, groupSelection, onSelect, disabled = false, editContext, onEdit, ceilingFence, onCeilingEdit, onWalkingChange }: Props) {
+  const editRef = useRef({ disabled, context: editContext, onEdit }); editRef.current = { disabled, context: editContext, onEdit };
+  const selectedCeilingRoom=selection?.kind==='room'?floor.rooms.find(r=>r.id===selection.objectID):selection?.kind==='ceiling'?floor.rooms.find(r=>r.ceiling?.id===selection.objectID):undefined;
+  const ceilingTarget:CeilingTarget|undefined=selectedCeilingRoom&&!groupSelection?.length?{floorID:floor.id,roomID:selectedCeilingRoom.id}:undefined;
+  const [ceilingTargets,setCeilingTargets]=useState<CeilingTarget[]>([]);
+  const ceilingRef=useRef({ceilingFence,onCeilingEdit,ceilingTarget,ceilingTargets,disabled,onWalkingChange});ceilingRef.current={ceilingFence,onCeilingEdit,ceilingTarget,ceilingTargets,disabled,onWalkingChange};
+  useLayoutEffect(()=>{setCeilingTargets(ceilingTarget?[ceilingTarget]:[]);},[ceilingTarget?.floorID,ceilingTarget?.roomID]);
   const host = useRef<HTMLDivElement>(null);
   const activeRef = useRef(active); activeRef.current = active;
   const contextLost = useRef(false);
@@ -26,6 +37,7 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
   const settingsID=useId();
   const [settingsOpen,setSettingsOpen]=useState(false);
   const [mode, setMode] = useState<'orbit' | 'walk'>('orbit');
+  useEffect(()=>{ceilingRef.current.onWalkingChange?.(mode==='walk');return()=>ceilingRef.current.onWalkingChange?.(false);},[mode]);
   const [roomID, setRoomID] = useState(floor.rooms.find(room=>room.id===selection?.objectID)?.id ?? floor.rooms[0]?.id ?? '');
   const [cutaway, setCutaway] = useState(rememberedView?.cutaway ?? false);
   const [fills, setFills] = useState(rememberedView?.fills ?? true);
@@ -48,8 +60,8 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
   const modelTop = floor.elevation + Math.max(0.5, ...floor.walls.map(w => w.baseY + w.height));
   const cutHeight = floor.elevation + (modelTop - floor.elevation) * cut;
   const updateCamera = () => { const r = runtime.current, p = position.current; if (!r || !p) return; r.camera.position.set(p.point.x, p.eyeY, p.point.z); r.camera.lookAt(p.point.x + Math.sin(heading.current) * Math.cos(pitch.current), p.eyeY + Math.sin(pitch.current), p.point.z - Math.cos(heading.current) * Math.cos(pitch.current)); r.render(); };
-  function leaveWalk() { walking.current = false; setMode('orbit'); stopRepeat(); const r = runtime.current; if (r) { r.controls.enabled = true; r.camera.position.copy(r.initial); r.controls.target.copy(r.focus); r.controls.update(); r.render(); } position.current = null; setMessage('Drag to orbit. Scroll or pinch to zoom.'); }
-  function beginWalk(id = roomID) { try { if (!navigation.current) throw new Error('The walking model is unavailable.'); const p = navigation.current.start(id); position.current = p; const portal=navigation.current.portals.filter(portal=>portal.roomIDs.includes(id)).map(portal=>({x:(portal.a.x+portal.b.x)/2,z:(portal.a.z+portal.b.z)/2})).sort((a,b)=>Math.hypot(a.x-p.point.x,a.z-p.point.z)-Math.hypot(b.x-p.point.x,b.z-p.point.z))[0];const boundary=roomBoundary(floor,floor.rooms.find(room=>room.id===id)!);const target=portal??[...boundary].sort((a,b)=>Math.hypot(b.x-p.point.x,b.z-p.point.z)-Math.hypot(a.x-p.point.x,a.z-p.point.z))[0];heading.current=target?Math.atan2(target.x-p.point.x,-(target.z-p.point.z)):0;pitch.current = -0.35; walking.current = true; setMode('walk'); setCutaway(false); if (runtime.current) runtime.current.controls.enabled = false; updateCamera(); setMessage('Tap a visible floor to move. Drag to look, or use the move buttons.'); setError(''); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); } }
+  function leaveWalk() { runtime.current?.cancelOpeningEdit(); runtime.current?.cancelCeilingEdit(); walking.current = false; setMode('orbit'); stopRepeat(); const r = runtime.current; if (r) { r.controls.enabled = true; r.camera.position.copy(r.initial); r.controls.target.copy(r.focus); r.controls.update(); r.render(); } position.current = null; setMessage('Drag to orbit. Scroll or pinch to zoom.'); }
+  function beginWalk(id = roomID) { runtime.current?.cancelOpeningEdit(); runtime.current?.cancelCeilingEdit(); try { if (!navigation.current) throw new Error('The walking model is unavailable.'); const p = navigation.current.start(id); position.current = p; const portal=navigation.current.portals.filter(portal=>portal.roomIDs.includes(id)).map(portal=>({x:(portal.a.x+portal.b.x)/2,z:(portal.a.z+portal.b.z)/2})).sort((a,b)=>Math.hypot(a.x-p.point.x,a.z-p.point.z)-Math.hypot(b.x-p.point.x,b.z-p.point.z))[0];const boundary=roomBoundary(floor,floor.rooms.find(room=>room.id===id)!);const target=portal??[...boundary].sort((a,b)=>Math.hypot(b.x-p.point.x,b.z-p.point.z)-Math.hypot(a.x-p.point.x,a.z-p.point.z))[0];heading.current=target?Math.atan2(target.x-p.point.x,-(target.z-p.point.z)):0;pitch.current = -0.35; walking.current = true; setMode('walk'); setCutaway(false); if (runtime.current) runtime.current.controls.enabled = false; updateCamera(); setMessage('Tap a visible floor to move. Drag to look, or use the move buttons.'); setError(''); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); } }
   moveTargetRef.current = target => {
     if (!walking.current || !position.current || !navigation.current) return;
     try { const result = navigation.current.move(position.current,target); position.current = result.position; setRoomID(result.position.roomID); updateCamera(); setMessage(result.reachedTarget ? result.crossedPortalIDs.length ? 'Moved through a permitted opening into the next room.' : 'Walking inside the known layout.' : result.stop === 'unknownBoundary' ? 'Unknown boundary. Capture or correct this connection before walking through.' : result.stop === 'ambiguousRooms' ? 'Room connection is ambiguous. Correct the shared boundary first.' : result.stop === 'requestTooLong' ? 'Choose a closer visible floor position.' : 'Movement stopped at the wall or opening clearance.'); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); }
@@ -71,17 +83,19 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
     const clipping = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e8);
     const resources: Array<{ dispose: () => void }> = [];
     const meshes: THREE.Object3D[] = [];
+    const edgeBuffers: { geometry: THREE.BufferGeometry; original: Float32Array; owners: string[] }[] = [];
     const graphic = (() => { try { return buildScene(document, floor.id); } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); return null; } })();
     let section: THREE.LineSegments | null = null, selectedEdges: THREE.LineSegments | null = null, selectedNode: THREE.InstancedMesh | null = null;
-    const batches=graphic?batchSceneFaces(graphic,clipping):[];
-    const ceilingBatches=graphic?batchSceneFaces({...graphic,faces:displayCeilings(document,floor.id),edges:[]},clipping):[];
+    let ceilingManipulator:ReturnType<typeof installCeilingManipulator>|undefined;
+    const batches=graphic?batchSceneFaces({...graphic,faces:graphic.faces.filter(face=>face.role!=='ceiling')},clipping):[];
+    const ceilingBatches=graphic?batchSceneFaces({...graphic,faces:[...graphic.faces.filter(face=>face.role==='ceiling'),...displayCeilings(document,floor.id)],edges:[]},clipping):[];
     for(const batch of ceilingBatches){batch.mesh.visible=ceilings;batch.updateColors(selectedRef.current?.objectID,fillsRef.current);scene.add(batch.mesh);meshes.push(batch.mesh);resources.push(batch.mesh.geometry,batch.mesh.material);}
     if (graphic) {
       for(const batch of batches){batch.updateColors(selectedRef.current?.objectID,fillsRef.current);scene.add(batch.mesh);meshes.push(batch.mesh);resources.push(batch.mesh.geometry,batch.mesh.material);}
-      const grouped = new Map<string, number[]>();
+      const grouped = new Map<string, { vertices: number[]; owners: string[] }>();
       const inferred = new Set(floor.walls.filter(w=>w.provenance.origin==='inferred').map(w=>w.id));
-      for (const edge of graphic.edges) { const key = inferred.has(edge.objectID) ? 'inferred' : edge.role === 'area' ? 'area' : 'normal'; const vertices = grouped.get(key) ?? []; vertices.push(edge.a.x, edge.a.y, edge.a.z, edge.b.x, edge.b.y, edge.b.z); grouped.set(key, vertices); }
-      for (const [key, vertices] of grouped) { const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); const material = key==='inferred' ? new THREE.LineDashedMaterial({color:'#a87839',dashSize:.12,gapSize:.08,clippingPlanes:[clipping]}) : new THREE.LineBasicMaterial({ color: key === 'area' ? '#759fba' : STRUCTURAL_EDGE_COLOR, clippingPlanes: [clipping] }); const lines=new THREE.LineSegments(geometry, material);if(key==='inferred')lines.computeLineDistances();scene.add(lines); resources.push(geometry, material); }
+      for (const edge of graphic.edges) { const key = inferred.has(edge.objectID) ? 'inferred' : edge.role === 'area' ? 'area' : 'normal'; const group = grouped.get(key) ?? { vertices: [], owners: [] }; group.vertices.push(edge.a.x, edge.a.y, edge.a.z, edge.b.x, edge.b.y, edge.b.z); group.owners.push(edge.objectID); grouped.set(key, group); }
+      for (const [key, { vertices, owners }] of grouped) { const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3)); const material = key==='inferred' ? new THREE.LineDashedMaterial({color:'#a87839',dashSize:.12,gapSize:.08,clippingPlanes:[clipping]}) : new THREE.LineBasicMaterial({ color: key === 'area' ? '#759fba' : STRUCTURAL_EDGE_COLOR, clippingPlanes: [clipping] }); const lines=new THREE.LineSegments(geometry, material);if(key==='inferred')lines.computeLineDistances();scene.add(lines); resources.push(geometry, material); edgeBuffers.push({ geometry, original: new Float32Array(vertices), owners }); }
       // Opening selection is a semantic hit target, never a rendered surface filling the void.
       for (const opening of floor.openings) {
         const wall = floor.walls.find(w=>w.id===opening.wallID)!; const path=wallPath(floor,wall);let traversed=0;
@@ -101,13 +115,17 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
       queuedFrame = requestAnimationFrame(() => {
         queuedFrame = 0;
         if (disposed || !activeRef.current || contextLost.current || window.document.hidden) return;
+        try { flushOpeningPreview(); } catch (cause) { cancelOpeningEdit(); setMessage(cause instanceof Error ? cause.message : String(cause)); }
+        camera.updateMatrixWorld(); updateOpeningHandles(); ceilingManipulator?.refresh();
         renderer.render(scene, camera);
         renderer.domElement.dataset.rendered = 'true';
       });
     };
-    const visibility = () => { if (window.document.hidden) cancelFrame(); else render(); };
+    const visibility = () => { if (window.document.hidden) { cancelOpeningEdit(); cancelFrame(); } else { touchContacts.clear(); fencedContacts.clear(); render(); } };
     window.document.addEventListener('visibilitychange', visibility);
     const select = (selection: Selection | null) => {
+      cancelOpeningEdit();
+      ceilingManipulator?.cancel();
       const selected = (groupRef.current?.length ? groupRef.current : selection ? [selection] : []).filter(item=>item.floorID===floor.id);
       const ids = new Set(selected.map(item=>item.objectID));
       renderer.domElement.dataset.selectedIds = JSON.stringify([...ids].sort());
@@ -120,9 +138,10 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
       if(nodes.length){const markers=new THREE.InstancedMesh(new THREE.SphereGeometry(.075,12,8),new THREE.MeshBasicMaterial({color:'#087aae',depthTest:false}),nodes.length),matrix=new THREE.Matrix4();nodes.forEach((node,index)=>{matrix.makeTranslation(node.point.x,floor.elevation+.075,node.point.z);markers.setMatrixAt(index,matrix);});markers.instanceMatrix.needsUpdate=true;markers.renderOrder=3;selectedNode=markers;scene.add(markers);}
       render();
     };
-    controls.addEventListener('change', render);
-    const resize = new ResizeObserver(([entry]) => { const { width, height } = entry.contentRect; if (!width || !height) return; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); render(); }); resize.observe(el);
+    const resize = new ResizeObserver(([entry]) => { const { width, height } = entry.contentRect; if (!width || !height) return; cancelOpeningEdit(); renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); render(); }); resize.observe(el);
     const updateSection = (height: number | null) => {
+      cancelOpeningEdit();
+      ceilingManipulator?.cancel();
       clipping.constant = height ?? 1e8;
       if (section) { scene.remove(section); section.geometry.dispose(); (section.material as THREE.Material).dispose(); section = null; }
       if (height !== null && graphic) {
@@ -136,6 +155,179 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
       }
       render();
     };
+    // Opening edits live inside this renderer. Pointer samples never recreate it.
+    type EditSample = { x: number; y: number };
+    type ActiveOpeningEdit = { pointerID: number; drag: OpeningModelDrag; fence: OpeningEditFence; camera: string; rect: DOMRect; host: Floor; queue: EditSample[]; result?: { opening: Opening; error?: string; held?: boolean } };
+    let openingEdit: ActiveOpeningEdit | null = null;
+    const touchContacts = new Set<number>(), fencedContacts = new Set<number>();
+    const handleLayer = window.document.createElement('div'); handleLayer.className = 'spatial-opening-model-handles'; handleLayer.setAttribute('aria-label', 'Selected opening resize handles'); el.appendChild(handleLayer);
+    const leaders = window.document.createElementNS('http://www.w3.org/2000/svg', 'svg'); leaders.classList.add('spatial-opening-leaders'); handleLayer.appendChild(leaders);
+    const handleButtons = (['start-bottom', 'start-top', 'end-bottom', 'end-top'] as OpeningCorner[]).map(corner => {
+      const button = window.document.createElement('button'); button.type = 'button'; button.dataset.openingCorner = corner; button.setAttribute('aria-label', `Resize opening ${corner.replace('-', ' ')} corner`); button.title = 'Drag this corner. Use Details for exact dimensions.'; button.hidden = true;
+      const dot = window.document.createElement('span'); button.appendChild(dot); handleLayer.appendChild(button); return button;
+    });
+    let previewObjects: THREE.Object3D[] = [], previewResources: Array<{ dispose(): void }> = [];
+    const cameraSignature = () => JSON.stringify([camera.position.toArray(), camera.quaternion.toArray(), camera.projectionMatrix.elements]);
+    const selectedOpening = () => selectedRef.current?.kind === 'opening' && !groupRef.current?.length ? floor.openings.find(o => o.id === selectedRef.current!.objectID) : undefined;
+    const screenPoint = (point: Point3) => {
+      camera.updateMatrixWorld(); const projected = new THREE.Vector3(point.x, point.y, point.z).project(camera), rect = renderer.domElement.getBoundingClientRect();
+      return { x: (projected.x + 1) * rect.width / 2, y: (1 - projected.y) * rect.height / 2, z: projected.z };
+    };
+    const rayAt = (x: number, y: number) => {
+      const rect = renderer.domElement.getBoundingClientRect(); camera.updateMatrixWorld();
+      raycaster.setFromCamera(new THREE.Vector2((x - rect.left) / rect.width * 2 - 1, -(y - rect.top) / rect.height * 2 + 1), camera);
+      return { origin: { x: raycaster.ray.origin.x, y: raycaster.ray.origin.y, z: raycaster.ray.origin.z }, direction: { x: raycaster.ray.direction.x, y: raycaster.ray.direction.y, z: raycaster.ray.direction.z } };
+    };
+    const visibleAt = (point: Point3) => {
+      if (point.y > clipping.constant + 1e-6) return false;
+      const screen = screenPoint(point), rect = renderer.domElement.getBoundingClientRect();
+      if (screen.z < -1 || screen.z > 1 || screen.x < 0 || screen.x > rect.width || screen.y < 0 || screen.y > rect.height) return false;
+      rayAt(rect.left + screen.x, rect.top + screen.y);
+      const targetDistance = camera.position.distanceTo(new THREE.Vector3(point.x, point.y, point.z));
+      const hit = raycaster.intersectObjects([...meshes.filter(mesh => mesh.visible && !mesh.userData.pickOnly), ...previewObjects.filter(object => object instanceof THREE.Mesh)], false).find(hit => hit.point.y <= clipping.constant + 1e-6);
+      return !hit || hit.distance >= targetDistance - Math.max(.006, targetDistance * 1e-5);
+    };
+    const hideOriginal = (ids: ReadonlySet<string>) => {
+      for (const batch of batches) batch.setHiddenObjects(ids);
+      for (const buffer of edgeBuffers) {
+        const positions = buffer.geometry.getAttribute('position') as THREE.BufferAttribute;
+        for (let i = 0; i < buffer.owners.length; i++) {
+          const offset = i * 6, hidden = ids.has(buffer.owners[i]);
+          for (let vertex = 0; vertex < 2; vertex++) { const source = offset + (hidden ? 0 : vertex * 3); positions.setXYZ(i * 2 + vertex, buffer.original[source], buffer.original[source + 1], buffer.original[source + 2]); }
+        }
+        positions.needsUpdate = true;
+      }
+    };
+    const removePreview = () => { for (const object of previewObjects) scene.remove(object); for (const resource of previewResources) resource.dispose(); previewObjects = []; previewResources = []; };
+    function cancelOpeningEdit(fenceContacts = true) {
+      const current = openingEdit; openingEdit = null;
+      if (current) {
+        if (fenceContacts) fencedContacts.add(current.pointerID);
+        removePreview(); hideOriginal(new Set()); if (selectedEdges) selectedEdges.visible = true; if (section) section.visible = true;
+        if (renderer.domElement.hasPointerCapture(current.pointerID)) renderer.domElement.releasePointerCapture(current.pointerID);
+        controls.enabled = activeRef.current && !walking.current; pointer = null; render();
+        if (fenceContacts && !disposed) setMessage('Opening edit cancelled. Saved geometry is unchanged.');
+      }
+    }
+    const editingAvailable = () => activeRef.current && !walking.current && !editRef.current.disabled && !!editRef.current.context && !!editRef.current.onEdit && !contextLost.current && !!graphic;
+    function editStillCurrent(edit: ActiveOpeningEdit): boolean {
+      const context = editRef.current.context, rect = renderer.domElement.getBoundingClientRect();
+      return editingAvailable() && selectedOpening()?.id === edit.fence.openingID && !!context && Object.keys(context).every(key => context[key as keyof typeof context] === edit.fence[key as keyof OpeningEditFence]) && cameraSignature() === edit.camera && ['left', 'top', 'width', 'height'].every(key => Math.abs(rect[key as 'left' | 'top' | 'width' | 'height'] - edit.rect[key as 'left' | 'top' | 'width' | 'height']) < .1);
+    }
+    function updateOpeningHandles() {
+      leaders.replaceChildren(); const opening = openingEdit?.result?.opening ?? selectedOpening();
+      for (const button of handleButtons) button.hidden = true;
+      if (!editingAvailable() || !opening) return;
+      const rect = renderer.domElement.getBoundingClientRect(); if (rect.width < 100 || rect.height < 100) return;
+      const positions = openingModelCorners(openingEdit?.host ?? floor, opening).map((entry, i) => ({ ...entry, i, anchor: screenPoint(entry.point), visible: visibleAt(entry.point) })).filter(entry => entry.visible).map(entry => ({ ...entry, x: entry.anchor.x, y: entry.anchor.y }));
+      // Separate 44px targets even for narrow projected openings. Leaders keep
+      // the physical corner explicit; the frozen initial ray preserves grab offset.
+      for (let pass = 0; pass < 8; pass++) for (let i = 0; i < positions.length; i++) for (let j = i + 1; j < positions.length; j++) {
+        const a = positions[i], b = positions[j], dx = b.x - a.x, dy = b.y - a.y, d = Math.hypot(dx, dy);
+        if (d >= 48) continue;
+        const ux = d > .01 ? dx / d : (i % 2 ? 1 : -1), uy = d > .01 ? dy / d : (j % 2 ? 1 : -1), shift = (48 - d) / 2;
+        a.x -= ux * shift; a.y -= uy * shift; b.x += ux * shift; b.y += uy * shift;
+      }
+      for (const entry of positions) {
+        entry.x = Math.max(22, Math.min(rect.width - 22, entry.x)); entry.y = Math.max(22, Math.min(rect.height - 22, entry.y));
+        if (positions.some(other => other !== entry && Math.hypot(entry.x - other.x, entry.y - other.y) < 43)) continue;
+        const button = handleButtons[entry.i]; button.hidden = false; button.dataset.openingId = opening.id; button.style.left = `${entry.x}px`; button.style.top = `${entry.y}px`;
+        const leader = window.document.createElementNS('http://www.w3.org/2000/svg', 'line'); leader.setAttribute('x1', String(entry.anchor.x)); leader.setAttribute('y1', String(entry.anchor.y)); leader.setAttribute('x2', String(entry.x)); leader.setAttribute('y2', String(entry.y)); leaders.appendChild(leader);
+      }
+    }
+    function paintOpeningPreview(edit: ActiveOpeningEdit) {
+      const result = edit.result; if (!result) return;
+      removePreview();
+      const candidate = result.error ? edit.drag.chart.original : result.opening;
+      const local = openingHostPreview(edit.host, candidate);
+      for (const batch of batchSceneFaces({ ...graphic!, faces: local.faces, edges: [] }, clipping)) { batch.updateColors(new Set([candidate.id]), fillsRef.current); scene.add(batch.mesh); previewObjects.push(batch.mesh); previewResources.push(batch.mesh.geometry, batch.mesh.material); }
+      const wire = (edges: { a: Point3; b: Point3 }[], color: string) => {
+        const geometry = new THREE.BufferGeometry(); geometry.setAttribute('position', new THREE.Float32BufferAttribute(edges.flatMap(edge => [edge.a.x, edge.a.y, edge.a.z, edge.b.x, edge.b.y, edge.b.z]), 3));
+        const material = new THREE.LineBasicMaterial({ color, clippingPlanes: [clipping] }), lines = new THREE.LineSegments(geometry, material); scene.add(lines); previewObjects.push(lines); previewResources.push(geometry, material);
+      };
+      wire(local.edges, STRUCTURAL_EDGE_COLOR); wire(openingModelEdges(edit.host, result.opening), result.error ? '#b34232' : '#087aae');
+      setMessage(result.error ?? (result.held ? 'View angle is nearly parallel to the wall. Preview held. Use Details for exact dimensions.' : `${result.opening.width.toFixed(3)} m wide, ${result.opening.height.toFixed(3)} m high. Release to save; Escape cancels.`));
+    }
+    function flushOpeningPreview(paint = true) {
+      const edit = openingEdit; if (!edit || !edit.queue.length) return;
+      if (!editStillCurrent(edit)) { cancelOpeningEdit(); return; }
+      const previous = edit.result;
+      for (const sample of edit.queue.splice(0)) edit.result = openingModelDragPreview(edit.host, edit.drag, rayAt(sample.x, sample.y));
+      if (paint && edit.result && (!previous || !sameOpeningGeometry(previous.opening, edit.result.opening) || previous.error !== edit.result.error || previous.held !== edit.result.held)) paintOpeningPreview(edit);
+    }
+    const beginEdit = (event: PointerEvent) => {
+      if((event.target as Element).closest('.spatial-ceiling-drag-handle')||ceilingManipulator?.ownsPointer(event.pointerId))return;
+      if (fencedContacts.has(event.pointerId)) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      if (event.button !== 0 || touchContacts.size > 1 || !editingAvailable()) return;
+      const opening = selectedOpening(); if (!opening) return;
+      const button = (event.target as Element).closest<HTMLButtonElement>('[data-opening-corner]');
+      let mode: OpeningCorner | 'move' = 'move', grabbedU: number | undefined;
+      if (button) {
+        if (button.hidden || button.dataset.openingId !== opening.id || !handleButtons.includes(button)) return;
+        mode = button.dataset.openingCorner as OpeningCorner;
+      } else {
+        const rect = renderer.domElement.getBoundingClientRect(), point = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+        const candidates = openingModelEdges(floor, opening).map(edge => {
+          const a = screenPoint(edge.a), b = screenPoint(edge.b), dx = b.x - a.x, dy = b.y - a.y, squared = dx * dx + dy * dy;
+          const t = squared > 1e-8 ? Math.max(0, Math.min(1, ((point.x - a.x) * dx + (point.y - a.y) * dy) / squared)) : 0;
+          const world = { x: edge.a.x + (edge.b.x - edge.a.x) * t, y: edge.a.y + (edge.b.y - edge.a.y) * t, z: edge.a.z + (edge.b.z - edge.a.z) * t };
+          return { distance: Math.hypot(point.x - a.x - dx * t, point.y - a.y - dy * t), u: edge.au + (edge.bu - edge.au) * t, world };
+        }).filter(candidate => candidate.distance <= (event.pointerType === 'touch' ? 22 : 10) && visibleAt(candidate.world)).sort((a, b) => a.distance - b.distance);
+        if (!candidates.length) return; grabbedU = candidates[0].u;
+      }
+      event.preventDefault(); event.stopImmediatePropagation();
+      const drag = beginOpeningModelDrag(floor, opening, mode, rayAt(event.clientX, event.clientY), grabbedU);
+      if (!drag) { setMessage('This wall is too edge-on to edit. Rotate the view or use Details.'); return; }
+      const wall = floor.walls.find(w => w.id === opening.wallID)!, nodeIDs = new Set(wall.nodeIDs);
+      const hostFloor: Floor = { id: floor.id, label: floor.label, elevation: floor.elevation, nodes: floor.nodes.filter(node => nodeIDs.has(node.id)), walls: [wall], openings: floor.openings.filter(o => o.wallID === wall.id), rooms: [] };
+      openingEdit = { pointerID: event.pointerId, drag, fence: { ...editRef.current.context!, openingID: opening.id }, camera: cameraSignature(), rect: renderer.domElement.getBoundingClientRect(), host: structuredClone(hostFloor), queue: [{ x: event.clientX, y: event.clientY }] };
+      pointer = null; controls.enabled = false;
+      hideOriginal(new Set([wall.id, ...hostFloor.openings.map(o => o.id)])); if (selectedEdges) selectedEdges.visible = false; if (section) section.visible = false;
+      try { renderer.domElement.setPointerCapture(event.pointerId); } catch { cancelOpeningEdit(); return; }
+      render();
+    };
+    const moveEdit = (event: PointerEvent) => {
+      if (fencedContacts.has(event.pointerId)) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      const edit = openingEdit; if (!edit || edit.pointerID !== event.pointerId) return;
+      event.preventDefault(); event.stopImmediatePropagation();
+      const samples = event.getCoalescedEvents?.() ?? [];
+      edit.queue.push(...(samples.length ? samples : [event]).map(sample => ({ x: sample.clientX, y: sample.clientY })));
+      // Bound a suspended-tab burst; exceeding the budget cancels, never drops
+      // a path-continuity sample or silently commits a shortened gesture.
+      if (edit.queue.length > 4096) { cancelOpeningEdit(); setMessage('Opening edit cancelled after an interrupted pointer stream.'); return; }
+      render();
+    };
+    const finishEdit = (event: PointerEvent) => {
+      if (fencedContacts.has(event.pointerId)) { event.preventDefault(); event.stopImmediatePropagation(); return; }
+      const edit = openingEdit; if (!edit || edit.pointerID !== event.pointerId) return;
+      event.preventDefault(); event.stopImmediatePropagation(); cancelFrame();
+      edit.queue.push({ x: event.clientX, y: event.clientY });
+      try { flushOpeningPreview(false); } catch (cause) { cancelOpeningEdit(); setMessage(cause instanceof Error ? cause.message : String(cause)); return; }
+      if (openingEdit !== edit) return;
+      const result = edit.result; cancelOpeningEdit(false);
+      if (!result || result.error || result.held || sameOpeningGeometry(edit.drag.chart.original, result.opening)) { if (result?.error) setMessage(result.error); return; }
+      try { void Promise.resolve(editRef.current.onEdit?.([{ type: 'updateOpening', floorID: floor.id, opening: result.opening }], edit.fence)).catch(cause => { if (!disposed) setMessage(cause instanceof Error ? cause.message : String(cause)); }); } catch (cause) { setMessage(cause instanceof Error ? cause.message : String(cause)); }
+    };
+    const cancelPointer = (event: PointerEvent) => { if (openingEdit?.pointerID === event.pointerId) cancelOpeningEdit(); };
+    const editKey = (event: KeyboardEvent) => { if (event.key === 'Escape' && openingEdit) { event.preventDefault(); cancelOpeningEdit(); setMessage('Opening edit cancelled. Saved geometry is unchanged.'); } };
+    const contactDown = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' || !el.contains(event.target as Node) && !openingEdit) return;
+      touchContacts.add(event.pointerId);
+      if (touchContacts.size > 1 && openingEdit) { for (const id of touchContacts) fencedContacts.add(id); cancelOpeningEdit(); }
+    };
+    const contactUp = (event: PointerEvent) => { touchContacts.delete(event.pointerId); fencedContacts.delete(event.pointerId); };
+    const editBlur = () => cancelOpeningEdit();
+    const editFocus = () => { cancelOpeningEdit(); touchContacts.clear(); fencedContacts.clear(); };
+    const orbitChanged = () => { if (openingEdit && cameraSignature() !== openingEdit.camera) cancelOpeningEdit(); render(); };
+    el.addEventListener('pointerdown', beginEdit, true); el.addEventListener('pointermove', moveEdit, true); el.addEventListener('pointerup', finishEdit, true); el.addEventListener('pointercancel', cancelPointer, true); renderer.domElement.addEventListener('lostpointercapture', cancelPointer);
+    window.addEventListener('pointerdown', contactDown, true); window.addEventListener('pointerup', contactUp); window.addEventListener('pointercancel', contactUp); window.addEventListener('keydown', editKey); window.addEventListener('blur', editBlur); window.addEventListener('focus', editFocus);
+    controls.addEventListener('change', orbitChanged);
+    const disposeOpeningEdit = () => {
+      cancelOpeningEdit(); removePreview(); handleLayer.remove();
+      el.removeEventListener('pointerdown', beginEdit, true); el.removeEventListener('pointermove', moveEdit, true); el.removeEventListener('pointerup', finishEdit, true); el.removeEventListener('pointercancel', cancelPointer, true); renderer.domElement.removeEventListener('lostpointercapture', cancelPointer);
+      window.removeEventListener('pointerdown', contactDown, true); window.removeEventListener('pointerup', contactUp); window.removeEventListener('pointercancel', contactUp); window.removeEventListener('keydown', editKey); window.removeEventListener('blur', editBlur); window.removeEventListener('focus', editFocus); controls.removeEventListener('change', orbitChanged);
+    };
+
     const raycaster = new THREE.Raycaster();
     let pointer: { x: number; y: number; moved: boolean } | null = null;
     const pointerDown = (event: PointerEvent) => { pointer = { x: event.clientX, y: event.clientY, moved: false }; if (walking.current) renderer.domElement.setPointerCapture(event.pointerId); };
@@ -148,17 +340,22 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
       if (!hit) { selectRef.current(null); return; }
       const id = (hit.object.userData.objectID ?? hit.object.userData.triangleOwners?.[hit.faceIndex ?? -1]) as string;
       if(!id){selectRef.current(null);return;}
-      const kind = floor.walls.some(w=>w.id===id) ? 'wall' : floor.openings.some(o=>o.id===id) ? 'opening' : floor.rooms.some(r=>r.id===id) ? 'room' : 'area'; selectRef.current({ floorID:floor.id,kind,objectID:id });
+      const kind = floor.walls.some(w=>w.id===id) ? 'wall' : floor.openings.some(o=>o.id===id) ? 'opening' : floor.rooms.some(r=>r.id===id) ? 'room' : floor.rooms.some(r=>r.ceiling?.id===id) ? 'ceiling' : 'area'; selectRef.current({ floorID:floor.id,kind,objectID:id });
     };
     const keyDown = (event: KeyboardEvent) => { if (!walking.current) return; const key = event.key.toLowerCase(); if (['w','a','s','d','arrowup','arrowdown','arrowleft','arrowright','escape'].includes(key)) event.preventDefault(); if (key==='w'||key==='arrowup') moveRef.current(0.2,0); if(key==='s'||key==='arrowdown') moveRef.current(-0.2,0);if(key==='a')moveRef.current(0,-0.2);if(key==='d')moveRef.current(0,0.2);if(key==='arrowleft')lookRef.current(-0.12);if(key==='arrowright')lookRef.current(0.12);if(key==='escape')leaveWalk(); };
-    const lost = (event: Event) => { event.preventDefault(); contextLost.current = true; cancelFrame(); renderer.domElement.dataset.rendered = 'false'; setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
+    const lost = (event: Event) => { event.preventDefault(); cancelOpeningEdit(); ceilingManipulator?.cancel(); contextLost.current = true; cancelFrame(); renderer.domElement.dataset.rendered = 'false'; setError('The graphics context was interrupted. Switch to the plan, then reopen 3D to recover. Saved geometry is unaffected.'); stopRepeat(); };
     renderer.domElement.addEventListener('pointerdown', pointerDown);renderer.domElement.addEventListener('pointermove',pointerMove);renderer.domElement.addEventListener('pointerup',pointerUp);renderer.domElement.addEventListener('keydown',keyDown);renderer.domElement.addEventListener('webglcontextlost',lost);
-    const dispose = () => { disposed = true; cancelFrame(); window.document.removeEventListener('visibilitychange', visibility); stopRepeat(); resize.disconnect(); controls.removeEventListener('change',render); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.dispose();selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
-    runtime.current = { camera, controls, render, focus, initial, clipping, updateSection, select, showCeilings:visible=>{ceilingBatches.forEach(batch=>{batch.mesh.visible=visible;});render();}, setActive:visible=>{controls.enabled=visible&&!walking.current;if(visible)render();else{cancelFrame();renderer.domElement.dataset.rendered='false';}}, dispose };
+    ceilingManipulator=installCeilingManipulator({three:THREE,scene,camera,controls,clipping,canvas:renderer.domElement,host:el,meshes,
+      state:()=>{const state=ceilingRef.current;return{document,floorID:floor.id,targets:state.ceilingTarget?state.ceilingTargets:[],fence:state.ceilingFence??{documentID:document.documentID,expectedRevision:document.revision,contextKey:'',generation:-1},enabled:activeRef.current&&!walking.current&&!state.disabled&&!!state.ceilingFence&&!!state.onCeilingEdit&&!!state.ceilingTarget&&!contextLost.current,navigationEnabled:activeRef.current&&!walking.current,viewKey:JSON.stringify([cameraSignature(),viewRef.current,editRef.current.context?.view])};},
+      render,requestPreview:callback=>requestAnimationFrame(callback),cancelPreview:cancelAnimationFrame,notify:setMessage,previewHeights:heights=>ceilingBatches.forEach(batch=>batch.previewCeilingHeights(heights)),commit:(command,fence)=>ceilingRef.current.onCeilingEdit?.([command],fence)});
+    const dispose = () => { disposed = true; cancelFrame(); ceilingManipulator?.dispose(); disposeOpeningEdit(); window.document.removeEventListener('visibilitychange', visibility); stopRepeat(); resize.disconnect(); controls.dispose(); resources.forEach(r=>r.dispose()); if(section){section.geometry.dispose();(section.material as THREE.Material).dispose();} if(selectedEdges){selectedEdges.geometry.dispose();(selectedEdges.material as THREE.Material).dispose();} if(selectedNode){selectedNode.dispose();selectedNode.geometry.dispose();(selectedNode.material as THREE.Material).dispose();} renderer.domElement.removeEventListener('pointerdown',pointerDown);renderer.domElement.removeEventListener('pointermove',pointerMove);renderer.domElement.removeEventListener('pointerup',pointerUp);renderer.domElement.removeEventListener('keydown',keyDown);renderer.domElement.removeEventListener('webglcontextlost',lost);renderer.dispose();releaseTracker();renderer.forceContextLoss(); renderer.domElement.remove(); };
+    runtime.current = { cancelCeilingEdit:()=>ceilingManipulator?.cancel(),refreshCeilingEdit:()=>ceilingManipulator?.refresh(),cancelOpeningEdit, camera, controls, render, focus, initial, clipping, updateSection, select, showCeilings:visible=>{cancelOpeningEdit();ceilingManipulator?.cancel();ceilingBatches.forEach(batch=>{batch.mesh.visible=visible;});render();}, setActive:visible=>{if(!visible){cancelOpeningEdit();ceilingManipulator?.cancel();}controls.enabled=visible&&!walking.current;if(visible)render();else{cancelFrame();renderer.domElement.dataset.rendered='false';}}, dispose };
     try { navigation.current = new WalkNavigation(document, floor.id); setPortalCount(navigation.current.portals.length); if (!navigation.current.roomIDs.includes(roomID)) setRoomID(navigation.current.roomIDs[0] ?? ''); } catch (cause) { navigation.current = null; setMessage(cause instanceof Error ? cause.message : String(cause)); }
     updateSection(cutaway ? cutHeight : null); select(selectedRef.current); render();
     return () => { const orbit=walking.current?initial:camera.position;const saved={camera:orbit.toArray() as [number,number,number],target:controls.target.toArray() as [number,number,number],...viewRef.current};lastFraming.current=saved;rememberRef.current?.(saved);runtime.current = null; navigation.current = null; walking.current = false; dispose(); };
   }, [document.documentID, document.revision, floor.id, contextAttempt]);
+  useLayoutEffect(() => { runtime.current?.refreshCeilingEdit(); runtime.current?.render(); }, [ceilingFence?.documentID,ceilingFence?.expectedRevision,ceilingFence?.contextKey,ceilingFence?.generation,JSON.stringify(ceilingTargets),disabled,active]);
+  useLayoutEffect(() => { runtime.current?.cancelOpeningEdit(); runtime.current?.render(); }, [disabled, editContext?.generation, editContext?.scope, editContext?.view, editContext?.revision, active, selection?.kind, selection?.objectID]);
   useEffect(() => {
     const reactivated = active && !previouslyActive.current; previouslyActive.current = active;
     if (!active) {
@@ -179,6 +376,7 @@ export function ModelViewport({ active = true, rememberedView, rememberView, doc
   return <div className="spatial-model" hidden={!active} inert={!active} style={active?undefined:{display:'none'}}><div ref={host} className="spatial-model-canvas" />
     <div className="spatial-model-bar"><div className="spatial-segmented"><button aria-pressed={mode==='orbit'} onClick={leaveWalk}>Orbit</button><button aria-pressed={mode==='walk'} disabled={!roomID || !!error} onClick={()=>beginWalk()}>Walk through</button></div><button onClick={()=>mode==='walk'?beginWalk():leaveWalk()}>Reset view</button></div>
     <div className="spatial-model-options" data-mode={mode}>{mode==='orbit'&&<button className="spatial-model-settings-toggle" aria-expanded={settingsOpen} aria-controls={settingsID} onClick={()=>setSettingsOpen(!settingsOpen)}>{settingsOpen?'Hide controls':'View controls'}</button>}<div id={settingsID} className="spatial-model-settings" data-open={settingsOpen}>{mode==='orbit' ? <><label className="spatial-check"><input type="checkbox" checked={fills} onChange={event=>setFills(event.target.checked)} />Surface fills</label><label className="spatial-check"><input type="checkbox" checked={ceilings} onChange={event=>setCeilings(event.target.checked)} />Display ceilings</label><label className="spatial-check"><input type="checkbox" checked={cutaway} onChange={event=>setCutaway(event.target.checked)} />Cutaway</label>{cutaway && <label className="spatial-cut-control">Cut height<input type="range" aria-label="Cutaway height" min="0.1" max="0.95" step="0.01" value={cut} onChange={event=>setCut(Number(event.target.value))} /></label>}</> : <><span className="spatial-walk-badge">● WALKING</span><button onClick={leaveWalk}>Exit walking</button></>}{!!floor.rooms.length && <label className="spatial-room-select"><span>Start in</span><select value={roomID} onChange={event=>{setRoomID(event.target.value);if(mode==='walk')beginWalk(event.target.value);}}>{floor.rooms.map(room=><option key={room.id} value={room.id}>{room.label}</option>)}</select></label>}</div></div>
+    {mode==='orbit'&&ceilingTarget&&ceilingFence&&onCeilingEdit&&<details className="spatial-ceiling-model-panel"><summary>Ceiling height</summary><CeilingHeightControls document={document} target={ceilingTarget} fence={ceilingFence} disabled={disabled} onEdit={onCeilingEdit} onTargetsChange={setCeilingTargets}/></details>}
     {mode==='walk' && <div className="spatial-walk-controls" aria-label="Walking controls"><div><button aria-label="Turn left" onPointerDown={()=>hold(()=>lookRef.current(-0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(-0.1);}}>↶</button><button aria-label="Walk forward" onPointerDown={()=>hold(()=>moveRef.current(0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0.2,0);}}>↑</button><button aria-label="Turn right" onPointerDown={()=>hold(()=>lookRef.current(0.1))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)lookRef.current(0.1);}}>↷</button></div><div><button aria-label="Step left" onPointerDown={()=>hold(()=>moveRef.current(0,-0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,-0.2);}}>←</button><button aria-label="Walk backward" onPointerDown={()=>hold(()=>moveRef.current(-0.2,0))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(-0.2,0);}}>↓</button><button aria-label="Step right" onPointerDown={()=>hold(()=>moveRef.current(0,0.2))} onPointerUp={stopRepeat} onPointerCancel={stopRepeat} onClick={event=>{if(event.detail===0)moveRef.current(0,0.2);}}>→</button></div></div>}
     <div className="spatial-model-message" role="status">{error || message}{!error && mode==='walk' && <span> {portalCount === 0 ? 'No traversable room connections. Unknown boundaries stay closed.' : 'Windows and unknown exterior boundaries stay closed.'}</span>}</div>
   </div>;
