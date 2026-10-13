@@ -1,0 +1,62 @@
+{
+  "environment": "Linux headless Chromium, development build, software WebGL",
+  "browser": "153.0.8010.0",
+  "counts": {
+    "rooms": 100,
+    "walls": 1000,
+    "openings": 500,
+    "observations": 2000,
+    "floorObservations": 1000,
+    "ceilingObservations": 500,
+    "wallObservations": 500
+  },
+  "warmSamplesMS": [
+    340.70000000018626,
+    861.7999999998137,
+    2925.100000000093,
+    2952.399999999907,
+    1013,
+    234.6999999997206,
+    834.6999999997206,
+    966.8999999999069,
+    320.89999999990687,
+    959.8000000002794,
+    934.8000000002794,
+    835.5,
+    982.6000000000931,
+    255.20000000018626,
+    1033.0999999996275,
+    839.5999999996275,
+    898.3999999999069,
+    877.8999999999069,
+    796,
+    835.2000000001863,
+    824.3000000002794,
+    803.8000000002794,
+    223.60000000009313
+  ],
+  "selectionFeedbackSamplesMS": [],
+  "cycles": [],
+  "pageErrors": [],
+  "limits": [
+    "Synthetic disjoint marks are not an agreed field pilot.",
+    "Software WebGL and browser timing do not establish physical iPhone frame, thermal, touch or total retained-memory acceptance.",
+    "Heap samples cover JavaScript heap after explicit garbage collection, not total process or GPU memory."
+  ],
+  "importAndOpenMS": 13368,
+  "coldCreationMS": 13316.69999999972,
+  "initialRenderer": {
+    "id": 2,
+    "visible": true,
+    "geometries": 7,
+    "textures": 0,
+    "drawCalls": 7,
+    "renderFrames": 2
+  },
+  "gpu": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "vendor": "Google Inc. (Google)"
+  },
+  "complete": false,
+  "failure": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeHidden\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('.spatial-model')\nExpected: hidden\nReceived: undefined\n"
+}

@@ -1,0 +1,873 @@
+{
+  "version": 1,
+  "execution_mode": "parallel_isolated_feature_development_sequential_master_integration",
+  "maximum_concurrent_writers_default": 4,
+  "queue": [
+    {
+      "id": "F00",
+      "title": "F00 Shared Foundation",
+      "owner": "Spatial master control",
+      "depends_on": [],
+      "status": "delivered",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
+      "packet": "docs/11-launch/spatial-feature-program/features/F00_Shared_Foundation.md",
+      "allowed_paths": "Master freezes exact paths in ACTIVE_TASK before implementation",
+      "acceptance_ids": [
+        "F00-A01",
+        "F00-A02",
+        "F00-A03",
+        "F00-A04",
+        "F00-A05"
+      ],
+      "completion_scope": "F00 documentation and shared engineering decisions only; no feature runtime or platform delivery",
+      "accepted_at": "2026-10-11T14:57:56.854871+00:00",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
+    },
+    {
+      "id": "F01",
+      "title": "F01 Surface Contrast",
+      "owner": "Spatial | F01 Surface Contrast",
+      "depends_on": [
+        "F00"
+      ],
+      "status": "code_accepted_with_platform_gaps",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
+      "packet": "docs/11-launch/spatial-feature-program/features/F01_Surface_Contrast.md",
+      "allowed_paths": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/data/data.test.ts",
+        "spatial-source/web/tests/ui/workflow.spec.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+      ],
+      "acceptance_ids": [
+        "F01-A01",
+        "F01-A02",
+        "F01-A03",
+        "F01-A04",
+        "F01-A05"
+      ],
+      "base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+      "activation_id": "F01-2026-10-11-01",
+      "execution_status": "source_accepted_worker_finished",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
+      "implementation_started": true,
+      "implementation_complete": true,
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "handoff_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
+      "accepted_at": "2026-10-11T15:49:39.114655+00:00",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json",
+      "platform_delivery": "open; tracked by master/F06; not deployed or installed"
+    },
+    {
+      "id": "F02",
+      "title": "F02 Openings",
+      "owner": "Spatial | F02 Openings",
+      "depends_on": [
+        "F01"
+      ],
+      "status": "code_accepted_with_platform_gaps",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91",
+      "packet": "docs/11-launch/spatial-feature-program/features/F02_Openings.md",
+      "allowed_paths": [
+        "spatial-source/web/src/types.ts",
+        "spatial-source/web/src/core/editor.ts",
+        "spatial-source/web/src/core/validation.ts",
+        "spatial-source/web/src/core/scene.ts",
+        "spatial-source/web/src/ui/openingManipulation.ts",
+        "spatial-source/web/src/ui/openingPlacement.ts",
+        "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "spatial-source/web/src/ui/Inspector.tsx",
+        "spatial-source/web/src/ui/PlanGeometry.tsx",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/geometry.ts",
+        "spatial-source/web/src/ui/roomDrawing.ts",
+        "spatial-source/web/src/ui/wallDrawing.ts",
+        "spatial-source/web/src/ui/workspace.css",
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/data/drawing.ts",
+        "spatial-source/web/src/data/exports.ts",
+        "spatial-source/web/src/data/imports.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/src/data/drawingRecovery.ts",
+        "spatial-source/contracts/COMPATIBILITY.md",
+        "spatial-source/web/tests/core/editor.test.ts",
+        "spatial-source/web/tests/core/validation.test.ts",
+        "spatial-source/web/tests/core/scene.test.ts",
+        "spatial-source/web/tests/core/navigation.test.ts",
+        "spatial-source/web/tests/core/room-drawing-connected.test.ts",
+        "spatial-source/web/tests/core/wall-drawing.test.ts",
+        "spatial-source/web/tests/data/data.test.ts",
+        "spatial-source/web/tests/data/drawing-recovery.test.ts",
+        "spatial-source/web/tests/data/outbox.test.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/ui/direct-openings.spec.ts",
+        "spatial-source/web/tests/ui/direct-placement.spec.ts",
+        "spatial-source/web/src/core/openings.ts",
+        "spatial-source/web/src/ui/openingModelManipulation.ts",
+        "spatial-source/web/src/ui/OpeningElevation.tsx",
+        "spatial-source/contracts/geometry-v1.2.schema.json",
+        "spatial-source/contracts/scene-v1.2.schema.json",
+        "spatial-source/web/tests/core/openings.test.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F02/F02_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F02/F02_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F02/openings-3d-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F02/openings-elevation-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F02/openings-catalog-desktop.png"
+      ],
+      "acceptance_ids": [
+        "F02-A01",
+        "F02-A02",
+        "F02-A03",
+        "F02-A04",
+        "F02-A05",
+        "F02-A06"
+      ],
+      "integration_depends_on": [
+        "F01"
+      ],
+      "branch": "spatial/f02-openings-2026-10-11",
+      "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+      "activation_id": "F02-2026-10-11-P1",
+      "execution_status": "reviewed_source_integrated",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+      "implementation_started": true,
+      "source_commit": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
+      "implementation_complete": true,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false
+    },
+    {
+      "id": "F03",
+      "title": "F03 Ceiling Height",
+      "owner": "Spatial | F03 Ceiling Heights",
+      "depends_on": [
+        "F01"
+      ],
+      "status": "code_accepted_with_platform_gaps",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92",
+      "packet": "docs/11-launch/spatial-feature-program/features/F03_Ceiling_Height.md",
+      "allowed_paths": [
+        "spatial-source/web/src/types.ts",
+        "spatial-source/web/src/core/editor.ts",
+        "spatial-source/web/src/core/validation.ts",
+        "spatial-source/web/src/core/scene.ts",
+        "spatial-source/web/src/core/navigation.ts",
+        "spatial-source/web/src/core/index.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/Inspector.tsx",
+        "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "spatial-source/web/src/ui/roomDrawing.ts",
+        "spatial-source/web/src/ui/wallDrawing.ts",
+        "spatial-source/web/src/ui/workspace.css",
+        "spatial-source/web/src/data/exports.ts",
+        "spatial-source/web/src/data/imports.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/contracts/COMPATIBILITY.md",
+        "spatial-source/web/tests/core/editor.test.ts",
+        "spatial-source/web/tests/core/validation.test.ts",
+        "spatial-source/web/tests/core/scene.test.ts",
+        "spatial-source/web/tests/core/navigation.test.ts",
+        "spatial-source/web/tests/core/room-drawing-connected.test.ts",
+        "spatial-source/web/tests/core/wall-drawing.test.ts",
+        "spatial-source/web/tests/data/data.test.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/src/core/ceilings.ts",
+        "spatial-source/web/src/core/surfaces.ts",
+        "spatial-source/web/src/ui/ceilingManipulation.ts",
+        "spatial-source/web/src/ui/CeilingHeightControls.tsx",
+        "spatial-source/contracts/geometry-v1.3.schema.json",
+        "spatial-source/contracts/scene-v1.3.schema.json",
+        "spatial-source/web/tests/core/ceilings.test.ts",
+        "spatial-source/web/tests/core/surfaces.test.ts",
+        "spatial-source/web/tests/ui/ceiling-height.spec.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/F03_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/F03_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/ceiling-height-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/ceiling-structure-desktop.png"
+      ],
+      "acceptance_ids": [
+        "F03-A01",
+        "F03-A02",
+        "F03-A03",
+        "F03-A04",
+        "F03-A05",
+        "F03-A06"
+      ],
+      "integration_depends_on": [
+        "F02"
+      ],
+      "branch": "spatial/f03-ceilings-2026-10-11",
+      "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+      "activation_id": "F03-2026-10-11-P1",
+      "execution_status": "reviewed_source_integrated",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+      "implementation_started": true,
+      "source_commit": "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
+      "implementation_complete": true,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false,
+      "resolved_historical_blocker": {
+        "filename": "F03_LOCAL_CANDIDATE.patch",
+        "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
+        "source_files": 27,
+        "alternative": "F03 handoff ZIP containing this patch",
+        "remote_branch": "spatial/f03-ceilings-2026-10-11",
+        "remote_head": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+      },
+      "recovery_disposition": "Nine recovered files hash-matched; missing shared adapters newly implemented, verified and published."
+    },
+    {
+      "id": "F04",
+      "title": "F04 Fixtures Cutouts",
+      "owner": "Spatial | F04 Fixtures and Cutouts",
+      "depends_on": [
+        "F01"
+      ],
+      "status": "code_accepted_with_platform_gaps",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93",
+      "packet": "docs/11-launch/spatial-feature-program/features/F04_Fixtures_Cutouts.md",
+      "allowed_paths": [
+        "spatial-source/web/src/types.ts",
+        "spatial-source/web/src/core/editor.ts",
+        "spatial-source/web/src/core/validation.ts",
+        "spatial-source/web/src/core/scene.ts",
+        "spatial-source/web/src/core/index.ts",
+        "spatial-source/web/src/core/surfaces.ts",
+        "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "spatial-source/web/src/ui/PlanGeometry.tsx",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/Inspector.tsx",
+        "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "spatial-source/web/src/ui/geometry.ts",
+        "spatial-source/web/src/ui/groupSelection.ts",
+        "spatial-source/web/src/ui/workspace.css",
+        "spatial-source/web/src/data/drawing.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/src/data/exports.ts",
+        "spatial-source/web/src/data/imports.ts",
+        "spatial-source/contracts/COMPATIBILITY.md",
+        "spatial-source/web/src/core/fixtureCatalog.ts",
+        "spatial-source/web/src/core/fixtures.ts",
+        "spatial-source/web/src/core/fixtureAttachments.ts",
+        "spatial-source/web/src/ui/FixturePicker.tsx",
+        "spatial-source/web/src/ui/fixtureManipulation.ts",
+        "spatial-source/web/src/fixturePalette.ts",
+        "spatial-source/contracts/geometry-v1.4.schema.json",
+        "spatial-source/contracts/scene-v1.4.schema.json",
+        "spatial-source/web/tests/core/fixtures.test.ts",
+        "spatial-source/web/tests/core/fixture-attachments.test.ts",
+        "spatial-source/web/tests/data/fixtures.test.ts",
+        "spatial-source/web/tests/ui/fixture-manipulation.test.ts",
+        "spatial-source/web/tests/ui/fixtures.spec.ts",
+        "spatial-source/web/src/core/navigation.ts",
+        "spatial-source/web/tests/core/navigation.test.ts",
+        "spatial-source/web/src/core/cutouts.ts",
+        "spatial-source/web/src/core/cutoutGeometry.ts",
+        "spatial-source/web/src/ui/CutoutControls.tsx",
+        "spatial-source/web/src/ui/cutoutManipulation.ts",
+        "spatial-source/web/tests/core/cutouts.test.ts",
+        "spatial-source/web/tests/core/cutout-geometry.test.ts",
+        "spatial-source/web/tests/data/cutouts.test.ts",
+        "spatial-source/web/tests/ui/cutout-manipulation.test.ts",
+        "spatial-source/web/tests/ui/cutouts.spec.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/fixtures-catalog-desktop.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png"
+      ],
+      "acceptance_ids": [
+        "F04-A01",
+        "F04-A02",
+        "F04-A03",
+        "F04-A04",
+        "F04-A05",
+        "F04-A06"
+      ],
+      "integration_depends_on": [
+        "F03"
+      ],
+      "branch": "spatial/f04-fixtures-2026-10-11",
+      "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+      "activation_id": "F04-2026-10-11-P1",
+      "execution_status": "reviewed_source_integrated",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+      "implementation_started": true,
+      "scope_amendment_id": "F04-2026-10-11-CUTOUTS-1",
+      "cutout_scope": "D18 optional cutouts and penetrations integrated with canonical F03 domains and F05 coverage.",
+      "source_commit": "44315237caccb4fb2511ebf54867f504f7a4d859",
+      "implementation_complete": true,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false,
+      "cutout_scope_status": "optional_wall_floor_ceiling_cutouts_and_penetrations_integrated"
+    },
+    {
+      "id": "F05",
+      "title": "F05 Affected Areas",
+      "owner": "Spatial | F05 Affected Areas",
+      "depends_on": [
+        "F01"
+      ],
+      "status": "code_accepted_with_platform_gaps",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94",
+      "packet": "docs/11-launch/spatial-feature-program/features/F05_Affected_Areas.md",
+      "allowed_paths": [
+        "spatial-source/web/src/types.ts",
+        "spatial-source/web/src/core/editor.ts",
+        "spatial-source/web/src/core/validation.ts",
+        "spatial-source/web/src/core/scene.ts",
+        "spatial-source/web/src/core/surfaces.ts",
+        "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/src/ui/PlanGeometry.tsx",
+        "spatial-source/web/src/ui/Inspector.tsx",
+        "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/geometry.ts",
+        "spatial-source/web/src/ui/groupSelection.ts",
+        "spatial-source/web/src/ui/review.ts",
+        "spatial-source/web/src/ui/workspace.css",
+        "spatial-source/web/src/data/drawing.ts",
+        "spatial-source/web/src/data/exports.ts",
+        "spatial-source/web/src/data/imports.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/src/data/store.ts",
+        "spatial-source/contracts/COMPATIBILITY.md",
+        "spatial-source/web/src/core/affectedAreas.ts",
+        "spatial-source/web/src/core/affectedAreaGeometry.ts",
+        "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+        "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+        "spatial-source/web/src/ui/affectedAreaBatches.ts",
+        "spatial-source/web/src/affectedAreaPalette.ts",
+        "spatial-source/contracts/geometry-v1.5.schema.json",
+        "spatial-source/contracts/scene-v1.5.schema.json",
+        "spatial-source/web/tests/core/affected-areas.test.ts",
+        "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+        "spatial-source/web/tests/data/affected-areas.test.ts",
+        "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+        "spatial-source/web/tests/ui/affected-areas.spec.ts",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/F05_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/F05_VERIFICATION.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/affected-areas-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F05/affected-areas-plan.png"
+      ],
+      "acceptance_ids": [
+        "F05-A01",
+        "F05-A02",
+        "F05-A03",
+        "F05-A04",
+        "F05-A05",
+        "F05-A06"
+      ],
+      "integration_depends_on": [
+        "F04"
+      ],
+      "branch": "spatial/f05-affected-areas-2026-10-11",
+      "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+      "activation_id": "F05-2026-10-11-P1",
+      "execution_status": "reviewed_source_integrated",
+      "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+      "implementation_started": true,
+      "source_commit": "dc53c7a1bce141706764a8da3af82c1c69fb1333",
+      "implementation_complete": true,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false
+    },
+    {
+      "id": "F06",
+      "title": "F06 Integration Acceptance",
+      "owner": "Astra master until activated",
+      "depends_on": [
+        "F05"
+      ],
+      "status": "in_progress",
+      "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/95",
+      "packet": "docs/11-launch/spatial-feature-program/features/F06_Integration_Acceptance.md",
+      "allowed_paths": "Master freezes exact paths in ACTIVE_TASK before implementation",
+      "acceptance_ids": [
+        "F06-A01",
+        "F06-A02",
+        "F06-A03",
+        "F06-A04",
+        "F06-A05",
+        "F06-A06"
+      ],
+      "execution_status": "combined_functional_checks_passed_performance_delivery_open",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
+    },
+    {
+      "id": "SP-WEB-UI",
+      "title": "Shared usable 2D editor and move-through 3D workspace",
+      "owner": "editor",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "current_connected_authoring_group_openings_recovery_browser_verified_owner_acceptance_pending",
+      "requirements": [
+        "WEB-01",
+        "WEB-03"
+      ],
+      "allowed_paths": [
+        "web/src/ui/",
+        "web/tests/ui/"
+      ],
+      "implementation_checkpoint": "Connected-room snapping/shared-wall splitting, direct door/window placement, group marquee/additive selection and provisional drag, one-command validation/undo/save, and durable unfinished drawing recovery implemented. Focused current-input evidence preserved; no owner or physical-device acceptance implied."
+    },
+    {
+      "id": "SP-CAPACITOR",
+      "title": "Installed shared workspace with preserved native capture bridge",
+      "owner": "native",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_Apple_compiled_native_simulator_verified_device_gate_pending",
+      "requirements": [
+        "CAP-08"
+      ],
+      "allowed_paths": [
+        "capacitor/",
+        "tests/capacitor/"
+      ]
+    },
+    {
+      "id": "SP-WEB-HOST",
+      "title": "Independent protected Spatial host using the same workspace",
+      "owner": "lead",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "dedicated_preview_current_source_verified_production_access_domain_pending",
+      "requirements": [
+        "WEB-01"
+      ],
+      "allowed_paths": [
+        "web/",
+        "integration/"
+      ],
+      "outcomes": [
+        "Serve full workspace independently of OS shell/runtime on an authorized protected deployment and chosen address.",
+        "Retain scoped OS embedding and one maintained editor; do not introduce live data exchange by implication."
+      ],
+      "acceptance_blocker": "Current source transfer is complete. Production home-route authorization and DNS remain unaccepted; dedicated project is unpublished.",
+      "implementation_checkpoint": "65 exact transferred files match source 5def609 at host b81e824. Production host build and final strict typecheck pass. No repeat browser/offline/screenshot suites."
+    },
+    {
+      "id": "SP-OS-EMBED",
+      "title": "Complete workspace in existing authenticated OS development host",
+      "owner": "lead",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "owner_requests_independent_first_selection_ui_preserved",
+      "requirements": [
+        "WEB-02"
+      ],
+      "allowed_paths": [
+        "web/",
+        "integration/"
+      ],
+      "implementation_checkpoint": "Current OS8d59d222 retains older generatedfc3a9b2 editor. Exact adapter/router/selector and8 generated files preserved and hash verified. No OS writes. Later integration must consume maintained standalone workspace, after source transfer and project authority are verified."
+    },
+    {
+      "id": "SP-WEB-DATA",
+      "title": "Transactional browser persistence, exact exports and disabled outbox",
+      "owner": "data",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_portable_browser_recovery_verified",
+      "requirements": [
+        "WEB-01",
+        "WEB-03"
+      ],
+      "allowed_paths": [
+        "web/src/data/",
+        "web/tests/data/"
+      ]
+    },
+    {
+      "id": "SP-WEB-CORE",
+      "title": "Canonical edit, scene and navigation adaptation with fresh tests",
+      "owner": "geometry",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_fresh_portable_verified",
+      "requirements": [
+        "WEB-01",
+        "WEB-03"
+      ],
+      "allowed_paths": [
+        "web/src/core/",
+        "web/tests/core/"
+      ]
+    },
+    {
+      "id": "SP-00",
+      "title": "Reconcile sources and establish real execution environment",
+      "owner": "lead",
+      "depends_on": [],
+      "status": "completed",
+      "requirements": [
+        "INT-01",
+        "INT-03",
+        "REL-03"
+      ],
+      "allowed_paths": [
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "RESUME.md",
+        "SOURCE_RECONCILIATION.json",
+        "contracts/",
+        "docs/"
+      ],
+      "outcomes": [
+        "Preserve current source and newer work; verify available hardware/tools/agents.",
+        "Bounded read-only reuse assessment of existing companion when source is accessible.",
+        "Accept package contracts or propose explicit additive corrections; begin implementation immediately."
+      ],
+      "evidence": "SOURCE_RECONCILIATION.json execution_2026_10_09",
+      "implementation_checkpoint": "Restored reviewed Git/source, validated176 source hashes and13 supplement hashes, verified real tools and preserved original evidence."
+    },
+    {
+      "id": "SP-01",
+      "title": "Native single-room end-to-end implementation",
+      "owner": "native",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_Apple_compiled_simulator_policy_verified_device_gate_pending",
+      "requirements": [
+        "CAP-01",
+        "CAP-02",
+        "CAP-05",
+        "CAP-06",
+        "CAP-07",
+        "REL-01"
+      ],
+      "allowed_paths": [
+        "ios/",
+        "packages/CaptureKit/",
+        "tests/native/"
+      ],
+      "outcomes": [
+        "Create actual iOS app target and compile using current stable Apple SDK.",
+        "Capture/archive/process/normalize a real room through the agreed geometry interface.",
+        "Show the same result in 2D and a first real graphic 3D view; no fixture-only completion."
+      ],
+      "implementation_checkpoint": "Both real unsigned app targets compiled/linked;14 native synthetic simulator tests pass. Connected capture source and portable policy tests preserved; real RoomPlan capture remains unaccepted.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-02",
+      "title": "Normalization and full structural editing core",
+      "owner": "geometry",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_portable_verified",
+      "requirements": [
+        "GEO-01",
+        "GEO-02",
+        "GEO-03",
+        "GEO-04",
+        "GEO-05",
+        "GEO-06",
+        "GEO-07"
+      ],
+      "allowed_paths": [
+        "packages/SpatialCore/",
+        "tests/geometry/",
+        "fixtures/geometry/"
+      ],
+      "outcomes": [
+        "Extend existing verified core rather than rebuilding it.",
+        "Implement RoomPlan normalization through a native adapter boundary, source ID reconciliation and exceptional-shape preservation.",
+        "Complete graph edit commands, validation, golden fixtures and old-version readers."
+      ],
+      "implementation_checkpoint": "Canonical geometry1.1, normalization reports, structural/room/floor/area commands, lineage, reusable read-only lookup;141 Core tests."
+    },
+    {
+      "id": "SP-03",
+      "title": "Shared 2D correction interface and accessibility",
+      "owner": "editor",
+      "depends_on": [
+        "SP-02"
+      ],
+      "status": "current_connected_authoring_group_openings_recovery_browser_verified_owner_acceptance_pending",
+      "requirements": [
+        "UI-01",
+        "UI-02",
+        "UI-03",
+        "UI-04",
+        "UI-05",
+        "UI-06",
+        "UI-07",
+        "PERF-01"
+      ],
+      "allowed_paths": [
+        "web/src/ui/",
+        "web/tests/ui/"
+      ],
+      "outcomes": [
+        "Implement full direct-manipulation editor and accessible alternatives.",
+        "Implement consequence-ranked review navigation, local state and useful error recovery.",
+        "Verify on baseline physical screens, not only screenshots or synthetic UI."
+      ],
+      "implementation_checkpoint": "Connected-room snapping/shared-wall splitting, direct door/window placement, group marquee/additive selection and provisional drag, one-command validation/undo/save, and durable unfinished drawing recovery implemented. Focused current-input evidence preserved; no owner or physical-device acceptance implied.",
+      "acceptance_blocker": "Canvas implementation and desktop usability work are ready. Physical iPhone touch/accessibility acceptance separately requires installation and device access."
+    },
+    {
+      "id": "SP-04",
+      "title": "Durable local data and revision lifecycle",
+      "owner": "data",
+      "depends_on": [
+        "SP-00"
+      ],
+      "status": "implemented_portable_verified_native_gate_blocked",
+      "requirements": [
+        "DAT-01",
+        "DAT-02",
+        "DAT-03",
+        "DAT-04",
+        "DAT-05",
+        "SEC-01",
+        "SEC-02"
+      ],
+      "allowed_paths": [
+        "packages/SpatialPersistence/",
+        "packages/SpatialInterop/",
+        "tests/persistence/",
+        "tests/security/"
+      ],
+      "outcomes": [
+        "Implement transactional drafts, staged files, migrations, local outbox and lock/auth policy.",
+        "Recover interrupted writes; preserve immutable versions and unacknowledged work.",
+        "Port strict importer defenses natively and test malformed input."
+      ],
+      "implementation_checkpoint": "SQLitev6 drafts/outbox/scoped access/recovery/confirmed history cleanup;59 XCTest and20 process-death cases. Physical protection/lock/storage UX pending.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-05",
+      "title": "Graphic 3D navigation and performance",
+      "owner": "renderer",
+      "depends_on": [
+        "SP-02"
+      ],
+      "status": "implemented_source_portable_verified_device_gate_blocked",
+      "requirements": [
+        "D3-01",
+        "D3-02",
+        "D3-03",
+        "D3-04",
+        "D3-05",
+        "UI-06",
+        "UI-07",
+        "PERF-01",
+        "PERF-03"
+      ],
+      "allowed_paths": [
+        "packages/SpatialCore/Sources/SpatialCore/Navigation.swift",
+        "packages/SpatialCore/Sources/SpatialCore/Cutaway.swift",
+        "ios/SpatialApp/SpatialModelView.swift",
+        "ios/SpatialApp/RealityKitSceneFactory.swift",
+        "tests/rendering/"
+      ],
+      "outcomes": [
+        "Implement RealityKit renderer, true wall holes, semantic edges and clear cutaway.",
+        "Complete orbit and actual move-through navigation with validated portals.",
+        "Profile scene updates/memory; implement translucent mode without misleading geometry."
+      ],
+      "implementation_checkpoint": "Swept walk navigation, real cutaway, display ceilings, bounded/cancelled RealityKit updates and canonical picking; declared partial synthetic envelopes exercised, native frames/memory unaccepted.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-06",
+      "title": "Full local export pipeline",
+      "owner": "renderer",
+      "depends_on": [
+        "SP-02",
+        "SP-04"
+      ],
+      "status": "implemented_Apple_drawing_verified_browser_exports_verified_device_share_pending",
+      "requirements": [
+        "EXP-01",
+        "EXP-02"
+      ],
+      "allowed_paths": [
+        "packages/SpatialInterop/",
+        "tests/exports/"
+      ],
+      "outcomes": [
+        "Generate exact-version SVG/PDF/PNG/portable 3D and per-floor packages.",
+        "Test orientation, labeling, windows/doors, styling, schema identity and round trips.",
+        "Keep raw Apple capture private by default."
+      ],
+      "implementation_checkpoint": "65 Apple interoperability tests including12 drawing encoder cases passed; current inputs/runtime hash-matched for reuse. Browser export and exact-version roundtrip checks also pass. Physical share targets and font coverage remain unaccepted.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-07",
+      "title": "Multi-room capture and interruption hardening",
+      "owner": "native",
+      "depends_on": [
+        "SP-01",
+        "SP-02",
+        "SP-04"
+      ],
+      "status": "implemented_source_portable_verified_device_gate_blocked",
+      "requirements": [
+        "CAP-03",
+        "CAP-04",
+        "CAP-07",
+        "GEO-03",
+        "PERF-03",
+        "REL-01"
+      ],
+      "allowed_paths": [
+        "ios/",
+        "packages/CaptureKit/",
+        "tests/native/"
+      ],
+      "outcomes": [
+        "Merge continuous compatible-space room segments and explicitly handle tracking loss.",
+        "Implement world-map recovery or safe separated-segment fallback, not guessed stitching.",
+        "Verify adverse physical-device journeys and preserve real artifacts."
+      ],
+      "implementation_checkpoint": "Retained connected rooms, compatible StructureBuilder inputs, identified world-map recovery, fail-closed lost alignment/mixed floors, explicit separate recovery; physical scan/relocalization required.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-08",
+      "title": "Scoped disconnected publication adapter and contract tests",
+      "owner": "data",
+      "depends_on": [
+        "SP-04",
+        "SP-06"
+      ],
+      "status": "implemented_disabled_contract_verified",
+      "requirements": [
+        "INT-01",
+        "INT-02",
+        "INT-03",
+        "SEC-02",
+        "DAT-02",
+        "EXP-02"
+      ],
+      "allowed_paths": [
+        "packages/SpatialPersistence/",
+        "contracts/publication.openapi.json",
+        "tests/persistence/"
+      ],
+      "outcomes": [
+        "Build injectable disabled/local-test publisher; no live writes without later authorization.",
+        "Exercise exact bytes, duplicate retries, auth expiry, revoked targets, stale revisions and forged receipts.",
+        "Document adapter mapping to current OS contracts after actual source read; preserve Moldo separation."
+      ],
+      "implementation_checkpoint": "Durable exact-revision outbox and disabled scoped publisher with synthetic authentication/revocation/conflict/forged-receipt checks; no live adapters or widened grants."
+    },
+    {
+      "id": "SP-09",
+      "title": "Integrated device, usability, security and release acceptance",
+      "owner": "lead",
+      "depends_on": [
+        "SP-03",
+        "SP-05",
+        "SP-06",
+        "SP-07",
+        "SP-08"
+      ],
+      "status": "blocked_external_physical_device_acceptance_and_project_authority",
+      "requirements": [
+        "PERF-01",
+        "PERF-02",
+        "REL-01",
+        "REL-02",
+        "REL-03",
+        "UI-05",
+        "SEC-01",
+        "SEC-02"
+      ],
+      "allowed_paths": [
+        "tests/",
+        "evidence/",
+        "docs/",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "RESUME.md"
+      ],
+      "outcomes": [
+        "Execute complete real workflow with representative device and scene evidence.",
+        "Measure capture plus correction/export time, not only capture or screenshot quality.",
+        "Record unresolved production gates; no distribution or market-leading claim without evidence and authorization."
+      ],
+      "implementation_checkpoint": "Shared authoring browser journeys, durable process recovery, independent data review, both actual Apple app compilations and14 native simulator tests pass within recorded scope. Full physical v1 journey and authorized project integration remain unaccepted.",
+      "acceptance_blocker": "No supported physical iPhone and authorized signing/installation access is verified. Actual Mac/Xcode compilation is available and passed; physical capture, recovery, accessibility and performance require the device. OS project authority and signed-in verification have separate recorded access blockers."
+    },
+    {
+      "id": "SP-03-MOBILE-DRAWING",
+      "title": "Smooth finger drawing and map-first mobile correction UI",
+      "owner": "lead",
+      "depends_on": [
+        "SP-03"
+      ],
+      "status": "completed_tested_transferred_live",
+      "allowed_paths": [
+        "web/src/ui/",
+        "web/tests/ui/",
+        "integration/lovable-host/src/offline/OfflineStatus.tsx",
+        "evidence/reviews/mobile-drawing-2026-10-10/"
+      ],
+      "outcomes": [
+        "Frame-limited previews with exact release and editable canonical geometry",
+        "Compact top actions and draggable left palette",
+        "Map remains visible in mobile correction screens"
+      ],
+      "evidence": "evidence/reviews/mobile-drawing-2026-10-10/final-review.json",
+      "acceptance_scope": "11 synthetic Chromium cases; physical phone feel and full accessibility remain distinct.",
+      "runtimeSourceCommit": "2fd22b67c81eb290d00ed22a30a650c562c57712",
+      "hostCommit": "9c1cc31f303411c7302b4157290f9d3068cd4e77",
+      "publicEvidence": "evidence/mobile-upgrade-2026-10-10/PUBLIC_DELIVERY.json"
+    },
+    {
+      "id": "SP-03-PRECISION-DRAWING",
+      "owner": "lead",
+      "status": "completed_tested_transferred_live",
+      "goal": "Accurate press-drag room and wall authoring with forgiving shared-corner/boundary snapping in the existing app structure",
+      "acceptance": [
+        "Two-tap rooms and press-drag rectangles coexist; either draft corner resizes without jump",
+        "Mouse/touch/pen wall strokes keep exact release and do not save before Finish",
+        "Zoom-independent magnets connect actual topology and release easily; free coordinates stay continuous",
+        "Endpoint wall splits preserve openings, room boundaries, one-step undo and existing recovery payloads",
+        "Focused local verification and exact dedicated-host transfer; no repeated Lovable offline or PNG checks"
+      ],
+      "evidence": "evidence/reviews/precision-drawing-2026-10-10/",
+      "sourceCommit": "b64448eac79e3cd0b046f7c5e1a256b3e9c73905",
+      "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
+    }
+  ],
+  "next_action": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
+  "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
+  "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
+}

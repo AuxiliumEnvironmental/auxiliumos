@@ -1,0 +1,13 @@
+# Owner requirements normalized without implementation claims
+
+The original request is in the master conversation dated October 11,2026. This mapping preserves every requested feature family and process constraint; it is a specification summary, not a verbatim transcript.
+
+1. Category contrast in 3D and mobile walkthrough: extremely light-gray walls, darker gray floors, intermediate gray ceilings when shown. Do not color each wall differently.
+2. Select and freely dimension windows/doors/passages in 2D and 3D. A 3D edge/corner tap exposes corner points. Only corner-handle drags resize; edge drags move the opening left/right along its wall without resizing. Selected/new doors expose Flip vertically and Flip horizontally. Bring actual companion types into coherent2D/3D behavior.
+3. Smooth direct ceiling-height dragging for a room or structure in 3D edit mode, never walkthrough.
+4a. Quickly place/resize toilets, appliances, walk-in showers, shower tubs, garden tubs, single/double and freestanding/cabinet sinks/vanities, built-ins, cutouts, chimneys/fireplaces, islands and upper/lower cabinets in 2D/3D. White objects with blue edges.
+4b. Tap wall/floor/ceiling; compact menu with Affected area, then moisture/fire options. Draw/move/resize affected shapes quickly.3D moisture light-blue translucent and fire red translucent.2D wall spans use adjustable dark blue/red two-point lines, ceiling areas a two-direction grid hatch, floor areas a filled blue/red region. Keep appropriate height in 3D.
+
+Process: preserve all current Spatial source/state and transfer/recovery instructions; track GitHub; maintain web/Lovable/Apple/OS consistency; independent strong standalone tool and full OS-tool integration; one Astra master and one feature chat at a time; use bounded agents where helpful; no hallucinated state, unseen source or completion; deliberate dependencies; future extension without losing original goals; conserve credits through targeted reads/builds and necessary risk-focused checks; preserve or improve camera movement, fluidity,3D performance, current app structure and field speed. The aspiration to lead competing tools is a quality goal, not a supported comparative claim.
+
+Screenshot references: IMG_2889, IMG_2891 and IMG_2892 show wall elevation, an affected rectangle with handles and dimensions, and an opening subtracted from highlighted wall material. They supply interaction inspiration, not a mandate to copy Clean Claims' layout or inferred geometry algorithms. The owner's written ceiling grid requirement controls over the screenshots' single-direction hatching.

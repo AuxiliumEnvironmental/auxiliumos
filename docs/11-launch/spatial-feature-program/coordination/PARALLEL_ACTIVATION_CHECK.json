@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "prepared_at_utc": "2026-10-11T16:16:45.453737+00:00",
+  "owner_authorization": "Explicit approval for GitHub writes and concurrent feature chats on 2026-10-11",
+  "accepted_F01_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
+  "reviewed_runtime_source": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+  "contract_revision": 3,
+  "checks": [
+    "Fresh program/host identity and writer preflight; original source and F01 evidence reused.",
+    "Four isolated branch names absent remotely before creation; no existing feature work overwritten.",
+    "Exact path and source-hash sets validated per task; every queue row matches its assignment.",
+    "Retired single-task lease has no active_task; all current prompts read the new live ledger from program branch.",
+    "F03/F04/F05 bounded read-only source reviews identified cumulative schema, surface/remap, export and selection dependencies.",
+    "Only program docs and Spatial control files changed. No runtime code, source schema, package, backend, native, OS or deployment changes.",
+    "JSON/reference and whitespace checks passed; no product suites rerun for coordination changes."
+  ],
+  "branch_creation": "Master creates each assigned branch at the containing activation commit before delivering prompts; exact refs are verified remotely.",
+  "runtime_tests_run": false,
+  "workers_started": false,
+  "git_record_semantics": "The containing commit is the activation identifier. Feature branch refs are created afterward at that exact commit, avoiding a self-containing hash."
+}

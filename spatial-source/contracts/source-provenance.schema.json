@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Auxilium Spatial source provenance 1.0.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "profileVersion",
+    "documentID",
+    "revision",
+    "sourceIdentity"
+  ],
+  "properties": {
+    "profileVersion": {
+      "const": "auxilium-spatial-source-provenance/1.0.0"
+    },
+    "documentID": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,96}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "sourceIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "documentID",
+        "revision",
+        "sha256",
+        "reason"
+      ],
+      "properties": {
+        "documentID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[^\\u0000-\\u001f]+$"
+        }
+      }
+    }
+  }
+}

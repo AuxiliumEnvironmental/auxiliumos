@@ -1,0 +1,474 @@
+{
+  "version": 1,
+  "purpose": "Complete v1 product acceptance, not a claim that the package already implements every item.",
+  "requirements": [
+    {
+      "id": "CAP-01",
+      "title": "Native capability-aware capture",
+      "acceptance": "Physical supported device completes native capture; unsupported hardware and camera denial are handled without pretending to scan.",
+      "owners": [
+        "native"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-02",
+      "title": "One coordinated sensor session",
+      "acceptance": "RoomPlan uses one coordinated AR session; no competing camera/session or mandatory GPS/audio/cloud pipeline.",
+      "owners": [
+        "native"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-03",
+      "title": "Compatible-space multi-room capture",
+      "acceptance": "Connected rooms merge in verified compatible coordinates; repeated rooms do not silently duplicate walls.",
+      "owners": [
+        "native",
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-04",
+      "title": "Truthful interruption recovery",
+      "acceptance": "Retained rooms survive tested interruption; failed relocalization produces a separate reviewed segment, never guessed alignment.",
+      "owners": [
+        "native",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-05",
+      "title": "Original source preservation",
+      "acceptance": "Raw and processed Apple captures are retained before normalization with protected files and explicit source identity.",
+      "owners": [
+        "native",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-06",
+      "title": "Quality guidance without fake scores",
+      "acceptance": "Guidance reflects actual SDK/geometry evidence; classification confidence is not advertised positional accuracy.",
+      "owners": [
+        "native",
+        "editor"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-07",
+      "title": "Bounded device resources",
+      "acceptance": "Low disk, thermal state, cancellation, duplicate finish and stale callback cases preserve honest state and bounded processing.",
+      "owners": [
+        "native",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-01",
+      "title": "Explicit coordinate transforms",
+      "acceptance": "Asymmetric rotated examples prove correct local-to-world and X/Z-to-screen conventions.",
+      "owners": [
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-02",
+      "title": "One canonical geometry source",
+      "acceptance": "2D/3D/exports derive from the same versioned walls, openings, nodes and rooms.",
+      "owners": [
+        "geometry",
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-03",
+      "title": "Topology and special geometry",
+      "acceptance": "Shared nodes/walls, concave rooms, angled/curved paths, nonuniform surfaces and unresolved boundaries are represented or explicitly flagged without silent shape invention.",
+      "owners": [
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-04",
+      "title": "Opening host integrity",
+      "acceptance": "Openings have validated host paths and bounds; ambiguous hosts, overlap and impossible geometry do not silently pass.",
+      "owners": [
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-05",
+      "title": "Stable IDs and lineage",
+      "acceptance": "Rescans/edits preserve or explicitly map object IDs and source lineage; old report/annotation positions never silently move.",
+      "owners": [
+        "geometry",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-06",
+      "title": "Measurement restraint",
+      "acceptance": "No verified measurement/area/quantity claim; internal dimensions and assumed heights retain their source meaning.",
+      "owners": [
+        "geometry",
+        "editor"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "GEO-07",
+      "title": "Schema evolution",
+      "acceptance": "Supported readers/writers reject or explicitly migrate unknown schemas; older golden documents remain recoverable.",
+      "owners": [
+        "geometry",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "UI-01",
+      "title": "Focused mobile workspace",
+      "acceptance": "Capture, review, editing, export and recovery have task-specific layouts with stable project/floor context.",
+      "owners": [
+        "editor"
+      ],
+      "product_status": "source_implemented_owner_mobile_usability_unaccepted"
+    },
+    {
+      "id": "UI-02",
+      "title": "Direct editing",
+      "acceptance": "Move/draw/split/join/delete walls, manipulate openings, label/manage rooms and distinguish semantic areas from physical walls.",
+      "owners": [
+        "editor",
+        "geometry"
+      ],
+      "product_status": "editor_core_implemented_canvas_capability_and_usability_incomplete",
+      "owner_clarification": "Reach at least companion in-scope manual drawing capability with clean UI, continuous/quick room creation, visible snaps, efficient selection and direct corrections. Same-task mouse/touch comparison required before parity/superiority claims. Business records/calibration/quantities stay excluded."
+    },
+    {
+      "id": "UI-03",
+      "title": "Undo and rejected-edit safety",
+      "acceptance": "Commands support undo/redo, rejected edits roll back, and edit-after-publication preserves the issued source revision.",
+      "owners": [
+        "editor",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "UI-04",
+      "title": "Review by consequence",
+      "acceptance": "Actionable disconnected/boundary/opening issues jump to affected geometry; no fabricated automatic diagnosis.",
+      "owners": [
+        "editor",
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "UI-05",
+      "title": "Accessibility",
+      "acceptance": "Primary 44-point targets, Dynamic Type, VoiceOver object actions, noncolor statuses, Reduce Motion and no clipped critical controls.",
+      "owners": [
+        "editor",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "UI-06",
+      "title": "Visual design fidelity",
+      "acceptance": "White/light or deliberate dark canvas, semantic dark/colored edges, optional pale-blue fill; no checkerboard, photo texture, triangle noise or auto-spin.",
+      "owners": [
+        "editor",
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending",
+      "owner_feedback": "Owner likes the current mobile interactive 2D/3D visual direction; preserve it. Full manual usability/accessibility acceptance is still open."
+    },
+    {
+      "id": "UI-07",
+      "title": "Consistent selection and state",
+      "acceptance": "2D/3D switches retain selected object/floor and useful framing; dismissed panels preserve edits.",
+      "owners": [
+        "editor",
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "D3-01",
+      "title": "Actual architectural cutouts",
+      "acceptance": "Doors/windows/openings cut wall faces; no painted rectangle that leaves a filled wall.",
+      "owners": [
+        "renderer",
+        "geometry"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "D3-02",
+      "title": "Interactive 3D",
+      "acceptance": "Orbit, pan, zoom, reset and explicit cutaway/ceiling controls work smoothly from the same geometry.",
+      "owners": [
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "D3-03",
+      "title": "Move-through navigation",
+      "acceptance": "Room placement/tap-to-move works through accepted portals, not windows or unknown geometry; exit/reset always works.",
+      "owners": [
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "D3-04",
+      "title": "Semantic line rendering",
+      "acceptance": "No triangle diagonals or unwanted tessellation seams; optional translucent materials are configured/tested explicitly.",
+      "owners": [
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "D3-05",
+      "title": "Resource lifecycle",
+      "acceptance": "Stable scene updates, cancelled stale work, bounded entities/buffers and verified release on repeated open/close.",
+      "owners": [
+        "renderer",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "DAT-01",
+      "title": "Durable local drafts",
+      "acceptance": "Acknowledged saves survive tested kill/relaunch and staged file/DB interruptions; in-memory state is not called saved.",
+      "owners": [
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "DAT-02",
+      "title": "Honest local/sync states",
+      "acceptance": "Editing, saved locally, pending, receiver-confirmed and released are distinct states.",
+      "owners": [
+        "data",
+        "editor"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "DAT-03",
+      "title": "Immutable revisions",
+      "acceptance": "Issued/publication artifacts are immutable and byte-identified; changes create new versions.",
+      "owners": [
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "DAT-04",
+      "title": "Protected private content",
+      "acceptance": "File protection, retention, account/lock behavior and redacted diagnostics are verified before real-data deployment.",
+      "owners": [
+        "data",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "DAT-05",
+      "title": "Offline behavior and recovery",
+      "acceptance": "Editing/export of retained permitted work does not require connectivity; stale edits/revocation are reconciled explicitly.",
+      "owners": [
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "SEC-01",
+      "title": "Untrusted-file defenses",
+      "acceptance": "Bounded archives/JSON/SVG reject traversal, symlinks, duplicates, nonfinite data, corrupt indices and active/external content.",
+      "owners": [
+        "data",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "SEC-02",
+      "title": "Least privilege",
+      "acceptance": "No client service key, credential URL, public raw bucket or cross-project/business grant from mere authentication.",
+      "owners": [
+        "data",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "EXP-01",
+      "title": "Portable local exports",
+      "acceptance": "Geometry plus polished 2D SVG/PDF/PNG and portable 3D export are generated from the exact selected revision.",
+      "owners": [
+        "renderer",
+        "data"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "EXP-02",
+      "title": "Verified artifact identity",
+      "acceptance": "Manifest lengths/hashes and document/floor/revision references are verified before trusted use.",
+      "owners": [
+        "data",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "INT-01",
+      "title": "Future integration without side effects",
+      "acceptance": "Disabled adapter and tested proposed contract do not mutate OS/Moldo or create live infrastructure.",
+      "owners": [
+        "data",
+        "lead"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "INT-02",
+      "title": "Publication correctness",
+      "acceptance": "Authorized receiver implementation, when enabled, verifies stored bytes/current authority and prevents duplicates, stale replacement and forged success.",
+      "owners": [
+        "data",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "INT-03",
+      "title": "Moldo separation",
+      "acceptance": "Selective reuse does not create OS membership or change Moldo engagement ownership; source audiences cannot widen.",
+      "owners": [
+        "data",
+        "lead"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "PERF-01",
+      "title": "Measured interaction budget",
+      "acceptance": "Baseline-device p95 feedback, frame behavior and warm transitions are measured against declared workloads.",
+      "owners": [
+        "editor",
+        "renderer",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "PERF-02",
+      "title": "Different capture/render envelopes",
+      "acceptance": "Synthetic stress proves engine behavior only; native capture claims use physical-scene evidence.",
+      "owners": [
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "PERF-03",
+      "title": "No unnecessary ongoing computation",
+      "acceptance": "No cloud inference in ordinary editing, no unbounded frame queues or unnecessary background camera/render loops.",
+      "owners": [
+        "native",
+        "renderer"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "REL-01",
+      "title": "Actual Apple build and device evidence",
+      "acceptance": "Real Xcode compile and target-device journeys are recorded separately from portable tests.",
+      "owners": [
+        "native",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "REL-02",
+      "title": "Complete v1 workflow",
+      "acceptance": "Real capture -> correction -> 2D/3D navigation -> reopen -> export completes without fixture-only substitutions.",
+      "owners": [
+        "lead",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "REL-03",
+      "title": "Truthful release and compatibility",
+      "acceptance": "No readiness/superiority/background-worker claim beyond recorded evidence; source/rollback/signing/authorization gates are explicit.",
+      "owners": [
+        "lead",
+        "qa"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "WEB-01",
+      "title": "One maintained full workspace",
+      "acceptance": "The same maintained React/TypeScript editor provides full 2D/3D, revisions, save/reopen and required exports in standalone browser, AuxiliumOS and installed Capacitor app. A viewer or launcher is insufficient.",
+      "owners": [
+        "lead"
+      ],
+      "product_status": "shared_source_implemented_independent_host_and_native_acceptance_pending",
+      "owner_clarification": "Owner selected spatialauxilium.io and a dedicated Lovable project for independent delivery. Preserve OS Spatial selection UI only for now; later embed the same full workspace through its scoped adapter. Source transfer is not editor regeneration. Domain or sign-in does not establish sync/project authority."
+    },
+    {
+      "id": "WEB-02",
+      "title": "Authorized OS project context",
+      "acceptance": "The OS embeds the complete workspace only after current authenticated project access checks; namespaces isolate profile/account/project and revoked contexts clear visible data.",
+      "owners": [
+        "lead"
+      ],
+      "product_status": "personal_scope_implemented_project_authority_blocked"
+    },
+    {
+      "id": "WEB-03",
+      "title": "Browser behavior and truthful persistence",
+      "acceptance": "Fresh TypeScript and real browser tests verify edits, undo/redo, reopened saves, revision conflicts, imports, exact exports and collision/cutaway. Swift evidence is not reused as TypeScript acceptance.",
+      "owners": [
+        "lead"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    },
+    {
+      "id": "CAP-08",
+      "title": "Versioned installed native bridge",
+      "acceptance": "The installed Capacitor app contains shared workspace assets and invokes actual retained Swift capture through bridge 1.0.0. Browser capture fails closed, sources remain protected and native/web revision conflicts cannot overwrite work.",
+      "owners": [
+        "lead"
+      ],
+      "product_status": "implemented_source_acceptance_pending"
+    }
+  ],
+  "architecture_correction": "2026-10-09 owner-approved shared React/TypeScript workspace with Capacitor native Apple capture. Original acceptance retained."
+}

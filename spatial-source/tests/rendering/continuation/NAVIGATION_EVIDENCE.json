@@ -1,0 +1,63 @@
+{
+  "baseline_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "implementation_status": "Uncommitted integrated source on the preserved baseline; lead owns final commit.",
+  "current_portable_evidence": "NAVIGATION_INDEXED_EVIDENCE.json supersedes the portable-input portion after the indexed source change; this earlier successful run is preserved separately.",
+  "environment": "Linux x86_64, official Swift 6.2.1 RELEASE ubuntu24.04, legacy compiler driver; no Apple SDK or device",
+  "portable_run": {
+    "command": "env LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swift test --jobs 1 --filter 'NavigationTests|CutawayTests'",
+    "working_directory": "packages/SpatialCore",
+    "test_console_started_utc": "2026-10-09T09:10:29.201Z",
+    "exit_code": 0,
+    "cases": 31,
+    "failures": 0,
+    "suites": {"NavigationTests": 20, "CutawayTests": 11},
+    "console_summary": "Executed 31 tests, with 0 failures (0 unexpected) in 0.226 (0.226) seconds",
+    "earlier_run": "The preceding 27-case run passed before four additional triangle-picking tests were added. It is not counted as additional test coverage."
+  },
+  "source_sha256": {
+    "packages/SpatialCore/Sources/SpatialCore/Navigation.swift": "092d30568f9a5e91a53d159349df35b4c8cc65a839de9737ac680bf384a6bf11",
+    "packages/SpatialCore/Sources/SpatialCore/Cutaway.swift": "1524aa2c931d3068e0d3b673178f53637efc737a12c6afd81fdfd9630a7a43c7",
+    "packages/SpatialCore/Sources/SpatialCore/Geometry.swift": "4f12488f8f6f2866dffe90b3354a15f10af48019a9ae3cdfe4e84ba8bbe44389",
+    "packages/SpatialCore/Sources/SpatialCore/Model.swift": "0de648af4ae79ddfc753ec293efe459e62e7702ac961fe72679f5ce5b6618c99",
+    "packages/SpatialCore/Sources/SpatialCore/Scene.swift": "ab1fcc441b3eed13a641ea80bf7eb9dc05209dcfcda035c92105b3434b3e6169",
+    "packages/SpatialCore/Sources/SpatialCore/Validation.swift": "95215e56d2943d5f80da93c721eae7d9dbfa6951c8ef32bf2cd0625b088c9ed8",
+    "packages/SpatialCore/Sources/SpatialCore/Fixtures.swift": "7f2bcb5c4e921911122c1be55714bb587adba9ccfbce02dea44ac34391465570",
+    "packages/SpatialCore/Package.swift": "b26a5d57a8e705931caa226f5b771d25c6de6175554de510278e72a3418a79cc",
+    "packages/SpatialCore/Tests/SpatialCoreTests/NavigationTests.swift": "c758e6c30a10f140cc0a18b6d6f6b4f9151abcd73b3314e497228aa40468cd53",
+    "packages/SpatialCore/Tests/SpatialCoreTests/CutawayTests.swift": "f3e0e116a1616719cc21f11795c4a8dd89b4f85fab73c9be500d5dad2039f91b"
+  },
+  "native_parse": {
+    "command": "env LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swiftc -frontend -parse ios/SpatialApp/SpatialModelView.swift ios/SpatialApp/RealityKitSceneFactory.swift",
+    "exit_code": 0,
+    "input_sha256": {
+      "ios/SpatialApp/SpatialModelView.swift": "7887941e190e8780f09091d26c5e00275698ddb2fa57a4641c079af7b87620a4",
+      "ios/SpatialApp/RealityKitSceneFactory.swift": "d859b831ba5d1ca39ed9c0afcd171e5659076c4962d1fde8d7f5d9e3bad71b45"
+    },
+    "scope": "Syntax only. No Apple SDK typecheck, link, simulator, visual or physical acceptance."
+  },
+  "implemented_journeys": [
+    "Choose named room or first visible floor triangle to place a walk camera; explicit named room jumps never establish alignment.",
+    "Tap-to-move or labeled steps with swept-circle collision; accepted shared door/passage only; walls, windows, narrow/raised/low/inferred portals and unknown boundaries block.",
+    "Look with drag or labeled turn/look buttons; Reduce Motion suppresses travel animation; Exit/Reset are pinned outside the horizontally scrolling tools.",
+    "Overview orbit/pan/zoom and view-dependent actual-triangle cutaway; far faces remain; wall/opening outlines remain; graph and exports unchanged.",
+    "Optional explicitly assumed display ceilings only where adjoining wall tops agree; light/dark face and edge palettes.",
+    "Canonical triangle picks preserve voids and concave floors; 44-point semantic-edge/node targets are depth checked and disambiguated; shared IDs preserved.",
+    "Selection highlights remain double-sided; semantic-area boundaries are dashed/nonphysical and do not create walkable room floors.",
+    "Stale result/hit rejection, retained cancellable geometry work, finite cancellable movement, bounded resource admission, one mesh/entity per semantic edge."
+  ],
+  "independent_review": {
+    "agent": "/root/apple_review_v2",
+    "scope": "Read-only native source/API review, not Apple compilation",
+    "findings_addressed": [
+      "Role delimiter parsing originally truncated colon-containing IDs.",
+      "Convex automatic physics collision was inappropriate for concave floor selection; replaced by canonical picking.",
+      "Area dash entity multiplication replaced by batched meshes and total resource admission.",
+      "Selected planes now preserve double-sided face culling.",
+      "Retained detached task handle and cancellation checks now cancel stale geometry phases."
+    ],
+    "lead_qa_finding_addressed": "Start placement now requires the first visible triangle to be a floor, not an infinite plane projected through an opaque wall. Independent QA also found cross-kind node-ID collisions; selecting a node now highlights its sphere only, never a same-ID unrelated render object."
+  },
+  "native_acceptance": "Pending: see NATIVE_NAVIGATION_ACCEPTANCE.md",
+  "live_integration": "Disabled and untouched",
+  "release": "Not released"
+}

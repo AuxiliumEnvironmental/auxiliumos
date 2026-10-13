@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.560000 -0.560000 9.120000 5.120000" role="img">
+<title>Synthetic two-room test - Level 1</title>
+<desc>Diagrammatic layout. Measurements unverified. Revision 1.</desc>
+<rect x="-0.560000" y="-0.560000" width="9.120000" height="5.120000" fill="white"/>
+<polygon points="0.000000,0.000000 4.000000,0.000000 4.000000,4.000000 0.000000,4.000000" fill="#EDF5FC"/>
+<polygon points="4.000000,0.000000 8.000000,0.000000 8.000000,4.000000 4.000000,4.000000" fill="#EDF5FC"/>
+<line x1="0.000000" y1="0.000000" x2="4.000000" y2="0.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="4.000000" y1="0.000000" x2="5.500000" y2="0.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="6.400000" y1="0.000000" x2="8.000000" y2="0.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="8.000000" y1="0.000000" x2="8.000000" y2="4.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="8.000000" y1="4.000000" x2="4.000000" y2="4.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="4.000000" y1="4.000000" x2="3.000000" y2="4.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="3.000000" y1="4.000000" x2="1.600000" y2="4.000000" stroke="#2563A6" stroke-width="0.015600" stroke-linecap="round"/>
+<line x1="1.600000" y1="4.000000" x2="0.000000" y2="4.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="0.000000" y1="4.000000" x2="0.000000" y2="0.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="4.000000" y1="0.000000" x2="4.000000" y2="1.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<line x1="4.000000" y1="1.900000" x2="4.000000" y2="4.000000" stroke="#17283D" stroke-width="0.024000" stroke-linecap="round"/>
+<text x="1.333333" y="1.333333" text-anchor="middle" font-family="system-ui,sans-serif" font-size="0.192000" fill="#17283D">Assessment area</text>
+<text x="5.333333" y="1.333333" text-anchor="middle" font-family="system-ui,sans-serif" font-size="0.192000" fill="#17283D">Office</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792.00000 612.00000" role="img">
+<title>Spatial layout page 1</title><desc>Document synthetic-two-rooms; floor floor-1; revision 1. Diagrammatic layout. Measurements unverified.</desc>
+<rect width="792.00000" height="612.00000" fill="white"/>
+<polygon points="56.00000,130.00000 396.00000,130.00000 396.00000,470.00000 56.00000,470.00000" data-object-id="room-a" data-role="room" fill="#EDF5FC" stroke="none" stroke-width="1.00000"/>
+<polygon points="396.00000,130.00000 736.00000,130.00000 736.00000,470.00000 396.00000,470.00000" data-object-id="room-b" data-role="room" fill="#EDF5FC" stroke="none" stroke-width="1.00000"/>
+<line x1="56.00000" y1="130.00000" x2="396.00000" y2="130.00000" data-object-id="w0" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="396.00000" y1="130.00000" x2="523.50000" y2="130.00000" data-object-id="w1" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="523.50000" y1="133.00000" x2="523.50000" y2="127.00000" data-object-id="entry" data-role="passage" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="600.00000" y1="133.00000" x2="600.00000" y2="127.00000" data-object-id="entry" data-role="passage" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="600.00000" y1="130.00000" x2="736.00000" y2="130.00000" data-object-id="w1" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="736.00000" y1="130.00000" x2="736.00000" y2="470.00000" data-object-id="w2" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="736.00000" y1="470.00000" x2="396.00000" y2="470.00000" data-object-id="w3" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="396.00000" y1="470.00000" x2="311.00000" y2="470.00000" data-object-id="w4" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="311.00000" y1="471.50000" x2="192.00000" y2="471.50000" data-object-id="window-a" data-role="window" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="311.00000" y1="468.50000" x2="192.00000" y2="468.50000" data-object-id="window-a" data-role="window" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="192.00000" y1="470.00000" x2="56.00000" y2="470.00000" data-object-id="w4" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="56.00000" y1="470.00000" x2="56.00000" y2="130.00000" data-object-id="w5" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="396.00000" y1="130.00000" x2="396.00000" y2="215.00000" data-object-id="w6" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<line x1="393.00000" y1="215.00000" x2="399.00000" y2="215.00000" data-object-id="door-a" data-role="door" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="393.00000" y1="291.50000" x2="399.00000" y2="291.50000" data-object-id="door-a" data-role="door" fill="none" stroke="#2563A6" stroke-width="0.80000" stroke-linecap="round"/>
+<line x1="396.00000" y1="291.50000" x2="396.00000" y2="470.00000" data-object-id="w6" data-role="wall" fill="none" stroke="#17283D" stroke-width="2.10000" stroke-linecap="round"/>
+<polygon points="157.33333,233.33333 181.33333,233.33333 181.33333,253.33333 157.33333,253.33333" data-object-id="room-a" data-role="room-label-backing" fill="#FFFFFF" stroke="none" stroke-width="1.00000"/>
+<polygon points="497.33333,233.33333 521.33333,233.33333 521.33333,253.33333 497.33333,253.33333" data-object-id="room-b" data-role="room-label-backing" fill="#FFFFFF" stroke="none" stroke-width="1.00000"/>
+<text x="159.33333" y="246.33333" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D" font-weight="600" data-object-id="room-a"><tspan x="159.33333" dy="0">R1</tspan></text>
+<text x="499.33333" y="246.33333" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D" font-weight="600" data-object-id="room-b"><tspan x="499.33333" dy="0">R2</tspan></text>
+<text x="40.00000" y="51.00000" font-family="system-ui,sans-serif" font-size="23.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Spatial layout</tspan></text>
+<text x="40.00000" y="75.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="40.00000" dy="0">Floor drawing  |  Revision 1  |  Needs review</tspan></text>
+<text x="40.00000" y="97.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D"><tspan x="40.00000" dy="0">Room keys and full labels follow on the directory pages.</tspan></text>
+<text x="40.00000" y="517.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D"><tspan x="40.00000" dy="0">Door / passage: open gap. Window: double line. Dashed polygon: area, not a physical barrier. Dashed circle:</tspan><tspan x="40.00000" dy="14.50000">incomplete.</tspan></text>
+<text x="40.00000" y="552.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D"><tspan x="40.00000" dy="0">Closed room boundaries only. Capture completeness is not established.</tspan></text>
+<text x="40.00000" y="592.00000" font-family="system-ui,sans-serif" font-size="9.00000" fill="#17283D"><tspan x="40.00000" dy="0">Diagrammatic layout. Measurements unverified.</tspan></text>
+<text x="690.00000" y="592.00000" font-family="system-ui,sans-serif" font-size="9.00000" fill="#17283D"><tspan x="690.00000" dy="0">1 / 2</tspan></text>
+</svg>

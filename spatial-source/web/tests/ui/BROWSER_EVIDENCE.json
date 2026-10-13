@@ -1,0 +1,178 @@
+{
+  "evidenceVersion": 2,
+  "completedAt": "2026-10-09T17:59:14.056782+00:00",
+  "inputGitRevision": "f04a4e23c4d09e7358ade11864d7f1883cdbc083",
+  "sourceState": "Recorded commit plus preserved dirty integration work. Exact runtime/config/test inputs are listed per run; this is not clean-commit evidence.",
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "browser": "Chromium 153.0.8010.0 Linux headless",
+    "browserSHA256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "runner": "Playwright 1.61.1",
+    "webGL": "ANGLE SwiftShader software rendering",
+    "device": "No physical Apple device. 390x844 and 844x390 viewport checks are browser layout evidence.",
+    "server": "Same-process Vite development server; no claim that localhost is a live URL"
+  },
+  "runs": [
+    {
+      "kind": "combined-browser",
+      "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts",
+      "result": {
+        "passed": 19,
+        "failed": 0,
+        "reportedDuration": "1.6m"
+      },
+      "context": "artifacts/run-context.json",
+      "inputHashesBefore": "artifacts/input-hashes-before.json",
+      "inputHashesAfter": "artifacts/input-hashes-after.json",
+      "log": "artifacts/FINAL_BROWSER.log",
+      "changedInputsDuringRun": [
+        {
+          "path": "src/data/imports.ts",
+          "before": "fab8d40044d849d3300c412d82752554d1008260026a7b3b70041a5297a29f64",
+          "after": "fd66857d90aaa63af0ffb6a6a405a4ad9cc7a5006b53c09c9ade47b89de48066",
+          "exactChange": "One trailing LF removed. SHA256(final bytes plus LF) matches the pre-run hash. No executable import behavior changed.",
+          "HMR": "Vite reported an update to SpatialWorkspace.tsx while the stress case was running. All 19 cases passed, but this run is not represented as every input unchanged."
+        }
+      ]
+    },
+    {
+      "kind": "stable-affected-import-recheck",
+      "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts --grep \"real authoring|colliding source|complete local backup\"",
+      "result": {
+        "passed": 3,
+        "failed": 0,
+        "durationSeconds": 10.7
+      },
+      "context": "artifacts/import-recheck-context.json",
+      "changedInputsDuringRun": [],
+      "log": "artifacts/FINAL_IMPORT_RECHECK.log"
+    },
+    {
+      "kind": "safe-area-affected-mobile-recheck",
+      "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts --grep \"narrow viewport|mobile model controls|200 percent text|synthetic safe-area\"",
+      "result": {
+        "passed": 4,
+        "failed": 0,
+        "durationSeconds": 6.6
+      },
+      "context": "artifacts/safe-area-context.json",
+      "changedInputsDuringRun": [],
+      "log": "artifacts/FINAL_SAFE_AREA.log",
+      "reason": "Verified Capacitor WKWebView fills display with automatic content insets disabled and viewport-fit=cover. Added scoped env(safe-area-inset-top/left/right) padding; existing bottom handling retained. Only impacted mobile checks repeated.",
+      "syntheticInsetCaveat": "CSS properties simulate portrait top59px and landscape left/right59px insets. This verifies responsive layout and working controls, not device notch or native WKWebView behavior."
+    }
+  ],
+  "distinctBrowserCases": 20,
+  "totalBrowserCaseExecutionsInTheseRuns": 26,
+  "workflows": [
+    "real authoring, history, frozen export and reopen survive browser reload",
+    "graphic 3D renders, clips wall geometry, walks with collision and exits",
+    "narrow viewport exposes the same correction controls with safe targets",
+    "wall and opening corrections use shared saved geometry and survive a view switch",
+    "authenticated personal scope rechecks authority and clears geometry on revocation",
+    "walking crosses a permitted door but cannot exit through a window or unknown exterior",
+    "documented geometric stress workload releases renderer resources across 20 cycles",
+    "ambiguous coincident corners require an explicit choice and preserve distinct identities",
+    "late authority rejection from a replaced profile cannot deny the new workspace",
+    "late allowed result cannot reopen geometry after current authority is revoked",
+    "colliding source imports offer explicit separate retention and reopen exact copies without replacing corrections",
+    "drawn semantic areas, floors and room merge operate on saved geometry with undo",
+    "wall drawing chooses an ambiguous corner identity explicitly",
+    "concurrent corrections show unsaved state and reopen the actual latest draft without overwrite",
+    "complete local backup reimports the separately retained source identity through the actual workspace",
+    "visible floor taps move through a permitted door and stop at a window between the same rooms",
+    "plan framing and orbit framing survive view switches and display ceilings do not alter geometry",
+    "mobile model controls stay reachable and held walking stops after release",
+    "200 percent text stays operable on a narrow screen and persists as a display preference",
+    "Synthetic safe-area insets preserve portrait correction, landscape content bounds and actual walking controls"
+  ],
+  "portableChecks": [
+    {
+      "command": "node --import tsx --test tests/ui/helpers.test.ts",
+      "passed": 5,
+      "failed": 0,
+      "log": "artifacts/FINAL_HELPERS.log"
+    },
+    {
+      "command": "npx tsc --noEmit",
+      "result": "exit0, no TypeScript diagnostics",
+      "executedAfter": "Stable import recheck and final safe-area mobile recheck"
+    }
+  ],
+  "finalInputHashes": "artifacts/input-hashes-final.json",
+  "finalInputManifestSHA256": "f52ac903b66be8d5b0bb90372df282b25d8d67eef69cb7d09d97f0f3a97af876",
+  "reuseBoundary": {
+    "postCombinedApplicationChanges": [
+      "src/data/imports.ts: removed trailing LF, affected imports rechecked against stable exact hashes",
+      "src/ui/workspace.css: native safe-area padding, affected mobile/layout checks rechecked against stable exact hashes"
+    ],
+    "postCombinedTestChanges": [
+      "tests/ui/workflow.spec.ts: added synthetic safe-area case"
+    ],
+    "unchangedChecks": "Navigation, core geometry, authority, persistence and renderer source stayed unchanged after the combined run. Their earlier evidence is preserved with the exact input record instead of claiming a new full suite."
+  },
+  "rendererStress": {
+    "artifact": "artifacts/renderer-stress.json",
+    "counts": {
+      "rooms": 100,
+      "walls": 1000,
+      "openings": 500,
+      "overlayMarkers": 0
+    },
+    "cycles": 20,
+    "activeThreeGeometriesEachCycle": 3,
+    "drawCallsEachCycle": 3,
+    "afterEachClose": "0 active renderers;0 tracked Three.js geometries/textures",
+    "idle": "No additional render frames in first idle sample",
+    "switchMilliseconds": {
+      "min": 954,
+      "median": 1227.5,
+      "max": 2163,
+      "sampleP95NearestRank": 1702
+    },
+    "postGCHeapBytes": {
+      "first": 29081132,
+      "last": 28133368,
+      "max": 30345204
+    },
+    "targetMilliseconds": 500,
+    "targetStatus": "Unmet in this development/software-WebGL run; target unchanged",
+    "limits": [
+      "2000 overlay markers have no implemented shared-workspace contract and were not tested. This is not acceptance of the complete stress profile.",
+      "Combined-run newline-only dependency edit triggered HMR; treat timing as exploratory rather than an unchanged-input benchmark.",
+      "Tracked WebGL disposal and JavaScript heap are not total native-process retained memory.",
+      "No physical iPhone frame-rate, latency or memory acceptance."
+    ]
+  },
+  "appearanceAndAccessibility": {
+    "observed": "Actual browser screenshots inspected; controls exercised by keyboard/pointer. Named dialogs, ambiguity focus,44px buttons, unobscured zoom,200% text correction/reopening and synthetic insets passed.",
+    "nativeDynamicType": "Source reads Apple system-body font when supported and offers persisted explicit100/125/150/200% preferences. Native OS Dynamic Type propagation and VoiceOver remain unaccepted."
+  },
+  "screenshots": [
+    "artifacts/desktop-editor.png",
+    "artifacts/cutaway-model.png",
+    "artifacts/mobile-editor.png",
+    "artifacts/mobile-model-cutaway.png",
+    "artifacts/mobile-model-walk.png",
+    "artifacts/mobile-200-percent-text.png",
+    "artifacts/mobile-synthetic-safe-area.png",
+    "artifacts/framing-before.png",
+    "artifacts/framing-after.png"
+  ],
+  "history": [
+    "BROWSER_BEFORE_BATCHING_EVIDENCE.json",
+    "BROWSER_BATCHING_EVIDENCE.json",
+    "BROWSER_13_CASES_EVIDENCE.json",
+    "PRIOR_BROWSER_FAILURES.json"
+  ],
+  "acceptanceNotEstablishedByThisEvidence": [
+    "Apple SDK compilation (tracked separately by integration lead)",
+    "iOS WKWebView execution and native Dynamic Type",
+    "Physical LiDAR capture, connected-room alignment, relocalization and recovery",
+    "Real iPhone touch/VoiceOver and native safe-area behavior",
+    "Documented performance budgets including2000overlaymarkers",
+    "Actual OS project-context authority (synthetic callback harness is not live project access)",
+    "Live OS/Moldo publication",
+    "Release or production readiness"
+  ]
+}

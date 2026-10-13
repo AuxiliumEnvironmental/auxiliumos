@@ -1,0 +1,71 @@
+{
+  "review_kind": "bounded_independent_read_only_F00_proposal_review",
+  "status": "no_F01_architectural_blocker_two_bounded_clarifications",
+  "source_revision_supplied_and_matched_to_receipt": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "reviewed_proposal": "/workspace/scratch/e76479f5af81/f00-handoff/F00_PROPOSAL.patch",
+  "inspected_paths": [
+    "proposed/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md",
+    "proposed/docs/11-launch/spatial-feature-program/DECISIONS.json",
+    "proposed/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md",
+    "proposed/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json",
+    "evidence/SOURCE_CHECKS.json",
+    "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASK.json",
+    "docs/11-launch/spatial-feature-program/features/F01_Surface_Contrast.md",
+    "docs/11-launch/spatial-feature-program/features/F03_Ceiling_Height.md",
+    "spatial-source/AGENTS.md",
+    "spatial-source/web/src/types.ts",
+    "spatial-source/web/src/core/editor.ts",
+    "spatial-source/web/src/core/validation.ts",
+    "spatial-source/web/src/core/scene.ts",
+    "spatial-source/web/src/core/navigation.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+    "spatial-source/web/src/ui/openingManipulation.ts",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/src/data/imports.ts",
+    "spatial-source/web/tests/ui/helpers.test.ts",
+    "spatial-source/web/tests/data/data.test.ts",
+    "spatial-source/web/tests/ui/workflow.spec.ts",
+    "spatial-source/web/tests/ui/warm-switch.spec.ts"
+  ],
+  "findings": [
+    {
+      "id": "R01",
+      "severity": "low",
+      "timing": "include_in_F01_assignment_before_activation",
+      "location": "F01_ACTIVATION_PROPOSED.json path_constraints and SHARED_CONTRACT.md D01",
+      "evidence": "ModelViewport.tsx currently labels the enabled-fill control 'Light blue fills'. F01 changes enabled structural fills to gray, but the proposed narrow material/selection scope does not explicitly mention updating this user-facing label.",
+      "risk": "A literal scope implementation could ship a misleading blue-color control alongside the approved gray palette.",
+      "smallest_correction": "Explicitly include renaming that existing control to 'Surface fills' within the already allowed ModelViewport.tsx presentation scope, and cover the label in the same focused visual scenario. No new path or test suite is needed.",
+      "blocks_F01_architecture": false
+    },
+    {
+      "id": "R02",
+      "severity": "medium",
+      "timing": "resolve_before_F03_implementation_not_F01",
+      "location": "SHARED_CONTRACT.md D03 ceiling identity and room split/merge semantics",
+      "evidence": "Current editor.splitRoom spreads the original room into the left result but creates the right room from id/label/boundary only. Current editor.mergeRooms spreads the first room and removes the second. The proposed D03 requires an explicit identity/remapping result but does not yet specify differing-height/null ceiling outcomes.",
+      "risk": "If those existing helpers merely accept the new field, splitting could omit a ceiling and merging could silently replace a different second-room height with the first-room height.",
+      "smallest_correction": "Before F03, freeze a deterministic policy: split duplicates established height/basis into the two resulting domains with explicit stable/new ceiling IDs and lineage, preserving null on both when input is null; merge preserves compatible equal-height intent only, while differing established heights or established/null combinations require an explicit accepted resulting height or atomic rejection. Never silently spread the first room's ceiling over the second room. Record this as a future F03 rule without writing infrastructure in F00/F01.",
+      "blocks_F01_architecture": false
+    }
+  ],
+  "confirmed": [
+    "The proposed ceiling intent plus non-shrinking shared-wall envelope is feasible with current constant wall spans and avoids changing a neighboring room's resolved ceiling. It does not require a per-side wall-height schema.",
+    "Wall arclength/base-relative charts, positive/negative normal definition, reversal of u and side, and aperture endpoint/orientation reversal are internally consistent with current ordered wall paths and join/split logic.",
+    "Legacy generic opening orientation remains unspecified and the rigid-style straight-run limit does not remove existing bent apertures.",
+    "The source has no room-ceiling field, 3D edit callback or attachment coordinate mappings; the proposal labels those as future additions rather than current behavior.",
+    "The drag revision-fence proposal identifies the current commitEdit signature gap correctly. It also distinguishes pre-submit cancellation from existing pending-save behavior.",
+    "F01 exact writable paths contain the necessary palette, viewport, GLB and focused test surfaces. No schema, storage, gesture or renderer rewrite is needed for F01.",
+    "The activation is explicitly proposed, active_task and owner remain null, and the base commit is exact with a required master refresh after accepted document changes. Existing ACTIVE_TASK is inactive. No lease or master acceptance was invented.",
+    "Display ceilings are absent from current canonical buildScene/GLB; the proposed F01 boundary preserves that truth and avoids manufacturing exported geometry."
+  ],
+  "limits": [
+    "One source/document review only; no broad application, Apple, OS or performance suite run.",
+    "No service contacted and no independent live GitHub/Lovable/head confirmation performed by this reviewer. Source revision identity relies on the lead's exact checkout and inspected receipt.",
+    "No source/proposal file edited. This review receipt is the only written path.",
+    "No deployment, Apple package, device behavior, host transfer or runtime visual quality was verified.",
+    "This review is not master acceptance and does not activate F01."
+  ]
+}

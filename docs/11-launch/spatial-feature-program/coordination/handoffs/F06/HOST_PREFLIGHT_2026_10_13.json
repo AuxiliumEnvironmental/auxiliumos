@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+  "host_ref": "467221a836c10ac2730bfa2375adde0ec447165c",
+  "scope": "Read-only preflight before pending performance source delta",
+  "modified_paths": [
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "expected": "444ae09729fc007bf8302be47f45868d4a204892db39720cb44be5e6c8bb119f",
+      "actual": "444ae09729fc007bf8302be47f45868d4a204892db39720cb44be5e6c8bb119f",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "expected": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+      "actual": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/core/index.ts",
+      "expected": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+      "actual": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/core/navigation.ts",
+      "expected": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+      "actual": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "expected": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+      "actual": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "expected": "144c037599f37f61c039df994f2f22b607d3285398a43469b88b23fe3c0f76a9",
+      "actual": "144c037599f37f61c039df994f2f22b607d3285398a43469b88b23fe3c0f76a9",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/drawing.ts",
+      "expected": "d508c4d2c83513c9d4a8c1edd6da8f2a611d500aafc9286eca60e0576aed1d01",
+      "actual": "d508c4d2c83513c9d4a8c1edd6da8f2a611d500aafc9286eca60e0576aed1d01",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/drawingRecovery.ts",
+      "expected": "641cede635b9d3525cc06aebb3288c4d57c7b027d8cc2015e96c02c90ae098b9",
+      "actual": "641cede635b9d3525cc06aebb3288c4d57c7b027d8cc2015e96c02c90ae098b9",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/exports.ts",
+      "expected": "4a341b92af57697445011329579d44385d4205137955257fb22b394e0c776dc6",
+      "actual": "4a341b92af57697445011329579d44385d4205137955257fb22b394e0c776dc6",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "expected": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+      "actual": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/imports.ts",
+      "expected": "fd66857d90aaa63af0ffb6a6a405a4ad9cc7a5006b53c09c9ade47b89de48066",
+      "actual": "fd66857d90aaa63af0ffb6a6a405a4ad9cc7a5006b53c09c9ade47b89de48066",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/data/store.ts",
+      "expected": "baa1747d5ad9571aace0bf3d32aaed5ae0289b5ba82ab0f1bd75d57591bd569e",
+      "actual": "baa1747d5ad9571aace0bf3d32aaed5ae0289b5ba82ab0f1bd75d57591bd569e",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "expected": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
+      "actual": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "expected": "d280ee91ad4353f23dd9e6c92f3663d0e77f69abe626795bc50a2c4c8c925527",
+      "actual": "d280ee91ad4353f23dd9e6c92f3663d0e77f69abe626795bc50a2c4c8c925527",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/Inspector.tsx",
+      "expected": "0327925f8652f299bc05a4bbe8405ee4804004c98996a7b04f6334eaab0134b9",
+      "actual": "0327925f8652f299bc05a4bbe8405ee4804004c98996a7b04f6334eaab0134b9",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "expected": "5a7f588240381b9c3e4dad461379dcd9ea694e959bf59f7fe5475495e91a74af",
+      "actual": "5a7f588240381b9c3e4dad461379dcd9ea694e959bf59f7fe5475495e91a74af",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+      "expected": "6577866f352385c141fde845e4c30f0e0be7fa5db631828ca532b97d7eabb35c",
+      "actual": "6577866f352385c141fde845e4c30f0e0be7fa5db631828ca532b97d7eabb35c",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "expected": "a8bd52dfed7edefc6b384d2c34b149ecefca1957e77d18d6912c63bfff169fc0",
+      "actual": "a8bd52dfed7edefc6b384d2c34b149ecefca1957e77d18d6912c63bfff169fc0",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/geometry.ts",
+      "expected": "e315cff4c0147f6bdfbe3b649865f1d032087de988017bd24e02693b7c78450d",
+      "actual": "e315cff4c0147f6bdfbe3b649865f1d032087de988017bd24e02693b7c78450d",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/groupSelection.ts",
+      "expected": "ddbed23da85d7ed2199a17d6cea6bbc4ec4df46bb112837d01b3ee25fbd40df3",
+      "actual": "ddbed23da85d7ed2199a17d6cea6bbc4ec4df46bb112837d01b3ee25fbd40df3",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingManipulation.ts",
+      "expected": "4e0195bcdeede54bf6bad930b1ae3edb17f68d5410ee600c1961ba7a37c0ffb9",
+      "actual": "4e0195bcdeede54bf6bad930b1ae3edb17f68d5410ee600c1961ba7a37c0ffb9",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/openingPlacement.ts",
+      "expected": "512529f4f64506c1f0c84d4c3175e5482d6578243c50bef77d8dbd57a3116afa",
+      "actual": "512529f4f64506c1f0c84d4c3175e5482d6578243c50bef77d8dbd57a3116afa",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/review.ts",
+      "expected": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
+      "actual": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/roomDrawing.ts",
+      "expected": "db6bbd69eac41c1f6b9a5aa2283cd3e164f2a3e3879aedb8867552e0336cee99",
+      "actual": "db6bbd69eac41c1f6b9a5aa2283cd3e164f2a3e3879aedb8867552e0336cee99",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "expected": "d0231d642973d9f0f0bfcc38f2e20db4fd75462c52d91f8798abead23404ca24",
+      "actual": "d0231d642973d9f0f0bfcc38f2e20db4fd75462c52d91f8798abead23404ca24",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/wallDrawing.ts",
+      "expected": "3a371281c432e8e597294d709de9f07abb5806b6d8140b4040ab0d81d4eba7b6",
+      "actual": "3a371281c432e8e597294d709de9f07abb5806b6d8140b4040ab0d81d4eba7b6",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/src/ui/workspace.css",
+      "expected": "8de059a65611311ebb1f1725e1ced7df64bba9d254aa617e9602e332b7443926",
+      "actual": "8de059a65611311ebb1f1725e1ced7df64bba9d254aa617e9602e332b7443926",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/data/data.test.ts",
+      "expected": "bba5b9b9be6f30acd0d76bbdc892a2fc2a971d3e0bee15d0e2fdda983dd1aa44",
+      "actual": "bba5b9b9be6f30acd0d76bbdc892a2fc2a971d3e0bee15d0e2fdda983dd1aa44",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/direct-openings.spec.ts",
+      "expected": "dc8a63887d7a0b8eead78d52e571cd53c8b1401a3bf2a8dc5acad9cb2cfb26ce",
+      "actual": "dc8a63887d7a0b8eead78d52e571cd53c8b1401a3bf2a8dc5acad9cb2cfb26ce",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/direct-placement.spec.ts",
+      "expected": "9da41b21af9d5fe7515a42e7cb78ed26fe286d3de07db4f79df25a0572602a53",
+      "actual": "9da41b21af9d5fe7515a42e7cb78ed26fe286d3de07db4f79df25a0572602a53",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/helpers.test.ts",
+      "expected": "f63415b451d92fc271491344d20d33af94a99cd56e674d6da2f480639344db2f",
+      "actual": "f63415b451d92fc271491344d20d33af94a99cd56e674d6da2f480639344db2f",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/playwright.config.ts",
+      "expected": "a785bb2ddde1ce54af2f4c262d6bffc4a66ab944d630f3c10a21849044f59886",
+      "actual": "a785bb2ddde1ce54af2f4c262d6bffc4a66ab944d630f3c10a21849044f59886",
+      "match": true
+    },
+    {
+      "path": "spatial-source/web/tests/ui/workflow.spec.ts",
+      "expected": "11079d0955917b1563b19ee6ad9f491fd2b1f8762af72a02b49ae9ed3724280d",
+      "actual": "11079d0955917b1563b19ee6ad9f491fd2b1f8762af72a02b49ae9ed3724280d",
+      "match": true
+    }
+  ],
+  "new_paths_verified_absent": [
+    "spatial-source/contracts/geometry-v1.2.schema.json",
+    "spatial-source/contracts/geometry-v1.3.schema.json",
+    "spatial-source/contracts/geometry-v1.4.schema.json",
+    "spatial-source/contracts/geometry-v1.5.schema.json",
+    "spatial-source/contracts/scene-v1.2.schema.json",
+    "spatial-source/contracts/scene-v1.3.schema.json",
+    "spatial-source/contracts/scene-v1.4.schema.json",
+    "spatial-source/contracts/scene-v1.5.schema.json",
+    "spatial-source/web/src/affectedAreaPalette.ts",
+    "spatial-source/web/src/core/affectedAreaGeometry.ts",
+    "spatial-source/web/src/core/affectedAreas.ts",
+    "spatial-source/web/src/core/ceilings.ts",
+    "spatial-source/web/src/core/cutoutGeometry.ts",
+    "spatial-source/web/src/core/cutouts.ts",
+    "spatial-source/web/src/core/fixtureAttachments.ts",
+    "spatial-source/web/src/core/fixtureCatalog.ts",
+    "spatial-source/web/src/core/fixtures.ts",
+    "spatial-source/web/src/core/openings.ts",
+    "spatial-source/web/src/core/surfaces.ts",
+    "spatial-source/web/src/core/versions.ts",
+    "spatial-source/web/src/fixturePalette.ts",
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+    "spatial-source/web/src/ui/CeilingHeightControls.tsx",
+    "spatial-source/web/src/ui/CutoutControls.tsx",
+    "spatial-source/web/src/ui/FixturePicker.tsx",
+    "spatial-source/web/src/ui/OpeningElevation.tsx",
+    "spatial-source/web/src/ui/affectedAreaBatches.ts",
+    "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+    "spatial-source/web/src/ui/ceilingManipulation.ts",
+    "spatial-source/web/src/ui/cutoutManipulation.ts",
+    "spatial-source/web/src/ui/fixtureManipulation.ts",
+    "spatial-source/web/src/ui/openingModelManipulation.ts",
+    "spatial-source/web/tests/core/affected-area-cumulative.test.ts",
+    "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+    "spatial-source/web/tests/core/affected-areas.test.ts",
+    "spatial-source/web/tests/core/ceilings.test.ts",
+    "spatial-source/web/tests/core/cutout-geometry.test.ts",
+    "spatial-source/web/tests/core/cutout-surfaces.integration.test.ts",
+    "spatial-source/web/tests/core/cutouts.test.ts",
+    "spatial-source/web/tests/core/feature-integration.test.ts",
+    "spatial-source/web/tests/core/fixture-attachments.test.ts",
+    "spatial-source/web/tests/core/fixtures.test.ts",
+    "spatial-source/web/tests/core/openings.test.ts",
+    "spatial-source/web/tests/core/surfaces.test.ts",
+    "spatial-source/web/tests/data/affected-areas.test.ts",
+    "spatial-source/web/tests/data/cutouts.test.ts",
+    "spatial-source/web/tests/data/fixtures.test.ts",
+    "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+    "spatial-source/web/tests/ui/affected-areas.spec.ts",
+    "spatial-source/web/tests/ui/ceiling-height.spec.ts",
+    "spatial-source/web/tests/ui/cutout-manipulation.test.ts",
+    "spatial-source/web/tests/ui/cutouts.spec.ts",
+    "spatial-source/web/tests/ui/feature-integration.spec.ts",
+    "spatial-source/web/tests/ui/feature-performance.spec.ts",
+    "spatial-source/web/tests/ui/fixture-manipulation.test.ts",
+    "spatial-source/web/tests/ui/fixtures.spec.ts",
+    "spatial-source/web/tests/ui/overlayStressFixture.ts"
+  ],
+  "new_receipt_path": "SPATIAL_SOURCE_DELIVERY.json",
+  "new_receipt_absent": true,
+  "listed_files": 985,
+  "protected_host_sha256": {
+    "src/routes/index.tsx": "59ee0651ca201d1befbfaf9b29264e90f91affd1cea1fb2231f1849dc9e156df",
+    "src/offline/hostOfflinePlugin.ts": "c34ddb780b35394e824bb71f545d4275fa0f136654c913938467269c540818bc",
+    "src/offline/register.ts": "01726c7e592e4ae0ba92f7d18fe0f4855311be5fe415d07cb9ebd85404e17bc6",
+    "src/components/WorkspaceBoundary.tsx": "6fac9e5c4ff832bb0d8d63d1ca3dc4c8de16e1b339140faeb08833f23f439baa",
+    "src/offline/OfflineStatus.tsx": "b5e2c37a5d233b1ebfc3095285ad335962437803fb83dd5156d21fa37fc04b62",
+    "package.json": "e2bfe5c5a044e78c6d408a54dd4f867c7697293397a959c12942a379bdbd6987",
+    "tsconfig.json": "16802714e7f0117cd17d998de8ae1f90b0a6e1e81702c76bd19b6d26d5306477",
+    "bun.lock": "7b2d5b386f1e0f3a29d96bed0d55ef349f054a6687343270bb33bc77483fabcd",
+    "vite.config.ts": "0c6670434614bc8c4d1c3f48637ca7485f857642e5a4d1c81b7a80c53574fb13"
+  },
+  "host_mutated": false
+}

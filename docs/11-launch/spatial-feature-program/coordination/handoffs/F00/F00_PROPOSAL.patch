@@ -1,0 +1,464 @@
+diff --git a/docs/11-launch/spatial-feature-program/DECISIONS.json b/docs/11-launch/spatial-feature-program/DECISIONS.json
+--- a/docs/11-launch/spatial-feature-program/DECISIONS.json
++++ b/docs/11-launch/spatial-feature-program/DECISIONS.json
+@@ -1,6 +1,6 @@
+ {
+-  "revision": 1,
+-  "status": "proposed_for_F00_ratification",
++  "revision": 2,
++  "status": "proposed_for_master_review_after_F00_preparation",
+   "verified_invariants": [
+     "one_shared_editor",
+     "meters_y_up_right_handed",
+@@ -12,32 +12,138 @@
+     {
+       "id": "D01",
+       "topic": "surface palette",
+-      "value": "Wall F2F3F5; floor B8BDC4; ceiling D5D9DE",
+-      "status": "proposed"
++      "value": "Explicit wall/floor/ceiling roles in web/src/surfacePalette.ts; category-preserving selected fills; opaque linear-RGB GLB structural materials. F01 has no schema change.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F01",
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "Keeps batching and geometry unchanged while removing the ceiling-as-wall fallback and export color mismatch.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
+     },
+     {
+       "id": "D02",
+-      "topic": "opening manipulation",
+-      "value": "Opposite-corner anchor and wall-local semantic flips; explicit type capability table",
+-      "status": "proposed"
++      "topic": "opening manipulation and orientation",
++      "value": "Opposite-corner wall-chart resize; edge u-only translation; explicit threshold; optional style/end/side capabilities; full reversal and bent-host policy.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F02",
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "Reuses full-arclength helpers without fabricating legacy door subtype or bending rigid leaves.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
+     },
+     {
+       "id": "D03",
+-      "topic": "structure heights",
+-      "value": "Explicit room set; drag common delta, separate absolute assignment",
+-      "status": "proposed"
++      "topic": "ceiling intent and wall envelope",
++      "value": "Freeze uniform legacy planes as inferred ceiling intent, unequal tops as null; explicit room height; extend necessary wall spans without shrinking them; preserve neighbor ceilings; explicit structure set/common delta.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "Avoids neighbor ceiling changes from a shared wall and preserves captured height differences until an explicit correction.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
+     },
+     {
+       "id": "D04",
+-      "topic": "fixture navigation",
+-      "value": "Diagrammatic nonblocking fixtures initially; no obstacle-avoidance claim",
+-      "status": "proposed"
++      "topic": "fixture representation and navigation",
++      "value": "Versioned parametric dimensions and explicit floor/wall mount; white faces/blue edges; diagrammatic nonblocking fixtures initially.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F04",
++        "F05"
++      ],
++      "rationale": "No competing editor, fake image dimensions or unimplemented obstacle-avoidance claim.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
+     },
+     {
+       "id": "D05",
+-      "topic": "damage geometry",
+-      "value": "Physical authored footprint and separate kind/side; clipping plus host-change review",
+-      "status": "proposed"
++      "topic": "affected-area evidence",
++      "value": "Independent moisture/fire records, explicit wall vertical range, physical footprint and recorded support mask; no new totals.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F05"
++      ],
++      "rationale": "Prevents new damage appearing when a hole is filled, a host expands or a ceiling moves.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
++    },
++    {
++      "id": "D06",
++      "topic": "surface identity and frames",
++      "value": "Role-qualified floor/room/ceiling references; wall ID plus positive/negative side; meters along wall and above base; fixed floor X/Z chart.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F02",
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "Scene triangle numbers, camera directions and undifferentiated room IDs are not durable attachment identities.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
++    },
++    {
++      "id": "D07",
++      "topic": "gesture transaction ownership",
++      "value": "Snapshot/context/revision fence; frame-coalesced preview; exact final sample; one command/undo item; pre-submit cancel saves nothing; existing pending-save semantics after submit.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F02",
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "The current workspace commit signature needs an explicit drag-start revision fence; it cannot be assumed to supply one.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
++    },
++    {
++      "id": "D08",
++      "topic": "attachment remapping",
++      "value": "Compose source/result surface transforms and exact source domains; retain clipped/unresolved observations, reject unresolved rigid-fixture moves.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F03",
++        "F04",
++        "F05"
++      ],
++      "rationale": "Existing ID mappings mark review but do not preserve physical attachment coordinates.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
++    },
++    {
++      "id": "D09",
++      "topic": "version and profile evolution",
++      "value": "Strict feature-local versions, proposed geometry 1.2/1.3/1.4/1.5 in task order; coordinated scene/profile changes only when vocabulary changes; no writable lossy downgrade.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F02",
++        "F03",
++        "F04",
++        "F05",
++        "F06"
++      ],
++      "rationale": "Old schemas reject unknown fields, and current imports regenerate/compare scene geometry.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
++    },
++    {
++      "id": "D10",
++      "topic": "platform delivery",
++      "value": "One shared workspace; exact host transfer/readback, actual Capacitor assets and Apple evidence, staged OS generation with separate authority; no assumed deployment.",
++      "status": "proposed",
++      "affected_tasks": [
++        "F01",
++        "F02",
++        "F03",
++        "F04",
++        "F05",
++        "F06"
++      ],
++      "rationale": "Current source, served web and installed app have distinct revisions and acceptance gates.",
++      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-proposal-awaiting-master-acceptance"
+     }
+   ],
+   "open": [
+@@ -46,7 +152,33 @@
+       "topic": "cutout scope",
+       "needed_before": "F04",
+       "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
+-      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved."
++      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved.",
++      "blocks": [
++        "F04_cutout_implementation"
++      ],
++      "does_not_block": [
++        "F01",
++        "F02",
++        "F03"
++      ]
++    },
++    {
++      "id": "Q02",
++      "topic": "unnamed catalog variants",
++      "needed_before": "F04",
++      "question": "Which bounded variants of appliances and built-ins beyond the named families belong in the first catalog?",
++      "recommendation": "Master records a proposed checklist at F04; all named families remain required. Do not treat etc. as an exhaustive source inventory.",
++      "blocks": [
++        "F04_catalog_completeness_claim"
++      ],
++      "does_not_block": [
++        "F01",
++        "F02",
++        "F03"
++      ]
+     }
+-  ]
++  ],
++  "inspected_source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
++  "accepted_by": null,
++  "accepted_at": null
+ }
+diff --git a/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md b/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md
+--- a/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md
++++ b/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md
+@@ -18,3 +18,15 @@
+ Per-feature implementation is the current authorized scope when activated. Production publishing, signing, installation and business-record binding follow the actual current authorization and gates; do not ask again for already authorized actions, but do not invent access. No release was performed during this planning pass.
+ 
+ Minimal final combined journey: create adjoining rooms; resize and flip a door; adjust one room's ceiling without altering its neighbor; add/rescale a floor and mounted fixture; create moisture/fire areas on wall/floor/ceiling; alter an opening/cutout; undo/redo; reopen; export the frozen revision; walk through valid passages. Reuse this for cross-feature assertions and add only an uncovered platform-specific risk. Preserve real failure evidence rather than multiplying success counts.
++
++## F00 preparation observations and proposed delivery rule
++
++Preparation inspected program head `141a4cd756751c437e4ecdde07a1db9703588687`. Dedicated Spatial provider metadata still reports `467221a836c10ac2730bfa2375adde0ec447165c`, agentFinished=true. Reviewed OS integration remains `a2b31bff3e88ab3a1a86285ab935552796c4d3cd`; OS provider metadata reports `4adbb330c0b4e7832bcae938a6507ee4b27ae0c3`, agentFinished=true. These are fresh identity/writer observations, not new served-asset, source-transfer or interaction acceptance. No application source, host, Apple assets, OS generated files or deployment was changed by F00.
++
++For F01, implementation permission is limited to the proposed exact source/test paths in `coordination/F01_ACTIVATION_PROPOSED.json`. A source worker returns hashes and results; the master owns subsequent host transfer, packaging and release receipts. The existing program branch is not verified as a Lovable sync branch. Reuse the prior matching host-source audit until a changed-file transfer needs readback; do not recopy all unchanged files.
++
++Read packaging tools before running them. In particular, `source:integration/package_os.py` replaces generated module files **before** it checks whether the existing Spatial route differs. It is not an all-or-nothing dry run. Future OS delivery must first reconcile route/adapter/current writer state and generate into a disposable checkout/staging target, then review the permitted diff. Never invoke it as a probe against a live/dirty OS checkout. Keep source `build:library` and standalone `build` outputs distinct.
++
++`source:capacitor/prepare.py` packages an already built `web/dist`, adds installed CSP, records source/packaged asset hashes and regenerates the native project. Pair that asset manifest with the exact accepted source commit and build inputs in the delivery receipt; the manifest alone is not source-commit or installation proof. One combined Apple build can cover accepted web-only features when native inputs remain unchanged. Current-device LiDAR, storage protection, lock/kill/low-disk, share completion, touch/accessibility and frame/memory evidence remain separate open gates.
++
++F00 uses source/document checks only. F01 uses one relevant build, focused palette/batch/GLB checks and one representative small-screen 3D scenario plus existing idle instrumentation. No broad topology, persistence, OS or native suite is justified by a palette-only change. Later features reopen only the data/geometry/platform checks their own changes affect. No feature is delivered everywhere merely because its shared source was accepted.
+diff --git a/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md b/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md
+--- a/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md
++++ b/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md
+@@ -1,6 +1,6 @@
+ # Shared implementation contract for F00 acceptance
+ 
+-This document separates verified invariants from proposed engineering decisions. F00 must record the accepted revisions in `DECISIONS.json` before dependent implementation. It is not a new geometry schema and must not be copied into code as unreviewed fields.
++This document separates verified invariants from proposed engineering decisions. F00 preparation proposes revision 2 in `DECISIONS.json`; only the master may mark it accepted before dependent implementation. It is not a new geometry schema and must not be copied into code as unreviewed fields.
+ 
+ ## Verified invariants to retain
+ 
+@@ -55,3 +55,125 @@
+ Affected-area sketches are user-recorded observations, separate from numeric moisture readings, scientific conclusions, verified quantity, estimate or scope authorization. Keep measurement status unverified. Cosmetic fixtures never erase evidence. Only actual host cutouts change visible material; historical observation coverage remains recoverable.
+ 
+ No new business database, access expansion or live publication is implied. OS accepts an immutable revision through its scoped adapter and separately owns audience/release. Standalone remains functional without that receiver. Versioned capability negotiation and one maintained source support future updates without speculative plugins.
++
++## F00 concrete rules: revision 2 proposal, awaiting master acceptance
++
++Inspected program/source snapshot: `141a4cd756751c437e4ecdde07a1db9703588687`.
++The following are engineering proposals, not implemented behavior or master approval.
++Names below fix semantics for review; only introduce fields when their feature consumes them.
++No shared-code prerequisite is needed for F01.
++
++### Verified reuse points and limits
++
++| Concern | Inspected implementation | Consequence |
++|---|---|---|
++| Saved graph | `source:web/src/types.ts`, `core/validation.ts` | Strict geometry 1.0.0/1.1.0. Room has no ceiling; no fixture/damage entities. |
++| Surface geometry | `core/scene.ts::buildScene`, `displayCeilings` | Actual wall aperture triangles; only uniform wall tops produce display ceilings. `buildScene` excludes those ceilings. |
++| Ownership/materials | `ui/sceneBatches.ts`, `ModelViewport.tsx` | Per-triangle object ownership exists. Non-floor faces fall into wall batches; floor/ceiling clicks become the same room selection. No 3D edit callback. |
++| Opening gestures | `ui/openingManipulation.ts`, `FloorplanCanvas.tsx` | Full path arclength, grab offset, branch continuity, 44px targets and ordered samples already exist. Reuse them. |
++| Save boundary | `SpatialWorkspace.commitEdit`, `core/editor.ts::applyCommands`, `data/store.ts` | One validated batch, expected revision, one stored undo snapshot; failed save retains a pending preview. Undo/redo restore content as a new monotonically increasing revision. |
++| Host changes | `core/editor.ts::splitWall`, `joinWalls`, `restorationMappings` | Existing mappings contain IDs and a review flag, not attachment coordinate transforms. Split through an aperture already rejects. |
++| Output/admission | `data/exports.ts`, `imports.ts`, `glb.ts`, `drawing.ts` | Exports use a frozen revision; imports compare scene to regenerated geometry. Local-document profiles include 1.0.0 and source-provenance 1.1.0. Old native compatibility prose alone is incomplete for current web profiles. |
++
++### D01: presentation consumed by F01
++
++Use one dependency-light module at `source:web/src/surfacePalette.ts`. It owns explicit structural roles `wall`, `floor`, `ceiling`, sRGB tokens and the conversion needed for export; no React, DOM or new package dependency. Do not add unused fixture/damage roles yet. An unknown face role must be explicitly unsupported, never silently colored as wall.
++
++Rename the current `ModelViewport` control label from "Light blue fills" to "Surface fills" in the same presentation change. Retain the toggle's behavior and any other color labels that still describe distinct semantic marks accurately.
++
++Proposed normal tokens remain wall `#F2F3F5`, ceiling `#D5D9DE`, floor `#B8BDC4`, structural edge `#68717C`. For selected fills, apply the same modest darkening factor (starting at 0.92 in linear RGB) to each category; retain blue selection outlines/handles. This preserves wall > ceiling > floor luminance, including when the legacy room selection highlights both floor and ceiling. Exact visual values remain a focused F01 review result. Fill-disabled mode keeps its existing white-body/selection affordance contract and is exempt from the normal-fill contrast requirement.
++
++Keep the current unlit batched viewport. Encode GLB structural faces as opaque neutral colors using linear RGB baseColorFactor values with alpha 1, metallicFactor 0 and roughnessFactor 1. Do not add lighting, textures or unlit extensions in F01. A viewer's lighting can alter apparent brightness; material-role equivalence is the acceptance claim. Keep semantic opening/window/inferred edge meanings. Shared scene JSON remains geometry/roles, not a new material schema. Plan SVG/PDF/PNG appearance is unchanged by this 3D feature. GLB still contains only the authoritative faces emitted by `buildScene`; do not export invented ceilings.
++
++Color-space references: [Three Color](https://threejs.org/docs/pages/Color.html) describes CSS/hex input conversion to its linear working space; [glTF material definition](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html#materials) defines base-color factors. F01 checks the pinned runtime and one exported material, not a broad exporter rewrite.
++
++### D06: stable surface references and coordinates, first consumed by F02/F03
++
++| Surface reference (within its document) | Canonical chart | Notes |
++|---|---|---|
++| `{floorID, kind: wall, wallID, side: positive or negative}` | `u` = meters along ordered `wall.nodeIDs`; `v` = meters above wall base. World Y = floor.elevation + wall.baseY + v. | For unit tangent `(tx,0,tz)`, positive normal is `(-tz,0,tx)`. Opposite side negates it. Not camera-left or room-boundary winding. |
++| `{floorID, kind: floor, roomID}` | `u=x`, `v=z` in that floor's existing frame; origin `(0,0)`, axes +X/+Z, plane Y = floor.elevation. | Domain is the explicit room polygon, not the entire level. |
++| `{floorID, kind: ceiling, roomID, ceilingID}` | Same floor X/Z chart; plane Y = floor.elevation + ceiling.height. | Stable authored/inferred ceiling record introduced in F03. Display-only legacy ceilings cannot host saved records before then. |
++
++Do not duplicate a changeable centroid/bounding-box origin in saved horizontal attachments. Floors remain independent frames; matching coordinates do not align levels. Wall charts follow every segment of a bent host. At an exact path vertex use the outgoing segment, except at the final endpoint; the active gesture retains segment continuity to prevent branch jumps.
++
++Extend existing `Selection` additively with a surface discriminator when a feature needs it; keep object selection and group editing intact. An opening remains an opening selection. Pick results may carry hit point, segment and revision transiently; neither mesh UUID nor triangle index is a persistent host. F01 retains existing ownership and defers this selection extension.
++
++### D07: begin, preview, commit and cancel
++
++Begin records immutable geometry, document/floor IDs, source revision, workspace generation/authority, selected target, pointer ID, grab offset, chart and camera basis. Ownership order is displayed selected handle, selected edge, selected body, then other visible geometry; ambiguous overlapping handles get separated screen-space targets or an explicit choice. Occluded/cut-away handles cannot capture through walls. Selection alone never edits. Walk mode only navigates; enter edit mode before showing active manipulators. Empty-space orbit/pinch/pan remains available.
++
++Preview applies deltas to that initial snapshot. Reuse ordered arclength samples for bent hosts while publishing at most once per animation frame. For 3D openings use intersections with actual host-segment vertical planes, mapped into the continuous `(u,v)` chart; advance only to contiguous segments consistent with prior travel. Never use a chord through the bend. For a vertical ceiling drag freeze a camera-facing vertical plane containing the grab point and world Y axis. At a near-parallel ray, invalid intersection, or camera-basis change, hold the last valid preview and offer exact numeric entry; do not divide by a near-zero denominator or jump planes mid-drag.
++
++Disable OrbitControls for an owned editing drag. A second touch cancels its edit preview before handing a fresh two-touch gesture to navigation. Cancel also covers Escape, pointercancel/lost capture, blur/background, view/tool/selection/scope/size change, authority loss and changed source revision. Clear queued frames and fence abandoned contacts until released. Re-entry requires a new pointerdown.
++
++Release processes pending samples and the exact terminal coordinates, then submits one validated command batch via `SpatialWorkspace.commitEdit` with the captured expected revision/context. Its current signature does not accept a drag's base revision; F02 must add the smallest fence before delegation so a stale gesture cannot be applied to a newer stored revision. Revalidate authority before durable save. A no-op, invalid candidate or pre-submit cancellation submits nothing. After submission, preserve the existing pending-save/retry/conflict handling; do not pretend pointer cancellation can undo an already issued transaction. Undo after a successful drag restores the whole batch as a new revision. No view writes IndexedDB or maintains separate undo history.
++
++Update only affected preview geometry; no storage, network, export, full topology rebuild or renderer construction on pointermove. Rebuild committed scene/navigation once from the accepted revision, retain camera memory, and use existing renderer diagnostics. Do not create a generic gesture framework ahead of F02's first concrete use.
++
++### D02: openings and persisted orientation, consumed by F02
++
++Preserve `kind` (door/window/passage), physical offset/width/bottom/height and provenance. Add an optional catalog style and only the applicable orientation dimensions: `end` = start/end along increasing u, `side` = positive/negative wall normal. Omitted values on legacy generic apertures mean unspecified; migration must not invent hinges or captured subtypes. Selecting a style records an edited author choice. Companion `defaultHeight` is symbol extent, never physical aperture height.
++
++| Preset | Horizontal flip | Vertical flip | Diagrammatic behavior |
++|---|---|---|---|
++| door_single | Swap hinge end | Reverse swing side | Single leaf |
++| door_double | Not applicable for symmetric leaves | Reverse swing side | Paired leaves; do not invent an active-leaf field |
++| door_sliding | Swap leading/stack end | Not applicable for symmetric track | Sliding panels |
++| door_pocket | Swap pocket end | Not applicable | Pocket direction; no claimed wall cavity |
++| door_bifold | Swap stack end | Reverse fold side | Folding panels |
++| doorway_open | Not applicable | Not applicable | Passage/frame |
++| window | Not applicable for generic window | Not applicable | Window/frame; never a walk portal |
++
++Nonapplicable flip controls explain why they have no effect. Generic doors first require an explicit style choice. A path reversal maps aperture `[u,u+w]` to `[L-u-w,L-u]`, swaps orientation end AND side to preserve its world appearance. Joins add the appropriate arclength translation; splits subtract it for the new host. These coordinate remaps are not user flip actions.
++
++Corner resize fixes the diagonally opposite `(u,v)` corner, permits independent width/height and rejects inversion. Edge drag translates along u only, preserving bottom, height and width; no automatic rehosting. Top corners retain bottom; bottom corners adjust bottom and height while holding the top. Bottom is wall-relative: expose it in elevation/numeric controls. For doors/passages, changing bottom shows the resulting floor-relative threshold `wall.baseY + bottom`; raised legacy apertures stay valid, with traversal decided separately. A new door/passage may start at the floor only when nonnegative `bottom=-wall.baseY` fits the host; otherwise retain a visibly raised starter or reject placement, never move the wall to fake a floor-level opening. Windows keep explicit sill height. No automatic snapping of a raised existing opening to zero.
++
++Preserve generic apertures and direct chart manipulation across bent walls. Rigid styled leaves/panels require the aperture interval to lie on one straight/collinear run. Reject a style placement or edit that would bend rigid geometry; leave the saved record intact and permit an explicit change back to generic. Do not straighten the host or replace a bent aperture with a chord. Existing navigation restrictions remain: window/inferred/raised/too-narrow/bend-spanning/ambiguous connections are not unlocked by a style or flip.
++
++### D03: ceiling intent and shared-wall envelope, consumed by F03
++
++Proposal: add explicit `Room.ceiling` in F03's new schema, either null (no established planar ceiling) or `{id, height, heightBasis, provenance}`. Height is clearance above that floor, not wall base or world elevation. One stable ID per ceiling survives height edits; a split/merge must give an explicit identity/remapping result. Migration resolves a uniform legacy wall-top plane once as **inferred**, with assumed height basis and its wall source IDs; unequal tops yield null. It does not label wall captures as captured ceiling measurements or normalize unequal walls. The original input and pre-migration revision remain recoverable. No ceiling record is written by F01.
++
++Room-height edits change only the selected ceiling intent and necessary boundary envelope in one command. Preserve every nonselected room's resolved ceiling intent before changing any shared wall. A legacy null ceiling stays null, including if later wall edits happen to align its tops. A selected null ceiling requires an explicit numeric starting height before dragging; do not seed a guessed measured ceiling.
++
++Room topology has explicit ceiling outcomes. Splitting a room with a ceiling retains that ceiling ID on the retained room and allocates a new ceiling ID for the new room, carrying the same height/basis and source lineage; its domain divides with the actual resulting room polygons. Splitting a null ceiling produces two null ceilings. Merging two established ceilings at the same elevation within EPSILON retains the first room/ceiling IDs and exactly remaps the second domain; merge provenance conservatively and retain both source lineages. Two null ceilings merge to null. Different heights, or one null and one established ceiling, reject unless the same explicit transaction supplies the resulting authored height. Never silently keep the first room's height. Revalidate openings, mounted fixtures and affected-area remaps for the entire resulting domain; undo restores both original room/ceiling identities. Existing splitRoom/mergeRooms helpers must be extended in F03 because their current field-copy behavior does not implement these rules.
++
++Walls retain one constant structural span per polyline. For each affected boundary, proposed `newTop = max(oldTop, highest authored/inferred ceiling top among incident rooms in the resulting document)`, then `newHeight = newTop - floor.elevation - wall.baseY`. Only walls that must extend change height/basis/provenance. Lowering a ceiling does **not** shrink a structural wall: a lowered ceiling can sit below a taller partition. This is ceiling-clearance editing, not an undocumented wall-demolition command. The preview indicates necessary wall extensions; all changes undo together. Neighbor ceiling height, footprint, floor/base elevation and openings remain unchanged. Existing unequal spans survive migration and are changed only by explicit selected-room correction requiring extension. No per-side wall-height schema or wall-thickness rewrite is required.
++
++Reject atomically if the proposed ceiling would cut any boundary opening (`wall.baseY + opening.bottom + opening.height > ceiling.height`, within the existing tolerance), exceed established bounds, or conflict with a fixture's accepted mount/extent. Never resize/delete the opening or fixture. Clippable observation regions instead retain their authored extent and gain host-change review under D05/D08. Navigation uses the same resolved ceiling intent for modeled display-head clearance, while preserving legacy unknown-height behavior without inventing clearance. Retain current floor-level portal and wall-base checks; a higher ceiling does not grant new portal authority.
++
++Structure dragging names an explicit room set and applies one common delta to their established heights, preserving differences and floor elevations. If any selected room has null height, block that drag and identify it for numeric initialization; do not silently omit it. A separate absolute assignment may initialize all explicitly selected rooms. Invalid members reject the entire batch. No inter-floor movement, frame alignment, sloped-ceiling reconstruction or stair inference is implied.
++
++### D04/D08: fixtures and attachment outcomes, consumed by F04/F05
++
++Fixtures use stable ID, versioned catalog style, finite positive width/depth/height, placement/mount transform and provenance. Floor objects use their floor frame plus yaw and base offset; wall-mounted objects use surface side, u, v and explicit outward depth. Exact dimensions and handle drags issue the same commands. Reuse archetypes and batched/instanced feature edges. Do not use SemanticArea or nonuniform mesh scale as the saved fixture record. White solids/blue feature edges remain diagrammatic and initially nonblocking for walk navigation; do not claim obstacle avoidance. All explicitly requested families in F04 remain required. Unnamed appliance variants remain provisional catalog choices, not a discovered complete source catalog.
++
++Extend the existing edit receipt only as needed by its first attachment consumer: source/result revisions, old/new surface refs, retained source-domain intervals, coordinate transform, and outcome `exact`, `clipped_needs_review`, or `unresolved`. Keep old ID mappings for current consumers. Compose transforms across a batch and regenerate coherent remaps for undo/redo; IDs alone never authorize reattachment.
++
++| Host operation | Required attachment rule |
++|---|---|
++| Pure translation/rotation; floor elevation | Transform the surface anchor/frame explicitly, retain physical dimensions. |
++| Wall reversal | `u'=L-u`, swap side; opening interval/orientation follow D02. |
++| Split/join | Split or translate charts on exact source intervals, preserving record lineage; a region crossing a split may have linked pieces. Rigid fixtures cannot be cut into pieces. |
++| Ceiling elevation | Ceiling-bound region follows the plane, footprint unchanged; floor fixtures remain floor-bound. |
++| Shortened wall, changed hole/domain | Retain authored observation footprint and prior support mask; clip current display and flag review. Never stretch percentages or fill newly created material. |
++| Nonrigid boundary edit, ambiguous topology, host deletion | Retain observation geometry/reference snapshot as unresolved for explicit reattachment; do not guess nearest surface. For a fixture without a defined valid remap, reject the structural transaction until an explicit move/delete resolution is included. |
++
++### D05: affected-area meaning, consumed by F05
++
++Store independent moisture/fire records with ID, surface reference, physical chart geometry, authoring provenance, source host revision/domain support and review status. Do not infer meter readings, scientific diagnosis, quantities or commercial scope. New plan wall areas require an explicitly visible/confirmed vertical range in the compact elevation control; plan-length changes retain that range. Floor is light fill; ceiling is clipped grid; wall is a side-specific line/face. Separate blue/red marks preserve both kinds in an overlap. No new quantity totals are proposed.
++
++Clip against current true host material AND the recorded support mask. Removed/moved holes or enlarged surfaces never enlarge old observations without an explicit new recording. Ordinary furniture can occlude the view but never subtract the evidence footprint. A missing/null ceiling cannot silently receive a ceiling record. Real cutout geometry and its domains depend on Q01; F01-F03 do not wait for that answer.
++
++### D09: feature-local schema evolution and delivery
++
++F01 changes no geometry/scene/profile version. Proposed next geometry versions are 1.2.0 for F02 opening style/orientation, 1.3.0 for F03 ceiling intent, 1.4.0 for F04 fixtures/agreed cutouts and 1.5.0 for F05 observations, subject to a fresh collision check at each activation. These are reservations for review, not admitted formats today. Keep original schemas immutable; add a new strict schema and version dispatch only when consumed. Upgrade a mutable draft explicitly with the first feature edit, preserving IDs, old snapshots and source provenance; never rewrite a frozen revision on open.
++
++Scene/profile versions change only when their admitted vocabulary changes. In particular, styled opening/fixture faces and authored ceilings require coordinated scene admission and import comparison changes, not just new strings in today's permissive TypeScript SceneFace.role. Update resource preflight and bounded-work limits with each new emitter. Preserve old fixtures/readers deliberately. Capability checks must reject unsupported transfers intact; a geometry-only projection is allowed only as an explicitly labeled derivative, never as a writable downgrade or full backup. Keep the disabled v1 publisher disabled; do not widen its four-file wire contract implicitly.
++
++The installed shared workspace receives these web changes through actual regenerated bundled assets. `AuxiliumCapture`/`AuxiliumFiles` remain v1 bridges and retain originals. Old Swift capture input is admitted intentionally; the legacy Swift authoring target need not acquire duplicate features. Web IndexedDB records, history hashes, source-provenance packages, SVG/PDF/PNG primitives, scene/GLB and local import must each be covered when their data changes. No database, new origin, shared-account permission, service-worker takeover or OS publisher change is part of these features.
++
++### Open product questions and master gate
++
++Q01 remains unresolved: wall through-openings, recesses, boundary notches, floor/ceiling voids, or more than one? The wall-through-opening recommendation is not accepted scope. Resolve it before F04's cutout implementation; no blocker for F01-F03. F04 also finalizes a bounded variant checklist for unnamed appliance/built-in examples without dropping named families. No product clarification is needed to begin F01 after master contract acceptance and activation. This preparation grants no lease and records no accepted decision on the master's behalf.
+diff --git a/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json b/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json
+new file mode 100644
+--- /dev/null
++++ b/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json
+@@ -0,0 +1,102 @@
++{
++  "schema_version": 1,
++  "proposal_only": true,
++  "status": "proposed_not_activated",
++  "active_task": null,
++  "task_to_activate": "F01",
++  "master": "Existing Astra master conversation",
++  "branch": "spatial/feature-program-2026-10-11",
++  "base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
++  "base_commit_semantics": "Exact verified source base for this proposal. Before recording ACTIVE_TASK, master pins the then-current accepted commit. If it differs only by adopted F00/control documents, retain source hashes and record that new exact commit without a full audit; any runtime difference requires focused reconciliation.",
++  "source_root": "spatial-source/",
++  "contract_revision": 2,
++  "contract_status": "proposed_awaiting_master_acceptance",
++  "owner": null,
++  "proposed_owner_role": "Single F01 feature worker appointed by the Astra master",
++  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
++  "parent_issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
++  "dependencies": [
++    "F00 master acceptance of revision 2 proposals, at minimum D01 and D10",
++    "No other active feature lease or conflicting writer",
++    "Fresh exact program HEAD and clean/preserved worktree; dedicated host metadata checked before any later transfer"
++  ],
++  "known_host_refs": {
++    "spatial_project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
++    "spatial_host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
++    "os_integration_branch": "work/integration-2026-10-10",
++    "os_source_commit": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
++    "os_host_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3"
++  },
++  "allowed_paths": [
++    "spatial-source/web/src/surfacePalette.ts",
++    "spatial-source/web/src/ui/sceneBatches.ts",
++    "spatial-source/web/src/ui/ModelViewport.tsx",
++    "spatial-source/web/src/data/glb.ts",
++    "spatial-source/web/tests/ui/helpers.test.ts",
++    "spatial-source/web/tests/data/data.test.ts",
++    "spatial-source/web/tests/ui/workflow.spec.ts"
++  ],
++  "new_path": [
++    "spatial-source/web/src/surfacePalette.ts"
++  ],
++  "path_constraints": {
++    "spatial-source/web/src/ui/ModelViewport.tsx": "Material/selection presentation and role handling, including renaming Light blue fills to Surface fills; preserve gesture, navigation and renderer lifecycle.",
++    "spatial-source/web/tests/ui/workflow.spec.ts": "One focused surface-contrast scenario or bounded extension of the existing graphic 3D scenario; no broad suite expansion.",
++    "tests": "Changed-risk assertions only; generated screenshots/results are ephemeral or returned as F01 evidence, not new runtime/config paths."
++  },
++  "forbidden_without_master_amendment": [
++    "Document types/schema/admission/store",
++    "Core geometry/scene/navigation behavior",
++    "Package/lock/config changes",
++    "Swift/native bridges and Apple source",
++    "OS source/routes/generated editor/authorization",
++    "Host scaffold/offline/auth wiring",
++    "Master controls, BUILD_STATE/BUILD_QUEUE, live ACTIVE_TASK.json",
++    "Publishing, signing, installation, or business-record binding"
++  ],
++  "required_acceptance": [
++    "F01-A01",
++    "F01-A02",
++    "F01-A03",
++    "F01-A04",
++    "F01-A05"
++  ],
++  "focused_acceptance": [
++    {
++      "id": "F01-A01",
++      "check": "One small-screen room: wall > ceiling > floor luminance, both unselected and selected; representative orbit and walk. Use existing syntheticDocument fixture and preserve geometry."
++    },
++    {
++      "id": "F01-A02",
++      "check": "Same scenario covers ceiling toggle, the Surface fills label and fill-disabled mode, cutaway and semantic picking. Legacy floor/ceiling room ownership remains intact until F03."
++    },
++    {
++      "id": "F01-A03",
++      "check": "Table-driven helper proves explicit roles/triangle ownership and sRGB-to-linear intended colors; existing GLB test checks opaque wall/floor factors and unchanged geometry identity. State that display ceilings are not exported."
++    },
++    {
++      "id": "F01-A04",
++      "check": "Bounded role batches (at most three structural roles), existing idle/warm-renderer instrumentation, no new animation loop or per-object materials. Run only the existing relevant warm-idle case, not stress/timing suites."
++    },
++    {
++      "id": "F01-A05",
++      "check": "Receipt separates source commit/build/UI evidence, host transfer/hash/build/served status, Apple asset/build/device status and OS status. Missing target verification stays open, not passed by source equality."
++    }
++  ],
++  "suggested_commands_from_source_web": [
++    "node --import tsx --test tests/ui/helpers.test.ts",
++    "node --import tsx --test --test-name-pattern=\"GLB\" tests/data/data.test.ts",
++    "npx playwright test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"surface contrast\"",
++    "npx playwright test --config tests/ui/warm-switch.config.ts warm-switch.spec.ts --grep \"warm renderer stays idle\"",
++    "npm run build"
++  ],
++  "command_notes": "surface contrast is the proposed focused scenario title, not an existing passing test. Install/reuse pinned dependencies and the current browser setup as needed; these commands were not run in F00. If extending the existing 3D test instead, select its actual title. Build once per relevant accepted candidate.",
++  "master_recording_steps": [
++    "Review F00 patch and record accepted decision revision without claiming prior acceptance.",
++    "Re-read ACTIVE_TASK; if any task is active, preserve it and reconcile the conflict, never overwrite.",
++    "Pin the exact accepted program commit and verify the bounded input hashes; appoint one worker.",
++    "Record a single ACTIVE_TASK for F01 with that base, owner, allowed_paths and required_acceptance. Update the existing source BUILD_QUEUE rather than creating another queue.",
++    "Supply accepted documents and the source at the recorded base to the F01 chat; stop after F01."
++  ],
++  "stop_after": "F01 handoff to master; do not begin F02"
++}

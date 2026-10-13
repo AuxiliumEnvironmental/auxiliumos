@@ -1,0 +1,263 @@
+{
+  "feature": "F05 affected observations",
+  "record": "Cumulative local integration evidence",
+  "date": "2026-10-13",
+  "source_commit": "1e227873de0e95870c7dbe75d981db2075127b31",
+  "predecessor_source_commit": "35931e46436babfc03aef6d00aba5867e273d230",
+  "reviewed_F05_source_commit": "dc53c7a1bce141706764a8da3af82c1c69fb1333",
+  "accepted_F02_source_commit": "0f3f7fdb68794bc4b28eb7153ceabe84ec0081bc",
+  "canonical_F03_source_commit": "1ab8226180097b32e55b1f3f6ae276bd63e263b9",
+  "canonical_F03_preview_fix": "4223bf60624080a412d1a5ad6e4882333895413a",
+  "source_scope": "Actual F01-F04 source composed with reviewed F05. No remote writes or deployment by this worker.",
+  "changes": [
+    "Replaced the F05 baseline surface/host receipt adapter with the canonical F03/F04 resolver, cutout subtraction and EditReceipt.surfaceRemaps.",
+    "Composed exact source-domain transforms across topology transaction segments; coherent multi-node movement is evaluated once.",
+    "Retained original footprints, recorded support, observation identities and unresolved pieces through host edits; metadata-only identity receipts preserve reviewed observations.",
+    "First F05 edits migrate legacy ceilings through establishCeilingSchema; strict 1.5 documents require each room's Ceiling|null and retain all actual predecessor fields.",
+    "Composed opening, ceiling, fixture, cutout and affected-area selection, render roles, scene batches, frozen drawings and GLB materials.",
+    "Canonical ceiling selections resolve to the matching affected-area surface; ceiling observation previews track canonical height previews.",
+    "Rechecked canonical EditFence immediately before affected-area durable submission, using the stored revision while previews are pending."
+  ],
+  "verification": [
+    {
+      "name": "Cumulative remap and retained support",
+      "command": "node --import tsx --test tests/core/affected-area-cumulative.test.ts tests/core/affected-area-remaps.test.ts",
+      "passed": 13,
+      "failed": 0,
+      "cases": [
+        "Real cutout move/delete on positive wall, negative wall, room floor and established ceiling",
+        "Stable observation identity/support under ceiling height changes",
+        "Unrelated fixture edit preserves reviewed observation state",
+        "Real cutout plus observation split/join and coherent floor translation",
+        "Opening removal cannot manufacture observed material",
+        "Clipped height support retained",
+        "Physical reversal swaps side/arclength",
+        "Deleted floors and rooms retain unresolved observations",
+        "Nonrigid changes preserve original record",
+        "Composed receipts contain original source hosts only",
+        "Replacement ceiling IDs become unresolved"
+      ]
+    },
+    {
+      "name": "Focused observation, store, frozen exports and gestures",
+      "command": "node --import tsx --test tests/core/affected-areas.test.ts tests/data/affected-areas.test.ts tests/ui/affected-area-manipulation.test.ts",
+      "passed": 17,
+      "failed": 0,
+      "cases": [
+        "Both affected kinds and wall sides",
+        "Concavity, holes, bent walls and overlapping independent kinds",
+        "Strict admission and source identity",
+        "Sided alpha GLB overlays and preserved structural palette",
+        "Shared plan floor fill, ceiling grid and side-specific wall marks",
+        "Real durable save/undo/redo/reopen and export admission",
+        "Finger offset, rectangle edits, frame coalescing, terminal sample and cancellation"
+      ]
+    },
+    {
+      "name": "Production compilation and bundle",
+      "command": "npm run build",
+      "source_commit": "fe24a1f54a32a204ab42f4dd56b7f08464d2b0b9",
+      "result": "passed",
+      "warning": "Vite existing large-chunk advisory; no bundle failure."
+    },
+    {
+      "name": "Final fence delta typecheck",
+      "command": "./node_modules/.bin/tsc --noEmit",
+      "source_commit": "1e227873de0e95870c7dbe75d981db2075127b31",
+      "result": "passed"
+    },
+    {
+      "name": "Final fence delta gestures",
+      "command": "node --import tsx --test tests/ui/affected-area-manipulation.test.ts",
+      "source_commit": "1e227873de0e95870c7dbe75d981db2075127b31",
+      "passed": 4,
+      "failed": 0,
+      "changed_check": "Canonical expectedRevision/contextKey/generation mismatches reject."
+    },
+    {
+      "name": "Cumulative schema composition integrity",
+      "method": "Python standard-library JSON comparison of 1.4/1.5 predecessor definitions, required fields, metadata and new roles",
+      "result": "passed",
+      "checks": [
+        "Geometry and scene retain all predecessor definitions unchanged",
+        "Geometry 1.5 requires ceiling in Room and adds affectedAreas",
+        "Scene 1.5 retains predecessor metadata/roles and requires surface on affected roles"
+      ],
+      "scope": "Structural schema inheritance check; not an independent full JSON Schema engine run."
+    }
+  ],
+  "fence_delta_reuse": {
+    "commit": "1e227873de0e95870c7dbe75d981db2075127b31",
+    "scope": "Five UI/gesture files only; no geometry, store or export algorithm changes after passing the 30 focused cases.",
+    "validation": "Typecheck plus the 4 affected gesture/fence cases rerun. Final cumulative build/browser checks are master-owned."
+  },
+  "dependency_handling": {
+    "package_lock_sha256": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "packages_changed": false,
+    "local_dependency_symlink_tracked": false,
+    "cleanup_commit": "059a3cb3e1234f4d3db65ab2f811144ce1bf85e3"
+  },
+  "evidence_reuse": {
+    "standalone_F05": "Previously preserved F05 desktop/mobile browser evidence remains standalone evidence; this worker makes no new cumulative browser claim.",
+    "master_owned": [
+      "Combined desktop/mobile feature journey",
+      "Retained F02/F03 positive 3D interactions",
+      "Actual 2000-observation benchmark",
+      "Final production build",
+      "Host/Apple/OS delivery"
+    ]
+  },
+  "source_manifest": [
+    {
+      "path": "spatial-source/contracts/COMPATIBILITY.md",
+      "sha256": "08404c41a4f334b132d0299cf4cc979ee6426ff83dfc7525356b100b1c7969a0",
+      "bytes": 10158
+    },
+    {
+      "path": "spatial-source/contracts/geometry-v1.5.schema.json",
+      "sha256": "ec7c9436b20502a4d30a66a4caa3d6a2ad6a82e0f5c1da1a27b49a002ba640d0",
+      "bytes": 43623
+    },
+    {
+      "path": "spatial-source/contracts/scene-v1.5.schema.json",
+      "sha256": "8f1d8c072cb721b60699ff2c5d391c1496b1203b32b7b50b0999140665413605",
+      "bytes": 33775
+    },
+    {
+      "path": "spatial-source/web/src/affectedAreaPalette.ts",
+      "sha256": "bbf735280362e4cfb9fa93109b63d68a5cbb0d8869ae848baf536abb0805bc99",
+      "bytes": 543
+    },
+    {
+      "path": "spatial-source/web/src/core/affectedAreaGeometry.ts",
+      "sha256": "1d27d0b99c17a2261f32f08706c05d3efd8709d1c4a7aa6a8bb92929a88d27c3",
+      "bytes": 9048
+    },
+    {
+      "path": "spatial-source/web/src/core/affectedAreas.ts",
+      "sha256": "9973a5d1a78e40a815aa3f0e72bc1fd2709bc7d0c8549ed094d2aad3aaf60648",
+      "bytes": 18251
+    },
+    {
+      "path": "spatial-source/web/src/core/editor.ts",
+      "sha256": "9db1f9fa4b6a8970e38cd5b6bf83ef4fe7a6ccaf11ba888c9e9e36f1f7220145",
+      "bytes": 25632
+    },
+    {
+      "path": "spatial-source/web/src/core/scene.ts",
+      "sha256": "97b4b5a83844c5f878eed435ee7a7e14cda7fc1451dfa0b62d40f309f7a2822c",
+      "bytes": 15978
+    },
+    {
+      "path": "spatial-source/web/src/core/validation.ts",
+      "sha256": "b0a0e0ecd434505e34ad911a0662ac6bbb79de3ff6c4f03b0a36235ecb3d3399",
+      "bytes": 16219
+    },
+    {
+      "path": "spatial-source/web/src/data/drawing.ts",
+      "sha256": "8e9ab25d1d6878ccfd1b652fb9ce309001c2fb2a6600526a4b7f73185abb8910",
+      "bytes": 18460
+    },
+    {
+      "path": "spatial-source/web/src/data/glb.ts",
+      "sha256": "5ca652efd961310b1b0b5a41d656b381f708d4430e30b8bfde686feaa7996863",
+      "bytes": 7417
+    },
+    {
+      "path": "spatial-source/web/src/types.ts",
+      "sha256": "3d1062722267d37872e3cd527b7d79e530172a0499cc00d16eab2c5ed17c960c",
+      "bytes": 10788
+    },
+    {
+      "path": "spatial-source/web/src/ui/AffectedAreaControls.tsx",
+      "sha256": "b6c01fe391d50c4ec570e2e4950900ed6a83964e8df22c4af51df48b22120673",
+      "bytes": 18625
+    },
+    {
+      "path": "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+      "sha256": "e16ece72bbf0dac8361ef9f1a01838f499d727a332bb533f6772fb433ea3be3c",
+      "bytes": 74464
+    },
+    {
+      "path": "spatial-source/web/src/ui/ModelViewport.tsx",
+      "sha256": "f03b7d49b364f3683a7c3f3255415a7ea93fbea85e5549be1b203a709cdbdc44",
+      "bytes": 83498
+    },
+    {
+      "path": "spatial-source/web/src/ui/PlanGeometry.tsx",
+      "sha256": "b354d209001a59a669f7ab26a3db84b7cb2b2f82d2485646ba86471e96613470",
+      "bytes": 7632
+    },
+    {
+      "path": "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+      "sha256": "7b479329873d67cd9d3297e20199f68e47200e7c5de7dc791a81901d0f96391f",
+      "bytes": 63043
+    },
+    {
+      "path": "spatial-source/web/src/ui/affectedAreaBatches.ts",
+      "sha256": "a3da970a6cc3d94dafa3a2092ab9de360a47f35a2dd6eda7148699cb671b1d47",
+      "bytes": 4360
+    },
+    {
+      "path": "spatial-source/web/src/ui/affectedAreaManipulation.ts",
+      "sha256": "b5aabc6ac9e4aab75e32d0241e142cb34aa6342a2863b7b3b37eb8b82d6cbca4",
+      "bytes": 8005
+    },
+    {
+      "path": "spatial-source/web/src/ui/geometry.ts",
+      "sha256": "d274f38fc0f8c0ef61f8b8fa26204270bcf930c1c0d8c003bc725d6ea2468d5c",
+      "bytes": 5486
+    },
+    {
+      "path": "spatial-source/web/src/ui/groupSelection.ts",
+      "sha256": "7ca10f05ad25290e89c0f366133b8c806ef2ace2d74f7c8aacbfe808db30946a",
+      "bytes": 16154
+    },
+    {
+      "path": "spatial-source/web/src/ui/review.ts",
+      "sha256": "8726927025827b084b8855bc8ea1920f31a4ba12c4f96f98993f12b8113916c9",
+      "bytes": 3522
+    },
+    {
+      "path": "spatial-source/web/src/ui/sceneBatches.ts",
+      "sha256": "2e03603aa6b8ca7eff99e1b902b34c9c307b76feb5e961e06b326ea3b8a04058",
+      "bytes": 5528
+    },
+    {
+      "path": "spatial-source/web/src/ui/workspace.css",
+      "sha256": "08bd6f9fdfae555b4bce7be7f4e38db937d50f66046d8c49d88de9338ae37087",
+      "bytes": 56275
+    },
+    {
+      "path": "spatial-source/web/tests/core/affected-area-cumulative.test.ts",
+      "sha256": "b11f3e5942bad4c9828e13a0f1e8c9aacc249da3accb9fc4b220ace123670180",
+      "bytes": 6231
+    },
+    {
+      "path": "spatial-source/web/tests/core/affected-area-remaps.test.ts",
+      "sha256": "e5ccfed275797505c75c5f1da1797acf4a1c907323aebeb26545ca140c1683eb",
+      "bytes": 7611
+    },
+    {
+      "path": "spatial-source/web/tests/core/affected-areas.test.ts",
+      "sha256": "b3dedcfc9979ab4894ac43468b331280eb1163c9b15267be59650143e8b76972",
+      "bytes": 5958
+    },
+    {
+      "path": "spatial-source/web/tests/data/affected-areas.test.ts",
+      "sha256": "5a6d1070cccd6874dc146d02e20d9cba11ad86b8296cdf2ac1ea41d32104888f",
+      "bytes": 7004
+    },
+    {
+      "path": "spatial-source/web/tests/ui/affected-area-manipulation.test.ts",
+      "sha256": "6eda2deae61b8c14652eab2f75ba802faffb43930d95f8acaee9ec098120ae2a",
+      "bytes": 2644
+    },
+    {
+      "path": "spatial-source/web/tests/ui/affected-areas.spec.ts",
+      "sha256": "c9090556c611b31fc370c548104caa2cdbe1bf4ed94c7cbc4dda5bf8c8e620f4",
+      "bytes": 10003
+    }
+  ]
+}
+

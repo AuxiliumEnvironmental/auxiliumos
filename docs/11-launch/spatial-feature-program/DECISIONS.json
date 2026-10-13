@@ -1,0 +1,296 @@
+{
+  "revision": 4,
+  "status": "accepted_engineering_contract",
+  "verified_invariants": [
+    "one_shared_editor",
+    "meters_y_up_right_handed",
+    "strict_old_schema_admission",
+    "expected_revision_commands",
+    "native_capture_originals_preserved"
+  ],
+  "proposals": [
+    {
+      "id": "D01",
+      "topic": "surface palette",
+      "value": "Explicit wall/floor/ceiling roles in web/src/surfacePalette.ts; category-preserving selected fills; opaque linear-RGB GLB structural materials. F01 has no schema change.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F01",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "Keeps batching and geometry unchanged while removing the ceiling-as-wall fallback and export color mismatch.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D02",
+      "topic": "opening manipulation and orientation",
+      "value": "Opposite-corner wall-chart resize; edge u-only translation; explicit threshold; optional style/end/side capabilities; full reversal and bent-host policy.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "Reuses full-arclength helpers without fabricating legacy door subtype or bending rigid leaves.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D03",
+      "topic": "ceiling intent and wall envelope",
+      "value": "Freeze uniform legacy planes as inferred ceiling intent, unequal tops as null; explicit room height; extend necessary wall spans without shrinking them; preserve neighbor ceilings; explicit structure set/common delta.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "Avoids neighbor ceiling changes from a shared wall and preserves captured height differences until an explicit correction.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D04",
+      "topic": "fixture representation and navigation",
+      "value": "Versioned parametric dimensions and explicit floor/wall mount; white faces/blue edges; diagrammatic nonblocking fixtures initially.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F04",
+        "F05"
+      ],
+      "rationale": "No competing editor, fake image dimensions or unimplemented obstacle-avoidance claim.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D05",
+      "topic": "affected-area evidence",
+      "value": "Independent moisture/fire records, explicit wall vertical range, physical footprint and recorded support mask; no new totals.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F05"
+      ],
+      "rationale": "Prevents new damage appearing when a hole is filled, a host expands or a ceiling moves.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D06",
+      "topic": "surface identity and frames",
+      "value": "Role-qualified floor/room/ceiling references; wall ID plus positive/negative side; meters along wall and above base; fixed floor X/Z chart.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "Scene triangle numbers, camera directions and undifferentiated room IDs are not durable attachment identities.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D07",
+      "topic": "gesture transaction ownership",
+      "value": "Snapshot/context/revision fence; frame-coalesced preview; exact final sample; one command/undo item; pre-submit cancel saves nothing; existing pending-save semantics after submit.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "The current workspace commit signature needs an explicit drag-start revision fence; it cannot be assumed to supply one.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D08",
+      "topic": "attachment remapping",
+      "value": "Compose source/result surface transforms and exact source domains; retain clipped/unresolved observations, reject unresolved rigid-fixture moves.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "rationale": "Existing ID mappings mark review but do not preserve physical attachment coordinates.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D09",
+      "topic": "version and profile evolution",
+      "value": "Strict feature-local versions, proposed geometry 1.2/1.3/1.4/1.5 in task order; coordinated scene/profile changes only when vocabulary changes; no writable lossy downgrade.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06"
+      ],
+      "rationale": "Old schemas reject unknown fields, and current imports regenerate/compare scene geometry.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D10",
+      "topic": "platform delivery",
+      "value": "One shared workspace; exact host transfer/readback, actual Capacitor assets and Apple evidence, staged OS generation with separate authority; no assumed deployment.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "F05",
+        "F06"
+      ],
+      "rationale": "Current source, served web and installed app have distinct revisions and acceptance gates.",
+      "specification": "SHARED_CONTRACT.md#f00-concrete-rules-revision-2-accepted-engineering-design"
+    },
+    {
+      "id": "D11",
+      "topic": "Opening style authorship and provenance",
+      "value": "Optional Opening.style is {id,end?,side?,provenance}; style IDs are the seven verified presets, kind and required orientation capabilities are validated. Legacy style remains absent. Style/flip-only commands author nested style provenance and preserve base aperture provenance. Only actual geometry correction follows the existing aperture provenance transition. Cosmetic style must not unlock inferred portals.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02"
+      ],
+      "rationale": "Bounded read-only source review identified concrete F02 consumers and backward-compatibility risks.",
+      "specification": "SHARED_CONTRACT.md#f02-activation-supplement-d11-d13"
+    },
+    {
+      "id": "D12",
+      "topic": "F02 format and backward admission",
+      "value": "Reserve geometry 1.2.0 and scene 1.2.0 after collision check. Add explicit opening face role owned by opening ID. Keep immutable old schemas. Retain local-document 1.0/1.1 and drawing profiles while member/vocabulary contracts stay unchanged; complete geometry/scene remain separately versioned. Reject 1.2 from constrained legacy v1 exchange/outbox with an actionable complete-local-document alternative. Styled drawing recovery uses formatVersion 2 alongside legacy 1. No database version migration solely for this payload.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02"
+      ],
+      "rationale": "Bounded read-only source review identified concrete F02 consumers and backward-compatibility risks.",
+      "specification": "SHARED_CONTRACT.md#f02-activation-supplement-d11-d13"
+    },
+    {
+      "id": "D13",
+      "topic": "Version preservation and drawing compatibility",
+      "value": "setArea and scene area branches must never downgrade a higher admitted version. Room/wall/placement preflights preserve the source document version instead of synthesizing only 1.0/1.1. Drawings/export extents include style symbols. New opening emitters explicitly dispatch material roles without changing accepted structural palette.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02"
+      ],
+      "rationale": "Bounded read-only source review identified concrete F02 consumers and backward-compatibility risks.",
+      "specification": "SHARED_CONTRACT.md#f02-activation-supplement-d11-d13"
+    },
+    {
+      "id": "D14",
+      "topic": "Parallel development and ordered integration",
+      "value": "F02-F05 may implement concurrently on their exact isolated branches. The master alone integrates F02, then F03, F04 and F05. Dependency-sensitive code is verified against real accepted predecessors before combined acceptance. See PARALLEL_DEVELOPMENT.md.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "specification": "SHARED_CONTRACT.md"
+    },
+    {
+      "id": "D15",
+      "topic": "Shared surface and fixture-consumer contract",
+      "value": "SURFACE_INTERFACE.md revision 1 fixes SurfaceRef, physical domains, transforms, resolver entry points, additive remap receipts and minimal fixture mounts. F03 owns first core/surfaces.ts implementation; F04/F05 consume the same vocabulary. No duplicate surface frameworks or inferred successful integration.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "specification": "SHARED_CONTRACT.md"
+    },
+    {
+      "id": "D16",
+      "topic": "Cumulative schema reservations",
+      "value": "Reserve geometry/scene 1.2.0 for F02, 1.3.0 for F03, 1.4.0 for F04 and 1.5.0 for F05. These names are unoccupied in the inspected maintained source. Later schemas must incorporate accepted predecessor fields/roles/admission. Preserve old files and source snapshots; feature branches cannot overwrite newer schema consumers.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "specification": "SHARED_CONTRACT.md"
+    },
+    {
+      "id": "D17",
+      "topic": "Ceiling migration boundary",
+      "value": "If a uniform legacy wall-top plane cannot represent positive floor-relative clearance, migrate its ceiling intent to null while preserving the original snapshot. Do not invent a positive height or reject otherwise valid legacy input solely to infer a ceiling. New rooms in the ceiling schema have explicit established/null state.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F02",
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "specification": "SHARED_CONTRACT.md"
+    },
+    {
+      "id": "D18",
+      "topic": "Optional host cutouts and service penetrations",
+      "value": "Owner approved optional floor/ceiling cutouts and penetrations, extending wall cutouts. CUTOUT_SCOPE.md fixes explicit host selection, rectangle/circle profiles, real subtraction, strict cumulative admission, exact attachments, floor walk-support checks and retained observation support. No recess depth, automatic shafts or portal permissions.",
+      "status": "accepted",
+      "affected_tasks": [
+        "F03",
+        "F04",
+        "F05"
+      ],
+      "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
+      "specification": "CUTOUT_SCOPE.md"
+    }
+  ],
+  "open": [
+    {
+      "id": "Q02",
+      "topic": "unnamed catalog variants",
+      "needed_before": "F04",
+      "question": "Which bounded variants of appliances and built-ins beyond the named families belong in the first catalog?",
+      "recommendation": "Master records a proposed checklist at F04; all named families remain required. Do not treat etc. as an exhaustive source inventory.",
+      "blocks": [
+        "F04_catalog_completeness_claim"
+      ],
+      "does_not_block": [
+        "F01",
+        "F02",
+        "F03"
+      ]
+    }
+  ],
+  "inspected_source_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "accepted_by": "Spatial master, owner-approved GitHub recording and parallel workflow",
+  "accepted_at": "2026-10-11T16:15:13.367807+00:00",
+  "acceptance_scope": "D01-D17 engineering contract accepted; implementation and platform gates remain independent. Q01/Q02 remain open for F04 only.",
+  "F02_preparation": {
+    "inspected_source_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
+    "prepared_at_utc": "2026-10-11T15:54:38.673783+00:00",
+    "activation_proposal": "coordination/ACTIVE_TASKS.json#/active_tasks/F02",
+    "runtime_changes": false,
+    "external_write_completed": true,
+    "status": "adopted_in_parallel_activation"
+  },
+  "resolved": [
+    {
+      "id": "Q01",
+      "topic": "cutout scope",
+      "needed_before": "F04",
+      "question": "Wall through-openings only, or also recesses, boundary notches and floor/ceiling voids?",
+      "recommendation": "Start with true wall cutouts; retain other interpretations as open until explicitly resolved.",
+      "blocks": [],
+      "does_not_block": [
+        "F01",
+        "F02",
+        "F03"
+      ],
+      "status": "resolved_for_first_implementation",
+      "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
+      "resolved_at_owner_local": "2026-10-11",
+      "decision": "D18",
+      "resolution": "Optional wall/floor/ceiling through-cutouts and service penetrations. Recesses, notches and automatic multi-level shafts are outside this first scope."
+    }
+  ]
+}

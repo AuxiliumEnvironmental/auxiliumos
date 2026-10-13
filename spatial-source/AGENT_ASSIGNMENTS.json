@@ -1,0 +1,113 @@
+{
+  "format_version": 1,
+  "actual_workers_started_by_package": true,
+  "lead": "lead",
+  "max_concurrent_writers": 4,
+  "fallback": "Use the same roles sequentially and attribute them honestly when worker tools are unavailable.",
+  "roles": [
+    {
+      "id": "lead",
+      "prompt": "agents/00_LEAD.md",
+      "taskIDs": [
+        "SP-00",
+        "SP-09"
+      ],
+      "ownedPaths": [
+        "contracts/",
+        "BUILD_STATE.json",
+        "BUILD_QUEUE.json",
+        "RESUME.md",
+        "SOURCE_RECONCILIATION.json",
+        "docs/"
+      ]
+    },
+    {
+      "id": "native",
+      "prompt": "agents/01_NATIVE_CAPTURE.md",
+      "taskIDs": [
+        "SP-01",
+        "SP-07"
+      ],
+      "ownedPaths": [
+        "ios/",
+        "packages/CaptureKit/",
+        "tests/native/"
+      ]
+    },
+    {
+      "id": "geometry",
+      "prompt": "agents/02_GEOMETRY.md",
+      "taskIDs": [
+        "SP-02"
+      ],
+      "ownedPaths": [
+        "packages/SpatialCore/",
+        "tests/geometry/",
+        "fixtures/geometry/"
+      ]
+    },
+    {
+      "id": "editor",
+      "prompt": "agents/03_EDITOR_AND_DESIGN.md",
+      "taskIDs": [
+        "SP-03"
+      ],
+      "ownedPaths": [
+        "packages/SpatialUI/Editor/",
+        "packages/SpatialUI/Shared/",
+        "tests/ui/",
+        "design/"
+      ]
+    },
+    {
+      "id": "renderer",
+      "prompt": "agents/04_3D_AND_EXPORTS.md",
+      "taskIDs": [
+        "SP-05",
+        "SP-06"
+      ],
+      "ownedPaths": [
+        "packages/SpatialUI/Viewer3D/",
+        "packages/SpatialInterop/Exports/",
+        "tests/rendering/",
+        "tests/exports/"
+      ]
+    },
+    {
+      "id": "data",
+      "prompt": "agents/05_DATA_AND_INTEGRATION.md",
+      "taskIDs": [
+        "SP-04",
+        "SP-08"
+      ],
+      "ownedPaths": [
+        "packages/SpatialPersistence/",
+        "packages/SpatialInterop/Publishing/",
+        "tests/persistence/",
+        "tests/security/",
+        "tests/integration/"
+      ]
+    },
+    {
+      "id": "qa",
+      "prompt": "agents/06_QA_SECURITY.md",
+      "taskIDs": [
+        "SP-09"
+      ],
+      "ownedPaths": [
+        "tests/review/",
+        "evidence/reviews/"
+      ]
+    }
+  ],
+  "execution_workers": {
+    "capture_v2": "CaptureKit and native capture/pipeline/adapter; then new integrated workflow tests",
+    "navigation_v2": "Navigation/cutaway Core files/tests and native RealityKit viewer/factory",
+    "exports_v2": "Interop drawing/local profiles and export tests; sharedschema changes lead-owned",
+    "delivery_v2": "Persistence/outbox/access/recovery/retention and adverse process tests",
+    "qa_v2": "Independent read-only product/security/geometry review; scoped evidence only",
+    "apple_review_v2": "Independent native API/source review, capability verification; scoped evidence only"
+  },
+  "execution_worker_status": "Implementation finished and source ownership released; final review evidence is preserved. No continuing background work is promised.",
+  "execution_contract": "Fixed baseline ea1a4566 plus assigned dirty inputs; explicit owned disjoint paths and acceptance checks. Lead owned shared schema, control state, project config, editor integration and final commits. No more than4 implementation workers wrote concurrently."
+}

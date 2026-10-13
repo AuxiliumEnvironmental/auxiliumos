@@ -1,0 +1,159 @@
+{
+  "checked_date": "2026-10-08",
+  "sources": [
+    {
+      "id": "A01",
+      "publisher": "Apple",
+      "title": "RoomPlan overview",
+      "url": "https://developer.apple.com/augmented-reality/roomplan/",
+      "supported_fact": "RoomPlan uses camera/LiDAR inputs and exposes parametric room output; it permits customized capture UI."
+    },
+    {
+      "id": "A02",
+      "publisher": "Apple",
+      "title": "WWDC23: Explore enhancements to RoomPlan",
+      "url": "https://developer.apple.com/videos/play/wwdc2023/10192/",
+      "supported_fact": "Historical guidance on continuous sessions, MultiRoom and residential capture size. The 2023 guidance is not a universal current hard limit."
+    },
+    {
+      "id": "A03",
+      "publisher": "Apple",
+      "title": "StructureBuilder.capturedStructure(from:)",
+      "url": "https://developer.apple.com/documentation/roomplan/structurebuilder/capturedstructure(from:)",
+      "supported_fact": "Rooms require compatible world space; persistent ARSession or successful world-map relocalization supports alignment."
+    },
+    {
+      "id": "A04",
+      "publisher": "Apple",
+      "title": "Scanning the rooms of a single structure",
+      "url": "https://developer.apple.com/documentation/roomplan/scanning-the-rooms-of-a-single-structure",
+      "supported_fact": "Room-by-room capture, guidance, and keeping the AR session alive between compatible scans."
+    },
+    {
+      "id": "A05",
+      "publisher": "Apple",
+      "title": "CapturedRoom.Surface.polygonCorners",
+      "url": "https://developer.apple.com/documentation/roomplan/capturedroom/surface/polygoncorners",
+      "supported_fact": "Polygon corner data is in local plane coordinates and represents nonuniform walls/floors."
+    },
+    {
+      "id": "A06",
+      "publisher": "Apple",
+      "title": "CapturedRoom.Confidence",
+      "url": "https://developer.apple.com/documentation/roomplan/capturedroom/confidence",
+      "supported_fact": "Confidence denotes certainty of feature classification; it is not a survey accuracy certificate."
+    },
+    {
+      "id": "A07",
+      "publisher": "Apple",
+      "title": "ARDepthData.confidenceMap",
+      "url": "https://developer.apple.com/documentation/arkit/ardepthdata/confidencemap",
+      "supported_fact": "Depth confidence is a different signal; reflective/absorbing surfaces can reduce confidence."
+    },
+    {
+      "id": "A08",
+      "publisher": "Apple",
+      "title": "CapturedRoom.Surface.Curve",
+      "url": "https://developer.apple.com/documentation/roomplan/capturedroom/surface/curve-swift.struct",
+      "supported_fact": "Curved-surface metadata includes angles, radius and local center."
+    },
+    {
+      "id": "A09",
+      "publisher": "Apple",
+      "title": "Bringing SceneKit projects to RealityKit",
+      "url": "https://developer.apple.com/documentation/realitykit/bringing-your-scenekit-projects-to-realitykit",
+      "supported_fact": "Apple describes SceneKit as soft-deprecated and recommends a newer native framework such as RealityKit for long-term work."
+    },
+    {
+      "id": "A10",
+      "publisher": "Apple",
+      "title": "ProcessInfo thermal state",
+      "url": "https://developer.apple.com/documentation/foundation/processinfo/thermalstate-swift.enum/nominal",
+      "supported_fact": "Thermal states include nominal, fair, serious and critical."
+    },
+    {
+      "id": "A11",
+      "publisher": "Apple",
+      "title": "UI Design Dos and Don'ts",
+      "url": "https://developer.apple.com/design/tips/",
+      "supported_fact": "Guidance includes at least 44-by-44-point hit targets, readable content and clear alignment."
+    },
+    {
+      "id": "A12",
+      "publisher": "Apple",
+      "title": "Complete file protection",
+      "url": "https://developer.apple.com/documentation/foundation/nsdata/writingoptions/completefileprotection",
+      "supported_fact": "Protected files cannot be read/written while locked; the app must handle unavailable protected data."
+    },
+    {
+      "id": "A13",
+      "publisher": "Apple",
+      "title": "RoomCaptureView init(frame:arSession:)",
+      "url": "https://developer.apple.com/documentation/roomplan/roomcaptureview/init(frame:arsession:)",
+      "supported_fact": "A custom world-tracking session can be used and its configuration preserved."
+    },
+    {
+      "id": "A14",
+      "publisher": "Apple",
+      "title": "StructureBuilder.ConfigurationOptions",
+      "url": "https://developer.apple.com/documentation/roomplan/structurebuilder/configurationoptions",
+      "supported_fact": "Current symbol reference uses init(options:), unlike some historical presentation code."
+    },
+    {
+      "id": "A15",
+      "publisher": "Apple",
+      "title": "UnlitMaterial",
+      "url": "https://developer.apple.com/documentation/realitykit/unlitmaterial",
+      "supported_fact": "A material not responding to scene lighting; translucent output requires explicit blending configuration."
+    },
+    {
+      "id": "A16",
+      "publisher": "Apple",
+      "title": "RoomBuilder.init(options:)",
+      "url": "https://developer.apple.com/documentation/roomplan/roombuilder/init(options:)",
+      "supported_fact": "RoomBuilder accepts an explicit configuration option set."
+    },
+    {
+      "id": "S01",
+      "publisher": "Supabase",
+      "title": "Resumable uploads",
+      "url": "https://supabase.com/docs/guides/storage/uploads/resumable-uploads",
+      "supported_fact": "TUS resumable upload support. Native implementation and background-transfer behavior still need validation."
+    },
+    {
+      "id": "S02",
+      "publisher": "Supabase",
+      "title": "Row level security",
+      "url": "https://supabase.com/docs/guides/database/postgres/row-level-security",
+      "supported_fact": "Server-side access rules and key handling are necessary; authentication alone is not per-project authorization."
+    },
+    {
+      "id": "S03",
+      "publisher": "Supabase",
+      "title": "Database backups",
+      "url": "https://supabase.com/docs/guides/platform/backups",
+      "supported_fact": "Database backups do not include actual Storage object contents."
+    },
+    {
+      "id": "S04",
+      "publisher": "Supabase",
+      "title": "Changelog",
+      "url": "https://supabase.com/changelog",
+      "supported_fact": "Reviewed current change index before integration planning. No Supabase SDK/schema/server is deployed here."
+    },
+    {
+      "id": "R01",
+      "publisher": "User repository",
+      "title": "AuxiliumOS ADR-001 at observed newer PR head",
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/blob/a749b7d67d177c02f557b02e305598dfd2fee78c/docs/03-data/ADR-001-DOMAIN-AND-MOLDO-BOUNDARIES.md",
+      "supported_fact": "OS/Moldo ownership, scoped integration and exact-version rules. Read via connected GitHub. This is architectural context, not proof of deployed integration."
+    },
+    {
+      "id": "R02",
+      "publisher": "User repository",
+      "title": "AuxiliumOS draft PR 84",
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/84",
+      "supported_fact": "Current read reported head a749b7d67d177c02f557b02e305598dfd2fee78c. Preserve newer changes; PR body can lag source."
+    }
+  ]
+}

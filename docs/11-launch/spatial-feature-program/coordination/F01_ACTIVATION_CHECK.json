@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-11T15:03:14.088864+00:00",
+  "activation_id": "F01-2026-10-11-01",
+  "accepted_base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+  "status": "passed_document_and_assignment_checks",
+  "checks": [
+    "F00 accepted; revision 2 decisions match ACTIVE_TASK",
+    "Exactly one active F01 assignment; worker not yet started; F02-F06 remain planned",
+    "Queue, state, owner, base, path list and five acceptance IDs agree",
+    "Seven source/test paths and four exact evidence artifacts; all existing source inputs match their SHA256 values",
+    "Runtime, native, OS and backend paths unchanged",
+    "Original F00 handoff and its hash-matched evidence preserved"
+  ],
+  "application_tests_run": false,
+  "deployments": false,
+  "worker_started": false,
+  "commit_semantics": "Containing commit records the activation. Its parent is the exact accepted F00 base."
+}

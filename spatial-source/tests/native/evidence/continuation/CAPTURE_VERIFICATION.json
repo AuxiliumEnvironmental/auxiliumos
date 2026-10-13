@@ -1,0 +1,46 @@
+{
+  "input_head": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "source_status": "modified_worktree_not_committed_by_worker",
+  "worker": "capture_v2",
+  "environment": "Ubuntu 24.04 x86_64, official Swift 6.2.1 Linux toolchain",
+  "portable_command": "LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu SWIFT_USE_OLD_DRIVER=1 SWIFT_BACKTRACE=enable=no /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swift test --jobs 1",
+  "portable_working_directory": "packages/CaptureKit",
+  "portable_result": {"exit_code": 0, "xctest_cases": 24, "failures": 0, "finished_utc": "2026-10-09T09:15:28.100Z", "log": "capturekit-tests.log"},
+  "native_parse_command": "LD_LIBRARY_PATH=/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu /workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swiftc -frontend -parse ios/SpatialApp/CaptureController.swift ios/SpatialApp/CapturePipeline.swift ios/SpatialApp/AppleSurfaceAdapter.swift tests/native/ConnectedCaptureTests.swift",
+  "native_parse_exit_code": 0,
+  "apple_sdk_compiled": false,
+  "native_journal_xctest_executed": false,
+  "simulator_executed": false,
+  "physical_roomplan_capture_accepted": false,
+  "physical_relocalization_accepted": false,
+  "field_accessibility_or_performance_accepted": false,
+  "live_integration_enabled": false,
+  "sha256": {
+    "packages/CaptureKit/Package.swift": "b9b6e964a9bfa392fba74f2b6ad43f61967165f54be47e4d78004f413fdea106",
+    "packages/CaptureKit/Sources/CaptureKit/CaptureLifecycle.swift": "413fc821f14d0c13e9e0e6b7fcbaa5cb39a8b773c7e5109b0bc8c5de38ed43d0",
+    "packages/CaptureKit/Sources/CaptureKit/ConnectedCaptureLifecycle.swift": "03bd20605ae7a45313fa39e8b0d8d6e3e7193e7b7f592cd246a028d2fc809ad0",
+    "packages/CaptureKit/Tests/CaptureKitTests/CaptureLifecycleTests.swift": "9c7295e900111ef8434cdcce3c55378992df8382fa3fd512a6507deaa215d389",
+    "packages/CaptureKit/Tests/CaptureKitTests/ConnectedCaptureLifecycleTests.swift": "5e1d44fcc10ce406950fda7a793b6ab54683a7722d7d1332df2a2acda54edcc7",
+    "ios/SpatialApp/CaptureController.swift": "bf9807fc6ddbd893d5ca8220db928df5389438997acc5c30db88b04ba487c7ad",
+    "ios/SpatialApp/CapturePipeline.swift": "09253c70afa1f403210029a7e5c1ef28c48bc7383ab2e3a65ba56f7053ca51ae",
+    "ios/SpatialApp/AppleSurfaceAdapter.swift": "59d6d48e1271953e7094233fab575f7241a4f91022c53f1da3100c54e82ff027",
+    "tests/native/ConnectedCaptureTests.swift": "09dbbbc76f9c6c40c88b9e63a4b7118a11e26beec7089ad1a34ae73edb7fff1d"
+  },
+  "scope": [
+    "Capture lifecycle policy tests use synthetic session identities and supplied tracking events, not Apple sensors.",
+    "Normal tracking without an identified loaded map and an observed relocalizing-to-normal transition cannot restore broken continuity.",
+    "Raw, processed rooms and merged StructureBuilder results are immutable archives; current source preserves prior drafts through optimistic revision checks.",
+    "Mixed-level structures fail closed instead of flattening floors. A single unsupported floor remains an incomplete wall-only editable result.",
+    "WorkspaceView was syntax-parsed, then handed to integration lead for recovery/publication UI additions; its final evidence must be recorded by the lead."
+  ],
+  "primary_apple_api_references": [
+    "https://developer.apple.com/documentation/roomplan/roomcaptureview/init(frame:arsession:)",
+    "https://developer.apple.com/documentation/roomplan/scanning-the-rooms-of-a-single-structure",
+    "https://developer.apple.com/documentation/roomplan/structurebuilder/capturedstructure(from:)",
+    "https://developer.apple.com/documentation/roomplan/capturedstructure",
+    "https://developer.apple.com/documentation/roomplan/capturedstructure/surface",
+    "https://developer.apple.com/documentation/roomplan/capturedstructure/floors"
+  ],
+  "api_evidence_note": "Primary Apple DocC JSON fetched on 2026-10-09 verified the RoomCaptureView custom ARSession initializer, stop(false) shared-session workflow, async StructureBuilder signature, Surface typealias, world-map relocalizing-to-normal admission and varying-floor support. Documentation research does not replace installed Apple SDK compilation.",
+  "auxiliary_probe_failure": "A one-line Swift interpreter Foundation-symbol probe was not executed: legacy swift driver did not support -e and lldb lacked libpython3.12.so.1.0 (exit127). No acceptance evidence is claimed from that probe."
+}

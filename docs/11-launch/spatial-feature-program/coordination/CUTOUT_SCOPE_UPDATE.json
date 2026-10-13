@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-12T03:08:34.089Z",
+  "owner_local_date": "2026-10-11",
+  "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
+  "status": "scope_authorization_only",
+  "decision": "D18",
+  "resolves": "Q01",
+  "contract_revision": 4,
+  "surface_interface_revision": 2,
+  "program_base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "feature_heads_observed": {
+    "F02": {
+      "branch": "spatial/f02-openings-2026-10-11",
+      "commit": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+    },
+    "F03": {
+      "branch": "spatial/f03-ceilings-2026-10-11",
+      "commit": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+    },
+    "F04": {
+      "branch": "spatial/f04-fixtures-2026-10-11",
+      "commit": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+    },
+    "F05": {
+      "branch": "spatial/f05-affected-areas-2026-10-11",
+      "commit": "a90d4f9f132153498d7567758a14132cbafa5c0f"
+    }
+  },
+  "runtime_changes": false,
+  "worker_branches_modified": false,
+  "worker_process_started": false,
+  "added_source_test_paths": [
+    "spatial-source/web/src/core/navigation.ts",
+    "spatial-source/web/tests/core/navigation.test.ts",
+    "spatial-source/web/src/core/cutouts.ts",
+    "spatial-source/web/src/core/cutoutGeometry.ts",
+    "spatial-source/web/src/ui/CutoutControls.tsx",
+    "spatial-source/web/src/ui/cutoutManipulation.ts",
+    "spatial-source/web/tests/core/cutouts.test.ts",
+    "spatial-source/web/tests/core/cutout-geometry.test.ts",
+    "spatial-source/web/tests/data/cutouts.test.ts",
+    "spatial-source/web/tests/ui/cutout-manipulation.test.ts",
+    "spatial-source/web/tests/ui/cutouts.spec.ts"
+  ],
+  "added_artifact_paths": [
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/cutouts-mobile.png"
+  ],
+  "runtime_checks": "Not run: this is a documentation/control-only amendment. No new cutout implementation, browser acceptance or platform delivery is claimed.",
+  "notification": "Committed live ledger/prompt/issue update is available to existing workers. No automatic cross-chat acknowledgement is claimed."
+}

@@ -1,0 +1,8 @@
+{
+  "hostCommit": "062e651070048da4d8d6a9ff042223089dbd8f9a",
+  "projectId": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+  "paths": {
+    "src/offline/OfflineStatus.tsx": "be1f5f83a3ba4d26accf728d0ee41662fb2d52729cb5a530a455efc3dbca107e",
+    "src/components/WorkspaceBoundary.tsx": "35b05fd148f4d80fb6f974ea8345bd48495cdd2a506a7e66b286de9f4255c96e"
+  }
+}

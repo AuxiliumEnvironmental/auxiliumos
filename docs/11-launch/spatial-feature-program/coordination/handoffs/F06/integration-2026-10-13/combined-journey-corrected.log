@@ -1,0 +1,15 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @auxilium/spatial-workspace@0.1.0 test:browser
+> playwright test --config tests/ui/playwright.config.ts feature-integration.spec.ts --output /workspace/scratch/9062ebaf2df3/combined-journey-corrected
+
+
+Running 1 test using 1 worker
+
+
+(node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] tests/ui/feature-integration.spec.ts:46:1 › combined opening, ceiling, fixture, hole and observation workflow survives mobile editing and exact backup
+6:43:46 PM [vite] (client) hmr update /src/ui/SpatialWorkspace.tsx
+  1 passed (51.6s)

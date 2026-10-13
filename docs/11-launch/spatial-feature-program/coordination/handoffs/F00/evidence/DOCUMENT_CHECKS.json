@@ -1,0 +1,122 @@
+{
+  "observed_at_utc": "2026-10-11T14:48:59.527685+00:00",
+  "result": "pass",
+  "checks": [
+    {
+      "check": "Exact inspected repository HEAD preserved",
+      "passed": true,
+      "detail": "141a4cd756751c437e4ecdde07a1db9703588687"
+    },
+    {
+      "check": "Repository worktree unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Four proposed paths, all documentation-only",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "git apply --check against exact base",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Existing ACTIVE_TASK remains null",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Existing canonical queue remains planned for F00/F01",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Every supplied JSON document parses",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Decision revision remains explicitly proposed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Decision IDs are unique and bounded D01-D10",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "F01 base is exact, proposal has no lease/owner",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "F01 seven exact writable paths resolve or are explicitly new",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "New palette path is not overwriting existing work",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "F01 acceptance IDs match canonical queue",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Cutout question remains open and nonblocking for F01",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Both independent-review findings resolved in final proposal",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "No invented shared-code prerequisite for F01",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Focused source comparison receipt clean",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Reused recovery identity matches original package record",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Structured handoff retains supplied template keys",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Handoff claims no commit, external write, feature or acceptance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "All F00 acceptance rows mapped once",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "check": "Human handoff relative file links resolve",
+      "passed": true,
+      "detail": []
+    }
+  ],
+  "application_suites_run": false,
+  "apple_os_performance_suites_run": false,
+  "external_mutations": false,
+  "review_resolution": "REVIEW_RESOLUTION.json",
+  "patch_sha256": "187163e0cfe08dacddedd07effcad672d25677b54f48b9ddb9ea93d63ff4f200",
+  "scope": "Source/document consistency only. Not runtime or master acceptance."
+}

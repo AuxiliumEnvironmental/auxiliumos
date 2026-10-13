@@ -1,0 +1,121 @@
+{
+  "task": "F04 cumulative F01-F04 integration",
+  "status": "branch_implementation_complete_pending_master_cumulative_acceptance",
+  "source_commit": "35931e46436babfc03aef6d00aba5867e273d230",
+  "inputs": {
+    "accepted_F02": "0f3f7fdb68794bc4b28eb7153ceabe84ec0081bc",
+    "reviewed_F04": "44315237caccb4fb2511ebf54867f504f7a4d859",
+    "recovered_F03_source": "4223bf60624080a412d1a5ad6e4882333895413a"
+  },
+  "worktree": "/workspace/scratch/9062ebaf2df3/integration_f04",
+  "reusable_dependencies": "/workspace/scratch/9062ebaf2df3/integration_f04/spatial-source/web/node_modules",
+  "changes": [
+    "Cumulative strict 1.0-1.4 admission retains styled openings and requires Ceiling|null from1.3. First F04 edits initialize ceiling intent and preserve later schema numbers. Ceiling holes require existing matching ceiling identity before migration.",
+    "Canonical F03 surface charts compose F04 real subtraction. Cutout add/move/remove issues material-change receipts on both wall sides and horizontal hosts. Split source domains retain original voids even after same-transaction cutout removal.",
+    "Stable ceilings emit once; rendering, GLB materials, plan/drawing extents and legacy exchange rejection preserve actual F02/F03 behavior. Ceiling cutout edges and hit targets follow preview height and restore on cancel.",
+    "Separate opening, ceiling and F04 gesture callbacks preserve their accepted fence semantics. F02 host preview retains F04 wall cutouts. Shared IDs account for fixtures/cutouts during ceiling allocation."
+  ],
+  "verification": {
+    "focused_core": {
+      "command": "node --import tsx --test tests/core/cutout-surfaces.integration.test.ts tests/core/cutouts.test.ts tests/core/fixtures.test.ts",
+      "cwd": "spatial-source/web",
+      "exit_code": 0,
+      "passed": 8,
+      "failed": 0,
+      "duration_ms": 895.555108,
+      "scope": "Cutout add/move/remove remaps for every host and both wall sides; split source material; stable ceiling identity/subtraction across height edits; six host/profile subtraction cases; atomic invalidity and navigation voids;20 fixture catalogue entries under cumulative migration.",
+      "tested_new_test_sha256": "c5cdd05bcaf28824dc1506c8b793809ec8dec7d5a4786aa39e4150d63e1eb91c",
+      "reuse_note": "After this run, one new-test union access was narrowed through a const ceilingID for TypeScript only; its runtime assertion is equivalent. Core implementation and existing test bytes remained unchanged. Production build subsequently typechecked the final test source. No broad repeated suite."
+    },
+    "production_build": {
+      "command": "npm run build",
+      "cwd": "spatial-source/web",
+      "exit_code": 0,
+      "typescript": "passed",
+      "vite": "passed:278 modules;2.56s bundling",
+      "warning": "Existing large-chunk advisory remains. Two preceding TypeScript-only failures were corrected: new test union narrowing and Object3D/Mesh guard in ceiling cutout preview. No preceding production bundle was emitted."
+    },
+    "browser": {
+      "command": "SPATIAL_TEST_URL=http://127.0.0.1:4204 SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium SPATIAL_EVIDENCE_DIR=/workspace/scratch/9062ebaf2df3/integration_f04/verification npx playwright test --config tests/ui/f04-composition.config.ts",
+      "cwd": "spatial-source/web",
+      "exit_code": 0,
+      "passed": 2,
+      "failed": 0,
+      "duration_seconds": 22.7,
+      "temporary_runner_config": "import { defineConfig } from '@playwright/test';\nexport default defineConfig({testDir:'.',testMatch:['cutouts.spec.ts'],workers:1,webServer:{command:'npm run dev -- --port 4204 --strictPort',url:'http://127.0.0.1:4204',reuseExistingServer:false},timeout:45000,outputDir:'../../../../verification/browser-results',reporter:'line',use:{launchOptions:{executablePath:process.env.SPATIAL_BROWSER_EXECUTABLE,args:['--enable-unsafe-swiftshader','--use-gl=angle','--use-angle=swiftshader']}}});\n",
+      "chromium": "153.0.8010.0",
+      "chromium_sha256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+      "scope": [
+        "Touch floor cutout; numeric dimensions; 3D wall placement/resize/cancel; ceiling projection; undo/reopen; navigation across floor void.",
+        "Hidden ceiling cutouts expose no handles and intercept no visible model pick; shown ceilings restore explicit pick target."
+      ],
+      "setup_failure": "Initial separate-server attempt returned connection refused before application assertions; runner-owned webServer at4204 resolved this execution-environment issue."
+    },
+    "diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "changed_product_paths": "spatial-source only; no package/lock changes"
+    },
+    "screenshot": {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F04/F04_COMPOSED_mobile.png",
+      "sha256": "97e2acf63c8888ccbab11566f00c1f7ca14d0478c130bce406225f59d57ffcbd",
+      "visual_review": "390px mobile plan shows actual floor void, readable controls and preserved responsive layout."
+    }
+  },
+  "source_hashes_sha256": {
+    "spatial-source/contracts/COMPATIBILITY.md": "488afccc926eed9a8985c0deb7f592b62f28b1546e9794dbf9f4301d9b45af40",
+    "spatial-source/contracts/geometry-v1.4.schema.json": "91b4931f67487e32b4d8426f89d66a8949a1c0fc1b4890135b1f94be6f2d2359",
+    "spatial-source/contracts/scene-v1.4.schema.json": "47cd3dc728a37826d66a3100f0ef7810541e2eaedd01e34f321cdc01897162f1",
+    "spatial-source/web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "spatial-source/web/package.json": "e7f58426639402a1d40f94995f97c6d6d41bdb04f67eb56387db0004778bf890",
+    "spatial-source/web/src/core/ceilings.ts": "33822607ad80c7ee8ee982f502f6275ff325a9a476cca303473f3dab4010cfb6",
+    "spatial-source/web/src/core/cutoutGeometry.ts": "284c07322ece2ef234f8d328830d716661a248c08509654963c5ea12b0ba4fd0",
+    "spatial-source/web/src/core/cutouts.ts": "d6e4f041396f857fdbc1bb503c56113d20297872ef3cd8b032ebad6e02386051",
+    "spatial-source/web/src/core/editor.ts": "ff9928e7894efcad069ed121950f6c8196dc45e857b1a44790dfc9e2864bf31f",
+    "spatial-source/web/src/core/fixtureAttachments.ts": "5f5c7df6575c9d9f22c37bcfcdcaeedb4eb532842ac6d9c98d85fe58177d5a2d",
+    "spatial-source/web/src/core/fixtureCatalog.ts": "82f705eb057b018850d042981c4fac0a1dc577aa1abc8b58f69ce83992e5bb58",
+    "spatial-source/web/src/core/fixtures.ts": "aff879cd94b22c8508706e4a0c3177f5cd62b6741cd792c0c677901228c7ec32",
+    "spatial-source/web/src/core/index.ts": "300fca52d801644b9d6e6e474459718014cdc4ef4337d7e9e0ca3a0e7d30acab",
+    "spatial-source/web/src/core/navigation.ts": "2396c32e95e81989f9048a492a73c83deb8a1c50d2fbed59750994cc04e34176",
+    "spatial-source/web/src/core/scene.ts": "97eca7b93c72673196ec7ee0fa577f833ab147f0a06ee12faf3befa0df799c44",
+    "spatial-source/web/src/core/surfaces.ts": "a3a149948babfb84c4e8a4519176b2ebfa54827b7bac448a54595378ba0dee31",
+    "spatial-source/web/src/core/validation.ts": "8d70a90be295305c43389decb58a1328c3a026a4359e5f5c9fa2c2efa22d95e1",
+    "spatial-source/web/src/data/drawing.ts": "024055f1df8430a25e1eb93865cdea82a088e08648b750284f9e7964d61ea601",
+    "spatial-source/web/src/data/exports.ts": "c690e7663f0e45d88d6f503f31d70b030c2c60ea08946c614884a85c0127cc6c",
+    "spatial-source/web/src/data/glb.ts": "626dc9c0c67612779c1c1a30edf30b8b423a0ebed1b106cf2571f589cb590d9c",
+    "spatial-source/web/src/data/imports.ts": "9017a77c4f10db49293c782c696a7254fab6381e4d78be8813baaa9c3714588a",
+    "spatial-source/web/src/fixturePalette.ts": "298de3771862456f34a5857242f1b61b10c0611c5d2fe49f51259f52bd84fa6f",
+    "spatial-source/web/src/types.ts": "d76b1b017c0e97b7518d18d16a0552d9ed5bc5432c803e740a109c5004610bd0",
+    "spatial-source/web/src/ui/CutoutControls.tsx": "9bf8413f5a89e7aac4959d7a2473d6e142a02387ea691d7fb5adc160a242247e",
+    "spatial-source/web/src/ui/FixturePicker.tsx": "d85c2f3ec9b298888f1de119b28a9a756d708a67bc6ab3459d1f2d9551b374fb",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx": "ae7203ef4fffaaf39c96554f23a3c3479dbc237844a98e5712d241ed59b8c17d",
+    "spatial-source/web/src/ui/Inspector.tsx": "13061a96cf75fc7f761c757bf3486fbb031c5935b58d8afb69fbc8456f9ebc7b",
+    "spatial-source/web/src/ui/ModelViewport.tsx": "fd14c4ba11341c855ef8e6b3e4705ccd52e07926e71ecde0409b263e364dca2d",
+    "spatial-source/web/src/ui/PlanGeometry.tsx": "47f6a5ef1a3f24e3db5668585158a06312947f30dc927bdfc10920d5f9e657a7",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx": "80bec19e395aab01519d07296d2fdf92e6c7a33782afeb849253fbb76948bbc7",
+    "spatial-source/web/src/ui/cutoutManipulation.ts": "51dc4f3efaf29eb58981540354560258b0c20d2e638069eba315965d26ab78e7",
+    "spatial-source/web/src/ui/fixtureManipulation.ts": "0eb19406f8733a250c9d5ee846c4eaa83f9d2e5447bbe1bc0734273b407e6a3f",
+    "spatial-source/web/src/ui/geometry.ts": "843c837f1b1fdd6d43651114f2805f0a7265e215528c2676534b41c98116eb33",
+    "spatial-source/web/src/ui/groupSelection.ts": "010667c1cd4d7b9a7d49da24fe04585dd0fc0d2e73e48920bd7733649be0ca58",
+    "spatial-source/web/src/ui/sceneBatches.ts": "3d121b4ca0ae756cdd8bc1f6a7d1e68ae3591e6e768c5c8b656825d95aa3da18",
+    "spatial-source/web/src/ui/workspace.css": "9438e279076e73100d9b36670775bb2b6dd6677f6282204e720edf8175f84362",
+    "spatial-source/web/tests/core/cutout-geometry.test.ts": "d6e5f49e96b31f83e5eaf5038635c00f902625a9f605ff4f83dedb474a864a58",
+    "spatial-source/web/tests/core/cutout-surfaces.integration.test.ts": "bac7b25743c8737fa4c74c4e6f0cde49090801585be5b18dfc5dc53404ba68bd",
+    "spatial-source/web/tests/core/cutouts.test.ts": "5dbd8703ba4f03d164ada522bacf5448274dccc1e4a82396c517363a2cf26d9c",
+    "spatial-source/web/tests/core/fixture-attachments.test.ts": "100fcbbd49e14d72a840220d8e678118a3edbdd6fed7ac27e95a80d68eb78bf0",
+    "spatial-source/web/tests/core/fixtures.test.ts": "d773687652fd440aa1fce4bca6caf8474bfe2c7988f6f974c124c6c1148eb5fb",
+    "spatial-source/web/tests/data/cutouts.test.ts": "ecedbdd0281dd8ab0fd8c7869e640a7407b95798d4dc39c0226219c5445cf19b",
+    "spatial-source/web/tests/data/fixtures.test.ts": "3ea363705d2526a9dc823fe6c182985eaa4efc2a30112449a59e524721ff9375",
+    "spatial-source/web/tests/ui/cutout-manipulation.test.ts": "36728404f6bda7396ec733e2a2bf0a1a395faac5795e5ce38bf10d76772d5bf2",
+    "spatial-source/web/tests/ui/cutouts.spec.ts": "2e7eb79600064631f03d0bc2d2d93b951541a83d439e7364d65ff16d86bab299",
+    "spatial-source/web/tests/ui/fixture-manipulation.test.ts": "042a7678634f6c41e4d88680f2de07904ba5cf92bdffc3e04bb8eac5dd845e01",
+    "spatial-source/web/tests/ui/fixtures.spec.ts": "be83da0036700c247d9738e455840dbe18b1f82b7b990a47b6daa73ad0cac504",
+    "spatial-source/web/tsconfig.json": "dbb469bc59cb12f311ed036c27dfba5ea175d3f4d1200fdb81df7f8dbf2595ad",
+    "spatial-source/web/vite.config.ts": "9d2e6677376800b0d06854904949a351ff9c6a2597359e009acb913885eed231"
+  },
+  "remaining": [
+    "Master cumulative F05 recorded-support acceptance and root combined integration checks.",
+    "Host source transfer/build/serve and OS/Apple platform delivery gates are not established by these local checks."
+  ],
+  "remote_writes": "none"
+}

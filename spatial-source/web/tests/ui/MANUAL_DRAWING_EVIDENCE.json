@@ -1,0 +1,92 @@
+{
+  "baselineCommit": "b3a85dac8f31a289468267f0ab67826a5f489ebe",
+  "sourceStatus": "Uncommitted worker source integrated in the existing canonical repository; lead owns final commit, manifest and packaging.",
+  "recordedAt": "2026-10-10T02:02:17.965277+00:00",
+  "environment": {
+    "os": "Linux",
+    "browser": "Chromium 153.0.8010.0",
+    "server": "Local Vite development server http://127.0.0.1:4175",
+    "uiRuntime": "Actual shared React/TypeScript workspace; synthetic documents",
+    "physicalDevice": false,
+    "signedInHost": false
+  },
+  "implemented": [
+    "Live wall/area pointer preview and explicit corner/orthogonal snap indicators",
+    "Continuous connected walls with canonical shared node IDs, one explicit atomic finish and one undo/redo transaction",
+    "Finish/Back/Cancel controls; Enter/Backspace/Escape keyboard equivalents",
+    "Mouse direct unambiguous node/wall drag; touch retains select-first and 44px hit targets",
+    "Ambiguous overlapping identities require a chooser even when one was already selected",
+    "Pointer-anchored wheel zoom; temporary Space+left and middle-mouse pan while drawing",
+    "Reject whole and partial collinear overlap/backtracking without automatically merging geometry",
+    "Pinch/cancel/blur/capture-loss cleanup; fresh interaction resumes after lost terminal events; held Space clears when SVG focus leaves",
+    "Parent onDrawingChange guard keeps unfinished draft visible and blocks destructive view/floor/history/close transitions; authority loss clears draft",
+    "Synchronous rejected edit retains draft; parent pending snapshot owns accepted-but-unsaved transaction"
+  ],
+  "changedInterfaces": {
+    "FloorplanCanvas.onDrawingChange": "Optional callback (active:boolean)=>void, notified in layout effect when draft becomes nonempty/empty and reset on unmount. Integrated by lead in SpatialWorkspace. Existing onEdit(commands):void unchanged."
+  },
+  "finalRun": {
+    "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts manual-drawing.spec.ts --output tests/ui/artifacts/manual-drawing/final16 --reporter line",
+    "cwd": "web/",
+    "result": "16 passed (53.5s)",
+    "exitCode": 0,
+    "log": "artifacts/manual-drawing/final16-run.log",
+    "inputsBefore": "artifacts/manual-drawing/final16-inputs-before.json",
+    "inputsAfter": "artifacts/manual-drawing/final16-inputs-after.json",
+    "matchedInputs": 46
+  },
+  "typecheck": {
+    "command": "./node_modules/.bin/tsc --noEmit",
+    "cwd": "web/",
+    "exitCode": 0,
+    "log": "artifacts/manual-drawing/final-typecheck.log"
+  },
+  "earlierRuns": [
+    {
+      "result": "Initial seven cases: 4 passed; 3 test-harness failures",
+      "failures": [
+        "Exact equality asserted ideal integer coordinates after Float32 SVG CTM conversion; corrected to numeric tolerance while snapped axis remains exact",
+        "Test expected validation code instead of actual user-facing validation message",
+        "Wheel anchor assertion used fractional requested pointer position, whereas browser delivered integer coordinates; corrected input uses exact integer pointer location"
+      ],
+      "evidence": "artifacts/manual-drawing/test-results/",
+      "note": "Exploratory input hashes were not frozen; not final-source certification. Failures retained."
+    },
+    {
+      "result": "3 corrected harness cases passed (12.0s)",
+      "note": "Focused rerun before lifecycle/overlap/final pan changes; exploratory only."
+    },
+    {
+      "result": "10 passed (35.2s)",
+      "note": "Before independent-review partial-overlap and focus-return fixes; superseded by final16."
+    },
+    {
+      "result": "15 passed (43.4s)",
+      "manifest": "artifacts/manual-drawing/before-temporary-pan-15-cases.json",
+      "log": "artifacts/manual-drawing/final-run.log",
+      "note": "Before temporary mouse pan; preserved separately."
+    },
+    {
+      "result": "12 affected manual cases passed (28.9s)",
+      "manifest": "artifacts/manual-drawing/accepted-inputs-before.json",
+      "log": "artifacts/manual-drawing/accepted-run.log",
+      "note": "After temporary pan, before SVG blur latch fix; superseded by final16."
+    },
+    {
+      "result": "11 existing affected workflows passed (33.6s)",
+      "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"real authoring|narrow viewport|wall and opening|authenticated personal|ambiguous coincident|late authority|late allowed|drawn semantic|wall drawing chooses|concurrent corrections|200 percent text\" --output tests/ui/artifacts/manual-drawing/regression --reporter line",
+      "manifest": "artifacts/manual-drawing/regression-inputs-after.json",
+      "log": "artifacts/manual-drawing/regression-run.log",
+      "note": "Inputs matched during run. Final source subsequently adds only SVG onBlur Space reset and its focused test; all16 manual cases were then rerun. Original warm-switch screenshots restored byte-for-byte; this run screenshots kept under regression-screenshots."
+    }
+  ],
+  "review": "Separate companion_editor_audit worker found partial wall overlap, abandoned touch fence and Space focus latch defects. All were fixed and covered by final browser tests; reviewer owns independent final findings.",
+  "limits": [
+    "Browser automation and CDP touch events are not physical-device touch, Safari/WKWebView, LiDAR, VoiceOver or performance acceptance.",
+    "No hosted sign-in, remote app refresh, live integration, signing, distribution or native build performed by this worker.",
+    "This corrects immediate drawing interactions; companion parity and usability superiority remain unaccepted. Rectangle rooms, multi-selection, drag openings and broader snapping are separate unfinished work.",
+    "Wall crossings and T-junctions are not automatically stitched. Shared endpoints connect only through exact corner identities.",
+    "Unfinished drawing is explicit local state until Finish. Parent guard covers internal workspace actions; browser unload warns. External OS SPA navigation can still unmount it. Only accepted transactions participate in durable recovery."
+  ],
+  "screenshotPreservation": "artifacts/manual-drawing/screenshot-preservation.json; newer regression screenshots preserved separately and historical warm-switch images restored from baseline Git bytes by lead."
+}

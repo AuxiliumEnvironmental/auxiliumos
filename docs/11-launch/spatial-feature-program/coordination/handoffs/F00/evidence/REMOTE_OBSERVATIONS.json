@@ -1,0 +1,118 @@
+{
+  "source_method": "Fresh Git transport clone at exact program branch; no write attempted",
+  "program_branch": "spatial/feature-program-2026-10-11",
+  "program_head": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "os_branch": "work/integration-2026-10-10",
+  "os_head": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+  "default_main_head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+  "default_main_vs_reviewed_os": {
+    "repository_full_name": "AuxiliumEnvironmental/auxiliumos",
+    "base": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+    "head": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+    "status": "behind",
+    "ahead_by": 0,
+    "behind_by": 45,
+    "total_commits": 0,
+    "too_large": null,
+    "base_commit": {
+      "sha": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+      "url": "https://api.github.com/repos/AuxiliumEnvironmental/auxiliumos/commits/a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+      "html_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/commit/a2b31bff3e88ab3a1a86285ab935552796c4d3cd"
+    },
+    "merge_base_commit": {
+      "sha": "1729a525a7a60b86d1498c1300b579eb6775b02c",
+      "url": "https://api.github.com/repos/AuxiliumEnvironmental/auxiliumos/commits/1729a525a7a60b86d1498c1300b579eb6775b02c",
+      "html_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/commit/1729a525a7a60b86d1498c1300b579eb6775b02c"
+    },
+    "files": []
+  },
+  "historical_spatial_branch": "spatial/integration-2026-10-09",
+  "historical_spatial_head": "42b7754265a8755f0f478a135d5506311d731b44",
+  "historical_ref_note": "Same ref already recorded in package references/source_audit.md, not newer standalone source.",
+  "active_task": {
+    "schema_version": 1,
+    "master": "This Astra master thread",
+    "active_task": null,
+    "status": "planning_complete_no_feature_worker_activated",
+    "next_candidate": "F00",
+    "base_commit": null,
+    "source_root": "spatial-source/",
+    "branch": "spatial/feature-program-2026-10-11",
+    "contract_revision": null,
+    "owner": null,
+    "allowed_paths": [],
+    "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+    "required_acceptance": [],
+    "activation_note": "Master fills this from actual current refs before launching a feature chat; no inferred lease expiry or automatic takeover."
+  },
+  "spatial_host": {
+    "project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+    "commit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "last_edited_at": "2026-10-10T17:05:31.195Z",
+    "agentFinished": true,
+    "is_published": true
+  },
+  "os_host": {
+    "project_id": "0b7bbfc6-627f-4ca0-9217-98f5b164b419",
+    "commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3",
+    "last_edited_at": "2026-10-10T04:40:21.032Z",
+    "agentFinished": true,
+    "is_published": true
+  },
+  "issue89": {
+    "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
+    "title": "Spatial F00: Reconcile source and accept shared feature contracts",
+    "issue_number": 89,
+    "body": "Parent: #88\n\nStatus: planned, not implemented. Only the Astra master activates this task. Dependencies: none.\n\nPacket: [F00_Shared_Foundation.md](https://github.com/AuxiliumEnvironmental/auxiliumos/blob/spatial/feature-program-2026-10-11/docs/11-launch/spatial-feature-program/features/F00_Shared_Foundation.md)\n\nRead the packet, MASTER_CONTROL.md, SHARED_CONTRACT.md, current Spatial BUILD_QUEUE and the active assignment. Source is `spatial-source/` on the isolated program branch. Base commit and exact allowed file list must be frozen by the master at activation. No concurrent feature writers; no edits to OS main/runtime or companion/Moldo by implication.\n\nComplete this packet's acceptance rows with changed-risk evidence and a structured handoff. Preserve one shared React/TypeScript editor and Swift capture. Record source/web/Lovable/OS/Apple status separately. Reuse valid matching evidence; no redundant broad suites or fabricated completion. Do not close this issue merely because a prompt or source snapshot exists.",
+    "state": "open",
+    "user": {
+      "login": "AuxiliumEnvironmental",
+      "name": "AuxiliumEnvironmental",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/207464855?v=4",
+      "id": 207464855
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-10-11T08:38:55Z",
+    "updated_at": "2026-10-11T08:38:55Z",
+    "closed_at": null,
+    "display_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/89",
+    "display_title": "Spatial F00: Reconcile source and accept shared feature contracts"
+  },
+  "issue88": {
+    "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+    "title": "Spatial master program: preserve current source and coordinate five feature upgrades",
+    "issue_number": 88,
+    "body": "## Master program\n\nOwner-authorized preservation and sequential feature planning are saved in draft PR #96, branch `spatial/feature-program-2026-10-11`.\n\n- Source snapshot: `73ac3e94fe2be122fde590d1b1f84df4a0511354`.\n- Master packet commit: `141a4cd756751c437e4ecdde07a1db9703588687`.\n- Original complete Spatial checkpoint: `eebd27f8fd3c5b2d4e21c7c6957f9dcd017c0a59`, original history retained in the paired recovery archive.\n- Runtime source: `b64448eac79e3cd0b046f7c5e1a256b3e9c73905`; dedicated Lovable host: `467221a836c10ac2730bfa2375adde0ec447165c`.\n\nStart at [START_HERE.md](https://github.com/AuxiliumEnvironmental/auxiliumos/blob/spatial/feature-program-2026-10-11/docs/11-launch/spatial-feature-program/START_HERE.md).\n\n## Task sequence\n\n- [ ] #89 F00: bounded shared-contract/source prerequisite\n- [ ] #90 F01: surface contrast\n- [ ] #91 F02: opening manipulation, flips and verified types\n- [ ] #92 F03: room/structure ceiling heights\n- [ ] #93 F04: fixtures and agreed real cutouts\n- [ ] #94 F05: moisture/fire affected areas\n- [ ] #95 F06: combined integration and platform delivery\n\nOnly one feature implementation chat active at a time. The master owns exact activation, contracts and accepted predecessor refs. Source `BUILD_QUEUE.json` is the one implementation queue; task issues are traceability. None of these features was implemented in the preservation pass.\n\n## Preservation and verification\n\n379 source-snapshot files and 40 program files were read back from the remote branch and matched. Existing OS paths/workflows remain unchanged; no deployment/backend changes. All 1,179 original archive hashes and recovery bundle matched. Fresh host reads matched 48 application-source files, preserving five older hosted control documents separately. Necessary preparation checks covered reference/acceptance/activation consistency; no redundant app tests were run.\n\nOriginal Git history was not pushed: git transport had no push credentials, so the authorized connector created a labeled source snapshot. SOURCE_SNAPSHOT.json records omitted historical generated evidence and the visual-reference binary retained in the complete ZIP. Complete source/recovery and host-scaffold package is delivered separately to the owner; environment secrets, field data and signing materials are excluded.\n\nKeep PR #96 a preservation/development review. Do not merge it as an OS runtime upgrade. Future OS cutover uses the current maintained editor and authorized adapter, preserving newer document work. Old unsigned Apple compilation is not current installed-device acceptance; all platform gaps are explicit in CURRENT_STATE and PLATFORM_DELIVERY.\n\nBefore F04, resolve whether cutouts also include recesses/boundary notches/floor-ceiling voids. Earlier features can proceed without that decision.",
+    "state": "open",
+    "user": {
+      "login": "AuxiliumEnvironmental",
+      "name": "AuxiliumEnvironmental",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/207464855?v=4",
+      "id": 207464855
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": null,
+    "comments": 0,
+    "created_at": "2026-10-11T08:29:39Z",
+    "updated_at": "2026-10-11T08:49:26Z",
+    "closed_at": null,
+    "display_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+    "display_title": "Spatial master program: preserve current source and coordinate five feature upgrades"
+  },
+  "issue89_comments": [],
+  "issue88_comments": [],
+  "external_writes": [],
+  "limits": [
+    "Provider metadata is not a fresh app/served-asset journey.",
+    "No push or connector write was attempted; advertised push permissions are not a demonstrated successful write.",
+    "Other computers' or other chats' uncommitted work cannot be inspected; all observed work was left unchanged."
+  ]
+}

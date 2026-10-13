@@ -1,0 +1,228 @@
+{
+  "task_id": "F02",
+  "base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "result_commit": null,
+  "branch": "spatial/f02-openings-2026-10-11",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/91",
+  "pr_url": null,
+  "disposition": "blocked_delivery",
+  "implementation_state": "Complete local candidate; browser acceptance and verified GitHub branch delivery incomplete.",
+  "changed_paths": [
+    "spatial-source/contracts/COMPATIBILITY.md",
+    "spatial-source/web/src/core/editor.ts",
+    "spatial-source/web/src/core/scene.ts",
+    "spatial-source/web/src/core/validation.ts",
+    "spatial-source/web/src/data/drawing.ts",
+    "spatial-source/web/src/data/drawingRecovery.ts",
+    "spatial-source/web/src/data/exports.ts",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/src/data/imports.ts",
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/types.ts",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx",
+    "spatial-source/web/src/ui/Inspector.tsx",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/ui/PlanGeometry.tsx",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx",
+    "spatial-source/web/src/ui/openingManipulation.ts",
+    "spatial-source/web/src/ui/openingPlacement.ts",
+    "spatial-source/web/src/ui/roomDrawing.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/wallDrawing.ts",
+    "spatial-source/web/src/ui/workspace.css",
+    "spatial-source/web/tests/ui/direct-openings.spec.ts",
+    "spatial-source/web/tests/ui/direct-placement.spec.ts",
+    "spatial-source/web/src/core/openings.ts",
+    "spatial-source/web/src/ui/openingModelManipulation.ts",
+    "spatial-source/web/src/ui/OpeningElevation.tsx",
+    "spatial-source/contracts/geometry-v1.2.schema.json",
+    "spatial-source/contracts/scene-v1.2.schema.json",
+    "spatial-source/web/tests/core/openings.test.ts"
+  ],
+  "requirements_addressed": [
+    "Single swing, double swing, sliding, pocket, bifold, open doorway and window catalog with applicable flip masks.",
+    "Physical wall-chart corner resizing, wall-aligned edge movement, exact numeric dimensions, threshold feedback, and original finger grab offset.",
+    "Matching 2D diagrams and owned 3D opening geometry, preserving actual wall apertures and the accepted F01 palette.",
+    "Versioned 1.2 geometry/scene admission, separately authored style provenance, and orientation preservation through wall split/join/reversal.",
+    "Recovery payload versioning and complete-local-document support; explicit legacy exchange/outbox refusal instead of silently discarding new fields.",
+    "Selected-opening edit fencing, transient affected-host previews, cancellation handling, and existing canonical durable command/undo integration."
+  ],
+  "contract_versions": {
+    "shared_contract_reviewed": 4,
+    "implementation_started_against_shared_contract": 3,
+    "surface_interface": 1,
+    "new_geometry": "1.2.0",
+    "new_scene": "1.2.0",
+    "legacy_geometry": [
+      "1.0.0",
+      "1.1.0"
+    ],
+    "styled_opening_recovery": 2,
+    "legacy_recovery": 1
+  },
+  "decisions": [
+    "Style is an authored choice, never a captured subtype or authority to traverse an inferred opening.",
+    "Rigid catalog styles require a straight host run; generic legacy apertures may cross bends.",
+    "Companion symbol extents are not physical opening heights.",
+    "Keep the legacy exchange and publisher closed to unsupported 1.2 geometry.",
+    "F04 cutout decisions remain master-controlled and are not implemented here."
+  ],
+  "evidence": [
+    {
+      "id": "F02-CORE",
+      "result": "pass",
+      "command": "node --loader loader.mjs --test tests/core/openings.test.ts tests/core/editor.test.ts tests/core/validation.test.ts tests/core/scene.test.ts tests/core/navigation.test.ts tests/core/wall-drawing.test.ts",
+      "tests": 150,
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0,
+      "scope": "Actual source using the installed global TypeScript transpiler. Includes seven opening styles, geometry, opposite corners, reversal/split/join, legacy admission, navigation, GLB and recovery payload checks. Not a browser UI test."
+    },
+    {
+      "id": "F02-CORE-TYPES",
+      "result": "pass",
+      "command": "tsc -p tsconfig.core.json",
+      "scope": "Dependency-free canonical core, types, palette and geometry helpers. Excludes React/Three integration typechecking."
+    },
+    {
+      "id": "F02-SOURCE-INTEGRITY",
+      "result": "pass",
+      "matched_candidate_files": 30
+    },
+    {
+      "id": "F02-BUILD",
+      "result": "blocked",
+      "detail": "The earlier full build stopped at TS2688: missing node and vite/client type definitions. Pinned dependencies could not be installed in the execution environment. No successful full application build is claimed."
+    },
+    {
+      "id": "F02-BROWSER",
+      "result": "not_run",
+      "detail": "Authored browser tests, including actual IndexedDB/recovery, local-document roundtrip and UI gesture controls, were not executed. No mobile, desktop or 3D acceptance screenshots were produced."
+    },
+    {
+      "id": "F02-PUSH",
+      "result": "not_verified",
+      "detail": "GitHub staging operations did not yield a completely verified source commit and branch update. Do not treat orphan staging objects as an integrated or accepted implementation."
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "Candidate present in attached full delta and patch, not a verified remote source commit."
+    },
+    "standalone_web": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "Install pinned dependencies, build, and execute focused opening UI acceptance."
+    },
+    "lovable": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No deployment or transfer performed."
+    },
+    "capacitor_assets": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No asset build or packaging performed."
+    },
+    "apple_build": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No Apple build performed."
+    },
+    "simulator": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No simulator execution performed."
+    },
+    "physical_iphone": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No device execution or touch-performance verification performed."
+    },
+    "os_embed": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "No embed integration or OS branch modification performed."
+    },
+    "exports": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": "Core JSON, scene and GLB checks passed. Full drawing/browser archive roundtrip is pending."
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [],
+  "known_limits": [
+    "Full React/Three TypeScript build",
+    "Successful interactive desktop and mobile 3D resizing and edge movement",
+    "Browser cancellation and asynchronous authorization paths",
+    "Real IndexedDB undo/redo/reopen and draft recovery",
+    "SVG/PDF/PNG and complete archive browser roundtrip",
+    "Renderer idle and pointer-stream performance",
+    "Capacitor packaging",
+    "Apple build and physical iPhone",
+    "AuxiliumOS embed"
+  ],
+  "source_preserved": {
+    "original_archive_overwrite": false,
+    "program_branch_written": false,
+    "other_feature_branches_written": false,
+    "published_or_deployed": false,
+    "candidate_file_hashes_verified": 30,
+    "caution": "Reconcile live branch changes before applying the delta. Do not copy an old archive over the repository."
+  },
+  "next_dependency_handoff": "Master: apply or cherry-pick the candidate only after reconciling the exact current branch and shared adapters. Install existing pinned dependencies, run the full build and focused F02 browser acceptance, then record actual integration and delivery evidence. This is not accepted or deployed.",
+  "active_writers_remaining": {
+    "F02": "stopped after this handoff",
+    "other_features": "Master-controlled concurrent work; no claim of their completion."
+  },
+  "parallel_integration": {
+    "assignment_ledger": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+    "work_branch": "spatial/f02-openings-2026-10-11",
+    "activation_id": "F02-2026-10-11-P1",
+    "branch_base_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+    "accepted_dependencies_tested": [
+      "Accepted F01 palette/source behavior in focused checks"
+    ],
+    "shared_file_adapter_commits": [],
+    "dependency_sensitive_gaps": [
+      "F03/F04 concurrent schema/UI integration not exercised",
+      "No completed branch push or full React/Three build",
+      "F04 D18 cutouts remain separate"
+    ],
+    "branch_status": "blocked_delivery",
+    "master_integration_commit": null
+  },
+  "source_package": "Auxilium_Spatial_F02_Handoff_2026-10-11.zip",
+  "verification_file": "F02_VERIFICATION.json",
+  "master_review": {
+    "date": "2026-10-12",
+    "status": "branch_implementation_complete_pending_integration",
+    "reviewed_local_commit": "b89b89a0d81eb240abed0fdcc7dbf475c84a80c6",
+    "recovered_remote_commit": "67bcf61b7e3985a90bfa2ffad2a0a26ad8c96dad",
+    "verification": "F02_VERIFICATION.json#master_review",
+    "original_worker_report": "All preceding fields are the original worker handoff, preserved as received. This additive review supersedes only its source-transfer/build/browser gaps.",
+    "platform_delivery": "pending F06"
+  }
+}

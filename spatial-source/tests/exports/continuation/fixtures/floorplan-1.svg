@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 792.00000 612.00000" role="img">
+<title>Spatial layout page 2</title><desc>Document synthetic-two-rooms; floor floor-1; revision 1. Diagrammatic layout. Measurements unverified.</desc>
+<rect width="792.00000" height="612.00000" fill="white"/>
+<text x="40.00000" y="49.00000" font-family="system-ui,sans-serif" font-size="21.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Drawing directory</tspan></text>
+<text x="40.00000" y="86.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Document</tspan></text>
+<text x="180.00000" y="87.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="180.00000" dy="0">Synthetic two-room test</tspan></text>
+<text x="40.00000" y="118.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Document ID</tspan></text>
+<text x="180.00000" y="119.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="180.00000" dy="0">synthetic-two-rooms</tspan></text>
+<text x="40.00000" y="150.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600" data-object-id="floor-1"><tspan x="40.00000" dy="0">Floor</tspan></text>
+<text x="180.00000" y="151.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D" data-object-id="floor-1"><tspan x="180.00000" dy="0">Level 1</tspan></text>
+<text x="40.00000" y="182.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Floor ID</tspan></text>
+<text x="180.00000" y="183.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="180.00000" dy="0">floor-1</tspan></text>
+<text x="40.00000" y="214.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Revision</tspan></text>
+<text x="180.00000" y="215.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="180.00000" dy="0">1</tspan></text>
+<text x="40.00000" y="246.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600" data-object-id="room-a"><tspan x="40.00000" dy="0">R1</tspan></text>
+<text x="180.00000" y="247.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D" data-object-id="room-a"><tspan x="180.00000" dy="0">Assessment area</tspan></text>
+<text x="40.00000" y="278.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600" data-object-id="room-b"><tspan x="40.00000" dy="0">R2</tspan></text>
+<text x="180.00000" y="279.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D" data-object-id="room-b"><tspan x="180.00000" dy="0">Office</tspan></text>
+<text x="40.00000" y="310.00000" font-family="system-ui,sans-serif" font-size="10.00000" fill="#17283D" font-weight="600"><tspan x="40.00000" dy="0">Interpretation</tspan></text>
+<text x="180.00000" y="311.00000" font-family="system-ui,sans-serif" font-size="11.00000" fill="#17283D"><tspan x="180.00000" dy="0">Diagrammatic geometry. Measurements unverified. Drawing orientation is</tspan><tspan x="180.00000" dy="15.95000">model-relative, not GPS north. No area or quantity claims.</tspan></text>
+<text x="40.00000" y="592.00000" font-family="system-ui,sans-serif" font-size="9.00000" fill="#17283D"><tspan x="40.00000" dy="0">Diagrammatic layout. Measurements unverified.</tspan></text>
+<text x="690.00000" y="592.00000" font-family="system-ui,sans-serif" font-size="9.00000" fill="#17283D"><tspan x="690.00000" dy="0">2 / 2</tspan></text>
+</svg>

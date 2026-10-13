@@ -1,0 +1,139 @@
+{
+  "baselineHEAD": "ea1a4566e68c99a01881c406b4438adf5abba885",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "inputSHA256": {
+    "packages/SpatialCore/Package.swift": "b26a5d57a8e705931caa226f5b771d25c6de6175554de510278e72a3418a79cc",
+    "packages/SpatialCore/Sources/SpatialCore/Cutaway.swift": "d5adcdcb209d0c4d966a9ad76c2d99749722125bd8316d2c69d0fcc23bf8614d",
+    "packages/SpatialCore/Sources/SpatialCore/Delivery.swift": "3debf1e022248a8ccba79a96e4075a4dae9584ee4f0c433ba55b8c7d3cc43a06",
+    "packages/SpatialCore/Sources/SpatialCore/Editor.swift": "84b2dc3d26e7e6e518dc918a31ad3056407c0ea1ac96f25e6c033f91f1b0f901",
+    "packages/SpatialCore/Sources/SpatialCore/Fixtures.swift": "7f2bcb5c4e921911122c1be55714bb587adba9ccfbce02dea44ac34391465570",
+    "packages/SpatialCore/Sources/SpatialCore/FloorGeometryIndex.swift": "fce23f73712fcb349560251686f6a28622e76c0517f3202ba601631e0432b94d",
+    "packages/SpatialCore/Sources/SpatialCore/Geometry.swift": "5b25b20063e9c60a4f5bb2f510f4f0f3b67add293a970023021a0ece3085a676",
+    "packages/SpatialCore/Sources/SpatialCore/Model.swift": "0de648af4ae79ddfc753ec293efe459e62e7702ac961fe72679f5ce5b6618c99",
+    "packages/SpatialCore/Sources/SpatialCore/Navigation.swift": "40788c2bc589cefa19313e1bcd509aad2d3cee2baecc6931e52b54823a36b0b2",
+    "packages/SpatialCore/Sources/SpatialCore/Normalization.swift": "4bec7441f1deee68453a918cba3b4469efd0a7774f55276d21513dd199a2f7b1",
+    "packages/SpatialCore/Sources/SpatialCore/RoomTopology.swift": "0acfc79f644c14b0968a70591cb9aa03a438b9ac539041a4382d75f938850d0a",
+    "packages/SpatialCore/Sources/SpatialCore/SVG.swift": "cf35a5b8ca4cb26a8315abe421b4e2146a02de06beba845cdb00463e3c349c85",
+    "packages/SpatialCore/Sources/SpatialCore/Scene.swift": "4f67e1ddaac81a298c162b2f8dbf71ccc5d9a6568973b7b4fea1489187263334",
+    "packages/SpatialCore/Sources/SpatialCore/Validation.swift": "9e9998326511c301486a28bf9a2f9735117311496d3575cb8e5340ff2406480a",
+    "packages/SpatialCore/Sources/spatialcheck/main.swift": "ea561d514ba83279b86b61321bfcd91e42bdcd6b63b3ba56287f7f548cfe6af2",
+    "packages/SpatialInterop/Package.swift": "e0698f9e30dbd84b02db70ce3130659fd62bcdfea4caf50b782f07e68d52c780",
+    "packages/SpatialInterop/Sources/CSpatialCompression/Compression.c": "9210b8a7e1346178644805fc7bbda6979a1b27868d87fab15205ee19a697981a",
+    "packages/SpatialInterop/Sources/CSpatialCompression/include/CSpatialCompression.h": "cba07a57c02469a10425a9cb8eda508085c7620559c8b19b2f31c3718a307eab",
+    "packages/SpatialInterop/Sources/SpatialInterop/AppleDrawingRenderer.swift": "b103a2e09e7c175f4380f8c5e370a5660b51cbb8eb8a73356a4b1f797c937757",
+    "packages/SpatialInterop/Sources/SpatialInterop/ByteDigest.swift": "10bcf25c216df39202120fff7b7c44906672a4725f923fd0ec9361aa4afc8a35",
+    "packages/SpatialInterop/Sources/SpatialInterop/ContractValidator.swift": "7ebea573c679a2c6c383544907a9dd0d4377511a395bc9c1b0bbf8a0ef639d8c",
+    "packages/SpatialInterop/Sources/SpatialInterop/DrawingArtifactValidation.swift": "e7385f48916098db137f4a7d695d1d35fe5d70d5ab7e3752033a6aa494ec9fb8",
+    "packages/SpatialInterop/Sources/SpatialInterop/DrawingExporter.swift": "e140eb9a9ca6c1faa8a5c4c7bdc0b4869772a2dc46ca9fff17bb73ceb6907ba5",
+    "packages/SpatialInterop/Sources/SpatialInterop/ExchangeExporter.swift": "006e13f05e0073ace719ed380eb4c36e87a297e4a67a04ae4e2d12aef567d444",
+    "packages/SpatialInterop/Sources/SpatialInterop/ExchangeImporter.swift": "6606f90cf796a7b8eed17264517fd384ed88e1a8b82ca1212d27c2547e1dd65f",
+    "packages/SpatialInterop/Sources/SpatialInterop/GLBExporter.swift": "01b31b7f67807cdfcf7626baa78532b3370118ab2dc5583c6476c891ea15cabe",
+    "packages/SpatialInterop/Sources/SpatialInterop/GeometryJSONReader.swift": "0b3434c9a3094596d4ec09fc625dbf39d6cc316f9eeab62d510a1baeacde0df6",
+    "packages/SpatialInterop/Sources/SpatialInterop/ImportError.swift": "dff62d02c0131107e3d7571f6bd7dc91b918f71e85412a86556d3e5422b08b6c",
+    "packages/SpatialInterop/Sources/SpatialInterop/LocalDocumentExporter.swift": "0b383bce123671c34420fdc835731ffb975791ee2c34bc3d234176162a100b1b",
+    "packages/SpatialInterop/Sources/SpatialInterop/ProfileArchive.swift": "ee7fec2f44fce41eba69ce6a6862baf1893ec00b415eef500b61140a65e0f5ce",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/drawing-pages-manifest.schema.json": "c25b0f63267471e05fe476efb1bdebd8ce33ddfdd8352cdb041509b7d9651f9b",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/geometry-v1.1.schema.json": "36242a8ed8bf8d0398ba20f58352f56063407488e9cb4d8e180f25fe9b06a9ce",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/geometry.schema.json": "abaad2f8090393eda3310549eeb4295f01e4b7bb111f3f33cbdc3218414e2b04",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/local-document-manifest.schema.json": "628e88c2a913fd73ed3120632e49426f3058f9abd428a97862f2c776f07e5d24",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/manifest.schema.json": "60838e516100e4f543045669a4e4875950ea4740f66f3abfab875e9ea9cda65a",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/scene-v1.1.schema.json": "eabbf9422fe5143577fa0a5b0617333309fd86e2afb799dec7da79506204233a",
+    "packages/SpatialInterop/Sources/SpatialInterop/Resources/scene.schema.json": "f6b6d8420aef30a91c934f0f8368b1c0eae2e7e5d970933d1b8b7b7de977c1ca",
+    "packages/SpatialInterop/Sources/SpatialInterop/SafeSVG.swift": "fe3c7568a72a5d3525ffae15d718275365d9a75029620010e64672e01f8cb6bb",
+    "packages/SpatialInterop/Sources/SpatialInterop/StrictJSON.swift": "d61f56e3fa8e0476975222da29521614deacc9dd94a271cb3e4c395f3a50bd72",
+    "packages/SpatialInterop/Sources/SpatialInterop/ZIPReader.swift": "45b1c35e87bf1bb02f87931463570dd6f7cb23babe63a0628d95679901d97fc6",
+    "packages/SpatialPersistence/Package.swift": "51ef947b36afc214e5391d6f30cf4e1bd543c63b327ed98cadd9084e3c742feb",
+    "packages/SpatialPersistence/Sources/CSQLite/module.modulemap": "bbfe59a972a3e8e09e347c04bc22c0eacd2544881af8a4b6068bfc30b38466e8",
+    "packages/SpatialPersistence/Sources/CSQLite/shim.h": "b052d8e561e942f97b503033ecd2eaa2b35213bdbf374983efe9e68eabdfc024",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/Archive.swift": "bf8763da6f9799d9e65a651cd81fedaf35301a82f7c78b05a133d58624e9d19f",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/Digest.swift": "10168220ec977ff492b923c15803c3c704fcb506c7c08c89c435adbcfe4d35c0",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/DocumentReader.swift": "3210b5e09ab1154ac890274ab6caf93c8cd4d480dea55c2991ae31970f342a15",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/HistoryCleanup.swift": "a8e14bf7db2cb44c9351a0271ffc570e63f4c671ef3421fce06e378507c060dd",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/LocalAccess.swift": "e5e811f9a7903d8880187d2bb8d69df11cc7b11e083dd753fbac48ea44899d27",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/PublicationCoordinator.swift": "52741f3ba320c79b6ab3a7e19f842e2655dfb1b85d9548cdf51f64bf35ecf441",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/PublicationTypes.swift": "fbe21a05c5ab559f2ec37aa5f6bc34c09b86be727cd959db873474ff4cd6fc18",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/SQLite.swift": "c92963f1796237c23e8685ed72c690b0ad3552de0b7855ebafae31a909d09ba3",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/SpatialStore.swift": "cf8f27526da83936c42e79eb943cecc15dcdb9148ac4a9390e3659d2f3376f9f",
+    "packages/SpatialPersistence/Sources/SpatialPersistence/Types.swift": "eeafc2ed04b7ab86f1692ee54a2abea562ec16a8e71d8918081e555e7acbc055",
+    "packages/SpatialPersistence/Sources/spatialstorecheck/main.swift": "e5b271cdad8fa796eb9c3ede0c43ea71f4f5295f7ee7c9cd392b2c25e7859212",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/DraftRecoveryTests.swift": "b850017ec7789c1b451ca834fb9eedcb181cc050ce8beeb20d8f3b4e8ceab592",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/HistoryCleanupTests.swift": "72532523f5f1660a8d96e34747a2df86f7ccd6430e1765adbf82784231fe0b6d",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/LocalAccessTests.swift": "1c8d97a3790723a08f285912806cd2eb0bf94d4a57ad2de0593cca848e2d9439",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/PublicationTests.swift": "f07de5f98a744d49a98fb418a2a547b148971d51847dc4c63f282b1a8f200e43",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/SpatialPersistenceTests.swift": "8914fba0411199e815c4eca21eb40d05ad754df0747bca3c7097fc3df60c6649",
+    "packages/SpatialPersistence/Tests/SpatialPersistenceTests/SyntheticPublicationReceiver.swift": "7f96bde88d144823e40ea1936c8240043ccdb60fe40cfd470cd7c7bf1af8479a",
+    "tests/persistence/continuation/process_death_outbox.py": "605ad440a0cd0a6bf9ed7f1dadd9350087ae6d55b590fdca5afcb8794d774ebb",
+    "tests/persistence/continuation/process_death_recovery_copy.py": "fffdca9320697544dbec27ebe21f73bf63155866f85f3d28c7b73903a78345c9",
+    "tests/persistence/continuation/run_checks.py": "cd8505220116fbb04962624792e7342f7411da21bb87d9ea0a2564dce141e936",
+    "tests/persistence/continuation/trace_process_checks.py": "4d3d154a6a2ac1a240db3454633c487df0404c786804843461cc8388cda72d43",
+    "tests/persistence/process_death.py": "0c17907288e41727b1e193ea4bd292538ac7370fa1ee52a37bc1169cc579e634"
+  },
+  "commands": [
+    {
+      "label": "build",
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/runtime/swift-6.2.1-RELEASE-ubuntu24.04/usr/bin/swift",
+        "build",
+        "--package-path",
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence",
+        "--build-tests",
+        "--jobs",
+        "1",
+        "-Xcc",
+        "-I/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/include",
+        "-Xlinker",
+        "-L/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "xctest",
+      "command": [
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/debug/SpatialPersistencePackageTests.xctest"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "draft-raw-process-death",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/persistence/continuation/trace_process_checks.py",
+        "tests/persistence/process_death.py",
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/debug/spatialstorecheck"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "outbox-process-death",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/persistence/continuation/trace_process_checks.py",
+        "tests/persistence/continuation/process_death_outbox.py",
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/debug/spatialstorecheck"
+      ],
+      "exit": 0
+    },
+    {
+      "label": "recovery-copy-process-death",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "tests/persistence/continuation/trace_process_checks.py",
+        "tests/persistence/continuation/process_death_recovery_copy.py",
+        "/workspace/scratch/0e3e352b90bc/Auxilium_Spatial_Developer_Package/packages/SpatialPersistence/.build/debug/spatialstorecheck"
+      ],
+      "exit": 0
+    }
+  ],
+  "scope": "Synthetic portable SQLite/XCTest/process-death checks only. No Apple SDK, iOS protection, sensor, physical-device, or live integration acceptance.",
+  "binarySHA256": {
+    "packages/SpatialPersistence/.build/debug/SpatialPersistencePackageTests.xctest": "447571a989d0099bc337e79952d72bcf29dbcbc0e7166f1263dc64fc9d571f8f",
+    "packages/SpatialPersistence/.build/debug/spatialstorecheck": "94acb94fbbd2f4c41d4b0f4ee357e43fd233f2df79316ca3d4f1eaac493704e6"
+  },
+  "inputsStableDuringRun": true,
+  "passed": true,
+  "environment": {
+    "SWIFT_USE_OLD_DRIVER": "1",
+    "SWIFT_BACKTRACE": "enable=no",
+    "LD_LIBRARY_PATH": "/workspace/scratch/0e3e352b90bc/runtime/dependencies/usr/lib/x86_64-linux-gnu:"
+  }
+}

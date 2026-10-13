@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "status": "superseded_by_parallel_assignments",
+  "active_task": null,
+  "replacement": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
+  "program_branch": "spatial/feature-program-2026-10-11",
+  "reason": "Owner changed from serial feature chats to parallel isolated development on 2026-10-11. This legacy file is deliberately nonauthorizing.",
+  "master": "Existing Spatial master conversation",
+  "contract_revision": 3
+}

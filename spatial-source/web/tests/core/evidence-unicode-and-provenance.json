@@ -1,0 +1,150 @@
+{
+  "timestampUTC": "2026-10-09T17:50:52.000961+00:00",
+  "inputBaselineCommit": "f04a4e23c4d09e7358ade11864d7f1883cdbc083",
+  "sourceState": "working tree; only the listed input hashes establish this evidence",
+  "environment": {
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "node": "v24.19.0",
+    "typescript": "5.8.3",
+    "database": "fake-indexeddb synthetic namespaces"
+  },
+  "runs": [
+    {
+      "name": "core-final-unicode",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "tests/core/editor.test.ts",
+        "tests/core/navigation.test.ts",
+        "tests/core/scene.test.ts",
+        "tests/core/unicode.test.ts",
+        "tests/core/validation.test.ts"
+      ],
+      "cwd": "web",
+      "exitCode": 0,
+      "log": "web/tests/core/core-final-unicode.log",
+      "logSHA256": "4148e5c152ad55dee58e875450e88e6a4872a6cba2159a3d66bef969eb3c8207"
+    },
+    {
+      "name": "core-final-typescript",
+      "command": [
+        "node_modules/.bin/tsc",
+        "--noEmit",
+        "--target",
+        "ES2022",
+        "--module",
+        "ESNext",
+        "--moduleResolution",
+        "Bundler",
+        "--strict",
+        "--skipLibCheck",
+        "src/core/index.ts",
+        "tests/core/editor.test.ts",
+        "tests/core/navigation.test.ts",
+        "tests/core/scene.test.ts",
+        "tests/core/unicode.test.ts",
+        "tests/core/validation.test.ts"
+      ],
+      "cwd": "web",
+      "exitCode": 0,
+      "log": "web/tests/core/core-final-typescript.log",
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "data-review-final",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "tests/core/data-review-probes.mjs"
+      ],
+      "cwd": "web",
+      "exitCode": 0,
+      "log": "web/tests/core/data-review-final.log",
+      "logSHA256": "58425be4f607b32031998c54f39305613a770b03074116e608eabc8d9f361939"
+    },
+    {
+      "name": "provenance-review-final",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "tests/core/provenance-review-probes.mjs"
+      ],
+      "cwd": "web",
+      "exitCode": 0,
+      "log": "web/tests/core/provenance-review-final.log",
+      "logSHA256": "dcf02f980f2c64f04c223377332e61009b812f81d1f3552878e7896bf7638363"
+    }
+  ],
+  "inputs": {
+    "contracts/geometry-v1.1.schema.json": "36242a8ed8bf8d0398ba20f58352f56063407488e9cb4d8e180f25fe9b06a9ce",
+    "contracts/geometry.schema.json": "abaad2f8090393eda3310549eeb4295f01e4b7bb111f3f33cbdc3218414e2b04",
+    "contracts/local-document-manifest-v1.1.schema.json": "aed05901535c3f5cac9ee94783105615bb7f934476ef70f69572a6110b1b1e83",
+    "contracts/local-document-manifest.schema.json": "628e88c2a913fd73ed3120632e49426f3058f9abd428a97862f2c776f07e5d24",
+    "contracts/local-document-source-provenance.md": "da9515f10caff22547e5fa6da194147069f194406adc460ce948f183a0fa5d7a",
+    "contracts/scene-v1.1.schema.json": "eabbf9422fe5143577fa0a5b0617333309fd86e2afb799dec7da79506204233a",
+    "contracts/scene.schema.json": "f6b6d8420aef30a91c934f0f8368b1c0eae2e7e5d970933d1b8b7b7de977c1ca",
+    "contracts/source-provenance.schema.json": "fb97987e011b44b6d4e3b3262008a0309e3f748f83cb15ca30167ab61a270ef6",
+    "fixtures/geometry.json": "d3f86053231eb5a96750a1dfdbf78d9c658ed08e0682b21d57403a139560ceec",
+    "fixtures/scene.json": "824709be0824dd60e4aec8b5b70eefe8c56bd8de280ba95099a35fba3d68d452",
+    "fixtures/synthetic_exchange.zip": "7311a27c4e31e73005b0955eb1b09567932643b7ac2d9d4ecf4bdbcf1bf3aca1",
+    "packages/SpatialInterop/Sources/CSpatialCompression/Compression.c": "9210b8a7e1346178644805fc7bbda6979a1b27868d87fab15205ee19a697981a",
+    "packages/SpatialInterop/Sources/SpatialInterop/DrawingArtifactValidation.swift": "e7385f48916098db137f4a7d695d1d35fe5d70d5ab7e3752033a6aa494ec9fb8",
+    "tests/exports/continuation/fixtures/floorplan-0.svg": "9d128f07203ee683be886a41da2817634d4839bc7438d543f735e93750d5f8f5",
+    "tests/exports/continuation/fixtures/floorplan-1.svg": "485d8909090dbaff6e60ebf874c3636717aa0443f4a0901169cf8168dc5d5da5",
+    "web/package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "web/package.json": "e7f58426639402a1d40f94995f97c6d6d41bdb04f67eb56387db0004778bf890",
+    "web/src/core/editor.ts": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+    "web/src/core/geometry.ts": "796585a4fac23c077c308d978f52febd951349bce3c6a396add7a6f2eaad78f0",
+    "web/src/core/index.ts": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+    "web/src/core/navigation.ts": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+    "web/src/core/scene.ts": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+    "web/src/core/validation.ts": "144c037599f37f61c039df994f2f22b607d3285398a43469b88b23fe3c0f76a9",
+    "web/src/data/bytes.ts": "1320ddcfe8d3647f88509c2d0593fa9f5d1b549e567555191c5a0488357057d4",
+    "web/src/data/drawing.ts": "d508c4d2c83513c9d4a8c1edd6da8f2a611d500aafc9286eca60e0576aed1d01",
+    "web/src/data/exports.ts": "4a341b92af57697445011329579d44385d4205137955257fb22b394e0c776dc6",
+    "web/src/data/glb.ts": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+    "web/src/data/imports.ts": "fab8d40044d849d3300c412d82752554d1008260026a7b3b70041a5297a29f64",
+    "web/src/data/index.ts": "1392251cffd8c0c3acc5afdfefae6f2f57484dc7d83d56c7d2db0a831113005d",
+    "web/src/data/outbox.ts": "54b203599565b1b7ea86b002264747480a338739b73fdc73a54e5aa23d5bff8b",
+    "web/src/data/provenance.ts": "ee7e38395fd0f6971e61b4dafce8ed02ee7a3ae88dba5b096ce6c24bd7fc7239",
+    "web/src/data/store.ts": "bea0e88abff076d249ec73e7cde506641b98ae7237331fc9698d7dd400250eb9",
+    "web/src/data/zip.ts": "4f16759998a914c0a53dd3eab0152cb15dd448491a3815350b374c9e5e5756a2",
+    "web/src/types.ts": "73a45d7bdf7418a43dbd9453c6b9fd624525a9c717a1a56247dd67c57f814e57",
+    "web/tests/core/data-review-probes.mjs": "ba3d777a00ffa2e1c36995ee1a01d865d1c27e62d8ad00504daaa9a3b2906ce0",
+    "web/tests/core/editor.test.ts": "4adb829a3f0ca016da67e067fed0c2a42b489739904cdb40f1645b1e3b90aa0c",
+    "web/tests/core/fixtures.ts": "8b8ce2f8251e8ddc2f7589791177f99f8fc7cff2cd5a03eb5ce4826f5b2fc69e",
+    "web/tests/core/navigation.test.ts": "a1f8779a7e9ca0aa43a9414d8a71c54928584b4acb2bf517dcfa5e5746120ae0",
+    "web/tests/core/provenance-review-probes.mjs": "23b0b51eae8f1d564c56741e58b51b04b02a982bb42962b988e9efcd4b7a27bf",
+    "web/tests/core/scene.test.ts": "06d21150052462be053f48e12fe784fb2f5beebfc545c627ade452fad76e0b6a",
+    "web/tests/core/unicode.test.ts": "c601f7ca8d8c491e85ed66adeed0ff5ae8b92afb55b409d9d15468b376a76a68",
+    "web/tests/core/validation.test.ts": "ef3c55e86b4a7f255d1e7848dcab332e3e3a8cac37ea61273719884ffbdf3cad",
+    "web/tests/data/generated/browser/all-floor.spatial.zip": "be6e7ed18024f41a0bef25b09ea1bdc076cd7bc293e2ac6fa8742a39b6774ca5",
+    "web/tests/data/generated/browser/copied-all-floor.spatial.zip": "dfce70a71bbdd53f36f72b290f9cb040a2e38e37f9c11e712feb599b4f81eecb",
+    "web/tests/data/generated/browser/unicode-corrected.pdf": "6b9533650e199aeb9a1a0fd01ddea957282be4c503d3df2131d893eba085f023",
+    "web/tsconfig.json": "59eda97779c785ffa9b8386887777981dd09dde5d4c2c8113ce74a592bf1f3cf"
+  },
+  "inputsUnchangedDuringRun": true,
+  "changedInputs": [],
+  "evidenceClass": "fresh portable TypeScript tests and independent adversarial data probes",
+  "notEstablished": [
+    "browser touch usability",
+    "Apple SDK compilation",
+    "physical capture or device recovery",
+    "live publication",
+    "release"
+  ],
+  "priorEvidencePreserved": [
+    "web/tests/core/evidence.json",
+    "web/tests/core/data-review-evidence.json"
+  ],
+  "precheckEnvironmentFailure": {
+    "command": "node --import tsx --input-type=module -e <Unicode smoke check>",
+    "cwd": ".",
+    "exitCode": 1,
+    "reason": "tsx is installed in web/node_modules; root module resolution failed before any check executed; focused tests run successfully from web"
+  }
+}

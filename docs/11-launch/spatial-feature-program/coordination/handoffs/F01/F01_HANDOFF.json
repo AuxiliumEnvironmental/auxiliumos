@@ -1,0 +1,300 @@
+{
+  "task_id": "F01",
+  "base_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+  "result_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+  "branch": "spatial/feature-program-2026-10-11",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
+  "pr_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/pull/96",
+  "disposition": "in_progress",
+  "changed_paths": [
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/tests/ui/helpers.test.ts",
+    "spatial-source/web/tests/data/data.test.ts",
+    "spatial-source/web/tests/ui/workflow.spec.ts",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png"
+  ],
+  "requirements_addressed": [
+    "F01-A01",
+    "F01-A02",
+    "F01-A03",
+    "F01-A04",
+    "F01-A05"
+  ],
+  "contract_versions": {
+    "shared_contract_revision": 2,
+    "status": "accepted_engineering_contract",
+    "geometry_scene_profile_versions": "unchanged"
+  },
+  "decisions": [
+    "Used all accepted starting tokens without visual tuning.",
+    "Explicit structuralSurfaceRole rejects unsupported roles rather than falling back to wall.",
+    "Selected structural fills multiply linear RGB by 0.92; existing blue outlines/handles and fill-disabled white/blue affordance stay intact.",
+    "Retained unlit vertex-color batches and triangle ownership; unchanged colors no longer request a redundant GPU buffer upload.",
+    "Supported GLB structural factors and structural edges use shared sRGB-to-linear conversion; wall/floor alpha is opaque. Window semantic material remains distinct and unchanged.",
+    "Display-only ceilings are neither authored nor exported. No later feature, schema, store, navigation, native, OS or deployment changes."
+  ],
+  "evidence": [
+    {
+      "acceptance_id": "F01-A01",
+      "check": "Small-screen category luminance, selected and unselected, orbit and walkthrough",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/ui/workflow.spec.ts"
+      ],
+      "environment": "Linux Chromium 153.0.8010.0, software WebGL, 390x844 CSS viewport, syntheticDocument",
+      "artifact": [
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json"
+      ],
+      "reused_from": null,
+      "why_sufficient": "Pinned Three conversion and independent displayed pixel checks establish the gray categories. Helpers cover all-selected and mixed states; real wall, floor and ceiling selections exercise their colors. Mobile navigation uses actual existing controls. No physical frame-pacing claim."
+    },
+    {
+      "acceptance_id": "F01-A02",
+      "check": "Ceiling toggle, Surface fills label, white fill-disabled mode, cutaway and semantic ownership",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/workflow.spec.ts"
+      ],
+      "environment": "Same focused mobile browser scenario",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Actual ray picks return room-b for floor and ceiling, w3 for wall and window-a for the opening. Ceiling clipping/visibility and existing selection affordance pass. Saved synthetic document is unchanged after the entire scenario."
+    },
+    {
+      "acceptance_id": "F01-A03",
+      "check": "Explicit structural roles, bounded ownership and opaque linear GLB factors with unchanged geometry identity",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/surfacePalette.ts",
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/data/glb.ts",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/data/data.test.ts"
+      ],
+      "environment": "Node 24.19.0, Three 0.186.1, pinned dependencies",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Table checks reject unknown roles and match pinned Three colors; GLB compares every emitted face/semantic-edge position, identities, source hash and revision to buildScene. Wall/floor factors are linear, alpha 1, OPAQUE, metallic 0 and roughness 1. No exported ceilings are invented."
+    },
+    {
+      "acceptance_id": "F01-A04",
+      "check": "At most three structural batches, no unchanged color upload, preserved warm idle renderer",
+      "result": "passed_local",
+      "source_inputs": [
+        "spatial-source/web/src/ui/sceneBatches.ts",
+        "spatial-source/web/src/ui/ModelViewport.tsx",
+        "spatial-source/web/tests/ui/helpers.test.ts",
+        "spatial-source/web/tests/ui/warm-switch.spec.ts",
+        "spatial-source/web/src/ui/rendererDiagnostics.ts"
+      ],
+      "environment": "Node helpers and existing Chromium software-WebGL warm-idle case",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "reused_from": null,
+      "why_sufficient": "Combined structural fixture allocates exactly three role batches; identical selection/fill updates do not dirty the color buffer. Existing test verifies hidden renderer frames stay unchanged and reactivation uses current geometry/selection with disposed old resources. No new loop, lighting, textures or per-object materials."
+    },
+    {
+      "acceptance_id": "F01-A05",
+      "check": "Independent source/local/host/Apple/OS/export delivery receipts",
+      "result": "passed_receipt_with_open_platform_gaps",
+      "source_inputs": [
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+        "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json"
+      ],
+      "environment": "Source GitHub commit verified; local checks as above; platform delivery excluded by activation",
+      "artifact": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json",
+      "reused_from": "Accepted F00 and activation metadata for historical platform references only",
+      "why_sufficient": "Each delivery target is recorded independently. Source equality is not used to pass host transfer/build/served state, Apple assets/build/device, or OS integration."
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "committed_and_locally_verified",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Master review and acceptance"
+      ]
+    },
+    "standalone_web": {
+      "status": "local_ui_and_production_build_passed_not_published",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Accepted-source host transfer",
+        "Host build",
+        "Served-version verification",
+        "Affected hosted interaction"
+      ]
+    },
+    "lovable": {
+      "status": "not_transferred",
+      "source_commit": null,
+      "candidate_source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": "467221a836c10ac2730bfa2375adde0ec447165c",
+      "evidence": "Fresh read-only provider metadata during preflight: agentFinished=true; same reference as activation. This is not F01 delivery.",
+      "transferred_host_hashes": null,
+      "host_build_status": "not_run_for_F01",
+      "served_version_status": "not_checked_for_F01",
+      "remaining": [
+        "Master transfers accepted changed canonical files preserving host scaffold",
+        "Read back exact transferred hashes",
+        "Build and verify served target"
+      ]
+    },
+    "capacitor_assets": {
+      "status": "not_prepared_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Master prepares assets from accepted web build and records manifest/source mapping"
+      ]
+    },
+    "apple_build": {
+      "status": "not_run_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": "Historical unsigned Apple successes are retained in F00; not reused as F01 application acceptance.",
+      "remaining": [
+        "Combined accepted-source Apple build",
+        "Signing/installation when authorized"
+      ]
+    },
+    "simulator": {
+      "status": "not_run_for_F01",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Current packaged candidate simulator verification"
+      ]
+    },
+    "physical_iphone": {
+      "status": "not_verified",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": null,
+      "remaining": [
+        "Actual installed-asset identity",
+        "Touch/navigation and visible contrast",
+        "Device frame/memory/thermal checks",
+        "Existing capture/storage/lifecycle gates remain separate"
+      ]
+    },
+    "os_embed": {
+      "status": "not_integrated",
+      "source_commit": null,
+      "host_or_asset_ref": null,
+      "evidence": "No OS files or hosts changed or packaged. Activation references are historical input only, not a fresh OS acceptance.",
+      "remaining": [
+        "Master reconciles current OS work",
+        "Reviewed generated source/adapter transfer",
+        "Authorized context/selector journey"
+      ]
+    },
+    "exports": {
+      "status": "supported_GLB_materials_verified_locally",
+      "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+      "host_or_asset_ref": null,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+      "remaining": [
+        "Display-only ceilings remain outside GLB until F03"
+      ],
+      "supported_structural_roles": [
+        "wall",
+        "floor"
+      ],
+      "geometry_and_scene_versions": "unchanged",
+      "plan_svg_pdf_png": "unchanged, not rerun"
+    }
+  },
+  "database_changes": [],
+  "rls_changes": [],
+  "unresolved_product_decisions": [],
+  "known_limits": [
+    "Display ceilings remain derived room-owned faces for uniform wall tops. They are not authoritative buildScene or GLB geometry. F03 owns ceiling intent, independent surface identity and export changes.",
+    "Floor and ceiling share the existing room selection ID; F01 deliberately preserves this compatibility boundary.",
+    "GLB base factors match intended UI colors; a PBR viewer can shade them differently. No new unlit extension or dynamic lighting was added.",
+    "Linux software-WebGL and a 390x844 viewport do not establish Safari, installed WKWebView, physical touch latency, frame pacing, memory/thermal performance or LiDAR acceptance.",
+    "F01 source has not been transferred to Lovable, published, bundled into Capacitor, compiled/signed/installed for Apple or integrated into AuxiliumOS.",
+    "No broad topology, persistence, capture, offline, Apple, OS or stress suite was run. Their previous platform gaps stay open."
+  ],
+  "source_preserved": {
+    "accepted_f00_ancestor": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+    "activation_ancestor": "a81e5ac65413b1ef47ae03c8b03ab602650a3550",
+    "isolated_checkout_clean_before_work": true,
+    "activation_rechecked_before_commit": true,
+    "source_commit_remote_write": "GitHub tree/commit plus non-forced expected-head ref update; fetched back locally",
+    "master_controls_unchanged": true
+  },
+  "next_dependency_handoff": [
+    "Master reviews source commit and F01 evidence and records acceptance; F02 must not start until the master activates it.",
+    "Reuse surfacePalette.ts structural roles and intended colors; introduce other roles only when their own feature is implemented.",
+    "F03 owns stable ceiling identity, height intent and GLB geometry support.",
+    "Master owns exact changed-file host transfer/readback, subsequent packaging and independent target receipts."
+  ],
+  "active_writers_remaining": [],
+  "implementation_parent_commit": "a81e5ac65413b1ef47ae03c8b03ab602650a3550",
+  "result_commit_semantics": "Actual source/test implementation commit. A subsequent evidence-only commit contains this handoff and is reported externally, avoiding a self-containing hash.",
+  "activation_id": "F01-2026-10-11-01",
+  "worker_status": "implementation_complete_awaiting_master_review",
+  "requested_master_disposition": "code_accepted_with_platform_gaps",
+  "activation_lease": "Live ACTIVE_TASK.json remains unchanged and assigned to F01; only the master changes it. Worker stops after this handoff.",
+  "verification_receipt": {
+    "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json",
+    "sha256": "7d5fc2212b1ee7218e9d22066549e3c30d7f75e8d8253a9d5a1cd05accc2d5ea"
+  },
+  "screenshots": {
+    "surface-contrast-orbit-mobile.png": {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png",
+      "sha256": "d97c4e90223d144529ea986909424195453a4abd9d6ebf339d51385a35abd0ee",
+      "bytes": 34474,
+      "kind": "actual local browser screenshot",
+      "viewport_css_px": [
+        390,
+        844
+      ],
+      "capture": "full page, CSS pixel scale",
+      "review": "Visually inspected. Extremely light gray walls, middle-gray ceilings and darker floors remain distinct. Orbit floor is visible through the real window; walk is framed with ordinary movement/look controls.",
+      "not_evidence_for": [
+        "physical iPhone",
+        "Safari/WKWebView",
+        "host deployment"
+      ]
+    },
+    "surface-contrast-walk-mobile.png": {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png",
+      "sha256": "308fa48b72285a69639d61fdaa9c36d4865b72b4e8b95d9187f935c78aa02090",
+      "bytes": 39502,
+      "kind": "actual local browser screenshot",
+      "viewport_css_px": [
+        390,
+        844
+      ],
+      "capture": "full page, CSS pixel scale",
+      "review": "Visually inspected. Extremely light gray walls, middle-gray ceilings and darker floors remain distinct. Orbit floor is visible through the real window; walk is framed with ordinary movement/look controls.",
+      "not_evidence_for": [
+        "physical iPhone",
+        "Safari/WKWebView",
+        "host deployment"
+      ]
+    }
+  },
+  "stopping_condition": "F01 complete in source with focused local evidence. No F02 implementation or deployment."
+}

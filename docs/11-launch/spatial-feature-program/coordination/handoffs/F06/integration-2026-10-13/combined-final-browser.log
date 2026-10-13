@@ -1,0 +1,43 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @auxilium/spatial-workspace@0.1.0 test:browser
+> playwright test --config tests/ui/playwright.config.ts feature-integration.spec.ts feature-performance.spec.ts --output /workspace/scratch/9062ebaf2df3/combined-final-results
+
+
+Running 2 tests using 1 worker
+
+
+(node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] tests/ui/feature-integration.spec.ts:46:1 › combined opening, ceiling, fixture, hole and observation workflow survives mobile editing and exact backup
+[2/2] tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles
+  1) tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: locator('.spatial-save-state')
+    Expected substring: "Revision 1"
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toContainText" with timeout 5000ms
+      - waiting for locator('.spatial-save-state')
+
+
+      29 |     await page.goto('/');
+      30 |     await page.locator('input[type=file]').setInputFiles({ name: 'combined-stress.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(fixture)) });
+    > 31 |     await expect(page.locator('.spatial-save-state')).toContainText('Revision 1');
+         |                                                       ^
+      32 |     receipt.coldCreationMS = await timedModel(page);
+      33 |     const initial = await diagnostics(page); expect(initial.active).toHaveLength(1); receipt.initialRenderer = initial.active[0];
+      34 |     receipt.gpu = await page.locator('.spatial-model-canvas canvas').evaluate((canvas: HTMLCanvasElement) => { const gl = canvas.getContext('webgl2')!, debug = gl.getExtension('WEBGL_debug_renderer_info'); return { renderer: gl.getParameter(debug ? debug.UNMASKED_RENDERER_WEBGL : gl.RENDERER), vendor: gl.getParameter(debug ? debug.UNMASKED_VENDOR_WEBGL : gl.VENDOR) }; });
+        at /workspace/scratch/9062ebaf2df3/integration_main/spatial-source/web/tests/ui/feature-performance.spec.ts:31:55
+
+    Error Context: ../../../combined-final-results/feature-performance-actual-a7080-ering-and-20-release-cycles/error-context.md
+
+
+  1 failed
+    tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles 
+  1 passed (44.2s)

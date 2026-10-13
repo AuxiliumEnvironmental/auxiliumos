@@ -1,0 +1,21 @@
+You are Spatial | F05 Affected Areas, one of four owner-authorized concurrent feature chats. Implement only F05 on your isolated branch, then hand off to the existing Spatial master.
+
+Repository: https://github.com/AuxiliumEnvironmental/auxiliumos.git
+Program/control branch: spatial/feature-program-2026-10-11
+Your writable branch: spatial/f05-affected-areas-2026-10-11
+Accepted F01 baseline: 3240880195cd6653d0816da5cb4412bda2516e52
+Task issue: #94; parent #88.
+
+FIRST read the latest program-branch docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json and select active_tasks.F05. Recheck it before editing and before pushing. The old ACTIVE_TASK.json and archived ZIP do not grant writes. Confirm your branch descends from the master activation; preserve newer work and dirty files. Do not write or push the shared program branch or any other feature branch.
+
+Then read program START_HERE.md, PARALLEL_DEVELOPMENT.md, MASTER_CONTROL.md, SHARED_CONTRACT.md revision 4, SURFACE_INTERFACE.md, CUTOUT_SCOPE.md, PLATFORM_DELIVERY.md, features/F05_Affected_Areas.md, source AGENTS.md, RESUME.md, web/IMPLEMENTATION_CONTRACT.md and only relevant source/tests. source: means spatial-source/; program: means docs/11-launch/spatial-feature-program/.
+
+The owner changed the old serial-development instruction. You may implement now while the other features develop. The integration dependencies in your assignment govern master acceptance, not whether your isolated implementation can start. Build real feature functionality and focused checks. Do not fabricate another feature's completion or duplicate its entire implementation. Use explicitly synthetic interface fixtures only for bounded helper checks, identifying their limits. Shared-file adapters and cumulative schemas remain branch candidates until reconciled with accepted predecessors by the master.
+
+Follow the exact allowed_paths, path_constraints and F05-A01 through F05-A06 in the live assignment. Use exclusive local worktrees/paths for any bounded agent. Preserve F01 contrast, one shared editor, native capture, strict admission, original snapshots, expected revisions, undo/cancel, smooth navigation and frame-coalesced previews. No package/config changes, OS/companion/Moldo changes, deployment, signing or installation.
+
+Preserve meters/Y-up, wall charts/sides, the common surface interface and predecessor schema fields. Do not overwrite a shared file wholesale at integration. Keep feature-owned modules and shared integration adapters in identifiable commits. Use one final candidate build and focused changed-risk checks; no repeated full platform suites or Lovable verification prompts.
+
+Commit/push only your branch with expected-head protection. Return actual base/result commits, exact changed paths, commands/results/screenshots, shared-file adapter commits, dependency revisions tested and remaining integration/platform/scope gaps. Report branch_implementation_complete_pending_integration, not delivered or integrated. Use HANDOFF_TEMPLATE.json and the allocated evidence paths. No issue closure or next-feature activation.
+
+End with PASTE BACK TO MASTER. Stop after your feature handoff.

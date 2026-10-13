@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "task_id": "F01",
+  "status": "code_accepted_with_platform_gaps",
+  "accepted_at_utc": "2026-10-11T15:49:39.114655+00:00",
+  "accepted_by": "Spatial master control, owner-authorized handoff review",
+  "branch": "spatial/feature-program-2026-10-11",
+  "reviewed_head_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
+  "source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
+  "source_tree": "16977a339de8cf42063e36367de6c0f7847a2453",
+  "web_tree": "a1cc95d4130687c7f7eea7cdeddcb89e2b0b66a3",
+  "accepted_F00_commit": "9ace24ce614dcd2bd12480887e5cdc78f2c47a03",
+  "activation_commit": "a81e5ac65413b1ef47ae03c8b03ab602650a3550",
+  "activation_id": "F01-2026-10-11-01",
+  "contract_revision": 2,
+  "scope": "F01 source/test implementation and focused local evidence only; host, Apple and OS delivery remain open.",
+  "handoff": "coordination/handoffs/F01/F01_HANDOFF.json",
+  "verification": "coordination/handoffs/F01/F01_VERIFICATION.json",
+  "artifact_hashes": {
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-walk-mobile.png": {
+      "sha256": "308fa48b72285a69639d61fdaa9c36d4865b72b4e8b95d9187f935c78aa02090",
+      "bytes": 39502
+    },
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_VERIFICATION.json": {
+      "sha256": "7d5fc2212b1ee7218e9d22066549e3c30d7f75e8d8253a9d5a1cd05accc2d5ea",
+      "bytes": 27187
+    },
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/F01_HANDOFF.json": {
+      "sha256": "f9faae48051e864c1e53244e14141e3aa35cb91b1c0bc0f2f8345aef02177e08",
+      "bytes": 15697
+    },
+    "docs/11-launch/spatial-feature-program/coordination/handoffs/F01/surface-contrast-orbit-mobile.png": {
+      "sha256": "d97c4e90223d144529ea986909424195453a4abd9d6ebf339d51385a35abd0ee",
+      "bytes": 34474
+    }
+  },
+  "master_checks": [
+    "Fresh program fetch has exactly the source commit and evidence commit after activation; F00 and activation remain ancestors.",
+    "All seven source/test changes and four evidence files are within the exact F01 assignment; no other runtime or control file changed.",
+    "All seven changed source/test hashes and eleven unchanged dependency/config/geometry inputs match the verification receipt.",
+    "Both attached JSON files and both attached PNGs byte-match the GitHub handoff artifacts.",
+    "Master read the complete actual source/test diff and visually inspected both mobile screenshots. Category order and selected darkening conform to D01; no blocking finding.",
+    "Explicit structural-role handling, opaque linear GLB materials, geometry ownership, fill-disabled controls, cutaway and no-idle-upload behavior match accepted contract and targeted assertions.",
+    "Focused helper, GLB, mobile browser, warm-idle and production build evidence reused only for the same inputs and recorded Linux/Chromium environment. No redundant product rerun.",
+    "Dedicated Spatial provider metadata remains 467221a836c10ac2730bfa2375adde0ec447165c with agentFinished=true; OS branch still a2b31bff3e88ab3a1a86285ab935552796c4d3cd. No active external writer observed.",
+    "Inherited OS status command completed for ownership/context only; no OS feature or application suite activated."
+  ],
+  "acceptance_rows": {
+    "F01-A01": "accepted_local_evidence",
+    "F01-A02": "accepted_local_evidence",
+    "F01-A03": "accepted_local_evidence",
+    "F01-A04": "accepted_local_evidence",
+    "F01-A05": "accepted_separate_delivery_receipt_with_open_gates"
+  },
+  "accepted_palette": {
+    "wall": "#F2F3F5",
+    "floor": "#B8BDC4",
+    "ceiling": "#D5D9DE",
+    "structural_edge": "#68717C"
+  },
+  "selected_factor_linear_rgb": 0.92,
+  "review_findings": [],
+  "reused_commands": [
+    {
+      "command": "node --import tsx --test tests/ui/helpers.test.ts",
+      "result": "passed",
+      "passes": 6
+    },
+    {
+      "command": "node --import tsx --test --test-name-pattern=\"GLB\" tests/data/data.test.ts",
+      "result": "passed",
+      "passes": 1
+    },
+    {
+      "command": "SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/d1f187137fd2/audit-work/ui/tools/unpacked/chromium SPATIAL_ARTIFACT_DIR=/workspace/scratch/2b25b67a3126/f01-checks/screenshots node node_modules/@playwright/test/cli.js test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"surface contrast\" --output=/workspace/scratch/2b25b67a3126/f01-checks/browser-final-results --reporter=json",
+      "result": "passed",
+      "passes": 1
+    },
+    {
+      "command": "SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/d1f187137fd2/audit-work/ui/tools/unpacked/chromium node node_modules/@playwright/test/cli.js test --config tests/ui/warm-switch.config.ts warm-switch.spec.ts --grep \"warm renderer stays idle\" --output=/workspace/scratch/2b25b67a3126/f01-checks/idle-results --reporter=json",
+      "result": "passed",
+      "passes": 1
+    },
+    {
+      "command": "npm run build",
+      "result": "passed",
+      "passes": null
+    }
+  ],
+  "platforms": {
+    "shared_source": {
+      "status": "accepted_source",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "standalone_web": {
+      "status": "local_ui_and_production_build_passed_not_published",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "lovable": {
+      "status": "not_transferred",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "capacitor_assets": {
+      "status": "not_prepared_for_F01",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "apple_build": {
+      "status": "not_run_for_F01",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "simulator": {
+      "status": "not_run_for_F01",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "physical_iphone": {
+      "status": "not_verified",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "os_embed": {
+      "status": "not_integrated",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    },
+    "exports": {
+      "status": "supported_GLB_materials_verified_locally",
+      "evidence": "coordination/handoffs/F01/F01_VERIFICATION.json"
+    }
+  },
+  "remaining_platform_gaps": [
+    "Display ceilings remain derived room-owned faces for uniform wall tops. They are not authoritative buildScene or GLB geometry. F03 owns ceiling intent, independent surface identity and export changes.",
+    "Floor and ceiling share the existing room selection ID; F01 deliberately preserves this compatibility boundary.",
+    "GLB base factors match intended UI colors; a PBR viewer can shade them differently. No new unlit extension or dynamic lighting was added.",
+    "Linux software-WebGL and a 390x844 viewport do not establish Safari, installed WKWebView, physical touch latency, frame pacing, memory/thermal performance or LiDAR acceptance.",
+    "F01 source has not been transferred to Lovable, published, bundled into Capacitor, compiled/signed/installed for Apple or integrated into AuxiliumOS.",
+    "No broad topology, persistence, capture, offline, Apple, OS or stress suite was run. Their previous platform gaps stay open."
+  ],
+  "delivery_plan": "Continue concurrent isolated feature development after master activation. Master integrates accepted results in dependency order and records exact host/Apple/OS delivery under F06. Source acceptance is not live or installed parity.",
+  "issue_disposition": "Keep issue #90 open for platform delivery; source implementation accepted. Parent #88 and F06 #95 retain the outstanding targets.",
+  "runtime_changes_in_master_review": false,
+  "application_tests_rerun": false,
+  "host_writes": false,
+  "deployments": false,
+  "next_task": "F02",
+  "next_gate": "Master records isolated parallel feature assignments after this acceptance commit; development can overlap and integration dependencies remain explicit.",
+  "git_record_semantics": "Acceptance is identified by its containing commit; the subsequent activation pins that exact commit.",
+  "owner_authorization": "2026-10-11: owner explicitly approved recording acceptance, updating GitHub tracking and activating F02; additionally requested concurrent feature development with master integration."
+}

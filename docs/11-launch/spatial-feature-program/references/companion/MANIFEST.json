@@ -1,0 +1,11 @@
+{
+  "source_project": "27ca8fae-ee6e-46c8-b8da-416c01f91629",
+  "source_commit": "6d2213b9f58171409332b25cd91bd0541e36c07f",
+  "read_only": true,
+  "purpose": "Verified opening/fixture catalog reference, not a second maintained editor or authoritative 3D geometry",
+  "files": {
+    "presets.ts": "6de52375013e9b0586c3edc5da51e770ae130b112c2bc38405d6ddacd1500919",
+    "entities.ts": "8244a04ba572fc6b79913a48286be37482ebc52587cf87165a27c2426d5b6d24",
+    "schemas.ts": "9b53370a709d7bafea04cfa0ef699e4dfe180350db897ae906a036fe0e669753"
+  }
+}

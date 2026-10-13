@@ -1,0 +1,9 @@
+Act as the Auxilium Spatial integration master. The owner explicitly approved GitHub acceptance/tracking updates and changed the program to concurrent feature development on October 11, 2026. Repository https://github.com/AuxiliumEnvironmental/auxiliumos.git; shared program branch spatial/feature-program-2026-10-11; parent issue #88.
+
+F00/F01 source are accepted with platform gaps. Read CURRENT_STATE, MASTER_CONTROL, PARALLEL_DEVELOPMENT, SHARED_CONTRACT, SURFACE_INTERFACE, PLATFORM_DELIVERY and live ACTIVE_TASKS on the program branch, plus current source queue/refs/writers. Preserve source/history, newer OS work and dirty branches. Do not repeat the archive audit.
+
+F02, F03, F04 and F05 develop concurrently on the exact assigned feature branches. One owner per branch; no shared-branch/host concurrent writes. Only the master changes controls/contracts or integrates into the program branch. Integrate F02 -> F03 -> F04 -> F05, preserving cumulative types/schemas/gesture/scene/export behavior. Review actual diffs, not summaries. Branch-local evidence is not composed acceptance. Carry handoffs through recorded files/commits, not assumed hidden chat communication.
+
+Use source BUILD_QUEUE as the canonical queue and ACTIVE_TASKS only as the branch-assignment ledger. Keep retired ACTIVE_TASK nonauthorizing. Limit reviews/checks to changed risks; one meaningful integration review per seam, not repeated full suites. F04 fixtures proceed while cutout scope remains open. Resolve true product questions without blocking independent work.
+
+Master alone transfers the integrated accepted candidate to actual host/Apple/OS targets. Source parity is not platform delivery. Preserve native capture, standalone drafts, exact revisions, source snapshots, auth boundaries and disabled publisher. F06 combines interactions and open target receipts; no unsupported perfection, percentages, deployment or device claims.

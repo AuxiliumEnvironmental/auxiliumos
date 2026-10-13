@@ -1,0 +1,58 @@
+{
+  "purpose": "Supplemental F00 proposed documentation and review evidence; no source backup",
+  "base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "files": {
+    "F00_HANDOFF.json": {
+      "bytes": 16749,
+      "sha256": "e371fcb170c8657b433dc58ace53ee4336b0ce8428347ee02eec0507c3af93b2"
+    },
+    "F00_PROPOSAL.patch": {
+      "bytes": 42488,
+      "sha256": "187163e0cfe08dacddedd07effcad672d25677b54f48b9ddb9ea93d63ff4f200"
+    },
+    "REVIEW_FIRST.md": {
+      "bytes": 7785,
+      "sha256": "34a9be52febeb3f38d248f9c3f41de0347ea600edea84b80b5ced6e1cd70b7d3"
+    },
+    "evidence/DOCUMENT_CHECKS.json": {
+      "bytes": 3101,
+      "sha256": "642c518e635130bfe3a43fe05c124845d7362b069f28dea24e56624c0ad66759"
+    },
+    "evidence/FINAL_REF_CHECK.json": {
+      "bytes": 1363,
+      "sha256": "7e41241a741a20d6336637a40758bbb11d16f5d0b275d7f46a3ddd413119515d"
+    },
+    "evidence/INDEPENDENT_REVIEW.json": {
+      "bytes": 6140,
+      "sha256": "eed2315590ad0d6e18c30c93fcd71751d83b4b17a325aa630a76c4833f7f62fc"
+    },
+    "evidence/REMOTE_OBSERVATIONS.json": {
+      "bytes": 8803,
+      "sha256": "7bc1c9b026b57de86360e509160f0721e3853de2b060e375ffba5fc2cf86f18d"
+    },
+    "evidence/REVIEW_RESOLUTION.json": {
+      "bytes": 848,
+      "sha256": "22c25aebfd726c50772d57cb24978f417308c4f0c05768b62c86b98106e602bd"
+    },
+    "evidence/SOURCE_CHECKS.json": {
+      "bytes": 6354,
+      "sha256": "0a1f4f640e6547a09cefa708322540610fdeaf48b1a3a56a625ec3e182617521"
+    },
+    "proposed/docs/11-launch/spatial-feature-program/DECISIONS.json": {
+      "bytes": 7478,
+      "sha256": "561f4f2b40e36e1d2639d4b7602769771eb5a12663160f138bd0c25475ff7fd3"
+    },
+    "proposed/docs/11-launch/spatial-feature-program/PLATFORM_DELIVERY.md": {
+      "bytes": 6169,
+      "sha256": "a5fe6c5c1b44fd3cf99d914dc355efa7b102843907bed899b77c3728fbbc8b4d"
+    },
+    "proposed/docs/11-launch/spatial-feature-program/SHARED_CONTRACT.md": {
+      "bytes": 29647,
+      "sha256": "790b3178f03947e3e610e61e5bf2a5a21b67376a838f5c529bc8669885789548"
+    },
+    "proposed/docs/11-launch/spatial-feature-program/coordination/F01_ACTIVATION_PROPOSED.json": {
+      "bytes": 5993,
+      "sha256": "f61bb4eee5c680fd9cd8c125f572ae7f9698a5f2d21e421b7329c8b73832cca3"
+    }
+  }
+}

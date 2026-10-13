@@ -1,0 +1,181 @@
+{
+  "evidenceVersion": 1,
+  "completedAt": "2026-10-09T18:53:16.166356+00:00",
+  "implementationBaseRevision": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+  "inputGitRevision": "97bd3044810608317eeedbe349abb0c50def1dc0",
+  "sourceState": "Exact runtime/config/test hashes bind the preserved working-tree implementation. The lead owns the final integration commit and archive.",
+  "outcome": "One warm renderer is retained only while its authorized document and floor remain open. It is inert, hidden, non-rendering and has no continuing walk timer in 2D. Hidden edits defer scene reconstruction until reactivation; the current canonical revision replaces the scene before paint. Closing or replacing document/floor/scope releases all tracked resources. Both lost contexts and failed initial context creation can recover on explicit re-entry.",
+  "changedRuntimeSHA256": {
+    "src/ui/ModelViewport.tsx": "46ac0122a8b1c4297133d3c068f127a67428b81b71916d44ec87212d7b731130",
+    "src/ui/SpatialWorkspace.tsx": "7f3b10647806c0743a7958b6d7660f120dd8ddab8056ba5a7b613b1e2246a6be",
+    "src/ui/rendererDiagnostics.ts": "63d25207db7a6c467d84f87e7966fb0cb906f954b6baab30dcc151f25f0a8e74"
+  },
+  "interfaces": [
+    "ModelViewport active?: boolean (default true); internal UI lifecycle only.",
+    "rendererDiagnostics active entries add visible:boolean, reporting actual canvas layout visibility.",
+    "No geometry/schema/core/data/bridge interfaces changed."
+  ],
+  "runs": [
+    {
+      "phase": "Initial focused lifecycle/timing",
+      "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/warm-switch.config.ts --grep \"warm \"",
+      "passed": 6,
+      "failed": 0,
+      "reportedDuration": "1.0m",
+      "log": "artifacts/WARM_FOCUSED_INITIAL.log",
+      "inputs": "artifacts/WARM_FOCUSED_INITIAL_INPUTS.json",
+      "inputRecordLimit": "Hashes captured after this run; the final runs below have before/after records.",
+      "timing": "artifacts/warm-switch-timing.json",
+      "scope": "Before lead-reviewed initial-creation retry and pre-paint corrections; historical evidence only."
+    },
+    {
+      "phase": "Full affected UI run",
+      "passed": 26,
+      "failed": 1,
+      "reportedDuration": "1.7m",
+      "log": "artifacts/warm-switch/pre-paint-review/FINAL_UI.log",
+      "context": "artifacts/warm-switch/pre-paint-review/run-context.json",
+      "inputsBefore": "artifacts/warm-switch/pre-paint-review/inputs-before.json",
+      "inputsAfter": "artifacts/warm-switch/pre-paint-review/inputs-after.json",
+      "changedInputsDuringRun": [],
+      "failure": "Measurement setup attempted its first click before asynchronous example creation completed (Model switch absent). Preserved as a harness failure, not hidden or counted as a passed test.",
+      "scope": "All original20 UI workflows and six new lifecycle/recovery checks passed against this input."
+    },
+    {
+      "phase": "Timing setup correction",
+      "passed": 1,
+      "failed": 0,
+      "reportedDuration": "59.1s",
+      "log": "artifacts/warm-switch/pre-paint-review/timing-recheck-FINAL_UI.log",
+      "context": "artifacts/warm-switch/pre-paint-review/timing-recheck-run-context.json",
+      "changedInputsDuringRun": [],
+      "change": "Await saved Revision1 before initiating measured click. No runtime source change in this correction.",
+      "scope": "Historical timing before pre-paint correction."
+    },
+    {
+      "phase": "Final pre-paint and affected renderer/navigation/mobile checks",
+      "command": "SPATIAL_EVIDENCE_PREFIX=prepaint-final python3 tests/ui/record-warm-evidence.py --grep \"warm |graphic 3D|wall and opening corrections|walking crosses|documented geometric stress|visible floor taps|plan framing|mobile model controls|synthetic safe-area\" --output tests/ui/artifacts/warm-switch/prepaint-final-results",
+      "passed": 15,
+      "failed": 0,
+      "reportedDuration": "2.4m",
+      "log": "artifacts/warm-switch/prepaint-final-FINAL_UI.log",
+      "context": "artifacts/warm-switch/prepaint-final-run-context.json",
+      "inputsBefore": "artifacts/warm-switch/prepaint-final-inputs-before.json",
+      "inputsAfter": "artifacts/warm-switch/prepaint-final-inputs-after.json",
+      "changedInputsDuringRun": [],
+      "scope": "All seven new warm-renderer cases and the eight original workflows that mount the model."
+    },
+    {
+      "phase": "Strict TypeScript check",
+      "command": "npx tsc --noEmit",
+      "result": "exit0; no diagnostics",
+      "log": "artifacts/warm-switch/FINAL_TYPECHECK.log"
+    }
+  ],
+  "distinctUICasesCovered": 27,
+  "reuseBoundary": {
+    "finalInputManifestSHA256": "8c6c3b5959a57a9932a6a57e82268fba3de373d717ee900f92319f832099d651",
+    "unaffectedOriginalCasesReused": 12,
+    "reason": "Between the26-pass combined run and final15-case run, only ModelViewport scene construction/cleanup timing changed in runtime code (useEffect to useLayoutEffect). All original workflows mounting that component were rerun. The12 original workflows confined to2D/library/import/persistence/authority retain the combined evidence. Exact final source/config/dependency hashes are recorded; no final whole-suite27/27 single-run claim is made.",
+    "coreDataNative": "Unchanged; not rerun as part of this worker task."
+  },
+  "leadReviewCorrections": [
+    {
+      "finding": "A failed initial WebGL construction left runtime null and needed an explicit re-entry retry after retention replaced unmount/recreate.",
+      "fix": "Retry only on inactive-to-active transition if context lost or runtime missing. Test injects initial graphics unavailability and proves no automatic retry loop, successful explicit re-entry and cleanup."
+    },
+    {
+      "finding": "A passive scene replacement effect could expose a retained old-revision canvas before paint.",
+      "fix": "Construct/swap/dispose scenes in useLayoutEffect. Browser assertion checks that the old canvas is detached at the first visible animation frame after hidden revision correction; updated window collision behavior also passes."
+    }
+  ],
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "node": "v24.19.0",
+    "browser": "153.0.8010.0",
+    "browserExecutableSHA256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "renderer": {
+      "vendor": "Google Inc. (Google)",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "build": "Vite development; localhost test execution only",
+    "device": "No physical iPhone involved"
+  },
+  "timing": {
+    "artifact": "artifacts/warm-switch/warm-switch-timing.json",
+    "method": "In-page performance.now from programmatic click dispatch to first rendered canvas plus one animation frame. Warm means the current open, unchanged document/floor and its renderer remain allocated; a real close releases them. Each workload starts with separately recorded cold creation.",
+    "observed": [
+      {
+        "workload": "synthetic-two-room",
+        "counts": {
+          "rooms": 2,
+          "walls": 7,
+          "openings": 3,
+          "overlayMarkers": 0
+        },
+        "coldCreationMS": 120,
+        "warmSamples": 30,
+        "warmMedianMS": 38.15000000037253,
+        "warmSampleP95NearestRankMS": 52.29999999888241,
+        "targetMS": 500,
+        "sampleWithinTarget": true
+      },
+      {
+        "workload": "geometric-stress",
+        "counts": {
+          "rooms": 100,
+          "walls": 1000,
+          "openings": 500,
+          "overlayMarkers": 0
+        },
+        "coldCreationMS": 1117.4000000003725,
+        "warmSamples": 30,
+        "warmMedianMS": 151.1499999994412,
+        "warmSampleP95NearestRankMS": 421,
+        "targetMS": 500,
+        "sampleWithinTarget": true
+      }
+    ],
+    "status": "The observed warm sample percentiles are below unchanged500ms target in this synthetic software-WebGL environment. This is not physical-device or complete-stress acceptance.",
+    "comparisonLimit": "Earlier954\u20132163ms stress observations included Playwright round-trip/polling and repeated context creation. Do not derive a percentage speedup from those differently measured runs."
+  },
+  "resourceCleanup": {
+    "artifact": "artifacts/warm-switch/renderer-open-close-warm-switch.json",
+    "actualCloseReopenCycles": 20,
+    "activeGeometriesPerCycle": [
+      3
+    ],
+    "drawCallsPerCycle": [
+      3
+    ],
+    "afterEveryClose": "0 active renderers and0 remaining tracked Three.js geometries/textures",
+    "hiddenIdle": "No new render frames across250/300ms idle assertions after switching to2D or holding navigation then suspending.",
+    "postGCHeapBytes": {
+      "first": 9697736,
+      "last": 11514692,
+      "max": 11519932,
+      "last10Min": 11135668,
+      "last10Max": 11519932
+    },
+    "memoryAcceptance": "Not established. Report raw heap values; do not claim total-memory plateau/no retained growth from this development run. The20 close/reopen cases do not substitute for native20 open/edit/close profiling."
+  },
+  "historicalFailures": [
+    {
+      "artifact": "artifacts/warm-switch/pre-paint-review/TYPECHECK_INITIAL_FAILURE.log",
+      "kind": "Test-harness TypeScript implicit this annotation; fixed before behavioral execution."
+    },
+    {
+      "artifact": "artifacts/warm-switch/pre-paint-review/FINAL_UI.log",
+      "kind": "Measurement harness lacked explicit saved-revision wait; corrected and timing rerun."
+    }
+  ],
+  "acceptanceStillPending": [
+    "Physical iPhone warm-switch/frame-rate/thermal/total-memory budgets and touch/VoiceOver operation",
+    "Agreed field pilot workload; the two-room synthetic example is not a physical scan or approved field benchmark",
+    "Full stress profile with2000overlaymarkers (no implemented shared-workspace contract)",
+    "NativeWKWebView execution of this updated bundled renderer",
+    "Production bundle/offline and generatedOS host updates (owned by integration lead)",
+    "Signed-inOS project authority, live integration and release"
+  ],
+  "activeWorkerJobs": []
+}

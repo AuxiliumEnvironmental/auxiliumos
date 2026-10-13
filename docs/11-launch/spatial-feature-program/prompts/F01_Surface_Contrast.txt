@@ -1,0 +1,31 @@
+HISTORICAL COMPLETED ASSIGNMENT. F00/F01 are already reviewed. Do not restart this task; current assignments are in program-branch coordination/ACTIVE_TASKS.json. The original instructions below are preserved for traceability.
+
+You are Spatial | F01 Surface Contrast, the single Auxilium Spatial feature chat assigned by the existing master conversation. Implement F01 only, then return the handoff to the master. Do not begin F02 or re-run F00 preparation.
+
+Repository: https://github.com/AuxiliumEnvironmental/auxiliumos
+Program branch: spatial/feature-program-2026-10-11
+Issue: #90. Parent: #88. Preservation/development draft PR: #96.
+Accepted F00 source baseline: 9ace24ce614dcd2bd12480887e5cdc78f2c47a03
+Activation ID: F01-2026-10-11-01. Engineering contract revision: 2, accepted.
+Source root: spatial-source/
+Program root: docs/11-launch/spatial-feature-program/
+
+START FROM THE RECORDED ASSIGNMENT
+Read program:coordination/ACTIVE_TASK.json from the current remote branch first. It must still assign F01 to Spatial | F01 Surface Contrast with the activation ID above. Reconcile the actual branch HEAD, worktree and competing operations; preserve newer or uncommitted work. Start from the branch commit containing the activation, which follows the accepted F00 baseline by documentation-only changes. Do not rewind to the baseline and restore an inactive assignment. If another task/owner is active, preserve it and report the conflict.
+
+Read program:START_HERE.md, CURRENT_STATE.md, MASTER_CONTROL.md, SHARED_CONTRACT.md, PLATFORM_DELIVERY.md, features/F01_Surface_Contrast.md, source:AGENTS.md, source:RESUME.md, and the F01 row of source:BUILD_QUEUE.json. Then inspect only this feature's relevant source and tests. The activation supplies exact writable source/test and evidence paths, input hashes and focused acceptance rows. Do not ask the owner to find files or choose internal engineering names. Fetch them from GitHub. Reuse the preserved source audits and F00 review; do not recrawl the recovery archives or repeat unchanged suites.
+
+BUILD F01
+Make 3D walls extremely light gray, floors darker gray and visible ceilings a middle gray. Use category-based contrast, including selected surfaces, in small-screen orbit and walkthrough views. Accepted starting tokens are wall #F2F3F5, floor #B8BDC4, ceiling #D5D9DE and structural edge #68717C; exact visual tuning stays within this feature and must be recorded. Keep semantic selection/opening/inferred marks distinct. Rename the existing Light blue fills label to Surface fills while preserving its toggle behavior.
+
+Use the assigned dependency-light surfacePalette.ts module for explicit structural roles and intended UI/GLB colors. Avoid the current unknown-role-as-wall fallback. Encode GLB structural materials with the correct sRGB-to-linear conversion and opaque alpha. Preserve geometry identity, face picking, batching, ceiling visibility, cutaway, fill-disabled mode, responsive movement and event-driven idle rendering. Current display-only ceilings are not authoritative buildScene/GLB geometry; document that limit instead of inventing exported ceilings. No schema, store, geometry, navigation, dependencies or Swift changes are needed.
+
+VERIFY ONLY THE CHANGED RISKS
+Follow F01-A01 through F01-A05 and the actual commands in the activation. Use focused palette/batch ownership and GLB checks, one representative small-screen 3D scenario, the existing relevant warm-idle case, and one build for the final candidate. Reuse valid unchanged evidence. Do not run broad persistence, topology, capture, Apple, OS, offline or stress suites for this palette change. Add an agent only for a bounded need that saves work; a trivial color change does not require a review quota.
+
+SAVE AND RETURN
+Commit only the exact allocated paths using the current program branch and expected-parent/fast-forward protection. Preserve unrelated work and do not edit master controls or mark your own task accepted. Store the structured handoff, verification receipt and useful final screenshots in the exact assigned artifact paths. A handoff's result commit may be reported externally after that commit exists; do not invent a self-containing hash.
+
+This activation authorizes source implementation and local affected verification. The master owns subsequent accepted-source host transfer, Apple packaging and OS integration. Do not deploy, sign, install or bind business records. Report source, local UI/build, host transfer/build/served version, Apple assets/build/device and OS status separately. Shared code does not update a deployed or installed app by itself. Missing platform verification remains open and does not justify repeating unrelated tests.
+
+If a service is inaccessible, finish all authorized work possible from available source and return the exact patch and missing check. Never claim a push or deployment without evidence. Use program:coordination/HANDOFF_TEMPLATE.json and end with PASTE BACK TO MASTER: actual base/result commits, changed paths, acceptance evidence, visual result and remaining platform gaps. Stop after F01.

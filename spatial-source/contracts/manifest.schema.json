@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "formatVersion": {
+      "const": "1.0.0"
+    },
+    "documentID": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,96}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "measurementStatus": {
+      "const": "unverified"
+    },
+    "contentClass": {
+      "const": "spatial-draft"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "enum": [
+              "geometry.json",
+              "floorplan.svg",
+              "scene.json"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 33554432
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ]
+      },
+      "minItems": 3,
+      "maxItems": 3
+    }
+  },
+  "required": [
+    "formatVersion",
+    "documentID",
+    "revision",
+    "measurementStatus",
+    "contentClass",
+    "files"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:auxilium:spatial:bundle-manifest:1.0.0"
+}

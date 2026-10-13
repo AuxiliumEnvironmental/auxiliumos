@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "proposal_only": true,
+  "status": "proposed_not_activated",
+  "active_task": null,
+  "task_to_activate": "F01",
+  "master": "Existing Astra master conversation",
+  "branch": "spatial/feature-program-2026-10-11",
+  "base_commit": "141a4cd756751c437e4ecdde07a1db9703588687",
+  "base_commit_semantics": "Exact verified source base for this proposal. Before recording ACTIVE_TASK, master pins the then-current accepted commit. If it differs only by adopted F00/control documents, retain source hashes and record that new exact commit without a full audit; any runtime difference requires focused reconciliation.",
+  "source_root": "spatial-source/",
+  "contract_revision": 2,
+  "contract_status": "proposed_awaiting_master_acceptance",
+  "owner": null,
+  "proposed_owner_role": "Single F01 feature worker appointed by the Astra master",
+  "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/90",
+  "parent_issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/88",
+  "dependencies": [
+    "F00 master acceptance of revision 2 proposals, at minimum D01 and D10",
+    "No other active feature lease or conflicting writer",
+    "Fresh exact program HEAD and clean/preserved worktree; dedicated host metadata checked before any later transfer"
+  ],
+  "known_host_refs": {
+    "spatial_project_id": "addeb89f-cdf1-4688-9157-b208793ffb8e",
+    "spatial_host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
+    "os_integration_branch": "work/integration-2026-10-10",
+    "os_source_commit": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+    "os_host_commit": "4adbb330c0b4e7832bcae938a6507ee4b27ae0c3"
+  },
+  "allowed_paths": [
+    "spatial-source/web/src/surfacePalette.ts",
+    "spatial-source/web/src/ui/sceneBatches.ts",
+    "spatial-source/web/src/ui/ModelViewport.tsx",
+    "spatial-source/web/src/data/glb.ts",
+    "spatial-source/web/tests/ui/helpers.test.ts",
+    "spatial-source/web/tests/data/data.test.ts",
+    "spatial-source/web/tests/ui/workflow.spec.ts"
+  ],
+  "new_path": [
+    "spatial-source/web/src/surfacePalette.ts"
+  ],
+  "path_constraints": {
+    "spatial-source/web/src/ui/ModelViewport.tsx": "Material/selection presentation and role handling, including renaming Light blue fills to Surface fills; preserve gesture, navigation and renderer lifecycle.",
+    "spatial-source/web/tests/ui/workflow.spec.ts": "One focused surface-contrast scenario or bounded extension of the existing graphic 3D scenario; no broad suite expansion.",
+    "tests": "Changed-risk assertions only; generated screenshots/results are ephemeral or returned as F01 evidence, not new runtime/config paths."
+  },
+  "forbidden_without_master_amendment": [
+    "Document types/schema/admission/store",
+    "Core geometry/scene/navigation behavior",
+    "Package/lock/config changes",
+    "Swift/native bridges and Apple source",
+    "OS source/routes/generated editor/authorization",
+    "Host scaffold/offline/auth wiring",
+    "Master controls, BUILD_STATE/BUILD_QUEUE, live ACTIVE_TASK.json",
+    "Publishing, signing, installation, or business-record binding"
+  ],
+  "required_acceptance": [
+    "F01-A01",
+    "F01-A02",
+    "F01-A03",
+    "F01-A04",
+    "F01-A05"
+  ],
+  "focused_acceptance": [
+    {
+      "id": "F01-A01",
+      "check": "One small-screen room: wall > ceiling > floor luminance, both unselected and selected; representative orbit and walk. Use existing syntheticDocument fixture and preserve geometry."
+    },
+    {
+      "id": "F01-A02",
+      "check": "Same scenario covers ceiling toggle, the Surface fills label and fill-disabled mode, cutaway and semantic picking. Legacy floor/ceiling room ownership remains intact until F03."
+    },
+    {
+      "id": "F01-A03",
+      "check": "Table-driven helper proves explicit roles/triangle ownership and sRGB-to-linear intended colors; existing GLB test checks opaque wall/floor factors and unchanged geometry identity. State that display ceilings are not exported."
+    },
+    {
+      "id": "F01-A04",
+      "check": "Bounded role batches (at most three structural roles), existing idle/warm-renderer instrumentation, no new animation loop or per-object materials. Run only the existing relevant warm-idle case, not stress/timing suites."
+    },
+    {
+      "id": "F01-A05",
+      "check": "Receipt separates source commit/build/UI evidence, host transfer/hash/build/served status, Apple asset/build/device status and OS status. Missing target verification stays open, not passed by source equality."
+    }
+  ],
+  "suggested_commands_from_source_web": [
+    "node --import tsx --test tests/ui/helpers.test.ts",
+    "node --import tsx --test --test-name-pattern=\"GLB\" tests/data/data.test.ts",
+    "npx playwright test --config tests/ui/playwright.config.ts workflow.spec.ts --grep \"surface contrast\"",
+    "npx playwright test --config tests/ui/warm-switch.config.ts warm-switch.spec.ts --grep \"warm renderer stays idle\"",
+    "npm run build"
+  ],
+  "command_notes": "surface contrast is the proposed focused scenario title, not an existing passing test. Install/reuse pinned dependencies and the current browser setup as needed; these commands were not run in F00. If extending the existing 3D test instead, select its actual title. Build once per relevant accepted candidate.",
+  "master_recording_steps": [
+    "Review F00 patch and record accepted decision revision without claiming prior acceptance.",
+    "Re-read ACTIVE_TASK; if any task is active, preserve it and reconcile the conflict, never overwrite.",
+    "Pin the exact accepted program commit and verify the bounded input hashes; appoint one worker.",
+    "Record a single ACTIVE_TASK for F01 with that base, owner, allowed_paths and required_acceptance. Update the existing source BUILD_QUEUE rather than creating another queue.",
+    "Supply accepted documents and the source at the recorded base to the F01 chat; stop after F01."
+  ],
+  "stop_after": "F01 handoff to master; do not begin F02"
+}

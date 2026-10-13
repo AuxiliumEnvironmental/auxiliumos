@@ -1,0 +1,96 @@
+{
+  "inputGitRevision": "41f000be361f0cf0c96963ffa1904b2295258769",
+  "sourceState": "uncommitted shared workspace implementation",
+  "completedAt": "2026-10-09T17:11:04.326899+00:00",
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "browser": "Chromium 153.0.8010.0, Linux headless, software-rendered WebGL",
+    "runner": "Playwright 1.61.1",
+    "device": "No physical iPhone; 390 x 844 browser viewport only"
+  },
+  "command": "SPATIAL_BROWSER_EXECUTABLE=\"$PWD/tests/ui/.browser-runtime/chromium\" npx playwright test --config tests/ui/playwright.config.ts",
+  "result": {
+    "passed": 5,
+    "failed": 0,
+    "durationSeconds": 8.1
+  },
+  "workflows": [
+    "Create synthetic example, rename room, durable undo/redo, freeze exact revision, initiate JSON download, reload and reopen",
+    "Real Three.js render, horizontal cutaway, walking collision, reset and exit",
+    "390px viewport correction, visible44px buttons, unobscured zoom control and no horizontal overflow",
+    "Wall movement, opening width/type correction, shared3Dselection, undo",
+    "Authenticated personal-context callback and clearing geometry after synthetic revocation"
+  ],
+  "inputHashes": {
+    "package-lock.json": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "package.json": "34c208de8cf62aba7170de54a3409d396c33e49bc2f01e36ec07f7df252bf234",
+    "src/capture.ts": "0ac1bad3514434fae42a06a659e969ea02116c4ec80d168aa08f08df5bb0978f",
+    "src/core/editor.ts": "38349fe5c8ed242c3560755ec092316adfb20afe8c3de04d52a7d93fbadc6697",
+    "src/core/geometry.ts": "796585a4fac23c077c308d978f52febd951349bce3c6a396add7a6f2eaad78f0",
+    "src/core/index.ts": "20b2fdd25369e323fa04a5b5c8810d91b4e1eb5d63c71d8119eb907f8636cba6",
+    "src/core/navigation.ts": "33eb40ea887d07b64d64b504aa71c34188da444a2d9d4586faea1064ffdf59df",
+    "src/core/scene.ts": "7d22a49c62a009ee24107cb9a88b6d16a237171a25982506f116817e091e1a6b",
+    "src/core/validation.ts": "a14c6491a33015ec2d9b0da1efc7d70ea6bfe0a069617c586e8277436f22a057",
+    "src/data/bytes.ts": "1320ddcfe8d3647f88509c2d0593fa9f5d1b549e567555191c5a0488357057d4",
+    "src/data/drawing.ts": "e8721b1ad094bb066ea8075551b53a844a8bc23fb424cf76f591c555d2cb866a",
+    "src/data/exports.ts": "fc42746bf23f1362864805dcdcf3baa0f3a04a6e1b73972c57f133d04b9c83fa",
+    "src/data/glb.ts": "2ba3c1aea85298eb7ce1000dda6bfcef7d16b612117cd5a84a1085aa8b402b93",
+    "src/data/imports.ts": "946eb17cd33bc4be1256eb039df8df5dac19689bb6cf5f9de6bfaca3fe86b8a8",
+    "src/data/index.ts": "e8726f9147f4ccaf74c116b61db6e69bfc0708922b262e19a0c43b3b4ea4cd23",
+    "src/data/outbox.ts": "4c7719dc95f68cc69453c509638f6bcb4aa23fc8eef551013245e2bd4abc5ef5",
+    "src/data/store.ts": "96d7049404a5fcdd8c54a49833e7b635250a42083c0b37f3a0eadf5a4b1e12ea",
+    "src/data/zip.ts": "cf839df803f6546f28f8a3765ddc495646b6055b0813fbd05e1a1838a8e27ec9",
+    "src/exportDelivery.ts": "aeade406f8529a406866e6fff8d0efd58ff572e500ceadf55217b70adb3c6fe5",
+    "src/library.ts": "39b7f73b0f64272bbe07401da090057228dc1713c0a7e80d86018f5562bfd97b",
+    "src/main.tsx": "1af801df9d1506c3ba61fa51a39d0dd62b0d73ead4d08272bec23bf1b6472e17",
+    "src/types.ts": "d726772bb4004e3479ccc15aeb22e4cf29bd7a72323b66660177a03cfac3746a",
+    "src/ui/FloorplanCanvas.tsx": "7b61def786d00521a02e3be3db676c20a40ec604083e99e5058bc92abdb81032",
+    "src/ui/Inspector.tsx": "0327925f8652f299bc05a4bbe8405ee4804004c98996a7b04f6334eaab0134b9",
+    "src/ui/ModelViewport.tsx": "30fe6f7418176db41f87a6c30c6ecf1b00384cfc24a6c3c0697ba3b5c2cbc04b",
+    "src/ui/SpatialWorkspace.tsx": "0049e7f9aab41679a528fb5ac7c5b1caf29b5638508c46ff19fc1b2ed61b0474",
+    "src/ui/geometry.ts": "3ec5e8398d08ebcdc9a589e77d02224a76a78d1b86f6214686056356f1a2d7af",
+    "src/ui/review.ts": "08bea1126a4f9e1bb4eb4e246f5bbcbdf70b508225985efbf466a9f6a7dcea14",
+    "src/ui/workspace.css": "bb0c244837665fb494d713b3cfb279351895e119e2f61631063477938034e1ca",
+    "tests/ui/authority-harness.tsx": "88a16f964ae4d004427f2ef72eae483c2f00c81e0a30b1eebed310438d9f1581",
+    "tests/ui/playwright.config.ts": "3cc7cf4d195fe8dffc65649ead3e072235ee2a529e2c06f91dd63a2d5605ccbb",
+    "tests/ui/workflow.spec.ts": "41a29bfb95ba10757f8b11b92e3ebcdf48585d6e66be63b2c300f2ddc093ed00"
+  },
+  "changedInputsDuringRun": [],
+  "earlierRuns": [
+    {
+      "result": "2 passed, 1 failed",
+      "reason": "Playwright exact getByLabel selector did not resolve nested Format select; corrected to the actual combobox accessible name. Real control was present."
+    },
+    {
+      "result": "3 passed, 1 failed",
+      "reason": "Test used exact raw text containing a space across wall icon/label spans; corrected to accessible button name. A scope update arrived during that run, so the final full run above supersedes it."
+    }
+  ],
+  "visualFinding": {
+    "original": "Mobile bottom tabs obscured part of zoom controls despite44px bounds.",
+    "fix": "Responsive workspace now lays out header, editor and tabs with viewport flex sizing; explicit unobscured center/viewport check passes.",
+    "preservedBefore": "artifacts/mobile-before-fit-fix.png"
+  },
+  "acceptanceNotEstablished": [
+    "Apple SDK compilation",
+    "iOS WKWebView execution",
+    "physical capture",
+    "physical touch and VoiceOver",
+    "Apple Dynamic Type",
+    "native interruption/recovery",
+    "performance budgets",
+    "live OS project-authority integration",
+    "live publication"
+  ],
+  "screenshots": [
+    "artifacts/desktop-editor.png",
+    "artifacts/cutaway-model.png",
+    "artifacts/mobile-editor.png"
+  ],
+  "additionalCorrection": "Room/area label input follows undo and restore of the selected object; direct input assertion passes.",
+  "portableChecks": {
+    "command": "node --import tsx --test tests/ui/helpers.test.ts",
+    "passed": 3,
+    "failed": 0
+  }
+}

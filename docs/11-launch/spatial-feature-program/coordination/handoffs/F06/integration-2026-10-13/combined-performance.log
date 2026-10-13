@@ -1,0 +1,40 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @auxilium/spatial-workspace@0.1.0 test:browser
+> playwright test --config tests/ui/playwright.config.ts feature-performance.spec.ts --output /workspace/scratch/9062ebaf2df3/combined-performance-results
+
+
+Running 1 test using 1 worker
+
+
+(node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles
+  1) tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles 
+
+    Test timeout of 300000ms exceeded.
+
+    Error: expect(locator).toBeHidden() failed
+
+    Locator:  locator('.spatial-model')
+    Expected: hidden
+    Received: undefined
+
+
+      38 |     for (let n = 0; n < 30; n++) {
+      39 |       await page.getByRole('button', { name: '2D plan', exact: true }).click();
+    > 40 |       await expect(page.locator('.spatial-model')).toBeHidden();
+         |                                                    ^
+      41 |       warm.push(await timedModel(page));
+      42 |       expect((await diagnostics(page)).active[0].id).toBe(initial.active[0].id);
+      43 |     }
+        at /workspace/scratch/9062ebaf2df3/integration_main/spatial-source/web/tests/ui/feature-performance.spec.ts:40:52
+
+    Error Context: ../../../combined-performance-results/feature-performance-actual-a7080-ering-and-20-release-cycles/error-context.md
+
+
+  Slow test file: tests/ui/feature-performance.spec.ts (5.1m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    tests/ui/feature-performance.spec.ts:21:1 › actual 2000-observation workload records warm latency, idle rendering and 20 release cycles 
