@@ -24,6 +24,7 @@ test('actual 2000-observation workload records warm latency, idle rendering and 
   expect([floor.rooms.length, floor.walls.length, floor.openings.length, fixture.affectedAreas!.length]).toEqual([100, 1000, 500, 2000]);
   const warm: number[] = [], selection: number[] = [], cycles: object[] = [], errors: string[] = [];
   const receipt: Record<string, unknown> = { environment: 'Linux headless Chromium, development build, software WebGL', browser: browser.version(), counts: { rooms: 100, walls: 1000, openings: 500, observations: 2000, floorObservations: 1000, ceilingObservations: 500, wallObservations: 500 }, warmSamplesMS: warm, selectionFeedbackSamplesMS: selection, cycles, pageErrors: errors, limits: ['Synthetic disjoint marks are not an agreed field pilot.', 'Software WebGL and browser timing do not establish physical iPhone frame, thermal, touch or total retained-memory acceptance.', 'Heap samples cover JavaScript heap after explicit garbage collection, not total process or GPU memory.'] };
+  const checkpoint = () => writeFile(info.outputPath('combined-overlay-performance.json'), JSON.stringify(receipt, null, 2) + '\n');
   page.on('pageerror', e => errors.push(e.message));
   try {
     await page.goto('/');
@@ -31,15 +32,23 @@ test('actual 2000-observation workload records warm latency, idle rendering and 
     await page.locator('input[type=file]').setInputFiles({ name: 'combined-stress.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(fixture)) });
     await expect(page.locator('.spatial-save-state')).toContainText('Revision 1', { timeout: 30_000 });
     receipt.importAndOpenMS = Date.now() - importStart;
+    const modelButton = page.getByRole('button', { name: '3D model', exact: true }), readyStart = Date.now();
+    receipt.modelButtonInitiallyDisabled = await modelButton.isDisabled();
+    // Initial drawing recovery can still be loading when the saved revision
+    // appears. Measure its readiness separately from an accepted view switch.
+    await expect(modelButton).toBeEnabled();
+    receipt.modelReadinessMS = Date.now() - readyStart;
     receipt.coldCreationMS = await timedModel(page);
     const initial = await diagnostics(page); expect(initial.active).toHaveLength(1); receipt.initialRenderer = initial.active[0];
     receipt.gpu = await page.locator('.spatial-model-canvas canvas').evaluate((canvas: HTMLCanvasElement) => { const gl = canvas.getContext('webgl2')!, debug = gl.getExtension('WEBGL_debug_renderer_info'); return { renderer: gl.getParameter(debug ? debug.UNMASKED_RENDERER_WEBGL : gl.RENDERER), vendor: gl.getParameter(debug ? debug.UNMASKED_VENDOR_WEBGL : gl.VENDOR) }; });
+    await checkpoint();
     await page.waitForTimeout(250); expect((await diagnostics(page)).active[0].renderFrames).toBe(initial.active[0].renderFrames);
     for (let n = 0; n < 30; n++) {
       await page.getByRole('button', { name: '2D plan', exact: true }).click();
       await expect(page.locator('.spatial-model')).toBeHidden();
       warm.push(await timedModel(page));
       expect((await diagnostics(page)).active[0].id).toBe(initial.active[0].id);
+      await checkpoint();
     }
     receipt.warmP95MS = percentile(warm); receipt.warmTargetMS = 500; receipt.warmWithinTarget = percentile(warm) <= 500;
     await page.getByRole('button', { name: '2D plan', exact: true }).click();
@@ -50,6 +59,7 @@ test('actual 2000-observation workload records warm latency, idle rendering and 
       const sample = () => { if (document.querySelector('.spatial-inspector h2')?.textContent === label) return requestAnimationFrame(() => resolve(performance.now() - start)); if (performance.now() - start > 10_000) return reject(new Error('Selection feedback timed out')); requestAnimationFrame(sample); }; requestAnimationFrame(sample);
     }), n));
     receipt.selectionP95MS = percentile(selection); receipt.selectionTargetMS = 100; receipt.selectionWithinTarget = percentile(selection) <= 100;
+    await checkpoint();
     const cdp = await page.context().newCDPSession(page);
     for (let cycle = 0; cycle < 20; cycle++) {
       if (cycle) { await page.locator('.spatial-project-card').filter({ hasText: fixture.title }).click(); await expect(page.locator('.spatial-save-state')).toContainText(`Revision ${cycle + 1}`, { timeout: 30_000 }); }
@@ -64,8 +74,9 @@ test('actual 2000-observation workload records warm latency, idle rendering and 
       expect(closed.released.every((r: { geometries: number; textures: number }) => r.geometries === 0 && r.textures === 0)).toBe(true);
       await cdp.send('HeapProfiler.collectGarbage'); const heap = await cdp.send('Runtime.getHeapUsage');
       cycles.push({ cycle, saveMS, freshRendererMS: switchMS, renderer: active.active[0], heapBytes: heap.usedSize });
+      await checkpoint();
     }
     expect(errors).toEqual([]); receipt.complete = true;
   } catch (error) { receipt.complete = false; receipt.failure = String(error); throw error; }
-  finally { await writeFile(info.outputPath('combined-overlay-performance.json'), JSON.stringify(receipt, null, 2) + '\n'); }
+  finally { await checkpoint(); }
 });

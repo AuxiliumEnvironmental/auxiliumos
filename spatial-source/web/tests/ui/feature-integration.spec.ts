@@ -76,6 +76,7 @@ test('combined opening, ceiling, fixture, hole and observation workflow survives
     await room(page); await page.getByRole('button', { name: 'Affected area', exact: true }).click();
     await page.getByLabel('Affected surface', { exact: true }).selectOption({ label: surface });
     await page.getByRole('button', { name: kind, exact: true }).click();
+    await expect(page.locator(`[data-affected-draw="${surface.startsWith('Floor') ? 'floor' : 'ceiling'}"]`)).toBeVisible();
     await dragPlan(page, [.3, .3], [3.7, 3.7]); await revision(page, ++r);
   }
   const recorded = (await saved(page)).document, moisture = recorded.affectedAreas!.find(a => a.kind === 'moisture')!;

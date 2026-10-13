@@ -45,19 +45,25 @@ export function mutateAffectedArea(document: SpatialDocument, command: EditComma
   establishCeilingSchema(document);document.schemaVersion='1.5.0';return true;
 }
 export interface VisibleAffectedPiece { areaID: string; kind: AffectedKind; surface: SurfaceRef; domain: SurfaceDomain }
-function overlaps(a:SurfaceDomain,b:SurfaceDomain):boolean{if(!a.polygons.length||!b.polygons.length)return false;const x=domainBounds(a),y=domainBounds(b);return x.minU<y.maxU&&x.maxU>y.minU&&x.minV<y.maxV&&x.maxV>y.minV;}
 /** The only observation clipping path used by plan, scene and frozen derivatives. */
 export function visibleAffectedAreas(document: SpatialDocument, floorID: string, dualMarks=true): VisibleAffectedPiece[] {
   const result:VisibleAffectedPiece[]=[],budget=areaWorkBudget();
+  // This memo belongs to one derivation, never to a mutable editor draft.
+  const hosts=new Map<string,ReturnType<typeof resolveSurface>>();
   for(const area of document.affectedAreas??[])for(const a of area.attachments){
     if(!a.surface||!a.transform||a.surface.floorID!==floorID)continue;
-    const host=resolveSurface(document,a.surface);if(!host)continue;
+    const key=surfaceKey(a.surface);if(!hosts.has(key))hosts.set(key,resolveSurface(document,a.surface));
+    const host=hosts.get(key);if(!host)continue;
     const domain=intersectDomains([transformDomain(asDomain(area.footprint),a.transform),transformDomain(area.recordedSupport,a.transform),transformDomain(a.sourceDomain,a.transform),host.domain],budget);
     if(domain.polygons.length)result.push({areaID:area.id,kind:area.kind,surface:a.surface,domain});
   }
   if(!dualMarks)return result;
+  // Only opposite marks on the same chart can overlap. Preserve their original
+  // order and exact clipping while avoiding an all-document scan per piece.
+  const groups=new Map<string,{piece:VisibleAffectedPiece;bounds:ReturnType<typeof domainBounds>}[]>();
+  for(const piece of result){const key=surfaceKey(piece.surface),group=groups.get(key)??[];group.push({piece,bounds:domainBounds(piece.domain)});groups.set(key,group);}
   return result.map(piece=>{
-    const opposite=result.filter(p=>p.kind!==piece.kind&&refEqual(p.surface,piece.surface)&&overlaps(p.domain,piece.domain));
+    const x=domainBounds(piece.domain),opposite=groups.get(surfaceKey(piece.surface))!.filter(({piece:p,bounds:y})=>p.kind!==piece.kind&&x.minU<y.maxU&&x.maxU>y.minU&&x.minV<y.maxV&&x.maxV>y.minV).map(({piece:p})=>p);
     if(!opposite.length)return piece;
     const other={polygons:opposite.flatMap(p=>p.domain.polygons)},overlap=intersectDomains([piece.domain,other],budget),plain=intersectDomains([piece.domain],budget,[other]);
     return{...piece,domain:{polygons:[...plain.polygons,...stripeDomain(overlap,piece.kind==='moisture'?0:1,0.12,budget).polygons]}};

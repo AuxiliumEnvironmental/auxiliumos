@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "repository": "AuxiliumEnvironmental/auxiliumos",
+  "branch": "spatial/feature-program-2026-10-11",
+  "published_commit": "d0f189c4979e1554adf56b99e0c4e081beb9632c",
+  "published_tree": "32983d897e5d690033defd59156b9a123eb84a52",
+  "reviewed_local_commit": "b11cf519145d76508a32ebf14ea3fdfac4d59ffd",
+  "reviewed_tree_matches": true,
+  "remote_ref_and_commit_readback_verified": true,
+  "additional_parents": [
+    "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
+    "44315237caccb4fb2511ebf54867f504f7a4d859",
+    "dc53c7a1bce141706764a8da3af82c1c69fb1333"
+  ],
+  "status": "Functional source integrated; F06 performance and delivery still open",
+  "issues_updated": [
+    88,
+    92,
+    93,
+    94,
+    95
+  ],
+  "draft_pr": 96,
+  "whole_program_os_merge": false,
+  "verification_record": "INTEGRATION_REVIEW_2026_10_13.json"
+}
