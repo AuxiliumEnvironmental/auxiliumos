@@ -1,0 +1,1709 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": "1.5.0"
+    },
+    "documentID": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{1,96}$"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "parentRevision": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "coordinateSystem": {
+      "const": "meters_y_up_right_handed"
+    },
+    "measurementStatus": {
+      "const": "unverified"
+    },
+    "reviewState": {
+      "enum": [
+        "needsReview",
+        "reviewed"
+      ]
+    },
+    "floors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Floor"
+      },
+      "minItems": 1,
+      "maxItems": 100
+    },
+    "affectedAreas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "kind": {
+            "enum": [
+              "moisture",
+              "fire"
+            ]
+          },
+          "surface": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "floorID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  "kind": {
+                    "const": "wall"
+                  },
+                  "wallID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  "side": {
+                    "enum": [
+                      "positive",
+                      "negative"
+                    ]
+                  }
+                },
+                "required": [
+                  "floorID",
+                  "kind",
+                  "wallID",
+                  "side"
+                ]
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "floorID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  "kind": {
+                    "const": "floor"
+                  },
+                  "roomID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  }
+                },
+                "required": [
+                  "floorID",
+                  "kind",
+                  "roomID"
+                ]
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "floorID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  "kind": {
+                    "const": "ceiling"
+                  },
+                  "roomID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  },
+                  "ceilingID": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                  }
+                },
+                "required": [
+                  "floorID",
+                  "kind",
+                  "roomID",
+                  "ceilingID"
+                ]
+              }
+            ]
+          },
+          "footprint": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "outer": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "u": {
+                      "type": "number",
+                      "minimum": -20000,
+                      "maximum": 20000
+                    },
+                    "v": {
+                      "type": "number",
+                      "minimum": -20000,
+                      "maximum": 20000
+                    }
+                  },
+                  "required": [
+                    "u",
+                    "v"
+                  ]
+                },
+                "minItems": 3,
+                "maxItems": 1000
+              },
+              "holes": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "u": {
+                        "type": "number",
+                        "minimum": -20000,
+                        "maximum": 20000
+                      },
+                      "v": {
+                        "type": "number",
+                        "minimum": -20000,
+                        "maximum": 20000
+                      }
+                    },
+                    "required": [
+                      "u",
+                      "v"
+                    ]
+                  },
+                  "minItems": 3,
+                  "maxItems": 1000
+                },
+                "minItems": 0,
+                "maxItems": 100
+              }
+            },
+            "required": [
+              "outer",
+              "holes"
+            ]
+          },
+          "recordedSupport": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "polygons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "outer": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "u": {
+                            "type": "number",
+                            "minimum": -20000,
+                            "maximum": 20000
+                          },
+                          "v": {
+                            "type": "number",
+                            "minimum": -20000,
+                            "maximum": 20000
+                          }
+                        },
+                        "required": [
+                          "u",
+                          "v"
+                        ]
+                      },
+                      "minItems": 3,
+                      "maxItems": 1000
+                    },
+                    "holes": {
+                      "type": "array",
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "u": {
+                              "type": "number",
+                              "minimum": -20000,
+                              "maximum": 20000
+                            },
+                            "v": {
+                              "type": "number",
+                              "minimum": -20000,
+                              "maximum": 20000
+                            }
+                          },
+                          "required": [
+                            "u",
+                            "v"
+                          ]
+                        },
+                        "minItems": 3,
+                        "maxItems": 1000
+                      },
+                      "minItems": 0,
+                      "maxItems": 100
+                    }
+                  },
+                  "required": [
+                    "outer",
+                    "holes"
+                  ]
+                },
+                "minItems": 0,
+                "maxItems": 512
+              }
+            },
+            "required": [
+              "polygons"
+            ]
+          },
+          "sourceRevision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          },
+          "sourceDocumentID": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "provenance": {
+            "$ref": "#/$defs/Provenance"
+          },
+          "measurementStatus": {
+            "const": "unverified"
+          },
+          "reviewState": {
+            "enum": [
+              "needsReview",
+              "reviewed",
+              "unresolved"
+            ]
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "surface": {
+                  "anyOf": [
+                    {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "floorID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            },
+                            "kind": {
+                              "const": "wall"
+                            },
+                            "wallID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            },
+                            "side": {
+                              "enum": [
+                                "positive",
+                                "negative"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "floorID",
+                            "kind",
+                            "wallID",
+                            "side"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "floorID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            },
+                            "kind": {
+                              "const": "floor"
+                            },
+                            "roomID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            }
+                          },
+                          "required": [
+                            "floorID",
+                            "kind",
+                            "roomID"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "additionalProperties": false,
+                          "properties": {
+                            "floorID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            },
+                            "kind": {
+                              "const": "ceiling"
+                            },
+                            "roomID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            },
+                            "ceilingID": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                            }
+                          },
+                          "required": [
+                            "floorID",
+                            "kind",
+                            "roomID",
+                            "ceilingID"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "sourceDomain": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "polygons": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "outer": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "u": {
+                                  "type": "number",
+                                  "minimum": -20000,
+                                  "maximum": 20000
+                                },
+                                "v": {
+                                  "type": "number",
+                                  "minimum": -20000,
+                                  "maximum": 20000
+                                }
+                              },
+                              "required": [
+                                "u",
+                                "v"
+                              ]
+                            },
+                            "minItems": 3,
+                            "maxItems": 1000
+                          },
+                          "holes": {
+                            "type": "array",
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "properties": {
+                                  "u": {
+                                    "type": "number",
+                                    "minimum": -20000,
+                                    "maximum": 20000
+                                  },
+                                  "v": {
+                                    "type": "number",
+                                    "minimum": -20000,
+                                    "maximum": 20000
+                                  }
+                                },
+                                "required": [
+                                  "u",
+                                  "v"
+                                ]
+                              },
+                              "minItems": 3,
+                              "maxItems": 1000
+                            },
+                            "minItems": 0,
+                            "maxItems": 100
+                          }
+                        },
+                        "required": [
+                          "outer",
+                          "holes"
+                        ]
+                      },
+                      "minItems": 0,
+                      "maxItems": 512
+                    }
+                  },
+                  "required": [
+                    "polygons"
+                  ]
+                },
+                "transform": {
+                  "anyOf": [
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "minimum": -20000,
+                        "maximum": 20000
+                      },
+                      "minItems": 6,
+                      "maxItems": 6
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "outcome": {
+                  "enum": [
+                    "exact",
+                    "clipped_needs_review",
+                    "unresolved"
+                  ]
+                }
+              },
+              "required": [
+                "surface",
+                "sourceDomain",
+                "transform",
+                "outcome"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 64
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "surface",
+          "footprint",
+          "recordedSupport",
+          "sourceRevision",
+          "sourceDocumentID",
+          "provenance",
+          "measurementStatus",
+          "reviewState",
+          "attachments"
+        ]
+      },
+      "minItems": 0,
+      "maxItems": 2000
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "documentID",
+    "revision",
+    "title",
+    "coordinateSystem",
+    "measurementStatus",
+    "reviewState",
+    "floors"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:auxilium:spatial:geometry:1.5.0",
+  "$defs": {
+    "Point2": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "z": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "x",
+        "z"
+      ]
+    },
+    "Node": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "point": {
+          "$ref": "#/$defs/Point2"
+        }
+      },
+      "required": [
+        "id",
+        "point"
+      ]
+    },
+    "Provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "origin": {
+          "enum": [
+            "captured",
+            "edited",
+            "inferred",
+            "synthetic"
+          ]
+        },
+        "sourceIDs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "minItems": 0,
+          "maxItems": 1000
+        },
+        "classificationConfidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "origin",
+        "sourceIDs",
+        "classificationConfidence"
+      ]
+    },
+    "Wall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "nodeIDs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{1,96}$"
+          },
+          "minItems": 2,
+          "maxItems": 1000
+        },
+        "baseY": {
+          "type": "number",
+          "minimum": -100,
+          "maximum": 100
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "heightBasis": {
+          "enum": [
+            "captured",
+            "assumed",
+            "edited",
+            "synthetic"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "nodeIDs",
+        "baseY",
+        "height",
+        "heightBasis",
+        "provenance"
+      ]
+    },
+    "Opening": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "wallID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "kind": {
+          "enum": [
+            "door",
+            "window",
+            "passage"
+          ]
+        },
+        "offset": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "width": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10000
+        },
+        "bottom": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        },
+        "style": {
+          "$ref": "#/$defs/OpeningStyle"
+        }
+      },
+      "required": [
+        "id",
+        "wallID",
+        "kind",
+        "offset",
+        "width",
+        "bottom",
+        "height",
+        "provenance"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "door_single"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "door"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "door_double"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "door"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "door_sliding"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "door"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "door_pocket"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "door"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "door_bifold"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "door"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "doorway_open"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "passage"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "style": {
+                "properties": {
+                  "id": {
+                    "const": "window"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              }
+            },
+            "required": [
+              "style"
+            ]
+          },
+          "then": {
+            "properties": {
+              "kind": {
+                "const": "window"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "WallReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wallID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "reversed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "wallID",
+        "reversed"
+      ]
+    },
+    "Room": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "boundary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/WallReference"
+          },
+          "minItems": 3,
+          "maxItems": 1000
+        },
+        "ceiling": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,96}$"
+                },
+                "height": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 100
+                },
+                "heightBasis": {
+                  "enum": [
+                    "captured",
+                    "assumed",
+                    "edited",
+                    "synthetic"
+                  ]
+                },
+                "provenance": {
+                  "$ref": "#/$defs/Provenance"
+                }
+              },
+              "required": [
+                "id",
+                "height",
+                "heightBasis",
+                "provenance"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "boundary",
+        "ceiling"
+      ]
+    },
+    "SemanticArea": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "polygon": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Point2"
+          },
+          "minItems": 3,
+          "maxItems": 1000
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "polygon",
+        "provenance"
+      ]
+    },
+    "Floor": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "elevation": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Node"
+          },
+          "minItems": 0,
+          "maxItems": 100000
+        },
+        "walls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wall"
+          },
+          "minItems": 0,
+          "maxItems": 50000
+        },
+        "openings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Opening"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "areas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/SemanticArea"
+          },
+          "maxItems": 1000
+        },
+        "rooms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Room"
+          },
+          "minItems": 0,
+          "maxItems": 10000
+        },
+        "fixtures": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "$ref": "#/$defs/Fixture"
+          }
+        },
+        "cutouts": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/$defs/Cutout"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "elevation",
+        "nodes",
+        "walls",
+        "openings",
+        "rooms"
+      ]
+    },
+    "OpeningStyle": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "door_single"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            },
+            "end": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            },
+            "side": {
+              "enum": [
+                "positive",
+                "negative"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance",
+            "end",
+            "side"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "door_double"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            },
+            "side": {
+              "enum": [
+                "positive",
+                "negative"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance",
+            "side"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "door_sliding"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            },
+            "end": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance",
+            "end"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "door_pocket"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            },
+            "end": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance",
+            "end"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "door_bifold"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            },
+            "end": {
+              "enum": [
+                "start",
+                "end"
+              ]
+            },
+            "side": {
+              "enum": [
+                "positive",
+                "negative"
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance",
+            "end",
+            "side"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "doorway_open"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "const": "window"
+            },
+            "provenance": {
+              "allOf": [
+                {
+                  "$ref": "#/$defs/Provenance"
+                },
+                {
+                  "properties": {
+                    "origin": {
+                      "const": "edited"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "provenance"
+          ]
+        }
+      ]
+    },
+    "SurfacePoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "u": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        },
+        "v": {
+          "type": "number",
+          "minimum": -10000,
+          "maximum": 10000
+        }
+      },
+      "required": [
+        "u",
+        "v"
+      ]
+    },
+    "WallSurface": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "floorID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "kind": {
+          "const": "wall"
+        },
+        "wallID": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "side": {
+          "enum": [
+            "positive",
+            "negative"
+          ]
+        }
+      },
+      "required": [
+        "floorID",
+        "kind",
+        "wallID",
+        "side"
+      ]
+    },
+    "SurfaceRef": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/WallSurface"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "floorID": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "kind": {
+              "const": "floor"
+            },
+            "roomID": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            }
+          },
+          "required": [
+            "floorID",
+            "kind",
+            "roomID"
+          ]
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "floorID": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "kind": {
+              "const": "ceiling"
+            },
+            "roomID": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "ceilingID": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            }
+          },
+          "required": [
+            "floorID",
+            "kind",
+            "roomID",
+            "ceilingID"
+          ]
+        }
+      ]
+    },
+    "Fixture": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "catalog": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,96}$"
+            },
+            "version": {
+              "const": 1
+            }
+          },
+          "required": [
+            "id",
+            "version"
+          ]
+        },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "width": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "depth": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            },
+            "height": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 100
+            }
+          },
+          "required": [
+            "width",
+            "depth",
+            "height"
+          ]
+        },
+        "mount": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "floor"
+                },
+                "position": {
+                  "$ref": "#/$defs/Point2"
+                },
+                "yaw": {
+                  "type": "number",
+                  "minimum": -100,
+                  "maximum": 100
+                },
+                "baseOffset": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "kind",
+                "position",
+                "yaw",
+                "baseOffset"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "wall"
+                },
+                "surface": {
+                  "$ref": "#/$defs/WallSurface"
+                },
+                "u": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 10000
+                },
+                "v": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "kind",
+                "surface",
+                "u",
+                "v"
+              ]
+            }
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "catalog",
+        "dimensions",
+        "mount",
+        "provenance"
+      ]
+    },
+    "Cutout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "kind": {
+          "enum": [
+            "cutout",
+            "penetration"
+          ]
+        },
+        "surface": {
+          "$ref": "#/$defs/SurfaceRef"
+        },
+        "profile": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "shape": {
+                  "const": "rectangle"
+                },
+                "center": {
+                  "$ref": "#/$defs/SurfacePoint"
+                },
+                "width": {
+                  "type": "number",
+                  "minimum": 0.01,
+                  "maximum": 100
+                },
+                "height": {
+                  "type": "number",
+                  "minimum": 0.01,
+                  "maximum": 100
+                },
+                "rotation": {
+                  "type": "number",
+                  "minimum": -100,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "shape",
+                "center",
+                "width",
+                "height",
+                "rotation"
+              ]
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "shape": {
+                  "const": "circle"
+                },
+                "center": {
+                  "$ref": "#/$defs/SurfacePoint"
+                },
+                "diameter": {
+                  "type": "number",
+                  "minimum": 0.01,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "shape",
+                "center",
+                "diameter"
+              ]
+            }
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "surface",
+        "profile",
+        "provenance"
+      ]
+    },
+    "Ceiling": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,96}$"
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "heightBasis": {
+          "enum": [
+            "captured",
+            "assumed",
+            "edited",
+            "synthetic"
+          ]
+        },
+        "provenance": {
+          "$ref": "#/$defs/Provenance"
+        }
+      },
+      "required": [
+        "id",
+        "height",
+        "heightBasis",
+        "provenance"
+      ]
+    }
+  },
+  "description": "Cumulative structural layout with openings, canonical ceilings, fixtures, cutouts and retained unverified surface observations.",
+  "$comment": "Extends geometry 1.4.0 without dropping predecessor fields. Semantic admission also checks host existence, rigid transforms, retained support and bounded clipping; every room retains Ceiling|null."
+}

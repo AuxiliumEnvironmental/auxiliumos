@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "execution_mode": "parallel_isolated_development_sequential_integration",
-  "status": "F02_accepted_F03_source_transfer_blocked",
+  "status": "F01_F05_functional_source_integrated_F06_performance_and_delivery_open",
   "master": "Existing Spatial master conversation",
   "program_branch": "spatial/feature-program-2026-10-11",
   "accepted_F01_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
@@ -264,12 +264,15 @@
       "implementation_complete": true,
       "worker_stopped_after_handoff": true,
       "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "worker_running": false
     },
     "F03": {
       "title": "Ceiling Heights",
       "task_id": "F03",
-      "status": "in_progress",
+      "status": "code_accepted_with_platform_gaps",
       "owner": "Spatial | F03 Ceiling Heights",
       "branch": "spatial/f03-ceilings-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
@@ -477,10 +480,16 @@
         "Production deployment, signing, installation, business-data binding"
       ],
       "scope_notice": "D18/CUTOUT_SCOPE.md is additive. Keep F03 ceiling identity/remap contracts; F04 owns cutout implementation and final subtraction. No restart or F04 reimplementation.",
-      "execution_status": "blocked_missing_source_patch",
-      "source_commit": null,
-      "implementation_complete": false,
-      "blocker": {
+      "execution_status": "reviewed_source_integrated",
+      "source_commit": "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
+      "implementation_complete": true,
+      "worker_stopped_after_handoff": true,
+      "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "worker_running": false,
+      "resolved_historical_blocker": {
         "filename": "F03_LOCAL_CANDIDATE.patch",
         "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
         "source_files": 27,
@@ -488,14 +497,12 @@
         "remote_branch": "spatial/f03-ceilings-2026-10-11",
         "remote_head": "a90d4f9f132153498d7567758a14132cbafa5c0f"
       },
-      "worker_stopped_after_handoff": true,
-      "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "recovery_disposition": "Nine recovered files hash-matched; missing shared adapters newly implemented, verified and published."
     },
     "F04": {
       "title": "Fixtures and Cutouts",
       "task_id": "F04",
-      "status": "branch_implementation_complete_pending_integration",
+      "status": "code_accepted_with_platform_gaps",
       "owner": "Spatial | F04 Fixtures and Cutouts",
       "branch": "spatial/f04-fixtures-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
@@ -755,18 +762,22 @@
       "resolved_scope": {
         "Q01": "Resolved by owner under D18; optional wall/floor/ceiling cutouts and service penetrations are implementation-authorized, not implemented."
       },
-      "execution_status": "reviewed_and_pushed_waiting_F03_integration",
+      "execution_status": "reviewed_source_integrated",
       "source_commit": "44315237caccb4fb2511ebf54867f504f7a4d859",
       "implementation_complete": true,
       "worker_stopped_after_handoff": true,
       "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06",
-      "cutout_scope_status": "implemented_on_reviewed_feature_branch_pending_integration"
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "cutout_scope_status": "optional_wall_floor_ceiling_cutouts_and_penetrations_integrated",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "worker_running": false,
+      "cutout_scope": "D18 optional cutouts and penetrations integrated with canonical F03 domains and F05 coverage."
     },
     "F05": {
       "title": "Affected Areas",
       "task_id": "F05",
-      "status": "branch_implementation_complete_pending_integration",
+      "status": "code_accepted_with_platform_gaps",
       "owner": "Spatial | F05 Affected Areas",
       "branch": "spatial/f05-affected-areas-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
@@ -978,16 +989,19 @@
         "OS/Moldo/companion/native/runtime permissions",
         "Production deployment, signing, installation, business-data binding"
       ],
-      "execution_status": "reviewed_and_pushed_waiting_F03_F04_integration",
+      "execution_status": "reviewed_source_integrated",
       "source_commit": "dc53c7a1bce141706764a8da3af82c1c69fb1333",
       "implementation_complete": true,
       "worker_stopped_after_handoff": true,
       "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "worker_running": false
     }
   },
-  "updated_at_utc": "2026-10-12T19:41:40.560Z",
-  "next_master_action": "Have the existing F04 chat refresh D18 and its additive live grant, preserve one writer per branch, and integrate actual handoffs in F02->F03->F04->F05 order. F03/F05 read the shared-domain amendment before integration.",
+  "updated_at_utc": "2026-10-13T00:53:30.687228+00:00",
+  "next_master_action": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
   "scope_amendment": {
     "id": "F04-2026-10-11-CUTOUTS-1",
     "decision": "D18",
@@ -995,6 +1009,12 @@
     "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user.",
     "worker_notification": "Existing chats must refresh the live program-branch ledger; no cross-chat delivery or worker start claimed."
   },
-  "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-  "first_incomplete_action": "Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow."
+  "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+  "first_incomplete_action": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
+  "F06_running_scope": {
+    "root": "Combined verification, source preservation and delivery coordination",
+    "performance_worker": "Bounded 2000-observation cost diagnosis in isolated checkout",
+    "delivery_worker": "Read-only isolated OS/Apple staging preparation pending final source",
+    "automatic_after_handoff": false
+  }
 }

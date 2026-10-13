@@ -1,0 +1,80 @@
+{
+  "status": "Preparation only; isolated OS checkout remains unchanged pending accepted combined source",
+  "os": {
+    "repository": "AuxiliumEnvironmental/auxiliumos",
+    "branch": "work/integration-2026-10-10",
+    "verifiedHead": "a2b31bff3e88ab3a1a86285ab935552796c4d3cd",
+    "worktree": "/workspace/scratch/9062ebaf2df3/integration_delivery_os",
+    "localBranch": "spatial/prepare-f06-delivery-2026-10-13",
+    "generatedSourceHead": "b286cdf49997a5a90af043ba542cd5c1ae41a705",
+    "existingGeneratedAssets": 8,
+    "allExistingGeneratedHashesMatch": true,
+    "adapterMatchesCanonicalPackageAdapter": true
+  },
+  "compatibility": {
+    "adapterChangeRequired": false,
+    "namespace": "auxiliumos:spatial:v1:profile:${profileID}:personal",
+    "databaseName": "auxilium-spatial-v1:${namespace}",
+    "existingDatabaseVersion": 1,
+    "canonicalDatabaseVersion": 2,
+    "migration": "Existing onupgradeneeded retains drafts/revisions/outbox and adds drawingRecovery. Do not change the namespace or mutate on open.",
+    "authority": "AuthGate plus current profile/development server recheck. Prior scope late rejection cannot revoke current scope. Project binding remains unconnected.",
+    "schemas": "OS current generated types admit1.0/1.1; regenerated accepted shared bundle will supply cumulative1.2\u20131.5 admission. Preserve immutable old drafts and fail unsupported old readers intact.",
+    "native": "Capture bridge1.0 returns retained older canonical geometry consumed by shared admission. File bridge1.0 transports existing JSON/ZIP/SVG/GLB/PDF/PNG bytes and does not parse feature schema;32MiB limit unchanged.",
+    "scope": "Preserve OS selectors, router, authentication, runtime, planning draft transitions and all unrelated host changes; only generated Spatial assets are candidates."
+  },
+  "firstRemainingAction": "Root supplies accepted combined F01-F05 source commit before any generation. No source staging/build/publish has been performed in the OS checkout.",
+  "commandsAfterRootApproval": [
+    "From accepted source spatial-source: npm --prefix web run build:library",
+    "From same source spatial-source: python3 integration/package_os.py /workspace/scratch/9062ebaf2df3/integration_delivery_os",
+    "Verify generated SOURCE_MANIFEST.json sourceHead/input/output hashes, unchanged protected OS paths, and generated-only diff",
+    "From integration_delivery_os: npm run build",
+    "From accepted source spatial-source: node --import tsx --test --test-name-pattern='upgrading an existing version-one database|scope namespaces isolate' tests/data/drawing-recovery.test.ts (run from web/)",
+    "One bounded OS /spatial browser smoke: existing profile draft reopening, one cumulative feature edit, current authority revoked before save/export. No whole OS suite.",
+    "From accepted source spatial-source: python3 integration/snapshot_apple.py APPLE_ISOLATED_CHECKOUT rooted at current Apple branch42b7754; verify complete snapshot hashes and stale files before root publication"
+  ],
+  "apple": {
+    "branch": "spatial/integration-2026-10-09",
+    "verifiedHead": "42b7754265a8755f0f478a135d5506311d731b44",
+    "workflowPath": ".github/workflows/spatial-apple.yml",
+    "workflowBlobSHA": "cba9322c9a968a4b5e114ddc987d54a76dad525a",
+    "trigger": "Push to exact branch with changed spatial-source/** or workflow path; no manual dispatch in this installed workflow",
+    "runner": "macos-15",
+    "xcode": "/Applications/Xcode_26.3.app/Contents/Developer",
+    "jobs": [
+      "Canonical web build",
+      "Unsigned installed Capacitor device-SDK compile",
+      "Unsigned retained native capture compile",
+      "Hash/runtime reuse or Swift interoperability tests",
+      "Available iPhone simulator native synthetic tests"
+    ],
+    "artifact": "spatial-unsigned-apple-evidence",
+    "lastSuccessfulRun": {
+      "id": 37969726280,
+      "sourceCommit": "f04253966ac57e4dc8780d16efb5ebc172e183e2",
+      "url": "https://github.com/AuxiliumEnvironmental/auxiliumos/actions/runs/37969726280",
+      "currentFeatureEvidence": false
+    },
+    "interopReuseInvalidatedBy": [
+      "contracts/COMPATIBILITY.md"
+    ],
+    "capability": "Root expected-head branch publication can trigger existing installed workflow. No local xcodebuild or gh CLI found; connector supports run/job readback and failed-job reruns, not dispatch. No workflow was triggered.",
+    "physicalDeviceEvidence": "Remains independent; unsigned/simulator tests do not prove capture, WebKit protection, signed install or actual file save."
+  },
+  "observedLimitations": [
+    "The workflow listing endpoint was not exposed by GitHub fetch; read existing branch workflow and known branch run collection instead.",
+    "OS checkout's current route is the historical embedded adapter; provider selector must be preserved during eventual hosted reconciliation, not assumed identical from this checkout.",
+    "No whole-program merge, remote ref update, host message, workflow rerun or dispatch was performed."
+  ],
+  "protectedSHA256": {
+    "web/src/pages/spatial.tsx": "76e2de9f6d57da8ecf32e091647baf612821f8e8ce612a7fe91f327d45f8fab0",
+    "web/src/router.tsx": "279eb1cf3dcef44a7cc6ec61d02d8f2b0c033d690655f9ef543231655c066620",
+    "web/src/components/app-shell.tsx": "9bfad8513199c0a12ca39e9bc94c169f4b3e720599ec84375c613d04890769c2",
+    "web/src/components/auth.tsx": "d3244b876388a739d2532c999377f533aa2352598befebf398a833eb179d9fc8",
+    "web/src/lib/runtime.tsx": "dd788f18df7c2d7ac3d7e0f391a72b5a97fa8548d8778ce0b779c8f986df4187",
+    "web/src/lib/use-planning-context.ts": "8bc5bba4b095db60919959bfefbaf2fce7f08e7f4785e186e11b82943aaf3209",
+    "web/src/lib/use-draft-transition.ts": "4f8948a640ad51e0ff7ed6e416dcaaf25ca2944e47dafcac2c8d027345bc3903",
+    "package.json": "35354859711624945d76690ad5e4396f88ab748542c762e1f12ed900db4064e4",
+    "package-lock.json": "e02b88cf144f5dc61b91a377ffd5d21dd4a7bf2dda6a37b8314cc7c33fe40a0d"
+  }
+}

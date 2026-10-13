@@ -27,7 +27,7 @@
   "autonomous_agents_started": true,
   "independent_review_performed": true,
   "verification_record": "evidence/shared-workspace/REQUIREMENTS.json; individual hash-bound reports",
-  "next_ready_task": "F01: activated for Spatial | F01 Surface Contrast; feature chat has not started. The recorded assignment is the first incomplete action.",
+  "next_ready_task": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
   "protected_context": "Preserve existing OS/Moldo/companion work; no migration/deployment from this ZIP.",
   "verified_foundation": {
     "swift_tests": 44,
@@ -261,16 +261,16 @@
     }
   },
   "feature_program_2026_10_11": {
-    "status": "F02_accepted_F03_source_transfer_blocked",
+    "status": "F01_F05_functional_source_integrated_F06_performance_and_delivery_open",
     "master_reference": "docs/11-launch/spatial-feature-program/CURRENT_STATE.md",
     "parent_issue": 88,
     "one_feature_at_a_time": false,
-    "current_source_checkpoint": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
-    "runtime_checkpoint": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
+    "current_source_checkpoint": "37283b42e234edad3596926e71397e16fcc0ffdc",
+    "runtime_checkpoint": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
     "host_commit": "467221a836c10ac2730bfa2375adde0ec447165c",
     "original_history_location": "paired recovery ZIP/recovery/repository.bundle",
     "new_source_snapshot": "GitHub isolated program branch/spatial-source",
-    "active_task": "F03",
+    "active_task": "F06",
     "platform_gaps_retained": true,
     "contract_revision": 4,
     "accepted_decisions": [
@@ -302,9 +302,11 @@
     "F01_source_commit": "33cc3527f239726d2a4503242da9b0a7531ed4b9",
     "F01_handoff_commit": "d553a3dbb25470abd5e0b157f708f7dda8383769",
     "host_contains_F01": false,
-    "updated_at_utc": "2026-10-12T19:41:40.562Z",
+    "updated_at_utc": "2026-10-13T00:53:30.687228+00:00",
     "execution_mode": "parallel_isolated_development_sequential_integration",
-    "active_tasks": [],
+    "active_tasks": [
+      "F06"
+    ],
     "accepted_F01_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
     "integration_order": [
       "F02",
@@ -315,28 +317,30 @@
     ],
     "cutout_scope": {
       "decision": "D18",
-      "status": "implemented_on_reviewed_F04_branch_pending_integration",
+      "status": "implemented_and_integrated_with_canonical_surfaces",
       "specification": "docs/11-launch/spatial-feature-program/CUTOUT_SCOPE.md",
       "owner_instruction": "We can implement cutouts to ceilings/floors and penetrations if possible just as an option to the user."
     },
-    "workers_running": false,
+    "workers_running": true,
     "F02_source_commit": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
     "F02_acceptance": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-    "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-    "first_incomplete_action": "Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.",
+    "master_review": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+    "first_incomplete_action": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
     "reviewed_feature_commits": {
       "F02": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
+      "F03": "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
       "F04": "44315237caccb4fb2511ebf54867f504f7a4d859",
       "F05": "dc53c7a1bce141706764a8da3af82c1c69fb1333"
     },
-    "missing_source": {
+    "host_contains_F02": false,
+    "F03_source_commit": "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
+    "resolved_historical_missing_source": {
       "filename": "F03_LOCAL_CANDIDATE.patch",
       "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
       "source_files": 27,
       "alternative": "F03 handoff ZIP containing this patch",
       "remote_branch": "spatial/f03-ceilings-2026-10-11",
       "remote_head": "a90d4f9f132153498d7567758a14132cbafa5c0f"
-    },
-    "host_contains_F02": false
+    }
   }
 }

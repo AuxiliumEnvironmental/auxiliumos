@@ -1,0 +1,10 @@
+✔ scope namespaces isolate the same document and reject a transplanted recovery envelope (123.037282ms)
+✔ upgrading an existing version-one database preserves its saved geometry and immutable revisions (31.80382ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1062.083536

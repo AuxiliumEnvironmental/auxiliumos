@@ -1,0 +1,36 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @auxilium/spatial-workspace@0.1.0 test:browser
+> playwright test --config tests/ui/playwright.config.ts feature-integration.spec.ts --output /workspace/scratch/9062ebaf2df3/combined-journey-results
+
+
+Running 1 test using 1 worker
+
+
+(node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/1] tests/ui/feature-integration.spec.ts:46:1 › combined opening, ceiling, fixture, hole and observation workflow survives mobile editing and exact backup
+  1) tests/ui/feature-integration.spec.ts:46:1 › combined opening, ceiling, fixture, hole and observation workflow survives mobile editing and exact backup 
+
+    Test timeout of 150000ms exceeded.
+
+    Error: locator.click: Test timeout of 150000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: '+ Fixture', exact: true })
+
+
+      59 |   await page.locator('.spatial-inspector').getByRole('button', { name: 'Assign selected ceiling heights', exact: true }).click(); await revision(page, ++r);
+      60 |   expect((await saved(page)).document.floors[0].rooms[1].ceiling!.height).toBe(2.6);
+    > 61 |   await page.getByRole('button', { name: '+ Fixture', exact: true }).click();
+         |                                                                      ^
+      62 |   await page.getByLabel('Fixture catalog').selectOption('built-in-shelves');
+      63 |   await page.getByRole('button', { name: 'Place fixture', exact: true }).click();
+      64 |   const position = await point(page, .8, 2.9); await page.mouse.click(position.x, position.y); await revision(page, ++r);
+        at /workspace/scratch/9062ebaf2df3/integration_main/spatial-source/web/tests/ui/feature-integration.spec.ts:61:70
+
+    Error Context: ../../../combined-journey-results/feature-integration-combin-02b1a-le-editing-and-exact-backup/error-context.md
+
+
+  1 failed
+    tests/ui/feature-integration.spec.ts:46:1 › combined opening, ceiling, fixture, hole and observation workflow survives mobile editing and exact backup 

@@ -164,3 +164,38 @@
 .spatial-opening-leaders { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .spatial-opening-leaders line { stroke: #087aae; stroke-width: 1; }
 @media (max-width: 360px) { .spatial-opening-fields { grid-template-columns: minmax(0, 1fr); } }
+/* F05 observation tools reuse the map-first panels and existing safe areas. */
+.spatial-workspace .spatial-affected-controls{padding:18px;border-bottom:1px solid var(--spatial-line);min-width:0}
+.spatial-workspace .spatial-affected-controls p{font-size:12px;overflow-wrap:anywhere}
+.spatial-workspace .spatial-affected-controls fieldset{margin:14px 0;padding:12px;border:1px solid var(--spatial-line);border-radius:8px}
+.spatial-workspace .spatial-affected-controls legend{font-weight:600;font-size:12px}
+.spatial-workspace .spatial-affected-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}
+.spatial-workspace .spatial-affected-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.spatial-workspace .spatial-affected-actions button{flex:1 1 100px}
+.spatial-workspace .spatial-affected-list{max-height:240px;overflow:auto;padding:12px;flex-shrink:0}
+.spatial-workspace .spatial-affected-list button{display:block;text-align:left;width:100%;margin:6px 0;font-size:12px}
+.spatial-workspace .spatial-affected-list small{display:block;overflow-wrap:anywhere;color:var(--spatial-muted)}
+.spatial-workspace .spatial-affected-model-handle{position:absolute;width:44px;height:44px;min-width:44px;min-height:44px;transform:translate(-50%,-50%);border:0;background:transparent;padding:0;touch-action:none;z-index:2}
+.spatial-workspace .spatial-affected-model-handle::after{content:'';display:block;width:12px;height:12px;margin:auto;background:white;border:2px solid currentColor;border-radius:50%}
+@media(max-width:380px){.spatial-workspace .spatial-affected-fields{grid-template-columns:minmax(0,1fr)}}
+
+
+/* F04 feature controls retain the current map-first layout. */
+.spatial-feature-controls { display:grid; gap:12px; border:1px solid #cad8e1; border-radius:12px; padding:16px; min-width:0; }
+.spatial-feature-controls legend { padding:0 6px; font-weight:600; }
+.spatial-feature-controls label { display:grid; gap:6px; }
+.spatial-feature-controls select { width:100%; min-height:44px; }
+.spatial-feature-controls button { min-height:44px; }
+.spatial-symbol-fixture,.spatial-symbol-cutout { color:#167bab; }
+/* Ceiling editing remains available while ceiling faces are hidden. */
+.spatial-workspace .spatial-ceiling-drag-handle { position: absolute; z-index: 4; width: 44px; height: 44px; min-width: 44px; min-height: 44px; padding: 0; transform: translate(-50%, -50%); border: 2px solid #087aae; border-radius: 50%; background: white; color: #087aae; font-size: 25px; box-shadow: 0 1px 5px #163a4b30; touch-action: none; cursor: ns-resize; }
+.spatial-ceiling-drag-handle[hidden] { display: none; }
+.spatial-ceiling-model-panel { position: absolute; right: 12px; bottom: 48px; z-index: 5; width: min(310px, calc(100% - 24px)); border: 1px solid var(--spatial-line, #d8e3ea); border-radius: 8px; background: white; box-shadow: 0 2px 8px #163a4b15; }
+.spatial-ceiling-model-panel > summary { min-height: 44px; padding: 12px; box-sizing: border-box; cursor: pointer; font-weight: 600; }
+.spatial-ceiling-model-panel .spatial-ceiling-controls { max-height: min(48vh, 440px); overflow-y: auto; padding: 0 12px 12px; margin: 0; }
+.spatial-ceiling-controls fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.spatial-ceiling-controls input:not([type=checkbox]), .spatial-ceiling-controls select { width: 100%; min-height: 44px; box-sizing: border-box; margin: 4px 0 10px; }
+.spatial-ceiling-controls button { min-height: 44px; }
+.spatial-ceiling-controls h3 { margin: 8px 0; }
+.spatial-ceiling-room-set { max-height: 160px; overflow: auto; border: 1px solid #d8e3ea; border-radius: 4px; padding: 8px; }
+.spatial-ceiling-room-set .spatial-check { display: flex; align-items: center; min-height: 44px; gap: 8px; }

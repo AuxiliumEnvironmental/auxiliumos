@@ -1,0 +1,23 @@
+{
+  "task_id": "F03",
+  "repository": "AuxiliumEnvironmental/auxiliumos",
+  "branch": "spatial/f03-ceilings-2026-10-11",
+  "accepted_activation_commit": "a90d4f9f132153498d7567758a14132cbafa5c0f",
+  "recovered_feature_owned_commit": "d7c8162fa65c544b1013ee816a87c019dfe14763",
+  "source_files": {
+    "spatial-source/contracts/geometry-v1.3.schema.json": "c8975469d0fda9db3aae2ab50cf19681cc6229a9",
+    "spatial-source/contracts/scene-v1.3.schema.json": "a32965bb32bf4bd0d71b98a1cdb34c0df3b9666d",
+    "spatial-source/web/src/core/ceilings.ts": "0f8ea7b9f1ca9432ee5f349166c2560b02ae2cf8",
+    "spatial-source/web/src/core/surfaces.ts": "f907f52294694c913ffbec14bb053c164b3dd8cb",
+    "spatial-source/web/src/ui/CeilingHeightControls.tsx": "cc3af9b2e48ebd4662d58c6b42e37bc80cfb988a",
+    "spatial-source/web/src/ui/ceilingManipulation.ts": "75ae8aacf82433879c768481f193b5015ef50ee9",
+    "spatial-source/web/tests/core/ceilings.test.ts": "c17c360dbbca57cb32524abe6ab6dba1a228e865",
+    "spatial-source/web/tests/core/surfaces.test.ts": "4eb501dc3a441217cf1e0662ebc122e818ee2f3b",
+    "spatial-source/web/tests/ui/ceiling-height.spec.ts": "f2e6c3d41a0de9b57bd5c388113f50318dc7e581"
+  },
+  "scope": "partial_recovery_feature_owned_modules_only",
+  "shared_adapters_included": false,
+  "integration_complete": false,
+  "status": "in_progress",
+  "note": "The previous F03 handoff ZIP and full local patch were not saved successfully. This is an accurate recovery package, not the completed candidate."
+}

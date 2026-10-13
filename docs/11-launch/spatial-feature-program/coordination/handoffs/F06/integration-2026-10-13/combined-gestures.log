@@ -1,0 +1,17 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> @auxilium/spatial-workspace@0.1.0 test:browser
+> playwright test --config tests/ui/playwright.config.ts --grep F02 mobile 3D|F03 mobile hidden-ceiling --output /workspace/scratch/9062ebaf2df3/combined-gesture-results
+
+6:38:56 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+6:38:58 PM [vite] (client) [optimizer] scanning dependencies...
+
+Running 2 tests using 1 worker
+
+
+(node:52) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[1/2] tests/ui/ceiling-height.spec.ts:64:1 › F03 mobile hidden-ceiling touch, exact numeric agreement, cancellation and navigation-only walk
+[2/2] tests/ui/direct-openings.spec.ts:323:1 › F02 mobile 3D corner resize, edge move, undo and cancellation share saved geometry
+  2 passed (19.6s)

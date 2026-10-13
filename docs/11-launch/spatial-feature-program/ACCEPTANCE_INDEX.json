@@ -3,283 +3,283 @@
     {
       "id": "F00-A01",
       "packet": "features/F00_Shared_Foundation.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "preparation_scope_verified",
+      "implementation": "delivered",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F00-A02",
       "packet": "features/F00_Shared_Foundation.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "preparation_scope_verified",
+      "implementation": "delivered",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F00-A03",
       "packet": "features/F00_Shared_Foundation.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "preparation_scope_verified",
+      "implementation": "delivered",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F00-A04",
       "packet": "features/F00_Shared_Foundation.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "preparation_scope_verified",
+      "implementation": "delivered",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F00-A05",
       "packet": "features/F00_Shared_Foundation.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "preparation_scope_verified",
+      "implementation": "delivered",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F00_ACCEPTANCE.json"
     },
     {
       "id": "F01-A01",
       "packet": "features/F01_Surface_Contrast.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "source_reviewed_platform_gaps_retained",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json"
     },
     {
       "id": "F01-A02",
       "packet": "features/F01_Surface_Contrast.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "source_reviewed_platform_gaps_retained",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json"
     },
     {
       "id": "F01-A03",
       "packet": "features/F01_Surface_Contrast.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "source_reviewed_platform_gaps_retained",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json"
     },
     {
       "id": "F01-A04",
       "packet": "features/F01_Surface_Contrast.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "source_reviewed_platform_gaps_retained",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json"
     },
     {
       "id": "F01-A05",
       "packet": "features/F01_Surface_Contrast.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "source_reviewed_platform_gaps_retained",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/F01_ACCEPTANCE.json"
     },
     {
       "id": "F02-A01",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F02-A02",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F02-A03",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F02-A04",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F02-A05",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F02-A06",
       "packet": "features/F02_Openings.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A01",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A02",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A03",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A04",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A05",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F03-A06",
       "packet": "features/F03_Ceiling_Height.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A01",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A02",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A03",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A04",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A05",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F04-A06",
       "packet": "features/F04_Fixtures_Cutouts.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A01",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A02",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A03",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A04",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A05",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F05-A06",
       "packet": "features/F05_Affected_Areas.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "implemented_scope_evidence_with_limits",
+      "implementation": "integrated",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A01",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A02",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A03",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A04",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A05",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "F06-A06",
       "packet": "features/F06_Integration_Acceptance.md",
-      "status": "not_run",
-      "implementation": "not_started",
-      "evidence": null
+      "status": "partial_evidence_open_gates",
+      "implementation": "in_progress",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     }
   ],
-  "note": "Feature acceptance is future work. Preparation checks do not pass these rows."
+  "note": "Current functional-source evidence replaces the initial not-started matrix. Linked receipts define exact checks and reuse limits; no row silently grants platform or physical-device acceptance."
 }

@@ -1,12 +1,17 @@
+import { fixturePreset } from './fixtureCatalog';
+import { validateFixture } from './fixtures';
+import { validateCutout } from './cutouts';
 import type { SpatialDocument, ValidationIssue } from '../types';
 import { OPENING_CATALOG, openingStyleError, openingHasRigidHost, openingPlanLines } from './openings';
+import { validateAffectedSemantics } from './affectedAreas';
 import { EPSILON, FloorGeometryIndex, isSimplePath, isSimplePolygon, pathLength } from './geometry';
+import { isAtLeastSchemaVersion } from './versions';
 
 export class GeometryValidationError extends Error {
   constructor(readonly issues: ValidationIssue[]){super(issues.map(i=>`${i.path}: ${i.message}`).join('; '));this.name='GeometryValidationError';}
 }
 export const validID=(value: unknown):value is string=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,96}$/.test(value);
-type Shape = {kind:'object';fields:Record<string,Shape>;optional?:string[]} | {kind:'array';item:Shape;min:number;max:number} | {kind:'number';min:number;max:number;positive?:boolean;integer?:boolean;nullable?:boolean} | {kind:'enum';values:unknown[]} | {kind:'id'} | {kind:'text'};
+type Shape = {kind:'variant';key:string;variants:Record<string,Shape>} | {kind:'nullable';item:Shape} | {kind:'union';items:Shape[]} | {kind:'object';fields:Record<string,Shape>;optional?:string[]} | {kind:'array';item:Shape;min:number;max:number} | {kind:'number';min:number;max:number;positive?:boolean;integer?:boolean;nullable?:boolean} | {kind:'enum';values:unknown[]} | {kind:'id'} | {kind:'text'};
 const id:Shape={kind:'id'},text:Shape={kind:'text'};
 const number=(min:number,max:number,positive=false):Shape=>({kind:'number',min,max,positive});
 const array=(item:Shape,min:number,max:number):Shape=>({kind:'array',item,min,max});
@@ -20,17 +25,33 @@ const opening=object({id,wallID:id,kind:choice('door','window','passage'),offset
 const style=object({id:choice(...OPENING_CATALOG.map(p=>p.id)),end:choice('start','end'),side:choice('positive','negative'),provenance},['end','side']);
 const styledOpening=object({...(opening.kind==='object'?opening.fields:{}),style},['style']);
 const room=object({id,label:text,boundary:array(object({wallID:id,reversed:choice(true,false)}),3,1000)});
+const ceiling=object({id,height:number(0,100,true),heightBasis:choice('captured','assumed','edited','synthetic'),provenance});
+const ceilingRoom=object({...(room.kind==='object'?room.fields:{}),ceiling:{kind:'nullable',item:ceiling}});
 const area=object({id,label:text,polygon:array(point,3,1000),provenance});
-const floor=object({id,label:text,elevation:number(-10000,10000),nodes:array(node,0,100000),walls:array(wall,0,50000),openings:array(opening,0,10000),rooms:array(room,0,10000),areas:array(area,0,1000)},['areas']);
-const documentShape=object({schemaVersion:choice('1.0.0','1.1.0'),documentID:id,revision:{kind:'number',min:1,max:Number.MAX_SAFE_INTEGER,integer:true},parentRevision:{kind:'number',min:1,max:Number.MAX_SAFE_INTEGER,integer:true,nullable:true},title:text,coordinateSystem:choice('meters_y_up_right_handed'),measurementStatus:choice('unverified'),reviewState:choice('needsReview','reviewed'),floors:array(floor,1,100)},['parentRevision']);
+
+const surfacePoint=object({u:number(-10000,10000),v:number(-10000,10000)});
+const wallSurface=object({floorID:id,kind:choice('wall'),wallID:id,side:choice('positive','negative')});
+const surface:Shape={kind:'union',items:[wallSurface,object({floorID:id,kind:choice('floor'),roomID:id}),object({floorID:id,kind:choice('ceiling'),roomID:id,ceilingID:id})]};
+const fixture=object({id,catalog:object({id,version:choice(1)}),dimensions:object({width:number(.01,100),depth:number(.01,100),height:number(.01,100)}),mount:{kind:'union',items:[object({kind:choice('floor'),position:point,yaw:number(-100,100),baseOffset:number(0,100)}),object({kind:choice('wall'),surface:wallSurface,u:number(0,10000),v:number(0,100)})]},provenance});
+const cutout=object({id,kind:choice('cutout','penetration'),surface,profile:{kind:'union',items:[object({shape:choice('rectangle'),center:surfacePoint,width:number(.01,100),height:number(.01,100),rotation:number(-100,100)}),object({shape:choice('circle'),center:surfacePoint,diameter:number(.01,100)})]},provenance});
+const floor=object({id,label:text,elevation:number(-10000,10000),nodes:array(node,0,100000),walls:array(wall,0,50000),openings:array(opening,0,10000),rooms:array(room,0,10000),areas:array(area,0,1000),fixtures:array(fixture,0,1000),cutouts:array(cutout,0,128)},['areas','fixtures','cutouts']);
+const affectedPoint=object({u:number(-20000,20000),v:number(-20000,20000)});
+const surfacePolygon=object({outer:array(affectedPoint,3,1000),holes:array(array(affectedPoint,3,1000),0,100)});
+const domain=object({polygons:array(surfacePolygon,0,512)});
+const affected=object({id,kind:choice('moisture','fire'),surface,footprint:surfacePolygon,recordedSupport:domain,sourceRevision:{kind:'number',min:1,max:Number.MAX_SAFE_INTEGER,integer:true},sourceDocumentID:id,provenance,measurementStatus:choice('unverified'),reviewState:choice('needsReview','reviewed','unresolved'),attachments:array(object({surface:{kind:'nullable',item:surface},sourceDomain:domain,transform:{kind:'nullable',item:array(number(-20000,20000),6,6)},outcome:choice('exact','clipped_needs_review','unresolved')}),1,64)});
+const documentShape=object({schemaVersion:choice('1.0.0','1.1.0','1.2.0','1.3.0','1.4.0','1.5.0'),documentID:id,revision:{kind:'number',min:1,max:Number.MAX_SAFE_INTEGER,integer:true},parentRevision:{kind:'number',min:1,max:Number.MAX_SAFE_INTEGER,integer:true,nullable:true},title:text,coordinateSystem:choice('meters_y_up_right_handed'),measurementStatus:choice('unverified'),reviewState:choice('needsReview','reviewed'),floors:array(floor,1,100),affectedAreas:array(affected,0,2000)},['parentRevision','affectedAreas']);
 
 /** Admission is both the strict transport structure and graph semantics. Unknown fields fail closed. */
 export function validateDocument(value:unknown):ValidationIssue[]{
-  const issues:ValidationIssue[]=[];
+  const issues:ValidationIssue[]=[];let affectedVisits=0;
   const add=(code:string,path:string,message:string)=>{if(issues.length<200)issues.push({code,path,message});};
   const visit=(value:unknown,shape:Shape,path:string):void=>{
     if(issues.length>=200)return;
+    if(path.startsWith('affectedAreas')&&++affectedVisits>2_000_000){add('capacity',path,'Affected-area admission work exceeds the bounded envelope');return;}
     switch(shape.kind){
+      case 'union':{const base=issues.length;for(const item of shape.items){visit(value,item,path);if(issues.length===base)return;issues.splice(base);}add('type',path,'Unsupported union shape');break;}
+      case 'nullable':if(value!==null)visit(value,shape.item,path);break;
+      case 'variant':{const record=value as Record<string,unknown>|null,key=record&&typeof record==='object'?record[shape.key]:null;if(typeof key!=='string'||!Object.hasOwn(shape.variants,key))add('type',path,'Unsupported surface reference');else visit(value,shape.variants[key],path);break;}
       case 'id':if(!validID(value))add('invalid_id',path,'Use 1 to 96 ASCII letters, digits, hyphens, or underscores');break;
       // With Unicode matching, a valid surrogate pair is one code point outside
       // this range; only malformed, unpaired UTF-16 code units match it.
@@ -48,17 +69,22 @@ export function validateDocument(value:unknown):ValidationIssue[]{
     }
   };
   const version=(value as {schemaVersion?:unknown}|null)?.schemaVersion;
-  const shape=version==='1.2.0' && floor.kind==='object' && documentShape.kind==='object' ? object({...documentShape.fields,schemaVersion:choice('1.2.0'),floors:array(object({...floor.fields,openings:array(styledOpening,0,10000)},['areas']),1,100)},['parentRevision']) : documentShape;
+  const shape=(version==='1.2.0'||version==='1.3.0'||version==='1.4.0'||version==='1.5.0') && floor.kind==='object' && documentShape.kind==='object' ? object({...documentShape.fields,schemaVersion:choice(version),floors:array(object({...floor.fields,openings:array(styledOpening,0,10000),rooms:array(version>='1.3.0'?ceilingRoom:room,0,10000)},['areas','fixtures','cutouts']),1,100)},['parentRevision','affectedAreas']) : documentShape;
   visit(value,shape,'');if(issues.length)return issues;
   const doc=value as SpatialDocument;
   if(doc.parentRevision!=null&&doc.parentRevision>=doc.revision)add('revision','parentRevision','Parent must precede the current revision');
   const unique=(values:string[],path:string)=>{if(new Set(values).size!==values.length)add('duplicate_id',path,'Identifiers must be unique in this collection');};
   unique(doc.floors.map(f=>f.id),'floors');
+  unique((doc.affectedAreas??[]).map(a=>a.id),'affectedAreas');
+  if(doc.schemaVersion!=='1.5.0'&&doc.affectedAreas!==undefined)add('schema_version','affectedAreas','Affected observations require geometry 1.5.0');
+  const renderIDs=new Set(doc.floors.flatMap(f=>[...f.walls,...f.openings,...f.rooms,...f.rooms.flatMap(r=>r.ceiling?[r.ceiling]:[]),...(f.areas??[]),...(f.fixtures??[]),...(f.cutouts??[])].map(x=>x.id)));
+  for(const a of doc.affectedAreas??[])if(renderIDs.has(a.id))add('duplicate_id','affectedAreas','Observation identifiers must not collide with structure');
   for(const [fi,f]of doc.floors.entries()){
-    const root=`floors[${fi}]`;for(const [name,items]of [['nodes',f.nodes],['walls',f.walls],['openings',f.openings],['rooms',f.rooms],['areas',f.areas??[]]] as const)unique(items.map(item=>item.id),`${root}.${name}`);
+    const root=`floors[${fi}]`;for(const [name,items]of [['nodes',f.nodes],['walls',f.walls],['openings',f.openings],['rooms',f.rooms],['areas',f.areas??[]],['fixtures',f.fixtures??[]],['cutouts',f.cutouts??[]]] as const)unique(items.map(item=>item.id),`${root}.${name}`);
     if(doc.schemaVersion==='1.0.0'&&f.areas!==undefined)add('schema_version',`${root}.areas`,'The areas field requires explicit schema version 1.1.0');
-    unique([...f.walls,...f.openings,...f.rooms,...(f.areas??[])].map(x=>x.id),`${root}.renderObjects`);
+    unique([...f.walls,...f.openings,...f.rooms,...(f.areas??[]),...(f.fixtures??[]),...(f.cutouts??[]),...f.rooms.flatMap(r=>r.ceiling?[r.ceiling]:[])].map(x=>x.id),`${root}.renderObjects`);
     let areaWork=0;for(const a of f.areas??[]){areaWork+=a.polygon.length*a.polygon.length;if(areaWork>2_000_000){add('capacity',`${root}.areas`,'Semantic polygon work exceeds the bounded envelope');break;}if(!isSimplePolygon(a.polygon))add('invalid_polygon',`${root}.areas.${a.id}`,'Semantic area must be a simple nonzero polygon');}
+    if(!isAtLeastSchemaVersion(doc.schemaVersion,'1.4.0')&&(f.fixtures!==undefined||f.cutouts!==undefined))add('schema_version',root,'Fixture and cutout records require version 1.4.0 or later');
     const index=new FloorGeometryIndex(f),lengths=new Map<string,number>();
     for(const w of f.walls){const p=`${root}.walls.${w.id}`;if(w.nodeIDs.some(id=>!index.nodes.has(id))){add('missing_node',p,'Wall references a missing node');continue;}
       const points=index.path(w);if(new Set(w.nodeIDs).size!==w.nodeIDs.length)add('wall_loop',p,'A wall path cannot repeat a node');
@@ -74,11 +100,23 @@ export function validateDocument(value:unknown):ValidationIssue[]{
     for(const group of groups.values()){const sorted=[...group].sort((a,b)=>a.offset-b.offset);for(let i=0;i<sorted.length;i++)for(let j=i+1;j<sorted.length;j++){const a=sorted[i],b=sorted[j];if(b.offset>=a.offset+a.width-EPSILON)break;if(Math.min(a.bottom+a.height,b.bottom+b.height)-Math.max(a.bottom,b.bottom)>EPSILON)add('opening_overlap',`${root}.openings`,`${a.id} overlaps ${b.id}`);}}
     const refs=new Map<string,boolean[]>();
     for(const room of f.rooms){const p=`${root}.rooms.${room.id}`;if(new Set(room.boundary.map(r=>r.wallID)).size!==room.boundary.length){add('duplicate_boundary',p,'Room repeats a wall');continue;}
+      if(room.ceiling){
+        const h=room.ceiling.height;
+        if(Math.abs(f.elevation+h)>10000)add('world_height_bounds',`${p}.ceiling`,'Combined floor and ceiling elevation exceeds scene bounds');
+        for(const ref of room.boundary){const wall=index.walls.get(ref.wallID);if(!wall)continue;
+          if(h>wall.baseY+wall.height+EPSILON)add('ceiling_envelope',`${p}.ceiling`,'Ceiling exceeds its boundary wall envelope');
+          for(const opening of groups.get(wall.id)??[])if(wall.baseY+opening.bottom+opening.height>h+EPSILON)add('ceiling_opening_conflict',`${p}.ceiling`,`Ceiling conflicts with opening ${opening.id}`);
+        }
+      }
       for(const r of room.boundary)refs.set(r.wallID,[...(refs.get(r.wallID)??[]),r.reversed]);
       try{const points=index.boundary(room);if(points.length>1000||!isSimplePolygon(points))add('invalid_polygon',p,'Room boundary must be a bounded simple nonzero polygon');}catch{add('open_boundary',p,'Boundary must connect using shared node identifiers and close explicitly');}
     }
     for(const [id,uses]of refs){if(uses.length>2)add('nonmanifold',`${root}.walls.${id}`,'More than two rooms use one wall');if(uses.length===2&&uses[0]===uses[1])add('shared_wall_direction',`${root}.walls.${id}`,'Adjacent rooms must traverse a shared wall oppositely');}
-  }return issues;
+    if(!issues.length){for(const x of f.fixtures??[])try{fixturePreset(x.catalog.id);validateFixture(doc,x,f.id);}catch(e){add('fixture_bounds',root+'.fixtures.'+x.id,(e as Error).message);}
+      const work=(f.cutouts??[]).reduce((n,c)=>n+(c.profile.shape==='circle'?48:4),0);if(work*work>2_000_000)add('capacity',root+'.cutouts','Cutout comparison exceeds bounded work');
+      else for(const c of f.cutouts??[])try{if(c.surface.floorID!==f.id)throw new Error('Cutout surface must belong to enclosing floor');validateCutout(doc,c);}catch(e){add('cutout_bounds',root+'.cutouts.'+c.id,(e as Error).message);}
+    }
+  }if(!issues.length)issues.push(...validateAffectedSemantics(doc));return issues;
 }
 export function requireValidDocument(value:unknown):SpatialDocument{
   const issues=validateDocument(value);if(issues.length)throw new GeometryValidationError(issues);

@@ -1,3 +1,13 @@
+## Current master checkpoint: October 13, 2026
+
+F01-F05 are integrated and functionally verified in the maintained shared source. F03's nine recovered files were hash-matched; missing adapters were newly implemented, tested and published at `bb150674b49ab529ca62089ab2ff2722f2e3d65c`. The missing historical 27-file patch is no longer a blocker. F04 includes 20 fixture entries and optional wall/floor/ceiling cutouts and penetrations. F05 preserves affected-area observations across the combined structural edits.
+
+The combined desktop/mobile editing journey, five cross-feature core checks, two migration/isolation checks and production build pass. Large-model performance remains open: the actual 2,000-observation run exceeded the 500 ms warm target and ended at its 300-second limit before selection/memory measurements. Platform delivery and physical-device gates remain separate.
+
+First incomplete action: F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.
+
+Current evidence: `docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json`. Earlier sections below preserve historical scope and are superseded by this checkpoint.
+
 # October 12, 2026 current feature checkpoint
 
 F02 source is accepted and integrated; F04/F05 are reviewed on isolated branches. Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.

@@ -1,0 +1,114 @@
+{
+  "feature": "F03 ceiling height completion on accepted F02",
+  "status": "implemented and verified; master integration pending",
+  "baseCommit": "0f3f7fdb68794bc4b28eb7153ceabe84ec0081bc",
+  "authenticRecoveryCommit": "dbf92198e701f5ddaeae8f2fc1eb190f5ac954c2",
+  "adapterCommit": "1ab8226180097b32e55b1f3f6ae276bd63e263b9",
+  "sourceCommit": "4223bf60624080a412d1a5ad6e4882333895413a",
+  "cherryPickOrder": [
+    "dbf92198e701f5ddaeae8f2fc1eb190f5ac954c2",
+    "1ab8226180097b32e55b1f3f6ae276bd63e263b9",
+    "4223bf60624080a412d1a5ad6e4882333895413a"
+  ],
+  "implementation": {
+    "schema": "Strict 1.3.0 extends accepted 1.2.0 opening styles; ceiling intent required per room, stable ID or null. Version upgrade helpers preserve future cumulative versions.",
+    "heightPolicy": "Meters above each floor datum; exact named room sets use absolute or common delta. Neighbor intent and openings stay fixed. Required wall extensions are atomic; lowering never shrinks walls.",
+    "migration": "First canonical ceiling edit establishes only positive uniform legacy wall-top inference; no open/export mutation or invented capture observations.",
+    "rendering": "Canonical ceiling emitted once with separate ceiling selection ID; hidden ceilings retain direct handle/outline and exact controls. Affected preview at render cadence; one durable commit.",
+    "persistence": "Geometry/local archive, canonical scene, GLB ceiling identity/material, drawing height directory, fresh revision-bound undo/redo/restore surface remaps.",
+    "fences": "EditFence document/revision/context/generation plus view, camera and synchronous canvas/viewport size checks. Walk mode is navigation-only.",
+    "surfaceContract": "Unresolved entries have null destination and transform; replacement ceiling IDs cannot attach by room coincidence."
+  },
+  "verification": [
+    {
+      "command": "npm run build",
+      "cwd": "spatial-source/web",
+      "exitCode": 0,
+      "result": "Typecheck and Vite production build passed on final source; existing large-chunk advisory remains."
+    },
+    {
+      "command": "node --import tsx --test tests/core/ceilings.test.ts tests/core/surfaces.test.ts",
+      "cwd": "spatial-source/web",
+      "exitCode": 0,
+      "passed": 24,
+      "failed": 0,
+      "result": "Includes actual F02 style to F03 migration and subsequent style edit without schema downgrade."
+    },
+    {
+      "command": "SPATIAL_TEST_URL=http://127.0.0.1:4203 SPATIAL_BROWSER_EXECUTABLE=/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium ./node_modules/.bin/playwright test --config f03-playwright.config.local.ts",
+      "cwd": "spatial-source/web",
+      "config": "Temporary config imports tests/ui/playwright.config.ts, retains launch options, sets testDir tests/ui, testMatch ceiling-height.spec.ts, globalSetup tests/ui/server.ts, workers 1 and timeout 60000. Dedicated Vite started on 4203 in same execution; temporary config removed afterward.",
+      "exitCode": 0,
+      "passed": 4,
+      "failed": 0,
+      "durationSeconds": 28.5,
+      "cases": [
+        "Mobile positive touch drag, no durable preview write, renderer identity retained, exact numeric agreement, cancellation and navigation-only walking",
+        "Explicit multi-floor room set including unknown initialization, one undo, redo, reopen and complete local archive roundtrip",
+        "120-sample coalesced preview; Escape, blur, cutaway, resize, deterministic same-task canvas resize, and stale store revision",
+        "Authority revocation before release retains source and closes authorized view"
+      ]
+    }
+  ],
+  "resolvedBrowserDefect": "Initial interruption journey exposed a release/resize notification race. Final source checks live canvas rectangle and viewport dimensions before accepting a terminal event. A synchronous canvas-resize-and-pointerup regression passed.",
+  "screenshots": [
+    {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/ceiling-height-mobile.png",
+      "sha256": "14d24f9fdb68d190df319d5b1ab3002e0e5bd566081fce94735117657eef40f8",
+      "visuallyReviewed": true
+    },
+    {
+      "path": "docs/11-launch/spatial-feature-program/coordination/handoffs/F03/ceiling-structure-desktop.png",
+      "sha256": "fb28971ac0b8d509600e4015856b4f78262251a0acdd57258122b8d70ecef141",
+      "visuallyReviewed": true
+    }
+  ],
+  "sourceSHA256": {
+    "spatial-source/contracts/COMPATIBILITY.md": "a05d89820054cafb9f24dd7df2b233c605d2e6a19061c38f4376e11b5c39b03a",
+    "spatial-source/contracts/geometry-v1.3.schema.json": "7a82cd1421cdea0b1e6b9c19a519a32b8b3546123fa34b7a0cd875cd067fc120",
+    "spatial-source/contracts/scene-v1.3.schema.json": "1fb65803decb36ac1414411b57bc85b3f15bf83eeb7fdf0813fcaba2809950c7",
+    "spatial-source/web/src/core/ceilings.ts": "8ca3f237bed8a61d527b435968c1283e56047e8f041b3503e824c52e1e2a72dd",
+    "spatial-source/web/src/core/editor.ts": "a9dfcab18fba4ad7cf94cf281ed533ffb48d305498aae293f066bbe21e789f32",
+    "spatial-source/web/src/core/index.ts": "f4bcd081816bbebb87a510d766d601157b3f1be3f5068480c2045544ce3c1fe0",
+    "spatial-source/web/src/core/navigation.ts": "6cc389dba71940cc43dba324ecb4d24abfcf0bdff6d8c74a6d79c8096f7e244d",
+    "spatial-source/web/src/core/scene.ts": "41e34065d036aadcfa42809ef63051558cd574f95c030e85e8fd72328e858adb",
+    "spatial-source/web/src/core/surfaces.ts": "25f221c258b0b5af9917bc2a709df8a33c46810f3d7dd3ffd616e421c401796a",
+    "spatial-source/web/src/core/validation.ts": "01e01d98e43fab9399527779cb8bd2e47430b54b294231565955124018aff757",
+    "spatial-source/web/src/core/versions.ts": "adf4b66f63279a9eca9a4910cda56a0bb2987e0d2b7ab9358beaed44a086a006",
+    "spatial-source/web/src/data/drawing.ts": "e429781bc54357ad07394bcdb2b19a5247e194e97b7cdcae78becc982c0374fa",
+    "spatial-source/web/src/data/exports.ts": "52fc2957d71a813caff05b25701255af725667d0cce278d53cb1914c825a6ce7",
+    "spatial-source/web/src/data/glb.ts": "fd9db8d86daba94db8422802ae6102f1bd63ba5c001cddff7638e8bcc18c7689",
+    "spatial-source/web/src/data/imports.ts": "52ae2c0711e832e1d21ba472958718ddac9d1fac1100150e80f229f31054d2eb",
+    "spatial-source/web/src/data/store.ts": "54eacf9e532732e42a5e3304bf27c64ce107c55317f07deb4a0e87164c493cdd",
+    "spatial-source/web/src/types.ts": "1f7a526b76fdc50e9afff5399920e940ac1c61e22a908d0dd9f9ae4212d2bd96",
+    "spatial-source/web/src/ui/CeilingHeightControls.tsx": "16b8d253f38a8695d2baa59f19bfe414d689ba21a122c50b621d9292030cf29e",
+    "spatial-source/web/src/ui/FloorplanCanvas.tsx": "b3171f4ac6a1f62728cebfc2750d88b1f56363c5af3ff90591b70c9c58e7e1e8",
+    "spatial-source/web/src/ui/Inspector.tsx": "78c63548818ff3ed0ffb8a75d4ff964e17c0b4c67e759f9c923fddd68ef916ed",
+    "spatial-source/web/src/ui/ModelViewport.tsx": "a688cedfb53e5f31caab9a356f96b9bc0a4cd004cded62d22fa37a1863b4fe7a",
+    "spatial-source/web/src/ui/SpatialWorkspace.tsx": "3b16dacf7631c8fb7f1a42b90909b8e2b185ce5dde0ae1c6fc568de9312f3e19",
+    "spatial-source/web/src/ui/ceilingManipulation.ts": "a671cc53c2ac146167a36566091cced3ec380a5f877ea9c8473816c1da7d19c2",
+    "spatial-source/web/src/ui/geometry.ts": "9ad4173615945f987f6aabb2f827cd87ee3d77cb1d032ed68bfc0dff41a0291d",
+    "spatial-source/web/src/ui/roomDrawing.ts": "4f10a7cd97edd67bd19029a7b71725605f6f9942098bf0165f276e96c21a907d",
+    "spatial-source/web/src/ui/sceneBatches.ts": "d3d2e54247efdd3247a1401b33e45e8d8b174f4aedf62a2d236fa3c56b0a79fb",
+    "spatial-source/web/src/ui/wallDrawing.ts": "41cc7cd4d6fe9b7b22ad382b4728d335abdb21bd7b1dee55af6eb09f7ce6f5a7",
+    "spatial-source/web/src/ui/workspace.css": "e7c52b4c25cfd3d64e67417cb05eb7d97bb4fe2d1bdedea203a9ef838afba1ca",
+    "spatial-source/web/tests/core/ceilings.test.ts": "2ac2d64a8cd9d0781197ef0bcdafbe61fc68e94eaeda69eaefb1af24e98a0774",
+    "spatial-source/web/tests/core/surfaces.test.ts": "43b9d9b13c2d6ab63705d795ad8105d50abec8dbb006efdd0479e8a5ab0361c5",
+    "spatial-source/web/tests/ui/ceiling-height.spec.ts": "8e60727853d1b9903c7309fcb2bf34f9ab91b81f0a78536ef53e599972123b65"
+  },
+  "environment": {
+    "browser": "Chromium 153.0.8010.0",
+    "browserExecutable": "/workspace/scratch/9062ebaf2df3/f05-browser-runtime/chromium",
+    "browserSHA256": "53a15d6c3a3d27dfb54c4ba60278b1683136f70cf1e67e989da7dfbd3d451ef0",
+    "packageLockSHA256": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3",
+    "reusedDependencyLockSHA256": "28f96dbdf5f21847502993449f08d1f25562535ec90baa738d2d566def151ed3"
+  },
+  "openDeliveryChecks": [
+    "Combined F02/F03/F04/F05 integration tests and final shared build are master-owned.",
+    "No installed WebKit/native iOS, Capacitor packaging, OS host cutover or remote delivery claims in this receipt."
+  ],
+  "unchangedBoundaries": [
+    "No package or lock changes.",
+    "No remote writes, host publication, shared master state or queue changes."
+  ]
+}

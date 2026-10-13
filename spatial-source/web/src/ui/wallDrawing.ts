@@ -8,7 +8,7 @@ import { overlappingSpan, type DrawPoint } from './planInteraction';
 /** Resolve explicit endpoint contacts through existing canonical split commands.
  * The entire drawing stays one transaction. No schema or recovery fields change:
  * exact endpoint coordinates reconstruct contacts after reopening a draft too. */
-export function wallDrawingCommands(floor: Floor, draft: DrawPoint[], schemaVersion: SpatialDocument['schemaVersion'] = floor.openings.some(o => o.style) ? '1.2.0' : floor.areas === undefined ? '1.0.0' : '1.1.0'): { commands: EditCommand[]; submittedIDs: string[] } {
+export function wallDrawingCommands(floor: Floor, draft: DrawPoint[], schemaVersion: SpatialDocument['schemaVersion'] = floor.rooms.some(room=>room.ceiling!==undefined) ? '1.3.0' : floor.openings.some(o => o.style) ? '1.2.0' : floor.areas === undefined ? '1.0.0' : '1.1.0'): { commands: EditCommand[]; submittedIDs: string[] } {
   if (draft.length < 2) throw new Error('Choose at least two corners for the wall.');
   const index = new FloorGeometryIndex(floor);
   const cuts = new Map<string, Array<{ offset: number; node: Node; existing: boolean; wallID: string }>>();

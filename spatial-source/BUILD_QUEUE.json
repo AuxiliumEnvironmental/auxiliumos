@@ -142,8 +142,10 @@
       "implementation_started": true,
       "source_commit": "6342e87e27376fb664dfe904d299a2c94ffac1ff",
       "implementation_complete": true,
-      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false
     },
     {
       "id": "F03",
@@ -152,7 +154,7 @@
       "depends_on": [
         "F01"
       ],
-      "status": "in_progress",
+      "status": "code_accepted_with_platform_gaps",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/92",
       "packet": "docs/11-launch/spatial-feature-program/features/F03_Ceiling_Height.md",
       "allowed_paths": [
@@ -210,12 +212,16 @@
       "branch": "spatial/f03-ceilings-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
       "activation_id": "F03-2026-10-11-P1",
-      "execution_status": "blocked_missing_source_patch",
+      "execution_status": "reviewed_source_integrated",
       "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
       "implementation_started": true,
-      "source_commit": null,
-      "implementation_complete": false,
-      "blocker": {
+      "source_commit": "bb150674b49ab529ca62089ab2ff2722f2e3d65c",
+      "implementation_complete": true,
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false,
+      "resolved_historical_blocker": {
         "filename": "F03_LOCAL_CANDIDATE.patch",
         "sha256": "dbc06596d98bbf450c71e876fea4c489342a5daa13822eb4c3357eb326dd41d0",
         "source_files": 27,
@@ -223,8 +229,7 @@
         "remote_branch": "spatial/f03-ceilings-2026-10-11",
         "remote_head": "a90d4f9f132153498d7567758a14132cbafa5c0f"
       },
-      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "recovery_disposition": "Nine recovered files hash-matched; missing shared adapters newly implemented, verified and published."
     },
     {
       "id": "F04",
@@ -233,7 +238,7 @@
       "depends_on": [
         "F01"
       ],
-      "status": "branch_implementation_complete_pending_integration",
+      "status": "code_accepted_with_platform_gaps",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/93",
       "packet": "docs/11-launch/spatial-feature-program/features/F04_Fixtures_Cutouts.md",
       "allowed_paths": [
@@ -301,15 +306,18 @@
       "branch": "spatial/f04-fixtures-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
       "activation_id": "F04-2026-10-11-P1",
-      "execution_status": "reviewed_and_pushed_waiting_F03_integration",
+      "execution_status": "reviewed_source_integrated",
       "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
       "implementation_started": true,
       "scope_amendment_id": "F04-2026-10-11-CUTOUTS-1",
-      "cutout_scope": "D18 optional wall/floor/ceiling cutouts and penetrations implemented and reviewed on F04 branch; integrated F03 surface domains pending.",
+      "cutout_scope": "D18 optional cutouts and penetrations integrated with canonical F03 domains and F05 coverage.",
       "source_commit": "44315237caccb4fb2511ebf54867f504f7a4d859",
       "implementation_complete": true,
-      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false,
+      "cutout_scope_status": "optional_wall_floor_ceiling_cutouts_and_penetrations_integrated"
     },
     {
       "id": "F05",
@@ -318,7 +326,7 @@
       "depends_on": [
         "F01"
       ],
-      "status": "branch_implementation_complete_pending_integration",
+      "status": "code_accepted_with_platform_gaps",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/94",
       "packet": "docs/11-launch/spatial-feature-program/features/F05_Affected_Areas.md",
       "allowed_paths": [
@@ -375,13 +383,15 @@
       "branch": "spatial/f05-affected-areas-2026-10-11",
       "base_commit": "3240880195cd6653d0816da5cb4412bda2516e52",
       "activation_id": "F05-2026-10-11-P1",
-      "execution_status": "reviewed_and_pushed_waiting_F03_F04_integration",
+      "execution_status": "reviewed_source_integrated",
       "activation_record": "docs/11-launch/spatial-feature-program/coordination/ACTIVE_TASKS.json",
       "implementation_started": true,
       "source_commit": "dc53c7a1bce141706764a8da3af82c1c69fb1333",
       "implementation_complete": true,
-      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_12.json",
-      "platform_delivery": "pending F06"
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json",
+      "platform_delivery": "F06 pending; performance and physical-device gates retained",
+      "integrated_runtime_commit": "d4e5dd9b508519684c2c71f49be367bb2dc65ad6",
+      "worker_running": false
     },
     {
       "id": "F06",
@@ -390,7 +400,7 @@
       "depends_on": [
         "F05"
       ],
-      "status": "planned",
+      "status": "in_progress",
       "issue_url": "https://github.com/AuxiliumEnvironmental/auxiliumos/issues/95",
       "packet": "docs/11-launch/spatial-feature-program/features/F06_Integration_Acceptance.md",
       "allowed_paths": "Master freezes exact paths in ACTIVE_TASK before implementation",
@@ -401,7 +411,9 @@
         "F06-A04",
         "F06-A05",
         "F06-A06"
-      ]
+      ],
+      "execution_status": "combined_functional_checks_passed_performance_delivery_open",
+      "evidence": "docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json"
     },
     {
       "id": "SP-WEB-UI",
@@ -855,7 +867,7 @@
       "hostCommit": "467221a836c10ac2730bfa2375adde0ec447165c"
     }
   ],
-  "next_action": "Receive F03_LOCAL_CANDIDATE.patch (or its handoff ZIP), verify its recorded hash, apply to the real F03 branch, complete its build/browser and restore-receipt gaps, then compose F03, F04 and F05 into accepted F02. F06 combined/platform checks follow.",
+  "next_action": "F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.",
   "architecture_correction": "2026-10-09 owner directive supersedes native-only authoring. Historical evidence retained.",
   "program_reference": "docs/11-launch/spatial-feature-program/START_HERE.md"
 }

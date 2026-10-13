@@ -1,8 +1,18 @@
+## Current master checkpoint: October 13, 2026
+
+F01-F05 are integrated and functionally verified in the maintained shared source. F03's nine recovered files were hash-matched; missing adapters were newly implemented, tested and published at `bb150674b49ab529ca62089ab2ff2722f2e3d65c`. The missing historical 27-file patch is no longer a blocker. F04 includes 20 fixture entries and optional wall/floor/ceiling cutouts and penetrations. F05 preserves affected-area observations across the combined structural edits.
+
+The combined desktop/mobile editing journey, five cross-feature core checks, two migration/isolation checks and production build pass. Large-model performance remains open: the actual 2,000-observation run exceeded the 500 ms warm target and ended at its 300-second limit before selection/memory measurements. Platform delivery and physical-device gates remain separate.
+
+First incomplete action: F06: resolve the measured 2000-observation latency gap, then deliver the verified combined source to the dedicated host, Apple snapshot and isolated OS generated module; retain physical-device and live project-authority gates.
+
+Current evidence: `docs/11-launch/spatial-feature-program/coordination/INTEGRATION_REVIEW_2026_10_13.json`. Earlier sections below preserve historical scope and are superseded by this checkpoint.
+
 # Delivery and evidence across platforms
 
 | Target | Maintained input | Required receipt | Current boundary |
 |---|---|---|---|
-| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | F01/F02 source accepted; F04/F05 reviewed branch candidates; F03 source patch missing |
+| Core/2D/3D | `source:web/src/` | Source commit, contract versions and relevant evidence | F01-F05 functional source integrated; large-model performance and delivery gates open |
 | Dedicated Lovable/web | `host:spatial-source/` plus protected host scaffold | Input/host hashes, host build, served version and affected interaction | Current host 467221a; a source commit alone does not update it |
 | Installed iPhone | web build packaged through `source:capacitor/prepare.py`; Swift bridges | Asset manifest, actual Apple build, simulator/device evidence as applicable | Old unsigned compile exists; current-device acceptance open |
 | AuxiliumOS tool | `source:integration/package_os.py` and authorized adapter | Generated manifest, preserved host diff, authorized project-context journey | Older embed; recoverable cutover and authority binding required |
